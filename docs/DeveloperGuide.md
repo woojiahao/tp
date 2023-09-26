@@ -6,7 +6,7 @@
 
 **Value Proposition:** It provides university students with an intuitive and frictionless experience to have transparency on their expenditure to help them better understand their spendings so they can develop better financial habits as they transition into adulthood. 
 
-### Potential Features:
+## Potential Features:
 - For every user > track individual finance (base)
 - Input spending & set budgets (base)
 - Tag another user and distribute the spendings during outings (extension)
@@ -15,7 +15,7 @@
 - Allow users to set repeating events (extension)
 - Tagging people for payments gives them a notification (extension)
 
-### Feature List [v1.2]
+## Feature List [v1.2]
 #### Track Finances
 - Create expenses - Name, date, location, Tag (type/category)
 - Delete expenses - Delete a single expense
@@ -32,3 +32,8 @@
 - Add tags – provide category of spending
 - Edit tags - change category of spending
 - Remove tags - delete category of spending
+
+## Links
+User Stories: https://github.com/orgs/AY2324S1-CS2103-T16-3/projects/1/views/2 
+
+Project Website: https://ay2324s1-cs2103-t16-3.github.io/tp/
