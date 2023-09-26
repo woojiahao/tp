@@ -1,3 +1,8 @@
+---
+layout: page
+title: Developer Guide
+---
+
 # UniCa$h Developer Guide [CS2103 T16-Group_3 TP]
 
 **Name:** UniCa$h
