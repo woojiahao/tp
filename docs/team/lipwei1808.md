@@ -3,13 +3,13 @@ layout: page
 title: Tan Lip Wei's Project Portfolio Page
 ---
 
-### Project: AddressBook Level 3
+### Project: UniCa$h
 
 #### Overview
 
-AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. 
+UniCa$h is a desktop application for university students who want to be more financially conscious.
 The user interacts with it using a CLI, and it has a GUI created with JavaFX.
-It is written in Java, and has about 10 kLoC.
+The project is written in Java, and has about 10 kLoC.
 
 #### Contributions
 
