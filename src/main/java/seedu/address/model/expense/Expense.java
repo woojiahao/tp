@@ -6,13 +6,13 @@ import java.util.Objects;
 import seedu.address.commons.util.ToStringBuilder;
 
 public class Expense {
-    private final String name;
+    private final Name name;
     private final double amount;
     private final String category;
     private final LocalDate date;
     private final String location;
 
-    public Expense(String name, double amount, String category, LocalDate date, String location) {
+    public Expense(Name name, double amount, String category, LocalDate date, String location) {
         this.name = name;
         this.amount = amount;
         this.category = category;
@@ -20,7 +20,7 @@ public class Expense {
         this.location = location;
     }
 
-    public String getName() {
+    public Name getName() {
         return name;
     }
 
