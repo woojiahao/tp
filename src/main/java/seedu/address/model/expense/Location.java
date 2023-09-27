@@ -3,13 +3,16 @@ package seedu.address.model.expense;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents an Expense's location.
+ */
 public class Location {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Locations should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of the location must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
@@ -17,9 +20,9 @@ public class Location {
     public final String location;
 
     /**
-     * Constructs a {@code Name}.
+     * Constructs a {@code Location}.
      *
-     * @param name A valid name.
+     * @param location A valid location.
      */
     public Location(String location) {
         requireNonNull(location);
@@ -28,7 +31,7 @@ public class Location {
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if a given string is a valid location.
      */
     public static boolean isValidLocation(String test) {
         return test.matches(VALIDATION_REGEX);

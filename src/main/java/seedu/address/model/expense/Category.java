@@ -3,13 +3,16 @@ package seedu.address.model.expense;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents an Expense's category.
+ */
 public class Category {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Categories should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of the category must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
@@ -17,9 +20,9 @@ public class Category {
     public final String category;
 
     /**
-     * Constructs a {@code Name}.
+     * Constructs a {@code Category}.
      *
-     * @param name A valid name.
+     * @param category A valid category.
      */
     public Category(String category) {
         requireNonNull(category);
@@ -28,7 +31,7 @@ public class Category {
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if a given string is a valid category.
      */
     public static boolean isValidCategory(String test) {
         return test.matches(VALIDATION_REGEX);

@@ -2,6 +2,9 @@ package seedu.address.model.expense;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents an Expense's amount.
+ */
 public class Amount {
 
     public static final String MESSAGE_CONSTRAINTS =
@@ -9,11 +12,19 @@ public class Amount {
 
     public final double amount;
 
+    /**
+     * Constructs a {@code Amount}.
+     *
+     * @param amount A valid amount.
+     */
     public Amount(double amount) {
         checkArgument(isValidAmount(amount), MESSAGE_CONSTRAINTS);
         this.amount = amount;
     }
 
+    /**
+     * Returns true if a given amount is a non-negative value.
+     */
     public static boolean isValidAmount(double amount) {
         return amount > 0.00;
     }
