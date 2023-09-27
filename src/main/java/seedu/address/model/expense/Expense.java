@@ -8,11 +8,11 @@ import seedu.address.commons.util.ToStringBuilder;
 public class Expense {
     private final Name name;
     private final Amount amount;
-    private final String category;
+    private final Category category;
     private final LocalDate date;
-    private final String location;
+    private final Location location;
 
-    public Expense(Name name, Amount amount, String category, LocalDate date, String location) {
+    public Expense(Name name, Amount amount, Category category, LocalDate date, Location location) {
         this.name = name;
         this.amount = amount;
         this.category = category;
@@ -28,7 +28,7 @@ public class Expense {
         return amount;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
@@ -36,7 +36,7 @@ public class Expense {
         return date;
     }
 
-    public String getLocation() {
+    public Location getLocation() {
         return location;
     }
 
