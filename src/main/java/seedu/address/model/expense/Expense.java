@@ -7,12 +7,12 @@ import seedu.address.commons.util.ToStringBuilder;
 
 public class Expense {
     private final Name name;
-    private final double amount;
+    private final Amount amount;
     private final String category;
     private final LocalDate date;
     private final String location;
 
-    public Expense(Name name, double amount, String category, LocalDate date, String location) {
+    public Expense(Name name, Amount amount, String category, LocalDate date, String location) {
         this.name = name;
         this.amount = amount;
         this.category = category;
@@ -24,7 +24,7 @@ public class Expense {
         return name;
     }
 
-    public double getAmount() {
+    public Amount getAmount() {
         return amount;
     }
 
