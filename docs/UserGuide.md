@@ -165,6 +165,141 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
+### Create Income
+Allows a user to register an inflow of money (income) into the application.
+Our application will store an income based on the name, value, date.
+
+Command: `create_income <name> [-value <value of income>] [-date <date of expense>]`
+
+Command Argument: `name` represents the name of the income to be added.
+
+Command Options:
+
+| Option Name | Optional? | Purpose                                                                                                                |
+|-------------|-----------|------------------------------------------------------------------------------------------------------------------------|
+| -value      | No        | Value of expense. Represents a positive number (integer/ float).                                                       |
+| -date       | Yes       | Date of when the expense was made. Follows format  dd/MM/yyyy <br><br>  Defaults to date of creation if not specified. |
+
+#### Expected Outputs
+
+##### Successful Execution
+
+###### Example 1
+
+>**Case**:  Create “work at lifo” income dated 19/09/2023 with value of 900.
+>
+>**Input**: `create_income work at liho -date 19/09/2023 -value 900`
+>
+>**Output**: Successfully created income “work at liho”!
+>
+>**Remark**: The income will be dated 19/09/2023.
+
+##### Failed Execution
+
+###### Example 1
+>**Case**: Missing `name` of income
+>
+>**Input**: `create_income`
+>
+>**Output**: Cannot create income without income name. 
+> Please specify the income name as such: `create_income <name> -value <value>`
+
+###### Example 2
+>**Case**: Missing `value` of income
+>
+>**Input**: `create_income working`
+>
+>**Output**: Cannot create income without income value.
+> Please specify the income name as such: `create_income <name> -value <value>`
+
+###### Example 3
+>**Case**: Invalid `value` form (not positive number)
+>
+>**Input**: `create_income working -value hi`
+>
+>**Output**: Cannot create income due to invalid income value type. Ensure that it is a positive number.
+
+###### Example 4
+>**Case**: Invalid `date` of income
+>
+>**Input**: `create_income working -value 1300 -date today`
+>
+>**Output**: Cannot create income due to invalid date format. Ensure that it follows dd/MM/yyyy.
+
+
+### Delete Income
+Allows a user to delete an income previously added into the application.
+
+Command: `delete_income <name>`
+
+#### Expected Outputs
+
+##### Successful Execution
+
+###### Example 1
+>**Case**: Delete “work at liho” income.
+>
+>**Input**: `delete_income work at liho`
+>
+>**Output**: Successfully deleted expense “work at liho”
+
+##### Failed Execution
+
+###### Example 1
+>**Case**: Missing `name` of income
+>
+>**Input**: `delete_income`
+>
+>**Output**: Cannot delete income without income `name`. 
+> Please specify the income name as such: `delete_income <name>`
+
+### Find Income
+Allows a user to search for an income(s) that was previously entered.
+User can find income(s) through name.
+
+Command: `find_income [-name <name of income>] [-value_more <value of income>] [-value_less <value of income>] [-date <date of income>]`
+
+Command Options:
+
+| Option Name | Optional? | Purpose                                                                                                |
+|-------------|-----------|--------------------------------------------------------------------------------------------------------|
+| -name       | Yes       | Name of income to find.                                                                                |
+| -value_more | Yes       | Value of income, used to filter income more than value.                                                |
+| -value_less | Yes       | Value of income, used to filter income less than value.                                                |
+| -date       | Yes       | Date of when the income was made. Follows format dd/MM/yyyy.<br><br>Filters income added on that date. |
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+If no options are specified, all income is returned.
+</div>
+
+#### Expected Outputs
+
+##### Successful Execution
+
+###### Example 1
+>**Case**: Find “work at liho” income.
+>
+>**Input**: `find_income work at liho`
+>
+>**Output**: Successfully found income “work at liho”. Display information related to the income
+
+##### Failed Execution
+
+###### Example 1
+>**Case**: Missing `name` of income
+>
+>**Input**: `find_income`
+>
+>**Output**: Cannot find income without income name.
+> Please specify the income name as such: `find_income <name>`
+
+###### Example 2
+>**Case**: Invalid `date` format
+>
+>**Input**: `find_income work at liho -date tomorrow`
+>
+>**Output**: Cannot find income due to invalid date format. Ensure that it follows dd/MM/yyyy.
+
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
