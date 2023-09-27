@@ -1,10 +1,16 @@
 package seedu.address.model.expense;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
 
+/**
+ * Represents an Expense in the finance tracker.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class Expense {
     private final Name name;
     private final Amount amount;
@@ -12,7 +18,11 @@ public class Expense {
     private final LocalDate date;
     private final Location location;
 
+    /**
+     * Every field must be present and not null.
+     */
     public Expense(Name name, Amount amount, Category category, LocalDate date, Location location) {
+        requireAllNonNull(name, amount, category, date, location);
         this.name = name;
         this.amount = amount;
         this.category = category;
@@ -45,6 +55,10 @@ public class Expense {
         return Objects.hash(name, amount, category, date, location);
     }
 
+    /**
+     * Returns true if both expenses have the same data fields.
+     * This defines a stronger notion of equality between two expenses.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
