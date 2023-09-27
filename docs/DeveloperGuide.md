@@ -39,6 +39,6 @@ title: Developer Guide
 - Remove tags - delete category of spending
 
 ## Links
-User Stories: https://github.com/orgs/AY2324S1-CS2103-T16-3/projects/1/views/2 
+User Stories: [https://github.com/orgs/AY2324S1-CS2103-T16-3/projects/1/views/2](https://github.com/orgs/AY2324S1-CS2103-T16-3/projects/1/views/2)
 
-Project Website: https://ay2324s1-cs2103-t16-3.github.io/tp/
+Project Website: [https://ay2324s1-cs2103-t16-3.github.io/tp/](https://ay2324s1-cs2103-t16-3.github.io/tp/)
