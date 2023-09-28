@@ -2,7 +2,7 @@ package seedu.address.model.income;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -14,12 +14,12 @@ import seedu.address.commons.util.ToStringBuilder;
 public class Income {
     private final Name name;
     private final Amount amount;
-    private final LocalDate date;
+    private final LocalDateTime date;
 
     /**
      * Every field must be present and not null.
      */
-    public Income(Name name, Amount amount, LocalDate date) {
+    public Income(Name name, Amount amount, LocalDateTime date) {
         requireAllNonNull(name, amount, date);
         this.name = name;
         this.amount = amount;
@@ -34,7 +34,7 @@ public class Income {
         return this.amount;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return this.date;
     }
 

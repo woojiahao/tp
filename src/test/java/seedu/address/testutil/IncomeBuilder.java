@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import seedu.address.model.income.Amount;
 import seedu.address.model.income.Income;
@@ -13,11 +13,11 @@ public class IncomeBuilder {
 
     public static final String DEFAULT_NAME = "Work at liho";
     public static final Double DEFAULT_AMOUNT = 3.0;
-    public static final LocalDate DEFAULT_DATE = LocalDate.now();
+    public static final LocalDateTime DEFAULT_DATE = LocalDateTime.now();
 
     private Name name;
     private Amount amount;
-    private LocalDate date;
+    private LocalDateTime date;
 
     /**
      * Creates a {@code IncomeBuilder} with the default details.
@@ -56,7 +56,7 @@ public class IncomeBuilder {
     /**
      * Sets the {@code LocalDate} of the {@code Income} that we are building.
      */
-    public IncomeBuilder withDate(LocalDate date) {
+    public IncomeBuilder withDate(LocalDateTime date) {
         this.date = date;
         return this;
     }
