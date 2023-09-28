@@ -1,9 +1,7 @@
 package seedu.address.model.income;
 
 import org.junit.jupiter.api.Test;
-import seedu.address.model.person.Person;
 import seedu.address.testutil.IncomeBuilder;
-import seedu.address.testutil.PersonBuilder;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.logic.commands.CommandTestUtil.*;
@@ -11,7 +9,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.testutil.TypicalIncomes.WORK_AT_LIHO;
 import static seedu.address.testutil.TypicalIncomes.ALLOWANCE;
 import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BOB;
 
 public class IncomeTest {
     @Test

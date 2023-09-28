@@ -8,7 +8,7 @@ import java.util.Objects;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Represents a Person in the address book.
+ * Represents an Income.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Income {
@@ -73,5 +73,4 @@ public class Income {
                 .add("date", date)
                 .toString();
     }
-
 }
