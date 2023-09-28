@@ -1,9 +1,12 @@
 package seedu.address.testutil;
 
-import seedu.address.model.income.Income;
-
 import java.time.LocalDate;
 
+import seedu.address.model.income.Income;
+
+/**
+ * A utility class containing a list of {@code Income} objects to be used in tests.
+ */
 public class TypicalIncomes {
     public static final Income WORK_AT_LIHO = new IncomeBuilder().withName("Work at liho")
             .withAmount(300.0)

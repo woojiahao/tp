@@ -2,8 +2,8 @@ package seedu.address.testutil;
 
 import java.time.LocalDate;
 
-import seedu.address.model.income.Income;
 import seedu.address.model.income.Amount;
+import seedu.address.model.income.Income;
 import seedu.address.model.income.Name;
 
 /**

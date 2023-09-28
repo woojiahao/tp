@@ -1,14 +1,17 @@
 package seedu.address.model.income;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.testutil.IncomeBuilder;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.testutil.TypicalIncomes.WORK_AT_LIHO;
 import static seedu.address.testutil.TypicalIncomes.ALLOWANCE;
+import static seedu.address.testutil.TypicalIncomes.WORK_AT_LIHO;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.testutil.IncomeBuilder;
 
 public class IncomeTest {
     @Test
@@ -40,7 +43,8 @@ public class IncomeTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Income.class.getCanonicalName() + "{name=" + WORK_AT_LIHO.getName() + ", amount=" + WORK_AT_LIHO.getAmount()
+        String expected = Income.class.getCanonicalName() + "{name=" + WORK_AT_LIHO.getName()
+                + ", amount=" + WORK_AT_LIHO.getAmount()
                 + ", date=" + WORK_AT_LIHO.getDate() + "}";
         assertEquals(expected, WORK_AT_LIHO.toString());
     }
