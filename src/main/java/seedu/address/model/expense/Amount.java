@@ -26,7 +26,7 @@ public class Amount {
      * Returns true if a given amount is a non-negative value.
      */
     public static boolean isValidAmount(double amount) {
-        return amount > 0.00;
+        return amount >= 0.00;
     }
 
     @Override
