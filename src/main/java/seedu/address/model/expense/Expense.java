@@ -42,7 +42,7 @@ public class Expense {
         return category;
     }
 
-    public LocalDateTime getDate() {
+    public LocalDateTime getDateTime() {
         return dateTime;
     }
 
@@ -83,7 +83,7 @@ public class Expense {
                 .add("name", name)
                 .add("amount", amount)
                 .add("category", category)
-                .add("date", dateTime)
+                .add("dateTime", dateTime)
                 .add("location", location)
                 .toString();
     }
