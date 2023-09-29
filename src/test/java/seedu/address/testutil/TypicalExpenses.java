@@ -6,6 +6,9 @@ import java.time.LocalTime;
 
 import seedu.address.model.expense.Expense;
 
+/**
+ * A utility class containing a list of {@code Expense} objects to be used in tests.
+ */
 public class TypicalExpenses {
     public static final Expense BUYING_GROCERIES = new ExpenseBuilder()
             .withName("Buying groceries")

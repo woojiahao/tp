@@ -55,9 +55,13 @@ public class ExpenseTest {
     @Test
     public void toStringMethod() {
         String expected =
-                Expense.class.getCanonicalName() + "{name=" + BUYING_GROCERIES.getName() + ", amount=" + BUYING_GROCERIES.getAmount()
-                        + ", category=" + BUYING_GROCERIES.getCategory() + ", dateTime=" + BUYING_GROCERIES.getDateTime() + ", " +
-                        "location=" + BUYING_GROCERIES.getLocation() + "}";
+                Expense.class.getCanonicalName()
+                        + "{name=" + BUYING_GROCERIES.getName()
+                        + ", amount=" + BUYING_GROCERIES.getAmount()
+                        + ", category=" + BUYING_GROCERIES.getCategory()
+                        + ", dateTime=" + BUYING_GROCERIES.getDateTime()
+                        + ", location=" + BUYING_GROCERIES.getLocation()
+                        + "}";
         assertEquals(expected, BUYING_GROCERIES.toString());
     }
 }
