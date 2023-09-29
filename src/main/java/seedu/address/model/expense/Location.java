@@ -9,13 +9,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Location {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Locations should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Locations should only contain alphanumeric characters, spaces, (, ), _, -, #, &, ., and ',', "
+                    + "and it should not be blank";
 
     /*
      * The first character of the location must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}_&#.,()-][\\p{Alnum} _&#.,()-]*";
 
     public final String location;
 
