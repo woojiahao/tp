@@ -27,8 +27,8 @@ public class CategoryTest {
         // invalid name
         assertFalse(Category.isValidCategory("")); // empty string
         assertFalse(Category.isValidCategory(" ")); // spaces only
-        assertFalse(Category.isValidCategory("^")); // only non-alphanumeric characters
-        assertFalse(Category.isValidCategory("Lots*")); // contains non-alphanumeric characters
+        assertFalse(Category.isValidCategory("^")); // only non-allowed characters
+        assertFalse(Category.isValidCategory("Lots*")); // contains non-allowed characters
 
         // valid name
         assertTrue(Category.isValidCategory("food")); // alphabets only
