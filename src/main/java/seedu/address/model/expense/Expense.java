@@ -2,7 +2,7 @@ package seedu.address.model.expense;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -15,18 +15,18 @@ public class Expense {
     private final Name name;
     private final Amount amount;
     private final Category category;
-    private final LocalDate date;
+    private final LocalDateTime dateTime;
     private final Location location;
 
     /**
      * Every field must be present and not null.
      */
-    public Expense(Name name, Amount amount, Category category, LocalDate date, Location location) {
-        requireAllNonNull(name, amount, category, date, location);
+    public Expense(Name name, Amount amount, Category category, LocalDateTime dateTime, Location location) {
+        requireAllNonNull(name, amount, category, dateTime, location);
         this.name = name;
         this.amount = amount;
         this.category = category;
-        this.date = date;
+        this.dateTime = dateTime;
         this.location = location;
     }
 
@@ -42,8 +42,8 @@ public class Expense {
         return category;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public LocalDateTime getDate() {
+        return dateTime;
     }
 
     public Location getLocation() {
@@ -52,7 +52,7 @@ public class Expense {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, amount, category, date, location);
+        return Objects.hash(name, amount, category, dateTime, location);
     }
 
     /**
@@ -73,7 +73,7 @@ public class Expense {
         return name.equals(otherExpense.name)
                 && amount == otherExpense.amount
                 && category.equals(otherExpense.category)
-                && date.equals(otherExpense.date)
+                && dateTime.equals(otherExpense.dateTime)
                 && location.equals(otherExpense.location);
     }
 
@@ -83,7 +83,7 @@ public class Expense {
                 .add("name", name)
                 .add("amount", amount)
                 .add("category", category)
-                .add("date", date)
+                .add("date", dateTime)
                 .add("location", location)
                 .toString();
     }
