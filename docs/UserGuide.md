@@ -167,7 +167,7 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 
 ---
 
-### Edit Expense
+### Edit Expense [coming soon]
 Allows a user to make edits to an existing expense, and all associated information.
 
 Command: `edit <expense_id> -<name of attribute 1> <new attribute 1 value> [-<name of attribute N> <new attribute N value> …]`
