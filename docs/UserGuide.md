@@ -165,6 +165,101 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
+---
+
+### Edit Expense
+Allows a user to make edits to an existing expense, and all associated information.
+
+Command: `edit <expense_id> -<name of attribute 1> <new attribute 1 value> [-<name of attribute N> <new attribute N value> …]`
+
+Command Argument: `expense_id` is the ID of the expense to edit.
+
+Command Options:
+
+| Option Name        | Optional? | Purpose                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+|--------------------|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -name of attribute | No        | The attribute to make edits to. Possible values: `name`, `amount`, `category`, `date`, `location`<br/><br/>Note: If `name of attribute` is date, then the associated `new attribute value` must be in format: `dd/MM/yyyy`.<br/>Note: If `name of attribute` is amount, then the associated `new attribute value` must be a number.<br/>Note: If `name of attribute` is not name or amount, then the associated `new attribute value` can be empty if the user wants to reset the attribute to the default value (NULL for location and Others for category). |
+| ...                | Yes       | More `name of attribute` `new attribute value` pairs to make more edits to the same expense                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+
+#### Expected Outputs
+
+##### Successful Execution
+
+###### Example 1
+
+>**Case**: Editing one attribute of expense 3
+>
+>**Input**: `edit 3 -location online`
+>
+>**Output**:
+> ```
+> Successful edits to expense 3:
+> location : online
+> ```
+
+###### Example 2
+
+>**Case**: Setting the expense’s category to be default of “Others”
+>
+>**Input**: `edit 2 -category -location frontier pasta express -amount 5.8
+`
+>
+>**Output**:
+> ```
+> Successful edits to expense 1:
+> category : “Others”
+> location : frontier pasta express
+> amount : $5.80
+> ```
+
+#### Failed Execution
+
+###### Example 1
+
+>**Case**: No attributes to edit
+>
+>**Input**: `edit 1`
+>
+>**Output**:
+> ```
+> Please input an attribute to edit, and the new value to change the attribute to.
+> Syntax: edit <integer> -<name of attribute> <new attribute value>
+> ```
+
+###### Example 2
+
+>**Case**: New attribute value for `name` is empty
+>
+>**Input**: `edit 1 -name`
+>
+>**Output**:
+> ```
+> Attributes “name” and “amount” cannot be empty
+> ```
+
+###### Example 3
+
+>**Case**: There are only 10 expenses in the list, but user tries to edit expense 100000
+>
+>**Input**: `edit 100000 -location online`
+>
+>**Output**:
+> ```
+> There are only 10 expenses. Please provide an integer between 1 and 10 (received: 100000)
+> ```
+
+###### Example 4
+
+>**Case**: Wrong input format for “date” and “amount” attribute
+>
+>**Input**: `edit 2 -date yesterday -amount 5.80.`
+>
+>**Output**:
+> ```
+> Attribute “date” must be of the form dd/MM/yyyy (received: yesterday)
+> Attribute “amount” must be a number (received: 5.80.)
+> ```
+
 ### Create Income
 Allows a user to register an inflow of money (income) into the application.
 Our application will store an income based on the name, value, date.
