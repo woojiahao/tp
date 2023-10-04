@@ -17,7 +17,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/woojiahao)]
 [[portfolio](team/woojiahao.md)]
 
-* Role: Integrations
+* Role: Integrations, Visualisations
 
 ### Jamie Toh
 
