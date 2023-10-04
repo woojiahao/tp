@@ -29,14 +29,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Testing
 
-### Johnny Doe
+### Tan Lip Wei
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/lipwei1808.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/lipwei1808)] [[portfolio](team/lipwei1808.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Model
 
 ### Jean Doe
 
