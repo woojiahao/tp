@@ -29,14 +29,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Testing
 
-### Johnny Doe
+### Ernest Liu
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/elhy1999.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/elhy1999)]
+[[portfolio](team/elhy1999.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Documentations
 
 ### Jean Doe
 
