@@ -128,6 +128,106 @@ Command Options:
 > Attribute “amount” must be a number (received: 5.80.)
 > ```
 
+
+### Delete Expense
+Allows a user to delete a previously added expense and all information associated with that expense.
+
+Command: `delete <name>`
+
+Command Argument: `name` represents the exact name of the expense intended to be deleted. 
+Has to exactly match a given expense, or else the command will do nothing, 
+so as to ensure the integrity of user data.
+
+#### Expected Outputs
+
+##### Successful Execution
+
+###### Example 1
+
+>**Case**:  Delete expense named “friday mcdonalds”
+>
+>**Input**: `delete "friday mcdonalds"`
+>
+>**Output**: Successfully deleted expense “friday mcdonalds”!
+>
+>**Remark**: The expense will be removed from file
+
+##### Unsuccessful Execution
+
+###### Example 1
+
+>**Case**:  Delete expense command entered with no argument provided
+>
+>**Input**: `delete `
+>
+>**Output**: No expense deleted. Delete command must be followed with an expense to be deleted like this: delete <expense>.
+>
+>**Remark**: No expenses will be removed and no changes made to file.
+
+###### Example 2
+
+>**Case**:  Delete expense command entered with no matching expense name
+>
+>**Input**: `delete asdf`
+>
+>**Output**: No expense deleted. Delete command must be followed with a valid expense name.
+>
+>**Remark**: No expenses will be removed and no changes made to file.
+
+
+### Mass Delete Expense
+Allows a user to delete all added expenses, and all associated information.
+
+Command: `delete_all_expenses`
+
+Command Argument:  No arguments are needed for this command. 
+The command is intentionally lengthy to ensure that mass deletion of all expenses is done intentionally.
+
+Remarks: Confirmation for mass deletion to be implemented at a later date.
+
+#### Expected Outputs
+
+##### Successful Execution
+
+###### Example 1
+
+>**Case**:  Delete all expenses
+>
+>**Input**: `delete_all_expenses`
+>
+>**Output**: Successfully deleted all expenses!
+>
+>**Remark**: All expenses will be removed from file
+
+##### Unsuccessful Execution
+
+###### Example 1
+
+>**Case**:  Mass deletion command entered improperly
+>
+>**Input**: `delete_all `
+>
+>**Output**: Invalid command.
+>
+>**Remark**: No expenses will be removed and no changes made to file.
+
+###### Example 2
+
+>**Case**:  Wrong delete command entered
+>
+>**Input**: `delete`
+>
+>**Output**: No expense deleted. Delete command must be followed with an expense to be deleted like this: delete <expense>.
+>
+>**Remark**: No expenses will be removed and no changes made to file. 
+> The above error is the same as the one for the simple “delete” function. 
+> In the above example, the delete_all_expenses functionality is 
+> intentionally obfuscated to prevent the user from accidental mass deletions. 
+> The rationale is that a user unsure of a basic command like delete is probably a new user, 
+> and a new user should not be directed to mass delete information. 
+> There are other, more proper ways to convey this information, such as this User Guide.
+
+
 ### Create Income
 Allows a user to register an inflow of money (income) into the application.
 Our application will store an income based on the name, value, date.
