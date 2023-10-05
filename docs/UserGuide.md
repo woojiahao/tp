@@ -255,7 +255,6 @@ Command Options:
 > Attribute “amount” must be a number (received: 5.80.)
 > ```
 
-
 ### Delete Expense [coming soon]
 Allows a user to delete a previously added expense and all information associated with that expense.
 
@@ -366,6 +365,191 @@ Remarks: Confirmation for mass deletion to be implemented at a later date.
 > and a new user should not be directed to mass delete information. 
 > There are other, more proper ways to convey this information, such as this User Guide.
 
+
+### List Expenses [coming soon]
+Allows a user to retrieve a list of all their past expenses with details on where it was spent, type of spending and how much was spent.
+
+Command: `list`
+
+#### Expected Outputs
+
+##### Successful Execution
+
+###### Example 1
+
+>**Case**:  Calling the command when there are no existing expenses.
+>
+>**Input**: `list`
+>
+>**Output**:
+>```
+>You have no expenses!
+>```
+
+###### Example 2
+
+>**Case**:  Calling the command with existing expenses.
+>
+>**Input**: `list`
+>
+>**Output**:
+>```
+>1. buy groceries 23/09/23 - $15.20 (groceries)
+>2. lunch at fc 23/09/23 - $5.50 (meals)
+>```
+
+##### Failed Execution
+
+###### Example 1
+>**Case**: Calling the command with any parameters
+>
+>**Input**: `list 5`
+>
+>**Output**:
+>```
+>Command not recognised. Try using the command “list” instead.
+>```
+
+### Find Expenses [coming soon]
+Allows a user to retrieve the expense(s) that contain/matches any of the given keywords.
+
+Command: `find <keyword>`
+
+Command Parameters: `<keyword>` is the keyword to look for in any of the stored expenses, it can be a single word or multiple words separated by spaces.
+
+#### Expected Outputs
+
+##### Successful Execution
+
+###### Example 1
+
+>**Case**:  Calling the command when there are no matching expenses.
+>
+>**Input**: `find chicken`
+>
+>**Output**:
+>```
+>You have no matching expenses!
+>```
+
+###### Example 2
+
+>**Case**:  Calling the command with keywords that match existing expenses.
+>
+>**Input**: `find lunch`
+>
+>**Output**:
+>```
+>2 expenses found containing the word(s) “groceries”:
+>
+>1. lunch at holland 16/09/23 - $15.20 (groceries)
+>4. lunch at fc 23/09/23 - $5.50 (meals)
+>```
+>**Note:** Index of retrieved list is respective to the order of the full expense list so index of 4 is the 4th expense stored in the system.
+
+##### Failed Execution
+
+###### Example 1
+>**Case**: Calling the command without any parameters
+>
+>**Input**: `find`
+>
+>**Output**:
+>```
+>The “find” command requires at least one word to search.
+>```
+
+### Tabulate Total Expense [coming soon]
+Allows a user to view their total expenditure, filtered by category of spending or by month.
+
+Command: `total [-category <category>] [-month <month>]`
+
+Command Options:
+
+| Option Name | Optional? | Purpose                                                                                                                                                |
+|-------------|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -category   | Yes       | Category / type of expense. Defaults to accounting for all categories if not specified.                                                                |
+| -month      | Yes       | Month of expenditure. Can either be the shorthand of the name like Sep or full name like September. <br/><br/>Defaults to all months if not specified. |
+
+#### Expected Outputs
+
+##### Successful Execution
+
+###### Example 1
+
+>**Case**:  Calling the command with no options.
+>
+>**Input**: `total`
+>
+>**Output**:
+>```
+>Your total expenditure recorded is $1388.
+>```
+
+###### Example 2
+
+>**Case**:  Calling the command with a specified category.
+>
+>**Input**: `total -category food`
+>
+>**Output**:
+>```
+>Your total expenditure recorded for food is $780.
+>```
+
+###### Example 3
+
+>**Case**:  Calling the command with a specified month.
+>
+>**Input**: `total -month June`
+>
+>**Output**:
+>```
+>Your total expenditure recorded for June is $400.
+>```
+
+###### Example 4
+
+>**Case**:  Calling the command with a specified category and month.
+>
+>**Input**: `total -category food -month June`
+>
+>**Output**:
+>```
+>Your total expenditure recorded for food in June is $230.
+>```
+
+##### Failed Execution
+
+###### Example 1
+>**Case**: Calling the command with a category that doesn’t exist.
+>
+>**Input**: `total -category chicken -month june`
+>
+>**Output**:
+>```
+>The category "chicken" doesn't exist.
+>```
+
+###### Example 2
+>**Case**: Calling the command with a month that doesn’t exist.
+>
+>**Input**: `total -category food -month juely`
+>
+>**Output**:
+>```
+>The month "juely" doesn't exist.
+>```
+
+###### Example 3
+>**Case**: Calling the command with a category and month that doesn’t exist.
+>
+>**Input**: `total -category chicken -month juely`
+>
+>**Output**:
+>```
+>The category "chicken" and month "juely" doesn't exist.
+>```
 
 ### Create Income
 
@@ -536,13 +720,15 @@ the data of your previous UniCa$h home folder.
 
 ## Command summary
 
-| Action             | Format, Examples                                                                                                                                                                                                                       |
-|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Create Expense** | `create <name> -amount <expense amount> [-category <category of expense>] [-date <date of expense>] [-location <location of expense>]` <br> e.g., `create buy food -amount 7.50 -date 19/09/2023 -location Food Clique -category Food` |
-| **Add**            | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`                                                                  |
-| **Clear**          | `clear`                                                                                                                                                                                                                                |
-| **Delete**         | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                    |
-| **Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                                            |
-| **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                             |
-| **List**           | `list`                                                                                                                                                                                                                                 |
-| **Help**           | `help`                                                                                                                                                                                                                                 |
+| Action                     | Format, Examples                                                                                                                                                                                                                       |
+|----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Create Expense**         | `create <name> -amount <expense amount> [-category <category of expense>] [-date <date of expense>] [-location <location of expense>]` <br> e.g., `create buy food -amount 7.50 -date 19/09/2023 -location Food Clique -category Food` |
+| **Delete Expense**         | `delete <name>`<br> e.g., `delete grabfood_lunch`                                                                                                                                                                                      |                                                                                                                                                                                                                       |
+| **Mass Delete Expenses**   | `delete_all_expenses`                                                                                                                                                                                                                  |
+| **Edit Expenses**          | `edit <expense_id> -<name of attribute 1> <new attribute 1 value> [-<name of attribute N> <new attribute N value> …​]`<br> e.g.,`edit 3 -location online`                                                                              |
+| **List Expenses**          | `list`                                                                                                                                                                                                                                 |
+| **Find Expenses**          | `find <keyword>` <br> e.g., `find lunch`                                                                                                                                                                                               |
+| **Tabulate Total Expense** | `total [-category <category>] [-month <month>]` <br> e.g., `total -category Food -month June`                                                                                                                                          |
+| **Create Income**          | `create_income <name> [-value <value of income>] [-date <date of expense>]` <br> e.g., `create_income work at liho -date 19/09/2023 -value 900`                                                                                        |
+| **Delete Income**          | `delete_income <name>`                                                                                                                                                                                                                 |
+| **Find Income**            | `find_income <name> [-value_more <value of income>] [-value_less <value of income>] [-date <date of income>]` <br> e.g., `find_income work at liho`                                                                                    |
