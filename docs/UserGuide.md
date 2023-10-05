@@ -129,7 +129,7 @@ Command Options:
 > ```
 
 
-### Delete Expense
+### Delete Expense [coming soon]
 Allows a user to delete a previously added expense and all information associated with that expense.
 
 Command: `delete <name>`
@@ -147,9 +147,9 @@ so as to ensure the integrity of user data.
 >**Case**:  Delete expense named “friday mcdonalds”
 >
 >**Input**: `delete "friday mcdonalds"`
->
+>```
 >**Output**: Successfully deleted expense “friday mcdonalds”!
->
+>``
 >**Remark**: The expense will be removed from file
 
 ##### Unsuccessful Execution
@@ -159,9 +159,9 @@ so as to ensure the integrity of user data.
 >**Case**:  Delete expense command entered with no argument provided
 >
 >**Input**: `delete `
->
+>```
 >**Output**: No expense deleted. Delete command must be followed with an expense to be deleted like this: delete <expense>.
->
+>```
 >**Remark**: No expenses will be removed and no changes made to file.
 
 ###### Example 2
@@ -169,13 +169,13 @@ so as to ensure the integrity of user data.
 >**Case**:  Delete expense command entered with no matching expense name
 >
 >**Input**: `delete asdf`
->
+>```
 >**Output**: No expense deleted. Delete command must be followed with a valid expense name.
->
+>```
 >**Remark**: No expenses will be removed and no changes made to file.
 
 
-### Mass Delete Expense
+### Mass Delete Expense [coming soon]
 Allows a user to delete all added expenses, and all associated information.
 
 Command: `delete_all_expenses`
@@ -194,9 +194,9 @@ Remarks: Confirmation for mass deletion to be implemented at a later date.
 >**Case**:  Delete all expenses
 >
 >**Input**: `delete_all_expenses`
->
+>```
 >**Output**: Successfully deleted all expenses!
->
+>```
 >**Remark**: All expenses will be removed from file
 
 ##### Unsuccessful Execution
@@ -206,9 +206,9 @@ Remarks: Confirmation for mass deletion to be implemented at a later date.
 >**Case**:  Mass deletion command entered improperly
 >
 >**Input**: `delete_all `
->
+>```
 >**Output**: Invalid command.
->
+>```
 >**Remark**: No expenses will be removed and no changes made to file.
 
 ###### Example 2
@@ -216,9 +216,9 @@ Remarks: Confirmation for mass deletion to be implemented at a later date.
 >**Case**:  Wrong delete command entered
 >
 >**Input**: `delete`
->
+>```
 >**Output**: No expense deleted. Delete command must be followed with an expense to be deleted like this: delete <expense>.
->
+>```
 >**Remark**: No expenses will be removed and no changes made to file. 
 > The above error is the same as the one for the simple “delete” function. 
 > In the above example, the delete_all_expenses functionality is 
