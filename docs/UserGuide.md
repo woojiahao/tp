@@ -3,10 +3,12 @@ layout: page
 title: User Guide
 ---
 
-UniCa$h is a **is a desktop application used for university students who want to be more financially conscious, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, UniCa$h can get your contact management tasks done faster than traditional GUI apps.
+UniCa$h is a **is a desktop application used for university students who want to be more financially conscious,
+optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (
+GUI). If you can type fast, UniCa$h can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -14,20 +16,23 @@ UniCa$h is a **is a desktop application used for university students who want to
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `unicash.jar` from [coming soon]().
+2. Download the latest `unicash.jar` from [coming soon]().
 
-1. Copy the file to the folder you want to use as the _home folder_ for your UniCa$h.
+3. Copy the file to the folder you want to use as the _home folder_ for your UniCa$h.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar unicash.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar unicash.jar` command to
+   run the application.
+
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
+   open the help window.<br>
    Some example commands you can try:
 
-   * `commands coming soon!`
+    * `commands coming soon!`
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -35,7 +40,129 @@ UniCa$h is a **is a desktop application used for university students who want to
 
 ---
 
+### Create Expense [coming soon]
+
+Allows a user to create an expense and all information associated with that expense including the name, amount,
+category (defaults to "Others"), location (optional), and date (defaults to the current date) of the expense.
+
+Command: `create <name> -amount <expense amount> [-category <category of expense>] [-date <date of expense>] [-location <location of expense>]`
+
+Command Argument: `name` represents the name of the expense to be added.
+
+Command Options:
+
+| Option Name | Optional? | Purpose                                                                                                            |
+|-------------|-----------|--------------------------------------------------------------------------------------------------------------------|
+| -amount     | No        | Amount of expense. Currency is SGD.                                                                                |
+| -category   | Yes       | Category/type of expense, used to group and filter expenses.<br/>Defaults to "Others" if not specified.            |
+| -date       | Yes       | Date of when the expense was made. Follows format `dd/MM/yyyy`.<br/>Defaults to date of creation if not specified. |
+| -location   | Yes       | Location where expense was made.<br/>Defaults to `NULL` if not specified.                                          |
+
+#### Expected Outputs
+
+##### Successful Execution
+
+###### Example 1
+
+> **Case**: Create expense with name, amount, date, location, and category
+>
+> **Input**: `create buy food -amount 7.50 -date 19/09/2023 -location Food Clique -category Food`
+>
+> **Output**:
+> ```
+> Successfully created expense "buy food" of category "Food"!
+> ```
+>
+> **Remark**: The expense will be dated 19/09/2023.
+
+###### Example 2
+
+> **Case**: Create expense with name, amount, location, and category but without date
+>
+> **Input**: `create buy groceries -amount 14.30 -category Food -location Fairprice`
+>
+> **Output**:
+> ```
+> Successfully created expense "buy groceries" of category "Food"!
+> ```
+>
+> **Remark**: The expense will be dated whenever the `create` command was executed.
+
+###### Example 3
+
+> **Case**: Create expense with name, amount, and category but without date and location
+>
+> **Input**: `create buy stuff -amount 13.00 -category Misc`
+>
+> **Output**:
+> ```
+> Successfully created expense "buy stuff" of category "Misc"!
+> ```
+>
+> **Remark**: The expense will be dated whenever the `create` command was executed and have a `NULL` location.
+
+###### Example 4
+
+> **Case**: Create expense with name and amount but without date, location, or category
+>
+> **Input**: `create buy things -amount 10.00`
+>
+> **Output**:
+> ```
+> Successfully created expense "buy things" of category "Others"!
+> ```
+>
+> **Remark**: The expense will be dated whenever the `create` command was executed, have a `NULL` location, and be
+> assigned to the "Others" category by default.
+
+##### Failed Execution
+
+###### Example 1
+
+> **Case**: Missing `name` of expense
+>
+> **Input**: `create`
+>
+> **Output**:
+> ```
+> Cannot create expense without expense name. Please specify the expense name as such: `create <expense name>`
+> ```
+
+###### Example 2
+
+> **Case**: Missing `amount` option of expense
+>
+> **Input**: `create buy something!`
+>
+> **Output**:
+> ```
+> Cannot create expense without amount of expenditure. Please specify the expense amount as such: `create <expense name> -amount <expense amount>`
+> ```
+
+###### Example 3
+
+> **Case**: Invalid `amount` option value.
+>
+> **Input**: `create buy something! -amount hi`
+>
+> **Output**:
+> ```
+> Failed to create expense as amount is invalid, ensure that it is a number.
+> ```
+
+###### Example 4
+
+> **Case**: Invalid `date` option value.
+>
+> **Input**: `create buy something! -amount 14.30 -date today`
+>
+> **Output**:
+> ```
+> Failed to create expense as date is invalid, ensure that it is the following format: `dd/MM/yyyy`.
+> ```
+
 ### Edit Expense [coming soon]
+
 Allows a user to make edits to an existing expense, and all associated information.
 
 Command: `edit <expense_id> -<name of attribute 1> <new attribute 1 value> [-<name of attribute N> <new attribute N value> …]`
@@ -55,7 +182,7 @@ Command Options:
 
 ###### Example 1
 
->**Case**: Editing one attribute of expense 3
+> **Case**: Editing one attribute of expense 3
 >
 >**Input**: `edit 3 -location online`
 >
@@ -67,7 +194,7 @@ Command Options:
 
 ###### Example 2
 
->**Case**: Setting the expense’s category to be default of “Others”
+> **Case**: Setting the expense’s category to be default of “Others”
 >
 >**Input**: `edit 2 -category -location frontier pasta express -amount 5.8
 `
@@ -84,7 +211,7 @@ Command Options:
 
 ###### Example 1
 
->**Case**: No attributes to edit
+> **Case**: No attributes to edit
 >
 >**Input**: `edit 1`
 >
@@ -96,7 +223,7 @@ Command Options:
 
 ###### Example 2
 
->**Case**: New attribute value for `name` is empty
+> **Case**: New attribute value for `name` is empty
 >
 >**Input**: `edit 1 -name`
 >
@@ -107,7 +234,7 @@ Command Options:
 
 ###### Example 3
 
->**Case**: There are only 10 expenses in the list, but user tries to edit expense 100000
+> **Case**: There are only 10 expenses in the list, but user tries to edit expense 100000
 >
 >**Input**: `edit 100000 -location online`
 >
@@ -118,7 +245,7 @@ Command Options:
 
 ###### Example 4
 
->**Case**: Wrong input format for “date” and “amount” attribute
+> **Case**: Wrong input format for “date” and “amount” attribute
 >
 >**Input**: `edit 2 -date yesterday -amount 5.80.`
 >
@@ -129,6 +256,7 @@ Command Options:
 > ```
 
 ### Create Income
+
 Allows a user to register an inflow of money (income) into the application.
 Our application will store an income based on the name, value, date.
 
@@ -149,7 +277,7 @@ Command Options:
 
 ###### Example 1
 
->**Case**:  Create “work at lifo” income dated 19/09/2023 with value of 900.
+> **Case**:  Create “work at lifo” income dated 19/09/2023 with value of 900.
 >
 >**Input**: `create_income work at liho -date 19/09/2023 -value 900`
 >
@@ -160,15 +288,17 @@ Command Options:
 ##### Failed Execution
 
 ###### Example 1
->**Case**: Missing `name` of income
+
+> **Case**: Missing `name` of income
 >
 >**Input**: `create_income`
 >
->**Output**: Cannot create income without income name. 
+>**Output**: Cannot create income without income name.
 > Please specify the income name as such: `create_income <name> -value <value>`
 
 ###### Example 2
->**Case**: Missing `value` of income
+
+> **Case**: Missing `value` of income
 >
 >**Input**: `create_income working`
 >
@@ -176,21 +306,23 @@ Command Options:
 > Please specify the income name as such: `create_income <name> -value <value>`
 
 ###### Example 3
->**Case**: Invalid `value` form (not positive number)
+
+> **Case**: Invalid `value` form (not positive number)
 >
 >**Input**: `create_income working -value hi`
 >
 >**Output**: Cannot create income due to invalid income value type. Ensure that it is a positive number.
 
 ###### Example 4
->**Case**: Invalid `date` of income
+
+> **Case**: Invalid `date` of income
 >
 >**Input**: `create_income working -value 1300 -date today`
 >
 >**Output**: Cannot create income due to invalid date format. Ensure that it follows dd/MM/yyyy.
 
-
 ### Delete Income
+
 Allows a user to delete an income previously added into the application.
 
 Command: `delete_income <name>`
@@ -200,7 +332,8 @@ Command: `delete_income <name>`
 ##### Successful Execution
 
 ###### Example 1
->**Case**: Delete “work at liho” income.
+
+> **Case**: Delete “work at liho” income.
 >
 >**Input**: `delete_income work at liho`
 >
@@ -209,14 +342,16 @@ Command: `delete_income <name>`
 ##### Failed Execution
 
 ###### Example 1
->**Case**: Missing `name` of income
+
+> **Case**: Missing `name` of income
 >
 >**Input**: `delete_income`
 >
->**Output**: Cannot delete income without income `name`. 
+>**Output**: Cannot delete income without income `name`.
 > Please specify the income name as such: `delete_income <name>`
 
 ### Find Income
+
 Allows a user to search for an income(s) that was previously entered.
 User can find income(s) through name.
 
@@ -240,7 +375,8 @@ If no options are specified, all income is returned.
 ##### Successful Execution
 
 ###### Example 1
->**Case**: Find “work at liho” income.
+
+> **Case**: Find “work at liho” income.
 >
 >**Input**: `find_income work at liho`
 >
@@ -249,7 +385,8 @@ If no options are specified, all income is returned.
 ##### Failed Execution
 
 ###### Example 1
->**Case**: Missing `name` of income
+
+> **Case**: Missing `name` of income
 >
 >**Input**: `find_income`
 >
@@ -257,7 +394,8 @@ If no options are specified, all income is returned.
 > Please specify the income name as such: `find_income <name>`
 
 ###### Example 2
->**Case**: Invalid `date` format
+
+> **Case**: Invalid `date` format
 >
 >**Input**: `find_income work at liho -date tomorrow`
 >
@@ -271,8 +409,10 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous UniCa$h home folder.
+**Q**: How do I transfer my data to another Computer?
+
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
+the data of your previous UniCa$h home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -284,12 +424,13 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+| Action             | Format, Examples                                                                                                                                                                                                                       |
+|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Create Expense** | `create <name> -amount <expense amount> [-category <category of expense>] [-date <date of expense>] [-location <location of expense>]` <br> e.g., `create buy food -amount 7.50 -date 19/09/2023 -location Food Clique -category Food` |
+| **Add**            | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`                                                                  |
+| **Clear**          | `clear`                                                                                                                                                                                                                                |
+| **Delete**         | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                    |
+| **Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                                            |
+| **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                             |
+| **List**           | `list`                                                                                                                                                                                                                                 |
+| **Help**           | `help`                                                                                                                                                                                                                                 |
