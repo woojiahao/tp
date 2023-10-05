@@ -21,7 +21,8 @@ GUI). If you can type fast, UniCa$h can get your contact management tasks done f
 3. Copy the file to the folder you want to use as the _home folder_ for your UniCa$h.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar unicash.jar` command to
-   run the application.<br>
+   run the application.
+
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -408,19 +409,10 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-<<<<<<< Updated upstream
+**Q**: How do I transfer my data to another Computer?
+
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
 the data of your previous UniCa$h home folder.
-=======
-<<<<<<< Updated upstream
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
-the data of your previous AddressBook home folder.
-=======
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
-the data of your previous UniCa$h home folder.
-> > > > > > > Stashed changes
-> > > > > > > Stashed changes
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -432,12 +424,13 @@ the data of your previous UniCa$h home folder.
 
 ## Command summary
 
- Action     | Format, Examples                                                                                                                                                      
-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
- **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` 
- **Clear**  | `clear`                                                                                                                                                               
- **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   
- **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           
- **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            
- **List**   | `list`                                                                                                                                                                
- **Help**   | `help`                                                                                                                                                                
+| Action             | Format, Examples                                                                                                                                                                                                                       |
+|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Create Expense** | `create <name> -amount <expense amount> [-category <category of expense>] [-date <date of expense>] [-location <location of expense>]` <br> e.g., `create buy food -amount 7.50 -date 19/09/2023 -location Food Clique -category Food` |
+| **Add**            | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`                                                                  |
+| **Clear**          | `clear`                                                                                                                                                                                                                                |
+| **Delete**         | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                    |
+| **Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                                            |
+| **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                             |
+| **List**           | `list`                                                                                                                                                                                                                                 |
+| **Help**           | `help`                                                                                                                                                                                                                                 |
