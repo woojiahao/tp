@@ -74,8 +74,8 @@ the filtered income with a success message.
 
 **Extensions**
 - 2a. User enters an incorrect format.
-    - 1a1. UniCa$h displays an error message.
-    - Use case resumes at step 1.
+  - 1a1. UniCa$h displays an error message.
+  - Use case resumes at step 1.
 
 - 3a. UniCa$h does not find any results matching the filter.
   - 3a1. UniCa$h displays a message saying no results found.
