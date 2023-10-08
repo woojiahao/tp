@@ -57,8 +57,8 @@ public class IncomeBuilder {
     /**
      * Sets the {@code LocalDate} of the {@code Income} that we are building.
      */
-    public IncomeBuilder withDate(DateTime date) {
-        this.date = date;
+    public IncomeBuilder withDate(LocalDateTime date) {
+        this.date = new DateTime(date);
         return this;
     }
 

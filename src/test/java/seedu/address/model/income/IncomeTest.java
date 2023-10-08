@@ -3,8 +3,8 @@ package seedu.address.model.income;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_NUS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INCOME_NAME_NUS;
 import static seedu.address.testutil.TypicalIncomes.ALLOWANCE;
 import static seedu.address.testutil.TypicalIncomes.WORK_AT_LIHO;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -33,11 +33,11 @@ public class IncomeTest {
         assertFalse(WORK_AT_LIHO.equals(ALLOWANCE));
 
         // different name -> returns false
-        Income editedWorkAtLiho = new IncomeBuilder(WORK_AT_LIHO).withName(VALID_NAME_BOB).build();
+        Income editedWorkAtLiho = new IncomeBuilder(WORK_AT_LIHO).withName(VALID_INCOME_NAME_NUS).build();
         assertFalse(WORK_AT_LIHO.equals(editedWorkAtLiho));
 
         // different value -> returns false
-        editedWorkAtLiho = new IncomeBuilder(WORK_AT_LIHO).withAmount(VALID_AMOUNT).build();
+        editedWorkAtLiho = new IncomeBuilder(WORK_AT_LIHO).withAmount(VALID_AMOUNT_NUS).build();
         assertFalse(ALICE.equals(editedWorkAtLiho));
     }
 

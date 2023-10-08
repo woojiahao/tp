@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
@@ -175,17 +176,21 @@ public class ParserUtil {
         String trimmed = datetimeString.trim();
         String[] datetime = trimmed.split(" ");
         if (datetime.length != 2) {
-            throw new ParseException(Amount.MESSAGE_CONSTRAINTS);
+            throw new ParseException(DateTime.MESSAGE_CONSTRAINTS);
         }
 
         LocalDateTime parsedDateTime;
-        String dateTimeString = datetime[0] + "T" + datetime[1];
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HH:mm");
-        parsedDateTime = LocalDateTime.parse(dateTimeString, formatter);
-
-        if (!DateTime.isValidDateTime(parsedDateTime)) {
-            throw new ParseException(Amount.MESSAGE_CONSTRAINTS);
+        try {
+            String dateTimeString = datetime[0] + "T" + datetime[1];
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HH:mm");
+            parsedDateTime = LocalDateTime.parse(dateTimeString, formatter);
+            if (!DateTime.isValidDateTime(parsedDateTime)) {
+                throw new ParseException(DateTime.MESSAGE_CONSTRAINTS);
+            }
+        } catch (DateTimeException exc) {
+            throw new ParseException(DateTime.MESSAGE_CONSTRAINTS);
         }
+
         return new DateTime(parsedDateTime);
     }
 }

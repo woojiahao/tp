@@ -11,23 +11,35 @@ import seedu.address.model.income.DateTime;
 import seedu.address.model.income.Income;
 import seedu.address.model.person.Person;
 
+import static seedu.address.logic.commands.CommandTestUtil.*;
+
 /**
  * A utility class containing a list of {@code Income} objects to be used in tests.
  */
 public class TypicalIncomes {
     public static final Income WORK_AT_LIHO = new IncomeBuilder().withName("Work at liho")
             .withAmount(300.0)
-            .withDate(new DateTime(LocalDateTime.of(2023, 9, 28, 0, 0)))
+            .withDate(LocalDateTime.of(2023, 9, 28, 0, 0))
             .build();
 
     public static final Income ALLOWANCE = new IncomeBuilder().withName("Allowance")
             .withAmount(200.0)
-            .withDate(new DateTime(LocalDateTime.of(2023, 10, 20, 0, 0)))
+            .withDate(LocalDateTime.of(2023, 10, 20, 0, 0))
             .build();
 
     public static final Income TUITION = new IncomeBuilder().withName("Tuition")
             .withAmount(450.0)
-            .withDate(new DateTime(LocalDateTime.of(2023, 11, 25, 12, 12)))
+            .withDate(LocalDateTime.of(2023, 11, 25, 12, 12))
+            .build();
+
+    // Manually added - Income's details found in {@code CommandTestUtil}
+    public static final Income NUS = new IncomeBuilder().withName(VALID_INCOME_NAME_NUS)
+            .withAmount(VALID_AMOUNT_NUS)
+            .withDate(VALID_DATETIME_NUS)
+            .build();
+    public static final Income INTERN = new IncomeBuilder().withName(VALID_INCOME_NAME_INTERN)
+            .withAmount(VALID_AMOUNT_INTERN)
+            .withDate(VALID_DATETIME_INTERN)
             .build();
 
     private TypicalIncomes() {} // prevents instantiation

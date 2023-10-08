@@ -2,13 +2,10 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -36,6 +33,14 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_INCOME_NAME_NUS = "Work at NUS";
+    public static final String VALID_INCOME_NAME_INTERN = "Internship";
+    public static final Double VALID_AMOUNT_NUS = 888.8;
+    public static final Double VALID_AMOUNT_INTERN = 8.8;
+    public static final LocalDateTime VALID_DATETIME_NUS = LocalDateTime.of(2021, 1, 1, 12, 12);
+    public static final LocalDateTime VALID_DATETIME_INTERN = LocalDateTime.of(2021, 8, 8, 8, 8);
+    public static final String VALID_DATETIME_NUS_STRING = "01/01/2021 12:12";
+    public static final String VALID_DATETIME_INTERN_STRING = "08/08/2021 08:08";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -47,17 +52,24 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String INCOME_NAME_DESC_NUS = " " + PREFIX_NAME + VALID_INCOME_NAME_NUS;
+    public static final String INCOME_NAME_DESC_INTERN = " " + PREFIX_NAME + VALID_INCOME_NAME_INTERN;
+    public static final String AMOUNT_DESC_NUS = " " + PREFIX_AMOUNT + VALID_AMOUNT_NUS;
+    public static final String AMOUNT_DESC_INTERN = " " + PREFIX_AMOUNT + VALID_AMOUNT_INTERN;
+    public static final String DATETIME_DESC_NUS = " " + PREFIX_DATETIME + VALID_DATETIME_NUS_STRING;
+    public static final String DATETIME_DESC_INTERN = " " + PREFIX_DATETIME + VALID_DATETIME_INTERN_STRING;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_INCOME_NAME_DESC = " " + PREFIX_NAME + "NUS&"; // '&' not allowed in names
+    public static final String INVALID_AMOUNT_DESC = " " + PREFIX_AMOUNT + "-3.0"; // negative amounts not allowed
+    public static final String INVALID_DATETIME_DESC = " " + PREFIX_DATETIME + "19/13/2001 19:30"; // invalid date
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
-
-    public static final Double VALID_AMOUNT = 888.8;
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;

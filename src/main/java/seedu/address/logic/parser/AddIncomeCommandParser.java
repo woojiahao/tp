@@ -5,6 +5,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.income.AddIncomeCommand;
@@ -28,7 +30,7 @@ public class AddIncomeCommandParser implements Parser<AddIncomeCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_AMOUNT, PREFIX_DATETIME);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_AMOUNT, PREFIX_DATETIME)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_AMOUNT)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddIncomeCommand.MESSAGE_USAGE));
         }
@@ -36,7 +38,15 @@ public class AddIncomeCommandParser implements Parser<AddIncomeCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_AMOUNT, PREFIX_DATETIME);
         Name name = ParserUtil.parseIncomeName(argMultimap.getValue(PREFIX_NAME).get());
         Amount amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
-        DateTime datetime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
+
+        // If datetime is given, used given value. Else, default to current time
+        DateTime datetime;
+        Optional<String> datetimeString = argMultimap.getValue(PREFIX_DATETIME);
+        if (datetimeString.isPresent()) {
+            datetime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
+        } else {
+            datetime = new DateTime(LocalDateTime.now());
+        }
 
         Income income = new Income(name, amount, datetime);
 
