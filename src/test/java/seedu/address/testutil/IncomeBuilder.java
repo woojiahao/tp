@@ -14,7 +14,7 @@ public class IncomeBuilder {
 
     public static final String DEFAULT_NAME = "Work at liho";
     public static final Double DEFAULT_AMOUNT = 3.0;
-    public static final DateTime DEFAULT_DATE = new DateTime(LocalDateTime.now());
+    public static final DateTime DEFAULT_DATE = new DateTime(LocalDateTime.of(2001, 12, 18, 18, 18));
 
     private Name name;
     private Amount amount;

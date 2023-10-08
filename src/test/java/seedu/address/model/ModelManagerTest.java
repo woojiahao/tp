@@ -102,12 +102,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasIncome_incomeNotInAddressBook_returnsFalse() {
+    public void hasIncome_incomeNotInIncomeList_returnsFalse() {
         assertFalse(modelManager.hasIncome(NUS));
     }
 
     @Test
-    public void hasIncome_incomeInAddressBook_returnsTrue() {
+    public void hasIncome_incomeInIncomeList_returnsTrue() {
         modelManager.addIncome(NUS);
         assertTrue(modelManager.hasIncome(NUS));
     }

@@ -22,10 +22,14 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.income.AddIncomeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.income.Income;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.IncomeBuilder;
+import seedu.address.testutil.IncomeUtil;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
@@ -86,6 +90,13 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_addIncome() throws Exception {
+        Income income = new IncomeBuilder().build();
+        AddIncomeCommand command = (AddIncomeCommand) parser.parseCommand(IncomeUtil.getAddIncomeCommand(income));
+        assertEquals(new AddIncomeCommand(income), command);
     }
 
     @Test

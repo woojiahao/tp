@@ -35,6 +35,17 @@ public class DateTime {
         return true;
     }
 
+    /**
+     * Helper method to stringify LocalDateTime objects into original text string
+     * pass by the user.
+     *
+     * @return text string of the LocalDateTime object
+     */
+    public String originalString() {
+        String formatted = dateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HH:mm"));
+        return String.join(" ", formatted.split("T"));
+    }
+
     @Override
     public String toString() {
         return dateTime.format(DateTimeFormatter.ofPattern("HHmm, MMM d yyyy"));
