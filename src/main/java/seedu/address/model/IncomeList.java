@@ -76,17 +76,6 @@ public class IncomeList implements ReadOnlyIncomeList {
     }
 
     /**
-     * Replaces the given Income {@code target} in the list with {@code editedIncome}.
-     * {@code target} must exist in the address book.
-     * The Income identity of {@code editedIncome} must not be the same as another existing Income in the address book.
-     */
-    public void setIncome(Income target, Income editedIncome) {
-        requireNonNull(editedIncome);
-
-        incomes.setIncome(target, editedIncome);
-    }
-
-    /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */

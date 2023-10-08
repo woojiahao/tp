@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_NUS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIncomes.INTERN;
 import static seedu.address.testutil.TypicalIncomes.NUS;
-import static seedu.address.testutil.TypicalIncomes.WORK_AT_LIHO;
 import static seedu.address.testutil.TypicalIncomes.getTypicalIncomeList;
 
 import java.util.Arrays;
@@ -21,6 +21,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.income.Income;
 import seedu.address.model.income.exceptions.DuplicateIncomeException;
 import seedu.address.testutil.IncomeBuilder;
+import seedu.address.testutil.IncomeListBuilder;
 
 public class IncomeListTest {
 
@@ -54,23 +55,31 @@ public class IncomeListTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasIncome_nullIncome_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> incomeList.hasIncome(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(incomeList.hasIncome(WORK_AT_LIHO));
+    public void hasIncome_incomeNotInIncomeList_returnsFalse() {
+        assertFalse(incomeList.hasIncome(NUS));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        incomeList.addIncome(WORK_AT_LIHO);
-        assertTrue(incomeList.hasIncome(WORK_AT_LIHO));
+    public void hasIncome_personInIncomeList_returnsTrue() {
+        incomeList.addIncome(NUS);
+        assertTrue(incomeList.hasIncome(NUS));
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void removeIncome_personInIncomeList_returnsTrue() {
+        IncomeList incomeList = new IncomeListBuilder().withIncome(NUS).build();
+        assertTrue(incomeList.hasIncome(NUS));
+        incomeList.removeIncome(NUS);
+        assertFalse(incomeList.hasIncome(NUS));
+    }
+
+    @Test
+    public void getIncomeList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> incomeList.getIncomeList().remove(0));
     }
 
@@ -78,6 +87,25 @@ public class IncomeListTest {
     public void toStringMethod() {
         String expected = IncomeList.class.getCanonicalName() + "{incomes=" + incomeList.getIncomeList() + "}";
         assertEquals(expected, incomeList.toString());
+    }
+
+    @Test
+    public void equals() {
+        // same object -> returns true
+        IncomeList incomeList = new IncomeListBuilder().build();
+        assertTrue(incomeList.equals(incomeList));
+
+        // same lists
+        incomeList.addIncome(NUS);
+        IncomeList anotherList = new IncomeListBuilder().withIncome(NUS).build();
+        assertTrue(incomeList.equals(anotherList));
+
+        // different lists
+        anotherList = new IncomeListBuilder().withIncome(INTERN).build();
+        assertFalse(incomeList.equals(anotherList));
+
+        // null -> returns false
+        assertFalse(incomeList.equals(null));
     }
 
     /**

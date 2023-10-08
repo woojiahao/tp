@@ -143,4 +143,24 @@ public class UniqueIncomeListTest {
     public void toStringMethod() {
         assertEquals(uniqueIncomeList.asUnmodifiableObservableList().toString(), uniqueIncomeList.toString());
     }
+
+    @Test
+    public void equals() {
+        // same object -> returns true
+        assertTrue(uniqueIncomeList.equals(uniqueIncomeList));
+
+        // same lists
+        uniqueIncomeList.add(NUS);
+        UniqueIncomeList anotherUniqueIncomeList = new UniqueIncomeList();
+        anotherUniqueIncomeList.add(NUS);
+        assertTrue(uniqueIncomeList.equals(anotherUniqueIncomeList));
+
+        // different lists
+        anotherUniqueIncomeList = new UniqueIncomeList();
+        anotherUniqueIncomeList.add(INTERN);
+        assertFalse(uniqueIncomeList.equals(anotherUniqueIncomeList));
+
+        // null -> returns false
+        assertFalse(uniqueIncomeList.equals(null));
+    }
 }
