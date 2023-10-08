@@ -17,10 +17,13 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.AddCommandTest;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.*;
+import seedu.address.model.IncomeList;
+import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyIncomeList;
+import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.income.Income;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.IncomeBuilder;
@@ -33,7 +36,7 @@ public class AddIncomeCommandTest {
     }
 
     @Test
-    public void execute_IncomeAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_incomeAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingIncomeAdded modelStub = new ModelStubAcceptingIncomeAdded();
         Income validIncome = new IncomeBuilder().build();
 
@@ -47,11 +50,11 @@ public class AddIncomeCommandTest {
     @Test
     public void execute_duplicateIncome_throwsCommandException() {
         Income validIncome = new IncomeBuilder().build();
-        AddIncomeCommand AddIncomeCommand = new AddIncomeCommand(validIncome);
+        AddIncomeCommand addIncomeCommand = new AddIncomeCommand(validIncome);
         ModelStub modelStub = new ModelStubWithIncome(validIncome);
 
-        assertThrows(CommandException.class, AddIncomeCommand.MESSAGE_DUPLICATE_INCOME,
-                () -> AddIncomeCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                AddIncomeCommand.MESSAGE_DUPLICATE_INCOME, () -> addIncomeCommand.execute(modelStub));
     }
 
     @Test
@@ -80,9 +83,9 @@ public class AddIncomeCommandTest {
 
     @Test
     public void toStringMethod() {
-        AddIncomeCommand AddIncomeCommand = new AddIncomeCommand(NUS);
+        AddIncomeCommand addIncomeCommand = new AddIncomeCommand(NUS);
         String expected = AddIncomeCommand.class.getCanonicalName() + "{toAdd=" + NUS + "}";
-        assertEquals(expected, AddIncomeCommand.toString());
+        assertEquals(expected, addIncomeCommand.toString());
     }
 
     /**
