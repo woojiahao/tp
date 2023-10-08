@@ -45,7 +45,7 @@ public class IncomeTest {
     public void toStringMethod() {
         String expected = Income.class.getCanonicalName() + "{name=" + WORK_AT_LIHO.getName()
                 + ", amount=" + WORK_AT_LIHO.getAmount()
-                + ", date=" + WORK_AT_LIHO.getDate() + "}";
+                + ", datetime=" + WORK_AT_LIHO.getDateTime() + "}";
         assertEquals(expected, WORK_AT_LIHO.toString());
     }
 }

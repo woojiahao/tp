@@ -1,0 +1,62 @@
+package seedu.address.model.income;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Objects;
+
+/**
+ * Represents an Income's date.
+ * Guarantees: immutable; is valid as declared in {@link #isValidDateTime(LocalDateTime)}
+ */
+public class DateTime {
+    public static final String MESSAGE_CONSTRAINTS =
+            "DateTime should be in the following format dd/mm/yyyy HH:mm";
+
+    public final LocalDateTime dateTime;
+
+    /**
+     * Constructs a {@code DateTime}.
+     *
+     * @param dateTime A valid date time.
+     */
+    public DateTime(LocalDateTime dateTime) {
+        requireNonNull(dateTime);
+        checkArgument(isValidDateTime(dateTime), MESSAGE_CONSTRAINTS);
+        this.dateTime = dateTime;
+    }
+
+    /**
+     * Returns true for all LocalDateTime objects.
+     */
+    public static boolean isValidDateTime(LocalDateTime amount) {
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return dateTime.format(DateTimeFormatter.ofPattern("HHmm, MMM d yyyy"));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Amount)) {
+            return false;
+        }
+
+        Amount otherAmount = (Amount) other;
+        return Objects.equals(this.dateTime, otherAmount.amount);
+    }
+
+    @Override
+    public int hashCode() {
+        return this.dateTime.hashCode();
+    }
+}

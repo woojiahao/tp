@@ -2,7 +2,6 @@ package seedu.address.model.income;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -14,16 +13,16 @@ import seedu.address.commons.util.ToStringBuilder;
 public class Income {
     private final Name name;
     private final Amount amount;
-    private final LocalDateTime date;
+    private final DateTime datetime;
 
     /**
      * Every field must be present and not null.
      */
-    public Income(Name name, Amount amount, LocalDateTime date) {
-        requireAllNonNull(name, amount, date);
+    public Income(Name name, Amount amount, DateTime datetime) {
+        requireAllNonNull(name, amount, datetime);
         this.name = name;
         this.amount = amount;
-        this.date = date;
+        this.datetime = datetime;
     }
 
     public Name getName() {
@@ -34,8 +33,8 @@ public class Income {
         return this.amount;
     }
 
-    public LocalDateTime getDate() {
-        return this.date;
+    public DateTime getDateTime() {
+        return this.datetime;
     }
 
     /**
@@ -56,13 +55,13 @@ public class Income {
         Income otherIncome = (Income) other;
         return name.equals(otherIncome.name)
                 && amount.equals(otherIncome.amount)
-                && date.equals(otherIncome.date);
+                && datetime.equals(otherIncome.datetime);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, amount, date);
+        return Objects.hash(name, amount, datetime);
     }
 
     @Override
@@ -70,7 +69,7 @@ public class Income {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("amount", amount)
-                .add("date", date)
+                .add("datetime", datetime)
                 .toString();
     }
 }

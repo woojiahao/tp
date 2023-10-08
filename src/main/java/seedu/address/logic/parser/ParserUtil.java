@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,6 +11,8 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.income.Amount;
+import seedu.address.model.income.DateTime;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -49,6 +53,22 @@ public class ParserUtil {
         }
         return new Name(trimmedName);
     }
+
+    /**
+     * Parses a {@code String name} into a {@code Name}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static seedu.address.model.income.Name parseIncomeName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!Name.isValidName(trimmedName)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new seedu.address.model.income.Name(trimmedName);
+    }
+
 
     /**
      * Parses a {@code String phone} into a {@code Phone}.
@@ -120,5 +140,52 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String amount} into an {@code Amount}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code amount} is invalid.
+     */
+    public static Amount parseAmount(String amount) throws ParseException {
+        requireNonNull(amount);
+        String trimmedAmount = amount.trim();
+        double castedAmount;
+        try {
+            castedAmount = Double.parseDouble(trimmedAmount);
+        } catch (NumberFormatException ex) {
+            throw new ParseException(Amount.MESSAGE_CONSTRAINTS);
+        }
+
+        if (!Amount.isValidAmount(castedAmount)) {
+            throw new ParseException(Amount.MESSAGE_CONSTRAINTS);
+        }
+        return new Amount(castedAmount);
+    }
+
+    /**
+     * Parses a {@code String datetime} into an {@code LocalDateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code amount} is invalid.
+     */
+    public static DateTime parseDateTime(String datetimeString) throws ParseException {
+        requireNonNull(datetimeString);
+        String trimmed = datetimeString.trim();
+        String[] datetime = trimmed.split(" ");
+        if (datetime.length != 2) {
+            throw new ParseException(Amount.MESSAGE_CONSTRAINTS);
+        }
+
+        LocalDateTime parsedDateTime;
+        String dateTimeString = datetime[0] + "T" + datetime[1];
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HH:mm");
+        parsedDateTime = LocalDateTime.parse(dateTimeString, formatter);
+
+        if (!DateTime.isValidDateTime(parsedDateTime)) {
+            throw new ParseException(Amount.MESSAGE_CONSTRAINTS);
+        }
+        return new DateTime(parsedDateTime);
     }
 }
