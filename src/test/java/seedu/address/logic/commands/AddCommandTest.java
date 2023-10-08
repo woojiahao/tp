@@ -21,7 +21,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyIncomeList;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.income.Income;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -155,6 +157,41 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setIncomeList(ReadOnlyIncomeList incomeList) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyIncomeList getIncomeList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasIncome(Income income) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteIncome(Income target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addIncome(Income income) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Income> getFilteredIncomeList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredIncomeList(Predicate<Income> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }

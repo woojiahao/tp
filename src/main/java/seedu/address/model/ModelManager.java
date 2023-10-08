@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.income.Income;
 import seedu.address.model.person.Person;
 
 /**
@@ -20,24 +21,28 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final IncomeList incomeList;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Income> filteredIncomes;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, IncomeList incomeList) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.incomeList = new IncomeList(incomeList);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredIncomes = new FilteredList<>(this.incomeList.getIncomeList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), new IncomeList());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -145,4 +150,48 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
+    //=========== IncomeList ================================================================================
+    @Override
+    public void setIncomeList(ReadOnlyIncomeList incomeList) {
+        this.incomeList.resetData(incomeList);
+    }
+
+    @Override
+    public ReadOnlyIncomeList getIncomeList() {
+        return incomeList;
+    }
+
+    @Override
+    public boolean hasIncome(Income income) {
+        requireNonNull(income);
+        return incomeList.hasIncome(income);
+    }
+
+    @Override
+    public void deleteIncome(Income target) {
+        incomeList.removeIncome(target);
+    }
+
+    @Override
+    public void addIncome(Income income) {
+        incomeList.addIncome(income);
+        updateFilteredIncomeList(PREDICATE_SHOW_ALL_INCOMES);
+    }
+
+    //=========== Filtered Income List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Income} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Income> getFilteredIncomeList() {
+        return filteredIncomes;
+    }
+
+    @Override
+    public void updateFilteredIncomeList(Predicate<Income> predicate) {
+        requireNonNull(predicate);
+        filteredIncomes.setPredicate(predicate);
+    }
 }

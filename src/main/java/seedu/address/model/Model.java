@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.income.Income;
 import seedu.address.model.person.Person;
 
 /**
@@ -13,6 +14,9 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Income> PREDICATE_SHOW_ALL_INCOMES = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -84,4 +88,38 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Replaces income list data with the data in {@code incomeList}.
+     */
+    void setIncomeList(ReadOnlyIncomeList incomeList);
+
+    /** Returns the IncomeList */
+    ReadOnlyIncomeList getIncomeList();
+
+    /**
+     * Deletes the given income.
+     * The income must exist in the income list.
+     */
+    void deleteIncome(Income target);
+
+    /**
+     * Adds the given income.
+     * {@code income} must not already exist in the income list.
+     */
+    void addIncome(Income person);
+
+    /**
+     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     */
+    boolean hasIncome(Income person);
+
+    /** Returns an unmodifiable view of the filtered income list */
+    ObservableList<Income> getFilteredIncomeList();
+
+    /**
+     * Updates the filter of the filtered income list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredIncomeList(Predicate<Income> predicate);
 }
