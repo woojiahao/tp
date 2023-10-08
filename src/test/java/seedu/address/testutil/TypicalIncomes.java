@@ -1,17 +1,19 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_INTERN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_NUS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME_INTERN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME_NUS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INCOME_NAME_INTERN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INCOME_NAME_NUS;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
 import seedu.address.model.IncomeList;
-import seedu.address.model.income.DateTime;
 import seedu.address.model.income.Income;
-import seedu.address.model.person.Person;
-
-import static seedu.address.logic.commands.CommandTestUtil.*;
 
 /**
  * A utility class containing a list of {@code Income} objects to be used in tests.

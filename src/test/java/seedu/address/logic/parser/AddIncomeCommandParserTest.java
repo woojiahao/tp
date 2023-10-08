@@ -1,9 +1,20 @@
 package seedu.address.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_INTERN;
+import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_NUS;
+import static seedu.address.logic.commands.CommandTestUtil.DATETIME_DESC_INTERN;
+import static seedu.address.logic.commands.CommandTestUtil.DATETIME_DESC_NUS;
+import static seedu.address.logic.commands.CommandTestUtil.INCOME_NAME_DESC_INTERN;
+import static seedu.address.logic.commands.CommandTestUtil.INCOME_NAME_DESC_NUS;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_AMOUNT_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATETIME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_INCOME_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_NUS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INCOME_NAME_NUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIncomes.NUS;
@@ -11,17 +22,12 @@ import static seedu.address.testutil.TypicalIncomes.NUS;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.income.AddIncomeCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.income.Amount;
 import seedu.address.model.income.DateTime;
 import seedu.address.model.income.Income;
-import seedu.address.model.person.Email;
 import seedu.address.testutil.IncomeBuilder;
 
-import java.time.LocalDateTime;
 
 public class AddIncomeCommandParserTest {
     private AddIncomeCommandParser parser = new AddIncomeCommandParser();

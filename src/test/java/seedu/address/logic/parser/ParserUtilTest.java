@@ -238,12 +238,12 @@ public class ParserUtilTest {
     @Test
     public void parseDateTime_invalidValue_throwsParseException() {
         String[] invalidDateTimes = new String[] {
-                INVALID_DATETIME_1,
-                INVALID_DATETIME_2,
-                INVALID_DATETIME_3,
-                INVALID_DATETIME_4,
-                INVALID_DATETIME_5,
-                INVALID_DATETIME_6,
+            INVALID_DATETIME_1,
+            INVALID_DATETIME_2,
+            INVALID_DATETIME_3,
+            INVALID_DATETIME_4,
+            INVALID_DATETIME_5,
+            INVALID_DATETIME_6,
         };
         for (String invalidDateTime : invalidDateTimes) {
             System.out.println(invalidDateTime);
