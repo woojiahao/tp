@@ -99,7 +99,7 @@ public class IncomeList implements ReadOnlyIncomeList {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("Incomes", incomes)
+                .add("incomes", incomes)
                 .toString();
     }
 

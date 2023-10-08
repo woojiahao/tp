@@ -47,12 +47,12 @@ public class DateTime {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Amount)) {
+        if (!(other instanceof DateTime)) {
             return false;
         }
 
-        Amount otherAmount = (Amount) other;
-        return Objects.equals(this.dateTime, otherAmount.amount);
+        DateTime otherDateTime = (DateTime) other;
+        return Objects.equals(this.dateTime, otherDateTime.dateTime);
     }
 
     @Override
