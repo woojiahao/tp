@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.income.Income;
 import seedu.address.model.person.Person;
 
 /**
@@ -48,4 +49,16 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats the {@code income} for display to the user.
+     */
+    public static String formatIncome(Income income) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(income.getName())
+                .append("; Amount: ")
+                .append(income.getAmount())
+                .append("; Date: ")
+                .append(income.getDateTime());
+        return builder.toString();
+    }
 }
