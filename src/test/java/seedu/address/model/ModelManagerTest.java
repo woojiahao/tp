@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIncomes.NUS;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
@@ -17,6 +18,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.IncomeListBuilder;
 
 public class ModelManagerTest {
 
@@ -27,6 +29,7 @@ public class ModelManagerTest {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
         assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
+        assertEquals(new IncomeList(), new IncomeList(modelManager.getIncomeList()));
     }
 
     @Test
@@ -94,10 +97,32 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasIncome_nullIncome_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasIncome(null));
+    }
+
+    @Test
+    public void hasIncome_incomeNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasIncome(NUS));
+    }
+
+    @Test
+    public void hasIncome_incomeInAddressBook_returnsTrue() {
+        modelManager.addIncome(NUS);
+        assertTrue(modelManager.hasIncome(NUS));
+    }
+
+    @Test
+    public void getFilteredIncomeList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredIncomeList().remove(0));
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
-        IncomeList incomeList = new IncomeList();
+        IncomeList incomeList = new IncomeListBuilder().withIncome(NUS).build();
+        IncomeList differentIncomeList = new IncomeList();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
@@ -129,5 +154,8 @@ public class ModelManagerTest {
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs, incomeList)));
+
+        // different incomeList -> returns false
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs, differentIncomeList)));
     }
 }

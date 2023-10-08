@@ -133,23 +133,6 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof ModelManager)) {
-            return false;
-        }
-
-        ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
-    }
-
     //=========== IncomeList ================================================================================
     @Override
     public void setIncomeList(ReadOnlyIncomeList incomeList) {
@@ -193,5 +176,24 @@ public class ModelManager implements Model {
     public void updateFilteredIncomeList(Predicate<Income> predicate) {
         requireNonNull(predicate);
         filteredIncomes.setPredicate(predicate);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ModelManager)) {
+            return false;
+        }
+
+        ModelManager otherModelManager = (ModelManager) other;
+        return addressBook.equals(otherModelManager.addressBook)
+                && incomeList.equals(otherModelManager.incomeList)
+                && userPrefs.equals(otherModelManager.userPrefs)
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredIncomes.equals(otherModelManager.filteredIncomes);
     }
 }
