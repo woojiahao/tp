@@ -1,7 +1,6 @@
 package seedu.address.model.transaction;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.testutil.TypicalTransactions.BUYING_GROCERIES;
 import static seedu.address.testutil.TypicalTransactions.DINING_WITH_FRIENDS;
 
@@ -21,6 +20,9 @@ public class TransactionTest {
 
         // same object -> returns true
         assertEquals(BUYING_GROCERIES, BUYING_GROCERIES);
+
+        // null -> returns false
+        assertFalse(groceriesCopy.equals(null));
 
         // null -> returns false
         assertNotEquals(null, BUYING_GROCERIES);

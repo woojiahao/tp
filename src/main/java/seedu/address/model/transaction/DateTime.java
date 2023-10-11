@@ -42,8 +42,7 @@ public class DateTime {
      * @return text string of the LocalDateTime object
      */
     public String originalString() {
-        String formatted = dateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
-        return String.join(" ", formatted.split("T"));
+        return dateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
     }
 
     @Override
