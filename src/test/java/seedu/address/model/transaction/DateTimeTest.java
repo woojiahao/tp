@@ -1,5 +1,6 @@
 package seedu.address.model.transaction;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -12,6 +13,13 @@ public class DateTimeTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new DateTime(null));
+    }
+
+    @Test
+    public void originalString() {
+        DateTime dateTime = new DateTime(LocalDateTime.of(2023, 12, 18, 18, 18));
+        String stringify = dateTime.originalString();
+        assertEquals(stringify, "18/12/2023 18:18");
     }
 
     @Test
