@@ -1,0 +1,94 @@
+package seedu.address.testutil;
+
+import java.time.LocalDateTime;
+
+import seedu.address.model.transaction.Amount;
+import seedu.address.model.transaction.Category;
+import seedu.address.model.transaction.DateTime;
+import seedu.address.model.transaction.Location;
+import seedu.address.model.transaction.Name;
+import seedu.address.model.transaction.Transaction;
+
+/**
+ * A utility class to help with building Transaction objects.
+ */
+public class TransactionBuilder {
+
+    public static final String DEFAULT_NAME = "Amy Bee";
+    public static final double DEFAULT_AMOUNT = 123.45;
+    public static final String DEFAULT_CATEGORY = "Food";
+    public static final LocalDateTime DEFAULT_DATE_TIME = LocalDateTime.of(2023, 8, 18, 1, 1);
+    public static final String DEFAULT_LOCATION = "Fairprice";
+
+    private Name name;
+    private Amount amount;
+    private Category category;
+    private DateTime dateTime;
+    private Location location;
+
+    /**
+     * Creates a {@code ExpenseBuilder} with the default details.
+     */
+    public TransactionBuilder() {
+        name = new Name(DEFAULT_NAME);
+        amount = new Amount(DEFAULT_AMOUNT);
+        category = new Category(DEFAULT_CATEGORY);
+        dateTime = new DateTime(DEFAULT_DATE_TIME);
+        location = new Location(DEFAULT_LOCATION);
+    }
+
+    /**
+     * Initializes the TransactionBuilder with the data of {@code transactionToCopy}.
+     */
+    public TransactionBuilder(Transaction transactionToCopy) {
+        name = transactionToCopy.getName();
+        amount = transactionToCopy.getAmount();
+        category = transactionToCopy.getCategory();
+        dateTime = transactionToCopy.getDateTime();
+        location = transactionToCopy.getLocation();
+    }
+
+    /**
+     * Sets the {@code Name} of the {@code Transaction} that we are building.
+     */
+    public TransactionBuilder withName(String name) {
+        this.name = new Name(name);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Amount} of the {@code Transaction} that we are building.
+     */
+    public TransactionBuilder withAmount(double amount) {
+        this.amount = new Amount(amount);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Category} of the {@code Transaction} that we are building.
+     */
+    public TransactionBuilder withCategory(String category) {
+        this.category = new Category(category);
+        return this;
+    }
+
+    /**
+     * Sets the {@code LocalDateTime} of the {@code Transaction} that we are building.
+     */
+    public TransactionBuilder withDateTime(DateTime dateTime) {
+        this.dateTime = dateTime;
+        return this;
+    }
+
+    /**
+     * Sets the {@code Location} of the {@code Transaction} that we are building.
+     */
+    public TransactionBuilder withLocation(String location) {
+        this.location = new Location(location);
+        return this;
+    }
+
+    public Transaction build() {
+        return new Transaction(name, amount, category, dateTime, location);
+    }
+}
