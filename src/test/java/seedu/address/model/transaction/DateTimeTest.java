@@ -2,6 +2,7 @@ package seedu.address.model.transaction;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -49,5 +50,17 @@ public class DateTimeTest {
 
         // different time -> returns false
         assertFalse(datetime.equals(new DateTime(LocalDateTime.of(2001, 1, 1, 12, 12))));
+    }
+
+    @Test
+    public void hashCode_test() {
+        DateTime dateTime1 = new DateTime(
+                LocalDateTime.of(2001, 1, 1, 12, 12));
+        DateTime dateTime2 = new DateTime(LocalDateTime.of(
+                2001, 1, 1, 12, 12));
+        DateTime dateTime3 = new DateTime(LocalDateTime.of(
+                2001, 1, 2, 12, 12));
+        assertEquals(dateTime1.hashCode(), dateTime2.hashCode());
+        assertNotEquals(dateTime1.hashCode(), dateTime3.hashCode());
     }
 }
