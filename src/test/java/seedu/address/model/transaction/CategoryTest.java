@@ -10,19 +10,19 @@ public class CategoryTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new seedu.address.model.expense.Category(null));
+        assertThrows(NullPointerException.class, () -> new Category(null));
     }
 
     @Test
     public void constructor_invalidCategory_throwsIllegalArgumentException() {
         String invalidCategory = "";
-        assertThrows(IllegalArgumentException.class, () -> new seedu.address.model.expense.Category(invalidCategory));
+        assertThrows(IllegalArgumentException.class, () -> new Category(invalidCategory));
     }
 
     @Test
     public void isValidCategory() {
         // null name
-        assertThrows(NullPointerException.class, () -> seedu.address.model.expense.Category.isValidCategory(null));
+        assertThrows(NullPointerException.class, () -> Category.isValidCategory(null));
 
         // invalid name
         assertFalse(Category.isValidCategory("")); // empty string
