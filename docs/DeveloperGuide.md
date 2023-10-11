@@ -38,6 +38,66 @@ title: Developer Guide
 - Edit tags - change category of spending
 - Remove tags - delete category of spending
 
+#### Use Case: UC05 - Listing All Expenses
+**MSS:**
+1. User enters the command to list all expenses with the correct format (i.e. no parameters).
+2. User submits the request.
+3. UniCa$h retrieves the list of all expenses and displays them for the User.
+
+   Use Case ends.
+
+**Extensions**
+- 2a. User enters the command with the incorrect format (i.e. with parameters).
+    - 2a1. UniCa$h displays an error message, requests for the correct format.
+    - Use case resumes at step 1.
+
+- 3a. There are no expenses for UniCa$h to retrieve.
+    - 3a1. UniCa$h displays a message informing the User that there are no expenses. 
+    - Use Case ends.
+
+#### Use Case: UC06 - Finding Expenses
+**MSS:**
+1. User enters the command to find expenses with the correct format.
+2. User submits the request.
+3. UniCa$h filters the expenses based on the specified filters and returns the filtered list of expenses with a success message.
+
+   Use Case ends.
+
+**Extensions**
+- 2a. User enters an incorrect format.
+    - 2a1. UniCa$h displays an error message, requests for correct format.
+    - 2a2. User enters command with new format.
+  
+    Steps 2a1-2a2 are repeated until the format entered is correct.
+
+    Use case resumes from Step 3.
+
+- 3a. UniCa$h does not find any results matching the filter.
+    - 3a1. UniCa$h displays a message informing the user that no results were found.
+    - Use Case ends.
+
+#### Use Case: UC07 - Tabulate Total Expenses
+**MSS:**
+1. User enters the command to tabulate total expenses with the correct format and parameters (if any).
+2. User submits the request.
+3. UniCas$h tabulates the expenditure based on the parameters passed in.
+4. UniCa$h returns the tabulated expenditure.
+
+   Use Case ends.
+
+**Extensions**
+- 2a. User enters an incorrect format.
+    - 2a1. UniCa$h displays an error message, requests for correct format.
+    - 2a2. User enters command with new format.
+
+  Steps 2a1-2a2 are repeated until the format entered is correct.
+
+  Use case resumes from Step 3.
+
+- 2b. UniCa$h does not find any results matching the filter.
+    - 2b1. UniCa$h displays an error message, informing the user that the parameters do not exist.
+    - Use Case resumes at Step 1.
+
 ## Links
 User Stories: [https://github.com/orgs/AY2324S1-CS2103-T16-3/projects/1/views/2](https://github.com/orgs/AY2324S1-CS2103-T16-3/projects/1/views/2)
 
