@@ -56,7 +56,7 @@ For the following Use Cases (unless specified otherwise):
 
 **Extensions**
 - 2a. User enters an incorrect format
-  - 2a1. UniCa$h displays an error message.
+  - 2a1. UniCa$h displays an error message with the correct command format.
   - Use case resumes at step 1.
 - 2b. User enters an extremely high number
   - 2b1. UniCa$h prompts the user with a warning of the input
@@ -74,7 +74,7 @@ the filtered income with a success message.
 
 **Extensions**
 - 2a. User enters an incorrect format.
-  - 1a1. UniCa$h displays an error message.
+  - 1a1. UniCa$h displays an error message with the correct command format.
   - Use case resumes at step 1.
 
 - 3a. UniCa$h does not find any results matching the filter.
@@ -93,7 +93,7 @@ the filtered income with a success message.
 
 **Extensions**
 - 2a. User enters an incorrect format.
-    - 1a1. UniCa$h displays an error message.
+    - 2a1. UniCa$h displays an error message with the correct command format.
     - Use case resumes at step 1.
 
 - 3a. UniCa$h does not find any income matching the provided arguments.
