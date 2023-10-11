@@ -107,12 +107,12 @@ public interface Model {
      * Adds the given income.
      * {@code income} must not already exist in the income list.
      */
-    void addIncome(Income person);
+    void addIncome(Income income);
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a income with the same identity as {@code income} exists in the income list.
      */
-    boolean hasIncome(Income person);
+    boolean hasIncome(Income income);
 
     /** Returns an unmodifiable view of the filtered income list */
     ObservableList<Income> getFilteredIncomeList();
