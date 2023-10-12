@@ -1,13 +1,12 @@
-package seedu.address.model.expense;
+package seedu.address.model.transaction;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents an Expense's location.
+ * Represents a Transaction's location.
  */
 public class Location {
-
     public static final String MESSAGE_CONSTRAINTS =
             "Locations should only contain alphanumeric characters, spaces, (, ), _, -, #, &, ., and ',', "
                     + "and it should not be blank";

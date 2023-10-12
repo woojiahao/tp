@@ -1,38 +1,41 @@
-package seedu.address.model.income;
+package seedu.address.model.transaction;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Objects;
 
 /**
- * Represents an Income's date.
- * Guarantees: immutable; is valid as declared in {@link #isValidDateTime(LocalDateTime)}
+ * Represents a Transaction's dateTime.
+ * Guarantees: immutable;
  */
 public class DateTime {
+    public static final String DATETIME_PATTERN = "dd-MM-uuuu HH:mm";
     public static final String MESSAGE_CONSTRAINTS =
-            "DateTime should be in the following format dd/mm/yyyy HH:mm";
+            "DateTime should be in the following format " + DATETIME_PATTERN;
+    public static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter
+            .ofPattern(DATETIME_PATTERN);
 
     public final LocalDateTime dateTime;
 
     /**
      * Constructs a {@code DateTime}.
+     * Defaults to current date if not provided.
      *
      * @param dateTime A valid date time.
      */
-    public DateTime(LocalDateTime dateTime) {
+    public DateTime(String dateTime) {
         requireNonNull(dateTime);
+        if (dateTime.isEmpty()) {
+            this.dateTime = LocalDateTime.now();
+            return;
+        }
         checkArgument(isValidDateTime(dateTime), MESSAGE_CONSTRAINTS);
-        this.dateTime = dateTime;
-    }
-
-    /**
-     * Returns true for all LocalDateTime objects.
-     */
-    public static boolean isValidDateTime(LocalDateTime amount) {
-        return true;
+        this.dateTime = LocalDateTime.parse(dateTime, DATETIME_FORMATTER);
     }
 
     /**
@@ -42,8 +45,19 @@ public class DateTime {
      * @return text string of the LocalDateTime object
      */
     public String originalString() {
-        String formatted = dateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HH:mm"));
-        return String.join(" ", formatted.split("T"));
+        return dateTime.format(DateTimeFormatter.ofPattern(DATETIME_PATTERN));
+    }
+
+    /**
+     * Returns true if a given string is a valid dateTime.
+     */
+    public static boolean isValidDateTime(String dateString) {
+        try {
+            LocalDateTime.parse(dateString, DATETIME_FORMATTER.withResolverStyle(ResolverStyle.STRICT));
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+        return true;
     }
 
     @Override

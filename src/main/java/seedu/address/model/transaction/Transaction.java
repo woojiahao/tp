@@ -1,29 +1,33 @@
-package seedu.address.model.expense;
+package seedu.address.model.transaction;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Represents an Expense in the finance tracker.
+ * Represents a Transaction in the finance tracker.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Expense {
+public class Transaction {
     private final Name name;
     private final Amount amount;
     private final Category category;
-    private final LocalDateTime dateTime;
+    private final DateTime dateTime;
     private final Location location;
+    private final Type type;
+
 
     /**
-     * Every field must be present and not null.
+     * Constructs a Transaction with all fields populated.
+     * Guarantees: details are present and not null, field values are validated, immutable.
      */
-    public Expense(Name name, Amount amount, Category category, LocalDateTime dateTime, Location location) {
-        requireAllNonNull(name, amount, category, dateTime, location);
+    public Transaction(Name name, Type type, Amount amount, Category category, DateTime dateTime,
+                       Location location) {
+        requireAllNonNull(name, type, amount, category, dateTime, location);
         this.name = name;
+        this.type = type;
         this.amount = amount;
         this.category = category;
         this.dateTime = dateTime;
@@ -42,7 +46,7 @@ public class Expense {
         return category;
     }
 
-    public LocalDateTime getDateTime() {
+    public DateTime getDateTime() {
         return dateTime;
     }
 
@@ -50,13 +54,17 @@ public class Expense {
         return location;
     }
 
+    public Type getType() {
+        return type;
+    }
+
     @Override
     public int hashCode() {
-        return Objects.hash(name, amount, category, dateTime, location);
+        return Objects.hash(name, amount, category, dateTime, location, type);
     }
 
     /**
-     * Returns true if both expenses have the same data fields.
+     * Returns true if both transactions have the same data fields.
      * This defines a stronger notion of equality between two expenses.
      */
     @Override
@@ -65,22 +73,24 @@ public class Expense {
             return true;
         }
 
-        if (!(other instanceof Expense)) {
+        if (!(other instanceof Transaction)) {
             return false;
         }
 
-        Expense otherExpense = (Expense) other;
-        return name.equals(otherExpense.name)
-                && amount == otherExpense.amount
-                && category.equals(otherExpense.category)
-                && dateTime.equals(otherExpense.dateTime)
-                && location.equals(otherExpense.location);
+        Transaction otherTransaction = (Transaction) other;
+        return name.equals(otherTransaction.name)
+                && type == otherTransaction.type
+                && amount == otherTransaction.amount
+                && category.equals(otherTransaction.category)
+                && dateTime.equals(otherTransaction.dateTime)
+                && location.equals(otherTransaction.location);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
+                .add("type", type)
                 .add("amount", amount)
                 .add("category", category)
                 .add("dateTime", dateTime)
