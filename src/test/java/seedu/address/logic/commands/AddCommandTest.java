@@ -21,10 +21,10 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyIncomeList;
+import seedu.address.model.ReadOnlyUniCash;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.income.Income;
 import seedu.address.model.person.Person;
+import seedu.address.model.transaction.Transaction;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -161,37 +161,37 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setIncomeList(ReadOnlyIncomeList incomeList) {
+        public void setUniCash(ReadOnlyUniCash uniCash) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyIncomeList getIncomeList() {
+        public ReadOnlyUniCash getUniCash() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasIncome(Income income) {
+        public boolean hasTransaction(Transaction income) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deleteIncome(Income target) {
+        public void deleteTransaction(Transaction target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void addIncome(Income income) {
+        public void addTransaction(Transaction income) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Income> getFilteredIncomeList() {
+        public ObservableList<Transaction> getFilteredTransactionList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredIncomeList(Predicate<Income> predicate) {
+        public void updateFilteredTransactionList(Predicate<Transaction> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }

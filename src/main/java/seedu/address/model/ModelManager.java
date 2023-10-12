@@ -11,8 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.income.Income;
 import seedu.address.model.person.Person;
+import seedu.address.model.transaction.Transaction;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -21,28 +21,28 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
-    private final IncomeList incomeList;
+    private final UniCash uniCash;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final FilteredList<Income> filteredIncomes;
+    private final FilteredList<Transaction> filteredTransactions;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, IncomeList incomeList) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, UniCash uniCash) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        this.incomeList = new IncomeList(incomeList);
+        this.uniCash = new UniCash(uniCash);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredIncomes = new FilteredList<>(this.incomeList.getIncomeList());
+        filteredTransactions = new FilteredList<>(this.uniCash.getTransactionList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs(), new IncomeList());
+        this(new AddressBook(), new UserPrefs(), new UniCash());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -133,32 +133,32 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
-    //=========== IncomeList ================================================================================
+    //=========== UniCash ================================================================================
     @Override
-    public void setIncomeList(ReadOnlyIncomeList incomeList) {
-        this.incomeList.resetData(incomeList);
+    public void setUniCash(ReadOnlyUniCash uniCash) {
+        this.uniCash.resetData(uniCash);
     }
 
     @Override
-    public ReadOnlyIncomeList getIncomeList() {
-        return incomeList;
+    public ReadOnlyUniCash getUniCash() {
+        return uniCash;
     }
 
     @Override
-    public boolean hasIncome(Income income) {
-        requireNonNull(income);
-        return incomeList.hasIncome(income);
+    public boolean hasTransaction(Transaction transaction) {
+        requireNonNull(transaction);
+        return uniCash.hasTransaction(transaction);
     }
 
     @Override
-    public void deleteIncome(Income target) {
-        incomeList.removeIncome(target);
+    public void deleteTransaction(Transaction target) {
+        uniCash.removeTransaction(target);
     }
 
     @Override
-    public void addIncome(Income income) {
-        incomeList.addIncome(income);
-        updateFilteredIncomeList(PREDICATE_SHOW_ALL_INCOMES);
+    public void addTransaction(Transaction transaction) {
+        uniCash.addTransaction(transaction);
+        updateFilteredTransactionList(PREDICATE_SHOW_ALL_TRANSACTIONS);
     }
 
     //=========== Filtered Income List Accessors =============================================================
@@ -168,14 +168,14 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Income> getFilteredIncomeList() {
-        return filteredIncomes;
+    public ObservableList<Transaction> getFilteredTransactionList() {
+        return filteredTransactions;
     }
 
     @Override
-    public void updateFilteredIncomeList(Predicate<Income> predicate) {
+    public void updateFilteredTransactionList(Predicate<Transaction> predicate) {
         requireNonNull(predicate);
-        filteredIncomes.setPredicate(predicate);
+        filteredTransactions.setPredicate(predicate);
     }
 
     @Override
@@ -191,9 +191,9 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
-                && incomeList.equals(otherModelManager.incomeList)
+                && uniCash.equals(otherModelManager.uniCash)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons)
-                && filteredIncomes.equals(otherModelManager.filteredIncomes);
+                && filteredTransactions.equals(otherModelManager.filteredTransactions);
     }
 }

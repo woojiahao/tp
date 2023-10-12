@@ -8,7 +8,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.income.Income;
+import seedu.address.model.transaction.Transaction;
 
 /**
  * Panel containing the list of persons.
@@ -18,30 +18,30 @@ public class IncomeListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(IncomeListPanel.class);
 
     @FXML
-    private ListView<Income> personListView;
+    private ListView<Transaction> transactionListView;
 
     /**
      * Creates a {@code IncomeListPanel} with the given {@code ObservableList}.
      */
-    public IncomeListPanel(ObservableList<Income> incomeList) {
+    public IncomeListPanel(ObservableList<Transaction> transactionList) {
         super(FXML);
-        personListView.setItems(incomeList);
-        personListView.setCellFactory(listView -> new IncomeListViewCell());
+        transactionListView.setItems(transactionList);
+        transactionListView.setCellFactory(listView -> new IncomeListViewCell());
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Income} using a {@code IncomeCard}.
      */
-    class IncomeListViewCell extends ListCell<Income> {
+    class IncomeListViewCell extends ListCell<Transaction> {
         @Override
-        protected void updateItem(Income income, boolean empty) {
-            super.updateItem(income, empty);
+        protected void updateItem(Transaction transaction, boolean empty) {
+            super.updateItem(transaction, empty);
 
-            if (empty || income == null) {
+            if (empty || transaction == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new IncomeCard(income, getIndex() + 1).getRoot());
+                setGraphic(new TransactionCard(transaction, getIndex() + 1).getRoot());
             }
         }
     }

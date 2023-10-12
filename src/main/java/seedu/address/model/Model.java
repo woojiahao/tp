@@ -5,8 +5,8 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.income.Income;
 import seedu.address.model.person.Person;
+import seedu.address.model.transaction.Transaction;
 
 /**
  * The API of the Model component.
@@ -16,7 +16,7 @@ public interface Model {
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Income> PREDICATE_SHOW_ALL_INCOMES = unused -> true;
+    Predicate<Transaction> PREDICATE_SHOW_ALL_TRANSACTIONS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -90,36 +90,35 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
-     * Replaces income list data with the data in {@code incomeList}.
+     * Replaces UniCash data with the data in {@code uniCash}.
      */
-    void setIncomeList(ReadOnlyIncomeList incomeList);
+    void setUniCash(ReadOnlyUniCash uniCash);
 
-    /** Returns the IncomeList */
-    ReadOnlyIncomeList getIncomeList();
+    /** Returns UniCash */
+    ReadOnlyUniCash getUniCash();
 
     /**
-     * Deletes the given income.
-     * The income must exist in the income list.
+     * Deletes the given transaction.
+     * The transaction must exist in UniCash.
      */
-    void deleteIncome(Income target);
+    void deleteTransaction(Transaction target);
 
     /**
-     * Adds the given income.
-     * {@code income} must not already exist in the income list.
+     * Adds the given transaction.
      */
-    void addIncome(Income income);
+    void addTransaction(Transaction transaction);
 
     /**
-     * Returns true if a income with the same identity as {@code income} exists in the income list.
+     * Returns true if a transaction with the same identity as {@code transaction} exists in UniCash.
      */
-    boolean hasIncome(Income income);
+    boolean hasTransaction(Transaction transaction);
 
-    /** Returns an unmodifiable view of the filtered income list */
-    ObservableList<Income> getFilteredIncomeList();
+    /** Returns an unmodifiable view of the filtered transaction list */
+    ObservableList<Transaction> getFilteredTransactionList();
 
     /**
-     * Updates the filter of the filtered income list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered UniCash to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredIncomeList(Predicate<Income> predicate);
+    void updateFilteredTransactionList(Predicate<Transaction> predicate);
 }

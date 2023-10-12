@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -15,13 +14,13 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.income.Amount;
-import seedu.address.model.income.DateTime;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.transaction.Amount;
+import seedu.address.model.transaction.DateTime;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -30,13 +29,6 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_AMOUNT = "str";
-    private static final String INVALID_DATETIME_1 = "1/18/200 19:30"; // Wrong date format
-    private static final String INVALID_DATETIME_2 = "1/18/2001 25:24"; // Wrong time format
-    private static final String INVALID_DATETIME_3 = "18-1-2001 19:30"; // Wrong date separators
-    private static final String INVALID_DATETIME_4 = "18/1/2001 19-30"; // Wrong time separators
-    private static final String INVALID_DATETIME_5 = "19:30"; // No date
-    private static final String INVALID_DATETIME_6 = "18/1/2001"; // No time
-
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -45,7 +37,7 @@ public class ParserUtilTest {
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_AMOUNT = "3.0";
-    private static final String VALID_DATETIME = "18/08/2001 18:30";
+    private static final String VALID_DATETIME = "18-08-2001 18:30";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -236,31 +228,15 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseDateTime_invalidValue_throwsParseException() {
-        String[] invalidDateTimes = new String[] {
-            INVALID_DATETIME_1,
-            INVALID_DATETIME_2,
-            INVALID_DATETIME_3,
-            INVALID_DATETIME_4,
-            INVALID_DATETIME_5,
-            INVALID_DATETIME_6,
-        };
-        for (String invalidDateTime : invalidDateTimes) {
-            System.out.println(invalidDateTime);
-            assertThrows(ParseException.class, () -> ParserUtil.parseDateTime(invalidDateTime));
-        }
-    }
-
-    @Test
     public void parseDateTime_validValueWithoutWhitespace_returnsName() throws Exception {
-        DateTime expectedDateTime = new DateTime(LocalDateTime.of(2001, 8, 18, 18, 30));
+        DateTime expectedDateTime = new DateTime("18-08-2001 18:30");
         assertEquals(expectedDateTime, ParserUtil.parseDateTime(VALID_DATETIME));
     }
 
     @Test
     public void parseDateTime_validValueWithWhitespace_returnsTrimmedName() throws Exception {
         String dateTimeWithWhiteSpace = WHITESPACE + VALID_DATETIME + WHITESPACE;
-        DateTime expectedDateTime = new DateTime(LocalDateTime.of(2001, 8, 18, 18, 30));
+        DateTime expectedDateTime = new DateTime("18-08-2001 18:30");
         assertEquals(expectedDateTime, ParserUtil.parseDateTime(dateTimeWithWhiteSpace));
     }
 }

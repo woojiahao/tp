@@ -1,11 +1,11 @@
-package seedu.address.logic.commands.income;
+package seedu.address.logic.commands.transaction;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIncomes.NUS;
+import static seedu.address.testutil.TypicalTransactions.NUS;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -19,56 +19,56 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.IncomeList;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyIncomeList;
+import seedu.address.model.ReadOnlyUniCash;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.income.Income;
+import seedu.address.model.UniCash;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.IncomeBuilder;
+import seedu.address.model.transaction.Transaction;
+import seedu.address.testutil.TransactionBuilder;
 
-public class AddIncomeCommandTest {
+public class AddTransactionCommandTest {
 
     @Test
-    public void constructor_nullIncome_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddIncomeCommand(null));
+    public void constructor_nullTransaction_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddTransactionCommand(null));
     }
 
     @Test
     public void execute_incomeAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingIncomeAdded modelStub = new ModelStubAcceptingIncomeAdded();
-        Income validIncome = new IncomeBuilder().build();
+        ModelStubAcceptingTransactionAdded modelStub = new ModelStubAcceptingTransactionAdded();
+        Transaction validTransaction = new TransactionBuilder().build();
 
-        CommandResult commandResult = new AddIncomeCommand(validIncome).execute(modelStub);
+        CommandResult commandResult = new AddTransactionCommand(validTransaction).execute(modelStub);
 
-        assertEquals(String.format(AddIncomeCommand.MESSAGE_SUCCESS, Messages.formatIncome(validIncome)),
+        assertEquals(String.format(AddTransactionCommand.MESSAGE_SUCCESS, Messages.formatTransaction(validTransaction)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validIncome), modelStub.incomesAdded);
+        assertEquals(Arrays.asList(validTransaction), modelStub.incomesAdded);
     }
 
     @Test
-    public void execute_duplicateIncome_throwsCommandException() {
-        Income validIncome = new IncomeBuilder().build();
-        AddIncomeCommand addIncomeCommand = new AddIncomeCommand(validIncome);
-        ModelStub modelStub = new ModelStubWithIncome(validIncome);
+    public void execute_duplicateTransaction_throwsCommandException() {
+        Transaction validTransaction = new TransactionBuilder().build();
+        AddTransactionCommand addTransactionCommand = new AddTransactionCommand(validTransaction);
+        ModelStub modelStub = new ModelStubWithTransaction(validTransaction);
 
         assertThrows(CommandException.class,
-                AddIncomeCommand.MESSAGE_DUPLICATE_INCOME, () -> addIncomeCommand.execute(modelStub));
+                AddTransactionCommand.MESSAGE_DUPLICATE_INCOME, () -> addTransactionCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Income nus = new IncomeBuilder().withName("Nus").build();
-        Income intern = new IncomeBuilder().withName("Intern").build();
-        AddIncomeCommand addNusCommand = new AddIncomeCommand(nus);
-        AddIncomeCommand addBobCommand = new AddIncomeCommand(intern);
+        Transaction nus = new TransactionBuilder().withName("Nus").build();
+        Transaction intern = new TransactionBuilder().withName("Intern").build();
+        AddTransactionCommand addNusCommand = new AddTransactionCommand(nus);
+        AddTransactionCommand addBobCommand = new AddTransactionCommand(intern);
 
         // same object -> returns true
         assertTrue(addNusCommand.equals(addNusCommand));
 
         // same values -> returns true
-        AddIncomeCommand addNusCommandCopy = new AddIncomeCommand(nus);
+        AddTransactionCommand addNusCommandCopy = new AddTransactionCommand(nus);
         assertTrue(addNusCommand.equals(addNusCommandCopy));
 
         // different types -> returns false
@@ -77,15 +77,15 @@ public class AddIncomeCommandTest {
         // null -> returns false
         assertFalse(addNusCommand.equals(null));
 
-        // different Income -> returns false
+        // different Transaction -> returns false
         assertFalse(addNusCommand.equals(addBobCommand));
     }
 
     @Test
     public void toStringMethod() {
-        AddIncomeCommand addIncomeCommand = new AddIncomeCommand(NUS);
-        String expected = AddIncomeCommand.class.getCanonicalName() + "{toAdd=" + NUS + "}";
-        assertEquals(expected, addIncomeCommand.toString());
+        AddTransactionCommand addTransactionCommand = new AddTransactionCommand(NUS);
+        String expected = AddTransactionCommand.class.getCanonicalName() + "{toAdd=" + NUS + "}";
+        assertEquals(expected, addTransactionCommand.toString());
     }
 
     /**
@@ -163,37 +163,37 @@ public class AddIncomeCommandTest {
         }
 
         @Override
-        public void setIncomeList(ReadOnlyIncomeList incomeList) {
+        public void setUniCash(ReadOnlyUniCash uniCash) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyIncomeList getIncomeList() {
+        public ReadOnlyUniCash getUniCash() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasIncome(Income income) {
+        public boolean hasTransaction(Transaction income) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deleteIncome(Income target) {
+        public void deleteTransaction(Transaction target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void addIncome(Income income) {
+        public void addTransaction(Transaction income) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Income> getFilteredIncomeList() {
+        public ObservableList<Transaction> getFilteredTransactionList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredIncomeList(Predicate<Income> predicate) {
+        public void updateFilteredTransactionList(Predicate<Transaction> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -201,16 +201,16 @@ public class AddIncomeCommandTest {
     /**
      * A Model stub that contains a single person.
      */
-    private class ModelStubWithIncome extends AddIncomeCommandTest.ModelStub {
-        private final Income income;
+    private class ModelStubWithTransaction extends AddTransactionCommandTest.ModelStub {
+        private final Transaction income;
 
-        ModelStubWithIncome(Income income) {
+        ModelStubWithTransaction(Transaction income) {
             requireNonNull(income);
             this.income = income;
         }
 
         @Override
-        public boolean hasIncome(Income income) {
+        public boolean hasTransaction(Transaction income) {
             requireNonNull(income);
             return this.income.equals(income);
         }
@@ -219,24 +219,24 @@ public class AddIncomeCommandTest {
     /**
      * A Model stub that always accept the person being added.
      */
-    private class ModelStubAcceptingIncomeAdded extends AddIncomeCommandTest.ModelStub {
-        final ArrayList<Income> incomesAdded = new ArrayList<>();
+    private class ModelStubAcceptingTransactionAdded extends AddTransactionCommandTest.ModelStub {
+        final ArrayList<Transaction> incomesAdded = new ArrayList<>();
 
         @Override
-        public boolean hasIncome(Income income) {
+        public boolean hasTransaction(Transaction income) {
             requireNonNull(income);
             return incomesAdded.stream().anyMatch(income::equals);
         }
 
         @Override
-        public void addIncome(Income income) {
+        public void addTransaction(Transaction income) {
             requireNonNull(income);
             incomesAdded.add(income);
         }
 
         @Override
-        public ReadOnlyIncomeList getIncomeList() {
-            return new IncomeList();
+        public ReadOnlyUniCash getUniCash() {
+            return new UniCash();
         }
     }
 

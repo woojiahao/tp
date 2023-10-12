@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.income;
+package seedu.address.logic.commands.transaction;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
@@ -11,12 +11,12 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.income.Income;
+import seedu.address.model.transaction.Transaction;
 
 /**
  * Adds an income to the income list.
  */
-public class AddIncomeCommand extends Command {
+public class AddTransactionCommand extends Command {
     public static final String COMMAND_WORD = "add_income";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an income to the income list. "
@@ -29,15 +29,15 @@ public class AddIncomeCommand extends Command {
             + PREFIX_AMOUNT + "300 "
             + PREFIX_DATETIME + "18/08/2001 19:30";
 
-    public static final String MESSAGE_SUCCESS = "New income added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New transaction added: %1$s";
     public static final String MESSAGE_DUPLICATE_INCOME = "This income already exists in the income list";
 
-    private final Income toAdd;
+    private final Transaction toAdd;
 
     /**
-     * Creates an AddIncomeCommand to add the specified {@code Income}
+     * Creates an AddTransactionCommand to add the specified {@code Transaction}
      */
-    public AddIncomeCommand(Income income) {
+    public AddTransactionCommand(Transaction income) {
         requireNonNull(income);
         toAdd = income;
     }
@@ -45,12 +45,12 @@ public class AddIncomeCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasIncome(toAdd)) {
+        if (model.hasTransaction(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_INCOME);
         }
 
-        model.addIncome(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatIncome(toAdd)));
+        model.addTransaction(toAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatTransaction(toAdd)));
     }
 
     @Override
@@ -60,12 +60,12 @@ public class AddIncomeCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddIncomeCommand)) {
+        if (!(other instanceof AddTransactionCommand)) {
             return false;
         }
 
-        AddIncomeCommand otherAddCommand = (AddIncomeCommand) other;
-        return toAdd.equals(otherAddCommand.toAdd);
+        AddTransactionCommand otherAddTransactionCommand = (AddTransactionCommand) other;
+        return toAdd.equals(otherAddTransactionCommand.toAdd);
     }
 
     @Override

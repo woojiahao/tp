@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIncomes.NUS;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalTransactions.NUS;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
-import seedu.address.testutil.IncomeListBuilder;
+import seedu.address.testutil.UniCashBuilder;
 
 public class ModelManagerTest {
 
@@ -29,7 +29,7 @@ public class ModelManagerTest {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
         assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
-        assertEquals(new IncomeList(), new IncomeList(modelManager.getIncomeList()));
+        assertEquals(new UniCash(), new UniCash(modelManager.getUniCash()));
     }
 
     @Test
@@ -97,37 +97,37 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasIncome_nullIncome_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasIncome(null));
+    public void hasTransaction_nullTransaction_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasTransaction(null));
     }
 
     @Test
-    public void hasIncome_incomeNotInIncomeList_returnsFalse() {
-        assertFalse(modelManager.hasIncome(NUS));
+    public void hasTransaction_transactionNotInUniCash_returnsFalse() {
+        assertFalse(modelManager.hasTransaction(NUS));
     }
 
     @Test
-    public void hasIncome_incomeInIncomeList_returnsTrue() {
-        modelManager.addIncome(NUS);
-        assertTrue(modelManager.hasIncome(NUS));
+    public void hasTransaction_transactionInUniCash_returnsTrue() {
+        modelManager.addTransaction(NUS);
+        assertTrue(modelManager.hasTransaction(NUS));
     }
 
     @Test
-    public void getFilteredIncomeList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredIncomeList().remove(0));
+    public void getFilteredUniCash_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredTransactionList().remove(0));
     }
 
     @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
-        IncomeList incomeList = new IncomeListBuilder().withIncome(NUS).build();
-        IncomeList differentIncomeList = new IncomeList();
+        UniCash uniCash = new UniCashBuilder().withTransaction(NUS).build();
+        UniCash differentUniCash = new UniCash();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs, incomeList);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs, incomeList);
+        modelManager = new ModelManager(addressBook, userPrefs, uniCash);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs, uniCash);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -140,12 +140,12 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs, incomeList)));
+        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs, uniCash)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs, incomeList)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs, uniCash)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -153,9 +153,9 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs, incomeList)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs, uniCash)));
 
         // different incomeList -> returns false
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs, differentIncomeList)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs, differentUniCash)));
     }
 }

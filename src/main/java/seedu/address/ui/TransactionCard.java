@@ -4,12 +4,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.income.Income;
+import seedu.address.model.transaction.Transaction;
 
 /**
  * A UI component that displays information of a {@code Income}.
  */
-public class IncomeCard extends UiPart<Region> {
+public class TransactionCard extends UiPart<Region> {
 
     private static final String FXML = "IncomeListCard.fxml";
 
@@ -21,7 +21,7 @@ public class IncomeCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Income income;
+    public final Transaction transaction;
 
     @FXML
     private HBox cardPane;
@@ -37,14 +37,12 @@ public class IncomeCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public IncomeCard(Income income, int displayedIndex) {
+    public TransactionCard(Transaction transaction, int displayedIndex) {
         super(FXML);
-        this.income = income;
-        System.out.println("*&*&*&*&*& " + income);
-        System.out.println(income.getAmount().toString());
+        this.transaction = transaction;
         id.setText(displayedIndex + ". ");
-        name.setText(income.getName().toString());
-        amount.setText(income.getAmount().toString());
-        dateTime.setText(income.getDateTime().toString());
+        name.setText(transaction.getName().toString());
+        amount.setText(transaction.getAmount().toString());
+        dateTime.setText(transaction.getDateTime().toString());
     }
 }

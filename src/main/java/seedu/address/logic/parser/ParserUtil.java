@@ -2,9 +2,6 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.DateTimeException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,13 +9,16 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.income.Amount;
-import seedu.address.model.income.DateTime;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.transaction.Amount;
+import seedu.address.model.transaction.Category;
+import seedu.address.model.transaction.DateTime;
+import seedu.address.model.transaction.Location;
+import seedu.address.model.transaction.Type;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -61,13 +61,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
-    public static seedu.address.model.income.Name parseIncomeName(String name) throws ParseException {
+    public static seedu.address.model.transaction.Name parseIncomeName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
-        return new seedu.address.model.income.Name(trimmedName);
+        return new seedu.address.model.transaction.Name(trimmedName);
     }
 
 
@@ -168,29 +168,45 @@ public class ParserUtil {
     /**
      * Parses a {@code String datetime} into an {@code LocalDateTime}.
      * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code amount} is invalid.
      */
-    public static DateTime parseDateTime(String datetimeString) throws ParseException {
-        requireNonNull(datetimeString);
-        String trimmed = datetimeString.trim();
-        String[] datetime = trimmed.split(" ");
-        if (datetime.length != 2) {
-            throw new ParseException(DateTime.MESSAGE_CONSTRAINTS);
-        }
+    public static DateTime parseDateTime(String dateTimeString) {
+        requireNonNull(dateTimeString);
+        String trimmedDateTime = dateTimeString.trim();
+        return new DateTime(trimmedDateTime);
+    }
 
-        LocalDateTime parsedDateTime;
-        try {
-            String dateTimeString = datetime[0] + "T" + datetime[1];
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HH:mm");
-            parsedDateTime = LocalDateTime.parse(dateTimeString, formatter);
-            if (!DateTime.isValidDateTime(parsedDateTime)) {
-                throw new ParseException(DateTime.MESSAGE_CONSTRAINTS);
-            }
-        } catch (DateTimeException exc) {
-            throw new ParseException(DateTime.MESSAGE_CONSTRAINTS);
+    /**
+     * Parses a {@code String type} into a {@code Type}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code type} is invalid.
+     */
+    public static Type parseType(String type) throws ParseException {
+        requireNonNull(type);
+        String trimmedType = type.trim();
+        if (!Type.isValidType(trimmedType)) {
+            throw new ParseException(Type.MESSAGE_CONSTRAINTS);
         }
+        return new Type(trimmedType);
+    }
 
-        return new DateTime(parsedDateTime);
+    /**
+     * Parses a {@code String category} into a {@code Category}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Category parseCategory(String category) {
+        requireNonNull(category);
+        String trimmedCategory = category.trim();
+        return new Category(trimmedCategory);
+    }
+
+    /**
+     * Parses a {@code String location} into a {@code Location}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Location parseLocation(String location) {
+        requireNonNull(location);
+        String trimmedLocation = location.trim();
+        return new Location(trimmedLocation);
     }
 }
