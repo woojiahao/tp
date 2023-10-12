@@ -39,22 +39,26 @@ public class TransactionTest {
         Transaction editedGroceries = new TransactionBuilder(BUYING_GROCERIES).withName("Another thing").build();
         assertNotEquals(BUYING_GROCERIES, editedGroceries);
 
-        // different phone -> returns false
+        // different amount -> returns false
         editedGroceries = new TransactionBuilder(BUYING_GROCERIES).withAmount(10.15).build();
         assertNotEquals(BUYING_GROCERIES, editedGroceries);
 
-        // different email -> returns false
+        // different categories -> returns false
         editedGroceries = new TransactionBuilder(BUYING_GROCERIES).withCategory("Food").build();
         assertNotEquals(BUYING_GROCERIES, editedGroceries);
 
-        // different address -> returns false
+        // different date -> returns false
         editedGroceries = new TransactionBuilder(BUYING_GROCERIES)
                 .withDateTime(new DateTime(LocalDateTime.MIN))
                 .build();
         assertNotEquals(BUYING_GROCERIES, editedGroceries);
 
-        // different tags -> returns false
+        // different location -> returns false
         editedGroceries = new TransactionBuilder(BUYING_GROCERIES).withLocation("UTown").build();
+        assertNotEquals(BUYING_GROCERIES, editedGroceries);
+
+        // different transaction type -> return false
+        editedGroceries = new TransactionBuilder(BUYING_GROCERIES).withType("income").build();
         assertNotEquals(BUYING_GROCERIES, editedGroceries);
     }
 
@@ -63,6 +67,7 @@ public class TransactionTest {
         String expected =
                 Transaction.class.getCanonicalName()
                         + "{name=" + BUYING_GROCERIES.getName()
+                        + ", type=" + BUYING_GROCERIES.getType()
                         + ", amount=" + BUYING_GROCERIES.getAmount()
                         + ", category=" + BUYING_GROCERIES.getCategory()
                         + ", dateTime=" + BUYING_GROCERIES.getDateTime()

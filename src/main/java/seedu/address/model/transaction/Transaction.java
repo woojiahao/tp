@@ -16,17 +16,20 @@ public class Transaction {
     private final Category category;
     private final DateTime dateTime;
     private final Location location;
+    private final Type type;
 
     /**
      * Every field must be present and not null.
      */
-    public Transaction(Name name, Amount amount, Category category, DateTime dateTime, Location location) {
-        requireAllNonNull(name, amount, category, dateTime, location);
+    public Transaction(Name name, Amount amount, Category category, DateTime dateTime,
+                       Location location, Type type) {
+        requireAllNonNull(name, amount, category, dateTime, location, type);
         this.name = name;
         this.amount = amount;
         this.category = category;
         this.dateTime = dateTime;
         this.location = location;
+        this.type = type;
     }
 
     public Name getName() {
@@ -49,9 +52,13 @@ public class Transaction {
         return location;
     }
 
+    public Type getType() {
+        return type;
+    }
+
     @Override
     public int hashCode() {
-        return Objects.hash(name, amount, category, dateTime, location);
+        return Objects.hash(name, amount, category, dateTime, location, type);
     }
 
     /**
@@ -70,6 +77,7 @@ public class Transaction {
 
         Transaction otherTransaction = (Transaction) other;
         return name.equals(otherTransaction.name)
+                && type == otherTransaction.type
                 && amount == otherTransaction.amount
                 && category.equals(otherTransaction.category)
                 && dateTime.equals(otherTransaction.dateTime)
@@ -80,6 +88,7 @@ public class Transaction {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
+                .add("type", type)
                 .add("amount", amount)
                 .add("category", category)
                 .add("dateTime", dateTime)

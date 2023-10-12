@@ -8,6 +8,7 @@ import seedu.address.model.transaction.DateTime;
 import seedu.address.model.transaction.Location;
 import seedu.address.model.transaction.Name;
 import seedu.address.model.transaction.Transaction;
+import seedu.address.model.transaction.Type;
 
 /**
  * A utility class to help with building Transaction objects.
@@ -19,12 +20,14 @@ public class TransactionBuilder {
     public static final String DEFAULT_CATEGORY = "Food";
     public static final LocalDateTime DEFAULT_DATE_TIME = LocalDateTime.of(2023, 8, 18, 1, 1);
     public static final String DEFAULT_LOCATION = "Fairprice";
+    public static final String DEFAULT_TYPE = "income";
 
     private Name name;
     private Amount amount;
     private Category category;
     private DateTime dateTime;
     private Location location;
+    private Type type;
 
     /**
      * Creates a {@code ExpenseBuilder} with the default details.
@@ -35,6 +38,7 @@ public class TransactionBuilder {
         category = new Category(DEFAULT_CATEGORY);
         dateTime = new DateTime(DEFAULT_DATE_TIME);
         location = new Location(DEFAULT_LOCATION);
+        type = new Type(DEFAULT_TYPE);
     }
 
     /**
@@ -46,6 +50,7 @@ public class TransactionBuilder {
         category = transactionToCopy.getCategory();
         dateTime = transactionToCopy.getDateTime();
         location = transactionToCopy.getLocation();
+        type = transactionToCopy.getType();
     }
 
     /**
@@ -88,7 +93,15 @@ public class TransactionBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Type} of the {@code Transaction} that we are building.
+     */
+    public TransactionBuilder withType(String type) {
+        this.type = new Type(type);
+        return this;
+    }
+
     public Transaction build() {
-        return new Transaction(name, amount, category, dateTime, location);
+        return new Transaction(name, amount, category, dateTime, location, type);
     }
 }
