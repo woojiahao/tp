@@ -21,6 +21,7 @@ public class DateTimeTest {
         assertDoesNotThrow(() -> new DateTime("01-01-2001 18:18"));
     }
 
+    @Test
     public void isValidDate() {
         assertFalse(DateTime.isValidDateTime("1-1-2001 18:18")); // wrong day and month format
         assertFalse(DateTime.isValidDateTime("01-1-2001 17:1")); // invalid time
