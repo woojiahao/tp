@@ -7,8 +7,6 @@ import static seedu.address.testutil.TypicalTransactions.BUYING_GROCERIES;
 import static seedu.address.testutil.TypicalTransactions.DINING_WITH_FRIENDS;
 import static seedu.address.testutil.TypicalTransactions.WORK_AT_LIHO;
 
-import java.time.LocalDateTime;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.TransactionBuilder;
@@ -50,7 +48,7 @@ public class TransactionTest {
 
         // different date -> returns false
         editedGroceries = new TransactionBuilder(BUYING_GROCERIES)
-                .withDateTime(new DateTime(LocalDateTime.MIN))
+                .withDateTime("01-01-1999 18:18")
                 .build();
         assertNotEquals(BUYING_GROCERIES, editedGroceries);
 

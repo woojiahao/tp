@@ -1,7 +1,5 @@
 package seedu.address.testutil;
 
-import java.time.LocalDateTime;
-
 import seedu.address.model.transaction.Amount;
 import seedu.address.model.transaction.Category;
 import seedu.address.model.transaction.DateTime;
@@ -18,7 +16,7 @@ public class TransactionBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final double DEFAULT_AMOUNT = 123.45;
     public static final String DEFAULT_CATEGORY = "Food";
-    public static final LocalDateTime DEFAULT_DATE_TIME = LocalDateTime.of(2023, 8, 18, 1, 1);
+    public static final String DEFAULT_DATE_TIME = "18-08-2001 10:10";
     public static final String DEFAULT_LOCATION = "Fairprice";
     public static final String DEFAULT_TYPE = "income";
 
@@ -80,8 +78,8 @@ public class TransactionBuilder {
     /**
      * Sets the {@code LocalDateTime} of the {@code Transaction} that we are building.
      */
-    public TransactionBuilder withDateTime(DateTime dateTime) {
-        this.dateTime = dateTime;
+    public TransactionBuilder withDateTime(String dateString) {
+        this.dateTime = new DateTime(dateString);
         return this;
     }
 
@@ -102,6 +100,6 @@ public class TransactionBuilder {
     }
 
     public Transaction build() {
-        return new Transaction(name, amount, category, dateTime, location, type);
+        return new Transaction(name, type, amount, category, dateTime, location);
     }
 }

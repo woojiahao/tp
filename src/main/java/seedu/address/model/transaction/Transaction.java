@@ -18,18 +18,20 @@ public class Transaction {
     private final Location location;
     private final Type type;
 
+
     /**
-     * Every field must be present and not null.
+     * Constructs a Transaction with all fields populated.
+     * Guarantees: details are present and not null, field values are validated, immutable.
      */
-    public Transaction(Name name, Amount amount, Category category, DateTime dateTime,
-                       Location location, Type type) {
-        requireAllNonNull(name, amount, category, dateTime, location, type);
+    public Transaction(Name name, Type type, Amount amount, Category category, DateTime dateTime,
+                       Location location) {
+        requireAllNonNull(name, type, amount, category, dateTime, location);
         this.name = name;
+        this.type = type;
         this.amount = amount;
         this.category = category;
         this.dateTime = dateTime;
         this.location = location;
-        this.type = type;
     }
 
     public Name getName() {

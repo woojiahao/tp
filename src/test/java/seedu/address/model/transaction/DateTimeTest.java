@@ -6,8 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
-import java.time.LocalDateTime;
-
 import org.junit.jupiter.api.Test;
 
 public class DateTimeTest {
@@ -17,18 +15,23 @@ public class DateTimeTest {
     }
 
     @Test
+    public void constructor_validString_success() {
+        assertThrows(NullPointerException.class, () -> new DateTime(null));
+    }
+
+    @Test
     public void originalString() {
-        DateTime dateTime = new DateTime(LocalDateTime.of(2023, 12, 18, 18, 18));
+        DateTime dateTime = new DateTime("18-12-2023 01:01");
         String stringify = dateTime.originalString();
-        assertEquals(stringify, "18/12/2023 18:18");
+        assertEquals(stringify, "18-12-2023 01:01");
     }
 
     @Test
     public void equals() {
-        DateTime datetime = new DateTime(LocalDateTime.of(2001, 1, 1, 1, 1));
+        DateTime datetime = new DateTime("01-01-2001 01:01");
 
         // same values -> returns true
-        assertTrue(datetime.equals(new DateTime(LocalDateTime.of(2001, 1, 1, 1, 1))));
+        assertTrue(datetime.equals(new DateTime("01-01-2001 01:01")));
 
         // same object -> returns true
         assertTrue(datetime.equals(datetime));
@@ -40,26 +43,29 @@ public class DateTimeTest {
         assertFalse(datetime.equals("hi"));
 
         // different year -> returns false
-        assertFalse(datetime.equals(new DateTime(LocalDateTime.of(2000, 1, 1, 1, 1))));
+        assertFalse(datetime.equals(new DateTime("01-01-2000 01:01")));
 
         // different month -> returns false
-        assertFalse(datetime.equals(new DateTime(LocalDateTime.of(2001, 12, 1, 1, 1))));
+        assertFalse(datetime.equals(new DateTime("01-02-2001 01:01")));
 
         // different day -> returns false
-        assertFalse(datetime.equals(new DateTime(LocalDateTime.of(2001, 1, 12, 1, 1))));
+        assertFalse(datetime.equals(new DateTime("02-01-2001 01:01")));
 
         // different time -> returns false
-        assertFalse(datetime.equals(new DateTime(LocalDateTime.of(2001, 1, 1, 12, 12))));
+        assertFalse(datetime.equals(new DateTime("01-01-2001 02:02")));
+    }
+
+    @Test
+    public void toStringMethod() {
+        DateTime dateTime = new DateTime("18-08-2023 01:01");
+        assertEquals(dateTime.toString(), "0101, Aug 18 2023");
     }
 
     @Test
     public void hashCode_test() {
-        DateTime dateTime1 = new DateTime(
-                LocalDateTime.of(2001, 1, 1, 12, 12));
-        DateTime dateTime2 = new DateTime(LocalDateTime.of(
-                2001, 1, 1, 12, 12));
-        DateTime dateTime3 = new DateTime(LocalDateTime.of(
-                2001, 1, 2, 12, 12));
+        DateTime dateTime1 = new DateTime("01-01-2001 12:12");
+        DateTime dateTime2 = new DateTime("01-01-2001 12:12");
+        DateTime dateTime3 = new DateTime("01-01-2002 12:12");
         assertEquals(dateTime1.hashCode(), dateTime2.hashCode());
         assertNotEquals(dateTime1.hashCode(), dateTime3.hashCode());
     }

@@ -1,8 +1,5 @@
 package seedu.address.testutil;
 
-import java.time.LocalDateTime;
-
-import seedu.address.model.transaction.DateTime;
 import seedu.address.model.transaction.Transaction;
 
 /**
@@ -21,13 +18,13 @@ public class TypicalTransactions {
             .withAmount(234.50)
             .withCategory("Food")
             .withLocation("Poulet")
-            .withDateTime(new DateTime(LocalDateTime.of(18, 8, 18, 1, 1)))
+            .withDateTime("18-08-2001 18:18")
             .build();
 
     public static final Transaction WORK_AT_LIHO = new TransactionBuilder()
             .withName("Working at liho")
             .withType("expense")
             .withAmount(888)
-            .withDateTime(new DateTime(LocalDateTime.of(18, 2, 18, 2, 1)))
+            .withDateTime("18-09-2002 18:17")
             .build();
 }
