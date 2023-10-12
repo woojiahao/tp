@@ -1,10 +1,10 @@
-package seedu.address.model.expense;
+package seedu.address.model.transaction;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents an Expense's category.
+ * Represents a Transaction's category.
  */
 public class Category {
 

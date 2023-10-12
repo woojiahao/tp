@@ -1,4 +1,4 @@
-package seedu.address.model.expense;
+package seedu.address.model.transaction;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

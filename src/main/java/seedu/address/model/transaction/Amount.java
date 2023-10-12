@@ -1,27 +1,23 @@
-package seedu.address.model.income;
+package seedu.address.model.transaction;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.util.Objects;
-
 /**
- * Represents an Income's amount.
- * Guarantees: immutable; is valid as declared in {@link #isValidAmount(double)}
+ * Represents a Transaction's amount.
  */
 public class Amount {
-    public static final String MESSAGE_CONSTRAINTS =
-            "Income amount should be positive number.";
 
-    public final Double amount;
+    public static final String MESSAGE_CONSTRAINTS =
+            "Amounts must be positive.";
+
+    public final double amount;
 
     /**
      * Constructs a {@code Amount}.
      *
      * @param amount A valid amount.
      */
-    public Amount(Double amount) {
-        requireNonNull(amount);
+    public Amount(double amount) {
         checkArgument(isValidAmount(amount), MESSAGE_CONSTRAINTS);
         this.amount = amount;
     }
@@ -30,12 +26,12 @@ public class Amount {
      * Returns true if a given amount is a non-negative value.
      */
     public static boolean isValidAmount(double amount) {
-        return amount > 0.00;
+        return amount >= 0.00;
     }
 
     @Override
-    public String toString() {
-        return Double.toString(this.amount);
+    public int hashCode() {
+        return Double.hashCode(amount);
     }
 
     @Override
@@ -44,17 +40,15 @@ public class Amount {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof Amount)) {
             return false;
         }
 
-        Amount otherAmount = (Amount) other;
-        return Objects.equals(this.amount, otherAmount.amount);
+        return amount == ((Amount) other).amount;
     }
 
     @Override
-    public int hashCode() {
-        return this.amount.hashCode();
+    public String toString() {
+        return Double.toString(amount);
     }
 }
