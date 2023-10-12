@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.transaction;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_INTERN;
@@ -29,7 +29,7 @@ import seedu.address.model.transaction.Transaction;
 import seedu.address.testutil.TransactionBuilder;
 
 
-public class AddIncomeCommandParserTest {
+public class AddTransactionCommandParserTest {
     private AddTransactionCommandParser parser = new AddTransactionCommandParser();
 
     @Test

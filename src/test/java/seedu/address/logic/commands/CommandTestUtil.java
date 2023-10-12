@@ -40,12 +40,19 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_TRANSACTION_NAME_NUS = "Work at NUS";
     public static final String VALID_TRANSACTION_NAME_INTERN = "Internship";
+    public static final String VALID_TRANSACTION_NAME_SHOPPING = "Shopping";
+    public static final String VALID_TYPE_EXPENSE = "expense";
+    public static final String VALID_TYPE_INCOME = "income";
     public static final Double VALID_AMOUNT_NUS = 888.8;
     public static final Double VALID_AMOUNT_INTERN = 8.8;
+    public static final Double VALID_AMOUNT_SHOPPING = 899.8;
     public static final String VALID_DATETIME_NUS = "12-12-2021 12:12";
     public static final String VALID_DATETIME_INTERN = "08-08-2008 08:08";
+    public static final String VALID_DATETIME_SHOPPING = "01-02-2008 11:08";
     public static final String VALID_DATETIME_NUS_STRING = "01/01/2021 12:12";
     public static final String VALID_DATETIME_INTERN_STRING = "08/08/2021 08:08";
+    public static final String VALID_CATEGORY_ENTERTAINMENT = "entertainment";
+    public static final String VALID_LOCATION_ORCHARD = "orchard";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;

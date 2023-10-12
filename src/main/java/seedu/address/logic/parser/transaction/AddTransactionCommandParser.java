@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.transaction;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.transaction.AddTransactionCommand;
+import seedu.address.logic.parser.*;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.transaction.Amount;
 import seedu.address.model.transaction.Category;
@@ -21,13 +22,13 @@ import seedu.address.model.transaction.Transaction;
 import seedu.address.model.transaction.Type;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new AddTransactionCommand object
  */
 public class AddTransactionCommandParser implements Parser<AddTransactionCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * and returns an AddTransactionCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddTransactionCommand parse(String args) throws ParseException {
@@ -35,13 +36,17 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TYPE, PREFIX_AMOUNT, PREFIX_DATETIME,
                         PREFIX_CATEGORY, PREFIX_LOCATION);
 
+        // Check if mandatory fields (name, amount, type) are present
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_AMOUNT, PREFIX_TYPE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddTransactionCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_AMOUNT, PREFIX_DATETIME);
+        // Check for duplicates
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_TYPE, PREFIX_AMOUNT, PREFIX_DATETIME,
+                PREFIX_CATEGORY, PREFIX_LOCATION);
+
         Name name = ParserUtil.parseIncomeName(argMultimap.getValue(PREFIX_NAME).get());
         Amount amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
         Type type = ParserUtil.parseType(argMultimap.getValue(PREFIX_TYPE).get());
