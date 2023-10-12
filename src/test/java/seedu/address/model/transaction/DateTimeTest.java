@@ -4,7 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static seedu.address.testutil.Assert.assertThrows;;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,8 +16,19 @@ public class DateTimeTest {
     }
 
     @Test
-    public void constructor_validString_success() {
-        assertThrows(NullPointerException.class, () -> new DateTime(null));
+    public void constructor_emptyString_success() {
+        assertDoesNotThrow(() -> new DateTime(""));
+        assertDoesNotThrow(() -> new DateTime("01-01-2001 18:18"));
+    }
+
+    public void isValidDate() {
+        assertFalse(DateTime.isValidDateTime("1-1-2001 18:18")); // wrong day and month format
+        assertFalse(DateTime.isValidDateTime("01-1-2001 17:1")); // invalid time
+        assertFalse(DateTime.isValidDateTime("01-01-2001")); // missing time
+        assertFalse(DateTime.isValidDateTime("18:18")); // missing date
+        assertFalse(DateTime.isValidDateTime("20-31-2001 18:18")); // invalid date
+        assertFalse(DateTime.isValidDateTime("20-01-2001 25:18")); // invalid time
+        assertFalse(DateTime.isValidDateTime("31-02-2001 18:18")); // invalid date
     }
 
     @Test

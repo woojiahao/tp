@@ -24,11 +24,16 @@ public class DateTime {
 
     /**
      * Constructs a {@code DateTime}.
+     * Defaults to current date if not provided.
      *
      * @param dateTime A valid date time.
      */
     public DateTime(String dateTime) {
         requireNonNull(dateTime);
+        if (dateTime.isEmpty()) {
+            this.dateTime = LocalDateTime.now();
+            return;
+        }
         checkArgument(isValidDateTime(dateTime), MESSAGE_CONSTRAINTS);
         this.dateTime = LocalDateTime.parse(dateTime, DATETIME_FORMATTER);
     }

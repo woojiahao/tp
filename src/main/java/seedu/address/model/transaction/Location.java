@@ -7,7 +7,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Transaction's location.
  */
 public class Location {
-
     public static final String MESSAGE_CONSTRAINTS =
             "Locations should only contain alphanumeric characters, spaces, (, ), _, -, #, &, ., and ',', "
                     + "and it should not be blank";
