@@ -23,4 +23,11 @@ public class TypicalTransactions {
             .withLocation("Poulet")
             .withDateTime(new DateTime(LocalDateTime.of(18, 8, 18, 1, 1)))
             .build();
+
+    public static final Transaction WORK_AT_LIHO = new TransactionBuilder()
+            .withName("Working at liho")
+            .withType("expense")
+            .withAmount(888)
+            .withDateTime(new DateTime(LocalDateTime.of(18, 2, 18, 2, 1)))
+            .build();
 }

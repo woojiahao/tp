@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.testutil.TypicalTransactions.BUYING_GROCERIES;
 import static seedu.address.testutil.TypicalTransactions.DINING_WITH_FRIENDS;
+import static seedu.address.testutil.TypicalTransactions.WORK_AT_LIHO;
 
 import java.time.LocalDateTime;
 
@@ -74,5 +75,11 @@ public class TransactionTest {
                         + ", location=" + BUYING_GROCERIES.getLocation()
                         + "}";
         assertEquals(expected, BUYING_GROCERIES.toString());
+    }
+
+    @Test
+    public void hashCode_test() {
+        assertEquals(BUYING_GROCERIES.hashCode(), BUYING_GROCERIES.hashCode());
+        assertNotEquals(BUYING_GROCERIES.hashCode(), WORK_AT_LIHO.hashCode());
     }
 }

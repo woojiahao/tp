@@ -1,6 +1,8 @@
 package seedu.address.model.transaction;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -56,5 +58,14 @@ public class TypeTest {
 
         // different values -> returns false
         assertFalse(name.equals(new Type("expense")));
+    }
+
+    @Test
+    public void hashCode_test() {
+        Type expense = new Type("expense");
+        Type income = new Type("income");
+        Type income2 = new Type("income");
+        assertEquals(income.hashCode(), income2.hashCode());
+        assertNotEquals(expense.hashCode(), income.hashCode());
     }
 }
