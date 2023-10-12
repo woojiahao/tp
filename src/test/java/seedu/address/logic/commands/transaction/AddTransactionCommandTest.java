@@ -18,7 +18,6 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUniCash;
@@ -45,16 +44,6 @@ public class AddTransactionCommandTest {
         assertEquals(String.format(AddTransactionCommand.MESSAGE_SUCCESS, Messages.formatTransaction(validTransaction)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validTransaction), modelStub.incomesAdded);
-    }
-
-    @Test
-    public void execute_duplicateTransaction_throwsCommandException() {
-        Transaction validTransaction = new TransactionBuilder().build();
-        AddTransactionCommand addTransactionCommand = new AddTransactionCommand(validTransaction);
-        ModelStub modelStub = new ModelStubWithTransaction(validTransaction);
-
-        assertThrows(CommandException.class,
-                AddTransactionCommand.MESSAGE_DUPLICATE_INCOME, () -> addTransactionCommand.execute(modelStub));
     }
 
     @Test

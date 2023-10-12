@@ -1,12 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import seedu.address.model.UniCash;
-import seedu.address.model.transaction.Transaction;
-
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_INTERN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_NUS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_SHOPPING;
@@ -20,6 +13,13 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TRANSACTION_NAM
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TRANSACTION_NAME_SHOPPING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_INCOME;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import seedu.address.model.UniCash;
+import seedu.address.model.transaction.Transaction;
 
 /**
  * A utility class containing a list of {@code Transaction} objects to be used in tests.
