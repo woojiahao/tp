@@ -35,7 +35,7 @@ public class AddTransactionCommandTest {
     }
 
     @Test
-    public void execute_incomeAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_transactionAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingTransactionAdded modelStub = new ModelStubAcceptingTransactionAdded();
         Transaction validTransaction = new TransactionBuilder().build();
 
@@ -43,7 +43,7 @@ public class AddTransactionCommandTest {
 
         assertEquals(String.format(AddTransactionCommand.MESSAGE_SUCCESS, Messages.formatTransaction(validTransaction)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validTransaction), modelStub.incomesAdded);
+        assertEquals(Arrays.asList(validTransaction), modelStub.transactionsAdded);
     }
 
     @Test
@@ -162,7 +162,7 @@ public class AddTransactionCommandTest {
         }
 
         @Override
-        public boolean hasTransaction(Transaction income) {
+        public boolean hasTransaction(Transaction transaction) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -172,7 +172,7 @@ public class AddTransactionCommandTest {
         }
 
         @Override
-        public void addTransaction(Transaction income) {
+        public void addTransaction(Transaction transaction) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -191,17 +191,17 @@ public class AddTransactionCommandTest {
      * A Model stub that contains a single person.
      */
     private class ModelStubWithTransaction extends AddTransactionCommandTest.ModelStub {
-        private final Transaction income;
+        private final Transaction transaction;
 
-        ModelStubWithTransaction(Transaction income) {
-            requireNonNull(income);
-            this.income = income;
+        ModelStubWithTransaction(Transaction transaction) {
+            requireNonNull(transaction);
+            this.transaction = transaction;
         }
 
         @Override
-        public boolean hasTransaction(Transaction income) {
-            requireNonNull(income);
-            return this.income.equals(income);
+        public boolean hasTransaction(Transaction transaction) {
+            requireNonNull(transaction);
+            return this.transaction.equals(transaction);
         }
     }
 
@@ -209,18 +209,18 @@ public class AddTransactionCommandTest {
      * A Model stub that always accept the person being added.
      */
     private class ModelStubAcceptingTransactionAdded extends AddTransactionCommandTest.ModelStub {
-        final ArrayList<Transaction> incomesAdded = new ArrayList<>();
+        final ArrayList<Transaction> transactionsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasTransaction(Transaction income) {
-            requireNonNull(income);
-            return incomesAdded.stream().anyMatch(income::equals);
+        public boolean hasTransaction(Transaction transaction) {
+            requireNonNull(transaction);
+            return transactionsAdded.stream().anyMatch(transaction::equals);
         }
 
         @Override
-        public void addTransaction(Transaction income) {
-            requireNonNull(income);
-            incomesAdded.add(income);
+        public void addTransaction(Transaction transaction) {
+            requireNonNull(transaction);
+            transactionsAdded.add(transaction);
         }
 
         @Override

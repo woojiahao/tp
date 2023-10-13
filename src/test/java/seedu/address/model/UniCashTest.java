@@ -48,7 +48,7 @@ public class UniCashTest {
     }
 
     @Test
-    public void hasTransaction_incomeNotInUniCash_returnsFalse() {
+    public void hasTransaction_transactionNotInUniCash_returnsFalse() {
         assertFalse(uniCash.hasTransaction(NUS));
     }
 
@@ -116,15 +116,15 @@ public class UniCashTest {
      * A stub ReadOnlyUniCash whose persons list can violate interface constraints.
      */
     private static class UniCashStub implements ReadOnlyUniCash {
-        private final ObservableList<Transaction> incomes = FXCollections.observableArrayList();
+        private final ObservableList<Transaction> transactions = FXCollections.observableArrayList();
 
-        UniCashStub(Collection<Transaction> incomes) {
-            this.incomes.setAll(incomes);
+        UniCashStub(Collection<Transaction> transactions) {
+            this.transactions.setAll(transactions);
         }
 
         @Override
         public ObservableList<Transaction> getTransactionList() {
-            return incomes;
+            return transactions;
         }
     }
 

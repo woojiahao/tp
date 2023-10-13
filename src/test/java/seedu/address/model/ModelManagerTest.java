@@ -178,7 +178,7 @@ public class ModelManagerTest {
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs, uniCash)));
 
-        // different incomeList -> returns false
+        // different differentUniCash -> returns false
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs, differentUniCash)));
     }
 }

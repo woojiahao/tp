@@ -46,12 +46,12 @@ public class AddTransactionCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Transaction expectedIncome = new TransactionBuilder(NUS).build();
+        Transaction expectedTransaction = new TransactionBuilder(NUS).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + TRANSACTION_NAME_DESC_NUS + TYPE_DESC_EXPENSE
                 + DATETIME_DESC_NUS + AMOUNT_DESC_NUS + CATEGORY_DESC_ENTERTAINMENT
-                + LOCATION_DESC_ORCHARD, new AddTransactionCommand(expectedIncome));
+                + LOCATION_DESC_ORCHARD, new AddTransactionCommand(expectedTransaction));
     }
 
     @Test

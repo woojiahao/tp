@@ -21,18 +21,18 @@ public class TransactionListPanel extends UiPart<Region> {
     private ListView<Transaction> transactionListView;
 
     /**
-     * Creates a {@code IncomeListPanel} with the given {@code ObservableList}.
+     * Creates a {@code TransactionListPanel} with the given {@code ObservableList}.
      */
     public TransactionListPanel(ObservableList<Transaction> transactionList) {
         super(FXML);
         transactionListView.setItems(transactionList);
-        transactionListView.setCellFactory(listView -> new IncomeListViewCell());
+        transactionListView.setCellFactory(listView -> new TransactionListViewCell());
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Income} using a {@code IncomeCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Transaction} using a {@code TransactionCard}.
      */
-    class IncomeListViewCell extends ListCell<Transaction> {
+    class TransactionListViewCell extends ListCell<Transaction> {
         @Override
         protected void updateItem(Transaction transaction, boolean empty) {
             super.updateItem(transaction, empty);

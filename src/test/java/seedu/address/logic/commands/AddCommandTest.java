@@ -171,7 +171,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasTransaction(Transaction income) {
+        public boolean hasTransaction(Transaction transaction) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -181,7 +181,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addTransaction(Transaction income) {
+        public void addTransaction(Transaction transaction) {
             throw new AssertionError("This method should not be called.");
         }
 

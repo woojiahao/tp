@@ -161,10 +161,10 @@ public class ModelManager implements Model {
         updateFilteredTransactionList(PREDICATE_SHOW_ALL_TRANSACTIONS);
     }
 
-    //=========== Filtered Income List Accessors =============================================================
+    //=========== Filtered Transaction List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Income} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Transaction} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
