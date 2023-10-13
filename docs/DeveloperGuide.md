@@ -157,6 +157,26 @@ the filtered income with a success message.
 
   Use case resumes from Step 3.
 
+#### Use Case: UC08 – Delete an Expense
+**MSS:**
+1. User enters the correct command to delete an expense.
+2. User submits the request.
+3. UniCa$h finds the expense based on the passed in arguments.
+4. UniCa$h deletes the expense.
+5. UniCa$h displays successful deletion message.
+
+   Use Case ends
+
+**Extensions**
+- 2a. User enters an incorrect command.
+    - 2a1. UniCa$h displays an error message with the correct command format.
+    - 2a2. UniCa$h also displays a "no message deleted" assurance message.
+    - Use case resumes at step 1.
+
+- 3a. UniCa$h does not find any expense matching the given input.
+    - 3a1. UniCa$h displays a message saying no results found.
+    - Use Case resumes at step 1
+
 ## Links
 User Stories: [https://github.com/orgs/AY2324S1-CS2103-T16-3/projects/1/views/2](https://github.com/orgs/AY2324S1-CS2103-T16-3/projects/1/views/2)
 
