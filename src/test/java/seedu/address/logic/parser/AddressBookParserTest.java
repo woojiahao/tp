@@ -28,10 +28,10 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.transaction.Transaction;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.IncomeUtil;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.TransactionBuilder;
+import seedu.address.testutil.TransactionUtil;
 
 public class AddressBookParserTest {
 
@@ -93,11 +93,11 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_addIncome() throws Exception {
-        Transaction income = new TransactionBuilder().build();
-        AddTransactionCommand command = (AddTransactionCommand) parser.parseCommand(
-                IncomeUtil.getAddIncomeCommand(income));
-        assertEquals(new AddTransactionCommand(income), command);
+    public void parseCommand_addTransaction() throws Exception {
+        Transaction transaction = new TransactionBuilder().build();
+        String s = TransactionUtil.getAddTransactionCommand(transaction);
+        AddTransactionCommand command = (AddTransactionCommand) parser.parseCommand(s);
+        assertEquals(new AddTransactionCommand(transaction), command);
     }
 
     @Test

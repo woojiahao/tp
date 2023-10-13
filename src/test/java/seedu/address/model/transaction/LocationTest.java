@@ -1,5 +1,6 @@
 package seedu.address.model.transaction;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -14,9 +15,9 @@ public class LocationTest {
     }
 
     @Test
-    public void constructor_invalidLocation_throwsIllegalArgumentException() {
+    public void constructor_noLocation_setDefault() {
         String invalidLocation = "";
-        assertThrows(IllegalArgumentException.class, () -> new Location(invalidLocation));
+        assertEquals("-", new Location(invalidLocation).toString());
     }
 
     @Test

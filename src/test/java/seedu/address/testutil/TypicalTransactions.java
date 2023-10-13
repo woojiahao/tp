@@ -52,6 +52,8 @@ public class TypicalTransactions {
             .withType(VALID_TYPE_EXPENSE)
             .withAmount(VALID_AMOUNT_NUS)
             .withDateTime(VALID_DATETIME_NUS)
+            .withLocation(VALID_LOCATION_ORCHARD)
+            .withCategory(VALID_CATEGORY_ENTERTAINMENT)
             .build();
     public static final Transaction INTERN = new TransactionBuilder().withName(VALID_TRANSACTION_NAME_INTERN)
             .withType(VALID_TYPE_EXPENSE)

@@ -26,8 +26,12 @@ public class Category {
      */
     public Category(String category) {
         requireNonNull(category);
-        checkArgument(isValidCategory(category), MESSAGE_CONSTRAINTS);
-        this.category = category;
+        if (category.isBlank()) {
+            this.category = "-";
+        } else {
+            checkArgument(isValidCategory(category), MESSAGE_CONSTRAINTS);
+            this.category = category;
+        }
     }
 
     /**

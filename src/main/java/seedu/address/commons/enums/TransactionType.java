@@ -54,4 +54,13 @@ public enum TransactionType {
         }
         return stringJoiner.toString();
     }
+
+    /**
+     * Returns the string value of a {@code TransactionType}.
+     *
+     * @return the string representation of a TransactionType.
+     */
+    public String getOriginalString() {
+        return transactionType;
+    }
 }

@@ -67,8 +67,8 @@ public class AddTransactionCommand extends Command {
             return false;
         }
 
-        AddTransactionCommand otherAddTransactionCommand = (AddTransactionCommand) other;
-        return toAdd.equals(otherAddTransactionCommand.toAdd);
+        AddTransactionCommand otherCommand = (AddTransactionCommand) other;
+        return toAdd.equals(otherCommand.toAdd);
     }
 
     @Override

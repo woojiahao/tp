@@ -1,5 +1,6 @@
 package seedu.address.model.transaction;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -14,9 +15,9 @@ public class CategoryTest {
     }
 
     @Test
-    public void constructor_invalidCategory_throwsIllegalArgumentException() {
+    public void constructor_noCategory_setDefault() {
         String invalidCategory = "";
-        assertThrows(IllegalArgumentException.class, () -> new Category(invalidCategory));
+        assertEquals("-", new Category(invalidCategory).toString());
     }
 
     @Test
