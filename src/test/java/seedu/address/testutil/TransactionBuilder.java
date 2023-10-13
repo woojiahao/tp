@@ -28,7 +28,7 @@ public class TransactionBuilder {
     private Type type;
 
     /**
-     * Creates a {@code ExpenseBuilder} with the default details.
+     * Creates a {@code TransactionBuilder} with the default details.
      */
     public TransactionBuilder() {
         name = new Name(DEFAULT_NAME);

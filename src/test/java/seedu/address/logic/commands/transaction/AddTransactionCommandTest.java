@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.transaction;
 
 import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -44,6 +45,15 @@ public class AddTransactionCommandTest {
         assertEquals(String.format(AddTransactionCommand.MESSAGE_SUCCESS, Messages.formatTransaction(validTransaction)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validTransaction), modelStub.transactionsAdded);
+    }
+
+    @Test
+    public void execute_duplicateTransaction_success() {
+        Transaction validTransaction = new TransactionBuilder().build();
+        AddTransactionCommand addTransactionCommand = new AddTransactionCommand(validTransaction);
+        ModelStub modelStub = new ModelStubWithTransaction(validTransaction);
+
+        assertDoesNotThrow(() -> addTransactionCommand.execute(modelStub));
     }
 
     @Test
@@ -202,6 +212,11 @@ public class AddTransactionCommandTest {
         public boolean hasTransaction(Transaction transaction) {
             requireNonNull(transaction);
             return this.transaction.equals(transaction);
+        }
+
+        @Override
+        public void addTransaction(Transaction transaction) {
+            return;
         }
     }
 

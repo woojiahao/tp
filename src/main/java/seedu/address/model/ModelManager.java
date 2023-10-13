@@ -27,7 +27,7 @@ public class ModelManager implements Model {
     private final FilteredList<Transaction> filteredTransactions;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given addressBook, userPrefs and uniCash.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, UniCash uniCash) {
         requireAllNonNull(addressBook, userPrefs);

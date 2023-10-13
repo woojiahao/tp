@@ -4,9 +4,9 @@ import seedu.address.model.UniCash;
 import seedu.address.model.transaction.Transaction;
 
 /**
- * A utility class to help with building IncomeList objects.
+ * A utility class to help with building UniCash objects.
  * Example usage: <br>
- *     {@code AddressBook ab = new AddressBookBuilder().withPerson("John", "Doe").build();}
+ *     {@code UniCash uc = new UniCashBuilder().withTransaction(NUS).build();}
  */
 public class UniCashBuilder {
 

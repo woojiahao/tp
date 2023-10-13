@@ -23,7 +23,7 @@ public class TransactionUtil {
     }
 
     /**
-     * Returns the part of command string for the given {@code person}'s details.
+     * Returns the part of command string for the given {@code transaction}'s details.
      */
     public static String getTransactionDetails(Transaction transaction) {
         StringBuilder sb = new StringBuilder();
