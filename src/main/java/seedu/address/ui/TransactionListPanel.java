@@ -13,9 +13,9 @@ import seedu.address.model.transaction.Transaction;
 /**
  * Panel containing the list of persons.
  */
-public class IncomeListPanel extends UiPart<Region> {
+public class TransactionListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(IncomeListPanel.class);
+    private final Logger logger = LogsCenter.getLogger(TransactionListPanel.class);
 
     @FXML
     private ListView<Transaction> transactionListView;
@@ -23,7 +23,7 @@ public class IncomeListPanel extends UiPart<Region> {
     /**
      * Creates a {@code IncomeListPanel} with the given {@code ObservableList}.
      */
-    public IncomeListPanel(ObservableList<Transaction> transactionList) {
+    public TransactionListPanel(ObservableList<Transaction> transactionList) {
         super(FXML);
         transactionListView.setItems(transactionList);
         transactionListView.setCellFactory(listView -> new IncomeListViewCell());
