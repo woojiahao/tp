@@ -101,10 +101,7 @@ public class ModelManagerTest {
 
     @Test
     public void setUniCash_nullTransaction_throwsNullPointerException() {
-        UniCash uniCash = new UniCashBuilder().build();
-        UniCash newUniCash = new UniCashBuilder().withTransaction(NUS).build();
-        uniCash.resetData(newUniCash);
-        assertEquals(uniCash, newUniCash);
+        assertThrows(NullPointerException.class, () -> modelManager.setUniCash(null));
     }
 
     @Test

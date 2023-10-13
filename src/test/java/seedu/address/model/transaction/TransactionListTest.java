@@ -3,6 +3,7 @@ package seedu.address.model.transaction;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_INTERN;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -150,5 +151,36 @@ public class TransactionListTest {
     @Test
     public void toStringMethod() {
         assertEquals(transactionList.asUnmodifiableObservableList().toString(), transactionList.toString());
+    }
+
+    @Test
+    public void equals() {
+        // same object -> returns true
+        TransactionList transactionList = new TransactionList();
+        assertTrue(transactionList.equals(transactionList));
+
+        // same lists
+        transactionList.add(NUS);
+        TransactionList anotherList = new TransactionList();
+        anotherList.add(NUS);
+        assertTrue(transactionList.equals(anotherList));
+
+        // different lists
+        anotherList = new TransactionList();
+        anotherList.add(BUYING_GROCERIES);
+        assertFalse(transactionList.equals(anotherList));
+
+        // null -> returns false
+        assertFalse(transactionList.equals(null));
+    }
+
+    @Test
+    public void hashCode_test() {
+        TransactionList transactionList1 = new TransactionList();
+        TransactionList transactionList2 = new TransactionList();
+        TransactionList transactionList3 = new TransactionList();
+        transactionList3.add(NUS);
+        assertEquals(transactionList1.hashCode(), transactionList2.hashCode());
+        assertNotEquals(transactionList1.hashCode(), transactionList3.hashCode());
     }
 }
