@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -7,6 +8,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalTransactions.BUYING_GROCERIES;
 import static seedu.address.testutil.TypicalTransactions.NUS;
 
 import java.nio.file.Path;
@@ -17,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.transaction.exceptions.TransactionNotFoundException;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.UniCashBuilder;
 
@@ -97,6 +100,14 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void setUniCash_nullTransaction_throwsNullPointerException() {
+        UniCash uniCash = new UniCashBuilder().build();
+        UniCash newUniCash = new UniCashBuilder().withTransaction(NUS).build();
+        uniCash.resetData(newUniCash);
+        assertEquals(uniCash, newUniCash);
+    }
+
+    @Test
     public void hasTransaction_nullTransaction_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasTransaction(null));
     }
@@ -110,6 +121,18 @@ public class ModelManagerTest {
     public void hasTransaction_transactionInUniCash_returnsTrue() {
         modelManager.addTransaction(NUS);
         assertTrue(modelManager.hasTransaction(NUS));
+    }
+
+    @Test
+    public void deleteTransaction_transactionNotInUniCash_throws() {
+        modelManager.addTransaction(NUS);
+        assertThrows(TransactionNotFoundException.class, () -> modelManager.deleteTransaction(BUYING_GROCERIES));
+    }
+
+    @Test
+    public void deleteTransaction_transactionInUniCash_throws() {
+        modelManager.addTransaction(NUS);
+        assertDoesNotThrow(() -> modelManager.deleteTransaction(NUS));
     }
 
     @Test

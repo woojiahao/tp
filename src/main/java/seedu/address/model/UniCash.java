@@ -78,7 +78,6 @@ public class UniCash implements ReadOnlyUniCash {
      */
     public void setTransaction(Transaction target, Transaction editedTransaction) {
         requireNonNull(editedTransaction);
-
         transactions.setTransaction(target, editedTransaction);
     }
 

@@ -1,12 +1,11 @@
 package seedu.address.model;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalTransactions.INTERN;
-import static seedu.address.testutil.TypicalTransactions.NUS;
-import static seedu.address.testutil.TypicalTransactions.getTypicalUniCash;
+import static seedu.address.testutil.TypicalTransactions.*;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -16,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.transaction.Transaction;
+import seedu.address.model.transaction.exceptions.TransactionNotFoundException;
 import seedu.address.testutil.UniCashBuilder;
 
 public class UniCashTest {
@@ -53,6 +53,22 @@ public class UniCashTest {
     public void hasTransaction_personInUniCash_returnsTrue() {
         uniCash.addTransaction(NUS);
         assertTrue(uniCash.hasTransaction(NUS));
+    }
+
+    @Test
+    public void setTransaction_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniCash.setTransaction(NUS, null));
+    }
+
+    @Test
+    public void setTransaction_transactionNotInUniCash_throwsTransactionNotFoundException() {
+        assertThrows(TransactionNotFoundException.class, () -> uniCash.setTransaction(NUS, BUYING_GROCERIES));
+    }
+
+    @Test
+    public void setTransaction_transactionInUniCash_success() {
+        uniCash.addTransaction(NUS);
+        assertDoesNotThrow(() -> uniCash.setTransaction(NUS, BUYING_GROCERIES));
     }
 
     @Test
