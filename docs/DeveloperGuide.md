@@ -175,7 +175,6 @@ the filtered income with a success message.
 
 - 3a. UniCa$h does not find any expense matching the given input.
     - 3a1. UniCa$h displays a message saying no results found.
-    - Use Case resumes at step 1
 
 ## Links
 User Stories: [https://github.com/orgs/AY2324S1-CS2103-T16-3/projects/1/views/2](https://github.com/orgs/AY2324S1-CS2103-T16-3/projects/1/views/2)
