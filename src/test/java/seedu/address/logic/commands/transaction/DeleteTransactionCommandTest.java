@@ -55,8 +55,8 @@ public class DeleteTransactionCommandTest {
     public void execute_validIndexFilteredList_success() {
         showTransactionAtIndex(model, INDEX_FIRST_TRANSACTION);
 
-        Transaction transactionToDelete = model.getFilteredTransactionList().
-                get(INDEX_FIRST_TRANSACTION.getZeroBased());
+        Transaction transactionToDelete = model.getFilteredTransactionList()
+                        .get(INDEX_FIRST_TRANSACTION.getZeroBased());
         DeleteTransactionCommand deleteCommand = new DeleteTransactionCommand(INDEX_FIRST_TRANSACTION);
 
         String expectedMessage = String.format(DeleteTransactionCommand.MESSAGE_DELETE_TRANSACTION_SUCCESS,
@@ -110,8 +110,8 @@ public class DeleteTransactionCommandTest {
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
         DeleteTransactionCommand deleteCommand = new DeleteTransactionCommand(targetIndex);
-        String expected = DeleteTransactionCommand.class.getCanonicalName() +
-                "{targetIndex=" + targetIndex + "}";
+        String expected = DeleteTransactionCommand.class.getCanonicalName()
+                + "{targetIndex=" + targetIndex + "}";
         assertEquals(expected, deleteCommand.toString());
     }
 
