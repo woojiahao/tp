@@ -13,7 +13,7 @@ import seedu.address.model.transaction.Type;
  */
 public class TransactionBuilder {
 
-    public static final String DEFAULT_NAME = "Amy Bee";
+    public static final String DEFAULT_NAME = "Dog food";
     public static final double DEFAULT_AMOUNT = 123.45;
     public static final String DEFAULT_CATEGORY = "Food";
     public static final String DEFAULT_DATE_TIME = "18-08-2001 10:10";
