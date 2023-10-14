@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_NUS;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_SHOPPING;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TRANSACTION_NAME_NUS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_NUS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME_NUS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TRANSACTION_NAME_NUS;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showTransactionAtIndex;
@@ -18,7 +18,6 @@ import static seedu.address.testutil.TypicalTransactions.getTypicalUniCash;
 
 import org.junit.jupiter.api.Test;
 
-import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.UniCashMessages;
 import seedu.address.logic.commands.ClearCommand;
@@ -26,7 +25,6 @@ import seedu.address.logic.commands.transaction.EditTransactionCommand.EditTrans
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.UniCash;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.transaction.Transaction;
 import seedu.address.testutil.EditTransactionDescriptorBuilder;
@@ -42,10 +40,12 @@ public class EditTransactionCommandTest {
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Transaction editedTransaction = new TransactionBuilder().build();
-        EditTransactionCommand.EditTransactionDescriptor descriptor = new EditTransactionDescriptorBuilder(editedTransaction).build();
+        EditTransactionCommand.EditTransactionDescriptor descriptor = new EditTransactionDescriptorBuilder(
+                editedTransaction).build();
         EditTransactionCommand editTransactionCommand = new EditTransactionCommand(INDEX_FIRST_TRANSACTION, descriptor);
 
-        String expectedMessage = String.format(EditTransactionCommand.MESSAGE_EDIT_TRANSACTION_SUCCESS, UniCashMessages.formatTransaction(editedTransaction));
+        String expectedMessage = String.format(EditTransactionCommand.MESSAGE_EDIT_TRANSACTION_SUCCESS,
+                UniCashMessages.formatTransaction(editedTransaction));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new UserPrefs(), getTypicalUniCash());
@@ -60,14 +60,19 @@ public class EditTransactionCommandTest {
         Transaction lastTransaction = model.getFilteredTransactionList().get(indexLastTransaction.getZeroBased());
 
         TransactionBuilder transactionInList = new TransactionBuilder(lastTransaction);
-        Transaction editedTransaction = transactionInList.withName(VALID_TRANSACTION_NAME_NUS).withAmount(VALID_AMOUNT_NUS)
+        Transaction editedTransaction = transactionInList
+                .withName(VALID_TRANSACTION_NAME_NUS)
+                .withAmount(VALID_AMOUNT_NUS)
                 .withDateTime(VALID_DATETIME_NUS).build();
 
-        EditTransactionDescriptor descriptor = new EditTransactionDescriptorBuilder().withName(VALID_TRANSACTION_NAME_NUS)
-                .withAmount(VALID_AMOUNT_NUS).withDateTime(VALID_DATETIME_NUS).build();
+        EditTransactionDescriptor descriptor = new EditTransactionDescriptorBuilder()
+                .withName(VALID_TRANSACTION_NAME_NUS)
+                .withAmount(VALID_AMOUNT_NUS)
+                .withDateTime(VALID_DATETIME_NUS).build();
         EditTransactionCommand editTransactionCommand = new EditTransactionCommand(indexLastTransaction, descriptor);
 
-        String expectedMessage = String.format(EditTransactionCommand.MESSAGE_EDIT_TRANSACTION_SUCCESS, UniCashMessages.formatTransaction(editedTransaction));
+        String expectedMessage = String.format(EditTransactionCommand.MESSAGE_EDIT_TRANSACTION_SUCCESS,
+                UniCashMessages.formatTransaction(editedTransaction));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new UserPrefs(), getTypicalUniCash());
@@ -78,10 +83,12 @@ public class EditTransactionCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditTransactionCommand editTransactionCommand = new EditTransactionCommand(INDEX_FIRST_TRANSACTION, new EditTransactionDescriptor());
+        EditTransactionCommand editTransactionCommand = new EditTransactionCommand(INDEX_FIRST_TRANSACTION,
+                new EditTransactionDescriptor());
         Transaction editedTransaction = model.getFilteredTransactionList().get(INDEX_FIRST_TRANSACTION.getZeroBased());
 
-        String expectedMessage = String.format(EditTransactionCommand.MESSAGE_EDIT_TRANSACTION_SUCCESS, UniCashMessages.formatTransaction(editedTransaction));
+        String expectedMessage = String.format(EditTransactionCommand.MESSAGE_EDIT_TRANSACTION_SUCCESS,
+                UniCashMessages.formatTransaction(editedTransaction));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new UserPrefs(), getTypicalUniCash());
@@ -93,12 +100,15 @@ public class EditTransactionCommandTest {
     public void execute_filteredList_success() {
         showTransactionAtIndex(model, INDEX_FIRST_TRANSACTION);
 
-        Transaction transactionInFilteredList = model.getFilteredTransactionList().get(INDEX_FIRST_TRANSACTION.getZeroBased());
-        Transaction editedTransaction = new TransactionBuilder(transactionInFilteredList).withName(VALID_TRANSACTION_NAME_NUS).build();
+        Transaction transactionInFilteredList = model.getFilteredTransactionList()
+                .get(INDEX_FIRST_TRANSACTION.getZeroBased());
+        Transaction editedTransaction = new TransactionBuilder(transactionInFilteredList)
+                .withName(VALID_TRANSACTION_NAME_NUS).build();
         EditTransactionCommand editTransactionCommand = new EditTransactionCommand(INDEX_FIRST_TRANSACTION,
                 new EditTransactionDescriptorBuilder().withName(VALID_TRANSACTION_NAME_NUS).build());
 
-        String expectedMessage = String.format(EditTransactionCommand.MESSAGE_EDIT_TRANSACTION_SUCCESS, UniCashMessages.formatTransaction(editedTransaction));
+        String expectedMessage = String.format(EditTransactionCommand.MESSAGE_EDIT_TRANSACTION_SUCCESS,
+                UniCashMessages.formatTransaction(editedTransaction));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new UserPrefs(), getTypicalUniCash());
@@ -111,7 +121,8 @@ public class EditTransactionCommandTest {
     public void execute_duplicateTransactionUnfilteredList_failure() {
         Transaction firstTransaction = model.getFilteredTransactionList().get(INDEX_FIRST_TRANSACTION.getZeroBased());
         EditTransactionDescriptor descriptor = new EditTransactionDescriptorBuilder(firstTransaction).build();
-        EditTransactionCommand editTransactionCommand = new EditTransactionCommand(INDEX_SECOND_TRANSACTION, descriptor);
+        EditTransactionCommand editTransactionCommand = new EditTransactionCommand(INDEX_SECOND_TRANSACTION,
+                descriptor);
 
         assertCommandFailure(editTransactionCommand, model, EditTransactionCommand.MESSAGE_DUPLICATE_TRANSACTION);
     }
@@ -121,7 +132,8 @@ public class EditTransactionCommandTest {
         showTransactionAtIndex(model, INDEX_FIRST_TRANSACTION);
 
         // edit transaction in filtered list into a duplicate in address book
-        Transaction transactionInList = model.getUniCash().getTransactionList().get(INDEX_SECOND_TRANSACTION.getZeroBased());
+        Transaction transactionInList = model.getUniCash().getTransactionList()
+                .get(INDEX_SECOND_TRANSACTION.getZeroBased());
         EditTransactionCommand editTransactionCommand = new EditTransactionCommand(INDEX_FIRST_TRANSACTION,
                 new EditTransactionDescriptorBuilder(transactionInList).build());
 
@@ -131,10 +143,12 @@ public class EditTransactionCommandTest {
     @Test
     public void execute_invalidTransactionIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTransactionList().size() + 1);
-        EditTransactionDescriptor descriptor = new EditTransactionDescriptorBuilder().withName(VALID_TRANSACTION_NAME_NUS).build();
+        EditTransactionDescriptor descriptor = new EditTransactionDescriptorBuilder()
+                .withName(VALID_TRANSACTION_NAME_NUS).build();
         EditTransactionCommand editTransactionCommand = new EditTransactionCommand(outOfBoundIndex, descriptor);
 
-        assertCommandFailure(editTransactionCommand, model, UniCashMessages.MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX);
+        assertCommandFailure(editTransactionCommand, model,
+                UniCashMessages.MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX);
     }
 
     /**
@@ -151,7 +165,8 @@ public class EditTransactionCommandTest {
         EditTransactionCommand editTransactionCommand = new EditTransactionCommand(outOfBoundIndex,
                 new EditTransactionDescriptorBuilder().withName(VALID_TRANSACTION_NAME_NUS).build());
 
-        assertCommandFailure(editTransactionCommand, model, UniCashMessages.MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX);
+        assertCommandFailure(editTransactionCommand, model,
+                UniCashMessages.MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX);
     }
 
     @Test
@@ -160,7 +175,8 @@ public class EditTransactionCommandTest {
 
         // same values -> returns true
         EditTransactionDescriptor copyDescriptor = new EditTransactionDescriptor(DESC_NUS);
-        EditTransactionCommand commandWithSameValues = new EditTransactionCommand(INDEX_FIRST_TRANSACTION, copyDescriptor);
+        EditTransactionCommand commandWithSameValues = new EditTransactionCommand(INDEX_FIRST_TRANSACTION,
+                copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -184,8 +200,8 @@ public class EditTransactionCommandTest {
         Index index = Index.fromOneBased(1);
         EditTransactionDescriptor editTransactionDescriptor = new EditTransactionDescriptor();
         EditTransactionCommand editTransactionCommand = new EditTransactionCommand(index, editTransactionDescriptor);
-        String expected = EditTransactionCommand.class.getCanonicalName() + "{index=" + index + ", editTransactionDescriptor="
-                + editTransactionDescriptor + "}";
+        String expected = EditTransactionCommand.class.getCanonicalName()
+                + "{index=" + index + ", editTransactionDescriptor=" + editTransactionDescriptor + "}";
         assertEquals(expected, editTransactionCommand.toString());
     }
 
