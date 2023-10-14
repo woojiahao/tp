@@ -26,8 +26,12 @@ public class Location {
      */
     public Location(String location) {
         requireNonNull(location);
-        checkArgument(isValidLocation(location), MESSAGE_CONSTRAINTS);
-        this.location = location;
+        if (location.isBlank()) {
+            this.location = "-";
+        } else {
+            checkArgument(isValidLocation(location), MESSAGE_CONSTRAINTS);
+            this.location = location;
+        }
     }
 
     /**

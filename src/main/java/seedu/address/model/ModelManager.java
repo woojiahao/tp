@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.transaction.Transaction;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -20,24 +21,28 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final UniCash uniCash;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Transaction> filteredTransactions;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given addressBook, userPrefs and uniCash.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, UniCash uniCash) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.uniCash = new UniCash(uniCash);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredTransactions = new FilteredList<>(this.uniCash.getTransactionList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), new UniCash());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -128,6 +133,51 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== UniCash ================================================================================
+    @Override
+    public void setUniCash(ReadOnlyUniCash uniCash) {
+        this.uniCash.resetData(uniCash);
+    }
+
+    @Override
+    public ReadOnlyUniCash getUniCash() {
+        return uniCash;
+    }
+
+    @Override
+    public boolean hasTransaction(Transaction transaction) {
+        requireNonNull(transaction);
+        return uniCash.hasTransaction(transaction);
+    }
+
+    @Override
+    public void deleteTransaction(Transaction target) {
+        uniCash.removeTransaction(target);
+    }
+
+    @Override
+    public void addTransaction(Transaction transaction) {
+        uniCash.addTransaction(transaction);
+        updateFilteredTransactionList(PREDICATE_SHOW_ALL_TRANSACTIONS);
+    }
+
+    //=========== Filtered Transaction List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Transaction} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Transaction> getFilteredTransactionList() {
+        return filteredTransactions;
+    }
+
+    @Override
+    public void updateFilteredTransactionList(Predicate<Transaction> predicate) {
+        requireNonNull(predicate);
+        filteredTransactions.setPredicate(predicate);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -141,8 +191,9 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
+                && uniCash.equals(otherModelManager.uniCash)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredTransactions.equals(otherModelManager.filteredTransactions);
     }
-
 }

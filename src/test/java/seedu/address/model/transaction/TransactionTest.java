@@ -57,7 +57,7 @@ public class TransactionTest {
         assertNotEquals(BUYING_GROCERIES, editedGroceries);
 
         // different transaction type -> return false
-        editedGroceries = new TransactionBuilder(BUYING_GROCERIES).withType("income").build();
+        editedGroceries = new TransactionBuilder(BUYING_GROCERIES).withType("expense").build();
         assertNotEquals(BUYING_GROCERIES, editedGroceries);
     }
 

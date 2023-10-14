@@ -3,10 +3,15 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -36,6 +41,19 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_TRANSACTION_NAME_NUS = "Work at NUS";
+    public static final String VALID_TRANSACTION_NAME_INTERN = "Internship";
+    public static final String VALID_TRANSACTION_NAME_SHOPPING = "Shopping";
+    public static final String VALID_TYPE_EXPENSE = "expense";
+    public static final String VALID_TYPE_INCOME = "income";
+    public static final Double VALID_AMOUNT_NUS = 888.8;
+    public static final Double VALID_AMOUNT_INTERN = 8.8;
+    public static final Double VALID_AMOUNT_SHOPPING = 899.8;
+    public static final String VALID_DATETIME_NUS = "12-12-2021 12:12";
+    public static final String VALID_DATETIME_INTERN = "08-08-2008 08:08";
+    public static final String VALID_DATETIME_SHOPPING = "01-02-2008 11:08";
+    public static final String VALID_CATEGORY_ENTERTAINMENT = "entertainment";
+    public static final String VALID_LOCATION_ORCHARD = "orchard";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -47,17 +65,31 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String TRANSACTION_NAME_DESC_NUS = " " + PREFIX_NAME + VALID_TRANSACTION_NAME_NUS;
+    public static final String TRANSACTION_NAME_DESC_INTERN = " " + PREFIX_NAME + VALID_TRANSACTION_NAME_INTERN;
+    public static final String AMOUNT_DESC_NUS = " " + PREFIX_AMOUNT + VALID_AMOUNT_NUS;
+    public static final String AMOUNT_DESC_INTERN = " " + PREFIX_AMOUNT + VALID_AMOUNT_INTERN;
+    public static final String DATETIME_DESC_NUS = " " + PREFIX_DATETIME + VALID_DATETIME_NUS;
+    public static final String DATETIME_DESC_INTERN = " " + PREFIX_DATETIME + VALID_DATETIME_INTERN;
+    public static final String TYPE_DESC_EXPENSE = " " + PREFIX_TYPE + VALID_TYPE_EXPENSE;
+    public static final String TYPE_DESC_INCOME = " " + PREFIX_TYPE + VALID_TYPE_INCOME;
+    public static final String CATEGORY_DESC_ENTERTAINMENT = " " + PREFIX_CATEGORY + VALID_CATEGORY_ENTERTAINMENT;
+    public static final String LOCATION_DESC_ORCHARD = " " + PREFIX_LOCATION + VALID_LOCATION_ORCHARD;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_TRANSACTION_NAME_DESC = " " + PREFIX_NAME + "NUS&"; // '&' not allowed in names
+    public static final String INVALID_AMOUNT_DESC = " " + PREFIX_AMOUNT + "-3.0"; // negative amounts not allowed
+    public static final String INVALID_DATETIME_DESC = " " + PREFIX_DATETIME + "19/13/2001 19:30"; // invalid date
+    public static final String INVALID_TYPE_DESC = " " + PREFIX_TYPE + "afaf"; // invalid type
+    public static final String INVALID_CATEGORY_DESC = " " + PREFIX_CATEGORY + "afraf*&"; // invalid type
+    public static final String INVALID_LOCATION_DESC = " " + PREFIX_LOCATION + "a214faf*&"; // invalid type
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
-
-    public static final Double VALID_AMOUNT = 888.8;
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;

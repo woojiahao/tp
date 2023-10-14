@@ -79,8 +79,8 @@ public class Transaction {
 
         Transaction otherTransaction = (Transaction) other;
         return name.equals(otherTransaction.name)
-                && type == otherTransaction.type
-                && amount == otherTransaction.amount
+                && type.equals(otherTransaction.type)
+                && amount.equals(otherTransaction.amount)
                 && category.equals(otherTransaction.category)
                 && dateTime.equals(otherTransaction.dateTime)
                 && location.equals(otherTransaction.location);

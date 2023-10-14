@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.transaction.Transaction;
 
 /**
  * The API of the Model component.
@@ -13,6 +14,9 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Transaction> PREDICATE_SHOW_ALL_TRANSACTIONS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -84,4 +88,37 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Replaces UniCash data with the data in {@code uniCash}.
+     */
+    void setUniCash(ReadOnlyUniCash uniCash);
+
+    /** Returns UniCash */
+    ReadOnlyUniCash getUniCash();
+
+    /**
+     * Deletes the given transaction.
+     * The transaction must exist in UniCash.
+     */
+    void deleteTransaction(Transaction target);
+
+    /**
+     * Adds the given transaction.
+     */
+    void addTransaction(Transaction transaction);
+
+    /**
+     * Returns true if a transaction with the same identity as {@code transaction} exists in UniCash.
+     */
+    boolean hasTransaction(Transaction transaction);
+
+    /** Returns an unmodifiable view of the filtered transaction list */
+    ObservableList<Transaction> getFilteredTransactionList();
+
+    /**
+     * Updates the filter of the filtered UniCash to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredTransactionList(Predicate<Transaction> predicate);
 }

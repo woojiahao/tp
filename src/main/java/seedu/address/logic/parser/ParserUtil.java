@@ -14,6 +14,11 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.transaction.Amount;
+import seedu.address.model.transaction.Category;
+import seedu.address.model.transaction.DateTime;
+import seedu.address.model.transaction.Location;
+import seedu.address.model.transaction.Type;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -49,6 +54,22 @@ public class ParserUtil {
         }
         return new Name(trimmedName);
     }
+
+    /**
+     * Parses a {@code String name} into a {@code Name}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static seedu.address.model.transaction.Name parseTransactionName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!Name.isValidName(trimmedName)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new seedu.address.model.transaction.Name(trimmedName);
+    }
+
 
     /**
      * Parses a {@code String phone} into a {@code Phone}.
@@ -120,5 +141,72 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String amount} into an {@code Amount}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code amount} is invalid.
+     */
+    public static Amount parseAmount(String amount) throws ParseException {
+        requireNonNull(amount);
+        String trimmedAmount = amount.trim();
+        double castedAmount;
+        try {
+            castedAmount = Double.parseDouble(trimmedAmount);
+        } catch (NumberFormatException ex) {
+            throw new ParseException(Amount.MESSAGE_CONSTRAINTS);
+        }
+
+        if (!Amount.isValidAmount(castedAmount)) {
+            throw new ParseException(Amount.MESSAGE_CONSTRAINTS);
+        }
+        return new Amount(castedAmount);
+    }
+
+    /**
+     * Parses a {@code String datetime} into an {@code LocalDateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static DateTime parseDateTime(String dateTimeString) {
+        requireNonNull(dateTimeString);
+        String trimmedDateTime = dateTimeString.trim();
+        return new DateTime(trimmedDateTime);
+    }
+
+    /**
+     * Parses a {@code String type} into a {@code Type}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code type} is invalid.
+     */
+    public static Type parseType(String type) throws ParseException {
+        requireNonNull(type);
+        String trimmedType = type.trim();
+        if (!Type.isValidType(trimmedType)) {
+            throw new ParseException(Type.MESSAGE_CONSTRAINTS);
+        }
+        return new Type(trimmedType);
+    }
+
+    /**
+     * Parses a {@code String category} into a {@code Category}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Category parseCategory(String category) {
+        requireNonNull(category);
+        String trimmedCategory = category.trim();
+        return new Category(trimmedCategory);
+    }
+
+    /**
+     * Parses a {@code String location} into a {@code Location}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Location parseLocation(String location) {
+        requireNonNull(location);
+        String trimmedLocation = location.trim();
+        return new Location(trimmedLocation);
     }
 }

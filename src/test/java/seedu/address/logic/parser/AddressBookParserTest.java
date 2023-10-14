@@ -22,12 +22,16 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.transaction.AddTransactionCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.transaction.Transaction;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.TransactionBuilder;
+import seedu.address.testutil.TransactionUtil;
 
 public class AddressBookParserTest {
 
@@ -86,6 +90,14 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_addTransaction() throws Exception {
+        Transaction transaction = new TransactionBuilder().build();
+        String s = TransactionUtil.getAddTransactionCommand(transaction);
+        AddTransactionCommand command = (AddTransactionCommand) parser.parseCommand(s);
+        assertEquals(new AddTransactionCommand(transaction), command);
     }
 
     @Test

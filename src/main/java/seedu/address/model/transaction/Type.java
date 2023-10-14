@@ -54,6 +54,6 @@ public class Type {
 
     @Override
     public String toString() {
-        return type.toString();
+        return type.getOriginalString();
     }
 }
