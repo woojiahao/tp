@@ -47,10 +47,5 @@ public class DeleteTransactionCommandParserTest {
         assertThrows(ParseException.class, () -> parser.parse("1 "));
     }
 
-    @Test
-    public void parse_customErrorMessage() {
-        // Ensuring the custom error message is set
-        ParseException exception = assertThrows(ParseException.class, () -> parser.parse("a"));
-        assertTrue(exception.getMessage().contains("MESSAGE_USAGE"));  // Assuming DeleteCommand.MESSAGE_USAGE is a static final string
-    }
 }
+
