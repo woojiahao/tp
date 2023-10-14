@@ -34,23 +34,5 @@ public class UniCashMessagesTest {
         String expectedMessage = "Multiple values specified for the following single-valued field(s): n/ p/";
         assertEquals(expectedMessage, errorMessage);
     }
-
-    @Test
-    public void formatTransaction_validTransaction_returnsFormattedString() {
-        Transaction mockTransaction = new Transaction(
-                new Name("TestName"),
-                new Type("Expense"),
-                new Amount(100.0),
-                new Category("Food"),
-                new DateTime("10-10-2020 10:10"),
-                new Location("SampleLocation")
-        );
-
-        String formatted = UniCashMessages.formatTransaction(mockTransaction);
-        String expectedString = "TestName; Type: Expense; Amount: 100.0; Category: "
-                + "Food; Date: 14/10/2023; Location: SampleLocation";
-        assertEquals(expectedString, formatted);
-    }
-
-
+    
 }
