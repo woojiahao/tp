@@ -6,13 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.Prefix;
-import seedu.address.model.transaction.Amount;
-import seedu.address.model.transaction.Category;
-import seedu.address.model.transaction.DateTime;
-import seedu.address.model.transaction.Location;
-import seedu.address.model.transaction.Name;
-import seedu.address.model.transaction.Transaction;
-import seedu.address.model.transaction.Type;
 
 
 public class UniCashMessagesTest {
@@ -34,5 +27,5 @@ public class UniCashMessagesTest {
         String expectedMessage = "Multiple values specified for the following single-valued field(s): n/ p/";
         assertEquals(expectedMessage, errorMessage);
     }
-    
+
 }
