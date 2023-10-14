@@ -24,6 +24,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.transaction.Transaction;
+import seedu.address.model.transaction.TransactionNameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -155,6 +157,21 @@ public class CommandTestUtil {
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
         final String[] splitName = person.getName().fullName.split("\\s+");
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the transaction at the
+     * given {@code targetIndex} in the {@code model}'s database.
+     */
+    public static void showTransactionAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredTransactionList().size());
+
+        Transaction transaction = model.getFilteredTransactionList().get(targetIndex.getZeroBased());
+        final String[] splitName = transaction.getName().fullName.split("\\s+");
+        model.updateFilteredTransactionList(
+                new TransactionNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
     }
