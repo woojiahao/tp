@@ -42,7 +42,7 @@ public class UniCashMessagesTest {
                 new Type("Expense"),
                 new Amount(100.0),
                 new Category("Food"),
-                new DateTime("14/10/2023"),
+                new DateTime("10-10-2020 10:10"),
                 new Location("SampleLocation")
         );
 
