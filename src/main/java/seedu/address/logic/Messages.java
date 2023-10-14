@@ -48,23 +48,5 @@ public class Messages {
         person.getTags().forEach(builder::append);
         return builder.toString();
     }
-
-    /**
-     * Formats the {@code transaction} for display to the user.
-     */
-    public static String formatTransaction(Transaction transaction) {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(transaction.getName())
-                .append("; Type: ")
-                .append(transaction.getType())
-                .append("; Amount: ")
-                .append(transaction.getAmount())
-                .append("; Category: ")
-                .append(transaction.getCategory())
-                .append("; Date: ")
-                .append(transaction.getDateTime())
-                .append("; Location: ")
-                .append(transaction.getLocation());
-        return builder.toString();
-    }
+    
 }
