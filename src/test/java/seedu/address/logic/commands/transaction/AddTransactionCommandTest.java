@@ -17,7 +17,6 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.Messages;
 import seedu.address.logic.UniCashMessages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
@@ -43,7 +42,8 @@ public class AddTransactionCommandTest {
 
         CommandResult commandResult = new AddTransactionCommand(validTransaction).execute(modelStub);
 
-        assertEquals(String.format(AddTransactionCommand.MESSAGE_SUCCESS, UniCashMessages.formatTransaction(validTransaction)),
+        assertEquals(String.format(AddTransactionCommand.MESSAGE_SUCCESS,
+                        UniCashMessages.formatTransaction(validTransaction)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validTransaction), modelStub.transactionsAdded);
     }
