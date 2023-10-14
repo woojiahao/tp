@@ -7,24 +7,20 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TRANSACTIONS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
+import seedu.address.logic.UniCashMessages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
 import seedu.address.model.transaction.Amount;
 import seedu.address.model.transaction.Category;
 import seedu.address.model.transaction.DateTime;
@@ -33,6 +29,9 @@ import seedu.address.model.transaction.Name;
 import seedu.address.model.transaction.Transaction;
 import seedu.address.model.transaction.Type;
 
+/**
+ * Edits the details of an existing transaction in the transactions list.
+ */
 public class EditTransactionCommand extends Command {
 
     public static final String COMMAND_WORD = "edit_transaction";
@@ -57,7 +56,8 @@ public class EditTransactionCommand extends Command {
 
     public static final String MESSAGE_EDIT_TRANSACTION_SUCCESS = "Edited Transaction: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_TRANSACTION = "This transaction already exists in the transactions list.";
+    public static final String MESSAGE_DUPLICATE_TRANSACTION = "This transaction already exists"
+            + " in the transactions list.";
 
     private final Index index;
     private final EditTransactionCommand.EditTransactionDescriptor editTransactionDescriptor;
@@ -66,12 +66,14 @@ public class EditTransactionCommand extends Command {
      * @param index of the transaction in the filtered transaction list to edit
      * @param editTransactionDescriptor details to edit the transaction with
      */
-    public EditTransactionCommand(Index index, EditTransactionCommand.EditTransactionDescriptor editTransactionDescriptor) {
+    public EditTransactionCommand(Index index,
+                                  EditTransactionCommand.EditTransactionDescriptor editTransactionDescriptor) {
         requireNonNull(index);
         requireNonNull(editTransactionDescriptor);
 
         this.index = index;
-        this.editTransactionDescriptor = new EditTransactionCommand.EditTransactionDescriptor(editTransactionDescriptor);
+        this.editTransactionDescriptor = new EditTransactionCommand
+                .EditTransactionDescriptor(editTransactionDescriptor);
     }
 
     @Override
@@ -80,7 +82,7 @@ public class EditTransactionCommand extends Command {
         List<Transaction> lastShownList = model.getFilteredTransactionList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX); // todo
+            throw new CommandException(UniCashMessages.MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX);
         }
 
         Transaction transactionToEdit = lastShownList.get(index.getZeroBased());
@@ -91,15 +93,17 @@ public class EditTransactionCommand extends Command {
         }
 
         model.setTransaction(transactionToEdit, editedTransaction);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_TRANSACTION_SUCCESS, Messages.formatTransaction(editedTransaction)));
+        model.updateFilteredTransactionList(PREDICATE_SHOW_ALL_TRANSACTIONS);
+        return new CommandResult(String.format(MESSAGE_EDIT_TRANSACTION_SUCCESS,
+                UniCashMessages.formatTransaction(editedTransaction)));
     }
 
     /**
      * Creates and returns a {@code Transaction} with the details of {@code transactionToEdit}
      * edited with {@code editTransactionDescriptor}.
      */
-    private static Transaction createEditedTransaction(Transaction transactionToEdit, EditTransactionCommand.EditTransactionDescriptor editTransactionDescriptor) {
+    private static Transaction createEditedTransaction(Transaction transactionToEdit, EditTransactionCommand
+            .EditTransactionDescriptor editTransactionDescriptor) {
         assert transactionToEdit != null;
 
         Name updatedName = editTransactionDescriptor.getName().orElse(transactionToEdit.getName());
@@ -109,7 +113,8 @@ public class EditTransactionCommand extends Command {
         Location updatedLocation = editTransactionDescriptor.getLocation().orElse(transactionToEdit.getLocation());
         Type updatedType = editTransactionDescriptor.getType().orElse(transactionToEdit.getType());
 
-        return new Transaction(updatedName, updatedType, updatedAmount, updatedCategory, updatedDateTime, updatedLocation);
+        return new Transaction(updatedName, updatedType, updatedAmount, updatedCategory, updatedDateTime,
+                updatedLocation);
     }
 
     @Override
@@ -228,7 +233,8 @@ public class EditTransactionCommand extends Command {
                 return false;
             }
 
-            EditTransactionCommand.EditTransactionDescriptor otherEditTransactionDescriptor = (EditTransactionCommand.EditTransactionDescriptor) other;
+            EditTransactionCommand.EditTransactionDescriptor otherEditTransactionDescriptor = (EditTransactionCommand
+                    .EditTransactionDescriptor) other;
             return Objects.equals(name, otherEditTransactionDescriptor.name)
                     && Objects.equals(amount, otherEditTransactionDescriptor.amount)
                     && Objects.equals(category, otherEditTransactionDescriptor.category)
