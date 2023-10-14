@@ -6,13 +6,15 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.Prefix;
-import seedu.address.model.transaction.Transaction;
-import seedu.address.model.transaction.Name;
-import seedu.address.model.transaction.Type;
+
 import seedu.address.model.transaction.Amount;
 import seedu.address.model.transaction.Category;
 import seedu.address.model.transaction.DateTime;
 import seedu.address.model.transaction.Location;
+import seedu.address.model.transaction.Name;
+import seedu.address.model.transaction.Transaction;
+import seedu.address.model.transaction.Type;
+
 
 public class UniCashMessagesTest {
 
@@ -46,8 +48,8 @@ public class UniCashMessagesTest {
         );
 
         String formatted = UniCashMessages.formatTransaction(mockTransaction);
-        String expectedString = "TestName; Type: Expense; Amount: 100.0; Category: " +
-                "Food; Date: 14/10/2023; Location: SampleLocation";
+        String expectedString = "TestName; Type: Expense; Amount: 100.0; Category: "
+                + "Food; Date: 14/10/2023; Location: SampleLocation";
         assertEquals(expectedString, formatted);
     }
 
