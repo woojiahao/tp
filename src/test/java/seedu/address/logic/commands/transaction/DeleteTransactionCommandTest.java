@@ -3,10 +3,11 @@ package seedu.address.logic.commands.transaction;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TRANSACTION;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TRANSACTION;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalTransactions.getTypicalUniCash;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,8 +15,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.UniCashMessages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.UniCash;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.transaction.Transaction;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -23,7 +24,7 @@ import seedu.address.model.UserPrefs;
  */
 public class DeleteTransactionCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new UniCash());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalUniCash());
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
@@ -63,6 +64,53 @@ public class DeleteTransactionCommandTest {
         String expected = DeleteTransactionCommand.class.getCanonicalName()
                 + "{targetIndex=" + targetIndex + "}";
         assertEquals(expected, deleteCommand.toString());
+    }
+
+    @Test
+    public void execute_validIndexUnfilteredList_success() {
+        Transaction transactionToDelete = model.getFilteredTransactionList().get(
+                INDEX_FIRST_TRANSACTION.getZeroBased());
+        DeleteTransactionCommand deleteCommand = new DeleteTransactionCommand(INDEX_FIRST_TRANSACTION);
+
+        String expectedMessage = String.format(DeleteTransactionCommand.MESSAGE_DELETE_TRANSACTION_SUCCESS,
+                UniCashMessages.formatTransaction(transactionToDelete));
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), getTypicalUniCash());
+        expectedModel.deleteTransaction(transactionToDelete);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validIndexFilteredList_success() {
+        showTransactionAtIndex(model, INDEX_FIRST_TRANSACTION);
+
+        Transaction transactionToDelete = model.getFilteredTransactionList()
+                        .get(INDEX_FIRST_TRANSACTION.getZeroBased());
+        DeleteTransactionCommand deleteCommand = new DeleteTransactionCommand(INDEX_FIRST_TRANSACTION);
+
+        String expectedMessage = String.format(DeleteTransactionCommand.MESSAGE_DELETE_TRANSACTION_SUCCESS,
+                UniCashMessages.formatTransaction(transactionToDelete));
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), getTypicalUniCash());
+        expectedModel.deleteTransaction(transactionToDelete);
+        showNoTransaction(expectedModel);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_invalidIndexFilteredList_throwsCommandException() {
+        showTransactionAtIndex(model, INDEX_FIRST_TRANSACTION);
+
+        Index outOfBoundIndex = INDEX_SECOND_TRANSACTION;
+        // ensures that outOfBoundIndex is still in bounds of transactions list
+        assertTrue(outOfBoundIndex.getZeroBased() < getTypicalUniCash().getTransactionList().size());
+
+        DeleteTransactionCommand deleteCommand = new DeleteTransactionCommand(outOfBoundIndex);
+
+        assertCommandFailure(deleteCommand, model,
+                UniCashMessages.MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX);
     }
 
     /**
