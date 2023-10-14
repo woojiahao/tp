@@ -80,7 +80,9 @@ public class CommandTestUtil {
     public static final String TYPE_DESC_EXPENSE = " " + PREFIX_TYPE + VALID_TYPE_EXPENSE;
     public static final String TYPE_DESC_INCOME = " " + PREFIX_TYPE + VALID_TYPE_INCOME;
     public static final String CATEGORY_DESC_ENTERTAINMENT = " " + PREFIX_CATEGORY + VALID_CATEGORY_ENTERTAINMENT;
+    public static final String CATEGORY_DESC_NUS = " " + PREFIX_CATEGORY + VALID_CATEGORY_NUS;
     public static final String LOCATION_DESC_ORCHARD = " " + PREFIX_LOCATION + VALID_LOCATION_ORCHARD;
+    public static final String LOCATION_DESC_NUS = " " + PREFIX_LOCATION + VALID_LOCATION_NUS;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
