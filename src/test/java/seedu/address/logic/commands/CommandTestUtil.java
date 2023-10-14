@@ -173,7 +173,7 @@ public class CommandTestUtil {
         model.updateFilteredTransactionList(
                 new TransactionNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
-        assertEquals(1, model.getFilteredPersonList().size());
+        assertEquals(1, model.getFilteredTransactionList().size());
     }
 
 }
