@@ -18,13 +18,12 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.transaction.AddTransactionCommand;
+import seedu.address.logic.commands.transaction.DeleteTransactionCommand;
 import seedu.address.logic.commands.transaction.EditTransactionCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.transaction.AddTransactionCommandParser;
-import seedu.address.logic.parser.transaction.EditTransactionCommandParser;
-import seedu.address.logic.commands.transaction.DeleteTransactionCommand;
 import seedu.address.logic.parser.transaction.DeleteTransactionCommandParser;
-
+import seedu.address.logic.parser.transaction.EditTransactionCommandParser;
 
 /**
  * Parses user input.
