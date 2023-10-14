@@ -6,7 +6,6 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
-import seedu.address.model.transaction.Transaction;
 
 /**
  * Container for user visible messages.
@@ -46,25 +45,6 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
-        return builder.toString();
-    }
-
-    /**
-     * Formats the {@code transaction} for display to the user.
-     */
-    public static String formatTransaction(Transaction transaction) {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(transaction.getName())
-                .append("; Type: ")
-                .append(transaction.getType())
-                .append("; Amount: ")
-                .append(transaction.getAmount())
-                .append("; Category: ")
-                .append(transaction.getCategory())
-                .append("; Date: ")
-                .append(transaction.getDateTime())
-                .append("; Location: ")
-                .append(transaction.getLocation());
         return builder.toString();
     }
 }
