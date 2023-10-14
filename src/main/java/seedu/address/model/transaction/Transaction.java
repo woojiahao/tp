@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Person;
 
 /**
  * Represents a Transaction in the finance tracker.
@@ -64,8 +65,22 @@ public class Transaction {
     }
 
     /**
+     * Returns true if both transactions have the same name and dateTime.
+     * This defines a weaker notion of equality between two transactions.
+     */
+    public boolean isSameTransaction(Transaction otherTransaction) {
+        if (otherTransaction == this) {
+            return true;
+        }
+
+        return otherTransaction != null
+                && otherTransaction.getName().equals(getName())
+                && otherTransaction.getDateTime().equals(getDateTime());
+    }
+
+    /**
      * Returns true if both transactions have the same data fields.
-     * This defines a stronger notion of equality between two expenses.
+     * This defines a stronger notion of equality between two transactions.
      */
     @Override
     public boolean equals(Object other) {

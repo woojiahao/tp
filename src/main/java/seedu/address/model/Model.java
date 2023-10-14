@@ -80,6 +80,13 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Replaces the given transaction {@code target} with {@code editedTransaction}.
+     * {@code target} must exist in the transaction list.
+     * The transaction identity of {@code editedTransaction} must not be the same as another existing transaction.
+     */
+    void setTransaction(Transaction target, Transaction editedTransaction);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 

@@ -20,9 +20,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 import seedu.address.model.transaction.Amount;
 import seedu.address.model.transaction.Category;
 import seedu.address.model.transaction.DateTime;
@@ -31,7 +33,7 @@ import seedu.address.model.transaction.Name;
 import seedu.address.model.transaction.Transaction;
 import seedu.address.model.transaction.Type;
 
-public class EditTransactionCommand {
+public class EditTransactionCommand extends Command {
 
     public static final String COMMAND_WORD = "edit_transaction";
 
@@ -70,6 +72,27 @@ public class EditTransactionCommand {
 
         this.index = index;
         this.editTransactionDescriptor = new EditTransactionCommand.EditTransactionDescriptor(editTransactionDescriptor);
+    }
+
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+        List<Transaction> lastShownList = model.getFilteredTransactionList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX); // todo
+        }
+
+        Transaction transactionToEdit = lastShownList.get(index.getZeroBased());
+        Transaction editedTransaction = createEditedTransaction(transactionToEdit, editTransactionDescriptor);
+
+        if (!transactionToEdit.isSameTransaction(editedTransaction) && model.hasTransaction(editedTransaction)) {
+            throw new CommandException(MESSAGE_DUPLICATE_TRANSACTION);
+        }
+
+        model.setTransaction(transactionToEdit, editedTransaction);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(String.format(MESSAGE_EDIT_TRANSACTION_SUCCESS, Messages.formatTransaction(editedTransaction)));
     }
 
     /**

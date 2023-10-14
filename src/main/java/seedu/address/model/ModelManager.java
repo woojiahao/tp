@@ -140,6 +140,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setTransaction(Transaction target, Transaction editedTransaction) {
+        requireAllNonNull(target, editedTransaction);
+
+        uniCash.setTransaction(target, editedTransaction);
+    }
+
+    @Override
     public ReadOnlyUniCash getUniCash() {
         return uniCash;
     }
