@@ -103,6 +103,7 @@ public interface Model {
      */
     void deleteTransaction(Transaction target);
 
+
     /**
      * Adds the given transaction.
      */
