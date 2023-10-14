@@ -19,9 +19,11 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.transaction.AddTransactionCommand;
 import seedu.address.logic.commands.transaction.DeleteTransactionCommand;
+import seedu.address.logic.commands.transaction.GetTotalExpenditureCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.transaction.AddTransactionCommandParser;
 import seedu.address.logic.parser.transaction.DeleteTransactionCommandParser;
+import seedu.address.logic.parser.transaction.GetTotalExpenditureCommandParser;
 
 /**
  * Parses user input.
@@ -86,6 +88,9 @@ public class AddressBookParser {
 
         case DeleteTransactionCommand.COMMAND_WORD:
             return new DeleteTransactionCommandParser().parse(arguments);
+
+        case GetTotalExpenditureCommand.COMMAND_WORD:
+            return new GetTotalExpenditureCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
