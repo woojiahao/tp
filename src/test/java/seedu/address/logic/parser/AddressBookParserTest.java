@@ -6,6 +6,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TRANSACTION;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,6 +24,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.transaction.AddTransactionCommand;
+import seedu.address.logic.commands.transaction.DeleteTransactionCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -98,6 +100,15 @@ public class AddressBookParserTest {
         String s = TransactionUtil.getAddTransactionCommand(transaction);
         AddTransactionCommand command = (AddTransactionCommand) parser.parseCommand(s);
         assertEquals(new AddTransactionCommand(transaction), command);
+    }
+
+    @Test
+    public void parseCommand_deleteTransaction() throws Exception {
+        DeleteTransactionCommand command = (DeleteTransactionCommand)
+                parser.parseCommand(
+                DeleteTransactionCommand.COMMAND_WORD + " "
+                        + INDEX_FIRST_TRANSACTION.getOneBased());
+        assertEquals(new DeleteTransactionCommand(INDEX_FIRST_TRANSACTION), command);
     }
 
     @Test
