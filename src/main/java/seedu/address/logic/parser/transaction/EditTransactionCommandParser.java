@@ -73,7 +73,6 @@ public class EditTransactionCommandParser implements Parser<EditTransactionComma
             editTransactionDescriptor.setLocation(
                     ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get()));
         }
-        //parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
         if (!editTransactionDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
