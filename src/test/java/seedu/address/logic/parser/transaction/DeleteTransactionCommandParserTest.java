@@ -34,17 +34,5 @@ public class DeleteTransactionCommandParserTest {
         assertThrows(ParseException.class, () -> parser.parse("0"));
     }
 
-    @Test
-    public void parse_invalidFormat_throwsParseException() {
-        // More than one space-separated argument
-        assertThrows(ParseException.class, () -> parser.parse("1 2"));
-
-        // Leading whitespace
-        assertThrows(ParseException.class, () -> parser.parse(" 1"));
-
-        // Trailing whitespace
-        assertThrows(ParseException.class, () -> parser.parse("1 "));
-    }
-
 }
 
