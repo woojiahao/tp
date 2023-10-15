@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalTransactions.BUYING_GROCERIES;
 import static seedu.address.testutil.TypicalTransactions.INTERN;
-import static seedu.address.testutil.TypicalTransactions.NUS;
-import static seedu.address.testutil.TypicalTransactions.SHOPPING;
 import static seedu.address.testutil.TypicalTransactions.getTypicalUniCash;
 
 import java.io.IOException;

@@ -22,6 +22,7 @@ import seedu.address.model.ReadOnlyUniCash;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UniCash;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.JsonUniCashStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
@@ -83,8 +84,7 @@ public class MainApp extends Application {
                 logger.info("Creating a new data file " + storage.getUniCashFilePath()
                         + " populated with a sample AddressBook.");
             }
-            // TODO: Add sample data here
-            initialData = uniCashOptional.orElseGet(UniCash::new);
+            initialData = uniCashOptional.orElseGet(SampleDataUtil::getSampleUniCash);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getUniCashFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");

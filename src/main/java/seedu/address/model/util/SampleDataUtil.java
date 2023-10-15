@@ -4,14 +4,23 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import seedu.address.commons.enums.TransactionType;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyUniCash;
+import seedu.address.model.UniCash;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.transaction.Amount;
+import seedu.address.model.transaction.Category;
+import seedu.address.model.transaction.DateTime;
+import seedu.address.model.transaction.Location;
+import seedu.address.model.transaction.Transaction;
+import seedu.address.model.transaction.Type;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -55,6 +64,35 @@ public class SampleDataUtil {
         return Arrays.stream(strings)
                 .map(Tag::new)
                 .collect(Collectors.toSet());
+    }
+
+    public static Transaction[] getSampleTransactions() {
+        return new Transaction[] {
+                new Transaction(
+                        new seedu.address.model.transaction.Name("Valid transaction"),
+                        new Type("expense"),
+                        new Amount(17.0),
+                        new Category("Food"),
+                        new DateTime("15-09-2023 00:00"),
+                        new Location("")
+                ),
+                new Transaction(
+                        new seedu.address.model.transaction.Name("Valid transaction 2"),
+                        new Type("expense"),
+                        new Amount(123),
+                        new Category("Others"),
+                        new DateTime("15-07-2023 00:00"),
+                        new Location("Jurong")
+                )
+        };
+    }
+
+    public static ReadOnlyUniCash getSampleUniCash() {
+        UniCash sample = new UniCash();
+        for (var transaction : getSampleTransactions()) {
+            sample.addTransaction(transaction);
+        }
+        return sample;
     }
 
 }
