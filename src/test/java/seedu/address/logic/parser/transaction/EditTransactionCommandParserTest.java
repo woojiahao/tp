@@ -1,7 +1,6 @@
 package seedu.address.logic.parser.transaction;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import seedu.address.logic.commands.CommandTestUtil;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
@@ -17,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.UniCashMessages;
+import seedu.address.logic.commands.CommandTestUtil;
 import seedu.address.logic.commands.transaction.EditTransactionCommand;
 import seedu.address.model.transaction.Amount;
 import seedu.address.model.transaction.Category;
@@ -173,12 +173,14 @@ public class EditTransactionCommandParserTest {
 
         // valid followed by invalid
         Index targetIndex = INDEX_FIRST_TRANSACTION;
-        String userInput = targetIndex.getOneBased() + CommandTestUtil.LOCATION_DESC_NUS + CommandTestUtil.INVALID_LOCATION_DESC;
+        String userInput = targetIndex.getOneBased() + CommandTestUtil.LOCATION_DESC_NUS
+                + CommandTestUtil.INVALID_LOCATION_DESC;
 
         assertParseFailure(parser, userInput, UniCashMessages.getErrorMessageForDuplicatePrefixes(PREFIX_LOCATION));
 
         // invalid followed by valid
-        userInput = targetIndex.getOneBased() + CommandTestUtil.INVALID_LOCATION_DESC + CommandTestUtil.LOCATION_DESC_NUS;
+        userInput = targetIndex.getOneBased() + CommandTestUtil.INVALID_LOCATION_DESC
+                + CommandTestUtil.LOCATION_DESC_NUS;
 
         assertParseFailure(parser, userInput, UniCashMessages.getErrorMessageForDuplicatePrefixes(PREFIX_LOCATION));
 
