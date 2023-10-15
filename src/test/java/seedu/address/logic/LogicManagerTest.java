@@ -93,6 +93,11 @@ public class LogicManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredTransactionList().remove(0));
     }
 
+    @Test
+    public void getUniCashFilePath_noInput_returnsValidPath() {
+        assertEquals("data/unicash.json", logic.getUniCashFilePath().toString());
+    }
+
     /**
      * Executes the command and confirms that
      * - no exceptions are thrown <br>
