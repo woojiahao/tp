@@ -92,9 +92,9 @@ public class JsonUniCashStorageTest {
     /**
      * Saves {@code UniCash} at the specified {@code filePath}.
      */
-    private void saveUniCash(ReadOnlyUniCash UniCash, String filePath) {
+    private void saveUniCash(ReadOnlyUniCash uniCash, String filePath) {
         try {
-            new JsonUniCashStorage(Paths.get(filePath)).saveUniCash(UniCash, addToTestDataPathIfNotNull(filePath));
+            new JsonUniCashStorage(Paths.get(filePath)).saveUniCash(uniCash, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
