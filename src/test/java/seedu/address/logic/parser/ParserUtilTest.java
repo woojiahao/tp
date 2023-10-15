@@ -236,7 +236,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseDateTime_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_DATETIME));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDateTime(INVALID_DATETIME));
     }
 
     @Test
