@@ -88,10 +88,6 @@ public class EditTransactionCommand extends Command {
         Transaction transactionToEdit = lastShownList.get(index.getZeroBased());
         Transaction editedTransaction = createEditedTransaction(transactionToEdit, editTransactionDescriptor);
 
-        if (!transactionToEdit.isSameTransaction(editedTransaction) && model.hasTransaction(editedTransaction)) {
-            throw new CommandException(MESSAGE_DUPLICATE_TRANSACTION);
-        }
-
         model.setTransaction(transactionToEdit, editedTransaction);
         model.updateFilteredTransactionList(PREDICATE_SHOW_ALL_TRANSACTIONS);
         return new CommandResult(String.format(MESSAGE_EDIT_TRANSACTION_SUCCESS,
