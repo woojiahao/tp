@@ -39,7 +39,8 @@ public class CategoryTest {
         assertTrue(Category.isValidCategory("Food Drinks and everything in between")); // long names
         assertTrue(Category.isValidCategory("Food & Drinks")); // &
         assertTrue(Category.isValidCategory("Food & Drink_s")); // -
-        assertTrue(Category.isValidCategory("Food-Drinks")); // _
+        assertTrue(Category.isValidCategory("Food-Drinks")); // -
+        assertTrue(Category.isValidCategory("-")); // -
     }
 
     @Test
