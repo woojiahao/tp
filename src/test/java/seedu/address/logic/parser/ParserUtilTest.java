@@ -29,6 +29,7 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_AMOUNT = "str";
+    private static final String INVALID_DATETIME = "18-8-2001";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -225,6 +226,11 @@ public class ParserUtilTest {
     @Test
     public void parseDateTime_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseDateTime((String) null));
+    }
+
+    @Test
+    public void parseDateTime_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_DATETIME));
     }
 
     @Test

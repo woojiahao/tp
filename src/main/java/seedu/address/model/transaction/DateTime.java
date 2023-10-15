@@ -30,7 +30,7 @@ public class DateTime {
      */
     public DateTime(String dateTime) {
         requireNonNull(dateTime);
-        if (dateTime.isEmpty()) {
+        if (dateTime.isBlank()) {
             this.dateTime = LocalDateTime.now();
             return;
         }
