@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
@@ -249,6 +250,12 @@ public class ParserUtilTest {
         String dateTimeWithWhiteSpace = WHITESPACE + VALID_DATETIME + WHITESPACE;
         DateTime expectedDateTime = new DateTime(VALID_DATETIME);
         assertEquals(expectedDateTime, ParserUtil.parseDateTime(dateTimeWithWhiteSpace));
+    }
+
+    @Test
+    public void parseCategory_empty_doesNotThrow() throws Exception {
+        assertDoesNotThrow(() -> ParserUtil.parseDateTime(""));
+        assertDoesNotThrow(() -> ParserUtil.parseDateTime(WHITESPACE + WHITESPACE));
     }
 
     @Test
