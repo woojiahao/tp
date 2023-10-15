@@ -2,7 +2,6 @@ package seedu.address.logic.parser.transaction;
 import static seedu.address.logic.UniCashMessages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.transaction.DeleteTransactionCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
@@ -24,7 +23,7 @@ public class DeleteTransactionCommandParser implements Parser<DeleteTransactionC
             return new DeleteTransactionCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTransactionCommand.MESSAGE_USAGE), pe);
         }
     }
 

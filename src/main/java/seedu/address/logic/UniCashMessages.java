@@ -19,6 +19,7 @@ public class UniCashMessages {
     public static final String MESSAGE_TRANSACTIONS_LISTED_OVERVIEW = "%1$d transactions listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
             "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_INVALID_MONTH = "Month must be between 1 and 12 (inclusive).";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
