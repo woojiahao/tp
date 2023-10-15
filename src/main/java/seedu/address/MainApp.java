@@ -5,6 +5,8 @@ import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+import javafx.application.Application;
+import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
@@ -28,8 +30,6 @@ import seedu.address.storage.UniCashStorage;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
-import javafx.application.Application;
-import javafx.stage.Stage;
 
 /**
  * Runs the application.
