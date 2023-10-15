@@ -94,7 +94,7 @@ public class JsonAdaptedTransaction {
         }
         final DateTime modelDateTime = new DateTime(dateTime);
 
-        if (location != null && Location.isValidLocation(location)) {
+        if (location != null && !Location.isValidLocation(location)) {
             throw new IllegalValueException(Location.MESSAGE_CONSTRAINTS);
         }
         final Location modelLocation = new Location(location);
