@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
+import seedu.address.logic.UniCashMessages;
 import seedu.address.model.Model;
 import seedu.address.model.transaction.TransactionNameContainsKeywordsPredicate;
 
@@ -31,7 +31,7 @@ public class FindCommand extends Command {
         requireNonNull(model);
         model.updateFilteredTransactionList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_TRANSACTIONS_LISTED_OVERVIEW,
+                String.format(UniCashMessages.MESSAGE_TRANSACTIONS_LISTED_OVERVIEW,
                         model.getFilteredTransactionList().size()));
     }
 
