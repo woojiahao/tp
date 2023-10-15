@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
@@ -20,7 +21,9 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.transaction.Amount;
+import seedu.address.model.transaction.Category;
 import seedu.address.model.transaction.DateTime;
+import seedu.address.model.transaction.Location;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -29,6 +32,9 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_AMOUNT = "str";
+    private static final String INVALID_DATETIME = "18-8-2001";
+    private static final String INVALID_CATEGORY = "$$af$";
+    private static final String INVALID_LOCATION = "^$2af";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -38,7 +44,8 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_AMOUNT = "3.0";
     private static final String VALID_DATETIME = "18-08-2001 18:30";
-
+    private static final String VALID_CATEGORY = "hobbies";
+    private static final String VALID_LOCATION = "orchard road";
     private static final String WHITESPACE = " \t\r\n";
 
     @Test
@@ -228,15 +235,84 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseDateTime_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDateTime(INVALID_DATETIME));
+    }
+
+    @Test
     public void parseDateTime_validValueWithoutWhitespace_returnsName() throws Exception {
-        DateTime expectedDateTime = new DateTime("18-08-2001 18:30");
+        DateTime expectedDateTime = new DateTime(VALID_DATETIME);
         assertEquals(expectedDateTime, ParserUtil.parseDateTime(VALID_DATETIME));
     }
 
     @Test
     public void parseDateTime_validValueWithWhitespace_returnsTrimmedName() throws Exception {
         String dateTimeWithWhiteSpace = WHITESPACE + VALID_DATETIME + WHITESPACE;
-        DateTime expectedDateTime = new DateTime("18-08-2001 18:30");
+        DateTime expectedDateTime = new DateTime(VALID_DATETIME);
         assertEquals(expectedDateTime, ParserUtil.parseDateTime(dateTimeWithWhiteSpace));
+    }
+
+    @Test
+    public void parseCategory_empty_doesNotThrow() throws Exception {
+        assertDoesNotThrow(() -> ParserUtil.parseDateTime(""));
+        assertDoesNotThrow(() -> ParserUtil.parseDateTime(WHITESPACE + WHITESPACE));
+    }
+
+    @Test
+    public void parseCategory_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseCategory((String) null));
+    }
+
+    @Test
+    public void parseCategory_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseCategory(INVALID_CATEGORY));
+    }
+
+    @Test
+    public void parseCategory_validValueWithoutWhitespace_returnsName() throws Exception {
+        Category expectedCategory = new Category(VALID_CATEGORY);
+        assertEquals(expectedCategory, ParserUtil.parseCategory(VALID_CATEGORY));
+    }
+
+    @Test
+    public void parseCategory_validValueWithWhitespace_returnsTrimmedCategory() throws Exception {
+        String categoryWithWhiteSpace = WHITESPACE + VALID_CATEGORY + WHITESPACE;
+        Category expectedCategory = new Category(VALID_CATEGORY);
+        assertEquals(expectedCategory, ParserUtil.parseCategory(categoryWithWhiteSpace));
+    }
+
+    @Test
+    public void parseCategory_empty_returnsDefaultCategory() throws Exception {
+        Category expectedCategory = new Category(WHITESPACE);
+        assertEquals(expectedCategory, ParserUtil.parseCategory(WHITESPACE));
+    }
+
+    @Test
+    public void parseLocation_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLocation((String) null));
+    }
+
+    @Test
+    public void parseLocation_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseLocation(INVALID_LOCATION));
+    }
+
+    @Test
+    public void parseLocation_validValueWithoutWhitespace_returnsName() throws Exception {
+        Location expectedLocation = new Location(VALID_LOCATION);
+        assertEquals(expectedLocation, ParserUtil.parseLocation(VALID_LOCATION));
+    }
+
+    @Test
+    public void parseLocation_validValueWithWhitespace_returnsTrimmedLocation() throws Exception {
+        String locationWithWhiteSpace = WHITESPACE + VALID_LOCATION + WHITESPACE;
+        Location expectedLocation = new Location(VALID_LOCATION);
+        assertEquals(expectedLocation, ParserUtil.parseLocation(locationWithWhiteSpace));
+    }
+
+    @Test
+    public void parseLocation_empty_returnsDefaultLocation() throws Exception {
+        Location expectedLocation = new Location(WHITESPACE);
+        assertEquals(expectedLocation, ParserUtil.parseLocation(WHITESPACE));
     }
 }

@@ -16,8 +16,8 @@ public class CategoryTest {
 
     @Test
     public void constructor_noCategory_setDefault() {
-        String invalidCategory = "";
-        assertEquals("-", new Category(invalidCategory).toString());
+        assertEquals("-", new Category("").toString());
+        assertEquals("-", new Category(" ").toString());
     }
 
     @Test

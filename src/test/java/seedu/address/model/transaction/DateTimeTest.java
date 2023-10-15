@@ -1,24 +1,31 @@
 package seedu.address.model.transaction;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.Clock;
+import java.time.Instant;
+import java.time.ZoneId;
+
 import org.junit.jupiter.api.Test;
+
 
 public class DateTimeTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new DateTime(null));
+        assertThrows(NullPointerException.class, () -> new DateTime("18-08-2001 18:18", null));
+        assertThrows(NullPointerException.class, () -> new DateTime(null, null));
     }
 
     @Test
-    public void constructor_emptyString_success() {
-        assertDoesNotThrow(() -> new DateTime(""));
-        assertDoesNotThrow(() -> new DateTime("01-01-2001 18:18"));
+    public void constructor_noDateTime_setDefault() {
+        Clock clock = Clock.fixed(Instant.parse("2014-12-21T10:15:30.00Z"), ZoneId.of("UTC"));
+        String empty = "";
+        assertEquals("1015, Dec 21 2014", new DateTime(empty, clock).toString());
     }
 
     @Test

@@ -1,8 +1,9 @@
 package seedu.address.model.transaction;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.Clock;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -19,8 +20,7 @@ public class DateTime {
             "DateTime should be in the following format " + DATETIME_PATTERN;
     public static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter
             .ofPattern(DATETIME_PATTERN);
-
-    public final LocalDateTime dateTime;
+    private LocalDateTime dateTime;
 
     /**
      * Constructs a {@code DateTime}.
@@ -29,13 +29,41 @@ public class DateTime {
      * @param dateTime A valid date time.
      */
     public DateTime(String dateTime) {
-        requireNonNull(dateTime);
-        if (dateTime.isEmpty()) {
-            this.dateTime = LocalDateTime.now();
+        requireAllNonNull(dateTime);
+        init(dateTime, Clock.systemDefaultZone());
+    }
+
+    /**
+     * Constructs a {@code DateTime} with a Clock.
+     * Defaults to current date if not provided.
+     * Used for mocking the current Clock used to generate LocalDateTime.now().
+     *
+     * @param dateTime A valid date time.
+     * @param clock A clock object to configure current time settings.
+     */
+    public DateTime(String dateTime, Clock clock) {
+        requireAllNonNull(dateTime, clock);
+        init(dateTime, clock);
+    }
+
+    /**
+     * Initialises the DateTime object when called by constructors.
+     * Sets the dateTime based on given {@code dateTime} and {@code clock}.
+     *
+     * @param dateTime the dateTime string to be set.
+     * @param clock the clock object of the system.
+     */
+    private void init(String dateTime, Clock clock) {
+        if (dateTime.isBlank()) {
+            this.dateTime = LocalDateTime.now(clock);
             return;
         }
         checkArgument(isValidDateTime(dateTime), MESSAGE_CONSTRAINTS);
         this.dateTime = LocalDateTime.parse(dateTime, DATETIME_FORMATTER);
+    }
+
+    public LocalDateTime getDateTime() {
+        return this.dateTime;
     }
 
     /**

@@ -71,7 +71,7 @@ public class GetTotalExpenditureCommandTest {
         assertEquals(2, filteredResult.size());
         for (var result : filteredResult) {
             assertEquals(TransactionType.EXPENSE, result.getType().type);
-            assertEquals(8, result.getDateTime().dateTime.getMonthValue());
+            assertEquals(8, result.getDateTime().getDateTime().getMonthValue());
         }
     }
 
@@ -104,7 +104,7 @@ public class GetTotalExpenditureCommandTest {
         for (var result : filteredResult) {
             assertEquals(TransactionType.EXPENSE, result.getType().type);
             assertEquals("Food", result.getCategory().category);
-            assertEquals(8, result.getDateTime().dateTime.getMonthValue());
+            assertEquals(8, result.getDateTime().getDateTime().getMonthValue());
         }
     }
 

@@ -166,16 +166,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String datetime} into an {@code LocalDateTime}.
-     * Leading and trailing whitespaces will be trimmed.
-     */
-    public static DateTime parseDateTime(String dateTimeString) {
-        requireNonNull(dateTimeString);
-        String trimmedDateTime = dateTimeString.trim();
-        return new DateTime(trimmedDateTime);
-    }
-
-    /**
      * Parses a {@code String type} into a {@code Type}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -191,22 +181,50 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String datetime} into an {@code LocalDateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code dateTimeString} is invalid.
+     */
+    public static DateTime parseDateTime(String dateTimeString) throws ParseException {
+        requireNonNull(dateTimeString);
+        String trimmedDateTime = dateTimeString.trim();
+        if (!trimmedDateTime.isBlank() && !DateTime.isValidDateTime(trimmedDateTime)) {
+            throw new ParseException(DateTime.MESSAGE_CONSTRAINTS);
+        }
+
+        return new DateTime(trimmedDateTime);
+    }
+
+    /**
      * Parses a {@code String category} into a {@code Category}.
      * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code category} is invalid.
      */
-    public static Category parseCategory(String category) {
+    public static Category parseCategory(String category) throws ParseException {
         requireNonNull(category);
         String trimmedCategory = category.trim();
+        if (!trimmedCategory.isBlank() && !Category.isValidCategory(trimmedCategory)) {
+            throw new ParseException(Category.MESSAGE_CONSTRAINTS);
+        }
+
         return new Category(trimmedCategory);
     }
 
     /**
      * Parses a {@code String location} into a {@code Location}.
      * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code location} is invalid.
      */
-    public static Location parseLocation(String location) {
+    public static Location parseLocation(String location) throws ParseException {
         requireNonNull(location);
         String trimmedLocation = location.trim();
+        if (!trimmedLocation.isBlank() && !Location.isValidLocation(trimmedLocation)) {
+            throw new ParseException(Location.MESSAGE_CONSTRAINTS);
+        }
+
         return new Location(trimmedLocation);
     }
 }
