@@ -19,7 +19,7 @@ public class ListCommand extends Command {
 
     private static final Logger logger = Logger.getLogger("ListCommandLogger");
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all transactions in UniCash. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all transactions in UniCa$h. "
             + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_FAILURE = "Command not recognised. Try using the command " + COMMAND_WORD
