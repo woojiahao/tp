@@ -26,12 +26,14 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.transaction.AddTransactionCommand;
 import seedu.address.logic.commands.transaction.ClearTransactionsCommand;
 import seedu.address.logic.commands.transaction.DeleteTransactionCommand;
+import seedu.address.logic.commands.transaction.EditTransactionCommand;
 import seedu.address.logic.commands.transaction.GetTotalExpenditureCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.transaction.Transaction;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditTransactionDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.TransactionBuilder;
@@ -118,6 +120,16 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ClearTransactionsCommand.COMMAND_WORD) instanceof ClearTransactionsCommand);
         assertTrue(parser.parseCommand(ClearTransactionsCommand.COMMAND_WORD + " 3")
                 instanceof ClearTransactionsCommand);
+    }
+
+    @Test
+    public void parseCommand_editTransaction() throws Exception {
+        Transaction transaction = new TransactionBuilder().build();
+        EditTransactionCommand.EditTransactionDescriptor descriptor = new EditTransactionDescriptorBuilder(transaction).build();
+        String input = EditTransactionCommand.COMMAND_WORD + " " + INDEX_FIRST_TRANSACTION.getOneBased() + " ";
+        input += TransactionUtil.getEditTransactionDescriptorDetails(descriptor);
+        EditTransactionCommand command = (EditTransactionCommand) parser.parseCommand(input);
+        assertEquals(new EditTransactionCommand(INDEX_FIRST_TRANSACTION, descriptor), command);
     }
 
     @Test
