@@ -5,9 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_TRANSACTIONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalTransactions.BUYING_GROCERIES;
-import static seedu.address.testutil.TypicalTransactions.DINING_WITH_FRIENDS;
-import static seedu.address.testutil.TypicalTransactions.WORK_AT_LIHO;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -66,7 +63,8 @@ public class FindCommandTest {
 
     @Test
     public void toStringMethod() {
-        TransactionNameContainsKeywordsPredicate predicate = new TransactionNameContainsKeywordsPredicate(Arrays.asList("keyword"));
+        TransactionNameContainsKeywordsPredicate predicate = new TransactionNameContainsKeywordsPredicate(
+                Arrays.asList("keyword"));
         FindCommand findCommand = new FindCommand(predicate);
         String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, findCommand.toString());
