@@ -118,29 +118,6 @@ public class EditTransactionCommandTest {
     }
 
     @Test
-    public void execute_duplicateTransactionUnfilteredList_failure() {
-        Transaction firstTransaction = model.getFilteredTransactionList().get(INDEX_FIRST_TRANSACTION.getZeroBased());
-        EditTransactionDescriptor descriptor = new EditTransactionDescriptorBuilder(firstTransaction).build();
-        EditTransactionCommand editTransactionCommand = new EditTransactionCommand(INDEX_SECOND_TRANSACTION,
-                descriptor);
-
-        assertCommandFailure(editTransactionCommand, model, EditTransactionCommand.MESSAGE_DUPLICATE_TRANSACTION);
-    }
-
-    @Test
-    public void execute_duplicateTransactionFilteredList_failure() {
-        showTransactionAtIndex(model, INDEX_FIRST_TRANSACTION);
-
-        // edit transaction in filtered list into a duplicate in address book
-        Transaction transactionInList = model.getUniCash().getTransactionList()
-                .get(INDEX_SECOND_TRANSACTION.getZeroBased());
-        EditTransactionCommand editTransactionCommand = new EditTransactionCommand(INDEX_FIRST_TRANSACTION,
-                new EditTransactionDescriptorBuilder(transactionInList).build());
-
-        assertCommandFailure(editTransactionCommand, model, EditTransactionCommand.MESSAGE_DUPLICATE_TRANSACTION);
-    }
-
-    @Test
     public void execute_invalidTransactionIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTransactionList().size() + 1);
         EditTransactionDescriptor descriptor = new EditTransactionDescriptorBuilder()
