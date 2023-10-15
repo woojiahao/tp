@@ -45,6 +45,8 @@ public class ParserUtilTest {
     private static final String VALID_DATETIME = "18-08-2001 18:30";
     private static final String VALID_CATEGORY = "hobbies";
     private static final String VALID_LOCATION = "orchard road";
+    private static final String DEFAULT_LOCATION = "-";
+    private static final String DEFAULT_CATEGORY = "-";
 
     private static final String WHITESPACE = " \t\r\n";
 

@@ -9,6 +9,10 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.Clock;
+import java.time.Instant;
+import java.time.ZoneId;
+
 public class DateTimeTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -19,6 +23,13 @@ public class DateTimeTest {
     public void constructor_emptyString_success() {
         assertDoesNotThrow(() -> new DateTime(""));
         assertDoesNotThrow(() -> new DateTime("01-01-2001 18:18"));
+    }
+
+    @Test
+    public void constructor_noDateTime_setDefault() {
+        Clock clock = Clock.fixed(Instant.parse("2014-12-21T10:15:30.00Z"), ZoneId.of("UTC"));
+        String empty = "";
+        assertEquals("1015, Dec 21 2014", new DateTime(empty, clock).toString());
     }
 
     @Test
