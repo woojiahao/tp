@@ -22,7 +22,6 @@ public class GetTotalExpenditureCommand extends Command {
             + PREFIX_CATEGORY + "CATEGORY\n";
 
     public static final String MESSAGE_SUCCESS = "Your total expenditure in %1$s was %2$.2f";
-    public static final String MESSAGE_INVALID_MONTH = "Invalid month provided, value must be from 1 to 12.";
 
     private final int month;
     private final Category categoryFilter;
@@ -42,7 +41,7 @@ public class GetTotalExpenditureCommand extends Command {
         model.updateFilteredTransactionList(transaction -> {
             boolean isExpense = transaction.getType().type.equals(TransactionType.EXPENSE);
             boolean isSameMonth = transaction.getDateTime().dateTime.getMonthValue() == month;
-            if (categoryFilter == null) {
+            if (categoryFilter == null || categoryFilter.isEmpty()) {
                 return isExpense && isSameMonth;
             }
             return isExpense && isSameMonth && transaction.getCategory().equals(categoryFilter);

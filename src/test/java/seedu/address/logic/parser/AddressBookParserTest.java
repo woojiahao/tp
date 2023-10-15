@@ -24,6 +24,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.transaction.AddTransactionCommand;
+import seedu.address.logic.commands.transaction.ClearTransactionsCommand;
 import seedu.address.logic.commands.transaction.DeleteTransactionCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -109,6 +110,13 @@ public class AddressBookParserTest {
                 DeleteTransactionCommand.COMMAND_WORD + " "
                         + INDEX_FIRST_TRANSACTION.getOneBased());
         assertEquals(new DeleteTransactionCommand(INDEX_FIRST_TRANSACTION), command);
+    }
+
+    @Test
+    public void parseCommand_clearTransaction() throws Exception {
+        assertTrue(parser.parseCommand(ClearTransactionsCommand.COMMAND_WORD) instanceof ClearTransactionsCommand);
+        assertTrue(parser.parseCommand(ClearTransactionsCommand.COMMAND_WORD + " 3")
+                instanceof ClearTransactionsCommand);
     }
 
     @Test

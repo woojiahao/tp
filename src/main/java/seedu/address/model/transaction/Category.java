@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 /**
  * Represents a Transaction's category.
  */
+// TODO: Maybe explore using static EMPTY_CATEGORY instead of hard coding
 public class Category {
 
     public static final String MESSAGE_CONSTRAINTS =
@@ -41,6 +42,9 @@ public class Category {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public boolean isEmpty() {
+        return category.equals("-");
+    }
 
     @Override
     public String toString() {
