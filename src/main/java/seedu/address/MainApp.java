@@ -18,16 +18,16 @@ import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyUniCash;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UniCash;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.AddressBookStorage;
-import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonUniCashStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
+import seedu.address.storage.UniCashStorage;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
@@ -58,8 +58,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        UniCashStorage uniCashStorage = new JsonUniCashStorage(userPrefs.getUniCashFilePath());
+        storage = new StorageManager(uniCashStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -74,24 +74,25 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        logger.info("Using data file : " + storage.getAddressBookFilePath());
+        logger.info("Using data file : " + storage.getUniCashFilePath());
 
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyUniCash> uniCashOptional;
+        ReadOnlyUniCash initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Creating a new data file " + storage.getAddressBookFilePath()
+            uniCashOptional = storage.readUniCash();
+            if (uniCashOptional.isEmpty()) {
+                logger.info("Creating a new data file " + storage.getUniCashFilePath()
                         + " populated with a sample AddressBook.");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = uniCashOptional.orElseGet(SampleDataUtil::getSampleUniCash);
         } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
+            logger.warning("Data file at " + storage.getUniCashFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
-            initialData = new AddressBook();
+            initialData = new UniCash();
         }
 
-        return new ModelManager(initialData, userPrefs, new UniCash());
+        // TODO: Remove ModelManager first parameter
+        return new ModelManager(new AddressBook(), userPrefs, initialData);
     }
 
     private void initLogging(Config config) {
@@ -118,7 +119,7 @@ public class MainApp extends Application {
 
         try {
             Optional<Config> configOptional = ConfigUtil.readConfig(configFilePathUsed);
-            if (!configOptional.isPresent()) {
+            if (configOptional.isEmpty()) {
                 logger.info("Creating new config file " + configFilePathUsed);
             }
             initializedConfig = configOptional.orElse(new Config());
@@ -149,7 +150,7 @@ public class MainApp extends Application {
         UserPrefs initializedPrefs;
         try {
             Optional<UserPrefs> prefsOptional = storage.readUserPrefs();
-            if (!prefsOptional.isPresent()) {
+            if (prefsOptional.isEmpty()) {
                 logger.info("Creating new preference file " + prefsFilePath);
             }
             initializedPrefs = prefsOptional.orElse(new UserPrefs());

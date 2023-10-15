@@ -29,7 +29,7 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook, userPrefs and uniCash.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, UniCash uniCash) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, ReadOnlyUniCash uniCash) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
@@ -67,17 +67,6 @@ public class ModelManager implements Model {
     public void setGuiSettings(GuiSettings guiSettings) {
         requireNonNull(guiSettings);
         userPrefs.setGuiSettings(guiSettings);
-    }
-
-    @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
-    }
-
-    @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
     //=========== AddressBook ================================================================================
@@ -131,6 +120,17 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public Path getUniCashFilePath() {
+        return userPrefs.getUniCashFilePath();
+    }
+
+    @Override
+    public void setUniCashFilePath(Path uniCashFilePath) {
+        requireNonNull(uniCashFilePath);
+        userPrefs.setUniCashFilePath(uniCashFilePath);
     }
 
     //=========== UniCash ================================================================================

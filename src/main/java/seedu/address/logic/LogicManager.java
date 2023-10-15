@@ -52,7 +52,7 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            storage.saveUniCash(model.getUniCash());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -74,7 +74,12 @@ public class LogicManager implements Logic {
 
     @Override
     public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+        return model.getUniCashFilePath();
+    }
+
+    @Override
+    public Path getUniCashFilePath() {
+        return model.getUniCashFilePath();
     }
 
     @Override

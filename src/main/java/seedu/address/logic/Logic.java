@@ -40,6 +40,11 @@ public interface Logic {
     Path getAddressBookFilePath();
 
     /**
+     * Returns the user prefs' UniCash file path.
+     */
+    Path getUniCashFilePath();
+
+    /**
      * Returns the user prefs' GUI settings.
      */
     GuiSettings getGuiSettings();
