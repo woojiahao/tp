@@ -17,6 +17,8 @@ public class DateTimeTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new DateTime(null));
+        assertThrows(NullPointerException.class, () -> new DateTime("18-08-2001 18:18", null));
+        assertThrows(NullPointerException.class, () -> new DateTime(null, null));
     }
 
     @Test

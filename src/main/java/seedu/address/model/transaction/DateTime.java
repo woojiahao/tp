@@ -42,7 +42,7 @@ public class DateTime {
      * @param clock A clock object to configure current time settings.
      */
     public DateTime(String dateTime, Clock clock) {
-        requireAllNonNull(dateTime);
+        requireAllNonNull(dateTime, clock);
         init(dateTime, clock);
     }
 
