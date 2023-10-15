@@ -62,6 +62,10 @@ public class DateTime {
         this.dateTime = LocalDateTime.parse(dateTime, DATETIME_FORMATTER);
     }
 
+    public LocalDateTime getDateTime() {
+        return this.dateTime;
+    }
+
     /**
      * Helper method to stringify LocalDateTime objects into original text string
      * pass by the user.
