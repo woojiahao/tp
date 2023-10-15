@@ -43,6 +43,7 @@ public class LocationTest {
         assertTrue(Location.isValidLocation("Ben & Jerry")); // &
         assertTrue(Location.isValidLocation("First Avenue, Block 283")); // ,
         assertTrue(Location.isValidLocation("First Avenue, Block 28.3")); // ,
+        assertTrue(Location.isValidLocation("-")); // Blank location
     }
 
     @Test

@@ -56,7 +56,7 @@ public class JsonAdaptedTransaction {
         category = source.getCategory().category;
         dateTime = source.getDateTime().originalString();
         location = source.getLocation().location;
-        type = source.getType().type.name();
+        type = source.getType().type.getOriginalString();
     }
 
     /**

@@ -39,16 +39,6 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
-     */
-    Path getAddressBookFilePath();
-
-    /**
-     * Sets the user prefs' address book file path.
-     */
-    void setAddressBookFilePath(Path addressBookFilePath);
-
-    /**
      * Replaces address book data with the data in {@code addressBook}.
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
@@ -88,6 +78,16 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Returns the user prefs' UniCash file path.
+     */
+    Path getUniCashFilePath();
+
+    /**
+     * Sets the user prefs' UniCash file path.
+     */
+    void setUniCashFilePath(Path uniCashFilePath);
 
     /**
      * Replaces UniCash data with the data in {@code uniCash}.
