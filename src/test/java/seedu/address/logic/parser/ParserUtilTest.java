@@ -45,9 +45,6 @@ public class ParserUtilTest {
     private static final String VALID_DATETIME = "18-08-2001 18:30";
     private static final String VALID_CATEGORY = "hobbies";
     private static final String VALID_LOCATION = "orchard road";
-    private static final String DEFAULT_LOCATION = "-";
-    private static final String DEFAULT_CATEGORY = "-";
-
     private static final String WHITESPACE = " \t\r\n";
 
     @Test
@@ -278,6 +275,12 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseCategory_empty_returnsDefaultCategory() throws Exception {
+        Category expectedCategory = new Category(WHITESPACE);
+        assertEquals(expectedCategory, ParserUtil.parseCategory(WHITESPACE));
+    }
+
+    @Test
     public void parseLocation_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseLocation((String) null));
     }
@@ -298,5 +301,11 @@ public class ParserUtilTest {
         String locationWithWhiteSpace = WHITESPACE + VALID_LOCATION + WHITESPACE;
         Location expectedLocation = new Location(VALID_LOCATION);
         assertEquals(expectedLocation, ParserUtil.parseLocation(locationWithWhiteSpace));
+    }
+
+    @Test
+    public void parseLocation_empty_returnsDefaultLocation() throws Exception {
+        Location expectedLocation = new Location(WHITESPACE);
+        assertEquals(expectedLocation, ParserUtil.parseLocation(WHITESPACE));
     }
 }

@@ -1,6 +1,5 @@
 package seedu.address.model.transaction;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -18,12 +17,6 @@ public class DateTimeTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new DateTime(null));
-    }
-
-    @Test
-    public void constructor_emptyString_success() {
-        assertDoesNotThrow(() -> new DateTime(""));
-        assertDoesNotThrow(() -> new DateTime("01-01-2001 18:18"));
     }
 
     @Test

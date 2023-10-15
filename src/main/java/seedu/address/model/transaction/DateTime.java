@@ -20,7 +20,7 @@ public class DateTime {
             "DateTime should be in the following format " + DATETIME_PATTERN;
     public static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter
             .ofPattern(DATETIME_PATTERN);
-    public final LocalDateTime dateTime;
+    private LocalDateTime dateTime;
 
     /**
      * Constructs a {@code DateTime}.
@@ -30,12 +30,7 @@ public class DateTime {
      */
     public DateTime(String dateTime) {
         requireAllNonNull(dateTime);
-        if (dateTime.isBlank()) {
-            this.dateTime = LocalDateTime.now();
-            return;
-        }
-        checkArgument(isValidDateTime(dateTime), MESSAGE_CONSTRAINTS);
-        this.dateTime = LocalDateTime.parse(dateTime, DATETIME_FORMATTER);
+        init(dateTime, Clock.systemDefaultZone());
     }
 
     /**
@@ -48,6 +43,17 @@ public class DateTime {
      */
     public DateTime(String dateTime, Clock clock) {
         requireAllNonNull(dateTime);
+        init(dateTime, clock);
+    }
+
+    /**
+     * Initialises the DateTime object when called by constructors.
+     * Sets the dateTime based on given {@code dateTime} and {@code clock}.
+     *
+     * @param dateTime the dateTime string to be set.
+     * @param clock the clock object of the system.
+     */
+    private void init(String dateTime, Clock clock) {
         if (dateTime.isBlank()) {
             this.dateTime = LocalDateTime.now(clock);
             return;

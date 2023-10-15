@@ -189,13 +189,10 @@ public class ParserUtil {
     public static DateTime parseDateTime(String dateTimeString) throws ParseException {
         requireNonNull(dateTimeString);
         String trimmedDateTime = dateTimeString.trim();
-        if (trimmedDateTime.isBlank()) {
-            return new DateTime(trimmedDateTime);
-        }
-
-        if (!DateTime.isValidDateTime(trimmedDateTime)) {
+        if (!trimmedDateTime.isBlank() && !DateTime.isValidDateTime(trimmedDateTime)) {
             throw new ParseException(DateTime.MESSAGE_CONSTRAINTS);
         }
+
         return new DateTime(trimmedDateTime);
     }
 
@@ -208,13 +205,10 @@ public class ParserUtil {
     public static Category parseCategory(String category) throws ParseException {
         requireNonNull(category);
         String trimmedCategory = category.trim();
-        if (trimmedCategory.isBlank()) {
-            return new Category(trimmedCategory);
-        }
-
-        if (!Category.isValidCategory(trimmedCategory)) {
+        if (!trimmedCategory.isBlank() && !Category.isValidCategory(trimmedCategory)) {
             throw new ParseException(Category.MESSAGE_CONSTRAINTS);
         }
+
         return new Category(trimmedCategory);
     }
 
@@ -227,13 +221,10 @@ public class ParserUtil {
     public static Location parseLocation(String location) throws ParseException {
         requireNonNull(location);
         String trimmedLocation = location.trim();
-        if (trimmedLocation.isBlank()) {
-            return new Location(trimmedLocation);
-        }
-
-        if (!Location.isValidLocation(trimmedLocation)) {
+        if (!trimmedLocation.isBlank() && !Location.isValidLocation(trimmedLocation)) {
             throw new ParseException(Location.MESSAGE_CONSTRAINTS);
         }
+
         return new Location(trimmedLocation);
     }
 }

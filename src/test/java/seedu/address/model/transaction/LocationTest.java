@@ -16,8 +16,8 @@ public class LocationTest {
 
     @Test
     public void constructor_noLocation_setDefault() {
-        String empty = "";
-        assertEquals("-", new Location(empty).toString());
+        assertEquals("-", new Location("").toString());
+        assertEquals("-", new Location(" ").toString());
     }
 
     @Test
