@@ -4,8 +4,6 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-import static java.util.Objects.requireNonNull;
-
 /**
  * Parses input arguments for the list command.
  */
@@ -19,7 +17,6 @@ public class ListCommandParser implements Parser<ListCommand> {
      */
     @Override
     public ListCommand parse(String userInput) throws ParseException {
-        requireNonNull(userInput);
         //list command must not have any additional arguments
         if (!userInput.trim().isBlank()) {
             throw new ParseException(ListCommand.MESSAGE_FAILURE);
