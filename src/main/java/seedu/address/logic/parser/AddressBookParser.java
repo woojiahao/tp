@@ -25,6 +25,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.transaction.AddTransactionCommandParser;
 import seedu.address.logic.parser.transaction.DeleteTransactionCommandParser;
 import seedu.address.logic.parser.transaction.GetTotalExpenditureCommandParser;
+import seedu.address.logic.parser.transaction.ListCommandParser;
 
 /**
  * Parses user input.
@@ -76,7 +77,7 @@ public class AddressBookParser {
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            return new ListCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
