@@ -26,6 +26,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.transaction.AddTransactionCommand;
 import seedu.address.logic.commands.transaction.ClearTransactionsCommand;
 import seedu.address.logic.commands.transaction.DeleteTransactionCommand;
+import seedu.address.logic.commands.transaction.GetTotalExpenditureCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -107,8 +108,8 @@ public class AddressBookParserTest {
     public void parseCommand_deleteTransaction() throws Exception {
         DeleteTransactionCommand command = (DeleteTransactionCommand)
                 parser.parseCommand(
-                DeleteTransactionCommand.COMMAND_WORD + " "
-                        + INDEX_FIRST_TRANSACTION.getOneBased());
+                        DeleteTransactionCommand.COMMAND_WORD + " "
+                                + INDEX_FIRST_TRANSACTION.getOneBased());
         assertEquals(new DeleteTransactionCommand(INDEX_FIRST_TRANSACTION), command);
     }
 
@@ -120,9 +121,21 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_getTotalExpenditure() throws Exception {
+        assertTrue(
+                parser.parseCommand(GetTotalExpenditureCommand.COMMAND_WORD + " 8")
+                        instanceof GetTotalExpenditureCommand
+        );
+        assertTrue(
+                parser.parseCommand(ClearTransactionsCommand.COMMAND_WORD + " 8 c/Food")
+                        instanceof ClearTransactionsCommand
+        );
+    }
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+                -> parser.parseCommand(""));
     }
 
     @Test
