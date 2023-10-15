@@ -11,6 +11,9 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.transaction.Category;
 
+/**
+ * Parses get_total_expenditure command to extract parameters.
+ */
 public class GetTotalExpenditureCommandParser implements Parser<GetTotalExpenditureCommand> {
 
     @Override
