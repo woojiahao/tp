@@ -7,7 +7,7 @@ import java.time.Month;
 
 import seedu.address.commons.enums.TransactionType;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
+import seedu.address.logic.UniCashMessages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -43,7 +43,7 @@ public class GetTotalExpenditureCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (month < 1 || month > 12) {
-            throw new CommandException(Messages.MESSAGE_INVALID_MONTH);
+            throw new CommandException(UniCashMessages.MESSAGE_INVALID_MONTH);
         }
 
         model.updateFilteredTransactionList(transaction -> {
