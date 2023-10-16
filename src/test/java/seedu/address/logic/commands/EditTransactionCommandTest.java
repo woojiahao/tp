@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.transaction;
+package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.UniCashMessages;
+import seedu.address.logic.commands.ClearTransactionsCommand;
 import seedu.address.logic.commands.EditTransactionCommand;
 import seedu.address.logic.commands.EditTransactionCommand.EditTransactionDescriptor;
 import seedu.address.model.Model;
@@ -163,7 +164,7 @@ public class EditTransactionCommandTest {
 
         // different types -> returns false
         assertFalse(copyDescriptor.equals(standardCommand));
-        assertFalse(standardCommand.equals(new ClearCommand()));
+        assertFalse(standardCommand.equals(new ClearTransactionsCommand()));
 
         // different index -> returns false
         assertFalse(standardCommand.equals(new EditTransactionCommand(INDEX_SECOND_TRANSACTION, DESC_NUS)));
