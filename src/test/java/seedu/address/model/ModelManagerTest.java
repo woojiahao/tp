@@ -154,7 +154,7 @@ public class ModelManagerTest {
         // different types -> returns false
         assertNotEquals(5, modelManager);
 
-        assertNotEquals(differentUniCash, modelManager);
+        assertFalse(modelManager.equals(uniCash));
 
         // TODO: Replicate this for transaction list
         // different filteredList -> returns false
