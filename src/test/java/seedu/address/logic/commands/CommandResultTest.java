@@ -24,7 +24,7 @@ public class CommandResultTest {
         // different types -> returns false
         assertNotEquals(0.5f, commandResult);
 
-        assertFalse(commandResult.equals(new CommandResult("others")));
+        assertFalse(commandResult.equals(5));
 
         // different feedbackToUser value -> returns false
         assertNotEquals(commandResult, new CommandResult("different"));

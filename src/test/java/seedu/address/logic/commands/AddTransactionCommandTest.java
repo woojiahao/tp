@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalTransactions.NUS;
@@ -75,6 +76,8 @@ public class AddTransactionCommandTest {
 
         // different Transaction -> returns false
         assertNotEquals(addNusCommand, addBobCommand);
+
+        assertFalse(addNusCommand.equals(2));
     }
 
     @Test
