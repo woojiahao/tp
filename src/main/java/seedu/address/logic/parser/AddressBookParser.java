@@ -102,6 +102,9 @@ public class AddressBookParser {
         case HelpCommandUniCash.COMMAND_WORD:
             return new HelpCommandUniCash();
 
+        case ExitCommandUniCash.COMMAND_WORD:
+            return new ExitCommandUniCash();
+
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
