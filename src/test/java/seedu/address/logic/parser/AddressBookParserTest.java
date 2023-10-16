@@ -106,6 +106,22 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_helpUniCash() throws Exception {
+        assertTrue(parser.parseCommand(
+                HelpCommandUniCash.COMMAND_WORD) instanceof HelpCommandUniCash);
+        assertTrue(parser.parseCommand(
+                HelpCommandUniCash.COMMAND_WORD + " 3") instanceof HelpCommandUniCash);
+    }
+
+    @Test
+    public void parseCommand_exitUniCash() throws Exception {
+        assertTrue(parser.parseCommand(
+                ExitCommandUniCash.COMMAND_WORD) instanceof ExitCommandUniCash);
+        assertTrue(parser.parseCommand(
+                ExitCommandUniCash.COMMAND_WORD + " 3") instanceof ExitCommandUniCash);
+    }
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
                 -> parser.parseCommand(""));

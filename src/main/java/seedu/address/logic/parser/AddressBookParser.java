@@ -81,6 +81,13 @@ public class AddressBookParser {
         case ClearTransactionsCommand.COMMAND_WORD:
             return new ClearTransactionsCommand();
 
+        case HelpCommandUniCash.COMMAND_WORD:
+            return new HelpCommandUniCash();
+
+        case ExitCommandUniCash.COMMAND_WORD:
+            return new ExitCommandUniCash();
+
+
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
