@@ -40,9 +40,7 @@ public class JsonAdaptedTransactionTest {
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
-        System.out.println(SHOPPING);
         var transaction = new JsonAdaptedTransaction(SHOPPING);
-        System.out.println(transaction);
         assertEquals(SHOPPING, transaction.toModelType());
     }
 

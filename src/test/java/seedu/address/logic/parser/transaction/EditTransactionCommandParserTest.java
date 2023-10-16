@@ -30,6 +30,7 @@ public class EditTransactionCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTransactionCommand.MESSAGE_USAGE);
+    private static final String CATEGORY_EMPTY = " " + PREFIX_CATEGORY;
 
     private EditTransactionCommandParser parser = new EditTransactionCommandParser();
 
@@ -208,4 +209,15 @@ public class EditTransactionCommandParserTest {
                 UniCashMessages.getErrorMessageForDuplicatePrefixes(PREFIX_LOCATION, PREFIX_CATEGORY, PREFIX_DATETIME));
     }
 
+    @Test
+    public void parse_resetCategories_success() {
+        Index targetIndex = INDEX_THIRD_TRANSACTION;
+        String userInput = targetIndex.getOneBased() + CATEGORY_EMPTY;
+
+        EditTransactionCommand.EditTransactionDescriptor descriptor = new EditTransactionDescriptorBuilder()
+                .withCategories().build();
+        EditTransactionCommand expectedCommand = new EditTransactionCommand(targetIndex, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
 }
