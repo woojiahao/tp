@@ -12,7 +12,7 @@ title: Developer Guide
 **Value Proposition:** It provides university students with an intuitive and frictionless experience to have transparency on their expenditure to help them better understand their spendings so they can develop better financial habits as they transition into adulthood. 
 
 ## Potential Features:
-- For every user > track individual finance (base)
+- For every user > track individual finances (base)
 - Input spending & set budgets (base)
 - Tag another user and distribute the spendings during outings (extension)
 - Viewing spending habits (extension)
@@ -22,21 +22,19 @@ title: Developer Guide
 
 ## Feature List [v1.2]
 #### Track Finances
-- Create expenses - Name, date, location, Tag (type/category)
-- Delete expenses - Delete a single expense
-- Edit expenses - Modify expenses
-- Find expenses - Find an expense 
-- Tabulate total expense  - Sum of all expenses & remaining balance
-
-#### Track Income
-- Input income - Add income: Name, date, amount
-- Delete income
-- Find income - find by name, date, value
+- Create transactions - Name, date, location, Tag (type/category)
+  - Input either Income or Expense
+- Delete transactions - Delete a single transaction
+  - Remove either an Income or an Expense
+- Clear transactions - Mass delete all transactions
+- Edit transactions - Modify transactions
+- Find transaction - Find a transaction by a given keyword 
+- Tabulate total expenditure  - Sum of all expenses & remaining balance
 
 #### Categorize Finances
-- Add tags – provide category of spending
-- Edit tags - change category of spending
-- Remove tags - delete category of spending
+- Add tags – provide category of transaction
+- Edit tags - change category of transaction
+- Remove tags - delete category of transaction
 
 
 ## Use Cases
@@ -46,11 +44,11 @@ For the following Use Cases (unless specified otherwise):
 - The System is `UniCa$h`
 - The Actor is `User`
 
-#### Use Case: UC01 - Adding an income
+#### Use Case: UC01 - Adding a transaction
 **MSS:**
-1. User enters the command to add an income with the correct format.
+1. User enters the command to add a transaction with the correct format.
 2. User submits the request.
-3. UniCa$h adds the income to the income list and displays success message.
+3. UniCa$h adds the transaction to the transactions list and displays success message.
     
     Use Case ends
 
@@ -63,12 +61,12 @@ For the following Use Cases (unless specified otherwise):
   - 2b2. User confirms the request
   - Use case resumes at step 3.
 
-#### Use Case: UC02 - Finding an income
+#### Use Case: UC02 - Finding a transaction
 **MSS:**
-1. User enters the command to find an income with the correct format.
+1. User enters the command to find a transaction with the correct format.
 2. User submits the request.
-3. UniCa$h filters all the incomes based on the specified filters and returns
-the filtered income with a success message.
+3. UniCa$h filters all the transactions based on the specified filters and returns
+the filtered transaction with a success message.
 
    Use Case ends
 
@@ -81,12 +79,12 @@ the filtered income with a success message.
   - 3a1. UniCa$h displays a message saying no results found.
   - Use Case resumes at step 1
 
-#### Use Case: UC03 - Delete an income
+#### Use Case: UC03 - Delete a transaction
 **MSS:**
-1. User enters the command to delete an income with the correct format.
+1. User enters the command to delete a transaction with the correct format.
 2. User submits the request.
-3. UniCa$h finds the income based on the passed in arguments.
-4. UniCa$h deletes the income.
+3. UniCa$h finds the transaction based on the passed in arguments.
+4. UniCa$h deletes the transaction.
 5. UniCa$h displays success message.
 
    Use Case ends
@@ -96,16 +94,16 @@ the filtered income with a success message.
     - 2a1. UniCa$h displays an error message with the correct command format.
     - Use case resumes at step 1.
 
-- 3a. UniCa$h does not find any income matching the provided arguments.
+- 3a. UniCa$h does not find any transactions matching the provided arguments.
     - 3a1. UniCa$h displays a message saying no results found.
     - Use Case resumes at step 1
 
 
 #### Use Case: UC05 - Listing All Transactions
 **MSS:**
-1. User enters the command to list all expenses with the correct format (i.e. no parameters).
+1. User enters the command to list all transactions with the correct format (i.e. no parameters).
 2. User submits the request.
-3. UniCa$h retrieves the list of all expenses and displays them for the User.
+3. UniCa$h retrieves the list of all transactions and displays them for the User.
 
    Use Case ends.
 
@@ -114,15 +112,15 @@ the filtered income with a success message.
     - 2a1. UniCa$h displays an error message, requests for the correct format.
     - Use case resumes from step 1.
 
-- 3a. There are no expenses for UniCa$h to retrieve.
+- 3a. There are no transactions for UniCa$h to retrieve.
     - 3a1. UniCa$h displays a message informing the User that there are no expenses. 
     - Use Case ends.
 
-#### Use Case: UC06 - Finding Transaction
+#### Use Case: UC06 - Finding a Transaction
 **MSS:**
 1. User enters the command to find transaction with the correct format.
 2. User submits the request.
-3. UniCa$h filters the expenses based on the specified filters and returns the filtered list of expenses with a success message.
+3. UniCa$h filters the transactions based on the specified filters and returns the filtered list of expenses with a success message.
 
    Use Case ends.
 
@@ -139,9 +137,9 @@ the filtered income with a success message.
     - 3a1. UniCa$h displays a message informing the user that no results were found.
     - Use Case ends.
 
-#### Use Case: UC07 - Tabulate Total Expenses
+#### Use Case: UC07 - Tabulate Total Expenditure
 **MSS:**
-1. User enters the command to tabulate total expenses.
+1. User enters the command to tabulate total expenditure.
 2. User submits the request.
 3. UniCa$h tabulates the expenditure based on the parameters passed in.
 4. UniCa$h displays the tabulated expenditure.
@@ -157,25 +155,51 @@ the filtered income with a success message.
 
   Use case resumes from Step 3.
 
-#### Use Case: UC08 – Delete an Expense
+#### Use Case: UC08 - Clear all transactions
 **MSS:**
-1. User enters the correct command to delete an expense.
+1. User enters the command to clear all transactions with the correct format. (i.e. no parameters)
 2. User submits the request.
-3. UniCa$h finds the expense based on the passed in arguments.
-4. UniCa$h deletes the expense.
-5. UniCa$h displays successful deletion message.
+3. UniCa$h deletes all transactions in the transactions list.
+4. UniCa$h displays success message.
 
    Use Case ends
 
 **Extensions**
-- 2a. User enters an incorrect command.
-    - 2a1. UniCa$h displays an error message with the correct command format.
-    - 2a2. UniCa$h also displays a "no message deleted" assurance message.
-    - Use case resumes at step 1.
+- 2a. User enters an incorrect format.
+  - 2a1. UniCa$h displays an error message with the correct command format.
+  - Use case resumes at step 1.
 
-- 3a. UniCa$h does not find any expense matching the given input.
-    - 3a1. UniCa$h displays a message saying no results found.
-    - Use Case ends
+- 3a. UniCa$h finds an empty transactions list.
+  - 3a1. UniCa$h displays a message saying that transactions list is empty.
+  - Use Case resumes at step 1
+
+#### Use Case: UC09 - Show UniCa$h Help
+**MSS:**
+1. User enters the command to show help with the correct format. (i.e. no parameters)
+2. User submits the request.
+3. UniCa$h displays help message in the help window.
+
+   Use Case ends
+
+**Extensions**
+- 2a. User enters an incorrect format.
+  - 2a1. UniCa$h displays an error message with the correct command format.
+  - Use case resumes at step 1.
+
+
+#### Use Case: UC10 - Exit UniCa$h
+**MSS:**
+1. User enters the command to exit UniCa$h with the correct format (i.e. no parameters)
+2. User submits the request. 
+3. UniCa$h displays exit message and application closes
+
+   Use Case ends
+
+**Extensions**
+- 2a. User enters an incorrect format.
+  - 2a1. UniCa$h displays an error message with the correct command format.
+  - Use case resumes at step 1.
+
 
 ## Links
 User Stories: [https://github.com/orgs/AY2324S1-CS2103-T16-3/projects/1/views/2](https://github.com/orgs/AY2324S1-CS2103-T16-3/projects/1/views/2)

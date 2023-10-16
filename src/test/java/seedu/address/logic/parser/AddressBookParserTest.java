@@ -17,10 +17,10 @@ import seedu.address.logic.commands.AddTransactionCommand;
 import seedu.address.logic.commands.ClearTransactionsCommand;
 import seedu.address.logic.commands.DeleteTransactionCommand;
 import seedu.address.logic.commands.EditTransactionCommand;
-import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.ExitCommandUniCash;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.GetTotalExpenditureCommand;
-import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.HelpCommandUniCash;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.transaction.Transaction;
@@ -35,8 +35,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_exit() throws Exception {
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
+        assertTrue(parser.parseCommand(ExitCommandUniCash.COMMAND_WORD) instanceof ExitCommandUniCash);
+        assertTrue(parser.parseCommand(ExitCommandUniCash.COMMAND_WORD + " 3") instanceof ExitCommandUniCash);
     }
 
     @Test
@@ -49,8 +49,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_help() throws Exception {
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+        assertTrue(parser.parseCommand(HelpCommandUniCash.COMMAND_WORD) instanceof HelpCommandUniCash);
+        assertTrue(parser.parseCommand(HelpCommandUniCash.COMMAND_WORD + " 3") instanceof HelpCommandUniCash);
     }
 
     @Test
@@ -106,8 +106,24 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_helpUniCash() throws Exception {
+        assertTrue(parser.parseCommand(
+                HelpCommandUniCash.COMMAND_WORD) instanceof HelpCommandUniCash);
+        assertTrue(parser.parseCommand(
+                HelpCommandUniCash.COMMAND_WORD + " 3") instanceof HelpCommandUniCash);
+    }
+
+    @Test
+    public void parseCommand_exitUniCash() throws Exception {
+        assertTrue(parser.parseCommand(
+                ExitCommandUniCash.COMMAND_WORD) instanceof ExitCommandUniCash);
+        assertTrue(parser.parseCommand(
+                ExitCommandUniCash.COMMAND_WORD + " 3") instanceof ExitCommandUniCash);
+    }
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommandUniCash.MESSAGE_USAGE), ()
                 -> parser.parseCommand(""));
     }
 
