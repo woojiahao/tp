@@ -185,7 +185,7 @@ public class EditTransactionCommandParserTest {
 
         assertParseFailure(parser, userInput, UniCashMessages.getErrorMessageForDuplicatePrefixes(PREFIX_LOCATION));
 
-        // mulltiple valid fields repeated
+        // multiple valid fields repeated
         userInput = targetIndex.getOneBased() + CommandTestUtil.LOCATION_DESC_NUS + CommandTestUtil.TYPE_DESC_INCOME
                 + CommandTestUtil.AMOUNT_DESC_NUS + CommandTestUtil.CATEGORY_DESC_NUS
                 + CommandTestUtil.DATETIME_DESC_NUS + CommandTestUtil.LOCATION_DESC_NUS
