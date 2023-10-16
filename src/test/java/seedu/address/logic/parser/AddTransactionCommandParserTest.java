@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.UniCashMessages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_INTERN;
 import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_NUS;
 import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_ENTERTAINMENT;
@@ -33,7 +33,7 @@ import static seedu.address.testutil.TypicalTransactions.NUS;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.Messages;
+import seedu.address.logic.UniCashMessages;
 import seedu.address.logic.commands.AddTransactionCommand;
 import seedu.address.logic.parser.AddTransactionCommandParser;
 import seedu.address.model.transaction.Amount;

@@ -6,7 +6,7 @@ package seedu.address.logic.commands;
 //import org.junit.jupiter.api.BeforeEach;
 //import org.junit.jupiter.api.Test;
 //
-//import seedu.address.logic.Messages;
+//import seedu.address.logic.UniCashMessages;
 //import seedu.address.model.Model;
 //import seedu.address.model.ModelManager;
 //import seedu.address.model.UniCash;
