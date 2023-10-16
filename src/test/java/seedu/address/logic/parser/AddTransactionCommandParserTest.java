@@ -1,4 +1,4 @@
-package seedu.address.logic.parser.transaction;
+package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_INTERN;
