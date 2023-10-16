@@ -46,21 +46,23 @@ public class CategoryTest {
 
     @Test
     public void equals() {
-        Category name = new Category("Valid Category");
+        Category category = new Category("Valid Category");
 
         // same values -> returns true
-        assertEquals(name, new Category("Valid Category"));
+        assertEquals(category, new Category("Valid Category"));
 
         // same object -> returns true
-        assertEquals(name, name);
+        assertEquals(category, category);
 
         // null -> returns false
-        assertNotEquals(null, name);
+        assertNotEquals(null, category);
 
         // different types -> returns false
-        assertNotEquals(5.0f, name);
+        assertNotEquals(5.0f, category);
+
+        assertFalse(category.equals(5));
 
         // different values -> returns false
-        assertNotEquals(name, new Category("Other Valid Category"));
+        assertNotEquals(category, new Category("Other Valid Category"));
     }
 }

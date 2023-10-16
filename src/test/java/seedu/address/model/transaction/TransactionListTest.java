@@ -172,6 +172,8 @@ public class TransactionListTest {
 
         // null -> returns false
         assertNotEquals(null, transactionList);
+
+        assertFalse(transactionList.equals(null));
     }
 
     @Test

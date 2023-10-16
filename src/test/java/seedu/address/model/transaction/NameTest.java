@@ -56,6 +56,8 @@ public class NameTest {
         // different types -> returns false
         assertNotEquals(5.0f, name);
 
+        assertFalse(name.equals(5));
+
         // different values -> returns false
         assertNotEquals(name, new Name("Other Valid Name"));
     }

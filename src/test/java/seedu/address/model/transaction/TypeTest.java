@@ -42,22 +42,24 @@ public class TypeTest {
 
     @Test
     public void equals() {
-        Type name = new Type("income");
+        Type type = new Type("income");
 
         // same values -> returns true
-        assertEquals(name, new Type("income"));
+        assertEquals(type, new Type("income"));
 
         // same object -> returns true
-        assertEquals(name, name);
+        assertEquals(type, type);
 
         // null -> returns false
-        assertNotEquals(null, name);
+        assertNotEquals(null, type);
 
         // different types -> returns false
-        assertNotEquals(5.0f, name);
+        assertNotEquals(5.0f, type);
+
+        assertFalse(type.equals(5));
 
         // different values -> returns false
-        assertNotEquals(name, new Type("expense"));
+        assertNotEquals(type, new Type("expense"));
     }
 
     @Test

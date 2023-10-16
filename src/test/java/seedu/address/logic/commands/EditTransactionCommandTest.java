@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_NUS;
@@ -163,6 +164,8 @@ public class EditTransactionCommandTest {
         // different types -> returns false
         assertNotEquals(copyDescriptor, standardCommand);
         assertNotEquals(standardCommand, new ClearTransactionsCommand());
+
+        assertFalse(standardCommand.equals(copyDescriptor));
 
         // different index -> returns false
         assertNotEquals(standardCommand, new EditTransactionCommand(INDEX_SECOND_TRANSACTION, DESC_NUS));

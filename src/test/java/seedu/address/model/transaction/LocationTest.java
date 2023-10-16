@@ -63,6 +63,8 @@ public class LocationTest {
         // different types -> returns false
         assertNotEquals(5.0f, name);
 
+        assertFalse(name.equals(5));
+
         // different values -> returns false
         assertNotEquals(name, new Location("Other Valid Location"));
     }

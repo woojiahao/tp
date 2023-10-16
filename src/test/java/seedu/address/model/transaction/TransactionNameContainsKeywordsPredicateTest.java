@@ -39,6 +39,8 @@ public class TransactionNameContainsKeywordsPredicateTest {
         // null -> returns false
         assertNotEquals(null, firstPredicate);
 
+        assertFalse(firstPredicate.equals(1));
+
         // different person -> returns false
         assertNotEquals(firstPredicate, secondPredicate);
     }

@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.Test;
@@ -22,6 +23,8 @@ public class CommandResultTest {
 
         // different types -> returns false
         assertNotEquals(0.5f, commandResult);
+
+        assertFalse(commandResult.equals(new CommandResult("others")));
 
         // different feedbackToUser value -> returns false
         assertNotEquals(commandResult, new CommandResult("different"));

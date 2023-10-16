@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.UniCashMessages.MESSAGE_TRANSACTIONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -48,6 +49,8 @@ public class FindCommandTest {
 
         // different person -> returns false
         assertNotEquals(findFirstCommand, findSecondCommand);
+
+        assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
     @Test
