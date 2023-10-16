@@ -20,12 +20,15 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.transaction.AddTransactionCommand;
 import seedu.address.logic.commands.transaction.ClearTransactionsCommand;
 import seedu.address.logic.commands.transaction.DeleteTransactionCommand;
+import seedu.address.logic.commands.transaction.EditTransactionCommand;
 import seedu.address.logic.commands.transaction.GetTotalExpenditureCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.transaction.AddTransactionCommandParser;
 import seedu.address.logic.parser.transaction.DeleteTransactionCommandParser;
+import seedu.address.logic.parser.transaction.EditTransactionCommandParser;
 import seedu.address.logic.parser.transaction.GetTotalExpenditureCommandParser;
 import seedu.address.logic.parser.transaction.ListCommandParser;
+
 
 /**
  * Parses user input.
@@ -87,6 +90,9 @@ public class AddressBookParser {
 
         case AddTransactionCommand.COMMAND_WORD:
             return new AddTransactionCommandParser().parse(arguments);
+
+        case EditTransactionCommand.COMMAND_WORD:
+            return new EditTransactionCommandParser().parse(arguments);
 
         case DeleteTransactionCommand.COMMAND_WORD:
             return new DeleteTransactionCommandParser().parse(arguments);

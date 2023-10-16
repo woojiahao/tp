@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import seedu.address.logic.commands.transaction.AddTransactionCommand;
+import seedu.address.logic.commands.transaction.EditTransactionCommand;
 import seedu.address.model.transaction.Transaction;
 
 /**
@@ -34,6 +35,24 @@ public class TransactionUtil {
         sb.append(PREFIX_DATETIME + transaction.getDateTime().originalString() + " ");
         sb.append(PREFIX_LOCATION + transaction.getLocation().location + " ");
 
+        return sb.toString();
+    }
+
+    public static String getEditTransactionDescriptorDetails(EditTransactionCommand
+                                                                     .EditTransactionDescriptor descriptor) {
+        StringBuilder sb = new StringBuilder();
+        descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName)
+                .append(" "));
+        descriptor.getType().ifPresent(type -> sb.append(PREFIX_TYPE).append(type.type.getOriginalString())
+                .append(" "));
+        descriptor.getAmount().ifPresent(amount -> sb.append(PREFIX_AMOUNT).append(amount.amount)
+                .append(" "));
+        descriptor.getCategory().ifPresent(category -> sb.append(PREFIX_CATEGORY).append(category.category)
+                .append(" "));
+        descriptor.getLocation().ifPresent(location -> sb.append(PREFIX_LOCATION).append(location)
+                .append(" "));
+        descriptor.getDateTime().ifPresent(dateTime -> sb.append(PREFIX_DATETIME).append(dateTime.originalString())
+                .append(" "));
         return sb.toString();
     }
 }

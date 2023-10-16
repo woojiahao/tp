@@ -20,6 +20,7 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.transaction.EditTransactionCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -27,6 +28,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.transaction.Transaction;
 import seedu.address.model.transaction.TransactionNameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditTransactionDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -55,7 +57,9 @@ public class CommandTestUtil {
     public static final String VALID_DATETIME_INTERN = "08-08-2008 08:08";
     public static final String VALID_DATETIME_SHOPPING = "01-02-2008 11:08";
     public static final String VALID_CATEGORY_ENTERTAINMENT = "entertainment";
+    public static final String VALID_CATEGORY_NUS = "Teaching Assistant";
     public static final String VALID_LOCATION_ORCHARD = "orchard";
+    public static final String VALID_LOCATION_NUS = "NUS";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -76,7 +80,9 @@ public class CommandTestUtil {
     public static final String TYPE_DESC_EXPENSE = " " + PREFIX_TYPE + VALID_TYPE_EXPENSE;
     public static final String TYPE_DESC_INCOME = " " + PREFIX_TYPE + VALID_TYPE_INCOME;
     public static final String CATEGORY_DESC_ENTERTAINMENT = " " + PREFIX_CATEGORY + VALID_CATEGORY_ENTERTAINMENT;
+    public static final String CATEGORY_DESC_NUS = " " + PREFIX_CATEGORY + VALID_CATEGORY_NUS;
     public static final String LOCATION_DESC_ORCHARD = " " + PREFIX_LOCATION + VALID_LOCATION_ORCHARD;
+    public static final String LOCATION_DESC_NUS = " " + PREFIX_LOCATION + VALID_LOCATION_NUS;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -95,6 +101,8 @@ public class CommandTestUtil {
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditTransactionCommand.EditTransactionDescriptor DESC_NUS;
+    public static final EditTransactionCommand.EditTransactionDescriptor DESC_SHOPPING;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -103,6 +111,13 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_NUS = new EditTransactionDescriptorBuilder().withName(VALID_TRANSACTION_NAME_NUS)
+                .withAmount(VALID_AMOUNT_NUS).withType(VALID_TYPE_INCOME).withCategory(VALID_CATEGORY_NUS)
+                .withDateTime(VALID_DATETIME_NUS).withLocation(VALID_LOCATION_NUS).build();
+        DESC_SHOPPING = new EditTransactionDescriptorBuilder().withName(VALID_TRANSACTION_NAME_SHOPPING)
+                .withCategory(VALID_CATEGORY_ENTERTAINMENT).withAmount(VALID_AMOUNT_SHOPPING)
+                .withType(VALID_TYPE_EXPENSE).withDateTime(VALID_DATETIME_SHOPPING).withLocation(VALID_LOCATION_ORCHARD)
+                .build();
     }
 
     /**

@@ -65,7 +65,7 @@ public class Transaction {
 
     /**
      * Returns true if both transactions have the same data fields.
-     * This defines a stronger notion of equality between two expenses.
+     * This defines a stronger notion of equality between two transactions.
      */
     @Override
     public boolean equals(Object other) {
