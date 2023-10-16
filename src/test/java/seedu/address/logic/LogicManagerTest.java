@@ -7,7 +7,6 @@ import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_NUS;
 import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_NUS;
 import static seedu.address.logic.commands.CommandTestUtil.DATETIME_DESC_NUS;
 import static seedu.address.logic.commands.CommandTestUtil.LOCATION_DESC_NUS;
-import static seedu.address.logic.commands.CommandTestUtil.LOCATION_DESC_ORCHARD;
 import static seedu.address.logic.commands.CommandTestUtil.TRANSACTION_NAME_DESC_NUS;
 import static seedu.address.logic.commands.CommandTestUtil.TYPE_DESC_EXPENSE;
 import static seedu.address.testutil.Assert.assertThrows;
