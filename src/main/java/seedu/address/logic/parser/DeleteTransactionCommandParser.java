@@ -1,4 +1,4 @@
-package seedu.address.logic.parser.transaction;
+package seedu.address.logic.parser;
 import static seedu.address.logic.UniCashMessages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.commons.core.index.Index;

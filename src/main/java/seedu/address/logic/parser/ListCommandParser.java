@@ -1,4 +1,4 @@
-package seedu.address.logic.parser.transaction;
+package seedu.address.logic.parser;
 
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.Parser;

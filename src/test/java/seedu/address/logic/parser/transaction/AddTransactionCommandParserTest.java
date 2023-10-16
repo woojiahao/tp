@@ -35,6 +35,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddTransactionCommand;
+import seedu.address.logic.parser.AddTransactionCommandParser;
 import seedu.address.model.transaction.Amount;
 import seedu.address.model.transaction.Transaction;
 import seedu.address.model.transaction.Type;

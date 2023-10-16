@@ -19,11 +19,6 @@ import seedu.address.logic.commands.DeleteTransactionCommand;
 import seedu.address.logic.commands.EditTransactionCommand;
 import seedu.address.logic.commands.GetTotalExpenditureCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.parser.transaction.AddTransactionCommandParser;
-import seedu.address.logic.parser.transaction.DeleteTransactionCommandParser;
-import seedu.address.logic.parser.transaction.EditTransactionCommandParser;
-import seedu.address.logic.parser.transaction.GetTotalExpenditureCommandParser;
-import seedu.address.logic.parser.transaction.ListCommandParser;
 
 
 /**
@@ -59,19 +54,6 @@ public class AddressBookParser {
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
         switch (commandWord) {
-
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
-
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
-
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
-
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
