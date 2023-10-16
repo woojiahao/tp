@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.UniCashMessages;
 import seedu.address.logic.commands.CommandTestUtil;
-import seedu.address.logic.commands.transaction.EditTransactionCommand;
+import seedu.address.logic.commands.EditTransactionCommand;
 import seedu.address.model.transaction.Amount;
 import seedu.address.model.transaction.Category;
 import seedu.address.model.transaction.DateTime;

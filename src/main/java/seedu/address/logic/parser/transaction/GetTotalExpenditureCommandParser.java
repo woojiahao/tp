@@ -3,7 +3,7 @@ package seedu.address.logic.parser.transaction;
 import static seedu.address.logic.UniCashMessages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 
-import seedu.address.logic.commands.transaction.GetTotalExpenditureCommand;
+import seedu.address.logic.commands.GetTotalExpenditureCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;

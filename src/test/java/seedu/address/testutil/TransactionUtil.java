@@ -7,8 +7,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
-import seedu.address.logic.commands.transaction.AddTransactionCommand;
-import seedu.address.logic.commands.transaction.EditTransactionCommand;
+import seedu.address.logic.commands.AddTransactionCommand;
+import seedu.address.logic.commands.EditTransactionCommand;
 import seedu.address.model.transaction.Transaction;
 
 /**

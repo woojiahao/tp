@@ -34,7 +34,7 @@ import static seedu.address.testutil.TypicalTransactions.NUS;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.transaction.AddTransactionCommand;
+import seedu.address.logic.commands.AddTransactionCommand;
 import seedu.address.model.transaction.Amount;
 import seedu.address.model.transaction.Transaction;
 import seedu.address.model.transaction.Type;

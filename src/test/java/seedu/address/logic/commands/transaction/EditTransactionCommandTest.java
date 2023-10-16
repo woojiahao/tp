@@ -20,8 +20,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.UniCashMessages;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.transaction.EditTransactionCommand.EditTransactionDescriptor;
+import seedu.address.logic.commands.EditTransactionCommand;
+import seedu.address.logic.commands.EditTransactionCommand.EditTransactionDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
