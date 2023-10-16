@@ -23,11 +23,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.transaction.AddTransactionCommand;
-import seedu.address.logic.commands.transaction.ClearTransactionsCommand;
-import seedu.address.logic.commands.transaction.DeleteTransactionCommand;
-import seedu.address.logic.commands.transaction.EditTransactionCommand;
-import seedu.address.logic.commands.transaction.GetTotalExpenditureCommand;
+import seedu.address.logic.commands.transaction.*;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
 import seedu.address.model.transaction.Transaction;
@@ -142,6 +138,14 @@ public class AddressBookParserTest {
                 parser.parseCommand(ClearTransactionsCommand.COMMAND_WORD + " 8 c/Food")
                         instanceof ClearTransactionsCommand
         );
+    }
+
+    @Test
+    public void parseCommand_helpUniCash() throws Exception {
+        assertTrue(parser.parseCommand(
+                HelpCommandUniCash.COMMAND_WORD) instanceof HelpCommandUniCash);
+        assertTrue(parser.parseCommand(
+                HelpCommandUniCash.COMMAND_WORD + " 3") instanceof HelpCommandUniCash);
     }
 
     @Test
