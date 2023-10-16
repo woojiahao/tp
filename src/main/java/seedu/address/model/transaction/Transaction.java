@@ -27,12 +27,14 @@ public class Transaction {
      * Constructs a Transaction with all fields populated.
      * Guarantees: details are present and not null, field values are validated, immutable.
      */
-    public Transaction(Name name,
-                       Type type,
-                       Amount amount,
-                       DateTime dateTime,
-                       Location location,
-                       Set<Category> categories) {
+    public Transaction(
+        Name name,
+        Type type,
+        Amount amount,
+        DateTime dateTime,
+        Location location,
+        Set<Category> categories
+    ) {
         requireAllNonNull(name, type, amount, categories, dateTime, location);
         this.name = name;
         this.type = type;
