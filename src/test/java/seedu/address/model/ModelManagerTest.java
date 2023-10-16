@@ -146,8 +146,8 @@ public class ModelManagerTest {
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs, uniCash);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs, uniCash);
+        modelManager = new ModelManager(uniCash, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(uniCash, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -160,12 +160,12 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs, uniCash)));
+        assertFalse(modelManager.equals(new ModelManager(uniCash, userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs, uniCash)));
+        assertFalse(modelManager.equals(new ModelManager(uniCash, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -173,9 +173,9 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setUniCashFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs, uniCash)));
+        assertFalse(modelManager.equals(new ModelManager(uniCash, differentUserPrefs)));
 
         // different differentUniCash -> returns false
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs, differentUniCash)));
+        assertFalse(modelManager.equals(new ModelManager(differentUniCash, userPrefs)));
     }
 }

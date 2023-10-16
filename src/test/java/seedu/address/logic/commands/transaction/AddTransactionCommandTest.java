@@ -21,7 +21,6 @@ import seedu.address.logic.UniCashMessages;
 import seedu.address.logic.commands.AddTransactionCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUniCash;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UniCash;

@@ -8,7 +8,6 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showTransactionAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TRANSACTION;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TRANSACTION;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalTransactions.getTypicalUniCash;
 
 import org.junit.jupiter.api.Test;
@@ -27,7 +26,7 @@ import seedu.address.model.transaction.Transaction;
  */
 public class DeleteTransactionCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalUniCash());
+    private Model model = new ModelManager(getTypicalUniCash(), new UserPrefs());
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
@@ -78,7 +77,7 @@ public class DeleteTransactionCommandTest {
         String expectedMessage = String.format(DeleteTransactionCommand.MESSAGE_DELETE_TRANSACTION_SUCCESS,
                 UniCashMessages.formatTransaction(transactionToDelete));
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), getTypicalUniCash());
+        ModelManager expectedModel = new ModelManager(getTypicalUniCash(), new UserPrefs());
         expectedModel.deleteTransaction(transactionToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -95,7 +94,7 @@ public class DeleteTransactionCommandTest {
         String expectedMessage = String.format(DeleteTransactionCommand.MESSAGE_DELETE_TRANSACTION_SUCCESS,
                 UniCashMessages.formatTransaction(transactionToDelete));
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), getTypicalUniCash());
+        Model expectedModel = new ModelManager(getTypicalUniCash(), new UserPrefs());
         expectedModel.deleteTransaction(transactionToDelete);
         showNoTransaction(expectedModel);
 

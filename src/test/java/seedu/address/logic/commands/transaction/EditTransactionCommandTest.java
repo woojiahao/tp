@@ -13,7 +13,6 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showTransactionAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TRANSACTION;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TRANSACTION;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalTransactions.getTypicalUniCash;
 
 import org.junit.jupiter.api.Test;
@@ -22,7 +21,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.UniCashMessages;
 import seedu.address.logic.commands.EditTransactionCommand;
 import seedu.address.logic.commands.EditTransactionCommand.EditTransactionDescriptor;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -35,7 +33,7 @@ import seedu.address.testutil.TransactionBuilder;
  */
 public class EditTransactionCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalUniCash());
+    private Model model = new ModelManager(getTypicalUniCash(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -47,8 +45,8 @@ public class EditTransactionCommandTest {
         String expectedMessage = String.format(EditTransactionCommand.MESSAGE_EDIT_TRANSACTION_SUCCESS,
                 UniCashMessages.formatTransaction(editedTransaction));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
-                new UserPrefs(), getTypicalUniCash());
+        Model expectedModel = new ModelManager(
+                getTypicalUniCash(), new UserPrefs());
         expectedModel.setTransaction(model.getFilteredTransactionList().get(0), editedTransaction);
 
         assertCommandSuccess(editTransactionCommand, model, expectedMessage, expectedModel);
@@ -74,8 +72,8 @@ public class EditTransactionCommandTest {
         String expectedMessage = String.format(EditTransactionCommand.MESSAGE_EDIT_TRANSACTION_SUCCESS,
                 UniCashMessages.formatTransaction(editedTransaction));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
-                new UserPrefs(), getTypicalUniCash());
+        Model expectedModel = new ModelManager(
+                getTypicalUniCash(), new UserPrefs());
         expectedModel.setTransaction(lastTransaction, editedTransaction);
 
         assertCommandSuccess(editTransactionCommand, model, expectedMessage, expectedModel);
@@ -90,8 +88,8 @@ public class EditTransactionCommandTest {
         String expectedMessage = String.format(EditTransactionCommand.MESSAGE_EDIT_TRANSACTION_SUCCESS,
                 UniCashMessages.formatTransaction(editedTransaction));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
-                new UserPrefs(), getTypicalUniCash());
+        Model expectedModel = new ModelManager(
+                getTypicalUniCash(), new UserPrefs());
 
         assertCommandSuccess(editTransactionCommand, model, expectedMessage, expectedModel);
     }
@@ -110,8 +108,8 @@ public class EditTransactionCommandTest {
         String expectedMessage = String.format(EditTransactionCommand.MESSAGE_EDIT_TRANSACTION_SUCCESS,
                 UniCashMessages.formatTransaction(editedTransaction));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
-                new UserPrefs(), getTypicalUniCash());
+        Model expectedModel = new ModelManager(
+                getTypicalUniCash(), new UserPrefs());
         expectedModel.setTransaction(model.getFilteredTransactionList().get(0), editedTransaction);
 
         assertCommandSuccess(editTransactionCommand, model, expectedMessage, expectedModel);

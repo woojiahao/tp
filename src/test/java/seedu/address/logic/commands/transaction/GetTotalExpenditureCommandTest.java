@@ -3,7 +3,6 @@ package seedu.address.logic.commands.transaction;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -175,6 +174,6 @@ public class GetTotalExpenditureCommandTest {
     }
 
     private static Model getModel() {
-        return new ModelManager(getTypicalAddressBook(), new UserPrefs(), new UniCash());
+        return new ModelManager(new UniCash(), new UserPrefs());
     }
 }
