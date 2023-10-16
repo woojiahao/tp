@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_NUS;
 import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_NUS;
 import static seedu.address.logic.commands.CommandTestUtil.DATETIME_DESC_NUS;
 import static seedu.address.logic.commands.CommandTestUtil.LOCATION_DESC_NUS;
+import static seedu.address.logic.commands.CommandTestUtil.LOCATION_DESC_ORCHARD;
 import static seedu.address.logic.commands.CommandTestUtil.TRANSACTION_NAME_DESC_NUS;
 import static seedu.address.logic.commands.CommandTestUtil.TYPE_DESC_EXPENSE;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -63,7 +64,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
+        String deleteCommand = "delete_transaction 9";
         assertCommandException(deleteCommand, MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX);
     }
 
@@ -173,8 +174,13 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Triggers the saveUniCash method by executing an add command
-        String addCommand = AddTransactionCommand.COMMAND_WORD + TRANSACTION_NAME_DESC_NUS + AMOUNT_DESC_NUS
-                + CATEGORY_DESC_NUS + AMOUNT_DESC_NUS + DATETIME_DESC_NUS + TYPE_DESC_EXPENSE + LOCATION_DESC_NUS;
+        String addCommand = AddTransactionCommand.COMMAND_WORD
+                + TRANSACTION_NAME_DESC_NUS
+                + CATEGORY_DESC_NUS
+                + AMOUNT_DESC_NUS
+                + DATETIME_DESC_NUS
+                + TYPE_DESC_EXPENSE
+                + LOCATION_DESC_NUS;
         Transaction expectedTransaction = new TransactionBuilder(NUS).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addTransaction(expectedTransaction);

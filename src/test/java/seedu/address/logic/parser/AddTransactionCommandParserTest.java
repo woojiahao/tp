@@ -4,6 +4,7 @@ import static seedu.address.logic.UniCashMessages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_INTERN;
 import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_NUS;
 import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_ENTERTAINMENT;
+import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_NUS;
 import static seedu.address.logic.commands.CommandTestUtil.DATETIME_DESC_INTERN;
 import static seedu.address.logic.commands.CommandTestUtil.DATETIME_DESC_NUS;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_AMOUNT_DESC;
@@ -12,6 +13,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATETIME_DESC
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LOCATION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TRANSACTION_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TYPE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.LOCATION_DESC_NUS;
 import static seedu.address.logic.commands.CommandTestUtil.LOCATION_DESC_ORCHARD;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.TRANSACTION_NAME_DESC_INTERN;
@@ -49,9 +51,16 @@ public class AddTransactionCommandParserTest {
         Transaction expectedTransaction = new TransactionBuilder(NUS).build();
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + TRANSACTION_NAME_DESC_NUS + TYPE_DESC_EXPENSE
-                + DATETIME_DESC_NUS + AMOUNT_DESC_NUS + CATEGORY_DESC_ENTERTAINMENT
-                + LOCATION_DESC_ORCHARD, new AddTransactionCommand(expectedTransaction));
+        assertParseSuccess(
+                parser,
+                PREAMBLE_WHITESPACE
+                        + TRANSACTION_NAME_DESC_NUS
+                        + TYPE_DESC_EXPENSE
+                        + DATETIME_DESC_NUS
+                        + AMOUNT_DESC_NUS
+                        + CATEGORY_DESC_NUS
+                        + LOCATION_DESC_NUS,
+                new AddTransactionCommand(expectedTransaction));
     }
 
     @Test
