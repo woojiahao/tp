@@ -73,7 +73,7 @@ public class DateTimeTest {
         // different time -> returns false
         assertNotEquals(datetime, new DateTime("01-01-2001 02:02"));
 
-        assertFalse(dateTime.equals(2));
+        assertFalse(datetime.equals(2));
     }
 
     @Test
