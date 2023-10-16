@@ -123,11 +123,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(
-                ParseException.class,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommandUniCash.MESSAGE_USAGE),
-                () -> parser.parseCommand("")
-        );
+        var message = String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommandUniCash.MESSAGE_USAGE);
+        assertThrows(ParseException.class, message, () -> parser.parseCommand(""));
     }
 
     @Test
