@@ -49,8 +49,12 @@ public class GetTotalExpenditureCommand extends Command {
         model.updateFilteredTransactionList(transaction -> {
             boolean isExpense = transaction.getType().type.equals(TransactionType.EXPENSE);
             boolean isSameMonth = transaction.getDateTime().getDateTime().getMonthValue() == month;
-            boolean hasCategory = categoryFilter == null
-                    || transaction.getCategories().stream().anyMatch(cat -> cat.equals(categoryFilter));
+            boolean hasCategory = transaction.getCategories().stream().anyMatch(cat -> {
+                if (categoryFilter == null) {
+                    return true;
+                }
+                return cat.equals(categoryFilter);
+            });
             return isExpense && isSameMonth && hasCategory;
         });
 
