@@ -7,9 +7,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.enums.TransactionType;
-import seedu.address.logic.commands.AddTransactionCommand;
-import seedu.address.logic.commands.ClearTransactionsCommand;
-import seedu.address.logic.commands.GetTotalExpenditureCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;

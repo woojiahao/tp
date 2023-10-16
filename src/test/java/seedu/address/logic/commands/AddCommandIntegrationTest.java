@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+//package seedu.address.logic.commands;
 
 //import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 //import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -15,9 +15,9 @@ package seedu.address.logic.commands;
 //import seedu.address.testutil.PersonBuilder;
 
 // TODO: Add an integration test for the AddTransactionCommand
-/**
- * Contains integration tests (interaction with the Model) for {@code AddCommand}.
- */
+///**
+// * Contains integration tests (interaction with the Model) for {@code AddCommand}.
+// */
 //public class AddCommandIntegrationTest {
 //
 //    private Model model;

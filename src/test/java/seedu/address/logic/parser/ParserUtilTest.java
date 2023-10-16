@@ -9,11 +9,11 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.transaction.Name;
 import seedu.address.model.transaction.Amount;
 import seedu.address.model.transaction.Category;
 import seedu.address.model.transaction.DateTime;
 import seedu.address.model.transaction.Location;
+import seedu.address.model.transaction.Name;
 
 // TODO: Need more testing here
 public class ParserUtilTest {

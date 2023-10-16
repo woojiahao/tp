@@ -1,9 +1,7 @@
 package seedu.address;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Paths;
 import java.util.Collections;
@@ -61,7 +59,7 @@ public class AppParametersTest {
         assertNotEquals(null, appParameters);
 
         // different types -> returns false
-        assertNotEquals(5.0f, appParameters, 0.0);
+        assertNotEquals(5.0f, appParameters);
 
         // different config path -> returns false
         AppParameters otherAppParameters = new AppParameters();

@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteTransactionCommand;
-import seedu.address.logic.parser.DeleteTransactionCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 public class DeleteTransactionCommandParserTest {

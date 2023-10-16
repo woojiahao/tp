@@ -35,7 +35,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.UniCashMessages;
 import seedu.address.logic.commands.AddTransactionCommand;
-import seedu.address.logic.parser.AddTransactionCommandParser;
 import seedu.address.model.transaction.Amount;
 import seedu.address.model.transaction.Transaction;
 import seedu.address.model.transaction.Type;
@@ -62,79 +61,79 @@ public class AddTransactionCommandParserTest {
 
         // multiple names
         assertParseFailure(parser, TRANSACTION_NAME_DESC_INTERN + validExpectedTransactionString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
+                UniCashMessages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // multiple amount
         assertParseFailure(parser, AMOUNT_DESC_INTERN + validExpectedTransactionString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_AMOUNT));
+                UniCashMessages.getErrorMessageForDuplicatePrefixes(PREFIX_AMOUNT));
 
         // multiple datetime
         assertParseFailure(parser, DATETIME_DESC_INTERN + validExpectedTransactionString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DATETIME));
+                UniCashMessages.getErrorMessageForDuplicatePrefixes(PREFIX_DATETIME));
 
         // multiple type
         assertParseFailure(parser, TYPE_DESC_INCOME + validExpectedTransactionString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TYPE));
+                UniCashMessages.getErrorMessageForDuplicatePrefixes(PREFIX_TYPE));
 
         // multiple location
         assertParseFailure(parser, LOCATION_DESC_ORCHARD + validExpectedTransactionString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_LOCATION));
+                UniCashMessages.getErrorMessageForDuplicatePrefixes(PREFIX_LOCATION));
 
         // multiple category
         assertParseFailure(parser, CATEGORY_DESC_ENTERTAINMENT + validExpectedTransactionString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_CATEGORY));
+                UniCashMessages.getErrorMessageForDuplicatePrefixes(PREFIX_CATEGORY));
 
         // invalid value followed by valid value
 
         // invalid name
         assertParseFailure(parser, INVALID_TRANSACTION_NAME_DESC + validExpectedTransactionString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
+                UniCashMessages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // invalid amount
         assertParseFailure(parser, INVALID_AMOUNT_DESC + validExpectedTransactionString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_AMOUNT));
+                UniCashMessages.getErrorMessageForDuplicatePrefixes(PREFIX_AMOUNT));
 
         // invalid datetime
         assertParseFailure(parser, INVALID_DATETIME_DESC + validExpectedTransactionString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DATETIME));
+                UniCashMessages.getErrorMessageForDuplicatePrefixes(PREFIX_DATETIME));
 
         // invalid type
         assertParseFailure(parser, INVALID_TYPE_DESC + validExpectedTransactionString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TYPE));
+                UniCashMessages.getErrorMessageForDuplicatePrefixes(PREFIX_TYPE));
 
         // invalid category
         assertParseFailure(parser, INVALID_CATEGORY_DESC + validExpectedTransactionString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_CATEGORY));
+                UniCashMessages.getErrorMessageForDuplicatePrefixes(PREFIX_CATEGORY));
 
         // invalid location
         assertParseFailure(parser, INVALID_LOCATION_DESC + validExpectedTransactionString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_LOCATION));
+                UniCashMessages.getErrorMessageForDuplicatePrefixes(PREFIX_LOCATION));
 
         // valid value followed by invalid value
 
         // invalid name
         assertParseFailure(parser, validExpectedTransactionString + INVALID_TRANSACTION_NAME_DESC,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
+                UniCashMessages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // invalid amount
         assertParseFailure(parser, validExpectedTransactionString + INVALID_AMOUNT_DESC,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_AMOUNT));
+                UniCashMessages.getErrorMessageForDuplicatePrefixes(PREFIX_AMOUNT));
 
         // invalid datetime
         assertParseFailure(parser, validExpectedTransactionString + INVALID_DATETIME_DESC,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DATETIME));
+                UniCashMessages.getErrorMessageForDuplicatePrefixes(PREFIX_DATETIME));
 
         // invalid type
         assertParseFailure(parser, validExpectedTransactionString + INVALID_TYPE_DESC,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TYPE));
+                UniCashMessages.getErrorMessageForDuplicatePrefixes(PREFIX_TYPE));
 
         // invalid category
         assertParseFailure(parser, validExpectedTransactionString + INVALID_CATEGORY_DESC,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_CATEGORY));
+                UniCashMessages.getErrorMessageForDuplicatePrefixes(PREFIX_CATEGORY));
 
         // invalid location
         assertParseFailure(parser, validExpectedTransactionString + INVALID_LOCATION_DESC,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_LOCATION));
+                UniCashMessages.getErrorMessageForDuplicatePrefixes(PREFIX_LOCATION));
     }
 
     @Test

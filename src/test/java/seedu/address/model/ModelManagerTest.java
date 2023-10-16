@@ -73,26 +73,28 @@ public class ModelManagerTest {
     }
 
     // TODO: Add equivalent hasTransaction tests
-//    @Test
-//    public void hasPerson_nullPerson_throwsNullPointerException() {
-//        assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
-//    }
-//
-//    @Test
-//    public void hasPerson_personNotInAddressBook_returnsFalse() {
-//        assertFalse(modelManager.hasPerson(ALICE));
-//    }
-//
-//    @Test
-//    public void hasPerson_personInAddressBook_returnsTrue() {
-//        modelManager.addPerson(ALICE);
-//        assertTrue(modelManager.hasPerson(ALICE));
-//    }
-//
-//    @Test
-//    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-//        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
-//    }
+
+    //    @Test
+    //    public void hasPerson_nullPerson_throwsNullPointerException() {
+    //        assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
+    //    }
+    //
+    //    @Test
+    //    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    //        assertFalse(modelManager.hasPerson(ALICE));
+    //    }
+    //
+    //    @Test
+    //    public void hasPerson_personInAddressBook_returnsTrue() {
+    //        modelManager.addPerson(ALICE);
+    //        assertTrue(modelManager.hasPerson(ALICE));
+    //    }
+    //
+    //    @Test
+    //    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+    //        assertThrows(UnsupportedOperationException.class, () -> modelManager
+    //        .getFilteredPersonList().remove(0));
+    //    }
 
     @Test
     public void setUniCash_nullTransaction_throwsNullPointerException() {
@@ -157,12 +159,12 @@ public class ModelManagerTest {
 
         // TODO: Replicate this for transaction list
         // different filteredList -> returns false
-//        String[] keywords = ALICE.getName().fullName.split("\\s+");
-//        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-//        assertFalse(modelManager.equals(new ModelManager(uniCash, userPrefs)));
-//
-//        // resets modelManager to initial state for upcoming tests
-//        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        //String[] keywords = ALICE.getName().fullName.split("\\s+");
+        //modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        //assertFalse(modelManager.equals(new ModelManager(uniCash, userPrefs)));
+
+        // resets modelManager to initial state for upcoming tests
+        //modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
