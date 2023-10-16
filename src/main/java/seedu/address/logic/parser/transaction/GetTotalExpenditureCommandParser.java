@@ -30,7 +30,7 @@ public class GetTotalExpenditureCommandParser implements Parser<GetTotalExpendit
         String categoryString = argMultimap.getValue(PREFIX_CATEGORY).orElse(null);
         Category category = null;
         if (categoryString != null) {
-             category = ParserUtil.parseCategory(categoryString);
+            category = ParserUtil.parseCategory(categoryString);
         }
 
         try {

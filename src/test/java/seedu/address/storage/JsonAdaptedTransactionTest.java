@@ -13,8 +13,12 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.category.Category;
-import seedu.address.model.transaction.*;
+import seedu.address.model.transaction.Amount;
+import seedu.address.model.transaction.DateTime;
+import seedu.address.model.transaction.Location;
+import seedu.address.model.transaction.Name;
+import seedu.address.model.transaction.Transaction;
+import seedu.address.model.transaction.Type;
 import seedu.address.testutil.TransactionBuilder;
 
 public class JsonAdaptedTransactionTest {
