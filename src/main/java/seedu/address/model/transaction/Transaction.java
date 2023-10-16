@@ -2,9 +2,13 @@ package seedu.address.model.transaction;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.category.Category;
 
 /**
  * Represents a Transaction in the finance tracker.
@@ -13,25 +17,29 @@ import seedu.address.commons.util.ToStringBuilder;
 public class Transaction {
     private final Name name;
     private final Amount amount;
-    private final Category category;
     private final DateTime dateTime;
     private final Location location;
     private final Type type;
+    private final Set<Category> categories = new HashSet<>();
 
 
     /**
      * Constructs a Transaction with all fields populated.
      * Guarantees: details are present and not null, field values are validated, immutable.
      */
-    public Transaction(Name name, Type type, Amount amount, Category category, DateTime dateTime,
-                       Location location) {
-        requireAllNonNull(name, type, amount, category, dateTime, location);
+    public Transaction(Name name,
+                       Type type,
+                       Amount amount,
+                       DateTime dateTime,
+                       Location location,
+                       Set<Category> categories) {
+        requireAllNonNull(name, type, amount, categories, dateTime, location);
         this.name = name;
         this.type = type;
         this.amount = amount;
-        this.category = category;
         this.dateTime = dateTime;
         this.location = location;
+        this.categories.addAll(categories);
     }
 
     public Name getName() {
@@ -40,10 +48,6 @@ public class Transaction {
 
     public Amount getAmount() {
         return amount;
-    }
-
-    public Category getCategory() {
-        return category;
     }
 
     public DateTime getDateTime() {
@@ -58,9 +62,17 @@ public class Transaction {
         return type;
     }
 
+    /**
+     * Returns an immutable category set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Category> getCategories() {
+        return Collections.unmodifiableSet(categories);
+    }
+
     @Override
     public int hashCode() {
-        return Objects.hash(name, amount, category, dateTime, location, type);
+        return Objects.hash(name, amount, dateTime, location, type, categories);
     }
 
     /**
@@ -81,7 +93,7 @@ public class Transaction {
         return name.equals(otherTransaction.name)
                 && type.equals(otherTransaction.type)
                 && amount.equals(otherTransaction.amount)
-                && category.equals(otherTransaction.category)
+                && categories.equals(otherTransaction.categories)
                 && dateTime.equals(otherTransaction.dateTime)
                 && location.equals(otherTransaction.location);
     }
@@ -92,9 +104,9 @@ public class Transaction {
                 .add("name", name)
                 .add("type", type)
                 .add("amount", amount)
-                .add("category", category)
                 .add("dateTime", dateTime)
                 .add("location", location)
+                .add("categories", categories)
                 .toString();
     }
 }

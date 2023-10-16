@@ -1,19 +1,21 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.storage.JsonAdaptedTransaction.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalTransactions.SHOPPING;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.transaction.Amount;
-import seedu.address.model.transaction.Category;
-import seedu.address.model.transaction.DateTime;
-import seedu.address.model.transaction.Location;
-import seedu.address.model.transaction.Name;
-import seedu.address.model.transaction.Type;
+import seedu.address.model.category.Category;
+import seedu.address.model.transaction.*;
+import seedu.address.testutil.TransactionBuilder;
 
 public class JsonAdaptedTransactionTest {
     private static final String INVALID_NAME = "R@chel";
@@ -25,14 +27,18 @@ public class JsonAdaptedTransactionTest {
 
     private static final String VALID_NAME = SHOPPING.getName().toString();
     private static final double VALID_AMOUNT = SHOPPING.getAmount().amount;
-    private static final String VALID_CATEGORY = SHOPPING.getCategory().category;
     private static final String VALID_DATETIME = SHOPPING.getDateTime().originalString();
     private static final String VALID_LOCATION = SHOPPING.getLocation().location;
     private static final String VALID_TYPE = SHOPPING.getType().toString();
+    private static final List<JsonAdaptedCategory> VALID_CATEGORIES = SHOPPING.getCategories().stream()
+            .map(JsonAdaptedCategory::new)
+            .collect(Collectors.toList());
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
+        System.out.println(SHOPPING);
         var transaction = new JsonAdaptedTransaction(SHOPPING);
+        System.out.println(transaction);
         assertEquals(SHOPPING, transaction.toModelType());
     }
 
@@ -41,10 +47,10 @@ public class JsonAdaptedTransactionTest {
         var transaction = new JsonAdaptedTransaction(
                 INVALID_NAME,
                 VALID_AMOUNT,
-                VALID_CATEGORY,
                 VALID_DATETIME,
                 VALID_LOCATION,
-                VALID_TYPE
+                VALID_TYPE,
+                VALID_CATEGORIES
         );
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, transaction::toModelType);
@@ -55,10 +61,11 @@ public class JsonAdaptedTransactionTest {
         var transaction = new JsonAdaptedTransaction(
                 null,
                 VALID_AMOUNT,
-                VALID_CATEGORY,
                 VALID_DATETIME,
                 VALID_LOCATION,
-                VALID_TYPE
+                VALID_TYPE,
+                VALID_CATEGORIES
+
         );
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, transaction::toModelType);
@@ -69,27 +76,28 @@ public class JsonAdaptedTransactionTest {
         var transaction = new JsonAdaptedTransaction(
                 VALID_NAME,
                 INVALID_AMOUNT,
-                VALID_CATEGORY,
                 VALID_DATETIME,
                 VALID_LOCATION,
-                VALID_TYPE
+                VALID_TYPE,
+                VALID_CATEGORIES
         );
         String expectedMessage = Amount.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, transaction::toModelType);
     }
 
     @Test
-    public void toModelType_invalidCategory_throwsIllegalValueException() {
-        var transaction = new JsonAdaptedTransaction(
-                VALID_NAME,
-                VALID_AMOUNT,
-                INVALID_CATEGORY,
-                VALID_DATETIME,
-                VALID_LOCATION,
-                VALID_TYPE
-        );
-        String expectedMessage = Category.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, transaction::toModelType);
+    public void toModelType_invalidCategories_throwsIllegalValueException() {
+        List<JsonAdaptedCategory> invalidCategories = new ArrayList<>(VALID_CATEGORIES);
+        invalidCategories.add(new JsonAdaptedCategory(INVALID_CATEGORY));
+        JsonAdaptedTransaction transaction =
+                new JsonAdaptedTransaction(
+                        VALID_NAME,
+                        INVALID_AMOUNT,
+                        VALID_DATETIME,
+                        VALID_LOCATION,
+                        VALID_TYPE,
+                        invalidCategories);
+        assertThrows(IllegalValueException.class, transaction::toModelType);
     }
 
     @Test
@@ -97,13 +105,25 @@ public class JsonAdaptedTransactionTest {
         var transaction = new JsonAdaptedTransaction(
                 VALID_NAME,
                 VALID_AMOUNT,
-                null,
                 VALID_DATETIME,
                 VALID_LOCATION,
-                VALID_TYPE
+                VALID_TYPE,
+                null
         );
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Category.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, transaction::toModelType);
+        Transaction transaction2 = new TransactionBuilder()
+                .withName(VALID_NAME)
+                .withAmount(VALID_AMOUNT)
+                .withDateTime(VALID_DATETIME)
+                .withLocation(VALID_LOCATION)
+                .withType(VALID_TYPE)
+                .withCategories()
+                .build();
+        try {
+            assertEquals(transaction.toModelType(), transaction2);
+        } catch (Exception e) {
+            fail();
+        }
+
     }
 
     @Test
@@ -111,10 +131,10 @@ public class JsonAdaptedTransactionTest {
         var transaction = new JsonAdaptedTransaction(
                 VALID_NAME,
                 VALID_AMOUNT,
-                VALID_CATEGORY,
                 INVALID_DATETIME,
                 VALID_LOCATION,
-                VALID_TYPE
+                VALID_TYPE,
+                VALID_CATEGORIES
         );
         String expectedMessage = DateTime.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, transaction::toModelType);
@@ -125,10 +145,10 @@ public class JsonAdaptedTransactionTest {
         var transaction = new JsonAdaptedTransaction(
                 VALID_NAME,
                 VALID_AMOUNT,
-                VALID_CATEGORY,
                 null,
                 VALID_LOCATION,
-                VALID_TYPE
+                VALID_TYPE,
+                VALID_CATEGORIES
         );
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, DateTime.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, transaction::toModelType);
@@ -139,10 +159,10 @@ public class JsonAdaptedTransactionTest {
         var transaction = new JsonAdaptedTransaction(
                 VALID_NAME,
                 VALID_AMOUNT,
-                VALID_CATEGORY,
                 VALID_DATETIME,
                 INVALID_LOCATION,
-                VALID_TYPE
+                VALID_TYPE,
+                VALID_CATEGORIES
         );
         String expectedMessage = Location.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, transaction::toModelType);
@@ -153,10 +173,10 @@ public class JsonAdaptedTransactionTest {
         var transaction = new JsonAdaptedTransaction(
                 VALID_NAME,
                 VALID_AMOUNT,
-                VALID_CATEGORY,
                 VALID_DATETIME,
                 VALID_LOCATION,
-                INVALID_TYPE
+                INVALID_TYPE,
+                VALID_CATEGORIES
         );
         String expectedMessage = Type.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, transaction::toModelType);
@@ -167,10 +187,10 @@ public class JsonAdaptedTransactionTest {
         var transaction = new JsonAdaptedTransaction(
                 VALID_NAME,
                 VALID_AMOUNT,
-                VALID_CATEGORY,
                 VALID_DATETIME,
                 VALID_LOCATION,
-                null
+                null,
+                VALID_CATEGORIES
         );
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Type.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, transaction::toModelType);

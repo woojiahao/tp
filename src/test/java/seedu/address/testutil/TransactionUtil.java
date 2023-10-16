@@ -7,8 +7,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
+import java.util.Set;
+
 import seedu.address.logic.commands.transaction.AddTransactionCommand;
 import seedu.address.logic.commands.transaction.EditTransactionCommand;
+import seedu.address.model.category.Category;
 import seedu.address.model.transaction.Transaction;
 
 /**
@@ -31,10 +34,11 @@ public class TransactionUtil {
         sb.append(PREFIX_NAME + transaction.getName().fullName + " ");
         sb.append(PREFIX_TYPE + transaction.getType().type.getOriginalString() + " ");
         sb.append(PREFIX_AMOUNT + transaction.getAmount().toString() + " ");
-        sb.append(PREFIX_CATEGORY + transaction.getCategory().category + " ");
         sb.append(PREFIX_DATETIME + transaction.getDateTime().originalString() + " ");
         sb.append(PREFIX_LOCATION + transaction.getLocation().location + " ");
-
+        transaction.getCategories().stream().forEach(
+                category -> sb.append(PREFIX_CATEGORY + category.category + " ")
+        );
         return sb.toString();
     }
 
@@ -47,12 +51,18 @@ public class TransactionUtil {
                 .append(" "));
         descriptor.getAmount().ifPresent(amount -> sb.append(PREFIX_AMOUNT).append(amount.amount)
                 .append(" "));
-        descriptor.getCategory().ifPresent(category -> sb.append(PREFIX_CATEGORY).append(category.category)
-                .append(" "));
         descriptor.getLocation().ifPresent(location -> sb.append(PREFIX_LOCATION).append(location)
                 .append(" "));
         descriptor.getDateTime().ifPresent(dateTime -> sb.append(PREFIX_DATETIME).append(dateTime.originalString())
                 .append(" "));
+        if (descriptor.getCategories().isPresent()) {
+            Set<Category> categories = descriptor.getCategories().get();
+            if (categories.isEmpty()) {
+                sb.append(PREFIX_CATEGORY);
+            } else {
+                categories.forEach(s -> sb.append(PREFIX_CATEGORY).append(s.category).append(" "));
+            }
+        }
         return sb.toString();
     }
 }

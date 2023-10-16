@@ -42,10 +42,6 @@ public class TransactionTest {
         editedGroceries = new TransactionBuilder(BUYING_GROCERIES).withAmount(10.15).build();
         assertNotEquals(BUYING_GROCERIES, editedGroceries);
 
-        // different categories -> returns false
-        editedGroceries = new TransactionBuilder(BUYING_GROCERIES).withCategory("Food").build();
-        assertNotEquals(BUYING_GROCERIES, editedGroceries);
-
         // different date -> returns false
         editedGroceries = new TransactionBuilder(BUYING_GROCERIES)
                 .withDateTime("01-01-1999 18:18")
@@ -59,6 +55,10 @@ public class TransactionTest {
         // different transaction type -> return false
         editedGroceries = new TransactionBuilder(BUYING_GROCERIES).withType("expense").build();
         assertNotEquals(BUYING_GROCERIES, editedGroceries);
+
+        // different categories -> returns false
+        editedGroceries = new TransactionBuilder(BUYING_GROCERIES).withCategories("TEST").build();
+        assertFalse(BUYING_GROCERIES.equals(editedGroceries));
     }
 
     @Test
@@ -68,9 +68,9 @@ public class TransactionTest {
                         + "{name=" + BUYING_GROCERIES.getName()
                         + ", type=" + BUYING_GROCERIES.getType()
                         + ", amount=" + BUYING_GROCERIES.getAmount()
-                        + ", category=" + BUYING_GROCERIES.getCategory()
                         + ", dateTime=" + BUYING_GROCERIES.getDateTime()
                         + ", location=" + BUYING_GROCERIES.getLocation()
+                        + ", categories=" + BUYING_GROCERIES.getCategories()
                         + "}";
         assertEquals(expected, BUYING_GROCERIES.toString());
     }

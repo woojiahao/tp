@@ -57,7 +57,8 @@ public class CommandTestUtil {
     public static final String VALID_DATETIME_INTERN = "08-08-2008 08:08";
     public static final String VALID_DATETIME_SHOPPING = "01-02-2008 11:08";
     public static final String VALID_CATEGORY_ENTERTAINMENT = "entertainment";
-    public static final String VALID_CATEGORY_NUS = "Teaching Assistant";
+    public static final String VALID_CATEGORY_EDUCATION = "education";
+    public static final String VALID_CATEGORY_NUS = "TA";
     public static final String VALID_LOCATION_ORCHARD = "orchard";
     public static final String VALID_LOCATION_NUS = "NUS";
 
@@ -112,10 +113,10 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         DESC_NUS = new EditTransactionDescriptorBuilder().withName(VALID_TRANSACTION_NAME_NUS)
-                .withAmount(VALID_AMOUNT_NUS).withType(VALID_TYPE_INCOME).withCategory(VALID_CATEGORY_NUS)
+                .withAmount(VALID_AMOUNT_NUS).withType(VALID_TYPE_INCOME).withCategories(VALID_CATEGORY_NUS)
                 .withDateTime(VALID_DATETIME_NUS).withLocation(VALID_LOCATION_NUS).build();
         DESC_SHOPPING = new EditTransactionDescriptorBuilder().withName(VALID_TRANSACTION_NAME_SHOPPING)
-                .withCategory(VALID_CATEGORY_ENTERTAINMENT).withAmount(VALID_AMOUNT_SHOPPING)
+                .withCategories(VALID_CATEGORY_ENTERTAINMENT).withAmount(VALID_AMOUNT_SHOPPING)
                 .withType(VALID_TYPE_EXPENSE).withDateTime(VALID_DATETIME_SHOPPING).withLocation(VALID_LOCATION_ORCHARD)
                 .build();
     }
