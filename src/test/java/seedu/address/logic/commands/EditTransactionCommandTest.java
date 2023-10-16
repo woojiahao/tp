@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_NUS;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_SHOPPING;
@@ -34,7 +35,7 @@ import seedu.address.testutil.TransactionBuilder;
  */
 public class EditTransactionCommandTest {
 
-    private Model model = new ModelManager(getTypicalUniCash(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalUniCash(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -153,24 +154,24 @@ public class EditTransactionCommandTest {
         EditTransactionDescriptor copyDescriptor = new EditTransactionDescriptor(DESC_NUS);
         EditTransactionCommand commandWithSameValues = new EditTransactionCommand(INDEX_FIRST_TRANSACTION,
                 copyDescriptor);
-        assertTrue(standardCommand.equals(commandWithSameValues));
+        assertEquals(standardCommand, commandWithSameValues);
 
         // same object -> returns true
-        assertTrue(copyDescriptor.equals(copyDescriptor));
-        assertTrue(standardCommand.equals(standardCommand));
+        assertEquals(copyDescriptor, copyDescriptor);
+        assertEquals(standardCommand, standardCommand);
 
         // null -> returns false
-        assertFalse(standardCommand.equals(null));
+        assertNotEquals(null, standardCommand);
 
         // different types -> returns false
-        assertFalse(copyDescriptor.equals(standardCommand));
-        assertFalse(standardCommand.equals(new ClearTransactionsCommand()));
+        assertNotEquals(copyDescriptor, standardCommand);
+        assertNotEquals(standardCommand, new ClearTransactionsCommand());
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditTransactionCommand(INDEX_SECOND_TRANSACTION, DESC_NUS)));
+        assertNotEquals(standardCommand, new EditTransactionCommand(INDEX_SECOND_TRANSACTION, DESC_NUS));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditTransactionCommand(INDEX_FIRST_TRANSACTION, DESC_SHOPPING)));
+        assertNotEquals(standardCommand, new EditTransactionCommand(INDEX_FIRST_TRANSACTION, DESC_SHOPPING));
     }
 
     @Test

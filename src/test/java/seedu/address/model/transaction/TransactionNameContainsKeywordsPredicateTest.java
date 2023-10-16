@@ -2,6 +2,7 @@ package seedu.address.model.transaction;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
@@ -25,21 +26,21 @@ public class TransactionNameContainsKeywordsPredicateTest {
                 new TransactionNameContainsKeywordsPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
-        assertTrue(firstPredicate.equals(firstPredicate));
+        assertEquals(firstPredicate, firstPredicate);
 
         // same values -> returns true
         TransactionNameContainsKeywordsPredicate firstPredicateCopy =
                 new TransactionNameContainsKeywordsPredicate(firstPredicateKeywordList);
-        assertTrue(firstPredicate.equals(firstPredicateCopy));
+        assertEquals(firstPredicate, firstPredicateCopy);
 
         // different types -> returns false
-        assertFalse(firstPredicate.equals(1));
+        assertNotEquals(1, firstPredicate);
 
         // null -> returns false
-        assertFalse(firstPredicate.equals(null));
+        assertNotEquals(null, firstPredicate);
 
         // different person -> returns false
-        assertFalse(firstPredicate.equals(secondPredicate));
+        assertNotEquals(firstPredicate, secondPredicate);
     }
 
     @Test
@@ -70,7 +71,7 @@ public class TransactionNameContainsKeywordsPredicateTest {
         assertFalse(predicate.test(new TransactionBuilder().withName("Food").build()));
 
         // Non-matching keyword
-        predicate = new TransactionNameContainsKeywordsPredicate(Arrays.asList("Food"));
+        predicate = new TransactionNameContainsKeywordsPredicate(List.of("Food"));
         assertFalse(predicate.test(new TransactionBuilder().withName("Chicken Rice").build()));
     }
 

@@ -1,10 +1,9 @@
 package seedu.address.logic.parser;
+
 import static seedu.address.logic.UniCashMessages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteTransactionCommand;
-import seedu.address.logic.parser.Parser;
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -15,6 +14,7 @@ public class DeleteTransactionCommandParser implements Parser<DeleteTransactionC
     /**
      * Parses the given {@code String} of arguments in the context of the
      * DeleteTransactionCommand and returns a DeleteTransactionCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteTransactionCommand parse(String args) throws ParseException {

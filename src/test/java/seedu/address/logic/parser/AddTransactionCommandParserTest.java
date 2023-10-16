@@ -43,7 +43,7 @@ import seedu.address.testutil.TransactionBuilder;
 
 
 public class AddTransactionCommandParserTest {
-    private AddTransactionCommandParser parser = new AddTransactionCommandParser();
+    private final AddTransactionCommandParser parser = new AddTransactionCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {

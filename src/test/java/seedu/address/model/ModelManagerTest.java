@@ -3,6 +3,7 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalTransactions.BUYING_GROCERIES;
@@ -140,19 +141,19 @@ public class ModelManagerTest {
         // same values -> returns true
         modelManager = new ModelManager(uniCash, userPrefs);
         ModelManager modelManagerCopy = new ModelManager(uniCash, userPrefs);
-        assertTrue(modelManager.equals(modelManagerCopy));
+        assertEquals(modelManager, modelManagerCopy);
 
         // same object -> returns true
-        assertTrue(modelManager.equals(modelManager));
+        assertEquals(modelManager, modelManager);
 
         // null -> returns false
-        assertFalse(modelManager.equals(null));
+        assertNotEquals(null, modelManager);
 
         // different types -> returns false
-        assertFalse(modelManager.equals(5));
+        assertNotEquals(5, modelManager);
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(uniCash, userPrefs)));
+        assertNotEquals(modelManager, new ModelManager(uniCash, userPrefs));
 
         // TODO: Replicate this for transaction list
         // different filteredList -> returns false
@@ -166,9 +167,9 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setUniCashFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(uniCash, differentUserPrefs)));
+        assertNotEquals(modelManager, new ModelManager(uniCash, differentUserPrefs));
 
         // different differentUniCash -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentUniCash, userPrefs)));
+        assertNotEquals(modelManager, new ModelManager(differentUniCash, userPrefs));
     }
 }

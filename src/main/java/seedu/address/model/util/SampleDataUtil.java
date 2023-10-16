@@ -16,22 +16,22 @@ public class SampleDataUtil {
 
     public static Transaction[] getSampleTransactions() {
         return new Transaction[]{
-                new Transaction(
-                        new seedu.address.model.transaction.Name("Valid transaction"),
-                        new Type("expense"),
-                        new Amount(17.0),
-                        new Category("Food"),
-                        new DateTime("15-09-2023 00:00"),
-                        new Location("")
-                ),
-                new Transaction(
-                        new seedu.address.model.transaction.Name("Valid transaction 2"),
-                        new Type("expense"),
-                        new Amount(123),
-                        new Category("Others"),
-                        new DateTime("15-07-2023 00:00"),
-                        new Location("Jurong")
-                )
+            new Transaction(
+                    new seedu.address.model.transaction.Name("Valid transaction"),
+                    new Type("expense"),
+                    new Amount(17.0),
+                    new Category("Food"),
+                    new DateTime("15-09-2023 00:00"),
+                    new Location("")
+            ),
+            new Transaction(
+                    new seedu.address.model.transaction.Name("Valid transaction 2"),
+                    new Type("expense"),
+                    new Amount(123),
+                    new Category("Others"),
+                    new DateTime("15-07-2023 00:00"),
+                    new Location("Jurong")
+            )
         };
     }
 

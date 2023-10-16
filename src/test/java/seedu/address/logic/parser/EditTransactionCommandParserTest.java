@@ -32,7 +32,7 @@ public class EditTransactionCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTransactionCommand.MESSAGE_USAGE);
 
-    private EditTransactionCommandParser parser = new EditTransactionCommandParser();
+    private final EditTransactionCommandParser parser = new EditTransactionCommandParser();
 
     @Test
     public void parse_missingParts_failure() {

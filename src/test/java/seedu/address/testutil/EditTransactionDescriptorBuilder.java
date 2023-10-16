@@ -13,7 +13,7 @@ import seedu.address.model.transaction.Type;
  * A utility class to help with building EditTransactionDescriptor objects.
  */
 public class EditTransactionDescriptorBuilder {
-    private EditTransactionCommand.EditTransactionDescriptor descriptor;
+    private final EditTransactionCommand.EditTransactionDescriptor descriptor;
 
     public EditTransactionDescriptorBuilder() {
         descriptor = new EditTransactionCommand.EditTransactionDescriptor();

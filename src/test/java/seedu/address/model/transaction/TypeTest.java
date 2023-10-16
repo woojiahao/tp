@@ -45,19 +45,19 @@ public class TypeTest {
         Type name = new Type("income");
 
         // same values -> returns true
-        assertTrue(name.equals(new Type("income")));
+        assertEquals(name, new Type("income"));
 
         // same object -> returns true
-        assertTrue(name.equals(name));
+        assertEquals(name, name);
 
         // null -> returns false
-        assertFalse(name.equals(null));
+        assertNotEquals(null, name);
 
         // different types -> returns false
-        assertFalse(name.equals(5.0f));
+        assertNotEquals(5.0f, name, 0.0);
 
         // different values -> returns false
-        assertFalse(name.equals(new Type("expense")));
+        assertNotEquals(name, new Type("expense"));
     }
 
     @Test

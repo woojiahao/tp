@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.UniCashMessages;
-import seedu.address.logic.commands.DeleteTransactionCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -26,7 +25,7 @@ import seedu.address.model.transaction.Transaction;
  */
 public class DeleteTransactionCommandTest {
 
-    private Model model = new ModelManager(getTypicalUniCash(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalUniCash(), new UserPrefs());
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
@@ -42,21 +41,21 @@ public class DeleteTransactionCommandTest {
         DeleteTransactionCommand deleteSecondCommand = new DeleteTransactionCommand(INDEX_SECOND_TRANSACTION);
 
         // same object -> returns true
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
+        assertEquals(deleteFirstCommand, deleteFirstCommand);
 
         // same values -> returns true
         DeleteTransactionCommand deleteFirstCommandCopy =
                 new DeleteTransactionCommand(INDEX_FIRST_TRANSACTION);
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
+        assertEquals(deleteFirstCommand, deleteFirstCommandCopy);
 
         // different types -> returns false
-        assertFalse(deleteFirstCommand.equals(1));
+        assertNotEquals(1, deleteFirstCommand);
 
         // null -> returns false
-        assertFalse(deleteFirstCommand.equals(null));
+        assertNotEquals(null, deleteFirstCommand);
 
         // different person -> returns false
-        assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+        assertNotEquals(deleteFirstCommand, deleteSecondCommand);
     }
 
     @Test
@@ -88,7 +87,7 @@ public class DeleteTransactionCommandTest {
         showTransactionAtIndex(model, INDEX_FIRST_TRANSACTION);
 
         Transaction transactionToDelete = model.getFilteredTransactionList()
-                        .get(INDEX_FIRST_TRANSACTION.getZeroBased());
+                .get(INDEX_FIRST_TRANSACTION.getZeroBased());
         DeleteTransactionCommand deleteCommand = new DeleteTransactionCommand(INDEX_FIRST_TRANSACTION);
 
         String expectedMessage = String.format(DeleteTransactionCommand.MESSAGE_DELETE_TRANSACTION_SUCCESS,

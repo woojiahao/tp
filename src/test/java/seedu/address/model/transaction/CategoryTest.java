@@ -2,6 +2,7 @@ package seedu.address.model.transaction;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -48,18 +49,18 @@ public class CategoryTest {
         Category name = new Category("Valid Category");
 
         // same values -> returns true
-        assertTrue(name.equals(new Category("Valid Category")));
+        assertEquals(name, new Category("Valid Category"));
 
         // same object -> returns true
-        assertTrue(name.equals(name));
+        assertEquals(name, name);
 
         // null -> returns false
-        assertFalse(name.equals(null));
+        assertNotEquals(null, name);
 
         // different types -> returns false
-        assertFalse(name.equals(5.0f));
+        assertNotEquals(5.0f, name, 0.0);
 
         // different values -> returns false
-        assertFalse(name.equals(new Category("Other Valid Category")));
+        assertNotEquals(name, new Category("Other Valid Category"));
     }
 }

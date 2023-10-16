@@ -12,7 +12,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 
 public class DeleteTransactionCommandParserTest {
 
-    private DeleteTransactionCommandParser parser = new DeleteTransactionCommandParser();
+    private final DeleteTransactionCommandParser parser = new DeleteTransactionCommandParser();
 
     @Test
     public void parse_validArgs_returnsDeleteTransactionCommand() throws Exception {

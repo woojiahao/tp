@@ -3,14 +3,13 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalTransactions.NUS;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -42,7 +41,7 @@ public class AddTransactionCommandTest {
         assertEquals(String.format(AddTransactionCommand.MESSAGE_SUCCESS,
                         UniCashMessages.formatTransaction(validTransaction)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validTransaction), modelStub.transactionsAdded);
+        assertEquals(List.of(validTransaction), modelStub.transactionsAdded);
     }
 
     @Test
@@ -62,20 +61,20 @@ public class AddTransactionCommandTest {
         AddTransactionCommand addBobCommand = new AddTransactionCommand(intern);
 
         // same object -> returns true
-        assertTrue(addNusCommand.equals(addNusCommand));
+        assertEquals(addNusCommand, addNusCommand);
 
         // same values -> returns true
         AddTransactionCommand addNusCommandCopy = new AddTransactionCommand(nus);
-        assertTrue(addNusCommand.equals(addNusCommandCopy));
+        assertEquals(addNusCommand, addNusCommandCopy);
 
         // different types -> returns false
-        assertFalse(addNusCommand.equals(1));
+        assertNotEquals(1, addNusCommand);
 
         // null -> returns false
-        assertFalse(addNusCommand.equals(null));
+        assertNotEquals(null, addNusCommand);
 
         // different Transaction -> returns false
-        assertFalse(addNusCommand.equals(addBobCommand));
+        assertNotEquals(addNusCommand, addBobCommand);
     }
 
     @Test
@@ -179,7 +178,6 @@ public class AddTransactionCommandTest {
 
         @Override
         public void addTransaction(Transaction transaction) {
-            return;
         }
     }
 

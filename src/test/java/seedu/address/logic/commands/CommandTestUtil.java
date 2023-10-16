@@ -12,6 +12,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -145,7 +146,7 @@ public class CommandTestUtil {
         Transaction transaction = model.getFilteredTransactionList().get(targetIndex.getZeroBased());
         final String[] splitName = transaction.getName().fullName.split("\\s+");
         model.updateFilteredTransactionList(
-                new TransactionNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+                new TransactionNameContainsKeywordsPredicate(Collections.singletonList(splitName[0])));
 
         assertEquals(1, model.getFilteredTransactionList().size());
     }

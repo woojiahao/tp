@@ -11,10 +11,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditTransactionCommand;
-import seedu.address.logic.parser.ArgumentMultimap;
-import seedu.address.logic.parser.ArgumentTokenizer;
-import seedu.address.logic.parser.Parser;
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -25,6 +21,7 @@ public class EditTransactionCommandParser implements Parser<EditTransactionComma
     /**
      * Parses the given {@code String} of arguments in the context of the EditTransactionCommand
      * and returns an EditTransactionCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditTransactionCommand parse(String args) throws ParseException {
@@ -54,23 +51,28 @@ public class EditTransactionCommandParser implements Parser<EditTransactionComma
         }
         if (argMultimap.getValue(PREFIX_TYPE).isPresent()) {
             editTransactionDescriptor.setType(
-                    ParserUtil.parseType(argMultimap.getValue(PREFIX_TYPE).get()));
+                    ParserUtil.parseType(argMultimap.getValue(PREFIX_TYPE).get())
+            );
         }
         if (argMultimap.getValue(PREFIX_AMOUNT).isPresent()) {
             editTransactionDescriptor.setAmount(
-                    ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get()));
+                    ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get())
+            );
         }
         if (argMultimap.getValue(PREFIX_DATETIME).isPresent()) {
             editTransactionDescriptor.setDateTime(
-                    ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get()));
+                    ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get())
+            );
         }
         if (argMultimap.getValue(PREFIX_CATEGORY).isPresent()) {
             editTransactionDescriptor.setCategory(
-                    ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get()));
+                    ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get())
+            );
         }
         if (argMultimap.getValue(PREFIX_LOCATION).isPresent()) {
             editTransactionDescriptor.setLocation(
-                    ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get()));
+                    ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get())
+            );
         }
 
         if (!editTransactionDescriptor.isAnyFieldEdited()) {

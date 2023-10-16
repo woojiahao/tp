@@ -27,15 +27,14 @@ public class TransactionUtil {
      * Returns the part of command string for the given {@code transaction}'s details.
      */
     public static String getTransactionDetails(Transaction transaction) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + transaction.getName().fullName + " ");
-        sb.append(PREFIX_TYPE + transaction.getType().type.getOriginalString() + " ");
-        sb.append(PREFIX_AMOUNT + transaction.getAmount().toString() + " ");
-        sb.append(PREFIX_CATEGORY + transaction.getCategory().category + " ");
-        sb.append(PREFIX_DATETIME + transaction.getDateTime().originalString() + " ");
-        sb.append(PREFIX_LOCATION + transaction.getLocation().location + " ");
+        String sb = PREFIX_NAME + transaction.getName().fullName + " " +
+                PREFIX_TYPE + transaction.getType().type.getOriginalString() + " " +
+                PREFIX_AMOUNT + transaction.getAmount().toString() + " " +
+                PREFIX_CATEGORY + transaction.getCategory().category + " " +
+                PREFIX_DATETIME + transaction.getDateTime().originalString() + " " +
+                PREFIX_LOCATION + transaction.getLocation().location + " ";
 
-        return sb.toString();
+        return sb;
     }
 
     public static String getEditTransactionDescriptorDetails(EditTransactionCommand

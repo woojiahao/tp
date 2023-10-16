@@ -54,7 +54,7 @@ public class NameTest {
         assertNotEquals(null, name);
 
         // different types -> returns false
-        assertFalse(name.equals(5.0f));
+        assertNotEquals(5.0f, name, 0.0);
 
         // different values -> returns false
         assertNotEquals(name, new Name("Other Valid Name"));

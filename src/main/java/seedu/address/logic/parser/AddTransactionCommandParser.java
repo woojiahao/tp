@@ -11,11 +11,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddTransactionCommand;
-import seedu.address.logic.parser.ArgumentMultimap;
-import seedu.address.logic.parser.ArgumentTokenizer;
-import seedu.address.logic.parser.Parser;
-import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.transaction.Amount;
 import seedu.address.model.transaction.Category;
@@ -33,6 +28,7 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddTransactionCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddTransactionCommand parse(String args) throws ParseException {

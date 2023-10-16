@@ -52,7 +52,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseTransactionName_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTransactionName((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTransactionName(null));
     }
 
     @Test
@@ -75,7 +75,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseAmount_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseAmount((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseAmount(null));
     }
 
     @Test
@@ -98,7 +98,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseDateTime_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseDateTime((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDateTime(null));
     }
 
     @Test
@@ -127,7 +127,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseCategory_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseCategory((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseCategory(null));
     }
 
     @Test
@@ -156,7 +156,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseLocation_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseLocation((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLocation(null));
     }
 
     @Test
