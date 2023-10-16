@@ -154,6 +154,8 @@ public class ModelManagerTest {
         // different types -> returns false
         assertNotEquals(5, modelManager);
 
+        assertNotEquals(differentUniCash, modelManager);
+
         // TODO: Replicate this for transaction list
         // different filteredList -> returns false
         //String[] keywords = ALICE.getName().fullName.split("\\s+");
