@@ -3,6 +3,7 @@ package unicash.logic.parser;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import unicash.logic.UniCashMessages;
 import unicash.logic.commands.AddTransactionCommand;
 import unicash.logic.parser.exceptions.ParseException;
 import unicash.model.category.Category;
@@ -12,7 +13,7 @@ import unicash.model.transaction.Location;
 import unicash.model.transaction.Name;
 import unicash.model.transaction.Transaction;
 import unicash.model.transaction.Type;
-import unicash.logic.UniCashMessages;
+
 
 /**
  * Parses input arguments and creates a new AddTransactionCommand object

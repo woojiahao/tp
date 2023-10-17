@@ -5,9 +5,10 @@ import static java.util.Objects.requireNonNull;
 import unicash.commons.util.ToStringBuilder;
 import unicash.logic.UniCashMessages;
 import unicash.logic.commands.exceptions.CommandException;
+import unicash.logic.parser.CliSyntax;
 import unicash.model.Model;
 import unicash.model.transaction.Transaction;
-import unicash.logic.parser.CliSyntax;
+
 
 /**
  * Adds a transaction to UniCash.
