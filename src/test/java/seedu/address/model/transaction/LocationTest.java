@@ -2,6 +2,7 @@ package seedu.address.model.transaction;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -51,18 +52,20 @@ public class LocationTest {
         Location name = new Location("Valid Location");
 
         // same values -> returns true
-        assertTrue(name.equals(new Location("Valid Location")));
+        assertEquals(name, new Location("Valid Location"));
 
         // same object -> returns true
-        assertTrue(name.equals(name));
+        assertEquals(name, name);
 
         // null -> returns false
-        assertFalse(name.equals(null));
+        assertNotEquals(null, name);
 
         // different types -> returns false
-        assertFalse(name.equals(5.0f));
+        assertNotEquals(5.0f, name);
+
+        assertFalse(name.equals(5));
 
         // different values -> returns false
-        assertFalse(name.equals(new Location("Other Valid Location")));
+        assertNotEquals(name, new Location("Other Valid Location"));
     }
 }

@@ -3,7 +3,6 @@ package seedu.address.model.transaction;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.time.Clock;
@@ -51,28 +50,30 @@ public class DateTimeTest {
         DateTime datetime = new DateTime("01-01-2001 01:01");
 
         // same values -> returns true
-        assertTrue(datetime.equals(new DateTime("01-01-2001 01:01")));
+        assertEquals(datetime, new DateTime("01-01-2001 01:01"));
 
         // same object -> returns true
-        assertTrue(datetime.equals(datetime));
+        assertEquals(datetime, datetime);
 
         // null -> returns false
-        assertFalse(datetime.equals(null));
+        assertNotEquals(null, datetime);
 
         // different types -> returns false
-        assertFalse(datetime.equals("hi"));
+        assertNotEquals("hi", datetime);
 
         // different year -> returns false
-        assertFalse(datetime.equals(new DateTime("01-01-2000 01:01")));
+        assertNotEquals(datetime, new DateTime("01-01-2000 01:01"));
 
         // different month -> returns false
-        assertFalse(datetime.equals(new DateTime("01-02-2001 01:01")));
+        assertNotEquals(datetime, new DateTime("01-02-2001 01:01"));
 
         // different day -> returns false
-        assertFalse(datetime.equals(new DateTime("02-01-2001 01:01")));
+        assertNotEquals(datetime, new DateTime("02-01-2001 01:01"));
 
         // different time -> returns false
-        assertFalse(datetime.equals(new DateTime("01-01-2001 02:02")));
+        assertNotEquals(datetime, new DateTime("01-01-2001 02:02"));
+
+        assertFalse(datetime.equals(2));
     }
 
     @Test

@@ -1,6 +1,8 @@
 package seedu.address.commons.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -27,7 +29,7 @@ public class VersionTest {
         assertEquals(19, version.getMajor());
         assertEquals(10, version.getMinor());
         assertEquals(20, version.getPatch());
-        assertEquals(true, version.isEarlyAccess());
+        assertTrue(version.isEarlyAccess());
     }
 
     @Test
@@ -53,11 +55,11 @@ public class VersionTest {
         // Tests equality
         one = new Version(0, 0, 0, true);
         another = new Version(0, 0, 0, true);
-        assertTrue(one.compareTo(another) == 0);
+        assertEquals(0, one.compareTo(another));
 
         one = new Version(11, 12, 13, false);
         another = new Version(11, 12, 13, false);
-        assertTrue(one.compareTo(another) == 0);
+        assertEquals(0, one.compareTo(another));
 
         // Tests different patch
         one = new Version(0, 0, 5, false);
@@ -121,11 +123,48 @@ public class VersionTest {
 
         one = new Version(0, 0, 0, false);
         another = new Version(0, 0, 0, false);
-        assertTrue(one.equals(another));
+        assertEquals(one, another);
 
         one = new Version(100, 191, 275, true);
         another = new Version(100, 191, 275, true);
-        assertTrue(one.equals(another));
+        assertEquals(one, another);
+    }
+
+    @Test
+    public void compareTo_fallThrough_returns1() {
+        var first = new Version(1, 2, 3, false);
+        var second = new Version(1, 2, 3, true);
+        assertEquals(1, first.compareTo(second));
+    }
+
+    @Test
+    public void compareTo_isEarlyAccess_returnsNegative1() {
+        var first = new Version(1, 2, 3, true);
+        var second = new Version(1, 2, 3, false);
+        assertEquals(-1, first.compareTo(second));
+    }
+
+    @Test
+    public void equals() {
+        var version = new Version(0, 0, 0, false);
+        assertEquals(version, version);
+
+        assertFalse(version.equals(5));
+
+        var sameVersion = new Version(0, 0, 0, false);
+        assertEquals(version, sameVersion);
+
+        var changedMajor = new Version(2, 0, 0, false);
+        assertNotEquals(version, changedMajor);
+
+        var changedMinor = new Version(0, 2, 0, false);
+        assertNotEquals(version, changedMinor);
+
+        var changedPatch = new Version(0, 0, 2, false);
+        assertNotEquals(version, changedPatch);
+
+        var changedIsEarlyAccess = new Version(0, 0, 0, true);
+        assertNotEquals(version, changedIsEarlyAccess);
     }
 
     private void verifyVersionParsedCorrectly(String versionString,

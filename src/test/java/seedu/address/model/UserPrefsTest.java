@@ -1,8 +1,15 @@
 package seedu.address.model;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.nio.file.Path;
+
 import org.junit.jupiter.api.Test;
+
+import seedu.address.commons.core.GuiSettings;
 
 public class UserPrefsTest {
 
@@ -16,6 +23,22 @@ public class UserPrefsTest {
     public void setUniCashFilePath_nullPath_throwsNullPointerException() {
         UserPrefs userPrefs = new UserPrefs();
         assertThrows(NullPointerException.class, () -> userPrefs.setUniCashFilePath(null));
+    }
+
+    @Test
+    public void equals() {
+        var userPrefs = new UserPrefs();
+        assertEquals(userPrefs, userPrefs);
+
+        assertFalse(userPrefs.equals(5));
+
+        var changedGuiSettings = new UserPrefs();
+        changedGuiSettings.setGuiSettings(new GuiSettings(0, 0, 0, 0));
+        assertNotEquals(changedGuiSettings, userPrefs);
+
+        var changedUniCashFilePath = new UserPrefs();
+        changedUniCashFilePath.setUniCashFilePath(Path.of("invalid_path"));
+        assertNotEquals(changedUniCashFilePath, userPrefs);
     }
 
 }

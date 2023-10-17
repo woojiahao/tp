@@ -10,6 +10,10 @@ import seedu.address.MainApp;
  */
 public class AppUtil {
 
+    private AppUtil() {
+
+    }
+
     /**
      * Gets an {@code Image} from the specified path.
      */

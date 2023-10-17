@@ -16,7 +16,7 @@ import seedu.address.model.transaction.TransactionNameContainsKeywordsPredicate;
  */
 public class FindCommandParserTest {
 
-    private FindCommandParser parser = new FindCommandParser();
+    private final FindCommandParser parser = new FindCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {

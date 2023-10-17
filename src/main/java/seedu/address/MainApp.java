@@ -15,7 +15,6 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyUniCash;
@@ -92,7 +91,7 @@ public class MainApp extends Application {
         }
 
         // TODO: Remove ModelManager first parameter
-        return new ModelManager(new AddressBook(), userPrefs, initialData);
+        return new ModelManager(initialData, userPrefs);
     }
 
     private void initLogging(Config config) {

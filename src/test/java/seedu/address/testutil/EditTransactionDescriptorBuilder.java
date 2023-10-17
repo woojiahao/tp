@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.transaction.EditTransactionCommand;
+import seedu.address.logic.commands.EditTransactionCommand;
 import seedu.address.model.category.Category;
 import seedu.address.model.transaction.Amount;
 import seedu.address.model.transaction.DateTime;
@@ -17,7 +17,7 @@ import seedu.address.model.transaction.Type;
  * A utility class to help with building EditTransactionDescriptor objects.
  */
 public class EditTransactionDescriptorBuilder {
-    private EditTransactionCommand.EditTransactionDescriptor descriptor;
+    private final EditTransactionCommand.EditTransactionDescriptor descriptor;
 
     public EditTransactionDescriptorBuilder() {
         descriptor = new EditTransactionCommand.EditTransactionDescriptor();

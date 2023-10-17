@@ -5,9 +5,11 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_NUS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_SHOPPING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_EDUCATION;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_ENTERTAINMENT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_NUS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME_INTERN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME_NUS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME_SHOPPING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION_NUS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION_ORCHARD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TRANSACTION_NAME_INTERN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TRANSACTION_NAME_NUS;
@@ -53,8 +55,8 @@ public class TypicalTransactions {
             .withType(VALID_TYPE_EXPENSE)
             .withAmount(VALID_AMOUNT_NUS)
             .withDateTime(VALID_DATETIME_NUS)
-            .withLocation(VALID_LOCATION_ORCHARD)
-            .withCategories(VALID_CATEGORY_ENTERTAINMENT)
+            .withLocation(VALID_LOCATION_NUS)
+            .withCategories(VALID_CATEGORY_NUS)
             .build();
     public static final Transaction INTERN = new TransactionBuilder().withName(VALID_TRANSACTION_NAME_INTERN)
             .withType(VALID_TYPE_EXPENSE)
