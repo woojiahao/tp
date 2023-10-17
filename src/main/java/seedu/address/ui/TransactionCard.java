@@ -51,7 +51,7 @@ public class TransactionCard extends UiPart<Region> {
         amount.setText(transaction.getAmount().toString());
         dateTime.setText(transaction.getDateTime().toString());
         transactionLocation.setText(transaction.getLocation().toString());
-        categories.setText(transaction.getCategory().toString());
+        categories.setText(transaction.getCategories().toString());
 
     }
 }
