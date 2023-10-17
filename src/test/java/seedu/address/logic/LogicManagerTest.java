@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.UniCashMessages.MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX;
 import static seedu.address.logic.UniCashMessages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_NUS;
@@ -20,6 +21,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.AddTransactionCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
@@ -88,6 +90,19 @@ public class LogicManagerTest {
     @Test
     public void getFilteredTransactionList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredTransactionList().remove(0));
+    }
+
+    @Test
+    public void getGuiSettings() {
+        assertEquals(model.getGuiSettings(), new GuiSettings());
+    }
+
+    @Test
+    public void setGuiSettings() {
+        var localModel = new ModelManager();
+        var guiSettings = new GuiSettings(15, 15, 15, 15);
+        localModel.setGuiSettings(guiSettings);
+        assertEquals(localModel.getGuiSettings(), guiSettings);
     }
 
     /**

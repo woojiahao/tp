@@ -14,6 +14,10 @@ import seedu.address.model.transaction.Type;
  */
 public class SampleDataUtil {
 
+    private SampleDataUtil() {
+
+    }
+
     public static Transaction[] getSampleTransactions() {
         return new Transaction[]{
             new Transaction(
