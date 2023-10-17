@@ -1,8 +1,12 @@
 package seedu.address.testutil;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import seedu.address.logic.commands.transaction.EditTransactionCommand;
+import seedu.address.model.category.Category;
 import seedu.address.model.transaction.Amount;
-import seedu.address.model.transaction.Category;
 import seedu.address.model.transaction.DateTime;
 import seedu.address.model.transaction.Location;
 import seedu.address.model.transaction.Name;
@@ -30,10 +34,10 @@ public class EditTransactionDescriptorBuilder {
         descriptor = new EditTransactionCommand.EditTransactionDescriptor();
         descriptor.setName(transaction.getName());
         descriptor.setAmount(transaction.getAmount());
-        descriptor.setCategory(transaction.getCategory());
         descriptor.setDateTime(transaction.getDateTime());
         descriptor.setLocation(transaction.getLocation());
         descriptor.setType(transaction.getType());
+        descriptor.setCategories(transaction.getCategories());
     }
 
     /**
@@ -49,14 +53,6 @@ public class EditTransactionDescriptorBuilder {
      */
     public EditTransactionDescriptorBuilder withAmount(double amount) {
         descriptor.setAmount(new Amount(amount));
-        return this;
-    }
-
-    /**
-     * Sets the {@code Category} of the {@code EditTransactionDescriptor} that we are building.
-     */
-    public EditTransactionDescriptorBuilder withCategory(String category) {
-        descriptor.setCategory(new Category(category));
         return this;
     }
 
@@ -81,6 +77,16 @@ public class EditTransactionDescriptorBuilder {
      */
     public EditTransactionDescriptorBuilder withType(String type) {
         descriptor.setType(new Type(type));
+        return this;
+    }
+
+    /**
+     * Parses the {@code categories} into a {@code Set<Category>} and set it to the {@code EditTransactionDescriptor}
+     * that we are building.
+     */
+    public EditTransactionDescriptorBuilder withCategories(String... categories) {
+        Set<Category> categoriesSet = Stream.of(categories).map(Category::new).collect(Collectors.toSet());
+        descriptor.setCategories(categoriesSet);
         return this;
     }
 

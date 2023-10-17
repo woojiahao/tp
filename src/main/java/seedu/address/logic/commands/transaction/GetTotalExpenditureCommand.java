@@ -12,7 +12,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.transaction.Category;
+import seedu.address.model.category.Category;
 
 /**
  * Calculates and returns the total expenditure of a user in a given month and (optionally) category.
@@ -49,10 +49,13 @@ public class GetTotalExpenditureCommand extends Command {
         model.updateFilteredTransactionList(transaction -> {
             boolean isExpense = transaction.getType().type.equals(TransactionType.EXPENSE);
             boolean isSameMonth = transaction.getDateTime().getDateTime().getMonthValue() == month;
-            if (categoryFilter == null || categoryFilter.isEmpty()) {
-                return isExpense && isSameMonth;
-            }
-            return isExpense && isSameMonth && transaction.getCategory().equals(categoryFilter);
+            boolean hasCategory = transaction.getCategories().stream().anyMatch(cat -> {
+                if (categoryFilter == null) {
+                    return true;
+                }
+                return cat.equals(categoryFilter);
+            });
+            return isExpense && isSameMonth && hasCategory;
         });
 
         var filteredList = model.getFilteredTransactionList();

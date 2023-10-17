@@ -18,8 +18,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.UniCashMessages;
 import seedu.address.logic.commands.CommandTestUtil;
 import seedu.address.logic.commands.transaction.EditTransactionCommand;
+import seedu.address.model.category.Category;
 import seedu.address.model.transaction.Amount;
-import seedu.address.model.transaction.Category;
 import seedu.address.model.transaction.DateTime;
 import seedu.address.model.transaction.Location;
 import seedu.address.model.transaction.Name;
@@ -30,6 +30,7 @@ public class EditTransactionCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTransactionCommand.MESSAGE_USAGE);
+    private static final String CATEGORY_EMPTY = " " + PREFIX_CATEGORY;
 
     private EditTransactionCommandParser parser = new EditTransactionCommandParser();
 
@@ -103,7 +104,7 @@ public class EditTransactionCommandParserTest {
 
         EditTransactionCommand.EditTransactionDescriptor descriptor = new EditTransactionDescriptorBuilder()
                 .withName(CommandTestUtil.VALID_TRANSACTION_NAME_NUS)
-                .withAmount(CommandTestUtil.VALID_AMOUNT_NUS).withCategory(CommandTestUtil.VALID_CATEGORY_NUS)
+                .withAmount(CommandTestUtil.VALID_AMOUNT_NUS).withCategories(CommandTestUtil.VALID_CATEGORY_NUS)
                 .withLocation(CommandTestUtil.VALID_LOCATION_NUS).withDateTime(CommandTestUtil.VALID_DATETIME_NUS)
                 .withType(CommandTestUtil.VALID_TYPE_INCOME).build();
         EditTransactionCommand expectedTransactionCommand = new EditTransactionCommand(targetIndex, descriptor);
@@ -119,7 +120,7 @@ public class EditTransactionCommandParserTest {
 
         EditTransactionCommand.EditTransactionDescriptor descriptor = new EditTransactionDescriptorBuilder()
                 .withAmount(CommandTestUtil.VALID_AMOUNT_INTERN)
-                .withCategory(CommandTestUtil.VALID_CATEGORY_NUS).build();
+                .withCategories(CommandTestUtil.VALID_CATEGORY_NUS).build();
         EditTransactionCommand expectedTransactionCommand = new EditTransactionCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedTransactionCommand);
@@ -143,7 +144,7 @@ public class EditTransactionCommandParserTest {
 
         // category
         userInput = targetIndex.getOneBased() + CommandTestUtil.CATEGORY_DESC_NUS;
-        descriptor = new EditTransactionDescriptorBuilder().withCategory(CommandTestUtil.VALID_CATEGORY_NUS).build();
+        descriptor = new EditTransactionDescriptorBuilder().withCategories(CommandTestUtil.VALID_CATEGORY_NUS).build();
         expectedCommand = new EditTransactionCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -184,7 +185,7 @@ public class EditTransactionCommandParserTest {
 
         assertParseFailure(parser, userInput, UniCashMessages.getErrorMessageForDuplicatePrefixes(PREFIX_LOCATION));
 
-        // mulltiple valid fields repeated
+        // multiple valid fields repeated
         userInput = targetIndex.getOneBased() + CommandTestUtil.LOCATION_DESC_NUS + CommandTestUtil.TYPE_DESC_INCOME
                 + CommandTestUtil.AMOUNT_DESC_NUS + CommandTestUtil.CATEGORY_DESC_NUS
                 + CommandTestUtil.DATETIME_DESC_NUS + CommandTestUtil.LOCATION_DESC_NUS
@@ -208,4 +209,15 @@ public class EditTransactionCommandParserTest {
                 UniCashMessages.getErrorMessageForDuplicatePrefixes(PREFIX_LOCATION, PREFIX_CATEGORY, PREFIX_DATETIME));
     }
 
+    @Test
+    public void parse_resetCategories_success() {
+        Index targetIndex = INDEX_THIRD_TRANSACTION;
+        String userInput = targetIndex.getOneBased() + CATEGORY_EMPTY;
+
+        EditTransactionCommand.EditTransactionDescriptor descriptor = new EditTransactionDescriptorBuilder()
+                .withCategories().build();
+        EditTransactionCommand expectedCommand = new EditTransactionCommand(targetIndex, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
 }

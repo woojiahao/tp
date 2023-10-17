@@ -63,7 +63,7 @@ public class DateTime {
     }
 
     public LocalDateTime getDateTime() {
-        return this.dateTime;
+        return dateTime;
     }
 
     /**
