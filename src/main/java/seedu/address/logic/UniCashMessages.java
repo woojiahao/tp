@@ -43,12 +43,12 @@ public class UniCashMessages {
                 .append(transaction.getType())
                 .append("; Amount: ")
                 .append(transaction.getAmount())
-                .append("; Category: ")
-                .append(transaction.getCategory())
                 .append("; Date: ")
                 .append(transaction.getDateTime())
                 .append("; Location: ")
-                .append(transaction.getLocation());
+                .append(transaction.getLocation())
+                .append("; Category: ");
+        transaction.getCategories().forEach(builder::append);
         return builder.toString();
     }
 }

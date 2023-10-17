@@ -64,10 +64,6 @@ public class ModelManager implements Model {
         userPrefs.setGuiSettings(guiSettings);
     }
 
-   
-
-
-
     @Override
     public Path getUniCashFilePath() {
         return userPrefs.getUniCashFilePath();

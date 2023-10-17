@@ -52,7 +52,7 @@ public class TransactionListTest {
     }
 
     @Test
-    public void add_duplicateTransaction_throwsDuplicateTransactionException() {
+    public void add_duplicateTransaction_doesNotThrow() {
         transactionList.add(NUS);
         assertDoesNotThrow(() -> transactionList.add(NUS));
     }

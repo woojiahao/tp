@@ -9,9 +9,15 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Optional;
+import java.util.Set;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditTransactionCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.category.Category;
 
 /**
  * Parses input arguments and creates a new EditTransactionCommand object
@@ -64,16 +70,15 @@ public class EditTransactionCommandParser implements Parser<EditTransactionComma
                     ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get())
             );
         }
-        if (argMultimap.getValue(PREFIX_CATEGORY).isPresent()) {
-            editTransactionDescriptor.setCategory(
-                    ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get())
-            );
-        }
+
         if (argMultimap.getValue(PREFIX_LOCATION).isPresent()) {
             editTransactionDescriptor.setLocation(
                     ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get())
             );
         }
+
+        parseCategoriesForEdit(argMultimap.getAllValues(PREFIX_CATEGORY))
+                .ifPresent(editTransactionDescriptor::setCategories);
 
         if (!editTransactionDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditTransactionCommand.MESSAGE_NOT_EDITED);
@@ -82,4 +87,21 @@ public class EditTransactionCommandParser implements Parser<EditTransactionComma
         return new EditTransactionCommand(index, editTransactionDescriptor);
     }
 
+    /**
+     * Parses {@code Collection<String> categories} into a {@code Set<Category>} if {@code categories} is non-empty.
+     * If {@code categories} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Category>} containing zero categories.
+     */
+    private Optional<Set<Category>> parseCategoriesForEdit(Collection<String> categories) throws ParseException {
+        requireNonNull(categories);
+
+        if (categories.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> categoriesSet = categories.size() == 1
+                && categories.contains("")
+                ? Collections.emptySet()
+                : categories;
+        return Optional.of(ParserUtil.parseCategories(categoriesSet));
+    }
 }

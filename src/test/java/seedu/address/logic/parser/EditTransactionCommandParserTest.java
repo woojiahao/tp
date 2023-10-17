@@ -1,6 +1,31 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.UniCashMessages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_INTERN;
+import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_NUS;
+import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_ENTERTAINMENT;
+import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_NUS;
+import static seedu.address.logic.commands.CommandTestUtil.DATETIME_DESC_INTERN;
+import static seedu.address.logic.commands.CommandTestUtil.DATETIME_DESC_NUS;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_AMOUNT_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_CATEGORY_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATETIME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_LOCATION_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TRANSACTION_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TYPE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.LOCATION_DESC_NUS;
+import static seedu.address.logic.commands.CommandTestUtil.LOCATION_DESC_ORCHARD;
+import static seedu.address.logic.commands.CommandTestUtil.TRANSACTION_NAME_DESC_NUS;
+import static seedu.address.logic.commands.CommandTestUtil.TYPE_DESC_EXPENSE;
+import static seedu.address.logic.commands.CommandTestUtil.TYPE_DESC_INCOME;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_INTERN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_NUS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_NUS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME_INTERN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME_NUS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION_NUS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TRANSACTION_NAME_NUS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_INCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
@@ -16,10 +41,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.UniCashMessages;
-import seedu.address.logic.commands.CommandTestUtil;
 import seedu.address.logic.commands.EditTransactionCommand;
+import seedu.address.model.category.Category;
 import seedu.address.model.transaction.Amount;
-import seedu.address.model.transaction.Category;
 import seedu.address.model.transaction.DateTime;
 import seedu.address.model.transaction.Location;
 import seedu.address.model.transaction.Name;
@@ -30,13 +54,14 @@ public class EditTransactionCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTransactionCommand.MESSAGE_USAGE);
+    private static final String CATEGORY_EMPTY = " " + PREFIX_CATEGORY;
 
     private final EditTransactionCommandParser parser = new EditTransactionCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        assertParseFailure(parser, CommandTestUtil.VALID_TRANSACTION_NAME_NUS, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_TRANSACTION_NAME_NUS, MESSAGE_INVALID_FORMAT);
 
         // no field specified
         assertParseFailure(parser, "1", EditTransactionCommand.MESSAGE_NOT_EDITED);
@@ -48,10 +73,18 @@ public class EditTransactionCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5" + CommandTestUtil.TRANSACTION_NAME_DESC_NUS, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(
+                parser,
+                "-5" + TRANSACTION_NAME_DESC_NUS,
+                MESSAGE_INVALID_FORMAT
+        );
 
         // zero index
-        assertParseFailure(parser, "0" + CommandTestUtil.TRANSACTION_NAME_DESC_NUS, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(
+                parser,
+                "0" + TRANSACTION_NAME_DESC_NUS,
+                MESSAGE_INVALID_FORMAT
+        );
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
@@ -62,51 +95,74 @@ public class EditTransactionCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser,
-                "1" + CommandTestUtil.INVALID_TRANSACTION_NAME_DESC,
-                Name.MESSAGE_CONSTRAINTS); // invalid name
-        assertParseFailure(parser,
-                "1" + CommandTestUtil.INVALID_AMOUNT_DESC,
-                Amount.MESSAGE_CONSTRAINTS); // invalid amount
-        assertParseFailure(parser,
-                "1" + CommandTestUtil.INVALID_CATEGORY_DESC,
-                Category.MESSAGE_CONSTRAINTS); // invalid category
-        assertParseFailure(parser,
-                "1" + CommandTestUtil.INVALID_DATETIME_DESC,
-                DateTime.MESSAGE_CONSTRAINTS); // invalid datetime
-        assertParseFailure(parser,
-                "1" + CommandTestUtil.INVALID_LOCATION_DESC,
-                Location.MESSAGE_CONSTRAINTS); // invalid location
-        assertParseFailure(parser,
-                "1" + CommandTestUtil.INVALID_TYPE_DESC,
-                Type.MESSAGE_CONSTRAINTS); // invalid type
+        assertParseFailure(
+                parser,
+                "1" + INVALID_TRANSACTION_NAME_DESC,
+                Name.MESSAGE_CONSTRAINTS
+        ); // invalid name
+        assertParseFailure(
+                parser,
+                "1" + INVALID_AMOUNT_DESC,
+                Amount.MESSAGE_CONSTRAINTS
+        ); // invalid amount
+        assertParseFailure(
+                parser,
+                "1" + INVALID_CATEGORY_DESC,
+                Category.MESSAGE_CONSTRAINTS
+        ); // invalid category
+        assertParseFailure(
+                parser,
+                "1" + INVALID_DATETIME_DESC,
+                DateTime.MESSAGE_CONSTRAINTS
+        ); // invalid datetime
+        assertParseFailure(
+                parser,
+                "1" + INVALID_LOCATION_DESC,
+                Location.MESSAGE_CONSTRAINTS
+        ); // invalid location
+        assertParseFailure(
+                parser,
+                "1" + INVALID_TYPE_DESC,
+                Type.MESSAGE_CONSTRAINTS
+        ); // invalid type
 
         // invalid amount followed by valid category
-        assertParseFailure(parser,
-                "1" + CommandTestUtil.INVALID_AMOUNT_DESC + CommandTestUtil.CATEGORY_DESC_ENTERTAINMENT,
-                Amount.MESSAGE_CONSTRAINTS);
+        assertParseFailure(
+                parser,
+                "1" + INVALID_AMOUNT_DESC + CATEGORY_DESC_ENTERTAINMENT,
+                Amount.MESSAGE_CONSTRAINTS
+        );
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser,
-                "1" + CommandTestUtil.INVALID_TRANSACTION_NAME_DESC + CommandTestUtil.INVALID_CATEGORY_DESC
-                        + CommandTestUtil.VALID_AMOUNT_INTERN + CommandTestUtil.VALID_DATETIME_INTERN,
+        assertParseFailure(
+                parser,
+                "1" + INVALID_TRANSACTION_NAME_DESC
+                        + INVALID_CATEGORY_DESC
+                        + VALID_AMOUNT_INTERN
+                        + VALID_DATETIME_INTERN,
                 Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_TRANSACTION;
-        String userInput = targetIndex.getOneBased() + CommandTestUtil.AMOUNT_DESC_NUS
-                + CommandTestUtil.LOCATION_DESC_NUS + CommandTestUtil.TYPE_DESC_INCOME
-                + CommandTestUtil.CATEGORY_DESC_NUS + CommandTestUtil.DATETIME_DESC_NUS
-                + CommandTestUtil.TRANSACTION_NAME_DESC_NUS;
+        String userInput = targetIndex.getOneBased()
+                + AMOUNT_DESC_NUS
+                + LOCATION_DESC_NUS
+                + TYPE_DESC_INCOME
+                + CATEGORY_DESC_NUS
+                + DATETIME_DESC_NUS
+                + TRANSACTION_NAME_DESC_NUS;
 
-        EditTransactionCommand.EditTransactionDescriptor descriptor = new EditTransactionDescriptorBuilder()
-                .withName(CommandTestUtil.VALID_TRANSACTION_NAME_NUS)
-                .withAmount(CommandTestUtil.VALID_AMOUNT_NUS).withCategory(CommandTestUtil.VALID_CATEGORY_NUS)
-                .withLocation(CommandTestUtil.VALID_LOCATION_NUS).withDateTime(CommandTestUtil.VALID_DATETIME_NUS)
-                .withType(CommandTestUtil.VALID_TYPE_INCOME).build();
-        EditTransactionCommand expectedTransactionCommand = new EditTransactionCommand(targetIndex, descriptor);
+        var descriptor = new EditTransactionDescriptorBuilder()
+                .withName(VALID_TRANSACTION_NAME_NUS)
+                .withAmount(VALID_AMOUNT_NUS)
+                .withCategories(VALID_CATEGORY_NUS)
+                .withLocation(VALID_LOCATION_NUS)
+                .withDateTime(VALID_DATETIME_NUS)
+                .withType(VALID_TYPE_INCOME)
+                .build();
+        var expectedTransactionCommand = new EditTransactionCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedTransactionCommand);
     }
@@ -114,13 +170,13 @@ public class EditTransactionCommandParserTest {
     @Test
     public void parse_someFieldsSpecified_success() {
         Index targetIndex = INDEX_FIRST_TRANSACTION;
-        String userInput = targetIndex.getOneBased() + CommandTestUtil.AMOUNT_DESC_INTERN
-                + CommandTestUtil.CATEGORY_DESC_NUS;
+        String userInput = targetIndex.getOneBased() + AMOUNT_DESC_INTERN + CATEGORY_DESC_NUS;
 
-        EditTransactionCommand.EditTransactionDescriptor descriptor = new EditTransactionDescriptorBuilder()
-                .withAmount(CommandTestUtil.VALID_AMOUNT_INTERN)
-                .withCategory(CommandTestUtil.VALID_CATEGORY_NUS).build();
-        EditTransactionCommand expectedTransactionCommand = new EditTransactionCommand(targetIndex, descriptor);
+        var descriptor = new EditTransactionDescriptorBuilder()
+                .withAmount(VALID_AMOUNT_INTERN)
+                .withCategories(VALID_CATEGORY_NUS)
+                .build();
+        var expectedTransactionCommand = new EditTransactionCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedTransactionCommand);
     }
@@ -129,39 +185,40 @@ public class EditTransactionCommandParserTest {
     public void parse_oneFieldSpecified_success() {
         // name
         Index targetIndex = INDEX_THIRD_TRANSACTION;
-        String userInput = targetIndex.getOneBased() + CommandTestUtil.TRANSACTION_NAME_DESC_NUS;
-        EditTransactionCommand.EditTransactionDescriptor descriptor = new EditTransactionDescriptorBuilder()
-                .withName(CommandTestUtil.VALID_TRANSACTION_NAME_NUS).build();
-        EditTransactionCommand expectedCommand = new EditTransactionCommand(targetIndex, descriptor);
+        String userInput = targetIndex.getOneBased() + TRANSACTION_NAME_DESC_NUS;
+        var descriptor = new EditTransactionDescriptorBuilder()
+                .withName(VALID_TRANSACTION_NAME_NUS)
+                .build();
+        var expectedCommand = new EditTransactionCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // amount
-        userInput = targetIndex.getOneBased() + CommandTestUtil.AMOUNT_DESC_NUS;
-        descriptor = new EditTransactionDescriptorBuilder().withAmount(CommandTestUtil.VALID_AMOUNT_NUS).build();
+        userInput = targetIndex.getOneBased() + AMOUNT_DESC_NUS;
+        descriptor = new EditTransactionDescriptorBuilder().withAmount(VALID_AMOUNT_NUS).build();
         expectedCommand = new EditTransactionCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // category
-        userInput = targetIndex.getOneBased() + CommandTestUtil.CATEGORY_DESC_NUS;
-        descriptor = new EditTransactionDescriptorBuilder().withCategory(CommandTestUtil.VALID_CATEGORY_NUS).build();
+        userInput = targetIndex.getOneBased() + CATEGORY_DESC_NUS;
+        descriptor = new EditTransactionDescriptorBuilder().withCategories(VALID_CATEGORY_NUS).build();
         expectedCommand = new EditTransactionCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // datetime
-        userInput = targetIndex.getOneBased() + CommandTestUtil.DATETIME_DESC_NUS;
-        descriptor = new EditTransactionDescriptorBuilder().withDateTime(CommandTestUtil.VALID_DATETIME_NUS).build();
+        userInput = targetIndex.getOneBased() + DATETIME_DESC_NUS;
+        descriptor = new EditTransactionDescriptorBuilder().withDateTime(VALID_DATETIME_NUS).build();
         expectedCommand = new EditTransactionCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // location
-        userInput = targetIndex.getOneBased() + CommandTestUtil.LOCATION_DESC_NUS;
-        descriptor = new EditTransactionDescriptorBuilder().withLocation(CommandTestUtil.VALID_LOCATION_NUS).build();
+        userInput = targetIndex.getOneBased() + LOCATION_DESC_NUS;
+        descriptor = new EditTransactionDescriptorBuilder().withLocation(VALID_LOCATION_NUS).build();
         expectedCommand = new EditTransactionCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // type
-        userInput = targetIndex.getOneBased() + CommandTestUtil.TYPE_DESC_INCOME;
-        descriptor = new EditTransactionDescriptorBuilder().withType(CommandTestUtil.VALID_TYPE_INCOME).build();
+        userInput = targetIndex.getOneBased() + TYPE_DESC_INCOME;
+        descriptor = new EditTransactionDescriptorBuilder().withType(VALID_TYPE_INCOME).build();
         expectedCommand = new EditTransactionCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -173,39 +230,73 @@ public class EditTransactionCommandParserTest {
 
         // valid followed by invalid
         Index targetIndex = INDEX_FIRST_TRANSACTION;
-        String userInput = targetIndex.getOneBased() + CommandTestUtil.LOCATION_DESC_NUS
-                + CommandTestUtil.INVALID_LOCATION_DESC;
+        String userInput = targetIndex.getOneBased() + LOCATION_DESC_NUS + INVALID_LOCATION_DESC;
 
         assertParseFailure(parser, userInput, UniCashMessages.getErrorMessageForDuplicatePrefixes(PREFIX_LOCATION));
 
         // invalid followed by valid
-        userInput = targetIndex.getOneBased() + CommandTestUtil.INVALID_LOCATION_DESC
-                + CommandTestUtil.LOCATION_DESC_NUS;
+        userInput = targetIndex.getOneBased() + INVALID_LOCATION_DESC + LOCATION_DESC_NUS;
 
         assertParseFailure(parser, userInput, UniCashMessages.getErrorMessageForDuplicatePrefixes(PREFIX_LOCATION));
 
-        // mulltiple valid fields repeated
-        userInput = targetIndex.getOneBased() + CommandTestUtil.LOCATION_DESC_NUS + CommandTestUtil.TYPE_DESC_INCOME
-                + CommandTestUtil.AMOUNT_DESC_NUS + CommandTestUtil.CATEGORY_DESC_NUS
-                + CommandTestUtil.DATETIME_DESC_NUS + CommandTestUtil.LOCATION_DESC_NUS
-                + CommandTestUtil.TYPE_DESC_INCOME + CommandTestUtil.AMOUNT_DESC_NUS
-                + CommandTestUtil.CATEGORY_DESC_NUS + CommandTestUtil.DATETIME_DESC_NUS
-                + CommandTestUtil.LOCATION_DESC_ORCHARD + CommandTestUtil.TYPE_DESC_EXPENSE
-                + CommandTestUtil.AMOUNT_DESC_INTERN + CommandTestUtil.CATEGORY_DESC_ENTERTAINMENT
-                + CommandTestUtil.DATETIME_DESC_INTERN;
+        // multiple valid fields repeated
+        userInput = targetIndex.getOneBased()
+                + LOCATION_DESC_NUS
+                + TYPE_DESC_INCOME
+                + AMOUNT_DESC_NUS
+                + CATEGORY_DESC_NUS
+                + DATETIME_DESC_NUS
+                + LOCATION_DESC_NUS
+                + TYPE_DESC_INCOME
+                + AMOUNT_DESC_NUS
+                + CATEGORY_DESC_NUS
+                + DATETIME_DESC_NUS
+                + LOCATION_DESC_ORCHARD
+                + TYPE_DESC_EXPENSE
+                + AMOUNT_DESC_INTERN
+                + CATEGORY_DESC_ENTERTAINMENT
+                + DATETIME_DESC_INTERN;
 
-        assertParseFailure(parser, userInput,
-                UniCashMessages.getErrorMessageForDuplicatePrefixes(PREFIX_LOCATION, PREFIX_TYPE, PREFIX_AMOUNT,
-                        PREFIX_DATETIME, PREFIX_CATEGORY));
+        assertParseFailure(
+                parser,
+                userInput,
+                UniCashMessages.getErrorMessageForDuplicatePrefixes(
+                        PREFIX_LOCATION,
+                        PREFIX_TYPE,
+                        PREFIX_AMOUNT,
+                        PREFIX_DATETIME,
+                        PREFIX_CATEGORY
+                )
+        );
 
         // multiple invalid values
-        userInput = targetIndex.getOneBased() + CommandTestUtil.INVALID_LOCATION_DESC
-                + CommandTestUtil.INVALID_CATEGORY_DESC + CommandTestUtil.INVALID_DATETIME_DESC
-                + CommandTestUtil.INVALID_LOCATION_DESC + CommandTestUtil.INVALID_CATEGORY_DESC
-                + CommandTestUtil.INVALID_DATETIME_DESC;
+        userInput = targetIndex.getOneBased()
+                + INVALID_LOCATION_DESC
+                + INVALID_CATEGORY_DESC
+                + INVALID_DATETIME_DESC
+                + INVALID_LOCATION_DESC
+                + INVALID_CATEGORY_DESC
+                + INVALID_DATETIME_DESC;
 
-        assertParseFailure(parser, userInput,
-                UniCashMessages.getErrorMessageForDuplicatePrefixes(PREFIX_LOCATION, PREFIX_CATEGORY, PREFIX_DATETIME));
+        assertParseFailure(
+                parser,
+                userInput,
+                UniCashMessages.getErrorMessageForDuplicatePrefixes(
+                        PREFIX_LOCATION,
+                        PREFIX_CATEGORY,
+                        PREFIX_DATETIME
+                )
+        );
     }
 
+    @Test
+    public void parse_resetCategories_success() {
+        Index targetIndex = INDEX_THIRD_TRANSACTION;
+        String userInput = targetIndex.getOneBased() + CATEGORY_EMPTY;
+
+        var descriptor = new EditTransactionDescriptorBuilder().withCategories().build();
+        var expectedCommand = new EditTransactionCommand(targetIndex, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
 }

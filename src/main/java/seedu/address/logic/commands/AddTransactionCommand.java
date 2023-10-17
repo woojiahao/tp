@@ -25,16 +25,16 @@ public class AddTransactionCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_TYPE + "TYPE "
             + PREFIX_AMOUNT + "AMOUNT "
-            + PREFIX_CATEGORY + "CATEGORY "
             + PREFIX_DATETIME + "DATETIME "
-            + PREFIX_LOCATION + "LOCATION \n "
+            + PREFIX_LOCATION + "LOCATION "
+            + "[" + PREFIX_CATEGORY + "CATEGORY]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Buying groceries "
             + PREFIX_TYPE + "expense "
             + PREFIX_AMOUNT + "300 "
-            + PREFIX_CATEGORY + "household expenses "
             + PREFIX_DATETIME + "18-08-2001 19:30 "
-            + PREFIX_LOCATION + "ntuc";
+            + PREFIX_LOCATION + "ntuc"
+            + PREFIX_CATEGORY + "household expenses";
 
     public static final String MESSAGE_SUCCESS = "New transaction added: %1$s";
 

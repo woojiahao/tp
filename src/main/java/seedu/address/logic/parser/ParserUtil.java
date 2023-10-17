@@ -2,11 +2,15 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.category.Category;
 import seedu.address.model.transaction.Amount;
-import seedu.address.model.transaction.Category;
 import seedu.address.model.transaction.DateTime;
 import seedu.address.model.transaction.Location;
 import seedu.address.model.transaction.Name;
@@ -106,22 +110,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String category} into a {@code Category}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code category} is invalid.
-     */
-    public static Category parseCategory(String category) throws ParseException {
-        requireNonNull(category);
-        String trimmedCategory = category.trim();
-        if (!trimmedCategory.isBlank() && !Category.isValidCategory(trimmedCategory)) {
-            throw new ParseException(Category.MESSAGE_CONSTRAINTS);
-        }
-
-        return new Category(trimmedCategory);
-    }
-
-    /**
      * Parses a {@code String location} into a {@code Location}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -136,4 +124,32 @@ public class ParserUtil {
 
         return new Location(trimmedLocation);
     }
+
+    /**
+     * Parses a {@code String category} into a {@code Category}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code category} is invalid.
+     */
+    public static Category parseCategory(String category) throws ParseException {
+        requireNonNull(category);
+        String trimmedCategory = category.trim();
+        if (!Category.isValidCategory(trimmedCategory)) {
+            throw new ParseException(Category.MESSAGE_CONSTRAINTS);
+        }
+        return new Category(trimmedCategory);
+    }
+
+    /**
+     * Parses {@code Collection<String> categories} into a {@code Set<Category>}.
+     */
+    public static Set<Category> parseCategories(Collection<String> categories) throws ParseException {
+        requireNonNull(categories);
+        final Set<Category> categorySet = new HashSet<>();
+        for (String categoryName : categories) {
+            categorySet.add(parseCategory(categoryName));
+        }
+        return categorySet;
+    }
+
 }

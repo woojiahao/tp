@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UniCash;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.transaction.Category;
+import seedu.address.model.category.Category;
 import seedu.address.testutil.TransactionBuilder;
 
 public class GetTotalExpenditureCommandTest {
@@ -71,8 +72,8 @@ public class GetTotalExpenditureCommandTest {
     @Test
     public void execute_multipleCategoriesOnly_filtersOnlySelectedCategory() throws CommandException {
         var model = getModel();
-        model.addTransaction(new TransactionBuilder().withType("expense").build());
-        model.addTransaction(new TransactionBuilder().withType("expense").withCategory("Others").build());
+        model.addTransaction(new TransactionBuilder().withType("expense").withCategories("Food").build());
+        model.addTransaction(new TransactionBuilder().withType("expense").withCategories("Others").build());
         model.addTransaction(new TransactionBuilder().withType("expense").build());
         var command = new GetTotalExpenditureCommand(8, new Category("Food"));
         command.execute(model);
@@ -80,7 +81,7 @@ public class GetTotalExpenditureCommandTest {
         assertEquals(2, filteredResult.size());
         for (var result : filteredResult) {
             assertEquals(TransactionType.EXPENSE, result.getType().type);
-            assertEquals("Food", result.getCategory().category);
+            assertTrue(result.getCategories().stream().anyMatch(cat -> cat.equals(new Category("Food"))));
         }
     }
 
@@ -88,7 +89,7 @@ public class GetTotalExpenditureCommandTest {
     public void execute_multipleMonthsAndCategories_filtersForSelectedMonthAndCategory() throws CommandException {
         var model = getModel();
         model.addTransaction(new TransactionBuilder().withType("expense").withDateTime("23-06-2001 00:00").build());
-        model.addTransaction(new TransactionBuilder().withType("expense").withCategory("Others").build());
+        model.addTransaction(new TransactionBuilder().withType("expense").withCategories("Others").build());
         model.addTransaction(new TransactionBuilder().withType("expense").build());
         var command = new GetTotalExpenditureCommand(8, new Category("Food"));
         command.execute(model);
@@ -96,7 +97,7 @@ public class GetTotalExpenditureCommandTest {
         assertEquals(1, filteredResult.size());
         for (var result : filteredResult) {
             assertEquals(TransactionType.EXPENSE, result.getType().type);
-            assertEquals("Food", result.getCategory().category);
+            assertTrue(result.getCategories().stream().anyMatch(cat -> cat.equals(new Category("Food"))));
             assertEquals(8, result.getDateTime().getDateTime().getMonthValue());
         }
     }
@@ -105,7 +106,7 @@ public class GetTotalExpenditureCommandTest {
     public void execute_multipleMonthsAndCategories_returnsValidTotalExpenditure() throws CommandException {
         var model = getModel();
         model.addTransaction(new TransactionBuilder().withType("expense").withDateTime("23-06-2001 00:00").build());
-        model.addTransaction(new TransactionBuilder().withType("expense").withCategory("Others").build());
+        model.addTransaction(new TransactionBuilder().withType("expense").withCategories("Others").build());
         model.addTransaction(new TransactionBuilder().withType("expense").build());
         model.addTransaction(new TransactionBuilder().withType("expense").withAmount(133.15).build());
         var command = new GetTotalExpenditureCommand(8, new Category("Food"));
@@ -122,7 +123,7 @@ public class GetTotalExpenditureCommandTest {
     public void toString_noInput_returnsCommandStringFormatted() {
         var command = new GetTotalExpenditureCommand(8, new Category("Food"));
         var toStringResult = command.toString();
-        String expected = GetTotalExpenditureCommand.class.getCanonicalName() + "{month=8, categoryFilter=Food}";
+        String expected = GetTotalExpenditureCommand.class.getCanonicalName() + "{month=8, categoryFilter=[Food]}";
         assertEquals(expected, toStringResult);
     }
 

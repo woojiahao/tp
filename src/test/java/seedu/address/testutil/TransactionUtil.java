@@ -7,8 +7,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
+import java.util.Set;
+
 import seedu.address.logic.commands.AddTransactionCommand;
 import seedu.address.logic.commands.EditTransactionCommand;
+import seedu.address.model.category.Category;
 import seedu.address.model.transaction.Transaction;
 
 /**
@@ -27,14 +30,16 @@ public class TransactionUtil {
      * Returns the part of command string for the given {@code transaction}'s details.
      */
     public static String getTransactionDetails(Transaction transaction) {
-        String sb = PREFIX_NAME + transaction.getName().fullName + " "
-                + PREFIX_TYPE + transaction.getType().type.getOriginalString() + " "
-                + PREFIX_AMOUNT + transaction.getAmount().toString() + " "
-                + PREFIX_CATEGORY + transaction.getCategory().category + " "
-                + PREFIX_DATETIME + transaction.getDateTime().originalString() + " "
-                + PREFIX_LOCATION + transaction.getLocation().location + " ";
-
-        return sb;
+        StringBuilder sb = new StringBuilder();
+        sb.append(PREFIX_NAME).append(transaction.getName().fullName).append(" ");
+        sb.append(PREFIX_TYPE).append(transaction.getType().type.getOriginalString()).append(" ");
+        sb.append(PREFIX_AMOUNT).append(transaction.getAmount().toString()).append(" ");
+        sb.append(PREFIX_DATETIME).append(transaction.getDateTime().originalString()).append(" ");
+        sb.append(PREFIX_LOCATION).append(transaction.getLocation().location).append(" ");
+        transaction.getCategories().forEach(
+                category -> sb.append(PREFIX_CATEGORY).append(category.category).append(" ")
+        );
+        return sb.toString();
     }
 
     public static String getEditTransactionDescriptorDetails(EditTransactionCommand
@@ -46,12 +51,18 @@ public class TransactionUtil {
                 .append(" "));
         descriptor.getAmount().ifPresent(amount -> sb.append(PREFIX_AMOUNT).append(amount.amount)
                 .append(" "));
-        descriptor.getCategory().ifPresent(category -> sb.append(PREFIX_CATEGORY).append(category.category)
-                .append(" "));
         descriptor.getLocation().ifPresent(location -> sb.append(PREFIX_LOCATION).append(location)
                 .append(" "));
         descriptor.getDateTime().ifPresent(dateTime -> sb.append(PREFIX_DATETIME).append(dateTime.originalString())
                 .append(" "));
+        if (descriptor.getCategories().isPresent()) {
+            Set<Category> categories = descriptor.getCategories().get();
+            if (categories.isEmpty()) {
+                sb.append(PREFIX_CATEGORY);
+            } else {
+                categories.forEach(s -> sb.append(PREFIX_CATEGORY).append(s.category).append(" "));
+            }
+        }
         return sb.toString();
     }
 }
