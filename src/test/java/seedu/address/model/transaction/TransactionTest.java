@@ -23,13 +23,15 @@ public class TransactionTest {
         assertEquals(BUYING_GROCERIES, BUYING_GROCERIES);
 
         // null -> returns false
-        assertFalse(groceriesCopy.equals(null));
+        assertNotEquals(null, groceriesCopy);
 
         // null -> returns false
         assertNotEquals(null, BUYING_GROCERIES);
 
         // different type -> returns false
         assertNotEquals(5, BUYING_GROCERIES);
+
+        assertFalse(BUYING_GROCERIES.equals(5));
 
         // different person -> returns false
         assertNotEquals(BUYING_GROCERIES, DINING_WITH_FRIENDS);

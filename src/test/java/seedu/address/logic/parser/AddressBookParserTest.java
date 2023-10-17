@@ -2,10 +2,9 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.UniCashMessages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.UniCashMessages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TRANSACTION;
 
 import java.util.Arrays;
@@ -14,30 +13,19 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.AddTransactionCommand;
+import seedu.address.logic.commands.ClearTransactionsCommand;
+import seedu.address.logic.commands.DeleteTransactionCommand;
+import seedu.address.logic.commands.EditTransactionCommand;
+import seedu.address.logic.commands.ExitCommandUniCash;
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.GetTotalExpenditureCommand;
+import seedu.address.logic.commands.HelpCommandUniCash;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.transaction.AddTransactionCommand;
-import seedu.address.logic.commands.transaction.ClearTransactionsCommand;
-import seedu.address.logic.commands.transaction.DeleteTransactionCommand;
-import seedu.address.logic.commands.transaction.EditTransactionCommand;
-import seedu.address.logic.commands.transaction.ExitCommandUniCash;
-import seedu.address.logic.commands.transaction.GetTotalExpenditureCommand;
-import seedu.address.logic.commands.transaction.HelpCommandUniCash;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Person;
 import seedu.address.model.transaction.Transaction;
 import seedu.address.model.transaction.TransactionNameContainsKeywordsPredicate;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.EditTransactionDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.TransactionBuilder;
 import seedu.address.testutil.TransactionUtil;
 
@@ -46,38 +34,9 @@ public class AddressBookParserTest {
     private final AddressBookParser parser = new AddressBookParser();
 
     @Test
-    public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
-    }
-
-    @Test
-    public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
-    }
-
-    @Test
-    public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
-    }
-
-    @Test
-    public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
-    }
-
-    @Test
     public void parseCommand_exit() throws Exception {
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
+        assertTrue(parser.parseCommand(ExitCommandUniCash.COMMAND_WORD) instanceof ExitCommandUniCash);
+        assertTrue(parser.parseCommand(ExitCommandUniCash.COMMAND_WORD + " 3") instanceof ExitCommandUniCash);
     }
 
     @Test
@@ -90,8 +49,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_help() throws Exception {
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+        assertTrue(parser.parseCommand(HelpCommandUniCash.COMMAND_WORD) instanceof HelpCommandUniCash);
+        assertTrue(parser.parseCommand(HelpCommandUniCash.COMMAND_WORD + " 3") instanceof HelpCommandUniCash);
     }
 
     @Test
@@ -164,8 +123,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-                -> parser.parseCommand(""));
+        var message = String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommandUniCash.MESSAGE_USAGE);
+        assertThrows(ParseException.class, message, () -> parser.parseCommand(""));
     }
 
     @Test

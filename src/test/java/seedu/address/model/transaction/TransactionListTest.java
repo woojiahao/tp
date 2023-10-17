@@ -157,20 +157,22 @@ public class TransactionListTest {
     public void equals() {
         // same object -> returns true
         TransactionList transactionList = new TransactionList();
-        assertTrue(transactionList.equals(transactionList));
+        assertEquals(transactionList, transactionList);
 
         // same lists
         transactionList.add(NUS);
         TransactionList anotherList = new TransactionList();
         anotherList.add(NUS);
-        assertTrue(transactionList.equals(anotherList));
+        assertEquals(transactionList, anotherList);
 
         // different lists
         anotherList = new TransactionList();
         anotherList.add(BUYING_GROCERIES);
-        assertFalse(transactionList.equals(anotherList));
+        assertNotEquals(transactionList, anotherList);
 
         // null -> returns false
+        assertNotEquals(null, transactionList);
+
         assertFalse(transactionList.equals(null));
     }
 

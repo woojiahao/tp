@@ -3,6 +3,7 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_INTERN;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -111,19 +112,21 @@ public class UniCashTest {
     public void equals() {
         // same object -> returns true
         UniCash transactionList = new UniCashBuilder().build();
-        assertTrue(transactionList.equals(transactionList));
+        assertEquals(transactionList, transactionList);
 
         // same lists
         transactionList.addTransaction(NUS);
         UniCash anotherList = new UniCashBuilder().withTransaction(NUS).build();
-        assertTrue(transactionList.equals(anotherList));
+        assertEquals(transactionList, anotherList);
 
         // different lists
         anotherList = new UniCashBuilder().withTransaction(INTERN).build();
-        assertFalse(transactionList.equals(anotherList));
+        assertNotEquals(transactionList, anotherList);
 
         // null -> returns false
-        assertFalse(transactionList.equals(null));
+        assertNotEquals(null, transactionList);
+
+        assertFalse(transactionList.equals(1));
     }
 
     /**

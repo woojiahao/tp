@@ -9,8 +9,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import java.util.Set;
 
-import seedu.address.logic.commands.transaction.AddTransactionCommand;
-import seedu.address.logic.commands.transaction.EditTransactionCommand;
+import seedu.address.logic.commands.AddTransactionCommand;
+import seedu.address.logic.commands.EditTransactionCommand;
 import seedu.address.model.category.Category;
 import seedu.address.model.transaction.Transaction;
 
@@ -31,13 +31,13 @@ public class TransactionUtil {
      */
     public static String getTransactionDetails(Transaction transaction) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + transaction.getName().fullName + " ");
-        sb.append(PREFIX_TYPE + transaction.getType().type.getOriginalString() + " ");
-        sb.append(PREFIX_AMOUNT + transaction.getAmount().toString() + " ");
-        sb.append(PREFIX_DATETIME + transaction.getDateTime().originalString() + " ");
-        sb.append(PREFIX_LOCATION + transaction.getLocation().location + " ");
-        transaction.getCategories().stream().forEach(
-                category -> sb.append(PREFIX_CATEGORY + category.category + " ")
+        sb.append(PREFIX_NAME).append(transaction.getName().fullName).append(" ");
+        sb.append(PREFIX_TYPE).append(transaction.getType().type.getOriginalString()).append(" ");
+        sb.append(PREFIX_AMOUNT).append(transaction.getAmount().toString()).append(" ");
+        sb.append(PREFIX_DATETIME).append(transaction.getDateTime().originalString()).append(" ");
+        sb.append(PREFIX_LOCATION).append(transaction.getLocation().location).append(" ");
+        transaction.getCategories().forEach(
+                category -> sb.append(PREFIX_CATEGORY).append(category.category).append(" ")
         );
         return sb.toString();
     }

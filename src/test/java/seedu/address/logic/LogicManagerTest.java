@@ -1,14 +1,16 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.UniCashMessages.MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX;
+import static seedu.address.logic.UniCashMessages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_NUS;
+import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_NUS;
+import static seedu.address.logic.commands.CommandTestUtil.DATETIME_DESC_NUS;
+import static seedu.address.logic.commands.CommandTestUtil.LOCATION_DESC_NUS;
+import static seedu.address.logic.commands.CommandTestUtil.TRANSACTION_NAME_DESC_NUS;
+import static seedu.address.logic.commands.CommandTestUtil.TYPE_DESC_EXPENSE;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalTransactions.NUS;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -18,7 +20,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.AddTransactionCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -28,11 +31,11 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyUniCash;
 import seedu.address.model.UniCash;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.address.model.transaction.Transaction;
 import seedu.address.storage.JsonUniCashStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.TransactionBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
@@ -41,7 +44,7 @@ public class LogicManagerTest {
     @TempDir
     public Path temporaryFolder;
 
-    private Model model = new ModelManager();
+    private final Model model = new ModelManager();
     private Logic logic;
 
     @BeforeEach
@@ -61,8 +64,8 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        String deleteCommand = "delete_transaction 9";
+        assertCommandException(deleteCommand, MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX);
     }
 
     @Test
@@ -84,13 +87,21 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    public void getFilteredTransactionList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredTransactionList().remove(0));
     }
 
     @Test
-    public void getFilteredTransactionList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredTransactionList().remove(0));
+    public void getGuiSettings() {
+        assertEquals(model.getGuiSettings(), new GuiSettings());
+    }
+
+    @Test
+    public void setGuiSettings() {
+        var localModel = new ModelManager();
+        var guiSettings = new GuiSettings(15, 15, 15, 15);
+        localModel.setGuiSettings(guiSettings);
+        assertEquals(localModel.getGuiSettings(), guiSettings);
     }
 
     /**
@@ -133,7 +144,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
                                       String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new UniCash());
+        Model expectedModel = new ModelManager(new UniCash(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -176,11 +187,16 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Triggers the saveUniCash method by executing an add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        String addCommand = AddTransactionCommand.COMMAND_WORD
+                + TRANSACTION_NAME_DESC_NUS
+                + CATEGORY_DESC_NUS
+                + AMOUNT_DESC_NUS
+                + DATETIME_DESC_NUS
+                + TYPE_DESC_EXPENSE
+                + LOCATION_DESC_NUS;
+        Transaction expectedTransaction = new TransactionBuilder(NUS).build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedPerson);
+        expectedModel.addTransaction(expectedTransaction);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 }
