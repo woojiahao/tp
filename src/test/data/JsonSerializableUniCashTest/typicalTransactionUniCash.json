@@ -2,14 +2,14 @@
   "transactions": [ {
     "name" : "Valid transaction",
     "amount" : 17.0,
-    "category" : "Food",
+    "categories" : ["Food"],
     "dateTime" : "15-09-2023 00:00",
     "location" : "-",
     "type" : "expense"
   }, {
     "name" : "Valid transaction 2",
     "amount" : 123,
-    "category" : "Others",
+    "categories" : ["Others"],
     "dateTime" : "15-07-2023 00:00",
     "location" : "Jurong",
     "type" : "expense"

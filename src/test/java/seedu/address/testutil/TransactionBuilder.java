@@ -1,12 +1,16 @@
 package seedu.address.testutil;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import seedu.address.model.category.Category;
 import seedu.address.model.transaction.Amount;
-import seedu.address.model.transaction.Category;
 import seedu.address.model.transaction.DateTime;
 import seedu.address.model.transaction.Location;
 import seedu.address.model.transaction.Name;
 import seedu.address.model.transaction.Transaction;
 import seedu.address.model.transaction.Type;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Transaction objects.
@@ -22,7 +26,7 @@ public class TransactionBuilder {
 
     private Name name;
     private Amount amount;
-    private Category category;
+    private Set<Category> categories;
     private DateTime dateTime;
     private Location location;
     private Type type;
@@ -33,10 +37,11 @@ public class TransactionBuilder {
     public TransactionBuilder() {
         name = new Name(DEFAULT_NAME);
         amount = new Amount(DEFAULT_AMOUNT);
-        category = new Category(DEFAULT_CATEGORY);
         dateTime = new DateTime(DEFAULT_DATE_TIME);
         location = new Location(DEFAULT_LOCATION);
         type = new Type(DEFAULT_TYPE);
+        categories = new HashSet<>();
+        categories.add(new Category(DEFAULT_CATEGORY));
     }
 
     /**
@@ -45,10 +50,10 @@ public class TransactionBuilder {
     public TransactionBuilder(Transaction transactionToCopy) {
         name = transactionToCopy.getName();
         amount = transactionToCopy.getAmount();
-        category = transactionToCopy.getCategory();
         dateTime = transactionToCopy.getDateTime();
         location = transactionToCopy.getLocation();
         type = transactionToCopy.getType();
+        categories = new HashSet<>(transactionToCopy.getCategories());
     }
 
     /**
@@ -64,14 +69,6 @@ public class TransactionBuilder {
      */
     public TransactionBuilder withAmount(double amount) {
         this.amount = new Amount(amount);
-        return this;
-    }
-
-    /**
-     * Sets the {@code Category} of the {@code Transaction} that we are building.
-     */
-    public TransactionBuilder withCategory(String category) {
-        this.category = new Category(category);
         return this;
     }
 
@@ -99,7 +96,16 @@ public class TransactionBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code categories} into a {@code Set<Category>} and set it to
+     * the {@code Transaction} that we are building.
+     */
+    public TransactionBuilder withCategories(String ... categories) {
+        this.categories = SampleDataUtil.getCategorySet(categories);
+        return this;
+    }
+
     public Transaction build() {
-        return new Transaction(name, type, amount, category, dateTime, location);
+        return new Transaction(name, type, amount, dateTime, location, categories);
     }
 }

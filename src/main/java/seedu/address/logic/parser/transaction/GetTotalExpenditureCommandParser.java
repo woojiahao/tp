@@ -9,7 +9,7 @@ import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.transaction.Category;
+import seedu.address.model.category.Category;
 
 /**
  * Parses get_total_expenditure command to extract parameters.
@@ -27,8 +27,11 @@ public class GetTotalExpenditureCommandParser implements Parser<GetTotalExpendit
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_CATEGORY);
 
-        String categoryString = argMultimap.getValue(PREFIX_CATEGORY).orElse("");
-        Category category = ParserUtil.parseCategory(categoryString);
+        String categoryString = argMultimap.getValue(PREFIX_CATEGORY).orElse(null);
+        Category category = null;
+        if (categoryString != null) {
+            category = ParserUtil.parseCategory(categoryString);
+        }
 
         try {
             String monthString = argMultimap.getPreamble();

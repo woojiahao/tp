@@ -53,7 +53,6 @@ public class AddCommandParserTest {
         Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
         String u = PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND;
-        System.out.println(new AddCommand(expectedPerson));
         // whitespace only preamble
         assertParseSuccess(parser, u, new AddCommand(expectedPerson));
 

@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_INTERN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_NUS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_SHOPPING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_EDUCATION;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_ENTERTAINMENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME_INTERN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME_NUS;
@@ -28,16 +29,16 @@ public class TypicalTransactions {
     public static final Transaction BUYING_GROCERIES = new TransactionBuilder()
             .withName("Buying groceries")
             .withAmount(16.75)
-            .withCategory("Groceries")
             .withLocation("Sheng Shiong (UTown)")
+            .withCategories("Groceries")
             .build();
 
     public static final Transaction DINING_WITH_FRIENDS = new TransactionBuilder()
             .withName("End of Semester Celebration")
             .withAmount(234.50)
-            .withCategory("Food")
             .withLocation("Poulet")
             .withDateTime("18-08-2001 18:18")
+            .withCategories("Food")
             .build();
 
     public static final Transaction WORK_AT_LIHO = new TransactionBuilder()
@@ -53,7 +54,7 @@ public class TypicalTransactions {
             .withAmount(VALID_AMOUNT_NUS)
             .withDateTime(VALID_DATETIME_NUS)
             .withLocation(VALID_LOCATION_ORCHARD)
-            .withCategory(VALID_CATEGORY_ENTERTAINMENT)
+            .withCategories(VALID_CATEGORY_ENTERTAINMENT)
             .build();
     public static final Transaction INTERN = new TransactionBuilder().withName(VALID_TRANSACTION_NAME_INTERN)
             .withType(VALID_TYPE_EXPENSE)
@@ -66,8 +67,8 @@ public class TypicalTransactions {
             .withType(VALID_TYPE_INCOME)
             .withAmount(VALID_AMOUNT_SHOPPING)
             .withDateTime(VALID_DATETIME_SHOPPING)
-            .withCategory(VALID_CATEGORY_ENTERTAINMENT)
             .withLocation(VALID_LOCATION_ORCHARD)
+            .withCategories(VALID_CATEGORY_ENTERTAINMENT, VALID_CATEGORY_EDUCATION)
             .build();
     /**
      * Returns a {@code UniCash} with all the typical transactions.

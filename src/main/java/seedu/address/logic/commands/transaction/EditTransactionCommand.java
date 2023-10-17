@@ -9,9 +9,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TRANSACTIONS;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -21,8 +24,8 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.category.Category;
 import seedu.address.model.transaction.Amount;
-import seedu.address.model.transaction.Category;
 import seedu.address.model.transaction.DateTime;
 import seedu.address.model.transaction.Location;
 import seedu.address.model.transaction.Name;
@@ -43,16 +46,17 @@ public class EditTransactionCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_TYPE + "TYPE] "
             + "[" + PREFIX_AMOUNT + "AMOUNT] "
-            + "[" + PREFIX_CATEGORY + "CATEGORY] "
             + "[" + PREFIX_DATETIME + "DATETIME] "
-            + "[" + PREFIX_LOCATION + "...\n"
+            + "[" + PREFIX_LOCATION + "LOCATION]"
+            + "[" + PREFIX_CATEGORY + "CATEGORY]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME + "Buying groceries "
             + PREFIX_TYPE + "expense "
             + PREFIX_AMOUNT + "300 "
-            + PREFIX_CATEGORY + "household expenses "
             + PREFIX_DATETIME + "18-08-2001 19:30 "
-            + PREFIX_LOCATION + "ntuc";
+            + PREFIX_LOCATION + "ntuc"
+            + PREFIX_CATEGORY + "household expenses ";
+
 
     public static final String MESSAGE_EDIT_TRANSACTION_SUCCESS = "Edited Transaction: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -104,13 +108,14 @@ public class EditTransactionCommand extends Command {
 
         Name updatedName = editTransactionDescriptor.getName().orElse(transactionToEdit.getName());
         Amount updatedAmount = editTransactionDescriptor.getAmount().orElse(transactionToEdit.getAmount());
-        Category updatedCategory = editTransactionDescriptor.getCategory().orElse(transactionToEdit.getCategory());
         DateTime updatedDateTime = editTransactionDescriptor.getDateTime().orElse(transactionToEdit.getDateTime());
         Location updatedLocation = editTransactionDescriptor.getLocation().orElse(transactionToEdit.getLocation());
         Type updatedType = editTransactionDescriptor.getType().orElse(transactionToEdit.getType());
+        Set<Category> updatedCategories = editTransactionDescriptor.getCategories()
+                .orElse(transactionToEdit.getCategories());
 
-        return new Transaction(updatedName, updatedType, updatedAmount, updatedCategory, updatedDateTime,
-                updatedLocation);
+        return new Transaction(updatedName, updatedType, updatedAmount, updatedDateTime,
+                updatedLocation, updatedCategories);
     }
 
     @Override
@@ -144,10 +149,10 @@ public class EditTransactionCommand extends Command {
     public static class EditTransactionDescriptor {
         private Name name;
         private Amount amount;
-        private Category category;
         private DateTime datetime;
         private Location location;
         private Type type;
+        private HashSet<Category> categories;
 
         public EditTransactionDescriptor() {}
 
@@ -157,17 +162,17 @@ public class EditTransactionCommand extends Command {
         public EditTransactionDescriptor(EditTransactionCommand.EditTransactionDescriptor toCopy) {
             setName(toCopy.name);
             setAmount(toCopy.amount);
-            setCategory(toCopy.category);
             setDateTime(toCopy.datetime);
             setLocation(toCopy.location);
             setType(toCopy.type);
+            setCategories(toCopy.categories);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, amount, category, datetime, location, type);
+            return CollectionUtil.isAnyNonNull(name, amount, datetime, location, type, categories);
         }
 
         public void setName(Name name) {
@@ -184,14 +189,6 @@ public class EditTransactionCommand extends Command {
 
         public Optional<Amount> getAmount() {
             return Optional.ofNullable(amount);
-        }
-
-        public void setCategory(Category category) {
-            this.category = category;
-        }
-
-        public Optional<Category> getCategory() {
-            return Optional.ofNullable(category);
         }
 
         public void setDateTime(DateTime datetime) {
@@ -218,6 +215,23 @@ public class EditTransactionCommand extends Command {
             return Optional.ofNullable(type);
         }
 
+        /**
+         * Sets {@code categories} to this object's {@code categories}.
+         * A defensive copy of {@code categories} is used internally.
+         */
+        public void setCategories(Set<Category> categories) {
+            this.categories = (categories != null) ? new HashSet<>(categories) : null;
+        }
+
+        /**
+         * Returns an unmodifiable category set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code categories} is null.
+         */
+        public Optional<Set<Category>> getCategories() {
+            return (categories != null) ? Optional.of(Collections.unmodifiableSet(categories)) : Optional.empty();
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -233,10 +247,10 @@ public class EditTransactionCommand extends Command {
                     .EditTransactionDescriptor) other;
             return Objects.equals(name, otherEditTransactionDescriptor.name)
                     && Objects.equals(amount, otherEditTransactionDescriptor.amount)
-                    && Objects.equals(category, otherEditTransactionDescriptor.category)
                     && Objects.equals(datetime, otherEditTransactionDescriptor.datetime)
                     && Objects.equals(location, otherEditTransactionDescriptor.location)
-                    && Objects.equals(type, otherEditTransactionDescriptor.type);
+                    && Objects.equals(type, otherEditTransactionDescriptor.type)
+                    && Objects.equals(categories, otherEditTransactionDescriptor.categories);
         }
 
         @Override
@@ -244,10 +258,10 @@ public class EditTransactionCommand extends Command {
             return new ToStringBuilder(this)
                     .add("name", name)
                     .add("amount", amount)
-                    .add("category", category)
                     .add("datetime", datetime)
                     .add("location", location)
                     .add("type", type)
+                    .add("categories", categories)
                     .toString();
         }
     }

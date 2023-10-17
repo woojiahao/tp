@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
+import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.transaction.AddTransactionCommand;
@@ -17,8 +18,8 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.category.Category;
 import seedu.address.model.transaction.Amount;
-import seedu.address.model.transaction.Category;
 import seedu.address.model.transaction.DateTime;
 import seedu.address.model.transaction.Location;
 import seedu.address.model.transaction.Name;
@@ -58,13 +59,12 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
         String dateTimeString = argMultimap.getValue(PREFIX_DATETIME).orElse("");
         DateTime dateTime = ParserUtil.parseDateTime(dateTimeString);
 
-        String categoryString = argMultimap.getValue(PREFIX_CATEGORY).orElse("");
-        Category category = ParserUtil.parseCategory(categoryString);
-
         String locationString = argMultimap.getValue(PREFIX_LOCATION).orElse("");
         Location location = ParserUtil.parseLocation(locationString);
 
-        Transaction transaction = new Transaction(name, type, amount, category, dateTime, location);
+        Set<Category> categoryList = ParserUtil.parseCategories(argMultimap.getAllValues(PREFIX_CATEGORY));
+
+        Transaction transaction = new Transaction(name, type, amount, dateTime, location, categoryList);
 
         return new AddTransactionCommand(transaction);
     }
