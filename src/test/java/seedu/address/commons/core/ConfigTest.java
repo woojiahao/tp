@@ -38,5 +38,19 @@ public class ConfigTest {
         assertNotEquals(otherConfig, defaultConfig);
     }
 
+    @Test
+    public void hashCode_sameConfig_returnsSameHashCode() {
+        var first = new Config();
+        var second = new Config();
+        assertEquals(first.hashCode(), second.hashCode());
+    }
+
+    @Test
+    public void hashCode_differentConfig_returnsDifferentHashCode() {
+        var first = new Config();
+        var second = new Config();
+        second.setLogLevel(Level.OFF);
+        assertNotEquals(first.hashCode(), second.hashCode());
+    }
 
 }

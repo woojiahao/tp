@@ -131,6 +131,20 @@ public class VersionTest {
     }
 
     @Test
+    public void compareTo_fallThrough_returns1() {
+        var first = new Version(1, 2, 3, false);
+        var second = new Version(1, 2, 3, true);
+        assertEquals(1, first.compareTo(second));
+    }
+
+    @Test
+    public void compareTo_isEarlyAccess_returnsNegative1() {
+        var first = new Version(1, 2, 3, true);
+        var second = new Version(1, 2, 3, false);
+        assertEquals(-1, first.compareTo(second));
+    }
+
+    @Test
     public void equals() {
         var version = new Version(0, 0, 0, false);
         assertEquals(version, version);
