@@ -33,7 +33,7 @@
                 <padding>
                     <Insets top="5" />
                 </padding>
-                <Label styleClass="cell_small_label" text="Date of Expense: " />
+                <Label styleClass="cell_small_label" text="Date: " />
                 <Label fx:id="dateTime" styleClass="cell_small_label" text="\$dateTime" />
             </HBox>
             <HBox spacing="3" alignment="CENTER_LEFT">
@@ -44,7 +44,7 @@
                 <padding>
                     <Insets top="10" />
                 </padding>
-                <Label styleClass="cell_small_label categories" alignment="CENTER_LEFT" fx:id="categories" />
+                <Label styleClass="cell_small_label_bold categories" alignment="CENTER_LEFT" fx:id="categories" />
             </HBox>
         </VBox>
     </GridPane>
