@@ -7,12 +7,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static unicash.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
-import unicash.testutil.Assert;
 
 public class AmountTest {
     @Test
     public void constructor_negativeAmount_throwsIllegalArgumentException() {
-        Assert.assertThrows(IllegalArgumentException.class, () -> new Amount(-10));
+        assertThrows(IllegalArgumentException.class, () -> new Amount(-10));
     }
 
     @Test

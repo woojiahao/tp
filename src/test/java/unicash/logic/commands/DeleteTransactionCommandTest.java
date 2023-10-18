@@ -4,7 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static unicash.logic.commands.CommandTestUtil.assertCommandFailure;
 import static unicash.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static unicash.logic.commands.CommandTestUtil.showTransactionAtIndex;
+import static unicash.testutil.TypicalIndexes.INDEX_FIRST_TRANSACTION;
+import static unicash.testutil.TypicalIndexes.INDEX_SECOND_TRANSACTION;
+import static unicash.testutil.TypicalTransactions.getTypicalUniCash;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,8 +19,6 @@ import unicash.model.Model;
 import unicash.model.ModelManager;
 import unicash.model.UserPrefs;
 import unicash.model.transaction.Transaction;
-import unicash.testutil.TypicalIndexes;
-import unicash.testutil.TypicalTransactions;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -23,27 +26,27 @@ import unicash.testutil.TypicalTransactions;
  */
 public class DeleteTransactionCommandTest {
 
-    private final Model model = new ModelManager(TypicalTransactions.getTypicalUniCash(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalUniCash(), new UserPrefs());
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTransactionList().size() + 1);
         DeleteTransactionCommand deleteCommand = new DeleteTransactionCommand(outOfBoundIndex);
 
-        CommandTestUtil.assertCommandFailure(deleteCommand, model, UniCashMessages.MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, UniCashMessages.MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        DeleteTransactionCommand deleteFirstCommand = new DeleteTransactionCommand(TypicalIndexes.INDEX_FIRST_TRANSACTION);
-        DeleteTransactionCommand deleteSecondCommand = new DeleteTransactionCommand(TypicalIndexes.INDEX_SECOND_TRANSACTION);
+        DeleteTransactionCommand deleteFirstCommand = new DeleteTransactionCommand(INDEX_FIRST_TRANSACTION);
+        DeleteTransactionCommand deleteSecondCommand = new DeleteTransactionCommand(INDEX_SECOND_TRANSACTION);
 
         // same object -> returns true
         assertEquals(deleteFirstCommand, deleteFirstCommand);
 
         // same values -> returns true
         DeleteTransactionCommand deleteFirstCommandCopy =
-                new DeleteTransactionCommand(TypicalIndexes.INDEX_FIRST_TRANSACTION);
+                new DeleteTransactionCommand(INDEX_FIRST_TRANSACTION);
         assertEquals(deleteFirstCommand, deleteFirstCommandCopy);
 
         // different types -> returns false
@@ -70,47 +73,47 @@ public class DeleteTransactionCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Transaction transactionToDelete = model.getFilteredTransactionList().get(
-                TypicalIndexes.INDEX_FIRST_TRANSACTION.getZeroBased());
-        DeleteTransactionCommand deleteCommand = new DeleteTransactionCommand(TypicalIndexes.INDEX_FIRST_TRANSACTION);
+                INDEX_FIRST_TRANSACTION.getZeroBased());
+        DeleteTransactionCommand deleteCommand = new DeleteTransactionCommand(INDEX_FIRST_TRANSACTION);
 
         String expectedMessage = String.format(DeleteTransactionCommand.MESSAGE_DELETE_TRANSACTION_SUCCESS,
                 UniCashMessages.formatTransaction(transactionToDelete));
 
-        ModelManager expectedModel = new ModelManager(TypicalTransactions.getTypicalUniCash(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(getTypicalUniCash(), new UserPrefs());
         expectedModel.deleteTransaction(transactionToDelete);
 
-        CommandTestUtil.assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        CommandTestUtil.showTransactionAtIndex(model, TypicalIndexes.INDEX_FIRST_TRANSACTION);
+        showTransactionAtIndex(model, INDEX_FIRST_TRANSACTION);
 
         Transaction transactionToDelete = model.getFilteredTransactionList()
-                .get(TypicalIndexes.INDEX_FIRST_TRANSACTION.getZeroBased());
-        DeleteTransactionCommand deleteCommand = new DeleteTransactionCommand(TypicalIndexes.INDEX_FIRST_TRANSACTION);
+                .get(INDEX_FIRST_TRANSACTION.getZeroBased());
+        DeleteTransactionCommand deleteCommand = new DeleteTransactionCommand(INDEX_FIRST_TRANSACTION);
 
         String expectedMessage = String.format(DeleteTransactionCommand.MESSAGE_DELETE_TRANSACTION_SUCCESS,
                 UniCashMessages.formatTransaction(transactionToDelete));
 
-        Model expectedModel = new ModelManager(TypicalTransactions.getTypicalUniCash(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalUniCash(), new UserPrefs());
         expectedModel.deleteTransaction(transactionToDelete);
         showNoTransaction(expectedModel);
 
-        CommandTestUtil.assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        CommandTestUtil.showTransactionAtIndex(model, TypicalIndexes.INDEX_FIRST_TRANSACTION);
+        showTransactionAtIndex(model, INDEX_FIRST_TRANSACTION);
 
-        Index outOfBoundIndex = TypicalIndexes.INDEX_SECOND_TRANSACTION;
+        Index outOfBoundIndex = INDEX_SECOND_TRANSACTION;
         // ensures that outOfBoundIndex is still in bounds of transactions list
-        assertTrue(outOfBoundIndex.getZeroBased() < TypicalTransactions.getTypicalUniCash().getTransactionList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < getTypicalUniCash().getTransactionList().size());
 
         DeleteTransactionCommand deleteCommand = new DeleteTransactionCommand(outOfBoundIndex);
 
-        CommandTestUtil.assertCommandFailure(deleteCommand, model,
+        assertCommandFailure(deleteCommand, model,
                 UniCashMessages.MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX);
     }
 

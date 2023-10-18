@@ -3,6 +3,12 @@ package unicash.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static unicash.logic.UniCashMessages.MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX;
 import static unicash.logic.UniCashMessages.MESSAGE_UNKNOWN_COMMAND;
+import static unicash.logic.commands.CommandTestUtil.AMOUNT_DESC_NUS;
+import static unicash.logic.commands.CommandTestUtil.CATEGORY_DESC_NUS;
+import static unicash.logic.commands.CommandTestUtil.DATETIME_DESC_NUS;
+import static unicash.logic.commands.CommandTestUtil.LOCATION_DESC_NUS;
+import static unicash.logic.commands.CommandTestUtil.TRANSACTION_NAME_DESC_NUS;
+import static unicash.logic.commands.CommandTestUtil.TYPE_DESC_EXPENSE;
 import static unicash.testutil.Assert.assertThrows;
 import static unicash.testutil.TypicalTransactions.NUS;
 
@@ -10,7 +16,6 @@ import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -31,8 +36,6 @@ import unicash.storage.JsonUniCashStorage;
 import unicash.storage.JsonUserPrefsStorage;
 import unicash.storage.StorageManager;
 import unicash.testutil.TransactionBuilder;
-import unicash.logic.commands.CommandTestUtil;
-import unicash.testutil.Assert;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
@@ -85,12 +88,12 @@ public class LogicManagerTest {
 
     @Test
     public void getFilteredTransactionList_modifyList_throwsUnsupportedOperationException() {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredTransactionList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredTransactionList().remove(0));
     }
 
     @Test
     public void getGuiSettings() {
-        Assertions.assertEquals(model.getGuiSettings(), new GuiSettings());
+        assertEquals(model.getGuiSettings(), new GuiSettings());
     }
 
     @Test
@@ -155,7 +158,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
                                       String expectedMessage, Model expectedModel) {
-        Assert.assertThrows(expectedException, expectedMessage, () -> logic.execute(inputCommand));
+        assertThrows(expectedException, expectedMessage, () -> logic.execute(inputCommand));
         assertEquals(expectedModel, model);
     }
 
@@ -185,12 +188,12 @@ public class LogicManagerTest {
 
         // Triggers the saveUniCash method by executing an add command
         String addCommand = AddTransactionCommand.COMMAND_WORD
-                + CommandTestUtil.TRANSACTION_NAME_DESC_NUS
-                + CommandTestUtil.CATEGORY_DESC_NUS
-                + CommandTestUtil.AMOUNT_DESC_NUS
-                + CommandTestUtil.DATETIME_DESC_NUS
-                + CommandTestUtil.TYPE_DESC_EXPENSE
-                + CommandTestUtil.LOCATION_DESC_NUS;
+                + TRANSACTION_NAME_DESC_NUS
+                + CATEGORY_DESC_NUS
+                + AMOUNT_DESC_NUS
+                + DATETIME_DESC_NUS
+                + TYPE_DESC_EXPENSE
+                + LOCATION_DESC_NUS;
         Transaction expectedTransaction = new TransactionBuilder(NUS).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addTransaction(expectedTransaction);

@@ -1,6 +1,7 @@
 package unicash.logic.commands;
 
 import static unicash.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static unicash.testutil.TypicalTransactions.getTypicalUniCash;
 
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +9,7 @@ import unicash.model.Model;
 import unicash.model.ModelManager;
 import unicash.model.UniCash;
 import unicash.model.UserPrefs;
-import unicash.testutil.TypicalTransactions;
+
 
 public class ClearTransactionsCommandTest {
 
@@ -17,17 +18,17 @@ public class ClearTransactionsCommandTest {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
-        CommandTestUtil.assertCommandSuccess(new ClearTransactionsCommand(), model,
+        assertCommandSuccess(new ClearTransactionsCommand(), model,
                 ClearTransactionsCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_nonEmptyUniCash_success() {
-        Model model = new ModelManager(TypicalTransactions.getTypicalUniCash(), new UserPrefs());
+        Model model = new ModelManager(getTypicalUniCash(), new UserPrefs());
         Model expectedModel = new ModelManager(new UniCash(), new UserPrefs());
         expectedModel.setUniCash(new UniCash());
 
-        CommandTestUtil.assertCommandSuccess(new ClearTransactionsCommand(), model,
+        assertCommandSuccess(new ClearTransactionsCommand(), model,
                 ClearTransactionsCommand.MESSAGE_SUCCESS, expectedModel);
     }
 

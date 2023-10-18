@@ -3,14 +3,15 @@ package unicash.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static unicash.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static unicash.testutil.Assert.assertThrows;
+import static unicash.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import unicash.logic.parser.exceptions.ParseException;
@@ -19,8 +20,6 @@ import unicash.model.transaction.Amount;
 import unicash.model.transaction.DateTime;
 import unicash.model.transaction.Location;
 import unicash.model.transaction.Name;
-import unicash.testutil.Assert;
-import unicash.testutil.TypicalIndexes;
 
 // TODO: Need more testing here
 public class ParserUtilTest {
@@ -40,91 +39,91 @@ public class ParserUtilTest {
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseIndex("10 a"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndex("10 a"));
     }
 
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
-        Assert.assertThrows(ParseException.class, ParserUtil.MESSAGE_INVALID_INDEX, ()
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
                 -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
     public void parseIndex_validInput_success() throws Exception {
         // No whitespaces
-        Assertions.assertEquals(TypicalIndexes.INDEX_FIRST_PERSON, ParserUtil.parseIndex("1"));
+        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("1"));
 
         // Leading and trailing whitespaces
-        Assertions.assertEquals(TypicalIndexes.INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
     }
 
     @Test
     public void parseTransactionName_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseTransactionName(null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTransactionName(null));
     }
 
     @Test
     public void parseTransactionName_invalidValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseTransactionName(INVALID_NAME));
+        assertThrows(ParseException.class, () -> ParserUtil.parseTransactionName(INVALID_NAME));
     }
 
     @Test
     public void parseTransactionName_validValueWithoutWhitespace_returnsTransactionName() throws Exception {
         Name expectedTransactionName = new Name(VALID_NAME);
-        Assertions.assertEquals(expectedTransactionName, ParserUtil.parseTransactionName(VALID_NAME));
+        assertEquals(expectedTransactionName, ParserUtil.parseTransactionName(VALID_NAME));
     }
 
     @Test
     public void parseTransactionName_validValueWithWhitespace_returnsTrimmedTransactionName() throws Exception {
         String nameWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
         Name expectedTransactionName = new Name(VALID_NAME);
-        Assertions.assertEquals(expectedTransactionName, ParserUtil.parseTransactionName(nameWithWhitespace));
+        assertEquals(expectedTransactionName, ParserUtil.parseTransactionName(nameWithWhitespace));
     }
 
     @Test
     public void parseAmount_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseAmount(null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseAmount(null));
     }
 
     @Test
     public void parseAmount_invalidValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_AMOUNT));
+        assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_AMOUNT));
     }
 
     @Test
     public void parseAmount_validValueWithoutWhitespace_returnsTransactionName() throws Exception {
         Amount expectedAmount = new Amount(3.0);
-        Assertions.assertEquals(expectedAmount, ParserUtil.parseAmount(VALID_AMOUNT));
+        assertEquals(expectedAmount, ParserUtil.parseAmount(VALID_AMOUNT));
     }
 
     @Test
     public void parseAmount_validValueWithWhitespace_returnsTrimmedTransactionName() throws Exception {
         String amountWithWhitespace = WHITESPACE + VALID_AMOUNT + WHITESPACE;
         Amount expectedAmount = new Amount(3.0);
-        Assertions.assertEquals(expectedAmount, ParserUtil.parseAmount(amountWithWhitespace));
+        assertEquals(expectedAmount, ParserUtil.parseAmount(amountWithWhitespace));
     }
 
     @Test
     public void parseDateTime_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseDateTime(null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDateTime(null));
     }
 
     @Test
     public void parseDateTime_invalidValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseDateTime(INVALID_DATETIME));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDateTime(INVALID_DATETIME));
     }
 
     @Test
     public void parseDateTime_validValueWithoutWhitespace_returnsTransactionName() throws Exception {
         DateTime expectedDateTime = new DateTime(VALID_DATETIME);
-        Assertions.assertEquals(expectedDateTime, ParserUtil.parseDateTime(VALID_DATETIME));
+        assertEquals(expectedDateTime, ParserUtil.parseDateTime(VALID_DATETIME));
     }
 
     @Test
     public void parseDateTime_validValueWithWhitespace_returnsTrimmedTransactionName() throws Exception {
         String dateTimeWithWhiteSpace = WHITESPACE + VALID_DATETIME + WHITESPACE;
         DateTime expectedDateTime = new DateTime(VALID_DATETIME);
-        Assertions.assertEquals(expectedDateTime, ParserUtil.parseDateTime(dateTimeWithWhiteSpace));
+        assertEquals(expectedDateTime, ParserUtil.parseDateTime(dateTimeWithWhiteSpace));
     }
 
     @Test
@@ -135,64 +134,64 @@ public class ParserUtilTest {
 
     @Test
     public void parseLocation_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseLocation(null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLocation(null));
     }
 
     @Test
     public void parseLocation_invalidValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseLocation(INVALID_LOCATION));
+        assertThrows(ParseException.class, () -> ParserUtil.parseLocation(INVALID_LOCATION));
     }
 
     @Test
     public void parseLocation_validValueWithoutWhitespace_returnsTransactionName() throws Exception {
         Location expectedLocation = new Location(VALID_LOCATION);
-        Assertions.assertEquals(expectedLocation, ParserUtil.parseLocation(VALID_LOCATION));
+        assertEquals(expectedLocation, ParserUtil.parseLocation(VALID_LOCATION));
     }
 
     @Test
     public void parseLocation_validValueWithWhitespace_returnsTrimmedLocation() throws Exception {
         String locationWithWhiteSpace = WHITESPACE + VALID_LOCATION + WHITESPACE;
         Location expectedLocation = new Location(VALID_LOCATION);
-        Assertions.assertEquals(expectedLocation, ParserUtil.parseLocation(locationWithWhiteSpace));
+        assertEquals(expectedLocation, ParserUtil.parseLocation(locationWithWhiteSpace));
     }
 
     @Test
     public void parseLocation_empty_returnsDefaultLocation() throws Exception {
         Location expectedLocation = new Location(WHITESPACE);
-        Assertions.assertEquals(expectedLocation, ParserUtil.parseLocation(WHITESPACE));
+        assertEquals(expectedLocation, ParserUtil.parseLocation(WHITESPACE));
     }
 
     @Test
     public void parseCategory_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseCategory(null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseCategory(null));
     }
 
     @Test
     public void parseCategory_invalidValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseCategory(INVALID_CATEGORY));
+        assertThrows(ParseException.class, () -> ParserUtil.parseCategory(INVALID_CATEGORY));
     }
 
     @Test
     public void parseCategory_validValueWithoutWhitespace_returnsCategory() throws Exception {
         Category expectedCategory = new Category(VALID_CATEGORY);
-        Assertions.assertEquals(expectedCategory, ParserUtil.parseCategory(VALID_CATEGORY));
+        assertEquals(expectedCategory, ParserUtil.parseCategory(VALID_CATEGORY));
     }
 
     @Test
     public void parseCategory_validValueWithWhitespace_returnsTrimmedCategory() throws Exception {
         String categoryWithWhitespace = WHITESPACE + VALID_CATEGORY + WHITESPACE;
         Category expectedCategory = new Category(VALID_CATEGORY);
-        Assertions.assertEquals(expectedCategory, ParserUtil.parseCategory(categoryWithWhitespace));
+        assertEquals(expectedCategory, ParserUtil.parseCategory(categoryWithWhitespace));
     }
 
     @Test
     public void parseCategories_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseCategories(null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseCategories(null));
     }
 
     @Test
     public void parseCategories_collectionWithInvalidCategories_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseCategories(
+        assertThrows(ParseException.class, () -> ParserUtil.parseCategories(
                 Arrays.asList(VALID_CATEGORY, INVALID_CATEGORY)));
     }
 

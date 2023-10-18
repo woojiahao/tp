@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static unicash.logic.UniCashMessages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static unicash.logic.UniCashMessages.MESSAGE_UNKNOWN_COMMAND;
 import static unicash.testutil.Assert.assertThrows;
+import static unicash.testutil.TypicalIndexes.INDEX_FIRST_TRANSACTION;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,8 +28,6 @@ import unicash.model.transaction.TransactionNameContainsKeywordsPredicate;
 import unicash.testutil.EditTransactionDescriptorBuilder;
 import unicash.testutil.TransactionBuilder;
 import unicash.testutil.TransactionUtil;
-import unicash.testutil.Assert;
-import unicash.testutil.TypicalIndexes;
 
 public class AddressBookParserTest {
 
@@ -72,8 +71,8 @@ public class AddressBookParserTest {
         DeleteTransactionCommand command = (DeleteTransactionCommand)
                 parser.parseCommand(
                         DeleteTransactionCommand.COMMAND_WORD + " "
-                                + TypicalIndexes.INDEX_FIRST_TRANSACTION.getOneBased());
-        assertEquals(new DeleteTransactionCommand(TypicalIndexes.INDEX_FIRST_TRANSACTION), command);
+                                + INDEX_FIRST_TRANSACTION.getOneBased());
+        assertEquals(new DeleteTransactionCommand(INDEX_FIRST_TRANSACTION), command);
     }
 
     @Test
@@ -88,10 +87,10 @@ public class AddressBookParserTest {
         Transaction transaction = new TransactionBuilder().build();
         EditTransactionCommand.EditTransactionDescriptor descriptor = new EditTransactionDescriptorBuilder(transaction)
                 .build();
-        String input = EditTransactionCommand.COMMAND_WORD + " " + TypicalIndexes.INDEX_FIRST_TRANSACTION.getOneBased() + " ";
+        String input = EditTransactionCommand.COMMAND_WORD + " " + INDEX_FIRST_TRANSACTION.getOneBased() + " ";
         input += TransactionUtil.getEditTransactionDescriptorDetails(descriptor);
         EditTransactionCommand command = (EditTransactionCommand) parser.parseCommand(input);
-        assertEquals(new EditTransactionCommand(TypicalIndexes.INDEX_FIRST_TRANSACTION, descriptor), command);
+        assertEquals(new EditTransactionCommand(INDEX_FIRST_TRANSACTION, descriptor), command);
     }
 
     @Test
@@ -125,11 +124,11 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         var message = String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommandUniCash.MESSAGE_USAGE);
-        Assert.assertThrows(ParseException.class, message, () -> parser.parseCommand(""));
+        assertThrows(ParseException.class, message, () -> parser.parseCommand(""));
     }
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        Assert.assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
 }

@@ -2,6 +2,12 @@ package unicash.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static unicash.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static unicash.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static unicash.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static unicash.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static unicash.logic.parser.CliSyntax.PREFIX_NAME;
+import static unicash.logic.parser.CliSyntax.PREFIX_TYPE;
 import static unicash.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -15,8 +21,6 @@ import unicash.model.UniCash;
 import unicash.model.transaction.Transaction;
 import unicash.model.transaction.TransactionNameContainsKeywordsPredicate;
 import unicash.testutil.EditTransactionDescriptorBuilder;
-import unicash.logic.parser.CliSyntax;
-import unicash.testutil.Assert;
 
 /**
  * Contains helper methods for testing commands.
@@ -40,25 +44,25 @@ public class CommandTestUtil {
     public static final String VALID_LOCATION_ORCHARD = "orchard";
     public static final String VALID_LOCATION_NUS = "NUS";
 
-    public static final String TRANSACTION_NAME_DESC_NUS = " " + CliSyntax.PREFIX_NAME + VALID_TRANSACTION_NAME_NUS;
-    public static final String TRANSACTION_NAME_DESC_INTERN = " " + CliSyntax.PREFIX_NAME + VALID_TRANSACTION_NAME_INTERN;
-    public static final String AMOUNT_DESC_NUS = " " + CliSyntax.PREFIX_AMOUNT + VALID_AMOUNT_NUS;
-    public static final String AMOUNT_DESC_INTERN = " " + CliSyntax.PREFIX_AMOUNT + VALID_AMOUNT_INTERN;
-    public static final String DATETIME_DESC_NUS = " " + CliSyntax.PREFIX_DATETIME + VALID_DATETIME_NUS;
-    public static final String DATETIME_DESC_INTERN = " " + CliSyntax.PREFIX_DATETIME + VALID_DATETIME_INTERN;
-    public static final String TYPE_DESC_EXPENSE = " " + CliSyntax.PREFIX_TYPE + VALID_TYPE_EXPENSE;
-    public static final String TYPE_DESC_INCOME = " " + CliSyntax.PREFIX_TYPE + VALID_TYPE_INCOME;
-    public static final String CATEGORY_DESC_ENTERTAINMENT = " " + CliSyntax.PREFIX_CATEGORY + VALID_CATEGORY_ENTERTAINMENT;
-    public static final String CATEGORY_DESC_NUS = " " + CliSyntax.PREFIX_CATEGORY + VALID_CATEGORY_NUS;
-    public static final String LOCATION_DESC_ORCHARD = " " + CliSyntax.PREFIX_LOCATION + VALID_LOCATION_ORCHARD;
-    public static final String LOCATION_DESC_NUS = " " + CliSyntax.PREFIX_LOCATION + VALID_LOCATION_NUS;
+    public static final String TRANSACTION_NAME_DESC_NUS = " " + PREFIX_NAME + VALID_TRANSACTION_NAME_NUS;
+    public static final String TRANSACTION_NAME_DESC_INTERN = " " + PREFIX_NAME + VALID_TRANSACTION_NAME_INTERN;
+    public static final String AMOUNT_DESC_NUS = " " + PREFIX_AMOUNT + VALID_AMOUNT_NUS;
+    public static final String AMOUNT_DESC_INTERN = " " + PREFIX_AMOUNT + VALID_AMOUNT_INTERN;
+    public static final String DATETIME_DESC_NUS = " " + PREFIX_DATETIME + VALID_DATETIME_NUS;
+    public static final String DATETIME_DESC_INTERN = " " + PREFIX_DATETIME + VALID_DATETIME_INTERN;
+    public static final String TYPE_DESC_EXPENSE = " " + PREFIX_TYPE + VALID_TYPE_EXPENSE;
+    public static final String TYPE_DESC_INCOME = " " + PREFIX_TYPE + VALID_TYPE_INCOME;
+    public static final String CATEGORY_DESC_ENTERTAINMENT = " " + PREFIX_CATEGORY + VALID_CATEGORY_ENTERTAINMENT;
+    public static final String CATEGORY_DESC_NUS = " " + PREFIX_CATEGORY + VALID_CATEGORY_NUS;
+    public static final String LOCATION_DESC_ORCHARD = " " + PREFIX_LOCATION + VALID_LOCATION_ORCHARD;
+    public static final String LOCATION_DESC_NUS = " " + PREFIX_LOCATION + VALID_LOCATION_NUS;
 
-    public static final String INVALID_TRANSACTION_NAME_DESC = " " + CliSyntax.PREFIX_NAME + "NUS&"; // '&' not allowed in names
-    public static final String INVALID_AMOUNT_DESC = " " + CliSyntax.PREFIX_AMOUNT + "-3.0"; // negative amounts not allowed
-    public static final String INVALID_DATETIME_DESC = " " + CliSyntax.PREFIX_DATETIME + "19/13/2001 19:30"; // invalid date
-    public static final String INVALID_TYPE_DESC = " " + CliSyntax.PREFIX_TYPE + "afaf"; // invalid type
-    public static final String INVALID_CATEGORY_DESC = " " + CliSyntax.PREFIX_CATEGORY + "afraf*&"; // invalid type
-    public static final String INVALID_LOCATION_DESC = " " + CliSyntax.PREFIX_LOCATION + "a214faf*&"; // invalid type
+    public static final String INVALID_TRANSACTION_NAME_DESC = " " + PREFIX_NAME + "NUS&"; // '&' not allowed in names
+    public static final String INVALID_AMOUNT_DESC = " " + PREFIX_AMOUNT + "-3.0"; // negative amounts not allowed
+    public static final String INVALID_DATETIME_DESC = " " + PREFIX_DATETIME + "19/13/2001 19:30"; // invalid date
+    public static final String INVALID_TYPE_DESC = " " + PREFIX_TYPE + "afaf"; // invalid type
+    public static final String INVALID_CATEGORY_DESC = " " + PREFIX_CATEGORY + "afraf*&"; // invalid type
+    public static final String INVALID_LOCATION_DESC = " " + PREFIX_LOCATION + "a214faf*&"; // invalid type
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -127,7 +131,7 @@ public class CommandTestUtil {
         UniCash expectedUniCash = new UniCash(actualModel.getUniCash());
         List<Transaction> expectedFilteredList = new ArrayList<>(actualModel.getFilteredTransactionList());
 
-        Assert.assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
+        assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedUniCash, actualModel.getUniCash());
         assertEquals(expectedFilteredList, actualModel.getFilteredTransactionList());
     }

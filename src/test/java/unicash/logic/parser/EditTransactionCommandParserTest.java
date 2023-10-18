@@ -26,6 +26,11 @@ import static unicash.logic.commands.CommandTestUtil.VALID_DATETIME_NUS;
 import static unicash.logic.commands.CommandTestUtil.VALID_LOCATION_NUS;
 import static unicash.logic.commands.CommandTestUtil.VALID_TRANSACTION_NAME_NUS;
 import static unicash.logic.commands.CommandTestUtil.VALID_TYPE_INCOME;
+import static unicash.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static unicash.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static unicash.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static unicash.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static unicash.logic.parser.CliSyntax.PREFIX_TYPE;
 import static unicash.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static unicash.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static unicash.testutil.TypicalIndexes.INDEX_FIRST_TRANSACTION;
@@ -45,11 +50,12 @@ import unicash.model.transaction.Name;
 import unicash.model.transaction.Type;
 import unicash.testutil.EditTransactionDescriptorBuilder;
 
+
 public class EditTransactionCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTransactionCommand.MESSAGE_USAGE);
-    private static final String CATEGORY_EMPTY = " " + CliSyntax.PREFIX_CATEGORY;
+    private static final String CATEGORY_EMPTY = " " + PREFIX_CATEGORY;
 
     private final EditTransactionCommandParser parser = new EditTransactionCommandParser();
 
@@ -227,12 +233,12 @@ public class EditTransactionCommandParserTest {
         Index targetIndex = INDEX_FIRST_TRANSACTION;
         String userInput = targetIndex.getOneBased() + LOCATION_DESC_NUS + INVALID_LOCATION_DESC;
 
-        assertParseFailure(parser, userInput, UniCashMessages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_LOCATION));
+        assertParseFailure(parser, userInput, UniCashMessages.getErrorMessageForDuplicatePrefixes(PREFIX_LOCATION));
 
         // invalid followed by valid
         userInput = targetIndex.getOneBased() + INVALID_LOCATION_DESC + LOCATION_DESC_NUS;
 
-        assertParseFailure(parser, userInput, UniCashMessages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_LOCATION));
+        assertParseFailure(parser, userInput, UniCashMessages.getErrorMessageForDuplicatePrefixes(PREFIX_LOCATION));
 
         // multiple valid fields repeated
         userInput = targetIndex.getOneBased()
@@ -256,11 +262,11 @@ public class EditTransactionCommandParserTest {
                 parser,
                 userInput,
                 UniCashMessages.getErrorMessageForDuplicatePrefixes(
-                        CliSyntax.PREFIX_LOCATION,
-                        CliSyntax.PREFIX_TYPE,
-                        CliSyntax.PREFIX_AMOUNT,
-                        CliSyntax.PREFIX_DATETIME,
-                        CliSyntax.PREFIX_CATEGORY
+                        PREFIX_LOCATION,
+                        PREFIX_TYPE,
+                        PREFIX_AMOUNT,
+                        PREFIX_DATETIME,
+                        PREFIX_CATEGORY
                 )
         );
 
@@ -277,9 +283,9 @@ public class EditTransactionCommandParserTest {
                 parser,
                 userInput,
                 UniCashMessages.getErrorMessageForDuplicatePrefixes(
-                        CliSyntax.PREFIX_LOCATION,
-                        CliSyntax.PREFIX_CATEGORY,
-                        CliSyntax.PREFIX_DATETIME
+                        PREFIX_LOCATION,
+                        PREFIX_CATEGORY,
+                        PREFIX_DATETIME
                 )
         );
     }

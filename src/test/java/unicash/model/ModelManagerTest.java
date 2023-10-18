@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static unicash.model.Model.PREDICATE_SHOW_ALL_TRANSACTIONS;
 import static unicash.testutil.Assert.assertThrows;
 import static unicash.testutil.TypicalTransactions.BUYING_GROCERIES;
 import static unicash.testutil.TypicalTransactions.INTERN;
@@ -14,14 +15,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import unicash.commons.core.GuiSettings;
 import unicash.model.transaction.TransactionNameContainsKeywordsPredicate;
 import unicash.model.transaction.exceptions.TransactionNotFoundException;
 import unicash.testutil.UniCashBuilder;
-import unicash.testutil.Assert;
 
 public class ModelManagerTest {
 
@@ -30,13 +29,13 @@ public class ModelManagerTest {
     @Test
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
-        Assertions.assertEquals(new GuiSettings(), modelManager.getGuiSettings());
+        assertEquals(new GuiSettings(), modelManager.getGuiSettings());
         assertEquals(new UniCash(), new UniCash(modelManager.getUniCash()));
     }
 
     @Test
     public void setUserPrefs_nullUserPrefs_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> modelManager.setUserPrefs(null));
+        assertThrows(NullPointerException.class, () -> modelManager.setUserPrefs(null));
     }
 
     @Test
@@ -55,19 +54,19 @@ public class ModelManagerTest {
 
     @Test
     public void setGuiSettings_nullGuiSettings_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> modelManager.setGuiSettings(null));
+        assertThrows(NullPointerException.class, () -> modelManager.setGuiSettings(null));
     }
 
     @Test
     public void setGuiSettings_validGuiSettings_setsGuiSettings() {
         GuiSettings guiSettings = new GuiSettings(1, 2, 3, 4);
         modelManager.setGuiSettings(guiSettings);
-        Assertions.assertEquals(guiSettings, modelManager.getGuiSettings());
+        assertEquals(guiSettings, modelManager.getGuiSettings());
     }
 
     @Test
     public void setUniCashFilePath_nullPath_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> modelManager.setUniCashFilePath(null));
+        assertThrows(NullPointerException.class, () -> modelManager.setUniCashFilePath(null));
     }
 
     @Test
@@ -79,12 +78,12 @@ public class ModelManagerTest {
 
     @Test
     public void setUniCash_nullTransaction_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> modelManager.setUniCash(null));
+        assertThrows(NullPointerException.class, () -> modelManager.setUniCash(null));
     }
 
     @Test
     public void hasTransaction_nullTransaction_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> modelManager.hasTransaction(null));
+        assertThrows(NullPointerException.class, () -> modelManager.hasTransaction(null));
     }
 
     @Test
@@ -101,7 +100,7 @@ public class ModelManagerTest {
     @Test
     public void deleteTransaction_transactionNotInUniCash_throws() {
         modelManager.addTransaction(NUS);
-        Assert.assertThrows(TransactionNotFoundException.class, () -> modelManager.deleteTransaction(BUYING_GROCERIES));
+        assertThrows(TransactionNotFoundException.class, () -> modelManager.deleteTransaction(BUYING_GROCERIES));
     }
 
     @Test
@@ -112,7 +111,7 @@ public class ModelManagerTest {
 
     @Test
     public void getFilteredUniCash_modifyList_throwsUnsupportedOperationException() {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredTransactionList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredTransactionList().remove(0));
     }
 
     @Test
@@ -146,7 +145,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(uniCash, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredTransactionList(Model.PREDICATE_SHOW_ALL_TRANSACTIONS);
+        modelManager.updateFilteredTransactionList(PREDICATE_SHOW_ALL_TRANSACTIONS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

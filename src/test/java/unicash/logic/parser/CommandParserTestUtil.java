@@ -2,7 +2,6 @@ package unicash.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Assertions;
 import unicash.logic.commands.Command;
 import unicash.logic.parser.exceptions.ParseException;
 
@@ -34,7 +33,7 @@ public class CommandParserTestUtil {
             parser.parse(userInput);
             throw new AssertionError("The expected ParseException was not thrown.");
         } catch (ParseException | IllegalArgumentException e) {
-            Assertions.assertEquals(expectedMessage, e.getMessage());
+            assertEquals(expectedMessage, e.getMessage());
         }
     }
 }

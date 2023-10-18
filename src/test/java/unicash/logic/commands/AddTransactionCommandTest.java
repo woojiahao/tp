@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static unicash.testutil.Assert.assertThrows;
+import static unicash.testutil.TypicalTransactions.NUS;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -23,14 +24,12 @@ import unicash.model.ReadOnlyUserPrefs;
 import unicash.model.UniCash;
 import unicash.model.transaction.Transaction;
 import unicash.testutil.TransactionBuilder;
-import unicash.testutil.Assert;
-import unicash.testutil.TypicalTransactions;
 
 public class AddTransactionCommandTest {
 
     @Test
     public void constructor_nullTransaction_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new AddTransactionCommand(null));
+        assertThrows(NullPointerException.class, () -> new AddTransactionCommand(null));
     }
 
     @Test
@@ -83,8 +82,8 @@ public class AddTransactionCommandTest {
 
     @Test
     public void toStringMethod() {
-        AddTransactionCommand addTransactionCommand = new AddTransactionCommand(TypicalTransactions.NUS);
-        String expected = AddTransactionCommand.class.getCanonicalName() + "{toAdd=" + TypicalTransactions.NUS + "}";
+        AddTransactionCommand addTransactionCommand = new AddTransactionCommand(NUS);
+        String expected = AddTransactionCommand.class.getCanonicalName() + "{toAdd=" + NUS + "}";
         assertEquals(expected, addTransactionCommand.toString());
     }
 

@@ -17,7 +17,7 @@ public class ExitCommandUniCashTest {
         CommandResult expectedCommandResult =
                 new CommandResult(ExitCommandUniCash.MESSAGE_EXIT_ACKNOWLEDGEMENT, false, true);
 
-        CommandTestUtil.assertCommandSuccess(new ExitCommandUniCash(), model,
+        assertCommandSuccess(new ExitCommandUniCash(), model,
                 expectedCommandResult, expectedModel);
     }
 }

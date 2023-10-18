@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static unicash.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
-import unicash.testutil.Assert;
+
 
 public class VersionTest {
 
@@ -20,7 +20,7 @@ public class VersionTest {
 
     @Test
     public void versionParsing_wrongVersionString_throwIllegalArgumentException() {
-        Assert.assertThrows(IllegalArgumentException.class, () -> Version.fromString("This is not a version string"));
+        assertThrows(IllegalArgumentException.class, () -> Version.fromString("This is not a version string"));
     }
 
     @Test

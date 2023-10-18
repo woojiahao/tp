@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static unicash.testutil.Assert.assertThrows;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import unicash.commons.enums.TransactionType;
@@ -16,7 +15,6 @@ import unicash.model.UniCash;
 import unicash.model.UserPrefs;
 import unicash.model.category.Category;
 import unicash.testutil.TransactionBuilder;
-import unicash.testutil.Assert;
 
 public class GetTotalExpenditureCommandTest {
 
@@ -25,19 +23,19 @@ public class GetTotalExpenditureCommandTest {
     @Test
     public void execute_nullModel_throwsNullPointerException() {
         var command = new GetTotalExpenditureCommand(10, null);
-        Assert.assertThrows(NullPointerException.class, () -> command.execute(null));
+        assertThrows(NullPointerException.class, () -> command.execute(null));
     }
 
     @Test
     public void execute_negativeMonth_throwsCommandException() {
         var command = new GetTotalExpenditureCommand(-12, null);
-        Assert.assertThrows(CommandException.class, () -> command.execute(BASE_MODEL));
+        assertThrows(CommandException.class, () -> command.execute(BASE_MODEL));
     }
 
     @Test
     public void execute_monthGreaterThan12_throwsCommandException() {
         var command = new GetTotalExpenditureCommand(13, null);
-        Assert.assertThrows(CommandException.class, () -> command.execute(BASE_MODEL));
+        assertThrows(CommandException.class, () -> command.execute(BASE_MODEL));
     }
 
     @Test
@@ -67,7 +65,7 @@ public class GetTotalExpenditureCommandTest {
         assertEquals(2, filteredResult.size());
         for (var result : filteredResult) {
             assertEquals(TransactionType.EXPENSE, result.getType().type);
-            Assertions.assertEquals(8, result.getDateTime().getDateTime().getMonthValue());
+            assertEquals(8, result.getDateTime().getDateTime().getMonthValue());
         }
     }
 
@@ -83,7 +81,7 @@ public class GetTotalExpenditureCommandTest {
         assertEquals(2, filteredResult.size());
         for (var result : filteredResult) {
             assertEquals(TransactionType.EXPENSE, result.getType().type);
-            Assertions.assertTrue(result.getCategories().stream().anyMatch(cat -> cat.equals(new Category("Food"))));
+            assertTrue(result.getCategories().stream().anyMatch(cat -> cat.equals(new Category("Food"))));
         }
     }
 
@@ -99,8 +97,8 @@ public class GetTotalExpenditureCommandTest {
         assertEquals(1, filteredResult.size());
         for (var result : filteredResult) {
             assertEquals(TransactionType.EXPENSE, result.getType().type);
-            Assertions.assertTrue(result.getCategories().stream().anyMatch(cat -> cat.equals(new Category("Food"))));
-            Assertions.assertEquals(8, result.getDateTime().getDateTime().getMonthValue());
+            assertTrue(result.getCategories().stream().anyMatch(cat -> cat.equals(new Category("Food"))));
+            assertEquals(8, result.getDateTime().getDateTime().getMonthValue());
         }
     }
 

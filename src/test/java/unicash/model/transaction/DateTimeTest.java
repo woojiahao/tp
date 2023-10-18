@@ -10,15 +10,14 @@ import java.time.Instant;
 import java.time.ZoneId;
 
 import org.junit.jupiter.api.Test;
-import unicash.testutil.Assert;
 
 
 public class DateTimeTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new DateTime(null));
-        Assert.assertThrows(NullPointerException.class, () -> new DateTime("18-08-2001 18:18", null));
-        Assert.assertThrows(NullPointerException.class, () -> new DateTime(null, null));
+        assertThrows(NullPointerException.class, () -> new DateTime(null));
+        assertThrows(NullPointerException.class, () -> new DateTime("18-08-2001 18:18", null));
+        assertThrows(NullPointerException.class, () -> new DateTime(null, null));
     }
 
     @Test
