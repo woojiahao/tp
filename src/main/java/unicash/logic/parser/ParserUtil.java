@@ -154,6 +154,10 @@ public class ParserUtil {
             throw new ParseException(UniqueCategoryList.MESSAGE_CONSTRAINTS);
         }
 
+        if (UniqueCategoryList.isMoreThanMax(categoryList)) {
+            throw new ParseException(UniqueCategoryList.MESSAGE_CONSTRAINTS);
+        }
+
         return new UniqueCategoryList(categoryList);
     }
 

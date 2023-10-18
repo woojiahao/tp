@@ -24,7 +24,7 @@ import unicash.model.category.exceptions.MaxCategoryException;
 public class UniqueCategoryList implements Iterable<Category> {
     public static final String MESSAGE_CONSTRAINTS =
             "There should only be a maximum of 5 unique categories.";
-    private static final int MAX_CATEGORIES = 5;
+    public static final int MAX_CATEGORIES = 5;
     private final ObservableList<Category> internalList = FXCollections.observableArrayList();
     private final ObservableList<Category> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
@@ -43,6 +43,10 @@ public class UniqueCategoryList implements Iterable<Category> {
         requireNonNull(categoryList);
         if (!categoriesAreUnique(categoryList)) {
             throw new DuplicateCategoryException();
+        }
+
+        if (isMoreThanMax(categoryList)) {
+            throw new MaxCategoryException();
         }
         internalList.setAll(categoryList);
     }
@@ -126,6 +130,10 @@ public class UniqueCategoryList implements Iterable<Category> {
             throw new DuplicateCategoryException();
         }
 
+        if (isMoreThanMax(categories)) {
+            throw new MaxCategoryException();
+        }
+
         internalList.setAll(categories);
     }
 
@@ -156,6 +164,13 @@ public class UniqueCategoryList implements Iterable<Category> {
     @Override
     public String toString() {
         return internalList.toString();
+    }
+
+    /**
+     * Returns true if a given list of categories is less than the maximum allowed categories.
+     */
+    public static boolean isMoreThanMax(List<Category> categories) {
+        return categories.size() > MAX_CATEGORIES;
     }
 
     /**

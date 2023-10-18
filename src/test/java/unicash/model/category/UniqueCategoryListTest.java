@@ -8,6 +8,7 @@ import static unicash.testutil.Assert.assertThrows;
 import static unicash.testutil.TypicalCategories.EDUCATION;
 import static unicash.testutil.TypicalCategories.ENTERTAINMENT;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -16,12 +17,29 @@ import org.junit.jupiter.api.Test;
 
 import unicash.model.category.exceptions.CategoryNotFoundException;
 import unicash.model.category.exceptions.DuplicateCategoryException;
-
+import unicash.model.category.exceptions.MaxCategoryException;
 
 
 public class UniqueCategoryListTest {
 
     private final UniqueCategoryList uniqueCategoryList = new UniqueCategoryList();
+
+    @Test
+    public void constructor_duplicate_throwsDuplicateCategoryException() {
+        List<Category> categoryList = new ArrayList<>();
+        categoryList.add(EDUCATION);
+        categoryList.add(EDUCATION);
+        assertThrows(DuplicateCategoryException.class, () -> new UniqueCategoryList(categoryList));
+    }
+
+    @Test
+    public void constructor_moreThanMaximumAllowed_throwsMaxCategoryException() {
+        List<Category> categoryList = new ArrayList<>();
+        for (int i = 0; i <= UniqueCategoryList.MAX_CATEGORIES; i++) {
+            categoryList.add(new Category("Test" + i));
+        }
+        assertThrows(MaxCategoryException.class, () -> new UniqueCategoryList(categoryList));
+    }
 
     @Test
     public void contains_nullCategory_throwsNullPointerException() {
@@ -48,6 +66,14 @@ public class UniqueCategoryListTest {
     public void add_duplicateCategory_throwsDuplicateCategoryException() {
         uniqueCategoryList.add(ENTERTAINMENT);
         assertThrows(DuplicateCategoryException.class, () -> uniqueCategoryList.add(ENTERTAINMENT));
+    }
+
+    @Test
+    public void add_maxCategory_throwsMaxCategoryException() {
+        for (int i = 0; i < UniqueCategoryList.MAX_CATEGORIES; i++) {
+            uniqueCategoryList.add(new Category("Test" + i));
+        }
+        assertThrows(MaxCategoryException.class, () -> uniqueCategoryList.add(new Category("test4")));
     }
 
     @Test
@@ -123,6 +149,16 @@ public class UniqueCategoryListTest {
         uniqueCategoryList.setCategories(expectedUniqueCategoryList);
         assertEquals(expectedUniqueCategoryList, uniqueCategoryList);
     }
+
+    @Test
+    public void setCategories_moreThanMaxAllowed_throwsMaxCategoryException() {
+        List<Category> categoryList = new ArrayList<>();
+        for (int i = 0; i <= UniqueCategoryList.MAX_CATEGORIES; i++) {
+            categoryList.add(new Category("Test" + i));
+        }
+        assertThrows(MaxCategoryException.class, () -> uniqueCategoryList.setCategories(categoryList));
+    }
+
 
     @Test
     public void setCategories_nullList_throwsNullPointerException() {

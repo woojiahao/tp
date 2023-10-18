@@ -34,6 +34,10 @@ public class ParserUtilTest {
     private static final String VALID_DATETIME = "18-08-2001 18:30";
     private static final String VALID_CATEGORY = "hobbies";
     private static final String VALID_CATEGORY_2 = "entertainemtn";
+    private static final String VALID_CATEGORY_3 = "test";
+    private static final String VALID_CATEGORY_4 = "test2";
+    private static final String VALID_CATEGORY_5 = "test3";
+    private static final String VALID_CATEGORY_6 = "test4";
     private static final String VALID_LOCATION = "orchard road";
     private static final String WHITESPACE = " \t\r\n";
 
@@ -198,6 +202,13 @@ public class ParserUtilTest {
     @Test
     public void parseCategories_emptyCollection_returnsEmptySet() {
         assertDoesNotThrow(() -> ParserUtil.parseCategories(Collections.emptyList()));
+    }
+
+    @Test
+    public void parseCategories_collectionWithMoreThanAllowedNumberOfCategories_returnsCategorySet() throws Exception {
+        assertThrows(ParseException.class, () -> ParserUtil.parseCategories(
+                Arrays.asList(VALID_CATEGORY, VALID_CATEGORY_2, VALID_CATEGORY_3, VALID_CATEGORY_4,
+                        VALID_CATEGORY_5, VALID_CATEGORY_6)));
     }
 
     @Test
