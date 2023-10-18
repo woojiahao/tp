@@ -20,7 +20,6 @@ import unicash.commons.core.GuiSettings;
 import unicash.commons.core.LogsCenter;
 import unicash.commons.util.StringUtil;
 import unicash.logic.Logic;
-import unicash.logic.UniCashMessages;
 import unicash.logic.commands.CommandResult;
 import unicash.logic.commands.exceptions.CommandException;
 import unicash.logic.parser.exceptions.ParseException;
