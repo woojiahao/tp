@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.application.Application;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import unicash.commons.core.Config;
 import unicash.commons.core.LogsCenter;
@@ -48,7 +49,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing UniCa$h ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -81,16 +82,15 @@ public class MainApp extends Application {
             uniCashOptional = storage.readUniCash();
             if (uniCashOptional.isEmpty()) {
                 logger.info("Creating a new data file " + storage.getUniCashFilePath()
-                        + " populated with a sample AddressBook.");
+                        + " populated with a sample UniCash.");
             }
             initialData = uniCashOptional.orElseGet(SampleDataUtil::getSampleUniCash);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getUniCashFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
+                    + " Will be starting with an empty UniCash.");
             initialData = new UniCash();
         }
 
-        // TODO: Remove ModelManager first parameter
         return new ModelManager(initialData, userPrefs);
     }
 
@@ -171,13 +171,17 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting UniCash " + MainApp.VERSION);
+        Font.loadFont(getClass().getResourceAsStream("/fonts/Inter-Regular.ttf"), 12);
+        Font.loadFont(getClass().getResourceAsStream("/fonts/Inter-Medium.ttf"), 12);
+        Font.loadFont(getClass().getResourceAsStream("/fonts/Inter-Bold.ttf"), 12);
+        Font.loadFont(getClass().getResourceAsStream("/fonts/Inter-SemiBold.ttf"), 12);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping UniCa$h ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {

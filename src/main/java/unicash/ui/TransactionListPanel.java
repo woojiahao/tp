@@ -14,7 +14,7 @@ import unicash.model.transaction.Transaction;
  * Panel containing the list of persons.
  */
 public class TransactionListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
+    private static final String FXML = "TransactionListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(TransactionListPanel.class);
 
     @FXML

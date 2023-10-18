@@ -70,6 +70,41 @@ public class GetTotalExpenditureCommandTest {
     }
 
     @Test
+    public void execute_expenseWithoutCategoryWithCategoryFilter_notIncludedInFilter() throws CommandException {
+        var model = getModel();
+        // This transaction does not contain any categories even if it's in August
+        model.addTransaction(new TransactionBuilder().withCategories().withType("expense").build());
+        model.addTransaction(new TransactionBuilder().withType("expense").withDateTime("18-07-2001 00:00").build());
+        model.addTransaction(new TransactionBuilder().withType("expense").withCategories("Food").build());
+        var command = new GetTotalExpenditureCommand(8, new Category("Food"));
+        command.execute(model);
+        var filteredResult = model.getFilteredTransactionList();
+        assertEquals(1, filteredResult.size());
+        for (var result : filteredResult) {
+            assertEquals(TransactionType.EXPENSE, result.getType().type);
+            assertEquals(8, result.getDateTime().getDateTime().getMonthValue());
+        }
+    }
+
+    @Test
+    public void execute_expenseWithoutCategoryWithoutCategoryFilter_includedInFilter() throws CommandException {
+        var model = getModel();
+        // This transaction does not contain any categories even if it's in August
+        // This should be included this round as no category filter is in place
+        model.addTransaction(new TransactionBuilder().withCategories().withType("expense").build());
+        model.addTransaction(new TransactionBuilder().withType("expense").withDateTime("18-07-2001 00:00").build());
+        model.addTransaction(new TransactionBuilder().withType("expense").withCategories("Food").build());
+        var command = new GetTotalExpenditureCommand(8, null);
+        command.execute(model);
+        var filteredResult = model.getFilteredTransactionList();
+        assertEquals(2, filteredResult.size());
+        for (var result : filteredResult) {
+            assertEquals(TransactionType.EXPENSE, result.getType().type);
+            assertEquals(8, result.getDateTime().getDateTime().getMonthValue());
+        }
+    }
+
+    @Test
     public void execute_multipleCategoriesOnly_filtersOnlySelectedCategory() throws CommandException {
         var model = getModel();
         model.addTransaction(new TransactionBuilder().withType("expense").withCategories("Food").build());
@@ -125,7 +160,7 @@ public class GetTotalExpenditureCommandTest {
     public void toString_noInput_returnsCommandStringFormatted() {
         var command = new GetTotalExpenditureCommand(8, new Category("Food"));
         var toStringResult = command.toString();
-        String expected = GetTotalExpenditureCommand.class.getCanonicalName() + "{month=8, categoryFilter=[Food]}";
+        String expected = GetTotalExpenditureCommand.class.getCanonicalName() + "{month=8, categoryFilter=Food}";
         assertEquals(expected, toStringResult);
     }
 
