@@ -29,7 +29,7 @@ import unicash.testutil.EditTransactionDescriptorBuilder;
 import unicash.testutil.TransactionBuilder;
 import unicash.testutil.TransactionUtil;
 
-public class AddressBookParserTest {
+public class UniCashParserTest {
 
     private final UniCashParser parser = new UniCashParser();
 

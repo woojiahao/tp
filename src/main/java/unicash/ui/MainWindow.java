@@ -20,6 +20,7 @@ import unicash.commons.core.GuiSettings;
 import unicash.commons.core.LogsCenter;
 import unicash.commons.util.StringUtil;
 import unicash.logic.Logic;
+import unicash.logic.UniCashMessages;
 import unicash.logic.commands.CommandResult;
 import unicash.logic.commands.exceptions.CommandException;
 import unicash.logic.parser.exceptions.ParseException;
@@ -34,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     public static final String USER_GUIDE_NAME = USER_GUIDE_NAME_PREFIX + USER_GUIDE_NAME_SUFFIX;
     public static final String PATH_TO_USER_GUIDE = "/documents/" + USER_GUIDE_NAME;
     public static final String FILE_ERROR_MESSAGE = "A FILE ERROR OCCURRED.";
+    public static final String UNKNOWN_ERROR_MESSAGE = "AN UNKNOWN ERROR OCCURRED.";
 
     private static final String FXML = "MainWindow.fxml";
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -218,9 +220,14 @@ public class MainWindow extends UiPart<Stage> {
 
             Files.copy(inputStream, tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
             Desktop.getDesktop().open(tempFile);
+
         } catch (IOException e) {
             System.err.println(FILE_ERROR_MESSAGE);
             logger.severe(FILE_ERROR_MESSAGE + StringUtil.getDetails(e));
+
+        } catch (Exception ex) {
+            System.err.println(UNKNOWN_ERROR_MESSAGE);
+            logger.severe(UNKNOWN_ERROR_MESSAGE + StringUtil.getDetails(ex));
         }
     }
 
