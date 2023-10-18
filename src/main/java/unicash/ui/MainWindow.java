@@ -31,8 +31,7 @@ public class MainWindow extends UiPart<Stage> {
     public static final String USER_GUIDE_NAME_SUFFIX = ".pdf";
     public static final String USER_GUIDE_NAME = USER_GUIDE_NAME_PREFIX + USER_GUIDE_NAME_SUFFIX;
     public static final String PATH_TO_USER_GUIDE = "/documents/" + USER_GUIDE_NAME;
-
-    public static final String FILE_ERROR_MESSAGE = "A FILE ERROR OCCURED. PLEASE TRY AGAIN.";
+    public static final String FILE_ERROR_MESSAGE = "A FILE ERROR OCCURRED. PLEASE TRY AGAIN.";
 
     private static final String FXML = "MainWindow.fxml";
     private final Logger logger = LogsCenter.getLogger(getClass());
