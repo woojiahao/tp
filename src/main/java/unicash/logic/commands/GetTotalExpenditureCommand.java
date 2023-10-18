@@ -47,12 +47,14 @@ public class GetTotalExpenditureCommand extends Command {
         model.updateFilteredTransactionList(transaction -> {
             boolean isExpense = transaction.getType().type.equals(TransactionType.EXPENSE);
             boolean isSameMonth = transaction.getDateTime().getDateTime().getMonthValue() == month;
-            boolean hasCategory = transaction.getCategories().stream().anyMatch(cat -> {
-                if (categoryFilter == null) {
-                    return true;
-                }
-                return cat.equals(categoryFilter);
-            });
+            if (categoryFilter == null) {
+                // No category filter so just get all expenses of the month
+                return isExpense && isSameMonth;
+            }
+
+            // If category filter exists and expense contains no category, it will not have the category
+            // Note: If the stream is empty then false is returned and the predicate is not evaluated.
+            boolean hasCategory = transaction.getCategories().stream().anyMatch(cat -> cat.equals(categoryFilter));
             return isExpense && isSameMonth && hasCategory;
         });
 
