@@ -150,6 +150,9 @@ public class ParserUtil {
         for (String categoryName : categories) {
             categoryList.add(parseCategory(categoryName));
         }
+        if (!UniqueCategoryList.categoriesAreUnique(categoryList)) {
+            throw new ParseException(UniqueCategoryList.MESSAGE_CONSTRAINTS);
+        }
 
         return new UniqueCategoryList(categoryList);
     }

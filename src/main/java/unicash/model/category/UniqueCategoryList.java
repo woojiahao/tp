@@ -22,6 +22,8 @@ import unicash.model.category.exceptions.MaxCategoryException;
  * Supports a minimal set of list operations.
  */
 public class UniqueCategoryList implements Iterable<Category> {
+    public static final String MESSAGE_CONSTRAINTS =
+            "There should only be a maximum of 5 unique categories.";
     private static final int MAX_CATEGORIES = 5;
     private final ObservableList<Category> internalList = FXCollections.observableArrayList();
     private final ObservableList<Category> internalUnmodifiableList =
@@ -39,6 +41,9 @@ public class UniqueCategoryList implements Iterable<Category> {
      */
     public UniqueCategoryList(List<Category> categoryList) {
         requireNonNull(categoryList);
+        if (!categoriesAreUnique(categoryList)) {
+            throw new DuplicateCategoryException();
+        }
         internalList.setAll(categoryList);
     }
 
@@ -94,7 +99,7 @@ public class UniqueCategoryList implements Iterable<Category> {
 
     /**
      * Removes the equivalent category from the list.
-     * The category category exist in the list.
+     * The category exist in the list.
      */
     public void remove(Category toRemove) {
         requireNonNull(toRemove);
@@ -156,7 +161,7 @@ public class UniqueCategoryList implements Iterable<Category> {
     /**
      * Returns {@code true} if {@code categories} contains only unique categories.
      */
-    private boolean categoriesAreUnique(List<Category> categories) {
+    public static boolean categoriesAreUnique(List<Category> categories) {
         HashSet<Category> set = new HashSet<>();
         for (Category category : categories) {
             if (set.contains(category)) {

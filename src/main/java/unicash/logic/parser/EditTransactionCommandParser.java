@@ -45,7 +45,7 @@ public class EditTransactionCommandParser implements Parser<EditTransactionComma
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_TYPE, PREFIX_AMOUNT, PREFIX_DATETIME,
-                PREFIX_CATEGORY, PREFIX_LOCATION);
+                PREFIX_LOCATION);
 
         EditTransactionCommand.EditTransactionDescriptor editTransactionDescriptor = new EditTransactionCommand
                 .EditTransactionDescriptor();
