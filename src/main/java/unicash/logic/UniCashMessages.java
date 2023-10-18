@@ -39,15 +39,15 @@ public class UniCashMessages {
     public static String formatTransaction(Transaction transaction) {
         final StringBuilder builder = new StringBuilder();
         builder.append(transaction.getName())
-                .append("; Type: ")
+                .append("; \nType: ")
                 .append(transaction.getType())
-                .append("; Amount: ")
+                .append("; \nAmount: ")
                 .append(transaction.getAmount())
-                .append("; Date: ")
+                .append("; \nDate: ")
                 .append(transaction.getDateTime())
-                .append("; Location: ")
+                .append("; \nLocation: ")
                 .append(transaction.getLocation())
-                .append("; Category: ");
+                .append("; \nCategory: ");
         transaction.getCategories().forEach(builder::append);
         return builder.toString();
     }

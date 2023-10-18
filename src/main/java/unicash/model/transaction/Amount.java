@@ -47,6 +47,16 @@ public class Amount {
         return amount == ((Amount) other).amount;
     }
 
+    /**
+     * Returns a rounded two-decimal precision String version of an {@code Amount}.
+     */
+    public static String amountToDecimalString(Amount amt) {
+        double roundedAmount = Math.round(amt.amount * 100.0) / 100.0;
+        String formattedNumberString = String.format("%.2f", roundedAmount);
+
+        return formattedNumberString;
+    }
+
     @Override
     public String toString() {
         return Double.toString(amount);

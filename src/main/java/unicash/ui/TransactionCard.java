@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import unicash.model.transaction.Amount;
 import unicash.model.transaction.Transaction;
 
 /**
@@ -46,12 +47,15 @@ public class TransactionCard extends UiPart<Region> {
     public TransactionCard(Transaction transaction, int displayedIndex) {
         super(FXML);
         this.transaction = transaction;
+        String transactionWithDecimal = Amount.amountToDecimalString(transaction.getAmount());
         id.setText(displayedIndex + ". ");
         name.setText(transaction.getName().toString());
-        amount.setText(transaction.getAmount().toString());
+        amount.setText("$" + transactionWithDecimal);
         dateTime.setText(transaction.getDateTime().toString());
         transactionLocation.setText(transaction.getLocation().toString());
         categories.setText(transaction.getCategories().toString());
 
     }
+
+
 }
