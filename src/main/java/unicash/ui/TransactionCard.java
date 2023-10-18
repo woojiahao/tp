@@ -43,14 +43,18 @@ public class TransactionCard extends UiPart<Region> {
 
     /**
      * Creates a {@code TransactionCard} with the given {@code Transaction} and index to display.
+     * The transaction's polarity (i.e. direction) depends on whether it's an expense or an income.
+     * All transactions are assumed to be made in dollars.
      */
     public TransactionCard(Transaction transaction, int displayedIndex) {
         super(FXML);
         this.transaction = transaction;
-        String transactionWithDecimal = Amount.amountToDecimalString(transaction.getAmount());
+        String dollarTransactionWithDecimal = "$" + Amount.amountToDecimalString(transaction.getAmount());
+        String transactionPolarity = transaction.getType().toString().equals("expense") ? "-" : "+";
+
         id.setText(displayedIndex + ". ");
         name.setText(transaction.getName().toString());
-        amount.setText("$" + transactionWithDecimal);
+        amount.setText(transactionPolarity + dollarTransactionWithDecimal);
         dateTime.setText(transaction.getDateTime().toString());
         transactionLocation.setText(transaction.getLocation().toString());
         categories.setText(transaction.getCategories().toString());
