@@ -49,7 +49,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing UniCash ]===========================");
+        logger.info("=============================[ Initializing UniCa$h ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -173,15 +173,15 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
         logger.info("Starting UniCash " + MainApp.VERSION);
         Font.loadFont(getClass().getResourceAsStream("/fonts/Inter-Regular.ttf"), 12);
-        // Font.loadFont(getClass().getResourceAsStream("/fonts/Inter-Medium.ttf"), 12);
-        // Font.loadFont(getClass().getResourceAsStream("/fonts/Inter-Bold.ttf"), 12);
-        // Font.loadFont(getClass().getResourceAsStream("/fonts/Inter-SemiBold.ttf"), 12);
+        Font.loadFont(getClass().getResourceAsStream("/fonts/Inter-Medium.ttf"), 12);
+        Font.loadFont(getClass().getResourceAsStream("/fonts/Inter-Bold.ttf"), 12);
+        Font.loadFont(getClass().getResourceAsStream("/fonts/Inter-SemiBold.ttf"), 12);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping UniCash ] =============================");
+        logger.info("============================ [ Stopping UniCa$h ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {
