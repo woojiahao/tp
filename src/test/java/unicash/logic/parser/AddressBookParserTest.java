@@ -31,7 +31,7 @@ import unicash.testutil.TransactionUtil;
 
 public class AddressBookParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final UniCashParser parser = new UniCashParser();
 
     @Test
     public void parseCommand_exit() throws Exception {

@@ -11,7 +11,7 @@ import unicash.commons.core.LogsCenter;
 import unicash.logic.commands.Command;
 import unicash.logic.commands.CommandResult;
 import unicash.logic.commands.exceptions.CommandException;
-import unicash.logic.parser.AddressBookParser;
+import unicash.logic.parser.UniCashParser;
 import unicash.logic.parser.exceptions.ParseException;
 import unicash.model.Model;
 import unicash.model.transaction.Transaction;
@@ -30,7 +30,7 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
+    private final UniCashParser uniCashParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -38,7 +38,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        uniCashParser = new UniCashParser();
     }
 
     @Override
@@ -46,7 +46,7 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+        Command command = uniCashParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
