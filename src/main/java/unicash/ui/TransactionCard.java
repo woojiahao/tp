@@ -21,7 +21,6 @@ public class TransactionCard extends UiPart<Region> {
      *
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
-
     public final Transaction transaction;
 
     @FXML
@@ -40,6 +39,7 @@ public class TransactionCard extends UiPart<Region> {
 
     @FXML
     private Label categories;
+
 
     /**
      * Creates a {@code TransactionCard} with the given {@code Transaction} and index to display.
