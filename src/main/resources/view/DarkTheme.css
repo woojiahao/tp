@@ -333,8 +333,10 @@
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, #F3F3F3, transparent, #F3F3F3;
+    -fx-background-color: transparent, derive(#F3F3F3, 90%), transparent, derive(#F3F3F3, 90%);
     -fx-background-radius: 0;
+    -fx-border-color: transparent, derive(#979191, 75%), transparent, derive(#979191, 75%);
+    -fx-border-width: 1;
 }
 
 #tags {
