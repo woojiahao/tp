@@ -126,24 +126,6 @@
     -fx-text-fill: #010504;
 }
 
-.transaction-name {
-    -fx-font-family: "Inter";
-    -fx-font-size: 16px;
-    -fx-text-fill: #010504;
-    -fx-font-weight: bold;
-}
-
-.transaction-id {
-    -fx-font-family: "Inter";
-    -fx-font-size: 16px;
-    -fx-text-fill: #010504;
-}
-
-.big-money {
-    -fx-font-weight: bold;
-    -fx-font-size: 12pt;
-}
-
 .cell_small_label {
     -fx-font-family: "Inter";
     -fx-font-size: 13px;
@@ -152,10 +134,9 @@
 
 .cell_small_label_bold {
     -fx-font-family: "Inter";
-    -fx-font-size: 12px;
+    -fx-font-size: 11px;
     -fx-text-fill: #010504;
     -fx-font-weight: bold;
-    -fx-font-style: italic;
 }
 
 .stack-pane {
@@ -414,4 +395,30 @@
     -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-font-size: 10pt;
+}
+
+.transaction-name {
+    -fx-font-family: "Inter";
+    -fx-font-size: 15px;
+    -fx-text-fill: #010504;
+    -fx-font-weight: bold;
+}
+
+.transaction-id {
+    -fx-font-family: "Inter";
+    -fx-font-size: 15px;
+    -fx-text-fill: #010504;
+    -fx-font-weight: bold;
+}
+
+.transaction-subtitle {
+    -fx-font-family: "Inter";
+    -fx-font-size: 13px;
+    -fx-text-fill: #010504;
+    -fx-font-style: italic;
+}
+
+.big-money {
+    -fx-font-weight: bold;
+    -fx-font-size: 12pt;
 }

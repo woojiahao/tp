@@ -33,11 +33,11 @@
                 <padding>
                     <Insets top="5" />
                 </padding>
-                <Label styleClass="cell_small_label" text="Date: " />
+                <Label styleClass="transaction-subtitle" text="Date: " />
                 <Label fx:id="dateTime" styleClass="cell_small_label" text="\$dateTime" />
             </HBox>
             <HBox spacing="3" alignment="CENTER_LEFT">
-                <Label styleClass="cell_small_label" text="Location: " />
+                <Label styleClass="transaction-subtitle" text="Location: " />
                 <Label fx:id="transactionLocation" styleClass="cell_small_label" text="\$location" />
             </HBox>
             <HBox>
