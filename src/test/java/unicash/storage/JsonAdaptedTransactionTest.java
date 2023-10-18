@@ -2,6 +2,7 @@ package unicash.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+import static unicash.storage.JsonAdaptedTransaction.MISSING_FIELD_MESSAGE_FORMAT;
 import static unicash.testutil.Assert.assertThrows;
 import static unicash.testutil.TypicalTransactions.SHOPPING;
 
@@ -19,7 +20,6 @@ import unicash.model.transaction.Name;
 import unicash.model.transaction.Transaction;
 import unicash.model.transaction.Type;
 import unicash.testutil.TransactionBuilder;
-import unicash.testutil.Assert;
 
 public class JsonAdaptedTransactionTest {
     private static final String INVALID_NAME = "R@chel";
@@ -55,7 +55,7 @@ public class JsonAdaptedTransactionTest {
                 VALID_CATEGORIES
         );
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, transaction::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, transaction::toModelType);
     }
 
     @Test
@@ -69,8 +69,8 @@ public class JsonAdaptedTransactionTest {
                 VALID_CATEGORIES
 
         );
-        String expectedMessage = String.format(JsonAdaptedTransaction.MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, transaction::toModelType);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, transaction::toModelType);
     }
 
     @Test
@@ -84,7 +84,7 @@ public class JsonAdaptedTransactionTest {
                 VALID_CATEGORIES
         );
         String expectedMessage = Amount.MESSAGE_CONSTRAINTS;
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, transaction::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, transaction::toModelType);
     }
 
     @Test
@@ -99,7 +99,7 @@ public class JsonAdaptedTransactionTest {
                         VALID_LOCATION,
                         VALID_TYPE,
                         invalidCategories);
-        Assert.assertThrows(IllegalValueException.class, transaction::toModelType);
+        assertThrows(IllegalValueException.class, transaction::toModelType);
     }
 
     @Test
@@ -139,7 +139,7 @@ public class JsonAdaptedTransactionTest {
                 VALID_CATEGORIES
         );
         String expectedMessage = DateTime.MESSAGE_CONSTRAINTS;
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, transaction::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, transaction::toModelType);
     }
 
     @Test
@@ -152,8 +152,8 @@ public class JsonAdaptedTransactionTest {
                 VALID_TYPE,
                 VALID_CATEGORIES
         );
-        String expectedMessage = String.format(JsonAdaptedTransaction.MISSING_FIELD_MESSAGE_FORMAT, DateTime.class.getSimpleName());
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, transaction::toModelType);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, DateTime.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, transaction::toModelType);
     }
 
     @Test
@@ -167,7 +167,7 @@ public class JsonAdaptedTransactionTest {
                 VALID_CATEGORIES
         );
         String expectedMessage = Location.MESSAGE_CONSTRAINTS;
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, transaction::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, transaction::toModelType);
     }
 
     @Test
@@ -181,7 +181,7 @@ public class JsonAdaptedTransactionTest {
                 VALID_CATEGORIES
         );
         String expectedMessage = Type.MESSAGE_CONSTRAINTS;
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, transaction::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, transaction::toModelType);
     }
 
     @Test
@@ -194,7 +194,7 @@ public class JsonAdaptedTransactionTest {
                 null,
                 VALID_CATEGORIES
         );
-        String expectedMessage = String.format(JsonAdaptedTransaction.MISSING_FIELD_MESSAGE_FORMAT, Type.class.getSimpleName());
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, transaction::toModelType);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Type.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, transaction::toModelType);
     }
 }

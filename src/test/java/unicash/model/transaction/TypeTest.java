@@ -7,20 +7,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static unicash.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
-import unicash.testutil.Assert;
 
 public class TypeTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new Type(null));
+        assertThrows(NullPointerException.class, () -> new Type(null));
     }
 
     @Test
     public void constructor_invalidType_throwsIllegalArgumentException() {
         String[] invalidTypes = new String[] {"", "1", "Wrong"};
         for (String invalidType: invalidTypes) {
-            Assert.assertThrows(IllegalArgumentException.class, () -> new Type(invalidType));
+            assertThrows(IllegalArgumentException.class, () -> new Type(invalidType));
         }
     }
 

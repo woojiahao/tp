@@ -15,7 +15,7 @@ import org.junit.jupiter.api.io.TempDir;
 import unicash.commons.core.GuiSettings;
 import unicash.commons.exceptions.DataLoadingException;
 import unicash.model.UserPrefs;
-import unicash.testutil.Assert;
+
 
 public class JsonUserPrefsStorageTest {
 
@@ -26,7 +26,7 @@ public class JsonUserPrefsStorageTest {
 
     @Test
     public void readUserPrefs_nullFilePath_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> readUserPrefs(null));
+        assertThrows(NullPointerException.class, () -> readUserPrefs(null));
     }
 
     private Optional<UserPrefs> readUserPrefs(String userPrefsFileInTestDataFolder) throws DataLoadingException {
@@ -41,7 +41,7 @@ public class JsonUserPrefsStorageTest {
 
     @Test
     public void readUserPrefs_notJsonFormat_exceptionThrown() {
-        Assert.assertThrows(DataLoadingException.class, () -> readUserPrefs("NotJsonFormatUserPrefs.json"));
+        assertThrows(DataLoadingException.class, () -> readUserPrefs("NotJsonFormatUserPrefs.json"));
     }
 
     private Path addToTestDataPathIfNotNull(String userPrefsFileInTestDataFolder) {
@@ -80,12 +80,12 @@ public class JsonUserPrefsStorageTest {
 
     @Test
     public void savePrefs_nullPrefs_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> saveUserPrefs(null, "SomeFile.json"));
+        assertThrows(NullPointerException.class, () -> saveUserPrefs(null, "SomeFile.json"));
     }
 
     @Test
     public void saveUserPrefs_nullFilePath_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> saveUserPrefs(new UserPrefs(), null));
+        assertThrows(NullPointerException.class, () -> saveUserPrefs(new UserPrefs(), null));
     }
 
     /**

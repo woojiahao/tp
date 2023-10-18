@@ -181,7 +181,7 @@ public class EditTransactionCommandTest {
         EditTransactionCommand editTransactionCommand = new EditTransactionCommand(index, editTransactionDescriptor);
         String expected = EditTransactionCommand.class.getCanonicalName()
                 + "{index=" + index + ", editTransactionDescriptor=" + editTransactionDescriptor + "}";
-        assertEquals(expected, toString());
+        assertEquals(expected, editTransactionCommand.toString());
     }
 
 }

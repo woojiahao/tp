@@ -7,13 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static unicash.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
-import unicash.testutil.Assert;
 
 public class LocationTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new Location(null));
+        assertThrows(NullPointerException.class, () -> new Location(null));
     }
 
     @Test
@@ -25,7 +24,7 @@ public class LocationTest {
     @Test
     public void isValidLocation() {
         // null name
-        Assert.assertThrows(NullPointerException.class, () -> Location.isValidLocation(null));
+        assertThrows(NullPointerException.class, () -> Location.isValidLocation(null));
 
         // invalid name
         assertFalse(Location.isValidLocation("")); // empty string
