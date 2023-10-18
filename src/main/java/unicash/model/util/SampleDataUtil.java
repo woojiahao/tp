@@ -1,12 +1,13 @@
 package unicash.model.util;
 
 import java.util.Arrays;
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import unicash.model.ReadOnlyUniCash;
 import unicash.model.UniCash;
 import unicash.model.category.Category;
+import unicash.model.category.UniqueCategoryList;
 import unicash.model.transaction.Amount;
 import unicash.model.transaction.DateTime;
 import unicash.model.transaction.Location;
@@ -31,7 +32,7 @@ public class SampleDataUtil {
                     new Amount(17.0),
                     new DateTime("15-09-2023 00:00"),
                     new Location(""),
-                    getCategorySet("Food")
+                    getCategoryList("Food")
             ),
             new Transaction(
                     new Name("Valid transaction 2"),
@@ -39,7 +40,7 @@ public class SampleDataUtil {
                     new Amount(123),
                     new DateTime("15-07-2023 00:00"),
                     new Location("Jurong"),
-                    getCategorySet("Others")
+                    getCategoryList("Others")
             )
         };
     }
@@ -55,9 +56,11 @@ public class SampleDataUtil {
     /**
      * Returns a category set containing the list of strings given.
      */
-    public static Set<Category> getCategorySet(String... strings) {
-        return Arrays.stream(strings)
+    public static UniqueCategoryList getCategoryList(String... strings) {
+        List<Category> categoryList = Arrays.stream(strings)
                 .map(Category::new)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
+
+        return new UniqueCategoryList(categoryList);
     }
 }

@@ -2,20 +2,20 @@ package unicash.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static unicash.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static unicash.testutil.Assert.assertThrows;
 import static unicash.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import unicash.logic.parser.exceptions.ParseException;
 import unicash.model.category.Category;
+import unicash.model.category.UniqueCategoryList;
 import unicash.model.transaction.Amount;
 import unicash.model.transaction.DateTime;
 import unicash.model.transaction.Location;
@@ -196,16 +196,17 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseCategories_emptyCollection_returnsEmptySet() throws Exception {
-        assertTrue(ParserUtil.parseCategories(Collections.emptyList()).isEmpty());
+    public void parseCategories_emptyCollection_returnsEmptySet() {
+        assertDoesNotThrow(() -> ParserUtil.parseCategories(Collections.emptyList()));
     }
 
     @Test
     public void parseCategories_collectionWithValidCategories_returnsCategorySet() throws Exception {
-        Set<Category> actualCategorySet = ParserUtil.parseCategories(Arrays.asList(VALID_CATEGORY, VALID_CATEGORY_2));
-        Set<Category> expectedCategorySet = new HashSet<Category>(
+        UniqueCategoryList actualCategoryList = ParserUtil.parseCategories(
+                Arrays.asList(VALID_CATEGORY, VALID_CATEGORY_2));
+        List<Category> categoryList = new ArrayList<>(
                 Arrays.asList(new Category(VALID_CATEGORY), new Category(VALID_CATEGORY_2)));
-
-        assertEquals(expectedCategorySet, actualCategorySet);
+        UniqueCategoryList expectedCategoryList = new UniqueCategoryList(categoryList);
+        assertEquals(expectedCategoryList, actualCategoryList);
     }
 }

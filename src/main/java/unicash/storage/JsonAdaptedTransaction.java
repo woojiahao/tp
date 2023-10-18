@@ -1,9 +1,7 @@
 package unicash.storage;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -11,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import unicash.commons.exceptions.IllegalValueException;
 import unicash.model.category.Category;
+import unicash.model.category.UniqueCategoryList;
 import unicash.model.transaction.Amount;
 import unicash.model.transaction.DateTime;
 import unicash.model.transaction.Location;
@@ -63,7 +62,8 @@ public class JsonAdaptedTransaction {
         dateTime = source.getDateTime().originalString();
         location = source.getLocation().location;
         type = source.getType().type.getOriginalString();
-        categories.addAll(source.getCategories().stream()
+        categories.addAll(source.getCategories().asUnmodifiableObservableList()
+                .stream()
                 .map(JsonAdaptedCategory::new)
                 .collect(Collectors.toList()));
     }
@@ -112,9 +112,8 @@ public class JsonAdaptedTransaction {
         for (JsonAdaptedCategory category : categories) {
             transactionCategories.add(category.toModelType());
         }
-        final Set<Category> modelTags = new HashSet<>(transactionCategories);
-
-        return new Transaction(modelName, modelType, modelAmount, modelDateTime, modelLocation, modelTags);
+        final UniqueCategoryList modelCategories = new UniqueCategoryList(transactionCategories);
+        return new Transaction(modelName, modelType, modelAmount, modelDateTime, modelLocation, modelCategories);
     }
 
     /**

@@ -12,12 +12,11 @@ import static unicash.logic.parser.CliSyntax.PREFIX_TYPE;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
-import java.util.Set;
 
 import unicash.commons.core.index.Index;
 import unicash.logic.commands.EditTransactionCommand;
 import unicash.logic.parser.exceptions.ParseException;
-import unicash.model.category.Category;
+import unicash.model.category.UniqueCategoryList;
 
 /**
  * Parses input arguments and creates a new EditTransactionCommand object
@@ -92,7 +91,7 @@ public class EditTransactionCommandParser implements Parser<EditTransactionComma
      * If {@code categories} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Category>} containing zero categories.
      */
-    private Optional<Set<Category>> parseCategoriesForEdit(Collection<String> categories) throws ParseException {
+    private Optional<UniqueCategoryList> parseCategoriesForEdit(Collection<String> categories) throws ParseException {
         requireNonNull(categories);
 
         if (categories.isEmpty()) {

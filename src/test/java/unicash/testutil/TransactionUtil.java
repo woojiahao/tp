@@ -7,7 +7,7 @@ import static unicash.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static unicash.logic.parser.CliSyntax.PREFIX_NAME;
 import static unicash.logic.parser.CliSyntax.PREFIX_TYPE;
 
-import java.util.Set;
+import java.util.List;
 
 import unicash.logic.commands.AddTransactionCommand;
 import unicash.logic.commands.EditTransactionCommand;
@@ -57,7 +57,7 @@ public class TransactionUtil {
         descriptor.getDateTime().ifPresent(dateTime -> sb.append(PREFIX_DATETIME).append(dateTime.originalString())
                 .append(" "));
         if (descriptor.getCategories().isPresent()) {
-            Set<Category> categories = descriptor.getCategories().get();
+            List<Category> categories = descriptor.getCategories().get().asUnmodifiableObservableList();
             if (categories.isEmpty()) {
                 sb.append(PREFIX_CATEGORY);
             } else {

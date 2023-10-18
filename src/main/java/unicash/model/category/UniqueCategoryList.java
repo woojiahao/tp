@@ -16,7 +16,7 @@ import unicash.model.category.exceptions.MaxCategoryException;
 /**
  * A list of categories that enforces uniqueness between its elements and does not allow nulls.
  * A category is considered unique by comparing using {@code Category#equals(Category)}. As such, adding and updating of
- * tags uses Category#equals(Category) for equality so as to ensure that the tag being added or updated is
+ * categories uses Category#equals(Category) for equality so as to ensure that the category being added or updated is
  * unique in terms of identity in the UniqueCategoryList.
  * <p>
  * Supports a minimal set of list operations.
@@ -28,7 +28,22 @@ public class UniqueCategoryList implements Iterable<Category> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns {@code true} if the list contains an equivalent tag as the given argument.
+     * Default constructor to create an empty category list.
+     */
+    public UniqueCategoryList() {}
+
+    /**
+     * Constructs a category list from a List of {@code Category}.
+     *
+     * @param categoryList the category list to be constructed into.
+     */
+    public UniqueCategoryList(List<Category> categoryList) {
+        requireNonNull(categoryList);
+        internalList.setAll(categoryList);
+    }
+
+    /**
+     * Returns {@code true} if the list contains an equivalent category as the given argument.
      */
     public boolean contains(Category toCheck) {
         requireNonNull(toCheck);
@@ -43,8 +58,8 @@ public class UniqueCategoryList implements Iterable<Category> {
     }
 
     /**
-     * Adds a tag to the list.
-     * The tag must not already exist in the list.
+     * Adds a category to the list.
+     * The category must not already exist in the list.
      */
     public void add(Category toAdd) {
         requireNonNull(toAdd);
@@ -58,9 +73,9 @@ public class UniqueCategoryList implements Iterable<Category> {
     }
 
     /**
-     * Replaces the tag {@code target} in the list with {@code editedCategory}.
+     * Replaces the category {@code target} in the list with {@code editedCategory}.
      * {@code target} must exist in the list.
-     * The tag identity of {@code editedCategory} must not be the same as another existing tag in the list.
+     * The category identity of {@code editedCategory} must not be the same as another existing category in the list.
      */
     public void setCategory(Category target, Category editedCategory) {
         requireAllNonNull(target, editedCategory);
@@ -78,8 +93,8 @@ public class UniqueCategoryList implements Iterable<Category> {
     }
 
     /**
-     * Removes the equivalent tag from the list.
-     * The tag must exist in the list.
+     * Removes the equivalent category from the list.
+     * The category category exist in the list.
      */
     public void remove(Category toRemove) {
         requireNonNull(toRemove);
@@ -89,7 +104,7 @@ public class UniqueCategoryList implements Iterable<Category> {
     }
 
     /**
-     * Replaces the contents of this list with {@code tags}.
+     * Replaces the contents of this list with {@code categories}.
      */
     public void setCategories(UniqueCategoryList replacement) {
         requireNonNull(replacement);
@@ -97,16 +112,16 @@ public class UniqueCategoryList implements Iterable<Category> {
     }
 
     /**
-     * Replaces the contents of this list with {@code tags}.
-     * {@code tags} must not contain duplicate tags.
+     * Replaces the contents of this list with {@code categories}.
+     * {@code categories} must not contain duplicate categories.
      */
-    public void setCategories(List<Category> tags) {
-        requireAllNonNull(tags);
-        if (!categoriesAreUnique(tags)) {
+    public void setCategories(List<Category> categories) {
+        requireAllNonNull(categories);
+        if (!categoriesAreUnique(categories)) {
             throw new DuplicateCategoryException();
         }
 
-        internalList.setAll(tags);
+        internalList.setAll(categories);
     }
 
     /**
@@ -139,15 +154,15 @@ public class UniqueCategoryList implements Iterable<Category> {
     }
 
     /**
-     * Returns {@code true} if {@code tags} contains only unique tags.
+     * Returns {@code true} if {@code categories} contains only unique categories.
      */
-    private boolean categoriesAreUnique(List<Category> tags) {
+    private boolean categoriesAreUnique(List<Category> categories) {
         HashSet<Category> set = new HashSet<>();
-        for (Category tag : tags) {
-            if (set.contains(tag)) {
+        for (Category category : categories) {
+            if (set.contains(category)) {
                 return false;
             }
-            set.add(tag);
+            set.add(category);
         }
         return true;
     }

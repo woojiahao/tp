@@ -81,7 +81,8 @@ public class GetTotalExpenditureCommandTest {
         assertEquals(2, filteredResult.size());
         for (var result : filteredResult) {
             assertEquals(TransactionType.EXPENSE, result.getType().type);
-            assertTrue(result.getCategories().stream().anyMatch(cat -> cat.equals(new Category("Food"))));
+            assertTrue(result.getCategories().asUnmodifiableObservableList()
+                    .stream().anyMatch(cat -> cat.equals(new Category("Food"))));
         }
     }
 
@@ -97,7 +98,8 @@ public class GetTotalExpenditureCommandTest {
         assertEquals(1, filteredResult.size());
         for (var result : filteredResult) {
             assertEquals(TransactionType.EXPENSE, result.getType().type);
-            assertTrue(result.getCategories().stream().anyMatch(cat -> cat.equals(new Category("Food"))));
+            assertTrue(result.getCategories().asUnmodifiableObservableList()
+                    .stream().anyMatch(cat -> cat.equals(new Category("Food"))));
             assertEquals(8, result.getDateTime().getDateTime().getMonthValue());
         }
     }
