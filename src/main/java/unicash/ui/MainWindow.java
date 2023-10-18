@@ -1,6 +1,6 @@
 package unicash.ui;
 
-import java.awt.*;
+import java.awt.Desktop;
 import java.io.File;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -27,9 +27,6 @@ import unicash.logic.parser.exceptions.ParseException;
  * a menu bar and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Stage> {
-
-    private static final String FXML = "MainWindow.fxml";
-
     public static final String USER_GUIDE_NAME_PREFIX = "userguide_local";
     public static final String USER_GUIDE_NAME_SUFFIX = ".pdf";
     public static final String USER_GUIDE_NAME = USER_GUIDE_NAME_PREFIX + USER_GUIDE_NAME_SUFFIX;
@@ -37,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
 
     public static final String FILE_ERROR_MESSAGE = "A FILE ERROR OCCURED. PLEASE TRY AGAIN.";
 
+    private static final String FXML = "MainWindow.fxml";
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
