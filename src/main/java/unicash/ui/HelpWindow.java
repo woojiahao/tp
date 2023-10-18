@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 import unicash.commons.core.LogsCenter;
 
 /**
- * Controller for a help page
+ * Controller for the pop-up help window
  */
 public class HelpWindow extends UiPart<Stage> {
 
@@ -65,7 +65,7 @@ public class HelpWindow extends UiPart<Stage> {
      *     </ul>
      */
     public void show() {
-        logger.fine("Showing help page about the application.");
+        logger.fine("Showing UniCash help page.");
         getRoot().show();
         getRoot().centerOnScreen();
     }
