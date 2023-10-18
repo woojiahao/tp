@@ -1,5 +1,7 @@
 package unicash.ui;
 
+import java.awt.*;
+import java.io.File;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -15,8 +17,6 @@ import unicash.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL_OLD = "https://se-education.org/addressbook-level3/UserGuide.html";
-
     public static final String USERGUIDE_URL = "https://ay2324s1-cs2103-t16-3.github.io/tp/";
     public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
 
@@ -28,6 +28,7 @@ public class HelpWindow extends UiPart<Stage> {
 
     @FXML
     private Label helpMessage;
+
 
     /**
      * Creates a new HelpWindow.
@@ -101,4 +102,5 @@ public class HelpWindow extends UiPart<Stage> {
         url.putString(USERGUIDE_URL);
         clipboard.setContent(url);
     }
+
 }

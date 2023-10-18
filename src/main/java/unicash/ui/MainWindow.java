@@ -1,5 +1,10 @@
 package unicash.ui;
 
+import java.awt.*;
+import java.io.File;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -25,6 +30,13 @@ public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
 
+    public static final String USER_GUIDE_NAME_PREFIX = "userguide_local";
+    public static final String USER_GUIDE_NAME_SUFFIX = ".pdf";
+    public static final String USER_GUIDE_NAME = USER_GUIDE_NAME_PREFIX + USER_GUIDE_NAME_SUFFIX;
+    public static final String PATH_TO_USER_GUIDE = "/documents/" + USER_GUIDE_NAME;
+
+    public static final String FILE_ERROR_MESSAGE = "A FILE ERROR OCCURED. PLEASE TRY AGAIN.";
+
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
@@ -40,6 +52,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private MenuItem userGuideMenuItem;
 
     @FXML
     private StackPane transactionListPanelPlaceholder;
@@ -189,4 +204,24 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
+
+    /**
+     * Opens the local user guide.
+     */
+    @FXML
+    private void handleOpenUserGuide() {
+        try {
+            // Path to the resource inside the jar file
+            InputStream inputStream = getClass().getResourceAsStream(PATH_TO_USER_GUIDE);
+
+            File tempFile = File.createTempFile(USER_GUIDE_NAME_PREFIX, USER_GUIDE_NAME_SUFFIX);
+            tempFile.deleteOnExit(); // The user guide will be deleted upon JVM exit
+
+            Files.copy(inputStream, tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            Desktop.getDesktop().open(tempFile);
+        } catch (Exception e) {
+            System.err.println(FILE_ERROR_MESSAGE);
+        }
+    }
+
 }

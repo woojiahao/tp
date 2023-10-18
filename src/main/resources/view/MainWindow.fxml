@@ -28,26 +28,30 @@
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false"
                       onAction="#handleHelp" text="Help" styleClass="normal-label" />
           </Menu>
+          <Menu mnemonicParsing="false" text="User Guide">
+            <MenuItem fx:id="userGuideMenuItem" text="Open..." onAction="#handleOpenUserGuide"/>
+          </Menu>
         </MenuBar>
 
         <!-- The below code contains the SplitPane, so the MenuBar runs across -->
         <SplitPane dividerPositions="0.7" VBox.vgrow="ALWAYS">
-          <VBox minWidth="340" prefWidth="340" styleClass="pane-with-border">
+          <VBox minWidth="400" prefWidth="400" styleClass="pane-with-border">
             <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
               <padding>
                 <Insets bottom="5" left="10" right="10" top="5" />
               </padding>
             </StackPane>
 
-            <VBox fx:id="personList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+            <VBox fx:id="personList" minWidth="400" prefWidth="400" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
               <padding>
                 <Insets bottom="10" left="10" right="10" top="10" />
               </padding>
               <StackPane fx:id="transactionListPanelPlaceholder" VBox.vgrow="ALWAYS" />
             </VBox>
           </VBox>
-          <VBox minWidth="260" prefWidth="260" styleClass="pane-with-border">
-            <StackPane fx:id="resultDisplayPlaceholder" maxHeight="320" minHeight="310" prefHeight="310" styleClass="pane-with-border">
+
+          <VBox minWidth="300" prefWidth="300" styleClass="pane-with-border">
+            <StackPane fx:id="resultDisplayPlaceholder" maxHeight="310" minHeight="310" prefHeight="310" styleClass="pane-with-border">
               <padding>
                 <Insets bottom="5" left="5" right="10" top="5" />
               </padding>
