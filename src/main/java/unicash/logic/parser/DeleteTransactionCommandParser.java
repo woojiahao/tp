@@ -1,9 +1,11 @@
 package unicash.logic.parser;
 
+import static unicash.logic.UniCashMessages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import unicash.commons.core.index.Index;
 import unicash.logic.commands.DeleteTransactionCommand;
 import unicash.logic.parser.exceptions.ParseException;
-import unicash.logic.UniCashMessages;
+
 
 /**
  * Parses input arguments and creates a new DeleteTransactionCommand object
@@ -22,7 +24,7 @@ public class DeleteTransactionCommandParser implements Parser<DeleteTransactionC
             return new DeleteTransactionCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(UniCashMessages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteTransactionCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTransactionCommand.MESSAGE_USAGE), pe);
         }
     }
 

@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static unicash.commons.util.AppUtil.checkArgument;
 
 import unicash.commons.enums.TransactionType;
-import unicash.commons.util.AppUtil;
 
 /**
  * Represents a Transaction's type.
@@ -23,7 +22,7 @@ public class Type {
      */
     public Type(String type) {
         requireNonNull(type);
-        AppUtil.checkArgument(isValidType(type), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidType(type), MESSAGE_CONSTRAINTS);
         this.type = TransactionType.parseType(type);
     }
 

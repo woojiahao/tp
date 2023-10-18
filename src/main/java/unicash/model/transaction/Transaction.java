@@ -9,7 +9,6 @@ import java.util.Set;
 
 import unicash.commons.util.ToStringBuilder;
 import unicash.model.category.Category;
-import unicash.commons.util.CollectionUtil;
 
 /**
  * Represents a Transaction in the finance tracker.
@@ -36,7 +35,7 @@ public class Transaction {
         Location location,
         Set<Category> categories
     ) {
-        CollectionUtil.requireAllNonNull(name, type, amount, categories, dateTime, location);
+        requireAllNonNull(name, type, amount, categories, dateTime, location);
         this.name = name;
         this.type = type;
         this.amount = amount;

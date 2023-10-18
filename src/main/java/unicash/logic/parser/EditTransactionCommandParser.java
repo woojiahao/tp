@@ -1,6 +1,13 @@
 package unicash.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static unicash.logic.UniCashMessages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static unicash.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static unicash.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static unicash.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static unicash.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static unicash.logic.parser.CliSyntax.PREFIX_NAME;
+import static unicash.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -11,7 +18,6 @@ import unicash.commons.core.index.Index;
 import unicash.logic.commands.EditTransactionCommand;
 import unicash.logic.parser.exceptions.ParseException;
 import unicash.model.category.Category;
-import unicash.logic.UniCashMessages;
 
 /**
  * Parses input arguments and creates a new EditTransactionCommand object
@@ -27,51 +33,51 @@ public class EditTransactionCommandParser implements Parser<EditTransactionComma
     public EditTransactionCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_TYPE, CliSyntax.PREFIX_AMOUNT, CliSyntax.PREFIX_DATETIME,
-                        CliSyntax.PREFIX_CATEGORY, CliSyntax.PREFIX_LOCATION);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TYPE, PREFIX_AMOUNT, PREFIX_DATETIME,
+                        PREFIX_CATEGORY, PREFIX_LOCATION);
 
         Index index;
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(UniCashMessages.MESSAGE_INVALID_COMMAND_FORMAT,
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EditTransactionCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_TYPE, CliSyntax.PREFIX_AMOUNT, CliSyntax.PREFIX_DATETIME,
-                CliSyntax.PREFIX_CATEGORY, CliSyntax.PREFIX_LOCATION);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_TYPE, PREFIX_AMOUNT, PREFIX_DATETIME,
+                PREFIX_CATEGORY, PREFIX_LOCATION);
 
         EditTransactionCommand.EditTransactionDescriptor editTransactionDescriptor = new EditTransactionCommand
                 .EditTransactionDescriptor();
 
-        if (argMultimap.getValue(CliSyntax.PREFIX_NAME).isPresent()) {
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editTransactionDescriptor.setName(
-                    ParserUtil.parseTransactionName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get()));
+                    ParserUtil.parseTransactionName(argMultimap.getValue(PREFIX_NAME).get()));
         }
-        if (argMultimap.getValue(CliSyntax.PREFIX_TYPE).isPresent()) {
+        if (argMultimap.getValue(PREFIX_TYPE).isPresent()) {
             editTransactionDescriptor.setType(
-                    ParserUtil.parseType(argMultimap.getValue(CliSyntax.PREFIX_TYPE).get())
+                    ParserUtil.parseType(argMultimap.getValue(PREFIX_TYPE).get())
             );
         }
-        if (argMultimap.getValue(CliSyntax.PREFIX_AMOUNT).isPresent()) {
+        if (argMultimap.getValue(PREFIX_AMOUNT).isPresent()) {
             editTransactionDescriptor.setAmount(
-                    ParserUtil.parseAmount(argMultimap.getValue(CliSyntax.PREFIX_AMOUNT).get())
+                    ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get())
             );
         }
-        if (argMultimap.getValue(CliSyntax.PREFIX_DATETIME).isPresent()) {
+        if (argMultimap.getValue(PREFIX_DATETIME).isPresent()) {
             editTransactionDescriptor.setDateTime(
-                    ParserUtil.parseDateTime(argMultimap.getValue(CliSyntax.PREFIX_DATETIME).get())
+                    ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get())
             );
         }
 
-        if (argMultimap.getValue(CliSyntax.PREFIX_LOCATION).isPresent()) {
+        if (argMultimap.getValue(PREFIX_LOCATION).isPresent()) {
             editTransactionDescriptor.setLocation(
-                    ParserUtil.parseLocation(argMultimap.getValue(CliSyntax.PREFIX_LOCATION).get())
+                    ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get())
             );
         }
 
-        parseCategoriesForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_CATEGORY))
+        parseCategoriesForEdit(argMultimap.getAllValues(PREFIX_CATEGORY))
                 .ifPresent(editTransactionDescriptor::setCategories);
 
         if (!editTransactionDescriptor.isAnyFieldEdited()) {

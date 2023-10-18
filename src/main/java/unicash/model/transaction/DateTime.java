@@ -1,8 +1,5 @@
 package unicash.model.transaction;
 
-import unicash.commons.util.AppUtil;
-import unicash.commons.util.CollectionUtil;
-
 import static unicash.commons.util.AppUtil.checkArgument;
 import static unicash.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -12,7 +9,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.util.Objects;
-
 /**
  * Represents a Transaction's dateTime.
  * Guarantees: immutable;
@@ -32,7 +28,7 @@ public class DateTime {
      * @param dateTime A valid date time.
      */
     public DateTime(String dateTime) {
-        CollectionUtil.requireAllNonNull(dateTime);
+        requireAllNonNull(dateTime);
         init(dateTime, Clock.systemDefaultZone());
     }
 
@@ -45,7 +41,7 @@ public class DateTime {
      * @param clock A clock object to configure current time settings.
      */
     public DateTime(String dateTime, Clock clock) {
-        CollectionUtil.requireAllNonNull(dateTime, clock);
+        requireAllNonNull(dateTime, clock);
         init(dateTime, clock);
     }
 
@@ -61,7 +57,7 @@ public class DateTime {
             this.dateTime = LocalDateTime.now(clock);
             return;
         }
-        AppUtil.checkArgument(isValidDateTime(dateTime), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidDateTime(dateTime), MESSAGE_CONSTRAINTS);
         this.dateTime = LocalDateTime.parse(dateTime, DATETIME_FORMATTER);
     }
 

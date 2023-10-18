@@ -4,10 +4,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
+import unicash.logic.Logic;
 import unicash.logic.commands.CommandResult;
 import unicash.logic.commands.exceptions.CommandException;
 import unicash.logic.parser.exceptions.ParseException;
-import unicash.logic.Logic;
 
 /**
  * The UI component that is responsible for receiving user command inputs.

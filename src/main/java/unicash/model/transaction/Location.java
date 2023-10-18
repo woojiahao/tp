@@ -1,7 +1,5 @@
 package unicash.model.transaction;
 
-import unicash.commons.util.AppUtil;
-
 import static java.util.Objects.requireNonNull;
 import static unicash.commons.util.AppUtil.checkArgument;
 
@@ -31,7 +29,7 @@ public class Location {
         if (location.isBlank()) {
             this.location = "-";
         } else {
-            AppUtil.checkArgument(isValidLocation(location), MESSAGE_CONSTRAINTS);
+            checkArgument(isValidLocation(location), MESSAGE_CONSTRAINTS);
             this.location = location;
         }
     }

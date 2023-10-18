@@ -1,7 +1,5 @@
 package unicash.model.transaction;
 
-import unicash.commons.util.AppUtil;
-
 import static unicash.commons.util.AppUtil.checkArgument;
 
 /**
@@ -20,7 +18,7 @@ public class Amount {
      * @param amount A valid amount.
      */
     public Amount(double amount) {
-        AppUtil.checkArgument(isValidAmount(amount), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidAmount(amount), MESSAGE_CONSTRAINTS);
         this.amount = amount;
     }
 

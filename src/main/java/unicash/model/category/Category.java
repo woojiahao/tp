@@ -1,7 +1,5 @@
 package unicash.model.category;
 
-import unicash.commons.util.AppUtil;
-
 import static java.util.Objects.requireNonNull;
 import static unicash.commons.util.AppUtil.checkArgument;
 
@@ -23,7 +21,7 @@ public class Category {
      */
     public Category(String category) {
         requireNonNull(category);
-        AppUtil.checkArgument(isValidCategory(category), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidCategory(category), MESSAGE_CONSTRAINTS);
         this.category = category;
     }
 

@@ -9,7 +9,6 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import unicash.model.transaction.exceptions.TransactionNotFoundException;
-import unicash.commons.util.CollectionUtil;
 
 /**
  * A list of Transactions that does not allow nulls.
@@ -42,7 +41,7 @@ public class TransactionList implements Iterable<Transaction> {
      * {@code target} must exist in the list.
      */
     public void setTransaction(Transaction target, Transaction editedTransaction) {
-        CollectionUtil.requireAllNonNull(target, editedTransaction);
+        requireAllNonNull(target, editedTransaction);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
@@ -77,7 +76,7 @@ public class TransactionList implements Iterable<Transaction> {
      * {@code transactions} must not contain null.
      */
     public void setTransactions(List<Transaction> transactions) {
-        CollectionUtil.requireAllNonNull(transactions);
+        requireAllNonNull(transactions);
         internalList.setAll(transactions);
     }
 

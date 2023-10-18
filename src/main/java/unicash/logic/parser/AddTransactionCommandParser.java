@@ -1,9 +1,16 @@
 package unicash.logic.parser;
 
+import static unicash.logic.UniCashMessages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static unicash.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static unicash.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static unicash.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static unicash.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static unicash.logic.parser.CliSyntax.PREFIX_NAME;
+import static unicash.logic.parser.CliSyntax.PREFIX_TYPE;
+
 import java.util.Set;
 import java.util.stream.Stream;
 
-import unicash.logic.UniCashMessages;
 import unicash.logic.commands.AddTransactionCommand;
 import unicash.logic.parser.exceptions.ParseException;
 import unicash.model.category.Category;
@@ -28,31 +35,31 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
      */
     public AddTransactionCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_TYPE, CliSyntax.PREFIX_AMOUNT, CliSyntax.PREFIX_DATETIME,
-                        CliSyntax.PREFIX_CATEGORY, CliSyntax.PREFIX_LOCATION);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TYPE, PREFIX_AMOUNT, PREFIX_DATETIME,
+                        PREFIX_CATEGORY, PREFIX_LOCATION);
 
         // Check if mandatory fields (name, amount, type) are present
-        if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_AMOUNT, CliSyntax.PREFIX_TYPE)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_AMOUNT, PREFIX_TYPE)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(UniCashMessages.MESSAGE_INVALID_COMMAND_FORMAT,
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddTransactionCommand.MESSAGE_USAGE));
         }
 
         // Check for duplicates
-        argMultimap.verifyNoDuplicatePrefixesFor(CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_TYPE, CliSyntax.PREFIX_AMOUNT, CliSyntax.PREFIX_DATETIME,
-                CliSyntax.PREFIX_CATEGORY, CliSyntax.PREFIX_LOCATION);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_TYPE, PREFIX_AMOUNT, PREFIX_DATETIME,
+                PREFIX_CATEGORY, PREFIX_LOCATION);
 
-        Name name = ParserUtil.parseTransactionName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get());
-        Amount amount = ParserUtil.parseAmount(argMultimap.getValue(CliSyntax.PREFIX_AMOUNT).get());
-        Type type = ParserUtil.parseType(argMultimap.getValue(CliSyntax.PREFIX_TYPE).get());
+        Name name = ParserUtil.parseTransactionName(argMultimap.getValue(PREFIX_NAME).get());
+        Amount amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
+        Type type = ParserUtil.parseType(argMultimap.getValue(PREFIX_TYPE).get());
 
-        String dateTimeString = argMultimap.getValue(CliSyntax.PREFIX_DATETIME).orElse("");
+        String dateTimeString = argMultimap.getValue(PREFIX_DATETIME).orElse("");
         DateTime dateTime = ParserUtil.parseDateTime(dateTimeString);
 
-        String locationString = argMultimap.getValue(CliSyntax.PREFIX_LOCATION).orElse("");
+        String locationString = argMultimap.getValue(PREFIX_LOCATION).orElse("");
         Location location = ParserUtil.parseLocation(locationString);
 
-        Set<Category> categoryList = ParserUtil.parseCategories(argMultimap.getAllValues(CliSyntax.PREFIX_CATEGORY));
+        Set<Category> categoryList = ParserUtil.parseCategories(argMultimap.getAllValues(PREFIX_CATEGORY));
 
         Transaction transaction = new Transaction(name, type, amount, dateTime, location, categoryList);
 

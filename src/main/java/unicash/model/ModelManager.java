@@ -12,7 +12,6 @@ import javafx.collections.transformation.FilteredList;
 import unicash.commons.core.GuiSettings;
 import unicash.commons.core.LogsCenter;
 import unicash.model.transaction.Transaction;
-import unicash.commons.util.CollectionUtil;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -28,7 +27,7 @@ public class ModelManager implements Model {
      * Initializes a ModelManager with the given userPrefs and UniCash.
      */
     public ModelManager(ReadOnlyUniCash uniCash, ReadOnlyUserPrefs userPrefs) {
-        CollectionUtil.requireAllNonNull(uniCash, userPrefs);
+        requireAllNonNull(uniCash, userPrefs);
 
         logger.fine("Initializing with UniCash: " + uniCash + " and user prefs " + userPrefs);
 
@@ -84,7 +83,7 @@ public class ModelManager implements Model {
 
     @Override
     public void setTransaction(Transaction target, Transaction editedTransaction) {
-        CollectionUtil.requireAllNonNull(target, editedTransaction);
+        requireAllNonNull(target, editedTransaction);
 
         uniCash.setTransaction(target, editedTransaction);
     }
