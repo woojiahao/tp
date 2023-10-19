@@ -205,7 +205,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseCategories_collectionWithMoreThanAllowedNumberOfCategories_returnsCategorySet() throws Exception {
+    public void parseCategories_collectionWithMoreThanAllowedNumberOfCategories_returnsCategorySet() {
         assertThrows(ParseException.class, () -> ParserUtil.parseCategories(
                 Arrays.asList(VALID_CATEGORY, VALID_CATEGORY_2, VALID_CATEGORY_3, VALID_CATEGORY_4,
                         VALID_CATEGORY_5, VALID_CATEGORY_6)));
@@ -219,5 +219,11 @@ public class ParserUtilTest {
                 Arrays.asList(new Category(VALID_CATEGORY), new Category(VALID_CATEGORY_2)));
         UniqueCategoryList expectedCategoryList = new UniqueCategoryList(categoryList);
         assertEquals(expectedCategoryList, actualCategoryList);
+    }
+
+    @Test
+    public void parseCategories_collectionWithDuplicateCategories_returnsCategorySet() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseCategories(
+                Arrays.asList(VALID_CATEGORY, VALID_CATEGORY)));
     }
 }
