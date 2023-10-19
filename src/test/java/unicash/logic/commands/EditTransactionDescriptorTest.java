@@ -14,6 +14,7 @@ import static unicash.logic.commands.EditTransactionCommand.EditTransactionDescr
 
 import org.junit.jupiter.api.Test;
 
+import unicash.model.transaction.Name;
 import unicash.testutil.EditTransactionDescriptorBuilder;
 
 public class EditTransactionDescriptorTest {
@@ -73,6 +74,19 @@ public class EditTransactionDescriptorTest {
     public void equals_differentCategories_returnsFalse() {
         var other = new EditTransactionDescriptorBuilder(DESC_NUS).withCategories("Completely", "Different").build();
         assertNotEquals(DESC_NUS, other);
+    }
+
+    @Test
+    public void isAnyFieldEdited_withNoEdits_returnsFalse() {
+        var descriptor = new EditTransactionDescriptor();
+        assertFalse(descriptor.isAnyFieldEdited());
+    }
+
+    @Test
+    public void isAnyFieldEdited_withEdits_returnsTrue() {
+        var descriptor = new EditTransactionDescriptor();
+        descriptor.setName(new Name("Changed name"));
+        assertTrue(descriptor.isAnyFieldEdited());
     }
 
     @Test
