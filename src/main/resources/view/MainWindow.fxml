@@ -29,7 +29,8 @@
                       onAction="#handleHelp" text="Help" styleClass="normal-label" />
           </Menu>
           <Menu mnemonicParsing="false" text="User Guide">
-            <MenuItem fx:id="userGuideMenuItem" text="Open..." onAction="#handleOpenUserGuide"/>
+            <MenuItem fx:id="userGuideMenuItem" text="Open..."
+                      styleClass="normal-label" onAction="#handleOpenUserGuide"/>
           </Menu>
         </MenuBar>
 
