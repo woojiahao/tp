@@ -227,6 +227,20 @@ public class GetTotalExpenditureCommandTest {
         assertNotEquals(command, other);
     }
 
+    @Test
+    public void equals_nullCFOtherNonNullCF_returnsFalse() {
+        var command = new GetTotalExpenditureCommand(7, null);
+        var other = new GetTotalExpenditureCommand(7, new Category("Others"));
+        assertNotEquals(command, other);
+    }
+
+    @Test
+    public void equals_nullCFOtherNullCF_returnsTrue() {
+        var command = new GetTotalExpenditureCommand(7, null);
+        var other = new GetTotalExpenditureCommand(7, null);
+        assertEquals(command, other);
+    }
+
     private static Model getModel() {
         return new ModelManager(new UniCash(), new UserPrefs());
     }
