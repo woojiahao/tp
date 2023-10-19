@@ -145,4 +145,13 @@ public class UniCashTest {
         }
     }
 
+    @Test
+    public void hashCode_test() {
+        UniCash uniCash1 = new UniCash();
+        UniCash uniCash2 = new UniCash();
+        UniCash uniCash3 = new UniCash();
+        uniCash3.addTransaction(NUS);
+        assertEquals(uniCash1.hashCode(), uniCash2.hashCode());
+        assertNotEquals(uniCash1.hashCode(), uniCash3.hashCode());
+    }
 }

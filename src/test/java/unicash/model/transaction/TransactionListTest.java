@@ -8,9 +8,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static unicash.logic.commands.CommandTestUtil.VALID_AMOUNT_INTERN;
 import static unicash.testutil.Assert.assertThrows;
 import static unicash.testutil.TypicalTransactions.BUYING_GROCERIES;
+import static unicash.testutil.TypicalTransactions.INTERN;
 import static unicash.testutil.TypicalTransactions.NUS;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -151,6 +154,21 @@ public class TransactionListTest {
     @Test
     public void toStringMethod() {
         assertEquals(transactionList.asUnmodifiableObservableList().toString(), transactionList.toString());
+    }
+
+    @Test
+    public void iterator() {
+        transactionList.add(NUS);
+        transactionList.add(INTERN);
+        Iterator<Transaction> iterator = transactionList.iterator();
+        List<Transaction> actual = new ArrayList<>();
+        while (iterator.hasNext()) {
+            actual.add(iterator.next());
+        }
+        List<Transaction> expectedIterator = new ArrayList<>();
+        expectedIterator.add(NUS);
+        expectedIterator.add(INTERN);
+        assertEquals(expectedIterator, actual);
     }
 
     @Test

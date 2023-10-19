@@ -41,4 +41,14 @@ public class UserPrefsTest {
         assertNotEquals(changedUniCashFilePath, userPrefs);
     }
 
+    @Test
+    public void hashCode_test() {
+        UserPrefs userPrefs1 = new UserPrefs();
+        UserPrefs userPrefs2 = new UserPrefs();
+        UserPrefs userPrefs3 = new UserPrefs();
+        userPrefs3.setGuiSettings(new GuiSettings(0, 0, 0, 0));
+        assertEquals(userPrefs1.hashCode(), userPrefs2.hashCode());
+        assertNotEquals(userPrefs1.hashCode(), userPrefs3.hashCode());
+    }
 }
+

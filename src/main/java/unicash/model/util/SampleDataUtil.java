@@ -19,7 +19,10 @@ import unicash.model.transaction.Type;
  * Contains utility methods for populating {@code UniCash} with sample data.
  */
 public class SampleDataUtil {
-
+    /**
+     * This private constructor is declared to support a constructor initialisation
+     * by code coverage.
+     */
     private SampleDataUtil() {
 
     }

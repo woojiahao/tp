@@ -10,9 +10,11 @@ import unicash.MainApp;
  */
 public class AppUtil {
 
-    private AppUtil() {
-
-    }
+    /**
+     * This private constructor is declared to support a constructor initialisation
+     * by code coverage.
+     */
+    private AppUtil() {}
 
     /**
      * Gets an {@code Image} from the specified path.
