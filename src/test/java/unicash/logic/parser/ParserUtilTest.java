@@ -33,7 +33,7 @@ public class ParserUtilTest {
     private static final String VALID_AMOUNT = "3.0";
     private static final String VALID_DATETIME = "18-08-2001 18:30";
     private static final String VALID_CATEGORY = "hobbies";
-    private static final String VALID_CATEGORY_2 = "entertainemtn";
+    private static final String VALID_CATEGORY_2 = "entertainment";
     private static final String VALID_CATEGORY_3 = "test";
     private static final String VALID_CATEGORY_4 = "test2";
     private static final String VALID_CATEGORY_5 = "test3";
