@@ -2,6 +2,7 @@ package unicash.logic.parser;
 
 import static unicash.logic.UniCashMessages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static unicash.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static unicash.logic.parser.CliSyntax.PREFIX_MONTH;
 
 import unicash.logic.commands.GetTotalExpenditureCommand;
 import unicash.logic.parser.exceptions.ParseException;
@@ -15,14 +16,15 @@ public class GetTotalExpenditureCommandParser implements Parser<GetTotalExpendit
 
     @Override
     public GetTotalExpenditureCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_CATEGORY);
+        // TODO: Support PREFIX_YEAR
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MONTH, PREFIX_CATEGORY);
 
-        if (argMultimap.getPreamble().isEmpty()) {
+        if (argMultimap.getValue(PREFIX_MONTH).isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, GetTotalExpenditureCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_CATEGORY);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_MONTH, PREFIX_CATEGORY);
 
         String categoryString = argMultimap.getValue(PREFIX_CATEGORY).orElse(null);
         Category category = null;
@@ -31,7 +33,7 @@ public class GetTotalExpenditureCommandParser implements Parser<GetTotalExpendit
         }
 
         try {
-            String monthString = argMultimap.getPreamble();
+            String monthString = argMultimap.getValue(PREFIX_MONTH).get();
             int month = Integer.parseInt(monthString);
             return new GetTotalExpenditureCommand(month, category);
         } catch (NumberFormatException e) {

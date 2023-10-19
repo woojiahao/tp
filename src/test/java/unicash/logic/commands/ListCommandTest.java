@@ -1,31 +1,42 @@
 package unicash.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static unicash.logic.commands.CommandTestUtil.assertCommandSuccess;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import unicash.model.Model;
 import unicash.model.ModelManager;
-import unicash.model.UniCash;
-import unicash.model.UserPrefs;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
  */
 public class ListCommandTest {
 
-    private Model model;
-    private Model expectedModel;
+    @Test
+    public void execute_listIsNotFiltered_showsSameList() {
+        Model model = new ModelManager();
+        Model expectedModel = new ModelManager();
 
-    @BeforeEach
-    public void setUp() {
-        model = new ModelManager(new UniCash(), new UserPrefs());
-        expectedModel = new ModelManager(new UniCash(), new UserPrefs());
+        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
-    public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+    public void equals_nullOther_returnsFalse() {
+        assertNotEquals(new ListCommand(), null);
+    }
+
+    @Test
+    public void equals_differentType_returnsFalse() {
+        assertFalse(new ListCommand().equals(5));
+    }
+
+    @Test
+    public void equals_otherListCommand_returnsTrue() {
+        var first = new ListCommand();
+        var second = new ListCommand();
+        assertEquals(first, second);
     }
 }

@@ -12,4 +12,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_TYPE = new Prefix("type/");
     public static final Prefix PREFIX_CATEGORY = new Prefix("c/");
     public static final Prefix PREFIX_LOCATION = new Prefix("l/");
+    public static final Prefix PREFIX_MONTH = new Prefix("month/");
+    public static final Prefix PREFIX_YEAR = new Prefix("year/");
 }

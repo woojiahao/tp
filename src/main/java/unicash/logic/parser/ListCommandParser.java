@@ -11,7 +11,6 @@ public class ListCommandParser implements Parser<ListCommand> {
     /**
      * Parses {@code userInput} into a command and returns it.
      *
-     * @param userInput
      * @throws ParseException if {@code userInput} does not conform the expected format
      */
     @Override

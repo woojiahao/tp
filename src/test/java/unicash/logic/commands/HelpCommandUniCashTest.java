@@ -10,11 +10,11 @@ import unicash.model.ModelManager;
 
 public class HelpCommandUniCashTest {
 
-    private Model model = new ModelManager();
-    private Model expectedModel = new ModelManager();
-
     @Test
     public void execute_help_success() {
+        Model model = new ModelManager();
+        Model expectedModel = new ModelManager();
+
         CommandResult expectedCommandResult =
                 new CommandResult(SHOWING_HELP_MESSAGE, true, false);
 

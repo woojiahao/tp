@@ -1,6 +1,7 @@
 package unicash.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static unicash.testutil.Assert.assertThrows;
@@ -157,6 +158,34 @@ public class GetTotalExpenditureCommandTest {
     }
 
     @Test
+    public void execute_multipleCategories_includedIfOneCategoryFitsFilter() throws CommandException {
+        var model = getModel();
+        model.addTransaction(
+                new TransactionBuilder()
+                        .withType("expense")
+                        .withCategories("Food", "Drinks", "Social")
+                        .build()
+        );
+        model.addTransaction(new TransactionBuilder().withType("expense").withCategories().build());
+        model.addTransaction(new TransactionBuilder().withType("expense").withCategories("School", "Food").build());
+        var command = new GetTotalExpenditureCommand(8, new Category("Food"));
+        command.execute(model);
+        var filteredResult = model.getFilteredTransactionList();
+        assertEquals(2, filteredResult.size());
+        for (var res : filteredResult) {
+            assertEquals(TransactionType.EXPENSE, res.getType().type);
+            boolean hasMatchingCategory = false;
+            for (var category : res.getCategories()) {
+                if (category.equals(new Category("Food"))) {
+                    hasMatchingCategory = true;
+                    break;
+                }
+            }
+            assertTrue(hasMatchingCategory);
+        }
+    }
+
+    @Test
     public void toString_noInput_returnsCommandStringFormatted() {
         var command = new GetTotalExpenditureCommand(8, new Category("Food"));
         var toStringResult = command.toString();
@@ -165,15 +194,15 @@ public class GetTotalExpenditureCommandTest {
     }
 
     @Test
-    public void equals_sameObject_returnsTrue() {
+    public void equals_sameInstance_returnsTrue() {
         var command = new GetTotalExpenditureCommand(8, new Category("Food"));
         assertEquals(command, command);
     }
 
     @Test
-    public void equals_notGetTotalExpenditureCommand_returnsFalse() {
+    public void equals_differentType_returnsFalse() {
         var command = new GetTotalExpenditureCommand(8, new Category("Food"));
-        assertNotEquals(command, new ClearTransactionsCommand());
+        assertFalse(command.equals(5));
     }
 
     @Test
@@ -202,6 +231,20 @@ public class GetTotalExpenditureCommandTest {
         var command = new GetTotalExpenditureCommand(7, new Category("Food"));
         var other = new GetTotalExpenditureCommand(8, new Category("Others"));
         assertNotEquals(command, other);
+    }
+
+    @Test
+    public void equals_nullCatFilterOtherNonNullCatFilter_returnsFalse() {
+        var command = new GetTotalExpenditureCommand(7, null);
+        var other = new GetTotalExpenditureCommand(7, new Category("Others"));
+        assertNotEquals(command, other);
+    }
+
+    @Test
+    public void equals_nullCatFilterOtherNullCatFilter_returnsTrue() {
+        var command = new GetTotalExpenditureCommand(7, null);
+        var other = new GetTotalExpenditureCommand(7, null);
+        assertEquals(command, other);
     }
 
     private static Model getModel() {
