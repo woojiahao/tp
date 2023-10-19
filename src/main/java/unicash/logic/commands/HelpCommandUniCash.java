@@ -10,6 +10,7 @@ public class HelpCommandUniCash extends Command {
     public static final String COMMAND_WORD = "help";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows UniCa$h usage instructions.\n"
+            + "\n"
             + "Example: " + COMMAND_WORD;
 
     public static final String SHOWING_HELP_MESSAGE = "Opened UniCa$h help window.";

@@ -26,21 +26,40 @@ public class SampleDataUtil {
     public static Transaction[] getSampleTransactions() {
         return new Transaction[]{
             new Transaction(
-                    new Name("Valid transaction"),
+                    new Name("Lunch at McDonalds"),
                     new Type("expense"),
-                    new Amount(17.0),
-                    new DateTime("15-09-2023 00:00"),
-                    new Location(""),
-                    getCategorySet("Food")
+                    new Amount(17.40),
+                    new DateTime("15-09-2023 11:00"),
+                    new Location("Clementi Mall"),
+                    getCategorySet("food")
             ),
             new Transaction(
-                    new Name("Valid transaction 2"),
+                    new Name("Buy clothes"),
                     new Type("expense"),
-                    new Amount(123),
-                    new DateTime("15-07-2023 00:00"),
-                    new Location("Jurong"),
-                    getCategorySet("Others")
+                    new Amount(109.00),
+                    new DateTime("17-09-2023 18:30"),
+                    new Location("Uniqlo Bugis"),
+                    getCategorySet("shopping")
+            ),
+
+            new Transaction(
+                    new Name("Intern allowance september"),
+                    new Type("income"),
+                    new Amount(1800.00),
+                    new DateTime("17-09-2023 00:00"),
+                    new Location(""),
+                    getCategorySet("salary")
+            ),
+
+            new Transaction(
+                    new Name("Evening with friends"),
+                    new Type("expense"),
+                    new Amount(49.50),
+                    new DateTime("17-09-2023 00:00"),
+                    new Location("Clarke Quay"),
+                    getCategorySet("social")
             )
+
         };
     }
 
