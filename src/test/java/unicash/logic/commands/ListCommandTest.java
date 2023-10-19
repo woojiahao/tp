@@ -15,17 +15,11 @@ import unicash.model.UserPrefs;
  */
 public class ListCommandTest {
 
-    private Model model;
-    private Model expectedModel;
-
-    @BeforeEach
-    public void setUp() {
-        model = new ModelManager(new UniCash(), new UserPrefs());
-        expectedModel = new ModelManager(new UniCash(), new UserPrefs());
-    }
-
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
+        Model model = new ModelManager();
+        Model expectedModel = new ModelManager();
+
         assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }

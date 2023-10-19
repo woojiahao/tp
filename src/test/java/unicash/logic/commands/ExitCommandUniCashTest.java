@@ -9,11 +9,12 @@ import unicash.model.ModelManager;
 
 public class ExitCommandUniCashTest {
 
-    private Model model = new ModelManager();
-    private Model expectedModel = new ModelManager();
 
     @Test
     public void execute_exit_success() {
+        Model model = new ModelManager();
+        Model expectedModel = new ModelManager();
+
         CommandResult expectedCommandResult =
                 new CommandResult(ExitCommandUniCash.MESSAGE_EXIT_ACKNOWLEDGEMENT, false, true);
 
