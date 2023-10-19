@@ -19,32 +19,32 @@
                 <Insets top="5" right="10" bottom="5" left="10" />
             </padding>
             <HBox HBox.hgrow="ALWAYS">
-                <Label fx:id="id" styleClass="cell_big_label">
+                <Label fx:id="id" styleClass="transaction-id">
                     <minWidth>
                         <!-- Ensures that the label text is never truncated -->
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+                <Label fx:id="name" text="\$first" styleClass="transaction-name" />
                 <Region HBox.hgrow="ALWAYS" />
-                <Label fx:id="amount" text="\$amount"/>
+                <Label fx:id="amount" text="\$amount" styleClass="big-money"/>
             </HBox>
             <HBox alignment="CENTER_LEFT">
                 <padding>
                     <Insets top="5" />
                 </padding>
-                <Label styleClass="cell_small_label" text="Date of Expense: " />
+                <Label styleClass="transaction-subtitle" text="Date: " />
                 <Label fx:id="dateTime" styleClass="cell_small_label" text="\$dateTime" />
             </HBox>
             <HBox spacing="3" alignment="CENTER_LEFT">
-                <Label styleClass="cell_small_label" text="Location: " />
+                <Label styleClass="transaction-subtitle" text="Location: " />
                 <Label fx:id="transactionLocation" styleClass="cell_small_label" text="\$location" />
             </HBox>
             <HBox>
                 <padding>
                     <Insets top="10" />
                 </padding>
-                <Label styleClass="cell_small_label categories" alignment="CENTER_LEFT" fx:id="categories" />
+                <Label styleClass="cell_small_label_bold categories" alignment="CENTER_LEFT" fx:id="categories" />
             </HBox>
         </VBox>
     </GridPane>

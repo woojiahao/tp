@@ -35,8 +35,9 @@ public class EditTransactionCommand extends Command {
     public static final String COMMAND_WORD = "edit_transaction";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the transaction identified "
-            + "by the index number used in the displayed transaction list. "
-            + "Existing values will be overwritten by the input values.\n"
+            + "by the index number used in the displayed transaction list."
+            + "Existing values will be overwritten by the input values!\n"
+            + "\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_TYPE + "TYPE] "
@@ -44,6 +45,7 @@ public class EditTransactionCommand extends Command {
             + "[" + PREFIX_DATETIME + "DATETIME] "
             + "[" + PREFIX_LOCATION + "LOCATION]"
             + "[" + PREFIX_CATEGORY + "CATEGORY]...\n"
+            + "\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME + "Buying groceries "
             + PREFIX_TYPE + "expense "

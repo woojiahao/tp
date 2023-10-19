@@ -13,7 +13,7 @@ import unicash.model.transaction.Transaction;
 public class UniCashMessages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
-    public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n\n%1$s";
     public static final String MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX =
             "The transaction index provided is invalid";
     public static final String MESSAGE_TRANSACTIONS_LISTED_OVERVIEW = "%1$d transactions listed!";
@@ -39,15 +39,15 @@ public class UniCashMessages {
     public static String formatTransaction(Transaction transaction) {
         final StringBuilder builder = new StringBuilder();
         builder.append(transaction.getName())
-                .append("; Type: ")
+                .append("; \nType: ")
                 .append(transaction.getType())
-                .append("; Amount: ")
+                .append("; \nAmount: ")
                 .append(transaction.getAmount())
-                .append("; Date: ")
+                .append("; \nDate: ")
                 .append(transaction.getDateTime())
-                .append("; Location: ")
+                .append("; \nLocation: ")
                 .append(transaction.getLocation())
-                .append("; Category: ");
+                .append("; \nCategory: ");
         transaction.getCategories().forEach(builder::append);
         return builder.toString();
     }

@@ -20,6 +20,7 @@ public class GetTotalExpenditureCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Retrieves the total expenditure by month with optional filters for category.\n"
+            + "\n"
             + "Parameters: MONTH (must be valid month index) "
             + PREFIX_CATEGORY + "CATEGORY\n";
 
