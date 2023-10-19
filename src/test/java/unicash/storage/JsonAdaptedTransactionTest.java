@@ -34,7 +34,9 @@ public class JsonAdaptedTransactionTest {
     private static final String VALID_DATETIME = SHOPPING.getDateTime().originalString();
     private static final String VALID_LOCATION = SHOPPING.getLocation().location;
     private static final String VALID_TYPE = SHOPPING.getType().toString();
-    private static final List<JsonAdaptedCategory> VALID_CATEGORIES = SHOPPING.getCategories().stream()
+    private static final List<JsonAdaptedCategory> VALID_CATEGORIES = SHOPPING.getCategories()
+            .asUnmodifiableObservableList()
+            .stream()
             .map(JsonAdaptedCategory::new)
             .collect(Collectors.toList());
 

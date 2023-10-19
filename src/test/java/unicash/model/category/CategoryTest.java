@@ -23,6 +23,17 @@ public class CategoryTest {
     public void isValidCategoryName() {
         // null Category name
         assertThrows(NullPointerException.class, () -> Category.isValidCategory(null));
+
+        // contains non-alphanumeric
+        assertFalse(Category.isValidCategory("ca&**"));
+
+        // empty
+        assertFalse(Category.isValidCategory(""));
+
+        // longer than 15 characters
+        assertFalse(Category.isValidCategory("categorycategorycategory"));
+
+        assertTrue(Category.isValidCategory("entertainment"));
     }
 
     @Test

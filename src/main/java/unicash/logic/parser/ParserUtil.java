@@ -2,14 +2,15 @@ package unicash.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import unicash.commons.core.index.Index;
 import unicash.commons.util.StringUtil;
 import unicash.logic.parser.exceptions.ParseException;
 import unicash.model.category.Category;
+import unicash.model.category.UniqueCategoryList;
 import unicash.model.transaction.Amount;
 import unicash.model.transaction.DateTime;
 import unicash.model.transaction.Location;
@@ -143,13 +144,21 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> categories} into a {@code Set<Category>}.
      */
-    public static Set<Category> parseCategories(Collection<String> categories) throws ParseException {
+    public static UniqueCategoryList parseCategories(Collection<String> categories) throws ParseException {
         requireNonNull(categories);
-        final Set<Category> categorySet = new HashSet<>();
+        final List<Category> categoryList = new ArrayList<>();
         for (String categoryName : categories) {
-            categorySet.add(parseCategory(categoryName));
+            categoryList.add(parseCategory(categoryName));
         }
-        return categorySet;
+        if (!UniqueCategoryList.categoriesAreUnique(categoryList)) {
+            throw new ParseException(UniqueCategoryList.MESSAGE_CONSTRAINTS);
+        }
+
+        if (UniqueCategoryList.isMoreThanMax(categoryList)) {
+            throw new ParseException(UniqueCategoryList.MESSAGE_CONSTRAINTS);
+        }
+
+        return new UniqueCategoryList(categoryList);
     }
 
 }

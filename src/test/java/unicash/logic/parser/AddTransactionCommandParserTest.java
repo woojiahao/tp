@@ -24,7 +24,6 @@ import static unicash.logic.commands.CommandTestUtil.VALID_AMOUNT_NUS;
 import static unicash.logic.commands.CommandTestUtil.VALID_TRANSACTION_NAME_NUS;
 import static unicash.logic.commands.CommandTestUtil.VALID_TYPE_EXPENSE;
 import static unicash.logic.parser.CliSyntax.PREFIX_AMOUNT;
-import static unicash.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static unicash.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static unicash.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static unicash.logic.parser.CliSyntax.PREFIX_NAME;
@@ -37,6 +36,7 @@ import org.junit.jupiter.api.Test;
 
 import unicash.logic.UniCashMessages;
 import unicash.logic.commands.AddTransactionCommand;
+import unicash.model.category.Category;
 import unicash.model.transaction.Amount;
 import unicash.model.transaction.Transaction;
 import unicash.model.transaction.Type;
@@ -88,9 +88,6 @@ public class AddTransactionCommandParserTest {
         assertParseFailure(parser, LOCATION_DESC_ORCHARD + validExpectedTransactionString,
                 UniCashMessages.getErrorMessageForDuplicatePrefixes(PREFIX_LOCATION));
 
-        // multiple category
-        assertParseFailure(parser, CATEGORY_DESC_ENTERTAINMENT + validExpectedTransactionString,
-                UniCashMessages.getErrorMessageForDuplicatePrefixes(PREFIX_CATEGORY));
 
         // invalid value followed by valid value
 
@@ -112,7 +109,7 @@ public class AddTransactionCommandParserTest {
 
         // invalid category
         assertParseFailure(parser, INVALID_CATEGORY_DESC + validExpectedTransactionString,
-                UniCashMessages.getErrorMessageForDuplicatePrefixes(PREFIX_CATEGORY));
+                Category.MESSAGE_CONSTRAINTS);
 
         // invalid location
         assertParseFailure(parser, INVALID_LOCATION_DESC + validExpectedTransactionString,
@@ -138,7 +135,7 @@ public class AddTransactionCommandParserTest {
 
         // invalid category
         assertParseFailure(parser, validExpectedTransactionString + INVALID_CATEGORY_DESC,
-                UniCashMessages.getErrorMessageForDuplicatePrefixes(PREFIX_CATEGORY));
+                Category.MESSAGE_CONSTRAINTS);
 
         // invalid location
         assertParseFailure(parser, validExpectedTransactionString + INVALID_LOCATION_DESC,

@@ -1,12 +1,13 @@
 package unicash.model.util;
 
 import java.util.Arrays;
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import unicash.model.ReadOnlyUniCash;
 import unicash.model.UniCash;
 import unicash.model.category.Category;
+import unicash.model.category.UniqueCategoryList;
 import unicash.model.transaction.Amount;
 import unicash.model.transaction.DateTime;
 import unicash.model.transaction.Location;
@@ -31,7 +32,7 @@ public class SampleDataUtil {
                     new Amount(17.40),
                     new DateTime("15-09-2023 11:00"),
                     new Location("Clementi Mall"),
-                    getCategorySet("food")
+                    getCategoryList("food")
             ),
             new Transaction(
                     new Name("Buy clothes"),
@@ -39,7 +40,7 @@ public class SampleDataUtil {
                     new Amount(109.00),
                     new DateTime("17-09-2023 18:30"),
                     new Location("Uniqlo Bugis"),
-                    getCategorySet("shopping")
+                    getCategoryList("shopping")
             ),
 
             new Transaction(
@@ -48,7 +49,7 @@ public class SampleDataUtil {
                     new Amount(1800.00),
                     new DateTime("17-09-2023 00:00"),
                     new Location(""),
-                    getCategorySet("salary")
+                    getCategoryList("salary")
             ),
 
             new Transaction(
@@ -57,7 +58,7 @@ public class SampleDataUtil {
                     new Amount(49.50),
                     new DateTime("17-09-2023 00:00"),
                     new Location("Clarke Quay"),
-                    getCategorySet("social")
+                    getCategoryList("social")
             )
 
         };
@@ -74,9 +75,11 @@ public class SampleDataUtil {
     /**
      * Returns a category set containing the list of strings given.
      */
-    public static Set<Category> getCategorySet(String... strings) {
-        return Arrays.stream(strings)
+    public static UniqueCategoryList getCategoryList(String... strings) {
+        List<Category> categoryList = Arrays.stream(strings)
                 .map(Category::new)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
+
+        return new UniqueCategoryList(categoryList);
     }
 }

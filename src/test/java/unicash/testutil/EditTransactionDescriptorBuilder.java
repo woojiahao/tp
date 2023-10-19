@@ -1,11 +1,12 @@
 package unicash.testutil;
 
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import unicash.logic.commands.EditTransactionCommand;
 import unicash.model.category.Category;
+import unicash.model.category.UniqueCategoryList;
 import unicash.model.transaction.Amount;
 import unicash.model.transaction.DateTime;
 import unicash.model.transaction.Location;
@@ -85,8 +86,8 @@ public class EditTransactionDescriptorBuilder {
      * that we are building.
      */
     public EditTransactionDescriptorBuilder withCategories(String... categories) {
-        Set<Category> categoriesSet = Stream.of(categories).map(Category::new).collect(Collectors.toSet());
-        descriptor.setCategories(categoriesSet);
+        List<Category> categoriesList = Stream.of(categories).map(Category::new).collect(Collectors.toList());
+        descriptor.setCategories(new UniqueCategoryList(categoriesList));
         return this;
     }
 

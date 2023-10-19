@@ -55,7 +55,8 @@ public class GetTotalExpenditureCommand extends Command {
 
             // If category filter exists and expense contains no category, it will not have the category
             // Note: If the stream is empty then false is returned and the predicate is not evaluated.
-            boolean hasCategory = transaction.getCategories().stream().anyMatch(cat -> cat.equals(categoryFilter));
+            boolean hasCategory = transaction.getCategories().asUnmodifiableObservableList()
+                    .stream().anyMatch(cat -> cat.equals(categoryFilter));
             return isExpense && isSameMonth && hasCategory;
         });
 

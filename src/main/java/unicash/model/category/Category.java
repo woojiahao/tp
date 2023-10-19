@@ -9,8 +9,10 @@ import static unicash.commons.util.AppUtil.checkArgument;
  */
 public class Category {
 
-    public static final String MESSAGE_CONSTRAINTS = "Category names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Category names should be alphanumeric and up to 15 characters long.";
+    // Category can only be up to 15 characters long
+    public static final String VALIDATION_REGEX = "\\p{Alnum}{1,15}$";
 
     public final String category;
 
@@ -58,5 +60,4 @@ public class Category {
     public String toString() {
         return category;
     }
-
 }
