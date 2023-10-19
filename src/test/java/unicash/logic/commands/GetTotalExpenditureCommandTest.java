@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static unicash.testutil.Assert.assertThrows;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import unicash.commons.enums.TransactionType;
@@ -152,6 +153,29 @@ public class GetTotalExpenditureCommandTest {
                 String.format(GetTotalExpenditureCommand.MESSAGE_SUCCESS, "AUGUST", 123.45 + 133.15),
                 result.getFeedbackToUser()
         );
+    }
+
+    @Test
+    public void execute_multipleCategories_includedIfOneCategoryFitsFilter() throws CommandException {
+        var model = getModel();
+        model.addTransaction(new TransactionBuilder().withType("expense").withCategories("Food", "Drinks", "Social").build());
+        model.addTransaction(new TransactionBuilder().withType("expense").withCategories().build());
+        model.addTransaction(new TransactionBuilder().withType("expense").withCategories("School", "Food").build());
+        var command = new GetTotalExpenditureCommand(8, new Category("Food"));
+        command.execute(model);
+        var filteredResult = model.getFilteredTransactionList();
+        assertEquals(2, filteredResult.size());
+        for (var res : filteredResult) {
+            assertEquals(TransactionType.EXPENSE, res.getType().type);
+            boolean hasMatchingCategory = false;
+            for (var category : res.getCategories()) {
+                if (category.equals(new Category("Food"))) {
+                    hasMatchingCategory = true;
+                    break;
+                }
+            }
+            assertTrue(hasMatchingCategory);
+        }
     }
 
     @Test
