@@ -1,5 +1,11 @@
 package unicash.ui;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -12,6 +18,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import unicash.commons.core.GuiSettings;
 import unicash.commons.core.LogsCenter;
+import unicash.commons.util.StringUtil;
 import unicash.logic.Logic;
 import unicash.logic.commands.CommandResult;
 import unicash.logic.commands.exceptions.CommandException;
@@ -22,9 +29,14 @@ import unicash.logic.parser.exceptions.ParseException;
  * a menu bar and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Stage> {
+    public static final String USER_GUIDE_NAME_PREFIX = "userguide_local";
+    public static final String USER_GUIDE_NAME_SUFFIX = ".pdf";
+    public static final String USER_GUIDE_NAME = USER_GUIDE_NAME_PREFIX + USER_GUIDE_NAME_SUFFIX;
+    public static final String PATH_TO_USER_GUIDE = "/documents/" + USER_GUIDE_NAME;
+    public static final String FILE_ERROR_MESSAGE = "A FILE ERROR OCCURRED.";
+    public static final String UNKNOWN_ERROR_MESSAGE = "AN UNKNOWN ERROR OCCURRED.";
 
     private static final String FXML = "MainWindow.fxml";
-
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
@@ -40,6 +52,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private MenuItem userGuideMenuItem;
 
     @FXML
     private StackPane transactionListPanelPlaceholder;
@@ -189,4 +204,30 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
+
+    /**
+     * Opens the local user guide.
+     */
+    @FXML
+    private void handleOpenUserGuide() {
+        try {
+            // Path to the resource inside the jar file
+            InputStream inputStream = getClass().getResourceAsStream(PATH_TO_USER_GUIDE);
+
+            File tempFile = File.createTempFile(USER_GUIDE_NAME_PREFIX, USER_GUIDE_NAME_SUFFIX);
+            tempFile.deleteOnExit(); // The user guide will be deleted upon JVM exit
+
+            Files.copy(inputStream, tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            Desktop.getDesktop().open(tempFile);
+
+        } catch (IOException e) {
+            System.err.println(FILE_ERROR_MESSAGE);
+            logger.severe(FILE_ERROR_MESSAGE + StringUtil.getDetails(e));
+
+        } catch (Exception ex) {
+            System.err.println(UNKNOWN_ERROR_MESSAGE);
+            logger.severe(UNKNOWN_ERROR_MESSAGE + StringUtil.getDetails(ex));
+        }
+    }
+
 }

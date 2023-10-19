@@ -10,12 +10,9 @@ import static unicash.logic.parser.CliSyntax.PREFIX_NAME;
 import static unicash.logic.parser.CliSyntax.PREFIX_TYPE;
 import static unicash.model.Model.PREDICATE_SHOW_ALL_TRANSACTIONS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import unicash.commons.core.index.Index;
 import unicash.commons.util.CollectionUtil;
@@ -23,7 +20,7 @@ import unicash.commons.util.ToStringBuilder;
 import unicash.logic.UniCashMessages;
 import unicash.logic.commands.exceptions.CommandException;
 import unicash.model.Model;
-import unicash.model.category.Category;
+import unicash.model.category.UniqueCategoryList;
 import unicash.model.transaction.Amount;
 import unicash.model.transaction.DateTime;
 import unicash.model.transaction.Location;
@@ -39,8 +36,9 @@ public class EditTransactionCommand extends Command {
     public static final String COMMAND_WORD = "edit_transaction";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the transaction identified "
-            + "by the index number used in the displayed transaction list. "
-            + "Existing values will be overwritten by the input values.\n"
+            + "by the index number used in the displayed transaction list."
+            + "Existing values will be overwritten by the input values!\n"
+            + "\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_TYPE + "TYPE] "
@@ -48,6 +46,7 @@ public class EditTransactionCommand extends Command {
             + "[" + PREFIX_DATETIME + "DATETIME] "
             + "[" + PREFIX_LOCATION + "LOCATION]"
             + "[" + PREFIX_CATEGORY + "CATEGORY]...\n"
+            + "\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME + "Buying groceries "
             + PREFIX_TYPE + "expense "
@@ -59,8 +58,6 @@ public class EditTransactionCommand extends Command {
 
     public static final String MESSAGE_EDIT_TRANSACTION_SUCCESS = "Edited Transaction: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_TRANSACTION = "This transaction already exists"
-            + " in the transactions list.";
 
     private final Index index;
     private final EditTransactionDescriptor editTransactionDescriptor;
@@ -113,7 +110,7 @@ public class EditTransactionCommand extends Command {
         DateTime updatedDateTime = editTransactionDescriptor.getDateTime().orElse(transactionToEdit.getDateTime());
         Location updatedLocation = editTransactionDescriptor.getLocation().orElse(transactionToEdit.getLocation());
         Type updatedType = editTransactionDescriptor.getType().orElse(transactionToEdit.getType());
-        Set<Category> updatedCategories = editTransactionDescriptor.getCategories()
+        UniqueCategoryList updatedCategories = editTransactionDescriptor.getCategories()
                 .orElse(transactionToEdit.getCategories());
 
         return new Transaction(updatedName, updatedType, updatedAmount, updatedDateTime,
@@ -154,7 +151,7 @@ public class EditTransactionCommand extends Command {
         private DateTime datetime;
         private Location location;
         private Type type;
-        private HashSet<Category> categories;
+        private UniqueCategoryList categories;
 
         public EditTransactionDescriptor() {
         }
@@ -222,8 +219,8 @@ public class EditTransactionCommand extends Command {
          * Sets {@code categories} to this object's {@code categories}.
          * A defensive copy of {@code categories} is used internally.
          */
-        public void setCategories(Set<Category> categories) {
-            this.categories = (categories != null) ? new HashSet<>(categories) : null;
+        public void setCategories(UniqueCategoryList categories) {
+            this.categories = categories;
         }
 
         /**
@@ -231,8 +228,8 @@ public class EditTransactionCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code categories} is null.
          */
-        public Optional<Set<Category>> getCategories() {
-            return (categories != null) ? Optional.of(Collections.unmodifiableSet(categories)) : Optional.empty();
+        public Optional<UniqueCategoryList> getCategories() {
+            return Optional.ofNullable(categories);
         }
 
         @Override

@@ -2,13 +2,10 @@ package unicash.model.transaction;
 
 import static unicash.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 import unicash.commons.util.ToStringBuilder;
-import unicash.model.category.Category;
+import unicash.model.category.UniqueCategoryList;
 
 /**
  * Represents a Transaction in the finance tracker.
@@ -20,7 +17,7 @@ public class Transaction {
     private final DateTime dateTime;
     private final Location location;
     private final Type type;
-    private final Set<Category> categories = new HashSet<>();
+    private final UniqueCategoryList categories = new UniqueCategoryList();
 
 
     /**
@@ -33,7 +30,7 @@ public class Transaction {
         Amount amount,
         DateTime dateTime,
         Location location,
-        Set<Category> categories
+        UniqueCategoryList categories
     ) {
         requireAllNonNull(name, type, amount, categories, dateTime, location);
         this.name = name;
@@ -41,7 +38,7 @@ public class Transaction {
         this.amount = amount;
         this.dateTime = dateTime;
         this.location = location;
-        this.categories.addAll(categories);
+        this.categories.setCategories(categories);
     }
 
     public Name getName() {
@@ -64,12 +61,8 @@ public class Transaction {
         return type;
     }
 
-    /**
-     * Returns an immutable category set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Category> getCategories() {
-        return Collections.unmodifiableSet(categories);
+    public UniqueCategoryList getCategories() {
+        return categories;
     }
 
     @Override

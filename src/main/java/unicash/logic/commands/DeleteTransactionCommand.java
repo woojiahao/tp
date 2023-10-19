@@ -20,7 +20,9 @@ public class DeleteTransactionCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the transaction identified by the index number used in the displayed transaction list.\n"
+            + "\n"
             + "Parameters: INDEX (must be a positive integer)\n"
+            + "\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_TRANSACTION_SUCCESS = "Deleted Transaction: %1$s";

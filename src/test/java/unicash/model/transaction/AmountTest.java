@@ -32,4 +32,18 @@ public class AmountTest {
         assertNotEquals(amount, null);
         assertNotEquals(amount, new Amount(12.16));
     }
+
+    @Test
+    public void amountToDecimalString_standardConversion_returnsCorrectString() {
+        Amount amt = new Amount(1234.5678);
+        String result = Amount.amountToDecimalString(amt);
+        assertEquals("1234.57", result);
+    }
+
+    @Test
+    public void amountToDecimalString_roundingRequired_returnsRoundedString() {
+        Amount amt = new Amount(45.678);
+        String result = Amount.amountToDecimalString(amt);
+        assertEquals("45.68", result);
+    }
 }

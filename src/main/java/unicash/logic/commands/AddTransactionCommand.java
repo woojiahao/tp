@@ -16,7 +16,8 @@ import unicash.model.transaction.Transaction;
 public class AddTransactionCommand extends Command {
     public static final String COMMAND_WORD = "add_transaction";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a transaction to UniCash. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a transaction to UniCa$h. \n"
+            + "\n"
             + "Parameters: "
             + CliSyntax.PREFIX_NAME + "NAME "
             + CliSyntax.PREFIX_TYPE + "TYPE "
@@ -24,13 +25,14 @@ public class AddTransactionCommand extends Command {
             + CliSyntax.PREFIX_DATETIME + "DATETIME "
             + CliSyntax.PREFIX_LOCATION + "LOCATION "
             + "[" + CliSyntax.PREFIX_CATEGORY + "CATEGORY]...\n"
+            + "\n"
             + "Example: " + COMMAND_WORD + " "
             + CliSyntax.PREFIX_NAME + "Buying groceries "
             + CliSyntax.PREFIX_TYPE + "expense "
             + CliSyntax.PREFIX_AMOUNT + "300 "
             + CliSyntax.PREFIX_DATETIME + "18-08-2001 19:30 "
-            + CliSyntax.PREFIX_LOCATION + "ntuc"
-            + CliSyntax.PREFIX_CATEGORY + "household expenses";
+            + CliSyntax.PREFIX_LOCATION + "ntuc "
+            + CliSyntax.PREFIX_CATEGORY + "household";
 
     public static final String MESSAGE_SUCCESS = "New transaction added: %1$s";
 

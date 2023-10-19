@@ -265,8 +265,7 @@ public class EditTransactionCommandParserTest {
                         PREFIX_LOCATION,
                         PREFIX_TYPE,
                         PREFIX_AMOUNT,
-                        PREFIX_DATETIME,
-                        PREFIX_CATEGORY
+                        PREFIX_DATETIME
                 )
         );
 
@@ -284,7 +283,6 @@ public class EditTransactionCommandParserTest {
                 userInput,
                 UniCashMessages.getErrorMessageForDuplicatePrefixes(
                         PREFIX_LOCATION,
-                        PREFIX_CATEGORY,
                         PREFIX_DATETIME
                 )
         );

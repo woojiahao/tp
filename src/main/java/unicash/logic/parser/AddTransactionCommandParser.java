@@ -8,12 +8,11 @@ import static unicash.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static unicash.logic.parser.CliSyntax.PREFIX_NAME;
 import static unicash.logic.parser.CliSyntax.PREFIX_TYPE;
 
-import java.util.Set;
 import java.util.stream.Stream;
 
 import unicash.logic.commands.AddTransactionCommand;
 import unicash.logic.parser.exceptions.ParseException;
-import unicash.model.category.Category;
+import unicash.model.category.UniqueCategoryList;
 import unicash.model.transaction.Amount;
 import unicash.model.transaction.DateTime;
 import unicash.model.transaction.Location;
@@ -46,8 +45,8 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
         }
 
         // Check for duplicates
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_TYPE, PREFIX_AMOUNT, PREFIX_DATETIME,
-                PREFIX_CATEGORY, PREFIX_LOCATION);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_TYPE, PREFIX_AMOUNT,
+                PREFIX_DATETIME, PREFIX_LOCATION);
 
         Name name = ParserUtil.parseTransactionName(argMultimap.getValue(PREFIX_NAME).get());
         Amount amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
@@ -59,9 +58,9 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
         String locationString = argMultimap.getValue(PREFIX_LOCATION).orElse("");
         Location location = ParserUtil.parseLocation(locationString);
 
-        Set<Category> categoryList = ParserUtil.parseCategories(argMultimap.getAllValues(PREFIX_CATEGORY));
+        UniqueCategoryList uniqueCategoryList = ParserUtil.parseCategories(argMultimap.getAllValues(PREFIX_CATEGORY));
 
-        Transaction transaction = new Transaction(name, type, amount, dateTime, location, categoryList);
+        Transaction transaction = new Transaction(name, type, amount, dateTime, location, uniqueCategoryList);
 
         return new AddTransactionCommand(transaction);
     }

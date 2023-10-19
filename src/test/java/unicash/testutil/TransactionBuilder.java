@@ -1,9 +1,8 @@
 package unicash.testutil;
 
-import java.util.HashSet;
-import java.util.Set;
 
 import unicash.model.category.Category;
+import unicash.model.category.UniqueCategoryList;
 import unicash.model.transaction.Amount;
 import unicash.model.transaction.DateTime;
 import unicash.model.transaction.Location;
@@ -26,7 +25,7 @@ public class TransactionBuilder {
 
     private Name name;
     private Amount amount;
-    private Set<Category> categories;
+    private UniqueCategoryList categories;
     private DateTime dateTime;
     private Location location;
     private Type type;
@@ -40,7 +39,7 @@ public class TransactionBuilder {
         dateTime = new DateTime(DEFAULT_DATE_TIME);
         location = new Location(DEFAULT_LOCATION);
         type = new Type(DEFAULT_TYPE);
-        categories = new HashSet<>();
+        categories = new UniqueCategoryList();
         categories.add(new Category(DEFAULT_CATEGORY));
     }
 
@@ -53,7 +52,7 @@ public class TransactionBuilder {
         dateTime = transactionToCopy.getDateTime();
         location = transactionToCopy.getLocation();
         type = transactionToCopy.getType();
-        categories = new HashSet<>(transactionToCopy.getCategories());
+        categories = transactionToCopy.getCategories();
     }
 
     /**
@@ -101,7 +100,7 @@ public class TransactionBuilder {
      * the {@code Transaction} that we are building.
      */
     public TransactionBuilder withCategories(String ... categories) {
-        this.categories = SampleDataUtil.getCategorySet(categories);
+        this.categories = SampleDataUtil.getCategoryList(categories);
         return this;
     }
 

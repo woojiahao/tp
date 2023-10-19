@@ -2,20 +2,20 @@ package unicash.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static unicash.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static unicash.testutil.Assert.assertThrows;
 import static unicash.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import unicash.logic.parser.exceptions.ParseException;
 import unicash.model.category.Category;
+import unicash.model.category.UniqueCategoryList;
 import unicash.model.transaction.Amount;
 import unicash.model.transaction.DateTime;
 import unicash.model.transaction.Location;
@@ -33,7 +33,11 @@ public class ParserUtilTest {
     private static final String VALID_AMOUNT = "3.0";
     private static final String VALID_DATETIME = "18-08-2001 18:30";
     private static final String VALID_CATEGORY = "hobbies";
-    private static final String VALID_CATEGORY_2 = "entertainemtn";
+    private static final String VALID_CATEGORY_2 = "entertainment";
+    private static final String VALID_CATEGORY_3 = "test";
+    private static final String VALID_CATEGORY_4 = "test2";
+    private static final String VALID_CATEGORY_5 = "test3";
+    private static final String VALID_CATEGORY_6 = "test4";
     private static final String VALID_LOCATION = "orchard road";
     private static final String WHITESPACE = " \t\r\n";
 
@@ -220,16 +224,30 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseCategories_emptyCollection_returnsEmptySet() throws Exception {
-        assertTrue(ParserUtil.parseCategories(Collections.emptyList()).isEmpty());
+    public void parseCategories_emptyCollection_returnsEmptySet() {
+        assertDoesNotThrow(() -> ParserUtil.parseCategories(Collections.emptyList()));
+    }
+
+    @Test
+    public void parseCategories_collectionWithMoreThanAllowedNumberOfCategories_returnsCategorySet() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseCategories(
+                Arrays.asList(VALID_CATEGORY, VALID_CATEGORY_2, VALID_CATEGORY_3, VALID_CATEGORY_4,
+                        VALID_CATEGORY_5, VALID_CATEGORY_6)));
     }
 
     @Test
     public void parseCategories_collectionWithValidCategories_returnsCategorySet() throws Exception {
-        Set<Category> actualCategorySet = ParserUtil.parseCategories(Arrays.asList(VALID_CATEGORY, VALID_CATEGORY_2));
-        Set<Category> expectedCategorySet = new HashSet<Category>(
+        UniqueCategoryList actualCategoryList = ParserUtil.parseCategories(
+                Arrays.asList(VALID_CATEGORY, VALID_CATEGORY_2));
+        List<Category> categoryList = new ArrayList<>(
                 Arrays.asList(new Category(VALID_CATEGORY), new Category(VALID_CATEGORY_2)));
+        UniqueCategoryList expectedCategoryList = new UniqueCategoryList(categoryList);
+        assertEquals(expectedCategoryList, actualCategoryList);
+    }
 
-        assertEquals(expectedCategorySet, actualCategorySet);
+    @Test
+    public void parseCategories_collectionWithDuplicateCategories_returnsCategorySet() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseCategories(
+                Arrays.asList(VALID_CATEGORY, VALID_CATEGORY)));
     }
 }
