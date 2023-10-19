@@ -5,13 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static unicash.logic.commands.CommandTestUtil.assertCommandSuccess;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import unicash.model.Model;
 import unicash.model.ModelManager;
-import unicash.model.UniCash;
-import unicash.model.UserPrefs;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.

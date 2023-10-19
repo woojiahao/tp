@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static unicash.testutil.Assert.assertThrows;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import unicash.commons.enums.TransactionType;
@@ -159,7 +158,12 @@ public class GetTotalExpenditureCommandTest {
     @Test
     public void execute_multipleCategories_includedIfOneCategoryFitsFilter() throws CommandException {
         var model = getModel();
-        model.addTransaction(new TransactionBuilder().withType("expense").withCategories("Food", "Drinks", "Social").build());
+        model.addTransaction(
+                new TransactionBuilder()
+                        .withType("expense")
+                        .withCategories("Food", "Drinks", "Social")
+                        .build()
+        );
         model.addTransaction(new TransactionBuilder().withType("expense").withCategories().build());
         model.addTransaction(new TransactionBuilder().withType("expense").withCategories("School", "Food").build());
         var command = new GetTotalExpenditureCommand(8, new Category("Food"));
@@ -228,14 +232,14 @@ public class GetTotalExpenditureCommandTest {
     }
 
     @Test
-    public void equals_nullCFOtherNonNullCF_returnsFalse() {
+    public void equals_nullCatFilterOtherNonNullCatFilter_returnsFalse() {
         var command = new GetTotalExpenditureCommand(7, null);
         var other = new GetTotalExpenditureCommand(7, new Category("Others"));
         assertNotEquals(command, other);
     }
 
     @Test
-    public void equals_nullCFOtherNullCF_returnsTrue() {
+    public void equals_nullCatFilterOtherNullCatFilter_returnsTrue() {
         var command = new GetTotalExpenditureCommand(7, null);
         var other = new GetTotalExpenditureCommand(7, null);
         assertEquals(command, other);

@@ -96,11 +96,11 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_getTotalExpenditure() throws Exception {
         assertTrue(
-                parser.parseCommand(GetTotalExpenditureCommand.COMMAND_WORD + " 8")
+                parser.parseCommand(GetTotalExpenditureCommand.COMMAND_WORD + " month/8")
                         instanceof GetTotalExpenditureCommand
         );
         assertTrue(
-                parser.parseCommand(ClearTransactionsCommand.COMMAND_WORD + " 8 c/Food")
+                parser.parseCommand(ClearTransactionsCommand.COMMAND_WORD + " month/8 c/Food")
                         instanceof ClearTransactionsCommand
         );
     }
