@@ -10,10 +10,6 @@ import unicash.MainApp;
  */
 public class AppUtil {
 
-    private AppUtil() {
-
-    }
-
     /**
      * Gets an {@code Image} from the specified path.
      */
