@@ -18,6 +18,6 @@ public class StyleSheet {
     public static final String FONT_STYLE_ITALIC = "-fx-font-style: italic";
 
     // Custom text formatting
-    public static final String TRANSACTION_ID_SEPARATOR = ".";
+    public static final String TRANSACTION_ID_SEPARATOR = ". ";
 
 }

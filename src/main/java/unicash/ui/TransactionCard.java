@@ -184,7 +184,7 @@ public class TransactionCard extends UiPart<Region> {
     // TODO: Customize id label style
     private void idStyleFormatter(int displayedIndex) {
         String idToString = String.valueOf(displayedIndex);
-        String idWithSeparator = TRANSACTION_ID_SEPARATOR + " " + idToString;
+        String idWithSeparator = idToString + TRANSACTION_ID_SEPARATOR;
         id.setText(idWithSeparator);
     }
 
