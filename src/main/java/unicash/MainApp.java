@@ -171,7 +171,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting UniCash " + MainApp.VERSION);
+        logger.info("Starting UniCa$h " + MainApp.VERSION);
         Font.loadFont(getClass().getResourceAsStream("/fonts/Inter-Regular.ttf"), 12);
         Font.loadFont(getClass().getResourceAsStream("/fonts/Inter-Medium.ttf"), 12);
         Font.loadFont(getClass().getResourceAsStream("/fonts/Inter-Bold.ttf"), 12);
