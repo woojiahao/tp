@@ -1,6 +1,7 @@
 package unicash.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static unicash.logic.UniCashMessages.MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX;
 import static unicash.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static unicash.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static unicash.logic.parser.CliSyntax.PREFIX_DATETIME;
@@ -62,20 +63,21 @@ public class EditTransactionCommand extends Command {
             + " in the transactions list.";
 
     private final Index index;
-    private final EditTransactionCommand.EditTransactionDescriptor editTransactionDescriptor;
+    private final EditTransactionDescriptor editTransactionDescriptor;
 
     /**
-     * @param index of the transaction in the filtered transaction list to edit
+     * @param index                     of the transaction in the filtered transaction list to edit
      * @param editTransactionDescriptor details to edit the transaction with
      */
-    public EditTransactionCommand(Index index,
-                                  EditTransactionCommand.EditTransactionDescriptor editTransactionDescriptor) {
+    public EditTransactionCommand(
+            Index index,
+            EditTransactionDescriptor editTransactionDescriptor
+    ) {
         requireNonNull(index);
         requireNonNull(editTransactionDescriptor);
 
         this.index = index;
-        this.editTransactionDescriptor = new EditTransactionCommand
-                .EditTransactionDescriptor(editTransactionDescriptor);
+        this.editTransactionDescriptor = new EditTransactionDescriptor(editTransactionDescriptor);
     }
 
     @Override
@@ -84,7 +86,7 @@ public class EditTransactionCommand extends Command {
         List<Transaction> lastShownList = model.getFilteredTransactionList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(UniCashMessages.MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX);
         }
 
         Transaction transactionToEdit = lastShownList.get(index.getZeroBased());
@@ -100,8 +102,10 @@ public class EditTransactionCommand extends Command {
      * Creates and returns a {@code Transaction} with the details of {@code transactionToEdit}
      * edited with {@code editTransactionDescriptor}.
      */
-    private static Transaction createEditedTransaction(Transaction transactionToEdit, EditTransactionCommand
-            .EditTransactionDescriptor editTransactionDescriptor) {
+    private static Transaction createEditedTransaction(
+            Transaction transactionToEdit,
+            EditTransactionDescriptor editTransactionDescriptor
+    ) {
         assert transactionToEdit != null;
 
         Name updatedName = editTransactionDescriptor.getName().orElse(transactionToEdit.getName());
@@ -152,12 +156,13 @@ public class EditTransactionCommand extends Command {
         private Type type;
         private HashSet<Category> categories;
 
-        public EditTransactionDescriptor() {}
+        public EditTransactionDescriptor() {
+        }
 
         /**
          * Copy constructor.
          */
-        public EditTransactionDescriptor(EditTransactionCommand.EditTransactionDescriptor toCopy) {
+        public EditTransactionDescriptor(EditTransactionDescriptor toCopy) {
             setName(toCopy.name);
             setAmount(toCopy.amount);
             setDateTime(toCopy.datetime);
@@ -237,12 +242,11 @@ public class EditTransactionCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditTransactionCommand.EditTransactionDescriptor)) {
+            if (!(other instanceof EditTransactionDescriptor)) {
                 return false;
             }
 
-            EditTransactionCommand.EditTransactionDescriptor otherEditTransactionDescriptor = (EditTransactionCommand
-                    .EditTransactionDescriptor) other;
+            var otherEditTransactionDescriptor = (EditTransactionDescriptor) other;
             return Objects.equals(name, otherEditTransactionDescriptor.name)
                     && Objects.equals(amount, otherEditTransactionDescriptor.amount)
                     && Objects.equals(datetime, otherEditTransactionDescriptor.datetime)
