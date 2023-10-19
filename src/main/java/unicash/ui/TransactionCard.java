@@ -4,6 +4,7 @@ import static unicash.ui.StyleSheet.FONT_STYLE_BOLD;
 import static unicash.ui.StyleSheet.TEXT_FILL_BLACK;
 import static unicash.ui.StyleSheet.TEXT_FILL_GREEN;
 import static unicash.ui.StyleSheet.TEXT_FILL_RED;
+import static unicash.ui.StyleSheet.TRANSACTION_ID_SEPARATOR;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -55,12 +56,70 @@ public class TransactionCard extends UiPart<Region> {
         super(FXML);
         this.transaction = transaction;
         id.setText(displayedIndex + ". ");
-        name.setText(transaction.getName().toString());
-        dateTime.setText(transaction.getDateTime().toString());
-        transactionLocation.setText(transaction.getLocation().toString());
+        this.idStyleFormatter(displayedIndex);
+        this.nameStyleFormatter();
+        this.dateTimeStyleFormatter();
+        this.transactionLocationStyleFormatter();
         this.amountStyleFormatter();
         this.categoriesStyleFormatter();
     }
+
+    /**
+     * Returns the name label of the transaction card.
+     *
+     * @return A Label containing the name of the transaction.
+     */
+    public Label getName() {
+        return this.name;
+    }
+
+    /**
+     * Returns the ID label of the transaction card.
+     *
+     * @return A Label containing the ID of the transaction.
+     */
+    public Label getId() {
+        return this.id;
+    }
+
+    /**
+     * Returns the amount of the transaction card.
+     *
+     * @return A Label containing the amount of the transaction.
+     */
+    public Label getAmount() {
+        return this.amount;
+    }
+
+
+
+    /**
+     * Returns the date and time label of the transaction card.
+     *
+     * @return A Label containing the date and time of the transaction.
+     */
+    public Label getDateTime() {
+        return this.dateTime;
+    }
+
+    /**
+     * Returns the location label of the transaction card.
+     *
+     * @return A Label containing the location of the transaction.
+     */
+    public Label getTransactionLocation() {
+        return this.transactionLocation;
+    }
+
+    /**
+     * Returns the categories label of the transaction card.
+     *
+     * @return A Label containing the categories associated with the transaction.
+     */
+    public Label getCategories() {
+        return this.categories;
+    }
+
 
     /*
      * For better presentation of the transaction amounts, instead of using the
@@ -102,6 +161,31 @@ public class TransactionCard extends UiPart<Region> {
         String categoriesToStringWithHashTag = "#" + trimmedCategoriesToString;
         categories.setText(categoriesToStringWithHashTag);
         categories.setStyle(FONT_STYLE_BOLD);
+    }
+
+    // TODO: Customize transactionLocation label style
+    private void transactionLocationStyleFormatter() {
+        String transactionLocationToString = transaction.getLocation().toString();
+        transactionLocation.setText(transactionLocationToString);
+    }
+
+    // TODO: Customize dateTime label style
+    private void dateTimeStyleFormatter() {
+        String dateTimeToString = transaction.getDateTime().toString();
+        dateTime.setText(dateTimeToString);
+    }
+
+    // TODO: Customize name label style
+    private void nameStyleFormatter() {
+        String nameToString = transaction.getName().toString();
+        name.setText(nameToString);
+    }
+
+    // TODO: Customize id label style
+    private void idStyleFormatter(int displayedIndex) {
+        String idToString = String.valueOf(displayedIndex);
+        String idWithSeparator = TRANSACTION_ID_SEPARATOR + " " + idToString;
+        id.setText(idWithSeparator);
     }
 
 }
