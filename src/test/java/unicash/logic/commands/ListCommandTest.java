@@ -1,5 +1,8 @@
 package unicash.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static unicash.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -21,5 +24,22 @@ public class ListCommandTest {
         Model expectedModel = new ModelManager();
 
         assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void equals_nullOther_returnsFalse() {
+        assertNotEquals(new ListCommand(), null);
+    }
+
+    @Test
+    public void equals_differentType_returnsFalse() {
+        assertFalse(new ListCommand().equals(5));
+    }
+
+    @Test
+    public void equals_otherListCommand_returnsTrue() {
+        var first = new ListCommand();
+        var second = new ListCommand();
+        assertEquals(first, second);
     }
 }
