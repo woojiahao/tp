@@ -2,6 +2,7 @@ package unicash.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static unicash.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static unicash.logic.parser.CliSyntax.PREFIX_MONTH;
 
 import java.time.Month;
 
@@ -20,8 +21,8 @@ public class GetTotalExpenditureCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Retrieves the total expenditure by month with optional filters for category.\n"
-            + "\n"
-            + "Parameters: MONTH (must be valid month index) "
+            + "Parameters: "
+            + PREFIX_MONTH + "MONTH "
             + PREFIX_CATEGORY + "CATEGORY\n";
 
     public static final String MESSAGE_SUCCESS = "Your total expenditure in %1$s was %2$.2f";
@@ -83,6 +84,9 @@ public class GetTotalExpenditureCommand extends Command {
         }
 
         GetTotalExpenditureCommand otherCommand = (GetTotalExpenditureCommand) other;
+        if (categoryFilter == null) {
+            return month == otherCommand.month && otherCommand.categoryFilter == null;
+        }
         return month == otherCommand.month && categoryFilter.equals(otherCommand.categoryFilter);
     }
 

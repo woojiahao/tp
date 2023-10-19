@@ -34,4 +34,14 @@ public class ListCommand extends Command {
         logger.log(Level.INFO, "List command executed successfully");
         return new CommandResult(MESSAGE_SUCCESS);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) {
+            return false;
+        }
+
+        // Nothing to compare so all ListCommand instances are equal to each other
+        return other instanceof ListCommand;
+    }
 }

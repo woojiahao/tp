@@ -3,6 +3,7 @@ package unicash.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static unicash.logic.commands.CommandTestUtil.DESC_NUS;
 import static unicash.logic.commands.CommandTestUtil.DESC_SHOPPING;
@@ -36,17 +37,85 @@ public class EditTransactionCommandTest {
     private final Model model = new ModelManager(getTypicalUniCash(), new UserPrefs());
 
     @Test
-    public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Transaction editedTransaction = new TransactionBuilder().build();
-        EditTransactionDescriptor descriptor = new EditTransactionDescriptorBuilder(
-                editedTransaction).build();
-        EditTransactionCommand editTransactionCommand = new EditTransactionCommand(INDEX_FIRST_TRANSACTION, descriptor);
+    public void constructor_nullIndex_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new EditTransactionCommand(
+                null,
+                new EditTransactionDescriptor()
+        ));
+    }
 
-        String expectedMessage = String.format(EditTransactionCommand.MESSAGE_EDIT_TRANSACTION_SUCCESS,
-                UniCashMessages.formatTransaction(editedTransaction));
+    @Test
+    public void constructor_nullDescriptor_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new EditTransactionCommand(
+                Index.fromOneBased(9),
+                null
+        ));
+    }
+
+    @Test
+    public void execute_nullModel_throwsNullPointerException() {
+        var command = new EditTransactionCommand(
+                Index.fromOneBased(9),
+                new EditTransactionDescriptor()
+        );
+        assertThrows(NullPointerException.class, () -> command.execute(null));
+    }
+
+    @Test
+    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTransactionList().size() + 1);
+        var descriptor = new EditTransactionDescriptorBuilder()
+                .withName(VALID_TRANSACTION_NAME_NUS)
+                .build();
+        var editTransactionCommand = new EditTransactionCommand(outOfBoundIndex, descriptor);
+
+        assertCommandFailure(
+                editTransactionCommand,
+                model,
+                UniCashMessages.MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX
+        );
+    }
+
+    /**
+     * Edit filtered list where index is larger than size of filtered list,
+     * but smaller than size of uni cash
+     */
+    @Test
+    public void execute_invalidIndexFilteredList_throwsCommandException() {
+        showTransactionAtIndex(model, INDEX_FIRST_TRANSACTION);
+        Index outOfBoundIndex = INDEX_SECOND_TRANSACTION;
+        // ensures that outOfBoundIndex is still in bounds of address book list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getUniCash().getTransactionList().size());
+
+        var editTransactionCommand = new EditTransactionCommand(
+                outOfBoundIndex,
+                new EditTransactionDescriptorBuilder()
+                        .withName(VALID_TRANSACTION_NAME_NUS)
+                        .build()
+        );
+
+        assertCommandFailure(
+                editTransactionCommand,
+                model,
+                UniCashMessages.MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX
+        );
+    }
+
+    @Test
+    public void execute_allFieldsSpecifiedUnfilteredList_success() {
+        var editedTransaction = new TransactionBuilder().build();
+        var descriptor = new EditTransactionDescriptorBuilder(editedTransaction).build();
+        var editTransactionCommand = new EditTransactionCommand(INDEX_FIRST_TRANSACTION, descriptor);
+
+        String expectedMessage = String.format(
+                EditTransactionCommand.MESSAGE_EDIT_TRANSACTION_SUCCESS,
+                UniCashMessages.formatTransaction(editedTransaction)
+        );
 
         Model expectedModel = new ModelManager(
-                getTypicalUniCash(), new UserPrefs());
+                getTypicalUniCash(),
+                new UserPrefs()
+        );
         expectedModel.setTransaction(model.getFilteredTransactionList().get(0), editedTransaction);
 
         assertCommandSuccess(editTransactionCommand, model, expectedMessage, expectedModel);
@@ -98,89 +167,88 @@ public class EditTransactionCommandTest {
     public void execute_filteredList_success() {
         showTransactionAtIndex(model, INDEX_FIRST_TRANSACTION);
 
-        Transaction transactionInFilteredList = model.getFilteredTransactionList()
+        Transaction transactionInFilteredList = model
+                .getFilteredTransactionList()
                 .get(INDEX_FIRST_TRANSACTION.getZeroBased());
         Transaction editedTransaction = new TransactionBuilder(transactionInFilteredList)
-                .withName(VALID_TRANSACTION_NAME_NUS).build();
-        EditTransactionCommand editTransactionCommand = new EditTransactionCommand(INDEX_FIRST_TRANSACTION,
-                new EditTransactionDescriptorBuilder().withName(VALID_TRANSACTION_NAME_NUS).build());
+                .withName(VALID_TRANSACTION_NAME_NUS)
+                .build();
+        EditTransactionCommand editTransactionCommand = new EditTransactionCommand(
+                INDEX_FIRST_TRANSACTION,
+                new EditTransactionDescriptorBuilder()
+                        .withName(VALID_TRANSACTION_NAME_NUS)
+                        .build()
+        );
 
-        String expectedMessage = String.format(EditTransactionCommand.MESSAGE_EDIT_TRANSACTION_SUCCESS,
-                UniCashMessages.formatTransaction(editedTransaction));
+        String expectedMessage = String.format(
+                EditTransactionCommand.MESSAGE_EDIT_TRANSACTION_SUCCESS,
+                UniCashMessages.formatTransaction(editedTransaction)
+        );
 
         Model expectedModel = new ModelManager(
-                getTypicalUniCash(), new UserPrefs());
+                getTypicalUniCash(),
+                new UserPrefs()
+        );
         expectedModel.setTransaction(model.getFilteredTransactionList().get(0), editedTransaction);
 
         assertCommandSuccess(editTransactionCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_invalidTransactionIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTransactionList().size() + 1);
-        EditTransactionDescriptor descriptor = new EditTransactionDescriptorBuilder()
-                .withName(VALID_TRANSACTION_NAME_NUS).build();
-        EditTransactionCommand editTransactionCommand = new EditTransactionCommand(outOfBoundIndex, descriptor);
-
-        assertCommandFailure(editTransactionCommand, model,
-                UniCashMessages.MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX);
-    }
-
-    /**
-     * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
-     */
-    @Test
-    public void execute_invalidTransactionIndexFilteredList_failure() {
-        showTransactionAtIndex(model, INDEX_FIRST_TRANSACTION);
-        Index outOfBoundIndex = INDEX_SECOND_TRANSACTION;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getUniCash().getTransactionList().size());
-
-        EditTransactionCommand editTransactionCommand = new EditTransactionCommand(outOfBoundIndex,
-                new EditTransactionDescriptorBuilder().withName(VALID_TRANSACTION_NAME_NUS).build());
-
-        assertCommandFailure(editTransactionCommand, model,
-                UniCashMessages.MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX);
+    public void equals_sameInstance_returnsTrue() {
+        var command = new EditTransactionCommand(INDEX_FIRST_TRANSACTION, DESC_NUS);
+        assertEquals(command, command);
     }
 
     @Test
-    public void equals() {
-        final EditTransactionCommand standardCommand = new EditTransactionCommand(INDEX_FIRST_TRANSACTION, DESC_NUS);
+    public void equals_nullOther_returnsFalse() {
+        var command = new EditTransactionCommand(INDEX_FIRST_TRANSACTION, DESC_NUS);
+        assertNotEquals(command, null);
+    }
 
-        // same values -> returns true
-        EditTransactionDescriptor copyDescriptor = new EditTransactionDescriptor(DESC_NUS);
-        EditTransactionCommand commandWithSameValues = new EditTransactionCommand(INDEX_FIRST_TRANSACTION,
-                copyDescriptor);
-        assertEquals(standardCommand, commandWithSameValues);
+    @Test
+    public void equals_fullShallowCopy_returnsTrue() {
+        var command = new EditTransactionCommand(INDEX_FIRST_TRANSACTION, DESC_NUS);
+        var other = new EditTransactionCommand(INDEX_FIRST_TRANSACTION, DESC_NUS);
+        assertEquals(command, other);
+    }
 
-        // same object -> returns true
-        assertEquals(copyDescriptor, copyDescriptor);
-        assertEquals(standardCommand, standardCommand);
+    @Test
+    public void equals_partialShallowCopyDescriptor_returnsTrue() {
+        var descriptor = new EditTransactionDescriptor(DESC_NUS);
+        var command = new EditTransactionCommand(INDEX_FIRST_TRANSACTION, DESC_NUS);
+        var other = new EditTransactionCommand(INDEX_FIRST_TRANSACTION, descriptor);
+        assertEquals(command, other);
+    }
 
-        // null -> returns false
-        assertNotEquals(null, standardCommand);
+    @Test
+    public void equals_otherDifferentType_returnsFalse() {
+        var command = new EditTransactionCommand(INDEX_FIRST_TRANSACTION, DESC_NUS);
+        assertFalse(command.equals(5));
+    }
 
-        // different types -> returns false
-        assertNotEquals(copyDescriptor, standardCommand);
-        assertNotEquals(standardCommand, new ClearTransactionsCommand());
+    @Test
+    public void equals_differentIndex_returnsFalse() {
+        var command = new EditTransactionCommand(INDEX_FIRST_TRANSACTION, DESC_NUS);
+        var other = new EditTransactionCommand(INDEX_SECOND_TRANSACTION, DESC_NUS);
+        assertNotEquals(command, other);
+    }
 
-        assertFalse(standardCommand.equals(copyDescriptor));
-
-        // different index -> returns false
-        assertNotEquals(standardCommand, new EditTransactionCommand(INDEX_SECOND_TRANSACTION, DESC_NUS));
-
-        // different descriptor -> returns false
-        assertNotEquals(standardCommand, new EditTransactionCommand(INDEX_FIRST_TRANSACTION, DESC_SHOPPING));
+    @Test
+    public void equals_differentDescriptor_returnsFalse() {
+        var command = new EditTransactionCommand(INDEX_FIRST_TRANSACTION, DESC_NUS);
+        var other = new EditTransactionCommand(INDEX_FIRST_TRANSACTION, DESC_SHOPPING);
+        assertNotEquals(command, other);
     }
 
     @Test
     public void toStringMethod() {
         Index index = Index.fromOneBased(1);
-        EditTransactionDescriptor editTransactionDescriptor = new EditTransactionDescriptor();
-        EditTransactionCommand editTransactionCommand = new EditTransactionCommand(index, editTransactionDescriptor);
+        var editTransactionDescriptor = new EditTransactionDescriptor();
+        var editTransactionCommand = new EditTransactionCommand(index, editTransactionDescriptor);
         String expected = EditTransactionCommand.class.getCanonicalName()
-                + "{index=" + index + ", editTransactionDescriptor=" + editTransactionDescriptor + "}";
+                + "{index=" + index
+                + ", editTransactionDescriptor=" + editTransactionDescriptor + "}";
         assertEquals(expected, editTransactionCommand.toString());
     }
 
