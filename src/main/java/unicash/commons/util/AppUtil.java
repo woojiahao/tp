@@ -11,6 +11,12 @@ import unicash.MainApp;
 public class AppUtil {
 
     /**
+     * This private constructor is declared to support a constructor initialisation
+     * by code coverage.
+     */
+    private AppUtil() {}
+
+    /**
      * Gets an {@code Image} from the specified path.
      */
     public static Image getImage(String imagePath) {
