@@ -20,8 +20,8 @@ import unicash.model.transaction.Amount;
 import unicash.model.transaction.DateTime;
 import unicash.model.transaction.Location;
 import unicash.model.transaction.Name;
+import unicash.model.transaction.Type;
 
-// TODO: Need more testing here
 public class ParserUtilTest {
     private static final String INVALID_NAME = "Ex@pen$e";
     private static final String INVALID_AMOUNT = "str";
@@ -101,6 +101,30 @@ public class ParserUtilTest {
         String amountWithWhitespace = WHITESPACE + VALID_AMOUNT + WHITESPACE;
         Amount expectedAmount = new Amount(3.0);
         assertEquals(expectedAmount, ParserUtil.parseAmount(amountWithWhitespace));
+    }
+
+    @Test
+    public void parseType_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseType(null));
+    }
+
+    @Test
+    public void parseType_invalidType_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseType("hi"));
+    }
+
+    @Test
+    public void parseType_validValueWithoutWhitespace_returnsType() throws ParseException {
+        String value = "expense";
+        Type expected = new Type("expense");
+        assertEquals(expected, ParserUtil.parseType(value));
+    }
+
+    @Test
+    public void parseType_validValueWithWhitespace_returnsTrimmedType() throws ParseException {
+        String value = "  income   ";
+        Type expected = new Type("income");
+        assertEquals(expected, ParserUtil.parseType(value));
     }
 
     @Test
