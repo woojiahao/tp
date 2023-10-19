@@ -1,6 +1,7 @@
 package unicash.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static unicash.testutil.Assert.assertThrows;
@@ -187,15 +188,15 @@ public class GetTotalExpenditureCommandTest {
     }
 
     @Test
-    public void equals_sameObject_returnsTrue() {
+    public void equals_sameInstance_returnsTrue() {
         var command = new GetTotalExpenditureCommand(8, new Category("Food"));
         assertEquals(command, command);
     }
 
     @Test
-    public void equals_notGetTotalExpenditureCommand_returnsFalse() {
+    public void equals_differentType_returnsFalse() {
         var command = new GetTotalExpenditureCommand(8, new Category("Food"));
-        assertNotEquals(command, new ClearTransactionsCommand());
+        assertFalse(command.equals(5));
     }
 
     @Test
