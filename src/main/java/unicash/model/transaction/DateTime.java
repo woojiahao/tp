@@ -6,6 +6,7 @@ import static unicash.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.Clock;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.util.Objects;
@@ -14,11 +15,17 @@ import java.util.Objects;
  * Guarantees: immutable;
  */
 public class DateTime {
-    public static final String DATETIME_PATTERN = "dd-MM-uuuu HH:mm";
+    public static final String DATETIME_PATTERN = "dd MMM uuuu HH:mm";
     public static final String MESSAGE_CONSTRAINTS =
-            "DateTime should be in the following format " + DATETIME_PATTERN;
-    public static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter
-            .ofPattern(DATETIME_PATTERN);
+            "DateTime should be in either of the following formats: "
+                    + "dd-MM-yyyy HH:mm, yyyy-MM-dd HH:mm, dd MMM yyyy HH:mm";
+    //accept date in multiple formats
+    private static final DateTimeFormatterBuilder DATETIME_FORMATTER_BUILDER =
+            new DateTimeFormatterBuilder().append(DateTimeFormatter.ofPattern("[dd-MM-uuuu HH:mm]"
+                    + "[uuuu-MM-dd HH:mm]" + "[dd MMM uuuu HH:mm]"));
+    private static final DateTimeFormatter DATETIME_FORMATTER = DATETIME_FORMATTER_BUILDER.toFormatter();
+
+    private final String originalDateTime;
     private LocalDateTime dateTime;
 
     /**
@@ -30,6 +37,7 @@ public class DateTime {
     public DateTime(String dateTime) {
         requireAllNonNull(dateTime);
         init(dateTime, Clock.systemDefaultZone());
+        originalDateTime = dateTime;
     }
 
     /**
@@ -43,6 +51,7 @@ public class DateTime {
     public DateTime(String dateTime, Clock clock) {
         requireAllNonNull(dateTime, clock);
         init(dateTime, clock);
+        originalDateTime = dateTime;
     }
 
     /**
@@ -66,13 +75,13 @@ public class DateTime {
     }
 
     /**
-     * Helper method to stringify LocalDateTime objects into original text string
-     * pass by the user.
+     * Helper method to return original text string
+     * passed by the user.
      *
      * @return text string of the LocalDateTime object
      */
     public String originalString() {
-        return dateTime.format(DateTimeFormatter.ofPattern(DATETIME_PATTERN));
+        return originalDateTime;
     }
 
     /**
@@ -89,7 +98,7 @@ public class DateTime {
 
     @Override
     public String toString() {
-        return dateTime.format(DateTimeFormatter.ofPattern("HHmm, MMM d yyyy"));
+        return dateTime.format(DateTimeFormatter.ofPattern(DATETIME_PATTERN));
     }
 
     @Override
