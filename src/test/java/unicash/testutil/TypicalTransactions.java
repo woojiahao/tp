@@ -76,11 +76,11 @@ public class TypicalTransactions {
      * Returns a {@code UniCash} with all the typical transactions.
      */
     public static UniCash getTypicalUniCash() {
-        UniCash ab = new UniCash();
+        UniCash uc = new UniCash();
         for (Transaction transaction : getTypicalTransactions()) {
-            ab.addTransaction(transaction);
+            uc.addTransaction(transaction);
         }
-        return ab;
+        return uc;
     }
 
     public static List<Transaction> getTypicalTransactions() {
