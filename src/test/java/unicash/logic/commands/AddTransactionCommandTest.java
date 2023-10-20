@@ -59,7 +59,7 @@ public class AddTransactionCommandTest {
         Transaction nus = new TransactionBuilder().withName("Nus").build();
         Transaction intern = new TransactionBuilder().withName("Intern").build();
         AddTransactionCommand addNusCommand = new AddTransactionCommand(nus);
-        AddTransactionCommand addBobCommand = new AddTransactionCommand(intern);
+        AddTransactionCommand addInternCommand = new AddTransactionCommand(intern);
 
         // same object -> returns true
         assertEquals(addNusCommand, addNusCommand);
@@ -75,7 +75,7 @@ public class AddTransactionCommandTest {
         assertNotEquals(null, addNusCommand);
 
         // different Transaction -> returns false
-        assertNotEquals(addNusCommand, addBobCommand);
+        assertNotEquals(addNusCommand, addInternCommand);
 
         assertFalse(addNusCommand.equals(2));
     }
@@ -163,7 +163,7 @@ public class AddTransactionCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single transaction.
      */
     private class ModelStubWithTransaction extends AddTransactionCommandTest.ModelStub {
         private final Transaction transaction;
@@ -185,7 +185,7 @@ public class AddTransactionCommandTest {
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the transaction being added.
      */
     private class ModelStubAcceptingTransactionAdded extends AddTransactionCommandTest.ModelStub {
         final ArrayList<Transaction> transactionsAdded = new ArrayList<>();
