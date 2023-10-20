@@ -15,12 +15,10 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import unicash.commons.enums.TransactionType;
 import unicash.model.Model;
 import unicash.model.ModelManager;
 import unicash.model.UniCash;
 import unicash.model.UserPrefs;
-import unicash.model.transaction.Transaction;
 import unicash.model.transaction.TransactionNameContainsKeywordsPredicate;
 
 /**
