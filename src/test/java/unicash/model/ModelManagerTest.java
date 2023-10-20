@@ -135,7 +135,6 @@ public class ModelManagerTest {
 
         assertFalse(modelManager.equals(uniCash));
 
-        // TODO: Replicate this for transaction list
         // different filteredList -> returns false
         String[] keywords = new String[] {"internship"};
         modelManager.updateFilteredTransactionList(
