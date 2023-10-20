@@ -37,7 +37,7 @@ import unicash.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 2, 2, true);
+    public static final Version VERSION = new Version(1, 2, 0, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -171,7 +171,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting UniCash " + MainApp.VERSION);
+        logger.info("Starting UniCa$h " + MainApp.VERSION);
         Font.loadFont(getClass().getResourceAsStream("/fonts/Inter-Regular.ttf"), 12);
         Font.loadFont(getClass().getResourceAsStream("/fonts/Inter-Medium.ttf"), 12);
         Font.loadFont(getClass().getResourceAsStream("/fonts/Inter-Bold.ttf"), 12);
