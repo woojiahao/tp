@@ -343,7 +343,7 @@
     -fx-border-width: 1;
     -fx-font-family: "Inter";
     -fx-font-size: 12pt;
-    -fx-text-fill: #575757;
+    -fx-text-fill: #262626;
 }
 
 #filterField, #personListPanel, #personWebpage {
