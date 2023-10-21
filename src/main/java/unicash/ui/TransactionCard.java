@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -191,17 +192,18 @@ public class TransactionCard extends UiPart<Region> {
     /* For color coding every category using its hash value to generate a color */
     private void discreteCategoriesStyleFormatter() {
         UniqueCategoryList categoryUniqueList = transaction.getCategories();
+        ObservableList<Category> categoryObservableList =
+                categoryUniqueList.asUnmodifiableObservableList();
         Iterator<Category> categoryIterator = categoryUniqueList.iterator();
         ArrayList<Category> categoryArrayList = new ArrayList<>();
 
         ArrayList<Label> labelArrayList = new ArrayList<>(
                 Arrays.asList(firstCategory, secondCategory, thirdCategory,
-                        fourthCategory, firstCategory)
+                        fourthCategory, fifthCategory)
                 );
 
-        while (categoryIterator.hasNext()) {
-            Category nextCategory = categoryIterator.next();
-            categoryArrayList.add(nextCategory);
+        for (Category c : categoryObservableList) {
+            categoryArrayList.add(c);
         }
 
         for (int i = 0; i < categoryArrayList.size(); i++) {

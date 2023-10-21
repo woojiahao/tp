@@ -75,7 +75,8 @@ public class Category {
      * hash code, to be used as a color indicator.
      */
     public String getCategoryColorFromHash() {
-        String hexString = Integer.toHexString(this.hashCode());
+        String hexString = Integer.toHexString(
+                Math.abs(this.hashCode()));
 
         while (hexString.length() < 6) {
             hexString = "0" + hexString;
