@@ -8,7 +8,7 @@ import unicash.commons.util.ToStringBuilder;
 import unicash.model.commons.Amount;
 
 /**
- * Represents a Budget in the UniCash.
+ * Represents a Budget in UniCash.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Budget {

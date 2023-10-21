@@ -6,7 +6,7 @@ import static unicash.commons.util.AppUtil.checkArgument;
 import unicash.commons.enums.BudgetInterval;
 
 /**
- * Represents a Transaction's interval.
+ * Represents a Budget's interval.
  */
 public class Interval {
 

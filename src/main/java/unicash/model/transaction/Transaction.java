@@ -9,7 +9,7 @@ import unicash.model.category.UniqueCategoryList;
 import unicash.model.commons.Amount;
 
 /**
- * Represents a Transaction in the UniCash.
+ * Represents a Transaction in UniCash.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Transaction {
