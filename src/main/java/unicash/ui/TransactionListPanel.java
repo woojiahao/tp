@@ -13,7 +13,8 @@ import unicash.commons.core.LogsCenter;
 import unicash.model.transaction.Transaction;
 
 /**
- * Panel containing the list of persons.
+ * TransactionListPanel contains the main list of Transactions to be
+ * displayed via the Main Window of the application.
  */
 public class TransactionListPanel extends UiPart<Region> {
     private static final String FXML = "TransactionListPanel.fxml";
@@ -31,16 +32,20 @@ public class TransactionListPanel extends UiPart<Region> {
         transactionListView.setCellFactory(
                 listView -> new TransactionListViewCell(transactionList));
 
-        // Binds items property of the ListView to an ObservableList. Whenever the list is
-        // updated (like reversing its order), the ListView will reflect the changes. The
-        // item of the ListView is kept in sync with a reversed version of the ObservableList.
-        transactionListView.itemsProperty().bind(Bindings.createObjectBinding(() -> {
-            ObservableList<Transaction> reversedList =
-                    FXCollections.observableArrayList(transactionList);
-            FXCollections.reverse(reversedList);
-            return reversedList;
+        /* Binds items property of the ListView to an ObservableList. Whenever the list is
+         * updated (like reversing its order), the ListView will reflect the changes. The
+         * item of the ListView is kept in sync with a reversed version of the ObservableList. */
+        transactionListView.itemsProperty()
+                .bind(
+                        Bindings.createObjectBinding(() -> {
+                            ObservableList<Transaction> reversedList =
+                                    FXCollections.observableArrayList(transactionList);
 
-        }, transactionList));
+                            FXCollections.reverse(reversedList);
+
+                            return reversedList;
+                        }, transactionList)
+            );
     }
 
     /**
@@ -53,7 +58,7 @@ public class TransactionListPanel extends UiPart<Region> {
 
         /**
          * Creates a TransactionListViewCell taking in an ObservableList
-         * parameterized to Transactions. This would later be used for retrieving the
+         * type parameterized to Transactions. This would later be used for retrieving the
          * maximum size of the transactions list which would later be used to determine
          * the correct transaction index to display, taking into account the reversed order.
          *
