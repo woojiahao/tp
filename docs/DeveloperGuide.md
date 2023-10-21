@@ -200,6 +200,33 @@ the filtered transaction with a success message.
   - 2a1. UniCa$h displays an error message with the correct command format.
   - Use case resumes at step 1.
 
+## Implementation
+
+This section aims to describe the implementation of the features in UniCash.
+
+There are 3 main group of features we have came up with.
+1. Transaction
+2. Budget
+3. General
+
+### Transaction
+
+<img src="images/unicash/TransactionClassDiagram.png" width="700" />
+
+UniCash tracks transactions with the use of `TransactionList` and `Transaction`. `TransactionList` acts
+as a wrapper for a list of `Transaction` that enforces no `null`.
+
+#### Add Transaction
+
+The `add_transaction` command adds a new `Transaction` to the `TransactionList` in UniCash.
+
+The activity diagram of adding a Transaction is as shown below
+
+<img src="images/unicash/AddTransactionActivityDiagram.png" width="700" />
+
+The following sequence diagram shows how the different components of UniCash interact with each other
+
+<img src="images/unicash/AddTransactionSequenceDiagram.png" width="700" />
 
 ## Links
 User Stories: [https://github.com/orgs/AY2324S1-CS2103-T16-3/projects/1/views/2](https://github.com/orgs/AY2324S1-CS2103-T16-3/projects/1/views/2)
