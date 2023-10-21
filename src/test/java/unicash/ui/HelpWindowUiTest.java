@@ -1,12 +1,10 @@
 package unicash.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-
 import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
@@ -17,7 +15,7 @@ import javafx.stage.Stage;
 @ExtendWith(ApplicationExtension.class)
 public class HelpWindowUiTest {
 
-   private HelpWindow helpWindow;
+    private HelpWindow helpWindow;
 
     @Start
     public void start(Stage stage) {

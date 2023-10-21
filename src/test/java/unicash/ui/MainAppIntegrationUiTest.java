@@ -10,14 +10,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.io.TempDir;
-
 import org.testfx.api.FxRobot;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.util.WaitForAsyncUtils;
-import unicash.MainApp;
 
 import javafx.scene.input.KeyCode;
+import unicash.MainApp;
 
 @ExtendWith(ApplicationExtension.class)
 public class MainAppIntegrationUiTest {

@@ -3,8 +3,8 @@ name: Java UI Unit Tests (Linux)
 on: [push, pull_request]
 
 env:
-  _JAVA_OPTIONS='-Djava.awt.headless=true -Dtestfx.robot=glass -Dtestfx.headless=true -Dprism.order=sw'
-  DISPLAY=':99.0'
+  _JAVA_OPTIONS: -Djava.awt.headless=true -Dtestfx.robot=glass -Dtestfx.headless=true -Dprism.order=sw
+  DISPLAY: :99.0
 
 jobs:
   build:
