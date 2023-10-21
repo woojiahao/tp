@@ -5,7 +5,7 @@ import unicash.model.Model;
 /**
  * Terminates UniCa$h.
  */
-public class ExitCommandUniCash extends Command {
+public class ExitCommand extends Command {
 
     public static final String COMMAND_WORD = "exit";
 
