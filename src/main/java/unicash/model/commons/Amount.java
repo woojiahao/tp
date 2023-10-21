@@ -10,6 +10,8 @@ public class Amount {
     public static final String MESSAGE_CONSTRAINTS =
             "Amounts must be positive.";
 
+    public static final String CURRENCY_INDICATOR = "$";
+
     public final double amount;
 
     /**
@@ -19,7 +21,7 @@ public class Amount {
      */
     public Amount(double amount) {
         checkArgument(isValidAmount(amount), MESSAGE_CONSTRAINTS);
-        this.amount = amount;
+        this.amount = Math.round(amount * 100.0) / 100.0;
     }
 
     /**
@@ -57,8 +59,13 @@ public class Amount {
         return formattedNumberString;
     }
 
+
+    public String originalString() {
+        return Double.toString(amount);
+    }
+
     @Override
     public String toString() {
-        return Double.toString(amount);
+        return CURRENCY_INDICATOR + String.format("%.2f", this.amount);
     }
 }

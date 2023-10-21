@@ -1,5 +1,6 @@
 package unicash.ui;
 
+import static unicash.ui.StyleSheet.FONT_STYLE_BOLD;
 import static unicash.ui.StyleSheet.TEXT_BACKGROUND_COLOR;
 import static unicash.ui.StyleSheet.TEXT_FILL_BLACK;
 import static unicash.ui.StyleSheet.TEXT_FILL_GREEN;
@@ -79,13 +80,12 @@ public class TransactionCard extends UiPart<Region> {
     public TransactionCard(Transaction transaction, int displayedIndex) {
         super(FXML);
         this.transaction = transaction;
-        id.setText(displayedIndex + ". ");
+        id.setText(displayedIndex + TRANSACTION_ID_SEPARATOR);
         this.idStyleFormatter(displayedIndex);
         this.nameStyleFormatter();
         this.dateTimeStyleFormatter();
         this.transactionLocationStyleFormatter();
         this.amountStyleFormatter();
-        //this.categoriesStyleFormatter();
         this.discreteCategoriesStyleFormatter();
     }
 
@@ -146,7 +146,7 @@ public class TransactionCard extends UiPart<Region> {
     }
 
 
-    /*
+    /**
      * For better presentation of the transaction amounts, instead of using the
      * toString method of the transaction amount directly, a dollar symbol is prepended
      * to the transaction, along with the polarity of the transaction depending on whether
@@ -173,24 +173,29 @@ public class TransactionCard extends UiPart<Region> {
     }
 
 
-    /* For better presentation of the transaction category, instead of using the
+    /**
+     * For better presentation of the transaction category, instead of using the
      * toString method of the UniqueCategoryList directly, the leading and trailing
      * square brackets are trimmed, and prepended with a "hashtag".
      */
-    /*private void categoriesStyleFormatter() {
+    private void categoriesStyleFormatter() {
         String categoriesToString = transaction.getCategories().toString();
         int categoriesToStringLength = categoriesToString.length();
         String trimmedCategoriesToString = categoriesToString
                 .substring(1, categoriesToStringLength - 1);
 
         String categoriesToStringWithHashTag = "#" + trimmedCategoriesToString;
-        categories.setText(categoriesToStringWithHashTag);
-        categories.setStyle(FONT_STYLE_BOLD);
+        firstCategory.setText(categoriesToStringWithHashTag);
+        firstCategory.setStyle(FONT_STYLE_BOLD);
         firstCategory.setText("testing");
         firstCategory.setStyle("-fx-background-color: #FFD43E");
-    }*/
+    }
 
-    /* For color coding every category using its hash value to generate a color */
+    /**
+     * For color coding every category using its hash value to generate a distinct
+     * and unique color without having to store additional color information inside
+     * the {@code Category} class.
+     **/
     private void discreteCategoriesStyleFormatter() {
         UniqueCategoryList categoryUniqueList = transaction.getCategories();
         ObservableList<Category> categoryObservableList =
