@@ -172,7 +172,6 @@ public class TransactionCard extends UiPart<Region> {
 
     }
 
-
     /**
      * For better presentation of the transaction category, instead of using the
      * toString method of the UniqueCategoryList directly, the leading and trailing

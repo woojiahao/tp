@@ -78,7 +78,7 @@
         </SplitPane> <!-- End of SplitPane -->
 
         <!-- The below code contains the StatusBarFooter -->
-        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER"/>
       </VBox>
     </Scene>
   </scene>
