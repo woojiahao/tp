@@ -13,11 +13,12 @@ import unicash.logic.commands.ClearTransactionsCommand;
 import unicash.logic.commands.Command;
 import unicash.logic.commands.DeleteTransactionCommand;
 import unicash.logic.commands.EditTransactionCommand;
-import unicash.logic.commands.ExitCommandUniCash;
+import unicash.logic.commands.ExitCommand;
 import unicash.logic.commands.FindCommand;
 import unicash.logic.commands.GetTotalExpenditureCommand;
-import unicash.logic.commands.HelpCommandUniCash;
+import unicash.logic.commands.HelpCommand;
 import unicash.logic.commands.ListCommand;
+import unicash.logic.commands.ResetCommand;
 import unicash.logic.parser.exceptions.ParseException;
 
 
@@ -42,7 +43,7 @@ public class UniCashParser {
     public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommandUniCash.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
         final String commandWord = matcher.group("commandWord").toLowerCase();
@@ -75,11 +76,14 @@ public class UniCashParser {
         case ClearTransactionsCommand.COMMAND_WORD:
             return new ClearTransactionsCommand();
 
-        case HelpCommandUniCash.COMMAND_WORD:
-            return new HelpCommandUniCash();
+        case ResetCommand.COMMAND_WORD:
+            return new ResetCommand();
 
-        case ExitCommandUniCash.COMMAND_WORD:
-            return new ExitCommandUniCash();
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
+
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
 
 
         default:
