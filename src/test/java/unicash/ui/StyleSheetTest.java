@@ -1,10 +1,9 @@
 package unicash.ui;
 
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class StyleSheetTest {
 
@@ -15,7 +14,7 @@ public class StyleSheetTest {
     }
 
     @Test
-    public void testBrightCategoryColorBrightness() {
+    public void combinedColorBrightness_lessThanThreshold_returnTrue() {
         String color = StyleSheet.getBrightCategoryColorFromHash(new Object());
         int r = Integer.parseInt(color.substring(1, 3), 16);
         int g = Integer.parseInt(color.substring(3, 5), 16);
@@ -27,7 +26,7 @@ public class StyleSheetTest {
     }
 
     @Test
-    public void testBrightCategoryColorSkewness() {
+    public void combinedColorBrightness_isColorSkewed_returnTrue() {
         String color = StyleSheet.getBrightCategoryColorFromHash(new Object() {
             @Override
             public int hashCode() {
@@ -43,6 +42,43 @@ public class StyleSheetTest {
 
             assertTrue(r >= g && g >= b);
         }
+    }
+
+    @Test
+    public void shortHashCodeObject_isColorSkewed_returnTrue() {
+        String color = StyleSheet.getBrightCategoryColorFromHash(new Object() {
+            @Override
+            public int hashCode() {
+                return 000000001;
+            }
+        });
+
+        if (StyleSheet.IS_YELLOW_SKEW) {
+
+            int r = Integer.parseInt(color.substring(1, 3), 16);
+            int g = Integer.parseInt(color.substring(3, 5), 16);
+            int b = Integer.parseInt(color.substring(5, 7), 16);
+
+            assertTrue(r >= g && g >= b);
+        }
+    }
+
+    @Test
+    public void zeroHashCodeObject_parsedToString_returnZero() {
+        String color = StyleSheet.getCategoryColorFromHash(new Object() {
+            @Override
+            public int hashCode() {
+                return 000000000;
+            }
+        });
+
+            int r = Integer.parseInt(color.substring(1, 3), 16);
+            int g = Integer.parseInt(color.substring(3, 5), 16);
+            int b = Integer.parseInt(color.substring(5, 7), 16);
+
+            assertTrue(r == g);
+            assertTrue(r == b);
+            assertTrue(g == b);
     }
 
     @Test
