@@ -377,9 +377,51 @@
     -fx-background-color: #FFD43E;
     -fx-background-radius: 4;
     -fx-font-weight: bold;
-    -fx-font-style: italic;
+    -fx-font-size: 10pt;
 
 }
+
+#firstCategory {
+    -fx-font-family: "Inter";
+    -fx-label-padding: 2 3 2 3;
+    -fx-background-radius: 4;
+    -fx-font-weight: bold;
+    -fx-font-size: 10pt;
+}
+
+#secondCategory {
+    -fx-font-family: "Inter";
+    -fx-label-padding: 2 3 2 3;
+    -fx-background-radius: 4;
+    -fx-font-weight: bold;
+    -fx-font-size: 10pt;
+}
+
+#thirdCategory {
+    -fx-font-family: "Inter";
+    -fx-label-padding: 2 3 2 3;
+    -fx-background-radius: 4;
+    -fx-font-weight: bold;
+    -fx-font-size: 10pt;
+}
+
+#fourthCategory {
+    -fx-font-family: "Inter";
+    -fx-label-padding: 2 3 2 3;
+    -fx-background-radius: 4;
+    -fx-font-weight: bold;
+    -fx-font-size: 10pt;
+}
+
+#fifthCategory {
+    -fx-font-family: "Inter";
+    -fx-label-padding: 2 3 2 3;
+    -fx-background-radius: 4;
+    -fx-font-weight: bold;
+    -fx-font-size: 10pt;
+}
+
+
 
 .bold-label {
     -fx-font-weight: bold;

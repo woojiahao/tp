@@ -167,6 +167,15 @@ public class UniqueCategoryList implements Iterable<Category> {
     }
 
     /**
+     * Returns the size of the encapsulated ObservableList
+     *
+     * @return int size of the list
+     */
+    public int getSize() {
+        return internalList.size();
+    }
+
+    /**
      * Returns true if a given list of categories is less than the maximum allowed categories.
      */
     public static boolean isMoreThanMax(List<Category> categories) {

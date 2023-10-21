@@ -5,13 +5,22 @@ import static unicash.ui.StyleSheet.TEXT_FILL_BLACK;
 import static unicash.ui.StyleSheet.TEXT_FILL_GREEN;
 import static unicash.ui.StyleSheet.TEXT_FILL_RED;
 import static unicash.ui.StyleSheet.TRANSACTION_ID_SEPARATOR;
+import static unicash.ui.StyleSheet.TEXT_BACKGROUND_COLOR;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import unicash.model.commons.Amount;
+import unicash.model.category.Category;
+import unicash.model.category.UniqueCategoryList;
 import unicash.model.transaction.Transaction;
+
 
 /**
  * A UI component that displays information of a {@code Transaction}.
@@ -43,8 +52,23 @@ public class TransactionCard extends UiPart<Region> {
     @FXML
     private Label transactionLocation;
 
+    //@FXML
+    //private Label categories;
+
     @FXML
-    private Label categories;
+    private Label firstCategory;
+
+    @FXML
+    private Label secondCategory;
+
+    @FXML
+    private Label thirdCategory;
+
+    @FXML
+    private Label fourthCategory;
+
+    @FXML
+    private Label fifthCategory;
 
 
     /**
@@ -61,7 +85,8 @@ public class TransactionCard extends UiPart<Region> {
         this.dateTimeStyleFormatter();
         this.transactionLocationStyleFormatter();
         this.amountStyleFormatter();
-        this.categoriesStyleFormatter();
+        //this.categoriesStyleFormatter();
+        this.discreteCategoriesStyleFormatter();
     }
 
     /**
@@ -112,12 +137,12 @@ public class TransactionCard extends UiPart<Region> {
     }
 
     /**
-     * Returns the categories label of the transaction card.
+     * Returns the first Category label of the transaction card.
      *
      * @return A Label containing the categories associated with the transaction.
      */
-    public Label getCategories() {
-        return this.categories;
+    public Label getFirstCategories() {
+        return this.firstCategory;
     }
 
 
@@ -147,12 +172,12 @@ public class TransactionCard extends UiPart<Region> {
 
     }
 
-    /*
-     * For better presentation of the transaction category, instead of using the
+
+    /* For better presentation of the transaction category, instead of using the
      * toString method of the UniqueCategoryList directly, the leading and trailing
      * square brackets are trimmed, and prepended with a "hashtag".
      */
-    private void categoriesStyleFormatter() {
+    /*private void categoriesStyleFormatter() {
         String categoriesToString = transaction.getCategories().toString();
         int categoriesToStringLength = categoriesToString.length();
         String trimmedCategoriesToString = categoriesToString
@@ -161,6 +186,35 @@ public class TransactionCard extends UiPart<Region> {
         String categoriesToStringWithHashTag = "#" + trimmedCategoriesToString;
         categories.setText(categoriesToStringWithHashTag);
         categories.setStyle(FONT_STYLE_BOLD);
+        firstCategory.setText("testing");
+        firstCategory.setStyle("-fx-background-color: #FFD43E");
+    }*/
+
+    /* For color coding every category using its hash value to generate a color */
+    private void discreteCategoriesStyleFormatter() {
+        UniqueCategoryList categoryUniqueList = transaction.getCategories();
+        Iterator<Category> categoryIterator = categoryUniqueList.iterator();
+        ArrayList<Category> categoryArrayList = new ArrayList<>();
+
+        ArrayList<Label> labelArrayList = new ArrayList<>(
+                Arrays.asList(firstCategory, secondCategory, thirdCategory,
+                        fourthCategory, firstCategory)
+                );
+
+        while (categoryIterator.hasNext()) {
+            Category nextCategory = categoryIterator.next();
+            categoryArrayList.add(nextCategory);
+        }
+
+        for (int i = 0; i < categoryArrayList.size(); i++) {
+            Category currentCategory = categoryArrayList.get(i);
+            String categoryColorHexString = currentCategory.getCategoryColorFromHash();
+            Label currentCategoryLabel = labelArrayList.get(i);
+            currentCategoryLabel.setText(currentCategory.hashTagToString());
+            currentCategoryLabel.setStyle(String.format(TEXT_BACKGROUND_COLOR,
+                    categoryColorHexString));
+
+        }
     }
 
     // TODO: Customize transactionLocation label style

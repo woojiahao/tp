@@ -14,6 +14,8 @@ public class Category {
     // Category can only be up to 15 characters long
     public static final String VALIDATION_REGEX = "\\p{Alnum}{1,15}$";
 
+    public static final String CATEGORY_PREFIX_SYMBOL = "#";
+
     public final String category;
 
     /**
@@ -59,5 +61,28 @@ public class Category {
      */
     public String toString() {
         return category;
+    }
+
+    /**
+     * Returns category with a prefixed hashtag
+     */
+    public String hashTagToString() {
+        return CATEGORY_PREFIX_SYMBOL + category.toString();
+    }
+
+    /**
+     * Returns a 6-digit hexadecimal number based on the Category's unique
+     * hash code, to be used as a color indicator.
+     */
+    public String getCategoryColorFromHash() {
+        String hexString = Integer.toHexString(this.hashCode());
+
+        while (hexString.length() < 6) {
+            hexString = "0" + hexString;
+        }
+
+        String categoryColorString = hexString.substring(0, 6).toUpperCase();
+
+        return "#" + categoryColorString;
     }
 }

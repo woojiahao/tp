@@ -20,4 +20,7 @@ public class StyleSheet {
     // Custom text formatting
     public static final String TRANSACTION_ID_SEPARATOR = ". ";
 
+    // Text background coloring
+    public static final String TEXT_BACKGROUND_COLOR = "-fx-background-color: %s";
+
 }

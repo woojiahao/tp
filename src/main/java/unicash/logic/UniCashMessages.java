@@ -48,8 +48,13 @@ public class UniCashMessages {
                 .append(transaction.getDateTime())
                 .append("; \nLocation: ")
                 .append(transaction.getLocation())
-                .append("; \nCategory: ");
-        transaction.getCategories().forEach(builder::append);
+                .append("; \nCategories: ");
+
+        transaction.getCategories().forEach(x -> {
+            builder.append(x.hashTagToString());
+            builder.append(" ");
+        });
+
         return builder.toString();
     }
 }
