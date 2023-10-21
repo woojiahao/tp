@@ -37,16 +37,16 @@ public class EditTransactionCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the transaction identified "
             + "by the index number used in the displayed transaction list."
-            + "Existing values will be overwritten by the input values!\n"
-            + "\n"
+            + "Existing values will be overwritten by the input values!"
+            + "\n\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_TYPE + "TYPE] "
             + "[" + PREFIX_AMOUNT + "AMOUNT] "
             + "[" + PREFIX_DATETIME + "DATETIME] "
             + "[" + PREFIX_LOCATION + "LOCATION]"
-            + "[" + PREFIX_CATEGORY + "CATEGORY]...\n"
-            + "\n"
+            + "[" + PREFIX_CATEGORY + "CATEGORY]..."
+            + "\n\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME + "Buying groceries "
             + PREFIX_TYPE + "expense "
@@ -56,7 +56,7 @@ public class EditTransactionCommand extends Command {
             + PREFIX_CATEGORY + "household expenses ";
 
 
-    public static final String MESSAGE_EDIT_TRANSACTION_SUCCESS = "Edited Transaction: %1$s";
+    public static final String MESSAGE_EDIT_TRANSACTION_SUCCESS = "Edited Transaction: \n\n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
     private final Index index;

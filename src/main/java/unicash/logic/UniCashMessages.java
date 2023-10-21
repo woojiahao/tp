@@ -38,7 +38,8 @@ public class UniCashMessages {
      */
     public static String formatTransaction(Transaction transaction) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(transaction.getName())
+        builder.append("Name: ")
+                .append(transaction.getName())
                 .append("; \nType: ")
                 .append(transaction.getType())
                 .append("; \nAmount: ")
