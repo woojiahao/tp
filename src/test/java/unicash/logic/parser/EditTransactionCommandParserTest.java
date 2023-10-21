@@ -43,7 +43,7 @@ import unicash.commons.core.index.Index;
 import unicash.logic.UniCashMessages;
 import unicash.logic.commands.EditTransactionCommand;
 import unicash.model.category.Category;
-import unicash.model.transaction.Amount;
+import unicash.model.commons.Amount;
 import unicash.model.transaction.DateTime;
 import unicash.model.transaction.Location;
 import unicash.model.transaction.Name;

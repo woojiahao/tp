@@ -34,10 +34,10 @@ public enum TransactionType {
     }
 
     /**
-     * Returns a boolean value if a given string is a valid TransactionType
+     * Returns a boolean value if a given string is a valid TransactionType.
      *
-     * @param test a string value to be tested
-     * @return a boolean value if the given string is a valid enum
+     * @param test a string value to be tested.
+     * @return a boolean value if the given string is a valid enum.
      */
     public static boolean isValidTransactionType(String test) {
         return Arrays.stream(values())
@@ -45,7 +45,7 @@ public enum TransactionType {
     }
 
     /**
-     * Returns a list of all transaction types separated by commas
+     * Returns a list of all transaction types separated by commas.
      */
     public static String listTransactionTypes() {
         StringJoiner stringJoiner = new StringJoiner(", ");
