@@ -37,7 +37,7 @@ import org.junit.jupiter.api.Test;
 import unicash.logic.UniCashMessages;
 import unicash.logic.commands.AddTransactionCommand;
 import unicash.model.category.Category;
-import unicash.model.transaction.Amount;
+import unicash.model.commons.Amount;
 import unicash.model.transaction.Transaction;
 import unicash.model.transaction.Type;
 import unicash.testutil.TransactionBuilder;

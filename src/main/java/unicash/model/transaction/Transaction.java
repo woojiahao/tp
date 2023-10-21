@@ -6,9 +6,10 @@ import java.util.Objects;
 
 import unicash.commons.util.ToStringBuilder;
 import unicash.model.category.UniqueCategoryList;
+import unicash.model.commons.Amount;
 
 /**
- * Represents a Transaction in the finance tracker.
+ * Represents a Transaction in the UniCash.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Transaction {
