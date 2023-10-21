@@ -9,7 +9,7 @@ import unicash.model.transaction.TransactionNameContainsKeywordsPredicate;
 
 /**
  * Finds and lists all transactions in UniCa$h whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
 
