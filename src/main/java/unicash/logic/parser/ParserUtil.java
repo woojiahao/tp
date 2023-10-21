@@ -158,7 +158,7 @@ public class ParserUtil {
         if (!UniqueCategoryList.categoriesAreUnique(categoryList)) {
             throw new ParseException(UniqueCategoryList.MESSAGE_DUPLICATION_CONSTRAINTS);
         }
-        
+
         return new UniqueCategoryList(categoryList);
     }
 

@@ -208,7 +208,7 @@ public class TransactionCard extends UiPart<Region> {
 
         for (int i = 0; i < categoryArrayList.size(); i++) {
             Category currentCategory = categoryArrayList.get(i);
-            String categoryColorHexString = currentCategory.getCategoryColorFromHash();
+            String categoryColorHexString = currentCategory.getBrightCategoryColorFromHash();
 
             Label currentCategoryLabel = labelArrayList.get(i);
 

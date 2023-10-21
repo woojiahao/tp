@@ -22,5 +22,6 @@ public class StyleSheet {
 
     // Text background coloring
     public static final String TEXT_BACKGROUND_COLOR = "-fx-background-color: %s";
+    public static final int CATEGORY_BRIGHTNESS_THRESHOLD = 145;
 
 }
