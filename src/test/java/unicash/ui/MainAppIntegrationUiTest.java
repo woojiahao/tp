@@ -20,13 +20,13 @@ import unicash.MainApp;
 import javafx.scene.input.KeyCode;
 
 @ExtendWith(ApplicationExtension.class)
-public class HelpWindowTest {
+public class MainAppIntegrationUiTest {
 
     @TempDir
     Path tempDir;
 
     @BeforeEach
-    public void runAppToTests() throws Exception {
+    public void runAppToTests() throws TimeoutException {
         FxToolkit.registerPrimaryStage();
         FxToolkit.setupApplication(() -> new MainApp(tempDir.resolve("ui_data.json")));
         FxToolkit.showStage();
@@ -38,8 +38,11 @@ public class HelpWindowTest {
         FxToolkit.cleanupStages();
     }
 
+    /**
+     * Integration test to handle user input to showing help window
+     */
     @Test
-    public void userInput_help_showHelpWindowAsRoot(FxRobot robot) {
+    public void userInput_help_showHelpWindowAsRoot(FxRobot robot) throws TimeoutException {
         var beforeHelpContainer = robot.lookup("#helpMessageContainer").tryQuery();
         assertTrue(beforeHelpContainer.isEmpty());
         robot.clickOn("#commandBoxPlaceholder");

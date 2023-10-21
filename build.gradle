@@ -21,6 +21,18 @@ checkstyle {
 }
 
 test {
+    doFirst {
+        exclude "**/**UiTest*"
+    }
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+// Specialized task to run only UI related unit tests
+tasks.register('uiTest', Test) {
+    doFirst {
+        include "**/**UiTest*"
+    }
     useJUnitPlatform()
     finalizedBy jacocoTestReport
 }
@@ -67,6 +79,7 @@ dependencies {
     testImplementation "org.testfx:testfx-core:4.0.17"
     testImplementation "org.testfx:testfx-junit5:4.0.17"
     testImplementation group: 'org.hamcrest', name: 'hamcrest', version: '2.1'
+    testImplementation "org.testfx:openjfx-monocle:jdk-11+26"
 }
 
 shadowJar {
