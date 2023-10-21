@@ -209,7 +209,9 @@ public class TransactionCard extends UiPart<Region> {
         for (int i = 0; i < categoryArrayList.size(); i++) {
             Category currentCategory = categoryArrayList.get(i);
             String categoryColorHexString = currentCategory.getCategoryColorFromHash();
+
             Label currentCategoryLabel = labelArrayList.get(i);
+
             currentCategoryLabel.setText(currentCategory.hashTagToString());
             currentCategoryLabel.setStyle(String.format(TEXT_BACKGROUND_COLOR,
                     categoryColorHexString));
