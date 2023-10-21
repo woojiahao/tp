@@ -5,6 +5,7 @@ import static unicash.ui.StyleSheet.TEXT_FILL_BLACK;
 import static unicash.ui.StyleSheet.TEXT_FILL_GREEN;
 import static unicash.ui.StyleSheet.TEXT_FILL_RED;
 import static unicash.ui.StyleSheet.TRANSACTION_ID_SEPARATOR;
+import static unicash.ui.StyleSheet.getBrightCategoryColorFromHash;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -208,7 +209,8 @@ public class TransactionCard extends UiPart<Region> {
 
         for (int i = 0; i < categoryArrayList.size(); i++) {
             Category currentCategory = categoryArrayList.get(i);
-            String categoryColorHexString = currentCategory.getBrightCategoryColorFromHash();
+            String categoryColorHexString =
+                    getBrightCategoryColorFromHash(currentCategory);
 
             Label currentCategoryLabel = labelArrayList.get(i);
 
