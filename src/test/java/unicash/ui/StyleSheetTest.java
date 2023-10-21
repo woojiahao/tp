@@ -1,9 +1,9 @@
 package unicash.ui;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class StyleSheetTest {
 
@@ -72,13 +72,13 @@ public class StyleSheetTest {
             }
         });
 
-            int r = Integer.parseInt(color.substring(1, 3), 16);
-            int g = Integer.parseInt(color.substring(3, 5), 16);
-            int b = Integer.parseInt(color.substring(5, 7), 16);
+        int r = Integer.parseInt(color.substring(1, 3), 16);
+        int g = Integer.parseInt(color.substring(3, 5), 16);
+        int b = Integer.parseInt(color.substring(5, 7), 16);
 
-            assertTrue(r == g);
-            assertTrue(r == b);
-            assertTrue(g == b);
+        assertTrue(r == g);
+        assertTrue(r == b);
+        assertTrue(g == b);
     }
 
     @Test
