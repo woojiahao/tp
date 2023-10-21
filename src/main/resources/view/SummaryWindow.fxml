@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Scene?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.stage.Stage?>
+
+<fx:root minHeight="500.0" minWidth="500.0" title="Your UniCa$h Summary" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <icons>
+      <Image url="@/images/help_icon.png" />
+   </icons>
+   <scene>
+      <Scene>
+         <VBox fx:id="summaryMessageContainer" alignment="CENTER" prefHeight="472.0" prefWidth="508.0">
+            <children>
+               <Label fx:id="summaryMessage" text="Expense Summary" />
+               <PieChart fx:id="pieChart" prefHeight="401.0" prefWidth="508.0" />
+            </children>
+         </VBox>
+      </Scene>
+   </scene>
+</fx:root>
