@@ -1,13 +1,11 @@
 package unicash.ui;
 
-import static unicash.ui.StyleSheet.FONT_STYLE_BOLD;
+import static unicash.ui.StyleSheet.TEXT_BACKGROUND_COLOR;
 import static unicash.ui.StyleSheet.TEXT_FILL_BLACK;
 import static unicash.ui.StyleSheet.TEXT_FILL_GREEN;
 import static unicash.ui.StyleSheet.TEXT_FILL_RED;
 import static unicash.ui.StyleSheet.TRANSACTION_ID_SEPARATOR;
-import static unicash.ui.StyleSheet.TEXT_BACKGROUND_COLOR;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -16,9 +14,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import unicash.model.commons.Amount;
 import unicash.model.category.Category;
 import unicash.model.category.UniqueCategoryList;
+import unicash.model.commons.Amount;
 import unicash.model.transaction.Transaction;
 
 
