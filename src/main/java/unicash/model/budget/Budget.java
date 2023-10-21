@@ -4,9 +4,7 @@ import static unicash.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
-import unicash.commons.enums.BudgetInterval;
 import unicash.commons.util.ToStringBuilder;
-import unicash.model.category.UniqueCategoryList;
 import unicash.model.commons.Amount;
 
 /**
@@ -15,15 +13,14 @@ import unicash.model.commons.Amount;
  */
 public class Budget {
     private final Amount amount;
-    private final BudgetInterval interval;
-    private final UniqueCategoryList categories = new UniqueCategoryList();
+    private final Interval interval;
 
 
     /**
      * Constructs a Budget with all fields populated.
      * Guarantees: details are present and not null, field values are validated, immutable.
      */
-    public Budget(Amount amount, BudgetInterval interval) {
+    public Budget(Amount amount, Interval interval) {
         requireAllNonNull(amount, interval);
         this.amount = amount;
         this.interval = interval;
@@ -33,7 +30,7 @@ public class Budget {
         return amount;
     }
 
-    public BudgetInterval getInterval() {
+    public Interval getInterval() {
         return interval;
     }
 
