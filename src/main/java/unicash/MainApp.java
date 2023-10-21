@@ -47,6 +47,16 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
 
+    private final Path storagePath;
+
+    public MainApp(Path storagePath) {
+        this.storagePath = storagePath;
+    }
+
+    public MainApp() {
+        this(null);
+    }
+
     @Override
     public void init() throws Exception {
         logger.info("=============================[ Initializing UniCa$h ]===========================");
@@ -58,6 +68,9 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
+        if (storagePath != null) {
+            userPrefs.setUniCashFilePath(storagePath);
+        }
         UniCashStorage uniCashStorage = new JsonUniCashStorage(userPrefs.getUniCashFilePath());
         storage = new StorageManager(uniCashStorage, userPrefsStorage);
 
