@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 import unicash.logic.commands.AddTransactionCommand;
 import unicash.logic.parser.exceptions.ParseException;
 import unicash.model.category.UniqueCategoryList;
-import unicash.model.transaction.Amount;
+import unicash.model.commons.Amount;
 import unicash.model.transaction.DateTime;
 import unicash.model.transaction.Location;
 import unicash.model.transaction.Name;

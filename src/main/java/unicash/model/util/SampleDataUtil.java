@@ -8,7 +8,7 @@ import unicash.model.ReadOnlyUniCash;
 import unicash.model.UniCash;
 import unicash.model.category.Category;
 import unicash.model.category.UniqueCategoryList;
-import unicash.model.transaction.Amount;
+import unicash.model.commons.Amount;
 import unicash.model.transaction.DateTime;
 import unicash.model.transaction.Location;
 import unicash.model.transaction.Name;
