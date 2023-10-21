@@ -194,6 +194,12 @@ public class UniqueCategoryListTest {
     }
 
     @Test
+    public void getSize_test() {
+        UniqueCategoryList categoryList = new UniqueCategoryList();
+        assertEquals(uniqueCategoryList.getSize(), 0);
+    }
+
+    @Test
     public void hashCode_test() {
         UniqueCategoryList categoryList1 = new UniqueCategoryList();
         UniqueCategoryList categoryList2 = new UniqueCategoryList();
