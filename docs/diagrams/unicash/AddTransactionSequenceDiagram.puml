@@ -6,10 +6,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":UniCashParser" as UniCashParser LOGIC_COLOR
 participant ":AddTransactionCommandParser" as AddTransactionCommandParser LOGIC_COLOR
-participant ":Name" as Name LOGIC_COLOR
-participant ":Type" as Type LOGIC_COLOR
-participant ":Amount" as Amount LOGIC_COLOR
-participant "transaction:Transaction" as Item LOGIC_COLOR
+participant "transaction:Transaction" as Transaction LOGIC_COLOR
 participant "command:AddTransactionCommand" as AddTransactionCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 
@@ -36,29 +33,11 @@ deactivate AddTransactionCommandParser
 UniCashParser -> AddTransactionCommandParser : parse("n/shopping t/expense amt/30")
 activate AddTransactionCommandParser
 
-create Name
-AddTransactionCommandParser -> Name
-activate Name
-Name --> AddTransactionCommandParser
-deactivate Name
-
-create Type
-AddTransactionCommandParser -> Type
-activate Type
-Type --> AddTransactionCommandParser
-deactivate Type
-
-create Amount
-AddTransactionCommandParser -> Amount
-activate Amount
-Amount --> AddTransactionCommandParser
-deactivate Amount
-
-create Item
-AddTransactionCommandParser -> Item
-activate Item
-Item --> AddTransactionCommandParser
-deactivate Item
+create Transaction
+AddTransactionCommandParser -> Transaction
+activate Transaction
+Transaction --> AddTransactionCommandParser : transaction
+deactivate Transaction
 
 create AddTransactionCommand
 AddTransactionCommandParser -> AddTransactionCommand : AddTransactionCommand("transaction")
@@ -81,7 +60,6 @@ activate Model
 
 Model --> AddTransactionCommand
 deactivate Model
-
 
 create CommandResult
 AddTransactionCommand -> CommandResult
