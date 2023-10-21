@@ -22,7 +22,7 @@ import unicash.logic.commands.FindCommand;
 import unicash.logic.commands.GetTotalExpenditureCommand;
 import unicash.logic.commands.HelpCommand;
 import unicash.logic.commands.ListCommand;
-import unicash.logic.commands.ResetUniCashCommand;
+import unicash.logic.commands.ResetCommand;
 import unicash.logic.parser.exceptions.ParseException;
 import unicash.model.transaction.Transaction;
 import unicash.model.transaction.TransactionNameContainsKeywordsPredicate;
@@ -85,9 +85,9 @@ public class UniCashParserTest {
 
     @Test
     public void parseCommand_resetUniCashCommand() throws Exception {
-        assertTrue(parser.parseCommand(ResetUniCashCommand.COMMAND_WORD) instanceof ResetUniCashCommand);
-        assertTrue(parser.parseCommand(ResetUniCashCommand.COMMAND_WORD + " 3")
-                instanceof ResetUniCashCommand);
+        assertTrue(parser.parseCommand(ResetCommand.COMMAND_WORD) instanceof ResetCommand);
+        assertTrue(parser.parseCommand(ResetCommand.COMMAND_WORD + " 3")
+                instanceof ResetCommand);
     }
 
     @Test

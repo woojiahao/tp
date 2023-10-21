@@ -10,7 +10,7 @@ import unicash.model.Model;
  * storage data and populating it with the default UniCa$h containing
  * typical transactions from {@code SampleDataUtil}.
  */
-public class ResetUniCashCommand extends Command {
+public class ResetCommand extends Command {
 
     public static final String COMMAND_WORD = "reset_unicash";
     public static final String MESSAGE_SUCCESS =

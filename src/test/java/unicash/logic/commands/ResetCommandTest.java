@@ -11,7 +11,7 @@ import unicash.model.UniCash;
 import unicash.model.UserPrefs;
 
 
-public class ResetUniCashCommandTest {
+public class ResetCommandTest {
 
     @Test
     public void execute_emptyUniCash_success() {
@@ -19,8 +19,8 @@ public class ResetUniCashCommandTest {
         Model expectedModel = new ModelManager();
         expectedModel.setUniCash(getSampleUniCash());
 
-        assertCommandSuccess(new ResetUniCashCommand(), model,
-                ResetUniCashCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ResetCommand(), model,
+                ResetCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
@@ -29,8 +29,8 @@ public class ResetUniCashCommandTest {
         Model expectedModel = new ModelManager(new UniCash(), new UserPrefs());
         expectedModel.setUniCash(getSampleUniCash());
 
-        assertCommandSuccess(new ResetUniCashCommand(), model,
-                ResetUniCashCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ResetCommand(), model,
+                ResetCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
 }
