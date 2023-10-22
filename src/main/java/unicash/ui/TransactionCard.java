@@ -200,7 +200,7 @@ public class TransactionCard extends UiPart<Region> {
         ArrayList<Label> labelArrayList = new ArrayList<>(
                 Arrays.asList(firstCategory, secondCategory, thirdCategory,
                         fourthCategory, fifthCategory)
-                );
+        );
 
         for (Category c : categoryObservableList) {
             categoryArrayList.add(c);
@@ -246,4 +246,3 @@ public class TransactionCard extends UiPart<Region> {
     }
 
 }
-

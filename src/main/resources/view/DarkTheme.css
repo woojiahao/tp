@@ -378,7 +378,17 @@
     -fx-background-radius: 4;
     -fx-font-weight: bold;
     -fx-font-size: 10pt;
+}
 
+#categoriesLabel {
+    -fx-font-family: "Inter";
+    -fx-label-padding: 2 3 2 3;
+    -fx-background-radius: 4;
+    -fx-font-weight: bold;
+    -fx-font-size: 10pt;
+}
+
+#categoriesFlowPane {
 }
 
 #firstCategory {
