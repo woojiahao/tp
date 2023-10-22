@@ -10,11 +10,11 @@
     <ColumnConstraints hgrow="SOMETIMES"  /> <!-- New column constraint -->
   </columnConstraints>
 
-  <!-- Storage Location -> LEFT SIDE OF STATUS BAR -->
+  <!-- Storage Location: LEFT SIDE OF STATUS BAR -->
   <Label fx:id="saveLocationStatus" styleClass="bold-label" GridPane.columnIndex="0"
          GridPane.halignment="LEFT" style="-fx-padding: 0 0 0 10;"/>
 
-  <!-- BalanceIndicator -> RIGHT SIDE OF STATUS BAR -->
+  <!-- BalanceIndicator: RIGHT SIDE OF STATUS BAR -->
   <Label fx:id="balanceIndicator" styleClass="bold-label" GridPane.columnIndex="1"
          GridPane.halignment="RIGHT" style="-fx-padding: 0 10 0 0;"/>
 
