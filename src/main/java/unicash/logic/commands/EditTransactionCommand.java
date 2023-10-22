@@ -8,7 +8,6 @@ import static unicash.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static unicash.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static unicash.logic.parser.CliSyntax.PREFIX_NAME;
 import static unicash.logic.parser.CliSyntax.PREFIX_TYPE;
-import static unicash.model.Model.PREDICATE_SHOW_ALL_TRANSACTIONS;
 
 import java.util.List;
 import java.util.Objects;

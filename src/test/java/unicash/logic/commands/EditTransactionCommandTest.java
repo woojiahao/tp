@@ -170,9 +170,11 @@ public class EditTransactionCommandTest {
         Transaction transactionInFilteredList = model
                 .getFilteredTransactionList()
                 .get(INDEX_FIRST_TRANSACTION.getZeroBased());
+
         Transaction editedTransaction = new TransactionBuilder(transactionInFilteredList)
                 .withName(VALID_TRANSACTION_NAME_NUS)
                 .build();
+
         EditTransactionCommand editTransactionCommand = new EditTransactionCommand(
                 INDEX_FIRST_TRANSACTION,
                 new EditTransactionDescriptorBuilder()
@@ -189,6 +191,8 @@ public class EditTransactionCommandTest {
                 getTypicalUniCash(),
                 new UserPrefs()
         );
+
+        showTransactionAtIndex(expectedModel, INDEX_FIRST_TRANSACTION);
         expectedModel.setTransaction(model.getFilteredTransactionList().get(0), editedTransaction);
 
         assertCommandSuccess(editTransactionCommand, model, expectedMessage, expectedModel);
