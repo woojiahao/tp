@@ -51,7 +51,7 @@ public class UniCashMessages {
                 .append("; \nCategories: ");
 
         transaction.getCategories().forEach(x -> {
-            builder.append(x.hashTagToString());
+            builder.append(x.categoryToStringWithPrefix());
             builder.append(" ");
         });
 
