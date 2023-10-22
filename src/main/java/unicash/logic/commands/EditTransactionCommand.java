@@ -21,7 +21,7 @@ import unicash.logic.UniCashMessages;
 import unicash.logic.commands.exceptions.CommandException;
 import unicash.model.Model;
 import unicash.model.category.UniqueCategoryList;
-import unicash.model.transaction.Amount;
+import unicash.model.commons.Amount;
 import unicash.model.transaction.DateTime;
 import unicash.model.transaction.Location;
 import unicash.model.transaction.Name;
