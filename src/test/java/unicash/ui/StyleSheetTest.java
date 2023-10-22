@@ -72,7 +72,7 @@ public class StyleSheetTest {
         String color = StyleSheet.getCategoryColorFromHash(new Object() {
             @Override
             public int hashCode() {
-                return 000000000;
+                return 0;
             }
         });
 

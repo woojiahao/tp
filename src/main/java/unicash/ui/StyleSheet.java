@@ -19,13 +19,14 @@ public class StyleSheet {
 
     // Custom text formatting
     public static final String TRANSACTION_ID_SEPARATOR = ". ";
+    public static final String HEX_STRING_PADDING_SPECIFIER = "%6s";
 
     // Color utilities
     public static final String TEXT_BACKGROUND_COLOR = "-fx-background-color: %s";
     public static final int MAX_COLOR_VALUE = 255;
     public static final int HEXADECIMAL_RADIX = 16;
 
-    // Color variables
+    // Color variables and offsets
     public static final int HEX_COLOR_START_INDEX = 0;
     public static final int HEX_COLOR_END_INDEX = 6;
     public static final int BRIGHTNESS_THRESHOLD = 130;
@@ -64,7 +65,7 @@ public class StyleSheet {
         int avg = (r + g + b) / 3;
 
         // The higher this threshold is set in the brighter the category tags will be.
-        // Ideal seems to be between 130 and 140
+        // Ideal seems to be between 130 and 140.
         if (avg < BRIGHTNESS_THRESHOLD) {
             r = adjustBrightness(r);
             g = adjustBrightness(g);
@@ -91,16 +92,17 @@ public class StyleSheet {
      * hash code, to be used as a color indicator, without any color offsetting
      */
     public static String getCategoryColorFromHash(Object obj) {
-        // Absolute value of hash code taken to guard against negative values
-        String hexString = Integer.toHexString(
-                Math.abs(obj.hashCode()));
+
+        // Absolute value of hash code taken to guard against negative hash values
+        String hexString = Integer.toHexString(Math.abs(obj.hashCode()));
 
         // Padding for hash codes that are less than 6 digits long
-        while (hexString.length() < 6) {
-            hexString = "0" + hexString;
-        }
+        hexString = hexString.length() < 6
+                ? String.format(HEX_STRING_PADDING_SPECIFIER, hexString).replace(' ', '0')
+                : hexString;
 
-        String categoryColorString = hexString.substring(0, 6).toUpperCase();
+        String categoryColorString = hexString.substring(HEX_COLOR_START_INDEX,
+                HEX_COLOR_END_INDEX).toUpperCase();
 
         return "#" + categoryColorString;
     }
