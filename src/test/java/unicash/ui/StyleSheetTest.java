@@ -12,7 +12,6 @@ import static unicash.ui.StyleSheet.FONT_STYLE_BOLD;
 import static unicash.ui.StyleSheet.GREEN_OFFSET;
 import static unicash.ui.StyleSheet.IS_YELLOW_SKEW;
 import static unicash.ui.StyleSheet.MAX_COLOUR_VALUE;
-import static unicash.ui.StyleSheet.MEDIAN_COLOR_VALUE;
 import static unicash.ui.StyleSheet.RED_OFFSET;
 import static unicash.ui.StyleSheet.TEXT_FILL_RED;
 import static unicash.ui.StyleSheet.USE_DEFAULT_STYLE;
@@ -57,25 +56,6 @@ public class StyleSheetTest {
         int totalBrightness = r + g + b;
 
         assertTrue(totalBrightness >= BRIGHTNESS_THRESHOLD);
-    }
-
-    @Test
-    public void combinedColorBrightness_isColorSkewed_returnTrue() {
-        String color = StyleSheet.getBrightCategoryColorFromHash(new Object() {
-            @Override
-            public int hashCode() {
-                return 11111111;
-            }
-        });
-
-        if (IS_YELLOW_SKEW) {
-
-            int r = Integer.parseInt(color.substring(1, 3), 16);
-            int g = Integer.parseInt(color.substring(3, 5), 16);
-            int b = Integer.parseInt(color.substring(5, 7), 16);
-
-            assertTrue(r >= g && g >= b);
-        }
     }
 
     @Test
@@ -127,16 +107,16 @@ public class StyleSheetTest {
 
     @Test
     public void testAdjustBrightness() {
-        assertEquals(MEDIAN_COLOR_VALUE, adjustBrightness(MAX_COLOUR_VALUE));
+        assertEquals(MAX_COLOUR_VALUE, adjustBrightness(MAX_COLOUR_VALUE));
         assertEquals(150 + BRIGHTNESS_OFFSET, adjustBrightness(150));
-        assertEquals(MEDIAN_COLOR_VALUE, adjustBrightness(MAX_COLOUR_VALUE + 1));
+        assertEquals(MAX_COLOUR_VALUE, adjustBrightness(MAX_COLOUR_VALUE + 1));
     }
 
     @Test
     public void testAbsoluteColorAddition() {
         assertEquals(30, absoluteColorAddition(10, 20));
         assertEquals(30, absoluteColorAddition(-10, 40));
-        assertEquals(MEDIAN_COLOR_VALUE, absoluteColorAddition(255, 255));
+        assertEquals(MAX_COLOUR_VALUE, absoluteColorAddition(255, 255));
     }
 
     @Test
