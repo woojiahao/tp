@@ -3,24 +3,35 @@ package unicash.model.commons;
 import static unicash.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Transaction's amount.
+ * Represents a Transaction's amount. Amounts are stored as a double with
+ * a maximum precision of 2 decimal places as with most general financial
+ * transactions in the real world. All amounts must be positive, and amounts
+ * exceeding the above mandated precision will be rounded (not truncated) to
+ * 2 decimal places. Amounts, if represented as a string, will be prefixed with
+ * a currency indicator.
  */
 public class Amount {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Amounts must be positive.";
 
+    public static final String MESSAGE_STRING_CONSTRAINTS =
+            "Amounts must be valid if entered as a String e.g. $[AMOUNT] ";
+
+    // Indicates the currency currently being used, set to dollar by default.
     public static final String CURRENCY_INDICATOR = "$";
 
     public final double amount;
 
     /**
-     * Constructs a {@code Amount}.
+     * Constructs an {@code Amount}.
      *
      * @param amount A valid amount.
      */
     public Amount(double amount) {
         checkArgument(isValidAmount(amount), MESSAGE_CONSTRAINTS);
+
+        /* A strict rounding of input amounts is enforced to avoid calculation discrepancies */
         this.amount = Math.round(amount * 100.0) / 100.0;
     }
 
@@ -61,6 +72,13 @@ public class Amount {
     }
 
 
+    //TODO: Consider making currency indicators available for the user to input
+    /**
+     * Returns the amount as a string with no currency prefix.
+     * Useful for tests that require simulation of raw user input.
+     *
+     * @return the amount as a String
+     */
     public String originalString() {
         return Double.toString(amount);
     }
@@ -70,3 +88,4 @@ public class Amount {
         return CURRENCY_INDICATOR + String.format("%.2f", this.amount);
     }
 }
+

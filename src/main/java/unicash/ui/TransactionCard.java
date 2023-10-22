@@ -19,7 +19,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import unicash.model.category.Category;
 import unicash.model.category.UniqueCategoryList;
-import unicash.model.commons.Amount;
 import unicash.model.transaction.Transaction;
 
 
@@ -52,9 +51,6 @@ public class TransactionCard extends UiPart<Region> {
 
     @FXML
     private Label transactionLocation;
-
-    //@FXML
-    //private Label categories;
 
     @FXML
     private Label firstCategory;
@@ -154,17 +150,16 @@ public class TransactionCard extends UiPart<Region> {
      * set the color of the amount Label text based on their type.
      */
     private void amountStyleFormatter() {
-        String transactionAmountWithDecimal = Amount.amountToDecimalString(transaction.getAmount());
-        String dollarTransactionWithDecimal = "$" + transactionAmountWithDecimal;
+        String formattedTransactionAmount = transaction.getAmount().toString();
+        String transactionType = transaction.getTypeString();
 
-        String transactionType = transaction.getType().toString().toLowerCase();
-        String transactionPolarity = transactionType.equals("expense") ? "-" : "+";
-        String transactionCardString = transactionPolarity + dollarTransactionWithDecimal;
+        String transactionSign = transactionType.equals("expense") ? "-" : "+";
+        String transactionCardString = transactionSign + formattedTransactionAmount;
         amount.setText(transactionCardString);
 
-        if (transactionPolarity.equals("-")) { // Set color to red or green depending on amt
+        if (transactionSign.equals("-")) { // Set color to red or green depending on amt
             amount.setStyle(TEXT_FILL_RED);
-        } else if (transactionPolarity.equals("+")) {
+        } else if (transactionSign.equals("+")) {
             amount.setStyle(TEXT_FILL_GREEN);
         } else {
             amount.setStyle(TEXT_FILL_BLACK);
@@ -205,7 +200,7 @@ public class TransactionCard extends UiPart<Region> {
         ArrayList<Label> labelArrayList = new ArrayList<>(
                 Arrays.asList(firstCategory, secondCategory, thirdCategory,
                         fourthCategory, fifthCategory)
-                );
+        );
 
         for (Category c : categoryObservableList) {
             categoryArrayList.add(c);
@@ -218,7 +213,7 @@ public class TransactionCard extends UiPart<Region> {
 
             Label currentCategoryLabel = labelArrayList.get(i);
 
-            currentCategoryLabel.setText(currentCategory.hashTagToString());
+            currentCategoryLabel.setText(currentCategory.categoryToStringWithPrefix());
             currentCategoryLabel.setStyle(String.format(TEXT_BACKGROUND_COLOR,
                     categoryColorHexString));
 
@@ -251,4 +246,3 @@ public class TransactionCard extends UiPart<Region> {
     }
 
 }
-

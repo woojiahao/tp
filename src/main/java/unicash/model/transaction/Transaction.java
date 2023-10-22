@@ -62,10 +62,6 @@ public class Transaction {
         return type;
     }
 
-    public UniqueCategoryList getCategories() {
-        return categories;
-    }
-
     /**
      * Returns the string value associated with this Type
      *
@@ -73,6 +69,10 @@ public class Transaction {
      */
     public String getTypeString() {
         return type.type.getOriginalString();
+    }
+
+    public UniqueCategoryList getCategories() {
+        return categories;
     }
 
     @Override
