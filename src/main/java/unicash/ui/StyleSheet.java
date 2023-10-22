@@ -38,13 +38,12 @@ public class StyleSheet {
     public static final int COLOR_END_INDEX = 6;
 
     /* Color variables and offsets to be modified according to preference */
-    public static final int BRIGHTNESS_THRESHOLD = 130; // Higher threshold = brighter value, 130 - 140 ideal
-    public static final int BRIGHTNESS_OFFSET = 50; // Default is 64
+    public static final int BRIGHTNESS_THRESHOLD = 150; // Higher threshold = brighter value, 130 - 140 ideal
+    public static final int BRIGHTNESS_OFFSET = 70; // Default is 64
     public static final int RED_OFFSET = 70;
-    public static final int GREEN_OFFSET = 70;
+    public static final int GREEN_OFFSET = 30;
     public static final int BLUE_OFFSET = 0;
     public static final boolean IS_YELLOW_SKEW = true;
-
 
     /**
      * Returns a 6-digit hexadecimal number based on the Category's unique
@@ -102,8 +101,7 @@ public class StyleSheet {
         if (IS_YELLOW_SKEW) {
             r = Math.min(MAX_COLOUR_VALUE, absoluteColorAddition(r, RED_OFFSET));
             g = Math.min(MAX_COLOUR_VALUE, absoluteColorAddition(g, GREEN_OFFSET));
-            b = Math.min(absoluteColorAddition(b, BLUE_OFFSET),
-                    absoluteColorAddition(r, g) / 4);
+            b = Math.min(absoluteColorAddition(b, BLUE_OFFSET), r + g / 4);
         }
 
         objectColorString = String.format(HEX_COLOR_STRING_SPECIFIER, r, g, b);
@@ -127,7 +125,7 @@ public class StyleSheet {
 
     /**
      * Helper guard function that returns the absolute value of the sum of 2 integers,
-     * but returns the median color value if the max color threshold is exceeded.
+     * but returns the max color value if the max color threshold is exceeded.
      *
      * @param a the first integer to be added
      * @param b the second integer to be added
@@ -135,7 +133,7 @@ public class StyleSheet {
      */
     public static int absoluteColorAddition(int a, int b) {
         return Math.abs(a + b) > MAX_COLOUR_VALUE
-                ? MEDIAN_COLOR_VALUE
+                ? MAX_COLOUR_VALUE
                 : Math.abs(a + b);
     }
 
