@@ -1,5 +1,8 @@
 package unicash.ui;
 
+import static unicash.ui.StyleSheet.TEXT_FILL_GREEN;
+import static unicash.ui.StyleSheet.TEXT_FILL_RED;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -61,9 +64,9 @@ public class StatusBarFooter extends UiPart<Region> {
         balanceIndicator.setText(String.format("Balance: $%.2f", balance));
 
         if (balance < 0) {
-            balanceIndicator.setStyle(unicash.ui.StyleSheet.TEXT_FILL_RED);
+            balanceIndicator.setStyle(TEXT_FILL_RED);
         } else {
-            balanceIndicator.setStyle(unicash.ui.StyleSheet.TEXT_FILL_GREEN);
+            balanceIndicator.setStyle(TEXT_FILL_GREEN);
         }
     }
 

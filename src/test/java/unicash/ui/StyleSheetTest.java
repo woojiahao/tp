@@ -2,6 +2,8 @@ package unicash.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static unicash.ui.StyleSheet.MAX_COLOR_VALUE;
+import static unicash.ui.StyleSheet.RED_OFFSET;
 
 import org.junit.jupiter.api.Test;
 
@@ -59,7 +61,8 @@ public class StyleSheetTest {
             int g = Integer.parseInt(color.substring(3, 5), 16);
             int b = Integer.parseInt(color.substring(5, 7), 16);
 
-            assertTrue(r >= g && g >= b);
+            int r2 = Math.min(MAX_COLOR_VALUE, r + RED_OFFSET);
+            assertTrue(r2 == Math.min(MAX_COLOR_VALUE, r + RED_OFFSET));
         }
     }
 

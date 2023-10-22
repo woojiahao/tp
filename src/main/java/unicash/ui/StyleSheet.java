@@ -30,7 +30,7 @@ public class StyleSheet {
     public static final int HEX_COLOR_END_INDEX = 6;
     public static final int BRIGHTNESS_THRESHOLD = 135;
     public static final int BRIGHTNESS_OFFSET = 64;
-    public static final int RED_OFFSET = 30;
+    public static final int RED_OFFSET = 10;
     public static final int GREEN_OFFSET = 20;
     public static final int BLUE_OFFSET = 00;
     public static final boolean IS_YELLOW_SKEW = true;
