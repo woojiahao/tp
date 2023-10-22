@@ -66,6 +66,15 @@ public class Transaction {
         return categories;
     }
 
+    /**
+     * Returns the string value associated with this Type
+     *
+     * @return string value of type
+     */
+    public String getTypeString() {
+        return type.type.getOriginalString();
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(name, amount, dateTime, location, type, categories);
