@@ -38,10 +38,10 @@ public class StyleSheet {
     public static final int COLOR_END_INDEX = 6;
 
     /* Color variables and offsets to be modified according to preference */
-    public static final int BRIGHTNESS_THRESHOLD = 150; // Higher threshold = brighter value, 130 - 140 ideal
-    public static final int BRIGHTNESS_OFFSET = 70; // Default is 64
+    public static final int BRIGHTNESS_THRESHOLD = 140; // Higher threshold = brighter value, 130 - 140 ideal
+    public static final int BRIGHTNESS_OFFSET = 64; // Default is 64
     public static final int RED_OFFSET = 70;
-    public static final int GREEN_OFFSET = 30;
+    public static final int GREEN_OFFSET = 70;
     public static final int BLUE_OFFSET = 0;
     public static final boolean IS_YELLOW_SKEW = true;
 
