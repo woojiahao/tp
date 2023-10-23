@@ -8,14 +8,12 @@ import static unicash.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static unicash.logic.parser.CliSyntax.PREFIX_NAME;
 import static unicash.logic.parser.CliSyntax.PREFIX_TYPE;
 
-
 import java.time.Month;
 
 import unicash.commons.enums.TransactionType;
 import unicash.commons.util.ToStringBuilder;
 import unicash.logic.UniCashMessages;
 import unicash.logic.commands.exceptions.CommandException;
-import unicash.logic.parser.CliSyntax;
 import unicash.model.Model;
 import unicash.model.category.Category;
 

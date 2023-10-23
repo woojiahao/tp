@@ -9,8 +9,8 @@ import unicash.model.category.UniqueCategoryList;
 import unicash.model.transaction.Transaction;
 
 /**
- * Tests that a {@code Transactions}'s {@code UniqueCategoryList}
- * matches any of the keywords given.
+ * Tests that a {@code Transactions}'s {@code UniqueCategoryList} matches any of
+ * the keywords given.
  */
 public class TransactionCategoryContainsKeywordsPredicate
         implements Predicate<Transaction> {

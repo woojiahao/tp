@@ -9,6 +9,9 @@ import unicash.model.transaction.Transaction;
 
 /**
  * Tests that a {@code Transactions}'s {@code Type} matches any of the keywords given.
+ * Similar to the transaction amount predicate, this predicate only makes sense if the
+ * full transaction type is specified, thus, partial matching will not be flagged as a
+ * match by this predicate.
  */
 public class TransactionTypeContainsKeywordsPredicate
         implements Predicate<Transaction> {
@@ -21,7 +24,7 @@ public class TransactionTypeContainsKeywordsPredicate
     @Override
     public boolean test(Transaction transaction) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsSubstringIgnoreCase(
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(
                         transaction.getType().toString(), keyword));
     }
 

@@ -8,6 +8,13 @@ import unicash.model.transaction.Transaction;
 
 /**
  * Tests that any of a {@code Transactions}'s properties matches any of the keywords given.
+ * Matching in this context either means a partial match of the keyword with the query, or
+ * a full match of the keyword, repeated for each keyword present in the list of keywords.
+ *
+ * </p> The matching depends on the property of the Transaction being matched, and the
+ * most appropriate matching is specified within the associated property predicate. This class
+ * simulates a composed predicate that represents a short-circuiting logical OR of all property
+ * predicates.
  */
 public class TransactionContainsKeywordsPredicate
         implements Predicate<Transaction> {
