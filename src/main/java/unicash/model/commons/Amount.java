@@ -12,11 +12,26 @@ import static unicash.commons.util.AppUtil.checkArgument;
  */
 public class Amount {
 
-    public static final String MESSAGE_CONSTRAINTS =
+    public static final String MESSAGE_SIGN_WARNING =
             "Amounts must be positive.";
+
+    public static final String MESSAGE_RANGE_LIMITS =
+            "Amounts must be between -2^31 and 2^31.";
+
+    public static final String MESSAGE_PRECISION_WARNING =
+            "Amounts must not have more than 2 decimal places!";
 
     public static final String MESSAGE_STRING_CONSTRAINTS =
             "Amounts must be valid if entered as a String e.g. $[AMOUNT] ";
+
+    public static final String MESSAGE_CONSTRAINTS_COMPILED = MESSAGE_SIGN_WARNING
+            + MESSAGE_RANGE_LIMITS
+            + MESSAGE_PRECISION_WARNING
+            + MESSAGE_STRING_CONSTRAINTS;
+
+    public static final String MESSAGE_CONSTRAINTS =
+            "Amounts must be positive.";
+
 
     // Indicates the currency currently being used, set to dollar by default.
     public static final String CURRENCY_INDICATOR = "$";
@@ -36,10 +51,75 @@ public class Amount {
     }
 
     /**
+     * Constructs an {@code Amount} given a String input.
+     *
+     * @param amount A valid amount String.
+     */
+    public Amount(String amount) {
+        checkArgument(isValidAmountString(amount), MESSAGE_STRING_CONSTRAINTS);
+
+        double parsedAmount = Double.parseDouble(amount.substring(1));
+
+        /* A strict rounding of input amounts is enforced to avoid calculation discrepancies */
+        this.amount = Math.round(parsedAmount * 100.0) / 100.0;
+    }
+
+    /**
      * Returns true if a given amount is a non-negative value.
      */
     public static boolean isValidAmount(double amount) {
         return amount >= 0.00;
+    }
+
+    /**
+     * Returns true if a given amount is a non-negative value.
+     */
+    public static boolean isPositiveAmount(double amount) {
+        return amount >= 0.00;
+    }
+
+    /**
+     * Returns true if a given amount is a non-negative value.
+     */
+    public static boolean isWithinRange(double amount) {
+        return (amount > Integer.MIN_VALUE) && (amount < Integer.MAX_VALUE);
+    }
+
+    /**
+     * Returns true if a given amount has less than or equal to two decimal places.
+     */
+    public static boolean hasNoMoreThanTwoDecimalPlaces(double amount) {
+        String stringValue = Double.toString(amount);
+        int decimalIndex = stringValue.indexOf(".");
+
+        // If there's no decimal point, then it has no decimal places
+        if (decimalIndex == -1) {
+            return false;
+        }
+        int decimalCount = stringValue.length() - decimalIndex - 1;
+
+        return decimalCount > 2;
+    }
+
+    /**
+     * Returns true if a given amount, when parsed, is a non-negative value.
+     * Strict validation in place, amount must start with the currency symbol.
+     */
+    public static boolean isValidAmountString(String amount) {
+        amount = amount.trim();
+        String[] amountCharArray = amount.split("");
+
+        if (!amountCharArray[0].equals(CURRENCY_INDICATOR)) {
+            return false;
+        }
+
+        try {
+            Double.parseDouble(amount.substring(1));
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+
+        return true;
     }
 
 
