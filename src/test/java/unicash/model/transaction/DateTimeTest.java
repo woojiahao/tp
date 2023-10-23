@@ -94,6 +94,18 @@ public class DateTimeTest {
     }
 
     @Test
+    public void differentFormatEquals() {
+        //check if different formats are equal using the DateTime.java equals() method
+        DateTime datetime1 = new DateTime("01-01-2001 01:01");
+        DateTime datetime2 = new DateTime("2001-01-01 01:01");
+        DateTime datetime3 = new DateTime("01 Jan 2001 01:01");
+
+        assertTrue(datetime1.equals(datetime2));
+        assertTrue(datetime2.equals(datetime3));
+        assertTrue(datetime1.equals(datetime3));
+    }
+
+    @Test
     public void toStringMethod() {
         DateTime dateTime = new DateTime("18-08-2023 01:01");
         assertEquals(dateTime.toString(), "18 Aug 2023 01:01");

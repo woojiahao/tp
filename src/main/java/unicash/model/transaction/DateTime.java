@@ -15,14 +15,19 @@ import java.util.Objects;
  * Guarantees: immutable;
  */
 public class DateTime {
-    public static final String DATETIME_PATTERN = "dd MMM uuuu HH:mm";
+    public static final String DATETIME_PATTERN_ONE = "dd-MM-uuuu HH:mm";
+    public static final String DATETIME_PATTERN_TWO = "uuuu-MM-dd HH:mm";
+    public static final String DATETIME_STORAGE_PATTERN = "dd MMM uuuu HH:mm";
     public static final String MESSAGE_CONSTRAINTS =
-            "DateTime should be in either of the following formats: "
-                    + "dd-MM-yyyy HH:mm, yyyy-MM-dd HH:mm, dd MMM yyyy HH:mm";
+            "DateTime should be in either of the following formats: " + "\n"
+                    + "1. " + DATETIME_PATTERN_ONE + "\n"
+                    + "2. " + DATETIME_PATTERN_TWO + "\n"
+                    + "3. " + DATETIME_STORAGE_PATTERN + "\n";
     //accept date in multiple formats
     private static final DateTimeFormatterBuilder DATETIME_FORMATTER_BUILDER =
             new DateTimeFormatterBuilder().append(DateTimeFormatter.ofPattern("[dd-MM-uuuu HH:mm]"
-                    + "[uuuu-MM-dd HH:mm]" + "[dd MMM uuuu HH:mm]"));
+                    + "[uuuu-MM-dd HH:mm]"
+                    + "[dd MMM uuuu HH:mm]"));
     private static final DateTimeFormatter DATETIME_FORMATTER = DATETIME_FORMATTER_BUILDER.toFormatter();
 
     private final String originalDateTime;
@@ -98,7 +103,7 @@ public class DateTime {
 
     @Override
     public String toString() {
-        return dateTime.format(DateTimeFormatter.ofPattern(DATETIME_PATTERN));
+        return dateTime.format(DateTimeFormatter.ofPattern(DATETIME_STORAGE_PATTERN));
     }
 
     @Override
