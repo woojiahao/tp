@@ -103,12 +103,14 @@ public class StringUtilTest {
      */
 
     @Test
-    public void containsSubstringIgnoreCase_validInputs_correctResult() {
-
+    public void containsSubstringIgnoreCase_invalidInputs_correctResult() {
         // Empty sentence
         assertFalse(StringUtil.containsSubstringIgnoreCase("", "abc")); // Boundary case
         assertFalse(StringUtil.containsSubstringIgnoreCase("    ", "123"));
+    }
 
+    @Test
+    public void containsSubstringIgnoreCase_validInputs_correctResult() {
         // Matches a partial word only
         assertTrue(StringUtil.containsSubstringIgnoreCase("aaa bbb ccc", "bb"));
         // Sentence word bigger than query word
