@@ -50,7 +50,7 @@ public class TypicalTransactions {
             .withDateTime("18-09-2002 18:17")
             .build();
 
-    // Manually added - Income's details found in {@code CommandTestUtil}
+    // Manually added - Transaction's details found in {@code CommandTestUtil}
     public static final Transaction NUS = new TransactionBuilder().withName(VALID_TRANSACTION_NAME_NUS)
             .withType(VALID_TYPE_EXPENSE)
             .withAmount(VALID_AMOUNT_NUS)
