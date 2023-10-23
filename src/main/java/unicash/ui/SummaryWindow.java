@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import unicash.commons.core.LogsCenter;
@@ -31,6 +32,9 @@ public class SummaryWindow extends UiPart<Stage> {
 
     @FXML
     private PieChart pieChart;
+
+    @FXML
+    private VBox summaryMessageContainer;
 
     private final HashMap<String, Double> expenseSummary;
 
@@ -87,6 +91,7 @@ public class SummaryWindow extends UiPart<Stage> {
         pieChart.getData().clear();
 
         pieChart.getData().addAll(pieChartData);
+        summaryMessageContainer.layout();
 
     }
 
