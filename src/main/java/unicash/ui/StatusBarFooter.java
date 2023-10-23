@@ -22,7 +22,7 @@ import unicash.model.transaction.Transaction;
 public class StatusBarFooter extends UiPart<Region> {
 
     private static final String FXML = "StatusBarFooter.fxml";
-    private static final String BALANCE_FORMAT = "Balance: $%.2f";
+    private static final String BALANCE_FORMAT = "Rolling Balance: $%.2f";
 
     @FXML
     private Label saveLocationStatus;
