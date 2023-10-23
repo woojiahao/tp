@@ -67,22 +67,12 @@ public class SummaryWindow extends UiPart<Stage> {
      *     </ul>
      */
     public void show() {
-//        logger.fine("Showing UniCash help page.");
-//        getRoot().show();
-//        getRoot().centerOnScreen();
-
-//        getStage(getRoot()).show();
-
         Stage root = getRoot();
         setPieChart(root);
         root.show();
     }
 
     public void setPieChart(Stage stage) {
-//        Scene scene = new Scene(new Group());
-//        stage.setTitle("Imported Fruits");
-//        stage.setWidth(500);
-//        stage.setHeight(500);
 
         ObservableList<PieChart.Data> pieChartData =
                 FXCollections.observableArrayList(
@@ -91,22 +81,10 @@ public class SummaryWindow extends UiPart<Stage> {
                         new PieChart.Data("Plums", 10),
                         new PieChart.Data("Pears", 22),
                         new PieChart.Data("Apples", 30));
-//        pieChart = new PieChart();
 
         pieChart.getData().clear();
 
         pieChart.getData().addAll(pieChartData);
-//        pieChart.setTitle("Your Expenses");
-
-//        ((Group) scene.getRoot()).getChildren().add(pieChart);
-//        stage.setScene(scene);
-
-//        pieChart.setLabelLineLength(10);
-//        pieChart.setLegendSide(Side.LEFT);
-
-//        final Label caption = new Label("");
-//        caption.setTextFill(Color.DARKORANGE);
-//        caption.setStyle("-fx-font: 24 arial;");
 
     }
 
