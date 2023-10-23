@@ -20,7 +20,7 @@ public class TransactionNameContainsKeywordsPredicate
     @Override
     public boolean test(Transaction transaction) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(
+                .anyMatch(keyword -> StringUtil.containsSubstringIgnoreCase(
                         transaction.getName().fullName, keyword));
     }
 
