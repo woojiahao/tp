@@ -46,7 +46,7 @@ public class TransactionAmountContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_transactionAmountContainsKeywords_returnsTrue() {
+    public void test_amountContainsKeywords_returnsTrue() {
         // One keyword
         TransactionAmountContainsKeywordsPredicate predicate =
                 new TransactionAmountContainsKeywordsPredicate(Collections.singletonList("1.10"));
@@ -64,7 +64,7 @@ public class TransactionAmountContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_transactionAmountDoesNotContainKeywords_returnsFalse() {
+    public void test_amountDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         TransactionAmountContainsKeywordsPredicate predicate =
                 new TransactionAmountContainsKeywordsPredicate(Collections.emptyList());

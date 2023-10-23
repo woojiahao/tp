@@ -46,7 +46,7 @@ public class TransactionCategoryContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_transactionCategoryContainsKeywords_returnsTrue() {
+    public void test_categoriesContainKeywords_returnsTrue() {
         // One keyword
         TransactionCategoryContainsKeywordsPredicate predicate =
                 new TransactionCategoryContainsKeywordsPredicate(Collections.singletonList("food"));
@@ -68,7 +68,7 @@ public class TransactionCategoryContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_transactionCategoryDoesNotContainKeywords_returnsFalse() {
+    public void test_categoriesDoNotContainKeywords_returnsFalse() {
         // Zero keywords
         TransactionCategoryContainsKeywordsPredicate predicate =
                 new TransactionCategoryContainsKeywordsPredicate(Collections.emptyList());

@@ -47,7 +47,7 @@ public class TransactionLocationContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_nameContainsKeywords_returnsTrue() {
+    public void test_locationContainsKeywords_returnsTrue() {
         // One keyword
         TransactionLocationContainsKeywordsPredicate predicate =
                 new TransactionLocationContainsKeywordsPredicate(Collections.singletonList("home"));
@@ -67,7 +67,7 @@ public class TransactionLocationContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_nameDoesNotContainKeywords_returnsFalse() {
+    public void test_locationDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         TransactionLocationContainsKeywordsPredicate predicate =
                 new TransactionLocationContainsKeywordsPredicate(Collections.emptyList());

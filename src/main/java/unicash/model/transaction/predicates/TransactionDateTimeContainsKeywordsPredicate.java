@@ -9,6 +9,8 @@ import unicash.model.transaction.Transaction;
 
 /**
  * Tests that a {@code Transactions}'s {@code DateTime} matches any of the keywords given.
+ * Given that DateTimes are numeric, full word match is required, as in the exact format
+ * specified in {@code DateTime}
  */
 public class TransactionDateTimeContainsKeywordsPredicate
         implements Predicate<Transaction> {
@@ -21,7 +23,7 @@ public class TransactionDateTimeContainsKeywordsPredicate
     @Override
     public boolean test(Transaction transaction) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsSubstringIgnoreCase(
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(
                         transaction.getDateTime().originalString(), keyword));
     }
 
