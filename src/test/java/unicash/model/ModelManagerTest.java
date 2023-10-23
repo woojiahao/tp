@@ -14,13 +14,13 @@ import static unicash.testutil.TypicalTransactions.NUS;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.HashMap;
 
 import org.junit.jupiter.api.Test;
 
 import unicash.commons.core.GuiSettings;
 import unicash.model.transaction.TransactionNameContainsKeywordsPredicate;
 import unicash.model.transaction.exceptions.TransactionNotFoundException;
-import unicash.testutil.TransactionBuilder;
 import unicash.testutil.UniCashBuilder;
 
 public class ModelManagerTest {
@@ -113,6 +113,23 @@ public class ModelManagerTest {
     @Test
     public void getFilteredUniCash_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredTransactionList().remove(0));
+    }
+
+    @Test
+    public void getExpenseSummary_success() {
+        UniCash uniCash = new UniCashBuilder()
+                .withTransaction(NUS)
+                .withTransaction(INTERN)
+                .withTransaction(BUYING_GROCERIES)
+                .build();
+        UserPrefs userPrefs = new UserPrefs();
+        modelManager = new ModelManager(uniCash, userPrefs);
+
+        HashMap<String, Double> expectedExpenseSummary = new HashMap<>();
+        expectedExpenseSummary.put("TA", 888.8);
+        expectedExpenseSummary.put("Food", 8.8);
+
+        assertEquals(modelManager.getExpenseSummary(), expectedExpenseSummary);
     }
 
     @Test

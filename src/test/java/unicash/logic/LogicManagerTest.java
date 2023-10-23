@@ -10,11 +10,17 @@ import static unicash.logic.commands.CommandTestUtil.LOCATION_DESC_NUS;
 import static unicash.logic.commands.CommandTestUtil.TRANSACTION_NAME_DESC_NUS;
 import static unicash.logic.commands.CommandTestUtil.TYPE_DESC_EXPENSE;
 import static unicash.testutil.Assert.assertThrows;
+import static unicash.testutil.TypicalTransactions.BUYING_GROCERIES;
+import static unicash.testutil.TypicalTransactions.DINING_WITH_FRIENDS;
+import static unicash.testutil.TypicalTransactions.INTERN;
 import static unicash.testutil.TypicalTransactions.NUS;
+import static unicash.testutil.TypicalTransactions.SHOPPING;
+import static unicash.testutil.TypicalTransactions.WORK_AT_LIHO;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.util.HashMap;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -89,6 +95,30 @@ public class LogicManagerTest {
     @Test
     public void getFilteredTransactionList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredTransactionList().remove(0));
+    }
+
+    @Test
+    public void getExpenseSummary_success() {
+        var uniCashStorage =
+                new JsonUniCashStorage(temporaryFolder.resolve("unicash.json"));
+        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
+        StorageManager storage = new StorageManager(uniCashStorage, userPrefsStorage);
+
+        Model model = new ModelManager();
+        model.addTransaction(NUS);
+        model.addTransaction(BUYING_GROCERIES);
+        model.addTransaction(WORK_AT_LIHO);
+        model.addTransaction(SHOPPING);
+        model.addTransaction(DINING_WITH_FRIENDS);
+        model.addTransaction(INTERN);
+        logic = new LogicManager(model, storage);
+        HashMap<String, Double> actualOutput = logic.getExpenseSummary();
+
+        HashMap<String, Double> expectedOutput = new HashMap<>();
+        expectedOutput.put("TA", 888.8);
+        expectedOutput.put("Food", 8.8);
+
+        assertEquals(actualOutput, expectedOutput);
     }
 
     @Test
