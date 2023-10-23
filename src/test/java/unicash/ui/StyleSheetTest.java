@@ -20,7 +20,11 @@ import static unicash.ui.StyleSheet.padHexString;
 
 import org.junit.jupiter.api.Test;
 
+import unicash.model.category.Category;
+
 public class StyleSheetTest {
+
+    public static final Category TEST_CATEGORY = new Category("test");
 
     @Test
     public void hexValues_nonNegativeValue_returnTrue() {
@@ -40,7 +44,7 @@ public class StyleSheetTest {
 
     @Test
     public void combinedColorBrightness_lessThanThreshold_returnTrue() {
-        String color = StyleSheet.getBrightColorFromHash(new Object());
+        String color = StyleSheet.getBrightColorFromHash(TEST_CATEGORY);
         int r = Integer.parseInt(color.substring(1, 3), 16);
         int g = Integer.parseInt(color.substring(3, 5), 16);
         int b = Integer.parseInt(color.substring(5, 7), 16);
@@ -52,7 +56,7 @@ public class StyleSheetTest {
 
     @Test
     public void combinedColorBrightness_isColorSkewed_returnTrue() {
-        String color = StyleSheet.getBrightColorFromHash(new Object() {
+        String color = StyleSheet.getBrightColorFromHash(new Category("test") {
             @Override
             public int hashCode() {
                 return 11111111;
@@ -71,7 +75,7 @@ public class StyleSheetTest {
 
     @Test
     public void shortHashCodeObject_isColorSkewed_returnTrue() {
-        String color = StyleSheet.getBrightColorFromHash(new Object() {
+        String color = StyleSheet.getBrightColorFromHash(new Category("test") {
             @Override
             public int hashCode() {
                 return 000000001;
@@ -90,7 +94,7 @@ public class StyleSheetTest {
 
     @Test
     public void zeroHashCodeObject_parsedToString_returnZero() {
-        String color = StyleSheet.getColorFromHash(new Object() {
+        String color = StyleSheet.getColorFromHash(new Category("test") {
             @Override
             public int hashCode() {
                 return 0;
@@ -108,7 +112,7 @@ public class StyleSheetTest {
 
     @Test
     public void testRegularCategoryColor() {
-        String color = StyleSheet.getColorFromHash(new Object());
+        String color = StyleSheet.getColorFromHash(TEST_CATEGORY);
 
         // Check if the color is a valid hex
         assertTrue(color.matches("^#[0-9A-F]{6}$"));
@@ -138,7 +142,8 @@ public class StyleSheetTest {
     @Test
     public void testGetColorOutput() {
         if (USE_DEFAULT_STYLE) {
-            assertEquals("#" + DEFAULT_BACKGROUND_COLOR_HEX, getColorOutput("123456"));
+            assertEquals("#" + DEFAULT_BACKGROUND_COLOR_HEX,
+                    getColorOutput("123456"));
         } else {
             assertEquals("#123456", getColorOutput("123456"));
         }

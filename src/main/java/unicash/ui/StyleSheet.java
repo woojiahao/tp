@@ -1,5 +1,7 @@
 package unicash.ui;
 
+import unicash.model.category.Category;
+
 /**
  * A class to consolidate and standardize all text styling, text formatting
  * and coloring involved in FXML and associated Controller classes.
@@ -49,10 +51,10 @@ public class StyleSheet {
      * Returns a 6-digit hexadecimal number based on the Category's unique
      * hash code, to be used as a color indicator, without any color offsetting.
      */
-    public static String getColorFromHash(Object obj) {
+    public static String getColorFromHash(Category category) {
 
         // Absolute value of hash code taken to guard against negative hash values
-        String hexString = Integer.toHexString(Math.abs(obj.hashCode()));
+        String hexString = Integer.toHexString(Math.abs(category.hashCode()));
 
         // Padding for hash codes that are less than 6 digits long
         hexString = padHexString(hexString);
@@ -71,10 +73,10 @@ public class StyleSheet {
      * generated from the hashcode accords poor {@code Label} visibility,
      * the value is offset such that is always of a certain brightness value.
      */
-    public static String getBrightColorFromHash(Object obj) {
+    public static String getBrightColorFromHash(Category category) {
 
         // Absolute value of hash code taken to guard against negative values
-        String hexString = Integer.toHexString(Math.abs(obj.hashCode()));
+        String hexString = Integer.toHexString(Math.abs(category.hashCode()));
 
         // Padding for hash codes that are less than 6 digits long
         hexString = padHexString(hexString);
@@ -124,8 +126,9 @@ public class StyleSheet {
 
 
     /**
-     * Helper guard function that returns the absolute value of the sum of 2 integers,
-     * but returns the max color value if the max color threshold is exceeded.
+     * Helper guard function that returns the absolute value of the sum of 2
+     * integers, but returns the max color value if the max color threshold is
+     * exceeded.
      *
      * @param a the first integer to be added
      * @param b the second integer to be added
@@ -140,8 +143,8 @@ public class StyleSheet {
     /**
      * Helper function to pad hash converted strings that are smaller than
      * {@code COLOR_END_INDEX} with leading zeros such that they align
-     * syntactically with JavaFX styling specifications. Guards against hash
-     * code that are smaller than 6 digits.
+     * syntactically with JavaFX hexadecimal color specifications. Guards
+     * against hash codes that are smaller than 6 digits.
      *
      * @param hexString the input String
      * @return the padded String
@@ -155,7 +158,8 @@ public class StyleSheet {
 
     /**
      * Helper function that returns the hex color string if the default
-     * flag is false, but returns {@code DEFAULT_BACKGROUND_COLOR_HEX} otherwise.
+     * flag is false, but returns {@code DEFAULT_BACKGROUND_COLOR_HEX}
+     * otherwise.
      *
      * @param colorString the input 6-digit hexadecimal color string
      * @return the hexadecimal color string prefixed with the "#" symbol
