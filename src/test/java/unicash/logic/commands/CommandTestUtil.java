@@ -28,7 +28,7 @@ import unicash.testutil.EditTransactionDescriptorBuilder;
 public class CommandTestUtil {
 
     public static final String VALID_TRANSACTION_NAME_NUS = "Work at NUS";
-    public static final String VALID_TRANSACTION_NAME_INTERN = "Internship";
+    public static final String VALID_TRANSACTION_NAME_INTERN = "Internship work";
     public static final String VALID_TRANSACTION_NAME_SHOPPING = "Shopping";
     public static final String VALID_TYPE_EXPENSE = "expense";
     public static final String VALID_TYPE_INCOME = "income";

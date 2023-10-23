@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static unicash.testutil.Assert.assertThrows;
+import static unicash.testutil.TypicalTransactions.INTERN;
 import static unicash.testutil.TypicalTransactions.NUS;
 
 import java.nio.file.Path;
@@ -56,16 +57,14 @@ public class AddTransactionCommandTest {
 
     @Test
     public void equals() {
-        Transaction nus = new TransactionBuilder().withName("Nus").build();
-        Transaction intern = new TransactionBuilder().withName("Intern").build();
-        AddTransactionCommand addNusCommand = new AddTransactionCommand(nus);
-        AddTransactionCommand addBobCommand = new AddTransactionCommand(intern);
+        AddTransactionCommand addNusCommand = new AddTransactionCommand(NUS);
+        AddTransactionCommand addInternCommand = new AddTransactionCommand(INTERN);
 
         // same object -> returns true
         assertEquals(addNusCommand, addNusCommand);
 
         // same values -> returns true
-        AddTransactionCommand addNusCommandCopy = new AddTransactionCommand(nus);
+        AddTransactionCommand addNusCommandCopy = new AddTransactionCommand(NUS);
         assertEquals(addNusCommand, addNusCommandCopy);
 
         // different types -> returns false
@@ -75,7 +74,7 @@ public class AddTransactionCommandTest {
         assertNotEquals(null, addNusCommand);
 
         // different Transaction -> returns false
-        assertNotEquals(addNusCommand, addBobCommand);
+        assertNotEquals(addNusCommand, addInternCommand);
 
         assertFalse(addNusCommand.equals(2));
     }
@@ -163,7 +162,7 @@ public class AddTransactionCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single transaction.
      */
     private class ModelStubWithTransaction extends AddTransactionCommandTest.ModelStub {
         private final Transaction transaction;
@@ -185,7 +184,7 @@ public class AddTransactionCommandTest {
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the transaction being added.
      */
     private class ModelStubAcceptingTransactionAdded extends AddTransactionCommandTest.ModelStub {
         final ArrayList<Transaction> transactionsAdded = new ArrayList<>();
