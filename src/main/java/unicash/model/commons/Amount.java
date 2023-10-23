@@ -154,12 +154,12 @@ public class Amount {
 
     //TODO: Consider making currency indicators available for the user to input
     /**
-     * Returns the amount as a string with no currency prefix.
+     * Returns the amount along as a string with no currency prefix.
      * Useful for tests that require simulation of raw user input.
      *
      * @return the amount as a String
      */
-    public String originalString() {
+    public String amountString() {
         return Double.toString(amount);
     }
 
