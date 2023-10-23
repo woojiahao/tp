@@ -1,5 +1,6 @@
 package unicash.model.transaction;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -9,9 +10,31 @@ import static unicash.testutil.TypicalTransactions.WORK_AT_LIHO;
 
 import org.junit.jupiter.api.Test;
 
+import unicash.model.category.UniqueCategoryList;
+import unicash.model.commons.Amount;
 import unicash.testutil.TransactionBuilder;
 
 public class TransactionTest {
+
+    @Test
+    public void getAmountAsDouble() {
+        assertEquals(BUYING_GROCERIES.getAmountAsDouble(), 16.75);
+        assertEquals(DINING_WITH_FRIENDS.getAmountAsDouble(), 234.50);
+        assertEquals(WORK_AT_LIHO.getAmountAsDouble(), 888.0);
+    }
+
+    @Test
+    public void initializeTransaction_NonEssentialFieldsMissing_success() {
+        // Missing DateTime, Location, and Category
+        assertDoesNotThrow(() -> new Transaction(
+                new Name("Test"),
+                new Type("expense"),
+                new Amount(3.21),
+                new DateTime(""),
+                new Location(""),
+                new UniqueCategoryList()
+        ));
+    }
 
     @Test
     public void equals() {
