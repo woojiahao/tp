@@ -8,12 +8,10 @@ import static unicash.ui.StyleSheet.BRIGHTNESS_THRESHOLD;
 import static unicash.ui.StyleSheet.COLOR_END_INDEX;
 import static unicash.ui.StyleSheet.COLOR_START_INDEX;
 import static unicash.ui.StyleSheet.DEFAULT_BACKGROUND_COLOR_HEX;
-import static unicash.ui.StyleSheet.FONT_STYLE_BOLD;
 import static unicash.ui.StyleSheet.GREEN_OFFSET;
 import static unicash.ui.StyleSheet.IS_YELLOW_SKEW;
 import static unicash.ui.StyleSheet.MAX_COLOUR_VALUE;
 import static unicash.ui.StyleSheet.RED_OFFSET;
-import static unicash.ui.StyleSheet.TEXT_FILL_RED;
 import static unicash.ui.StyleSheet.USE_DEFAULT_STYLE;
 import static unicash.ui.StyleSheet.absoluteColorAddition;
 import static unicash.ui.StyleSheet.adjustBrightness;
@@ -23,12 +21,6 @@ import static unicash.ui.StyleSheet.padHexString;
 import org.junit.jupiter.api.Test;
 
 public class StyleSheetTest {
-
-    @Test
-    public void testConstants() {
-        assertEquals("-fx-text-fill: red", TEXT_FILL_RED);
-        assertEquals("-fx-font-weight: bold", FONT_STYLE_BOLD);
-    }
 
     @Test
     public void hexValues_nonNegativeValue_returnTrue() {

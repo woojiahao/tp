@@ -79,10 +79,10 @@ public class Amount {
     }
 
     /**
-     * Returns true if a given amount is a non-negative value.
+     * Returns true if a given amount is within the appropriate value.
      */
     public static boolean isWithinRange(double amount) {
-        return (amount > Integer.MIN_VALUE) && (amount < Integer.MAX_VALUE);
+        return (amount >= 0.00 && amount < Integer.MAX_VALUE);
     }
 
     /**

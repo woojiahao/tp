@@ -11,6 +11,7 @@ import static unicash.ui.StyleSheet.getBrightColorFromHash;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -197,10 +198,8 @@ public class TransactionCard extends UiPart<Region> {
         Iterator<Category> categoryIterator = categoryUniqueList.iterator();
         ArrayList<Category> categoryArrayList = new ArrayList<>();
 
-        ArrayList<Label> labelArrayList = new ArrayList<>(
-                Arrays.asList(firstCategory, secondCategory, thirdCategory,
-                        fourthCategory, fifthCategory)
-        );
+        Label[] labelArrayList = new Label[] {firstCategory, secondCategory,
+                thirdCategory, fourthCategory, fifthCategory};
 
         for (Category c : categoryObservableList) {
             categoryArrayList.add(c);
@@ -211,7 +210,7 @@ public class TransactionCard extends UiPart<Region> {
             String categoryColorHexString =
                     getBrightColorFromHash(currentCategory);
 
-            Label currentCategoryLabel = labelArrayList.get(i);
+            Label currentCategoryLabel = labelArrayList[i];
 
             currentCategoryLabel.setText(currentCategory.categoryToStringWithPrefix());
             currentCategoryLabel.setStyle(String.format(TEXT_BACKGROUND_COLOR_SPECIFIER,

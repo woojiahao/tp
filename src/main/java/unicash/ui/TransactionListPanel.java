@@ -65,7 +65,7 @@ public class TransactionListPanel extends UiPart<Region> {
          * @param transactionList the input {@code ObservableList<Transaction>}
          */
         public TransactionListViewCell(ObservableList<Transaction> transactionList) {
-            this.internalTransactionList = transactionList;
+            internalTransactionList = transactionList;
         }
 
         @Override
