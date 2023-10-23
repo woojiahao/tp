@@ -1,5 +1,7 @@
 package unicash.ui;
 
+import static unicash.logic.UniCashMessages.MESSAGE_UNICASH_WELCOME;
+
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
@@ -131,7 +133,7 @@ public class MainWindow extends UiPart<Stage> {
         transactionListPanelPlaceholder.getChildren().add(transactionListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
-        resultDisplay.setFeedbackToUser("Welcome to UniCa$h");
+        resultDisplay.setFeedbackToUser(MESSAGE_UNICASH_WELCOME);
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(
