@@ -66,6 +66,14 @@ public class StatusBarFooter extends UiPart<Region> {
      * falls below 0, or goes into a negative value, the font style is set to the
      * universal red color style, and green otherwise.
      *
+     * </p> It must be noted that given the way {@code MainWindow} interacts with
+     * {@code Logic}, all Commands that result in a change to the filtered list on
+     * display, such as any filter (find, get_total, etc.) commands will result in
+     * the balance being tabulated only for those specific transactions contained in
+     * the current TransactionListPanel. This is the nature of the observable list,
+     * and a persistent universal balance indicator would require modifications to
+     * the interaction between {@code MainWindow} and {@Logic} minimally.
+     *
      * @param transactions the input transactions list to be monitored.
      */
     @FXML
@@ -83,6 +91,7 @@ public class StatusBarFooter extends UiPart<Region> {
         String balanceString = String.format(BALANCE_FORMAT, balance);
         balanceIndicator.setText(balanceString);
 
+        // Set color to green, red, and black for positive, negative and zero respectively.
         if (Double.compare(balance, 0) < 0) {
             balanceIndicator.setStyle(TEXT_FILL_RED);
 
