@@ -10,7 +10,11 @@ import unicash.model.transaction.Transaction;
 /**
  * Tests that a {@code Transactions}'s {@code DateTime} matches any of the keywords given.
  * Given that DateTimes are numeric, full word match is required, as in the exact format
- * specified in {@code DateTime}
+ * specified in {@code DateTime}.
+ *
+ * </p> However, given that the actual specification splits date and time, this property
+ * predicate would work for finding both date and time separately as they are separated
+ * by a space and thus would parse to two words.
  */
 public class TransactionDateTimeContainsKeywordsPredicate
         implements Predicate<Transaction> {
