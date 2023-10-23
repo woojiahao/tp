@@ -1,19 +1,20 @@
-package unicash.model.transaction;
+package unicash.model.transaction.predicates;
+
+import unicash.commons.util.StringUtil;
+import unicash.commons.util.ToStringBuilder;
+import unicash.model.transaction.Transaction;
 
 import java.util.List;
 import java.util.function.Predicate;
 
-import unicash.commons.util.StringUtil;
-import unicash.commons.util.ToStringBuilder;
-
 /**
- * Tests that a {@code Transactions}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Transactions}'s {@code Type} matches any of the keywords given.
  */
-public class TransactionNameContainsKeywordsPredicate
+public class TransactionTypeContainsKeywordsPredicate
         implements Predicate<Transaction> {
     private final List<String> keywords;
 
-    public TransactionNameContainsKeywordsPredicate(List<String> keywords) {
+    public TransactionTypeContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
@@ -21,7 +22,7 @@ public class TransactionNameContainsKeywordsPredicate
     public boolean test(Transaction transaction) {
         return keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsSubstringIgnoreCase(
-                        transaction.getName().fullName, keyword));
+                        transaction.getType().toString(), keyword));
     }
 
     @Override
@@ -31,12 +32,12 @@ public class TransactionNameContainsKeywordsPredicate
         }
 
         // instanceof handles nulls
-        if (!(other instanceof TransactionNameContainsKeywordsPredicate)) {
+        if (!(other instanceof TransactionTypeContainsKeywordsPredicate)) {
             return false;
         }
 
-        TransactionNameContainsKeywordsPredicate otherNameContainsKeywordsPredicate =
-                (TransactionNameContainsKeywordsPredicate) other;
+        TransactionTypeContainsKeywordsPredicate otherNameContainsKeywordsPredicate =
+                (TransactionTypeContainsKeywordsPredicate) other;
         return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
     }
 
