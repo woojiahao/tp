@@ -194,7 +194,6 @@ public class EditTransactionCommandTest {
 
         showTransactionAtIndex(expectedModel, INDEX_FIRST_TRANSACTION);
         expectedModel.setTransaction(model.getFilteredTransactionList().get(0), editedTransaction);
-
         assertCommandSuccess(editTransactionCommand, model, expectedMessage, expectedModel);
     }
 
