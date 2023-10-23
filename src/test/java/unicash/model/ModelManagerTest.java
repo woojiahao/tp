@@ -17,8 +17,8 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import unicash.commons.core.GuiSettings;
-import unicash.model.transaction.predicates.TransactionContainsKeywordsPredicate;
 import unicash.model.transaction.exceptions.TransactionNotFoundException;
+import unicash.model.transaction.predicates.TransactionContainsKeywordsPredicate;
 import unicash.testutil.UniCashBuilder;
 
 public class ModelManagerTest {

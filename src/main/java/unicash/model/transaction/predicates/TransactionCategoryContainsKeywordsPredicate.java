@@ -1,12 +1,12 @@
 package unicash.model.transaction.predicates;
 
+import java.util.List;
+import java.util.function.Predicate;
+
 import unicash.commons.util.StringUtil;
 import unicash.commons.util.ToStringBuilder;
 import unicash.model.category.UniqueCategoryList;
 import unicash.model.transaction.Transaction;
-
-import java.util.List;
-import java.util.function.Predicate;
 
 /**
  * Tests that a {@code Transactions}'s {@code UniqueCategoryList}
@@ -27,6 +27,12 @@ public class TransactionCategoryContainsKeywordsPredicate
                         categoryJoiner(transaction.getCategories()), keyword));
     }
 
+    /**
+     * Returns all categories as a single string.
+     *
+     * @param categoryList
+     * @return
+     */
     public String categoryJoiner(UniqueCategoryList categoryList) {
         String originalToString = categoryList.toString();
         String trimmedToString = originalToString

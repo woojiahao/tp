@@ -12,6 +12,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import unicash.model.transaction.predicates.TransactionContainsKeywordsPredicate;
+import unicash.model.transaction.predicates.TransactionNameContainsKeywordsPredicate;
 import unicash.testutil.TransactionBuilder;
 
 public class TransactionContainsKeywordsPredicateTest {
@@ -69,12 +70,12 @@ public class TransactionContainsKeywordsPredicateTest {
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
-        TransactionContainsKeywordsPredicate predicate =
-                new TransactionContainsKeywordsPredicate(Collections.emptyList());
+        TransactionNameContainsKeywordsPredicate predicate =
+                new TransactionNameContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new TransactionBuilder().withName("Food").build()));
 
         // Non-matching keyword
-        predicate = new TransactionContainsKeywordsPredicate(List.of("Food"));
+        predicate = new TransactionNameContainsKeywordsPredicate(List.of("Food"));
         assertFalse(predicate.test(new TransactionBuilder().withName("Chicken Rice").build()));
     }
 
