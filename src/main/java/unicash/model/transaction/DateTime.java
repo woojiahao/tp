@@ -89,7 +89,7 @@ public class DateTime {
 
     @Override
     public String toString() {
-        return dateTime.format(DateTimeFormatter.ofPattern("HHmm, MMM d yyyy"));
+        return dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm"));
     }
 
     @Override

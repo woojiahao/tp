@@ -26,9 +26,10 @@ public class TransactionDateTimeContainsKeywordsPredicate
 
     @Override
     public boolean test(Transaction transaction) {
-        return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(
-                        transaction.getDateTime().originalString(), keyword));
+        //return keywords.stream()
+            //    .anyMatch(keyword -> StringUtil.containsSubstringIgnoreCase(
+                      //  transaction.getDateTime().toString(), keyword));
+        return transaction.getDateTime().toString().contains(String.join(" ", keywords));
     }
 
     @Override

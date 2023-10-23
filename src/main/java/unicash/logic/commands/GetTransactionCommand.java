@@ -53,7 +53,6 @@ public class GetTransactionCommand extends Command {
 
         Transaction transactionToRetrieve = transactionList.get(index.getZeroBased());
 
-        model.updateFilteredTransactionList(PREDICATE_SHOW_ALL_TRANSACTIONS);
         return new CommandResult(String.format(MESSAGE_GET_TRANSACTION_SUCCESS,
                 UniCashMessages.formatTransaction(transactionToRetrieve)));
     }
