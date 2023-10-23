@@ -24,7 +24,7 @@ public class TransactionTest {
     }
 
     @Test
-    public void initializeTransaction_NonEssentialFieldsMissing_success() {
+    public void initializeTransaction_nonEssentialFieldsMissing_success() {
         // Missing DateTime, Location, and Category
         assertDoesNotThrow(() -> new Transaction(
                 new Name("Test"),
