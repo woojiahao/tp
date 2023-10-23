@@ -10,14 +10,14 @@ import static unicash.commons.util.AppUtil.checkArgument;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces up to 500 characters, "
-                    + "and it should not be blank";
+            "Names should only contain alphanumeric characters, spaces, (, ), _, @, -, #, &, ., and ',', "
+                    + "up to 500 characters and it should not be blank";
 
     /*
      * The first character of the transaction must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "^[\\p{Alnum}][\\p{Alnum} ]{0,499}$";
+    public static final String VALIDATION_REGEX = "^[\\p{Alnum}_&#.,()@-][\\p{Alnum} _&#.,()@-]{0,499}$";
 
     public final String fullName;
 
