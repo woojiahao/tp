@@ -10,7 +10,7 @@ start
 if () then ([else])
   :Parse exception thrown;
   stop
-else ([All compulsary fields are present and in the correct format])
+else ([All compulsory fields are present and in the correct format])
   :Transaction successfully added ;
 endif
 

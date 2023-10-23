@@ -202,18 +202,18 @@ the filtered transaction with a success message.
 
 ## Implementation
 
-This section aims to describe the implementation of the features in UniCash.
+This section aims to describe the implementation of the features in UniCa$h.
 
-There are 3 main group of features we have came up with.
-1. Transaction
-2. Budget
-3. General
+There are 3 main group of features we have come up with.
+1. Transaction Management
+2. Budget Management and Monitoring
+3. General Utility Features
 
 ### Transaction
 
 <img src="images/unicash/TransactionClassDiagram.png" width="700" />
 
-UniCash tracks transactions with the use of `TransactionList` and `Transaction`. `TransactionList` acts
+UniCa$h tracks transactions with the use of `TransactionList` and `Transaction`. `TransactionList` acts
 as a wrapper for a list of `Transaction` that enforces no `null`.
 
 The `Transaction` class is composed of the following fields
@@ -225,7 +225,7 @@ The `Transaction` class is composed of the following fields
 5. `Location`: The location where the transaction took place.
 6. `UniqueCategoryList`: A list of categories to be tagged with the transaction.
 
-For the attributes, there are 3 compulsary fields, namely `Name`, `Type` and
+For the attributes, there are 3 compulsory fields, namely `Name`, `Type` and
 `Amount`. The remaining fields would fall back to a default value if not specified.
 
 #### Add Transaction
@@ -257,7 +257,7 @@ the lifeline reaches the end of diagram.
 4. The `LogicManager` will then invoke the execute command, adding the `Transaction` to the UniCash.
 
 Note that only the `Category` field is allowed to be specified multiple times, while the other fields can only be specified once, else
-a `ParserException` is thrown. Another noteworthy point is that `Category` that are added are to be unique and can only be up to 
+a `ParserException` is thrown. Another noteworthy point is that `Category` that are added are to be case-insensitively unique and can only be up to 
 a specified value in the `UniqueCategoryList` class. Else, a `ParserException` would be thrown.
 
 ## Links
