@@ -1,4 +1,4 @@
-package unicash.model.transaction;
+package unicash.model.predicates;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -11,28 +11,27 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import unicash.model.transaction.predicates.TransactionContainsKeywordsPredicate;
 import unicash.model.transaction.predicates.TransactionNameContainsKeywordsPredicate;
 import unicash.testutil.TransactionBuilder;
 
-public class TransactionContainsKeywordsPredicateTest {
+public class TransactionNameContainsKeywordsPredicateTest {
 
     @Test
     public void equals() {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        TransactionContainsKeywordsPredicate firstPredicate =
-                new TransactionContainsKeywordsPredicate(firstPredicateKeywordList);
-        TransactionContainsKeywordsPredicate secondPredicate =
-                new TransactionContainsKeywordsPredicate(secondPredicateKeywordList);
+        TransactionNameContainsKeywordsPredicate firstPredicate =
+                new TransactionNameContainsKeywordsPredicate(firstPredicateKeywordList);
+        TransactionNameContainsKeywordsPredicate secondPredicate =
+                new TransactionNameContainsKeywordsPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
         assertEquals(firstPredicate, firstPredicate);
 
         // same values -> returns true
-        TransactionContainsKeywordsPredicate firstPredicateCopy =
-                new TransactionContainsKeywordsPredicate(firstPredicateKeywordList);
+        TransactionNameContainsKeywordsPredicate firstPredicateCopy =
+                new TransactionNameContainsKeywordsPredicate(firstPredicateKeywordList);
         assertEquals(firstPredicate, firstPredicateCopy);
 
         // different types -> returns false
@@ -50,20 +49,20 @@ public class TransactionContainsKeywordsPredicateTest {
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
-        TransactionContainsKeywordsPredicate predicate =
-                new TransactionContainsKeywordsPredicate(Collections.singletonList("Food"));
+        TransactionNameContainsKeywordsPredicate predicate =
+                new TransactionNameContainsKeywordsPredicate(Collections.singletonList("Food"));
         assertTrue(predicate.test(new TransactionBuilder().withName("Food at mcdonalds").build()));
 
         // Multiple keywords
-        predicate = new TransactionContainsKeywordsPredicate(Arrays.asList("Food", "mcdonalds"));
+        predicate = new TransactionNameContainsKeywordsPredicate(Arrays.asList("Food", "mcdonalds"));
         assertTrue(predicate.test(new TransactionBuilder().withName("Food mcdonalds").build()));
 
         // Only one matching keyword
-        predicate = new TransactionContainsKeywordsPredicate(Arrays.asList("Chicken", "Rice"));
+        predicate = new TransactionNameContainsKeywordsPredicate(Arrays.asList("Chicken", "Rice"));
         assertTrue(predicate.test(new TransactionBuilder().withName("Chicken Rice").build()));
 
         // Mixed-case keywords
-        predicate = new TransactionContainsKeywordsPredicate(Arrays.asList("fOod", "McDonalds"));
+        predicate = new TransactionNameContainsKeywordsPredicate(Arrays.asList("fOod", "McDonalds"));
         assertTrue(predicate.test(new TransactionBuilder().withName("Food mcdonalds").build()));
     }
 
@@ -82,10 +81,10 @@ public class TransactionContainsKeywordsPredicateTest {
     @Test
     public void toStringMethod() {
         List<String> keywords = List.of("keyword1", "keyword2");
-        TransactionContainsKeywordsPredicate predicate =
-                new TransactionContainsKeywordsPredicate(keywords);
+        TransactionNameContainsKeywordsPredicate predicate =
+                new TransactionNameContainsKeywordsPredicate(keywords);
 
-        String expected = TransactionContainsKeywordsPredicate
+        String expected = TransactionNameContainsKeywordsPredicate
                 .class.getCanonicalName() + "{keywords=" + keywords + "}";
         assertEquals(expected, predicate.toString());
     }
