@@ -70,7 +70,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_oneKeyword_multipleTransactionsFound() {
-        String expectedMessage = String.format(MESSAGE_TRANSACTIONS_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_TRANSACTIONS_LISTED_OVERVIEW, 3);
         TransactionNameContainsKeywordsPredicate predicate = preparePredicate("work");
         FindCommand command = new FindCommand(predicate);
 
@@ -80,8 +80,8 @@ public class FindCommandTest {
         assertCommandSuccess(command, modelWithTransactions, expectedMessage, expectedModel);
 
         var filteredResult = modelWithTransactions.getFilteredTransactionList();
-        assertEquals(filteredResult.get(0), NUS);
-        assertEquals(filteredResult.get(1), INTERN);
+        assertEquals(filteredResult.get(1), NUS);
+        assertEquals(filteredResult.get(2), INTERN);
     }
 
     @Test
