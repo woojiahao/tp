@@ -18,6 +18,7 @@ public class SummaryCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
+        model.updateExpenseSummary();
         return new CommandResult(SHOWING_SUMMARY_MESSAGE, false, false, true);
     }
 }
