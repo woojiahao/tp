@@ -140,6 +140,11 @@ public class ModelManager implements Model {
         expenseSummary.putAll(newExpenseSummary);
     }
 
+    @Override
+    public HashMap<String, Double> getExpenseSummary() {
+        return expenseSummary;
+    }
+
     /**
      * Removes all entries in expenseSummary
      * This public methods is only used during testing to see if different ModelManager

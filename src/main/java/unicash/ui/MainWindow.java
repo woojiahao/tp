@@ -82,7 +82,9 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
-        summaryWindow = new SummaryWindow();
+
+        // link expense summary from model to UI
+        summaryWindow = new SummaryWindow(logic.getExpenseSummary());
     }
 
     public Stage getPrimaryStage() {
@@ -173,6 +175,7 @@ public class MainWindow extends UiPart<Stage> {
         if (!summaryWindow.isShowing()) {
             summaryWindow.show();
         } else {
+            summaryWindow.setPieChart(); // TODO: Remove this and make it real-time
             summaryWindow.focus();
         }
     }

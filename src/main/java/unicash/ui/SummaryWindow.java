@@ -1,5 +1,6 @@
 package unicash.ui;
 
+import java.util.HashMap;
 import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
@@ -31,21 +32,23 @@ public class SummaryWindow extends UiPart<Stage> {
     @FXML
     private PieChart pieChart;
 
+    private final HashMap<String, Double> expenseSummary;
 
     /**
      * Creates a new SummaryWindow.
      *
      * @param root Stage to use as the root of the HelpWindow.
      */
-    public SummaryWindow(Stage root) {
+    public SummaryWindow(Stage root, HashMap<String, Double> expenseSummary) {
         super(FXML, root);
+        this.expenseSummary = expenseSummary;
     }
 
     /**
      * Creates a new SummaryWindow.
      */
-    public SummaryWindow() {
-        this(new Stage());
+    public SummaryWindow(HashMap<String, Double> expenseSummary) {
+        this(new Stage(), expenseSummary);
     }
 
     /**
@@ -68,19 +71,18 @@ public class SummaryWindow extends UiPart<Stage> {
      */
     public void show() {
         Stage root = getRoot();
-        setPieChart(root);
+        setPieChart();
         root.show();
     }
 
-    public void setPieChart(Stage stage) {
+    public void setPieChart() {
 
-        ObservableList<PieChart.Data> pieChartData =
-                FXCollections.observableArrayList(
-                        new PieChart.Data("Grapefruit", 13),
-                        new PieChart.Data("Oranges", 25),
-                        new PieChart.Data("Plums", 10),
-                        new PieChart.Data("Pears", 22),
-                        new PieChart.Data("Apples", 30));
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+        for (HashMap.Entry<String, Double> entry : expenseSummary.entrySet()) {
+            String category = entry.getKey();
+            Double totalAmount = entry.getValue();
+            pieChartData.add(new PieChart.Data(category, totalAmount));
+        }
 
         pieChart.getData().clear();
 
