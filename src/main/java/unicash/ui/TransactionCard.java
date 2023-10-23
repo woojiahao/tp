@@ -9,9 +9,7 @@ import static unicash.ui.StyleSheet.TRANSACTION_ID_SEPARATOR;
 import static unicash.ui.StyleSheet.getBrightColorFromHash;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -199,7 +197,7 @@ public class TransactionCard extends UiPart<Region> {
         ArrayList<Category> categoryArrayList = new ArrayList<>();
 
         Label[] labelArrayList = new Label[] {firstCategory, secondCategory,
-                thirdCategory, fourthCategory, fifthCategory};
+            thirdCategory, fourthCategory, fifthCategory};
 
         for (Category c : categoryObservableList) {
             categoryArrayList.add(c);
