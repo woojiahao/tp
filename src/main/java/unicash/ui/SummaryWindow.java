@@ -6,19 +6,17 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.geometry.Side;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import unicash.commons.core.LogsCenter;
 
+/**
+ * Controller for the pop-up summary window.
+ */
 public class SummaryWindow extends UiPart<Stage> {
 
     public static final String USER_GUIDE_URL = "https://ay2324s1-cs2103-t16-3.github.io/tp/";
@@ -36,23 +34,21 @@ public class SummaryWindow extends UiPart<Stage> {
     @FXML
     private VBox summaryMessageContainer;
 
-    private final HashMap<String, Double> expenseSummary;
 
     /**
      * Creates a new SummaryWindow.
      *
      * @param root Stage to use as the root of the HelpWindow.
      */
-    public SummaryWindow(Stage root, HashMap<String, Double> expenseSummary) {
+    public SummaryWindow(Stage root) {
         super(FXML, root);
-        this.expenseSummary = expenseSummary;
     }
 
     /**
      * Creates a new SummaryWindow.
      */
-    public SummaryWindow(HashMap<String, Double> expenseSummary) {
-        this(new Stage(), expenseSummary);
+    public SummaryWindow() {
+        this(new Stage());
     }
 
     /**
@@ -73,13 +69,16 @@ public class SummaryWindow extends UiPart<Stage> {
      *         </li>
      *     </ul>
      */
-    public void show() {
+    public void show(HashMap<String, Double> expenseSummary) {
         Stage root = getRoot();
-        setPieChart();
+        setPieChart(expenseSummary);
         root.show();
     }
 
-    public void setPieChart() {
+    /**
+     * Updates the pie chart with the data in model.expenseSummary
+     */
+    public void setPieChart(HashMap<String, Double> expenseSummary) {
 
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
         for (HashMap.Entry<String, Double> entry : expenseSummary.entrySet()) {

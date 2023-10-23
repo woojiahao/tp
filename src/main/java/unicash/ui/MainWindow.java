@@ -84,7 +84,7 @@ public class MainWindow extends UiPart<Stage> {
         helpWindow = new HelpWindow();
 
         // link expense summary from model to UI
-        summaryWindow = new SummaryWindow(logic.getExpenseSummary());
+        summaryWindow = new SummaryWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -173,7 +173,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void handleSummary() {
         if (!summaryWindow.isShowing()) {
-            summaryWindow.show();
+            summaryWindow.show(logic.getExpenseSummary());
         } else {
             summaryWindow.focus();
         }
@@ -205,7 +205,7 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            summaryWindow.setPieChart();
+            summaryWindow.setPieChart(logic.getExpenseSummary());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
