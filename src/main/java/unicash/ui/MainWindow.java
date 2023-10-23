@@ -175,7 +175,6 @@ public class MainWindow extends UiPart<Stage> {
         if (!summaryWindow.isShowing()) {
             summaryWindow.show();
         } else {
-            summaryWindow.setPieChart(); // TODO: Remove this and make it real-time
             summaryWindow.focus();
         }
     }
@@ -206,6 +205,7 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            summaryWindow.setPieChart();
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
