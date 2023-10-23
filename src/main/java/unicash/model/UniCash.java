@@ -2,10 +2,12 @@ package unicash.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javafx.collections.ObservableList;
 import unicash.commons.util.ToStringBuilder;
+import unicash.model.category.Category;
 import unicash.model.transaction.Transaction;
 import unicash.model.transaction.TransactionList;
 
@@ -87,6 +89,42 @@ public class UniCash implements ReadOnlyUniCash {
      */
     public void removeTransaction(Transaction key) {
         transactions.remove(key);
+    }
+
+    /**
+     * Returns the amount for each category of expenses.
+     * Note: This function ignores all 'income' transactions
+     */
+    HashMap<String, Double> getSumOfExpensePerCategory() {
+        HashMap<String, Double> sumPerCategory = new HashMap<>();
+        ObservableList<Transaction> allTransactions = getTransactionList();
+        String uncategorizedCategoryName = "Uncategorized";
+        for (Transaction t : allTransactions) {
+            if (t.getType().toString().equals("income")) {
+                continue;
+            }
+            Double transactionAmount = t.getAmountAsDouble();
+            // If t has no categories
+            if (t.getCategories().asUnmodifiableObservableList().isEmpty()) {
+                if (!sumPerCategory.containsKey(uncategorizedCategoryName)) {
+                    sumPerCategory.put(uncategorizedCategoryName, (double) 0);
+                }
+                Double currAmount = sumPerCategory.get(uncategorizedCategoryName);
+                Double newAmount = currAmount + transactionAmount;
+                sumPerCategory.put(uncategorizedCategoryName, newAmount);
+                continue;
+            }
+            // If t has at least one category
+            for (Category transactionCategory : t.getCategories()) {
+                if (!sumPerCategory.containsKey(transactionCategory.category)) {
+                    sumPerCategory.put(transactionCategory.category, (double) 0);
+                }
+                Double currAmount = sumPerCategory.get(transactionCategory.category);
+                Double newAmount = currAmount + transactionAmount;
+                sumPerCategory.put(transactionCategory.category, newAmount);
+            }
+        }
+        return sumPerCategory;
     }
 
     //// util methods

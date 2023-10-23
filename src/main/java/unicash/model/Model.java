@@ -90,4 +90,9 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredTransactionList(Predicate<Transaction> predicate);
+
+    /**
+     * Updates the summary of expenses saved in UniCash.
+     */
+    void updateExpenseSummary();
 }

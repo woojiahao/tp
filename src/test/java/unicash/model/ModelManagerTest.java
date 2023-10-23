@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static unicash.model.Model.PREDICATE_SHOW_ALL_TRANSACTIONS;
 import static unicash.testutil.Assert.assertThrows;
 import static unicash.testutil.TypicalTransactions.BUYING_GROCERIES;
+import static unicash.testutil.TypicalTransactions.INTERN;
 import static unicash.testutil.TypicalTransactions.NUS;
 
 import java.nio.file.Path;
@@ -19,6 +20,7 @@ import org.junit.jupiter.api.Test;
 import unicash.commons.core.GuiSettings;
 import unicash.model.transaction.TransactionNameContainsKeywordsPredicate;
 import unicash.model.transaction.exceptions.TransactionNotFoundException;
+import unicash.testutil.TransactionBuilder;
 import unicash.testutil.UniCashBuilder;
 
 public class ModelManagerTest {
@@ -141,6 +143,11 @@ public class ModelManagerTest {
                 new TransactionNameContainsKeywordsPredicate(Arrays.asList(keywords))
         );
         assertFalse(modelManager.equals(new ModelManager(uniCash, userPrefs)));
+
+        // different expenseSummary -> returns false
+        modelManager.addTransaction(INTERN);
+        modelManagerCopy.clearExpenseSummary();
+        assertFalse(modelManager.equals(modelManagerCopy));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredTransactionList(PREDICATE_SHOW_ALL_TRANSACTIONS);
