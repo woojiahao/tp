@@ -115,17 +115,6 @@ public class SummaryWindow extends UiPart<Stage> {
         getRoot().requestFocus();
     }
 
-    /**
-     * Copies the URL to the user guide to the clipboard.
-     */
-    @FXML
-    private void copyUrl() {
-        final Clipboard clipboard = Clipboard.getSystemClipboard();
-        final ClipboardContent url = new ClipboardContent();
-        url.putString(USER_GUIDE_URL);
-        clipboard.setContent(url);
-    }
-
 }
 
 
