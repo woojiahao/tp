@@ -48,7 +48,7 @@ public class StyleSheetTest {
 
     @Test
     public void combinedColorBrightness_lessThanThreshold_returnTrue() {
-        String color = StyleSheet.getBrightCategoryColorFromHash(new Object());
+        String color = StyleSheet.getBrightColorFromHash(new Object());
         int r = Integer.parseInt(color.substring(1, 3), 16);
         int g = Integer.parseInt(color.substring(3, 5), 16);
         int b = Integer.parseInt(color.substring(5, 7), 16);
@@ -60,7 +60,7 @@ public class StyleSheetTest {
 
     @Test
     public void combinedColorBrightness_isColorSkewed_returnTrue() {
-        String color = StyleSheet.getBrightCategoryColorFromHash(new Object() {
+        String color = StyleSheet.getBrightColorFromHash(new Object() {
             @Override
             public int hashCode() {
                 return 11111111;
@@ -79,7 +79,7 @@ public class StyleSheetTest {
 
     @Test
     public void shortHashCodeObject_isColorSkewed_returnTrue() {
-        String color = StyleSheet.getBrightCategoryColorFromHash(new Object() {
+        String color = StyleSheet.getBrightColorFromHash(new Object() {
             @Override
             public int hashCode() {
                 return 000000001;
@@ -98,7 +98,7 @@ public class StyleSheetTest {
 
     @Test
     public void zeroHashCodeObject_parsedToString_returnZero() {
-        String color = StyleSheet.getCategoryColorFromHash(new Object() {
+        String color = StyleSheet.getColorFromHash(new Object() {
             @Override
             public int hashCode() {
                 return 0;
@@ -116,7 +116,7 @@ public class StyleSheetTest {
 
     @Test
     public void testRegularCategoryColor() {
-        String color = StyleSheet.getCategoryColorFromHash(new Object());
+        String color = StyleSheet.getColorFromHash(new Object());
 
         // Check if the color is a valid hex
         assertTrue(color.matches("^#[0-9A-F]{6}$"));

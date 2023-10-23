@@ -1,12 +1,12 @@
 package unicash.ui;
 
 import static unicash.ui.StyleSheet.FONT_STYLE_BOLD;
-import static unicash.ui.StyleSheet.TEXT_BACKGROUND_COLOR;
+import static unicash.ui.StyleSheet.TEXT_BACKGROUND_COLOR_SPECIFIER;
 import static unicash.ui.StyleSheet.TEXT_FILL_BLACK;
 import static unicash.ui.StyleSheet.TEXT_FILL_GREEN;
 import static unicash.ui.StyleSheet.TEXT_FILL_RED;
 import static unicash.ui.StyleSheet.TRANSACTION_ID_SEPARATOR;
-import static unicash.ui.StyleSheet.getBrightCategoryColorFromHash;
+import static unicash.ui.StyleSheet.getBrightColorFromHash;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import unicash.commons.enums.TransactionType;
 import unicash.model.category.Category;
 import unicash.model.category.UniqueCategoryList;
 import unicash.model.transaction.Transaction;
@@ -77,12 +78,13 @@ public class TransactionCard extends UiPart<Region> {
         super(FXML);
         this.transaction = transaction;
         id.setText(displayedIndex + TRANSACTION_ID_SEPARATOR);
-        this.idStyleFormatter(displayedIndex);
-        this.nameStyleFormatter();
-        this.dateTimeStyleFormatter();
-        this.transactionLocationStyleFormatter();
-        this.amountStyleFormatter();
-        this.discreteCategoriesStyleFormatter();
+
+        idStyleFormatter(displayedIndex);
+        nameStyleFormatter();
+        dateTimeStyleFormatter();
+        transactionLocationStyleFormatter();
+        amountStyleFormatter();
+        discreteCategoriesStyleFormatter();
     }
 
     /**
@@ -91,7 +93,7 @@ public class TransactionCard extends UiPart<Region> {
      * @return A Label containing the name of the transaction.
      */
     public Label getName() {
-        return this.name;
+        return name;
     }
 
     /**
@@ -100,7 +102,7 @@ public class TransactionCard extends UiPart<Region> {
      * @return A Label containing the ID of the transaction.
      */
     public Label getId() {
-        return this.id;
+        return id;
     }
 
     /**
@@ -109,7 +111,7 @@ public class TransactionCard extends UiPart<Region> {
      * @return A Label containing the amount of the transaction.
      */
     public Label getAmount() {
-        return this.amount;
+        return amount;
     }
 
 
@@ -120,7 +122,7 @@ public class TransactionCard extends UiPart<Region> {
      * @return A Label containing the date and time of the transaction.
      */
     public Label getDateTime() {
-        return this.dateTime;
+        return dateTime;
     }
 
     /**
@@ -129,7 +131,7 @@ public class TransactionCard extends UiPart<Region> {
      * @return A Label containing the location of the transaction.
      */
     public Label getTransactionLocation() {
-        return this.transactionLocation;
+        return transactionLocation;
     }
 
     /**
@@ -138,7 +140,7 @@ public class TransactionCard extends UiPart<Region> {
      * @return A Label containing the categories associated with the transaction.
      */
     public Label getFirstCategories() {
-        return this.firstCategory;
+        return firstCategory;
     }
 
 
@@ -153,7 +155,8 @@ public class TransactionCard extends UiPart<Region> {
         String formattedTransactionAmount = transaction.getAmount().toString();
         String transactionType = transaction.getTypeString();
 
-        String transactionSign = transactionType.equals("expense") ? "-" : "+";
+        String transactionSign = transactionType.equalsIgnoreCase(
+                String.valueOf(TransactionType.EXPENSE)) ? "-" : "+";
         String transactionCardString = transactionSign + formattedTransactionAmount;
         amount.setText(transactionCardString);
 
@@ -178,11 +181,8 @@ public class TransactionCard extends UiPart<Region> {
         String trimmedCategoriesToString = categoriesToString
                 .substring(1, categoriesToStringLength - 1);
 
-        String categoriesToStringWithHashTag = "#" + trimmedCategoriesToString;
-        firstCategory.setText(categoriesToStringWithHashTag);
+        firstCategory.setText(categoriesToString);
         firstCategory.setStyle(FONT_STYLE_BOLD);
-        firstCategory.setText("testing");
-        firstCategory.setStyle("-fx-background-color: #FFD43E");
     }
 
     /**
@@ -209,12 +209,12 @@ public class TransactionCard extends UiPart<Region> {
         for (int i = 0; i < categoryArrayList.size(); i++) {
             Category currentCategory = categoryArrayList.get(i);
             String categoryColorHexString =
-                    getBrightCategoryColorFromHash(currentCategory);
+                    getBrightColorFromHash(currentCategory);
 
             Label currentCategoryLabel = labelArrayList.get(i);
 
             currentCategoryLabel.setText(currentCategory.categoryToStringWithPrefix());
-            currentCategoryLabel.setStyle(String.format(TEXT_BACKGROUND_COLOR,
+            currentCategoryLabel.setStyle(String.format(TEXT_BACKGROUND_COLOR_SPECIFIER,
                     categoryColorHexString));
 
         }

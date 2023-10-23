@@ -12,6 +12,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
+import unicash.commons.enums.TransactionType;
+import unicash.model.commons.Amount;
 import unicash.model.transaction.Transaction;
 
 /**
@@ -22,7 +24,8 @@ import unicash.model.transaction.Transaction;
 public class StatusBarFooter extends UiPart<Region> {
 
     private static final String FXML = "StatusBarFooter.fxml";
-    private static final String BALANCE_FORMAT = "Rolling Balance: $%.2f";
+    private static final String POSITIVE_BALANCE_STRING = "Rolling Balance: ";
+    private static final String NEGATIVE_BALANCE_STRING = "Rolling Balance: -";
 
     @FXML
     private Label saveLocationStatus;
@@ -41,7 +44,7 @@ public class StatusBarFooter extends UiPart<Region> {
                            ObservableList<Transaction> transactionList) {
         super(FXML);
         saveLocationStatus.setText("Data source -> " + Paths.get(".").resolve(saveLocation));
-        this.transactions = transactionList;
+        transactions = transactionList;
 
         /*
          * This initiates the first indication of balance upon application start,
@@ -55,7 +58,7 @@ public class StatusBarFooter extends UiPart<Region> {
          * dynamically. This is done with a {@code ListChangeListener} that reports a list
          * of changes done to an {@code ObservableList}
          */
-        this.transactions.addListener((
+        transactions.addListener((
                 ListChangeListener.Change<? extends Transaction> c) -> {
             updateBalance(transactions);
         });
@@ -79,16 +82,23 @@ public class StatusBarFooter extends UiPart<Region> {
     @FXML
     public void updateBalance(ObservableList<Transaction> transactions) {
         double balance = 0.0;
+        String balanceString = String.valueOf(balance);
 
         for (Transaction t : transactions) {
-            if (t.getTypeString().equalsIgnoreCase("expense")) {
+            if (t.getTypeString().equalsIgnoreCase(String.valueOf(
+                    TransactionType.EXPENSE))) {
                 balance -= t.getAmount().amount;
             } else {
                 balance += t.getAmount().amount;
             }
         }
 
-        String balanceString = String.format(BALANCE_FORMAT, balance);
+        if (Double.compare(balance, 0) < 0) {
+            balanceString = NEGATIVE_BALANCE_STRING + new Amount(Math.abs(balance));
+        } else {
+            balanceString = POSITIVE_BALANCE_STRING + new Amount(balance);
+        }
+
         balanceIndicator.setText(balanceString);
 
         // Set color to green, red, and black for positive, negative and zero respectively.

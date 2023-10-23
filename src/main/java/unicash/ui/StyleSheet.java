@@ -27,7 +27,7 @@ public class StyleSheet {
     public static final String HEX_COLOR_STRING_SPECIFIER = "%02X%02X%02X";
 
     /* Background styling and formatting */
-    public static final String TEXT_BACKGROUND_COLOR = "-fx-background-color: %s";
+    public static final String TEXT_BACKGROUND_COLOR_SPECIFIER = "-fx-background-color: %s";
 
     /* Color utilities */
     public static final int MAX_COLOUR_VALUE = 255;
@@ -49,7 +49,7 @@ public class StyleSheet {
      * Returns a 6-digit hexadecimal number based on the Category's unique
      * hash code, to be used as a color indicator, without any color offsetting.
      */
-    public static String getCategoryColorFromHash(Object obj) {
+    public static String getColorFromHash(Object obj) {
 
         // Absolute value of hash code taken to guard against negative hash values
         String hexString = Integer.toHexString(Math.abs(obj.hashCode()));
@@ -71,7 +71,7 @@ public class StyleSheet {
      * generated from the hashcode accords poor {@code Label} visibility,
      * the value is offset such that is always of a certain brightness value.
      */
-    public static String getBrightCategoryColorFromHash(Object obj) {
+    public static String getBrightColorFromHash(Object obj) {
 
         // Absolute value of hash code taken to guard against negative values
         String hexString = Integer.toHexString(Math.abs(obj.hashCode()));
