@@ -5,7 +5,6 @@ import java.util.function.Predicate;
 
 import unicash.commons.util.StringUtil;
 import unicash.commons.util.ToStringBuilder;
-import unicash.model.category.UniqueCategoryList;
 import unicash.model.transaction.Transaction;
 
 /**
@@ -23,8 +22,8 @@ public class TransactionCategoryContainsKeywordsPredicate
     @Override
     public boolean test(Transaction transaction) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsSubstringIgnoreCase(
-                        (transaction.getCategories()
+                .anyMatch(keyword -> StringUtil.containsSubstringIgnoreCase((
+                        transaction.getCategories()
                                 .joinCategoriesAsString()), keyword));
     }
 

@@ -126,7 +126,7 @@ public class StringUtilTest {
 
         // Leading/trailing spaces
         assertTrue(StringUtil.containsSubstringIgnoreCase("aaa bbb ccc", "  ccc  "));
-        
+
         // Matches multiple words in sentence
         assertTrue(StringUtil.containsSubstringIgnoreCase("AAA bBb ccc  bbb", "bbB"));
     }
