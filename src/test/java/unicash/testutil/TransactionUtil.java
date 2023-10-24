@@ -35,7 +35,7 @@ public class TransactionUtil {
         sb.append(PREFIX_NAME).append(transaction.getName().fullName).append(" ");
         sb.append(PREFIX_TYPE).append(transaction.getType().type.getOriginalString()).append(" ");
         sb.append(PREFIX_AMOUNT).append(transaction.getAmount().toString()).append(" ");
-        sb.append(PREFIX_DATETIME).append(transaction.getDateTime().originalString()).append(" ");
+        sb.append(PREFIX_DATETIME).append(transaction.getDateTime().inputString()).append(" ");
         sb.append(PREFIX_LOCATION).append(transaction.getLocation().location).append(" ");
         transaction.getCategories().forEach(
                 category -> sb.append(PREFIX_CATEGORY).append(category.category).append(" ")
@@ -54,7 +54,7 @@ public class TransactionUtil {
                 .append(" "));
         descriptor.getLocation().ifPresent(location -> sb.append(PREFIX_LOCATION).append(location)
                 .append(" "));
-        descriptor.getDateTime().ifPresent(dateTime -> sb.append(PREFIX_DATETIME).append(dateTime.originalString())
+        descriptor.getDateTime().ifPresent(dateTime -> sb.append(PREFIX_DATETIME).append(dateTime.inputString())
                 .append(" "));
         if (descriptor.getCategories().isPresent()) {
             List<Category> categories = descriptor.getCategories().get().asUnmodifiableObservableList();
