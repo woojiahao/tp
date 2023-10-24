@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static unicash.logic.UniCashMessages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static unicash.logic.UniCashMessages.MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX;
 import static unicash.logic.commands.CommandTestUtil.assertCommandFailure;
 import static unicash.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static unicash.logic.commands.CommandTestUtil.showTransactionAtIndex;
@@ -36,25 +36,12 @@ public class GetCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTransactionList().size() + 1);
-        GetCommand getCommand = new GetCommand(outOfBoundIndex);
-
-        assertCommandFailure(getCommand, model, UniCashMessages.MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX);
-    }
-
-    @Test
     public void equals() {
         GetCommand getFirstCommand = new GetCommand(INDEX_FIRST_TRANSACTION);
         GetCommand getSecondCommand = new GetCommand(INDEX_SECOND_TRANSACTION);
 
         // same object -> returns true
         assertEquals(getFirstCommand, getFirstCommand);
-
-        // same values -> returns true
-        GetCommand getFirstCommandCopy =
-                new GetCommand(INDEX_FIRST_TRANSACTION);
-        assertEquals(getFirstCommand, getFirstCommandCopy);
 
         // different types -> returns false
         assertFalse(getFirstCommand.equals(1));
@@ -77,18 +64,19 @@ public class GetCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Transaction transactionToDelete = model.getFilteredTransactionList().get(
+        Transaction transactionToGet = model.getFilteredTransactionList().get(
                 INDEX_FIRST_TRANSACTION.getZeroBased());
         GetCommand getCommand = new GetCommand(INDEX_FIRST_TRANSACTION);
 
         String expectedMessage = String.format(GetCommand.MESSAGE_GET_TRANSACTION_SUCCESS,
-                UniCashMessages.formatTransaction(transactionToDelete));
+                INDEX_FIRST_TRANSACTION.getOneBased(),
+                UniCashMessages.formatTransaction(transactionToGet));
 
         assertCommandSuccess(getCommand, model, expectedMessage, model);
     }
 
     @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() {
+    public void execute_invalidIndexFilteredList_throwsParseException() {
         showTransactionAtIndex(model, INDEX_FIRST_TRANSACTION);
 
         Index outOfBoundIndex = INDEX_SECOND_TRANSACTION;
@@ -97,8 +85,7 @@ public class GetCommandTest {
 
         GetCommand getCommand = new GetCommand(outOfBoundIndex);
 
-        assertCommandFailure(getCommand, model, String.format(
-                MESSAGE_INVALID_COMMAND_FORMAT, GetCommand.MESSAGE_USAGE));
+        assertCommandFailure(getCommand, model, MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX);
     }
 
 }

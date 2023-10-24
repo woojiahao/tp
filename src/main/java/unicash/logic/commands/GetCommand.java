@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import unicash.commons.core.index.Index;
+import unicash.commons.util.ToStringBuilder;
 import unicash.logic.UniCashMessages;
 import unicash.logic.commands.exceptions.CommandException;
 import unicash.model.Model;
@@ -28,12 +29,13 @@ public class GetCommand extends Command {
             + "\n\n"
             + "Example: get 2";
 
-    private static final Logger logger = Logger.getLogger("GetCommandLogger");
-
     public static final String MESSAGE_GET_TRANSACTION_SUCCESS = "Transaction %1$d retrieved:"
             + "\n\n%2$s";
 
+    private static final Logger logger = Logger.getLogger("GetCommandLogger");
+
     private final Index index;
+
 
     /**
      * Creates a GetTransactionCommand Object
@@ -49,16 +51,38 @@ public class GetCommand extends Command {
         requireNonNull(model);
         logger.log(Level.INFO, "Executing get command");
 
-        List<Transaction> transactionList = model.getFilteredTransactionList();
+        List<Transaction> lastShownList = model.getFilteredTransactionList();
 
-        if (index.getZeroBased() > transactionList.size()) {
+        if (index.getZeroBased() >= lastShownList.size()) {
             logger.log(Level.INFO, "Get command execution failed");
             throw new CommandException(MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX);
         }
 
-        Transaction transactionToRetrieve = transactionList.get(index.getZeroBased());
+        Transaction transactionToRetrieve = lastShownList.get(index.getZeroBased());
         logger.log(Level.INFO, "Get command executed successfully");
         return new CommandResult(String.format(MESSAGE_GET_TRANSACTION_SUCCESS,
                 index.getOneBased(), UniCashMessages.formatTransaction(transactionToRetrieve)));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof GetCommand)) {
+            return false;
+        }
+
+        GetCommand otherGetCommand = (GetCommand) other;
+        return index.equals(otherGetCommand.index);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("targetIndex", index)
+                .toString();
     }
 }
