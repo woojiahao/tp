@@ -41,7 +41,7 @@ jacocoTestReport {
     dependsOn test
     // Only run the UI tests when on Windows
     def os = System.getProperty("os.name").toLowerCase()
-    if (!(os.contains("nux") || os.contains("ubuntu"))) {
+    if (!(os.contains("mac") || os.contains("ubuntu") || os.contains("nux"))) {
         dependsOn uiTest
     }
 }
