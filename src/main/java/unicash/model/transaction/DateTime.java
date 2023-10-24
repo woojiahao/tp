@@ -81,7 +81,6 @@ public class DateTime {
 
     /**
      * Helper method to return original text string
-     * passed by the user.
      *
      * @return text string of the LocalDateTime object
      */
