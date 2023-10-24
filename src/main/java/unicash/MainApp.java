@@ -47,10 +47,10 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
 
-    private final Path storagePath;
+    private final Path customStoragePath;
 
-    public MainApp(Path storagePath) {
-        this.storagePath = storagePath;
+    public MainApp(Path customStoragePath) {
+        this.customStoragePath = customStoragePath;
     }
 
     public MainApp() {
@@ -68,8 +68,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        if (storagePath != null) {
-            userPrefs.setUniCashFilePath(storagePath);
+        if (customStoragePath != null) {
+            userPrefs.setUniCashFilePath(customStoragePath);
         }
         UniCashStorage uniCashStorage = new JsonUniCashStorage(userPrefs.getUniCashFilePath());
         storage = new StorageManager(uniCashStorage, userPrefsStorage);
