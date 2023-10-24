@@ -29,6 +29,9 @@ public class EditBudgetCommand extends Command {
 
     public final Budget budget;
 
+    /**
+     * Creates an EditBudgetCommand to edit the specified {@code Budget}
+     */
     public EditBudgetCommand(Budget budget) {
         requireNonNull(budget);
         this.budget = budget;
