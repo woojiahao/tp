@@ -1,8 +1,10 @@
 package unicash.model.transaction;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static unicash.testutil.Assert.assertThrows;
 
 import java.time.Clock;
@@ -24,7 +26,7 @@ public class DateTimeTest {
     public void constructor_noDateTime_setDefault() {
         Clock clock = Clock.fixed(Instant.parse("2014-12-21T10:15:30.00Z"), ZoneId.of("UTC"));
         String empty = "";
-        assertEquals("1015, Dec 21 2014", new DateTime(empty, clock).toString());
+        assertEquals("21 Dec 2014 10:15", new DateTime(empty, clock).toString());
     }
 
     @Test
@@ -39,10 +41,25 @@ public class DateTimeTest {
     }
 
     @Test
-    public void originalString() {
-        DateTime dateTime = new DateTime("18-12-2023 01:01");
-        String stringify = dateTime.originalString();
-        assertEquals(stringify, "18-12-2023 01:01");
+    public void isValidDate_acceptedFormats() {
+        assertTrue(DateTime.isValidDateTime("01-01-2001 18:18")); //dd-MM-uuuu HH:mm
+        assertTrue(DateTime.isValidDateTime("2001-01-01 18:18")); //uuuu-MM-dd HH:mm
+        assertTrue(DateTime.isValidDateTime("01 Jan 2001 18:18")); //dd MMM uuuu HH:mm
+    }
+
+    @Test
+    public void inputString() {
+        DateTime dateTimeFormatOne = new DateTime("18-12-2023 01:01");
+        String stringifyOne = dateTimeFormatOne.inputString();
+        assertEquals("18-12-2023 01:01", stringifyOne);
+
+        DateTime dateTimeFormatTwo = new DateTime("2023-12-18 01:01");
+        String stringifyTwo = dateTimeFormatTwo.inputString();
+        assertEquals("2023-12-18 01:01", stringifyTwo);
+
+        DateTime dateTimeFormatThree = new DateTime("18 Dec 2023 01:01");
+        String stringifyThree = dateTimeFormatThree.inputString();
+        assertEquals("18 Dec 2023 01:01", stringifyThree);
     }
 
     @Test
@@ -77,9 +94,21 @@ public class DateTimeTest {
     }
 
     @Test
+    public void differentFormatEquals() {
+        //check if different formats are equal using the DateTime.java equals() method
+        DateTime datetime1 = new DateTime("01-01-2001 01:01");
+        DateTime datetime2 = new DateTime("2001-01-01 01:01");
+        DateTime datetime3 = new DateTime("01 Jan 2001 01:01");
+
+        assertTrue(datetime1.equals(datetime2));
+        assertTrue(datetime2.equals(datetime3));
+        assertTrue(datetime1.equals(datetime3));
+    }
+
+    @Test
     public void toStringMethod() {
         DateTime dateTime = new DateTime("18-08-2023 01:01");
-        assertEquals(dateTime.toString(), "0101, Aug 18 2023");
+        assertEquals(dateTime.toString(), "18 Aug 2023 01:01");
     }
 
     @Test
