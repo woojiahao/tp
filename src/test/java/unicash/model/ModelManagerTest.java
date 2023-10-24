@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static unicash.model.Model.PREDICATE_SHOW_ALL_TRANSACTIONS;
 import static unicash.testutil.Assert.assertThrows;
 import static unicash.testutil.TypicalTransactions.BUYING_GROCERIES;
-import static unicash.testutil.TypicalTransactions.INTERN;
 import static unicash.testutil.TypicalTransactions.NUS;
 
 import java.nio.file.Path;
@@ -136,9 +135,8 @@ public class ModelManagerTest {
 
         assertFalse(modelManager.equals(uniCash));
 
-        // TODO: Replicate this for transaction list
         // different filteredList -> returns false
-        String[] keywords = INTERN.getName().fullName.split("\\s+");
+        String[] keywords = new String[] {"internship"};
         modelManager.updateFilteredTransactionList(
                 new TransactionNameContainsKeywordsPredicate(Arrays.asList(keywords))
         );

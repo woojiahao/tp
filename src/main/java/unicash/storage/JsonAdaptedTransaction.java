@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import unicash.commons.exceptions.IllegalValueException;
 import unicash.model.category.Category;
 import unicash.model.category.UniqueCategoryList;
-import unicash.model.transaction.Amount;
+import unicash.model.commons.Amount;
 import unicash.model.transaction.DateTime;
 import unicash.model.transaction.Location;
 import unicash.model.transaction.Name;
@@ -59,7 +59,7 @@ public class JsonAdaptedTransaction {
     public JsonAdaptedTransaction(Transaction source) {
         name = source.getName().fullName;
         amount = source.getAmount().amount;
-        dateTime = source.getDateTime().originalString();
+        dateTime = source.getDateTime().inputString();
         location = source.getLocation().location;
         type = source.getType().type.getOriginalString();
         categories.addAll(source.getCategories().asUnmodifiableObservableList()

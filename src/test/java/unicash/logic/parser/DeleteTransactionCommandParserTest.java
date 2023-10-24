@@ -26,12 +26,16 @@ public class DeleteTransactionCommandParserTest {
 
         // Non-integer input
         assertThrows(ParseException.class, () -> parser.parse("a"));
+        assertThrows(ParseException.class, () -> parser.parse("."));
 
         // Negative number
         assertThrows(ParseException.class, () -> parser.parse("-1"));
 
         // Zero as input (assuming indices are 1-based)
         assertThrows(ParseException.class, () -> parser.parse("0"));
+
+        // Float as input (assuming indices are 1-based)
+        assertThrows(ParseException.class, () -> parser.parse("0.5"));
     }
 
 }

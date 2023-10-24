@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import unicash.commons.exceptions.IllegalValueException;
-import unicash.model.transaction.Amount;
+import unicash.model.commons.Amount;
 import unicash.model.transaction.DateTime;
 import unicash.model.transaction.Location;
 import unicash.model.transaction.Name;
@@ -31,7 +31,7 @@ public class JsonAdaptedTransactionTest {
 
     private static final String VALID_NAME = SHOPPING.getName().toString();
     private static final double VALID_AMOUNT = SHOPPING.getAmount().amount;
-    private static final String VALID_DATETIME = SHOPPING.getDateTime().originalString();
+    private static final String VALID_DATETIME = SHOPPING.getDateTime().inputString();
     private static final String VALID_LOCATION = SHOPPING.getLocation().location;
     private static final String VALID_TYPE = SHOPPING.getType().toString();
     private static final List<JsonAdaptedCategory> VALID_CATEGORIES = SHOPPING.getCategories()
