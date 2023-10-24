@@ -102,29 +102,31 @@ public class StringUtilTest {
         // Empty sentence
         assertFalse(StringUtil.containsSubstringIgnoreCase("", "abc")); // Boundary case
         assertFalse(StringUtil.containsSubstringIgnoreCase("    ", "123"));
+
+        // Query word bigger than sentence word
+        assertFalse(StringUtil.containsSubstringIgnoreCase("aaa bbb ccc", "bbbb"));
     }
 
     @Test
     public void containsSubstringIgnoreCase_validInputs_correctResult() {
         // Matches a partial word only
         assertTrue(StringUtil.containsSubstringIgnoreCase("aaa bbb ccc", "bb"));
-        // Sentence word bigger than query word
-        assertFalse(StringUtil.containsSubstringIgnoreCase("aaa bbb ccc", "bbbb"));
-        // Query word bigger than sentence word
 
         // Matches word in the sentence, different upper/lower case letters
-
         assertTrue(StringUtil.containsSubstringIgnoreCase("aaa bBb ccc", "Bbb"));
-        // First word (boundary case)
-        assertTrue(StringUtil.containsSubstringIgnoreCase("aaa bBb ccc@1", "CCc@1"));
-        // Last word (boundary case)
-        assertTrue(StringUtil.containsSubstringIgnoreCase("  AAA   bBb   ccc  ", "aaa"));
-        // Sentence has extra spaces
-        assertTrue(StringUtil.containsSubstringIgnoreCase("Aaa", "aaa"));
-        // Only one word in sentence (boundary case)
-        assertTrue(StringUtil.containsSubstringIgnoreCase("aaa bbb ccc", "  ccc  "));
-        // Leading/trailing spaces
 
+        // Last word (boundary case)
+        assertTrue(StringUtil.containsSubstringIgnoreCase("aaa bBb ccc@1", "CCc@1"));
+
+        // Sentence has extra spaces
+        assertTrue(StringUtil.containsSubstringIgnoreCase("  AAA   bBb   ccc  ", "aaa"));
+
+        // Only one word in sentence (boundary case)
+        assertTrue(StringUtil.containsSubstringIgnoreCase("Aaa", "aaa"));
+
+        // Leading/trailing spaces
+        assertTrue(StringUtil.containsSubstringIgnoreCase("aaa bbb ccc", "  ccc  "));
+        
         // Matches multiple words in sentence
         assertTrue(StringUtil.containsSubstringIgnoreCase("AAA bBb ccc  bbb", "bbB"));
     }
