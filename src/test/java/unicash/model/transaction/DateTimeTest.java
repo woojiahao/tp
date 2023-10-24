@@ -48,17 +48,17 @@ public class DateTimeTest {
     }
 
     @Test
-    public void originalString() {
+    public void inputString() {
         DateTime dateTimeFormatOne = new DateTime("18-12-2023 01:01");
-        String stringifyOne = dateTimeFormatOne.originalString();
+        String stringifyOne = dateTimeFormatOne.inputString();
         assertEquals("18-12-2023 01:01", stringifyOne);
 
         DateTime dateTimeFormatTwo = new DateTime("2023-12-18 01:01");
-        String stringifyTwo = dateTimeFormatTwo.originalString();
+        String stringifyTwo = dateTimeFormatTwo.inputString();
         assertEquals("2023-12-18 01:01", stringifyTwo);
 
         DateTime dateTimeFormatThree = new DateTime("18 Dec 2023 01:01");
-        String stringifyThree = dateTimeFormatThree.originalString();
+        String stringifyThree = dateTimeFormatThree.inputString();
         assertEquals("18 Dec 2023 01:01", stringifyThree);
     }
 

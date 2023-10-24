@@ -59,7 +59,7 @@ public class JsonAdaptedTransaction {
     public JsonAdaptedTransaction(Transaction source) {
         name = source.getName().fullName;
         amount = source.getAmount().amount;
-        dateTime = source.getDateTime().originalString();
+        dateTime = source.getDateTime().inputString();
         location = source.getLocation().location;
         type = source.getType().type.getOriginalString();
         categories.addAll(source.getCategories().asUnmodifiableObservableList()

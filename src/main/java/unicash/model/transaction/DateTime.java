@@ -85,7 +85,7 @@ public class DateTime {
      *
      * @return text string of the LocalDateTime object
      */
-    public String originalString() {
+    public String inputString() {
         return originalDateTime;
     }
 
