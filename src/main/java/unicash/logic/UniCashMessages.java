@@ -11,6 +11,7 @@ import unicash.logic.commands.EditTransactionCommand;
 import unicash.logic.commands.ExitCommand;
 import unicash.logic.commands.FindCommand;
 import unicash.logic.commands.GetTotalExpenditureCommand;
+import unicash.logic.commands.GetTransactionCommand;
 import unicash.logic.commands.HelpCommand;
 import unicash.logic.commands.ListCommand;
 import unicash.logic.commands.ResetCommand;
@@ -45,6 +46,8 @@ public class UniCashMessages {
             + ListCommand.COMMAND_WORD
             + "\n"
             + FindCommand.COMMAND_WORD
+            + "\n"
+            + GetTransactionCommand.COMMAND_WORD
             + "\n"
             + GetTotalExpenditureCommand.COMMAND_WORD
             + "\n\n"
