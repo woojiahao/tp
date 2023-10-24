@@ -106,6 +106,13 @@ public class Amount {
         return true;
     }
 
+    /**
+     * Returns true if a given amount has no more than two decimal places.
+     */
+    public static boolean hasNoMoreThanTwoDecimalPlaces(double amount) {
+        String stringValue = Double.toString(amount);
+        return stringValue.matches("^-?\\d+(\\.\\d{1,2})?$");
+    }
 
     @Override
     public int hashCode() {

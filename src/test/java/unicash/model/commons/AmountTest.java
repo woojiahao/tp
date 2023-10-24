@@ -46,4 +46,23 @@ public class AmountTest {
         String result = Amount.amountToDecimalString(amt);
         assertEquals("45.68", result);
     }
+    @Test
+    void testHasNoMoreThanTwoDecimalPlaces() {
+        // Test cases with no more than two decimal places
+        assertTrue(Amount.hasNoMoreThanTwoDecimalPlaces(10));
+        assertTrue(Amount.hasNoMoreThanTwoDecimalPlaces(10.0));
+        assertTrue(Amount.hasNoMoreThanTwoDecimalPlaces(10.1));
+        assertTrue(Amount.hasNoMoreThanTwoDecimalPlaces(10.12));
+        assertTrue(Amount.hasNoMoreThanTwoDecimalPlaces(-10.12));
+
+        // Test cases with more than two decimal places
+        assertFalse(Amount.hasNoMoreThanTwoDecimalPlaces(10.123));
+        assertFalse(Amount.hasNoMoreThanTwoDecimalPlaces(-10.123));
+
+        // Test cases with edge cases
+        assertTrue(Amount.hasNoMoreThanTwoDecimalPlaces(0));
+        assertTrue(Amount.hasNoMoreThanTwoDecimalPlaces(0.0));
+        assertTrue(Amount.hasNoMoreThanTwoDecimalPlaces(-0.0));
+        assertFalse(Amount.hasNoMoreThanTwoDecimalPlaces(0.001));
+    }
 }
