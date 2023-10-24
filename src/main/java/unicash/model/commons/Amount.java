@@ -51,7 +51,8 @@ public class Amount {
     }
 
     /**
-     * Constructs an {@code Amount} given a String input.
+     * Constructs an {@code Amount} given a String input with a prefixed
+     * currency symbol.
      *
      * @param amount A valid amount String.
      */
