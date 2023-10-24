@@ -40,8 +40,10 @@ tasks.register('uiTest', Test) {
 jacocoTestReport {
     dependsOn test
     // Only run the UI tests when on Windows
+    def disallowedOSes = ['mac', 'ubuntu', 'nux']
     def os = System.getProperty("os.name").toLowerCase()
-    if (!(os.contains("mac") || os.contains("ubuntu") || os.contains("nux"))) {
+    def isAllowed = disallowedOSes.every { !os.contains(it) }
+    if (isAllowed) {
         dependsOn uiTest
     }
 }
