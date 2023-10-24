@@ -98,7 +98,7 @@ public class StringUtilTest {
      */
 
     @Test
-    public void containsSubstringIgnoreCase_invalidInputs_correctResult() {
+    public void containsSubstringIgnoreCase_invalidInputs_returnFalse() {
         // Empty sentence
         assertFalse(StringUtil.containsSubstringIgnoreCase("", "abc")); // Boundary case
         assertFalse(StringUtil.containsSubstringIgnoreCase("    ", "123"));
@@ -108,7 +108,7 @@ public class StringUtilTest {
     }
 
     @Test
-    public void containsSubstringIgnoreCase_validInputs_correctResult() {
+    public void containsSubstringIgnoreCase_validInputs_returnTrue() {
         // Matches a partial word only
         assertTrue(StringUtil.containsSubstringIgnoreCase("aaa bbb ccc", "bb"));
 
