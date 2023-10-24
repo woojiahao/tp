@@ -2,6 +2,7 @@ package unicash.commons.util;
 
 import static java.util.Objects.requireNonNull;
 import static unicash.commons.util.AppUtil.checkArgument;
+import static unicash.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -54,19 +55,12 @@ public class StringUtil {
      * @param substring cannot be null, cannot be empty, must be a single word
      */
     public static boolean containsSubstringIgnoreCase(String sentence, String substring) {
-        requireNonNull(sentence);
-        requireNonNull(substring);
+        requireAllNonNull(sentence, substring);
 
         String preppedString = substring.trim();
-        checkArgument(!preppedString.isEmpty(), "Word parameter cannot be empty");
-        checkArgument(preppedString.split("\\s+").length == 1, "Word parameter should be a single word");
+        checkArgument(!preppedString.isEmpty(), "Substring parameter cannot be empty");
 
-        String preppedSentence = sentence;
-        String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
-
-        return Arrays.stream(wordsInPreppedSentence)
-                .anyMatch(word -> word.toLowerCase()
-                        .contains(preppedString.toLowerCase()));
+        return sentence.toLowerCase().contains(preppedString.toLowerCase());
     }
 
     /**

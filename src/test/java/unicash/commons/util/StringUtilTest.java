@@ -50,7 +50,7 @@ public class StringUtilTest {
     //---------------- Tests for containsSubstringIgnoreCase --------------------------------------
 
     /*
-     * Invalid equivalence partitions for word: null, empty, multiple words
+     * Invalid equivalence partitions for substring: null, empty.
      * Invalid equivalence partitions for sentence: null
      * The four test cases below test one invalid input at a time.
      */
@@ -63,15 +63,10 @@ public class StringUtilTest {
 
     @Test
     public void containsSubstringIgnoreCase_emptyWord_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, "Word parameter cannot be empty", ()
+        assertThrows(IllegalArgumentException.class, "Substring parameter cannot be empty", ()
             -> StringUtil.containsSubstringIgnoreCase("typical sentence", "  "));
     }
 
-    @Test
-    public void containsSubstringIgnoreCase_multipleWords_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, "Word parameter should be a single word", ()
-            -> StringUtil.containsSubstringIgnoreCase("typical sentence", "aaa BBB"));
-    }
 
     @Test
     public void containsSubstringIgnoreCase_nullSentence_throwsNullPointerException() {
