@@ -57,7 +57,7 @@ public class CommandTestUtil {
     public static final String LOCATION_DESC_ORCHARD = " " + PREFIX_LOCATION + VALID_LOCATION_ORCHARD;
     public static final String LOCATION_DESC_NUS = " " + PREFIX_LOCATION + VALID_LOCATION_NUS;
 
-    public static final String INVALID_TRANSACTION_NAME_DESC = " " + PREFIX_NAME + "NUS&"; // '&' not allowed in names
+    public static final String INVALID_TRANSACTION_NAME_DESC = " " + PREFIX_NAME + "NUS[]&"; // '&' not allowed in names
     public static final String INVALID_AMOUNT_DESC = " " + PREFIX_AMOUNT + "-3.0"; // negative amounts not allowed
     public static final String INVALID_DATETIME_DESC = " " + PREFIX_DATETIME + "19/13/2001 19:30"; // invalid date
     public static final String INVALID_TYPE_DESC = " " + PREFIX_TYPE + "afaf"; // invalid type
