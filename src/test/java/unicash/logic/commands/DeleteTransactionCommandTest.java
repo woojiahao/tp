@@ -50,14 +50,12 @@ public class DeleteTransactionCommandTest {
         assertEquals(deleteFirstCommand, deleteFirstCommandCopy);
 
         // different types -> returns false
-        assertNotEquals(1, deleteFirstCommand);
-
         assertFalse(deleteFirstCommand.equals(1));
 
         // null -> returns false
         assertNotEquals(null, deleteFirstCommand);
 
-        // different person -> returns false
+        // different transaction -> returns false
         assertNotEquals(deleteFirstCommand, deleteSecondCommand);
     }
 

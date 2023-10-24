@@ -17,11 +17,12 @@ import unicash.logic.commands.AddTransactionCommand;
 import unicash.logic.commands.ClearTransactionsCommand;
 import unicash.logic.commands.DeleteTransactionCommand;
 import unicash.logic.commands.EditTransactionCommand;
-import unicash.logic.commands.ExitCommandUniCash;
+import unicash.logic.commands.ExitCommand;
 import unicash.logic.commands.FindCommand;
 import unicash.logic.commands.GetTotalExpenditureCommand;
-import unicash.logic.commands.HelpCommandUniCash;
+import unicash.logic.commands.HelpCommand;
 import unicash.logic.commands.ListCommand;
+import unicash.logic.commands.ResetCommand;
 import unicash.logic.parser.exceptions.ParseException;
 import unicash.model.transaction.Transaction;
 import unicash.model.transaction.TransactionNameContainsKeywordsPredicate;
@@ -35,8 +36,8 @@ public class UniCashParserTest {
 
     @Test
     public void parseCommand_exit() throws Exception {
-        assertTrue(parser.parseCommand(ExitCommandUniCash.COMMAND_WORD) instanceof ExitCommandUniCash);
-        assertTrue(parser.parseCommand(ExitCommandUniCash.COMMAND_WORD + " 3") instanceof ExitCommandUniCash);
+        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
+        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
     }
 
     @Test
@@ -49,8 +50,8 @@ public class UniCashParserTest {
 
     @Test
     public void parseCommand_help() throws Exception {
-        assertTrue(parser.parseCommand(HelpCommandUniCash.COMMAND_WORD) instanceof HelpCommandUniCash);
-        assertTrue(parser.parseCommand(HelpCommandUniCash.COMMAND_WORD + " 3") instanceof HelpCommandUniCash);
+        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
+        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
     }
 
     @Test
@@ -76,10 +77,17 @@ public class UniCashParserTest {
     }
 
     @Test
-    public void parseCommand_clearTransaction() throws Exception {
+    public void parseCommand_clearTransactions() throws Exception {
         assertTrue(parser.parseCommand(ClearTransactionsCommand.COMMAND_WORD) instanceof ClearTransactionsCommand);
         assertTrue(parser.parseCommand(ClearTransactionsCommand.COMMAND_WORD + " 3")
                 instanceof ClearTransactionsCommand);
+    }
+
+    @Test
+    public void parseCommand_resetUniCashCommand() throws Exception {
+        assertTrue(parser.parseCommand(ResetCommand.COMMAND_WORD) instanceof ResetCommand);
+        assertTrue(parser.parseCommand(ResetCommand.COMMAND_WORD + " 3")
+                instanceof ResetCommand);
     }
 
     @Test
@@ -108,22 +116,22 @@ public class UniCashParserTest {
     @Test
     public void parseCommand_helpUniCash() throws Exception {
         assertTrue(parser.parseCommand(
-                HelpCommandUniCash.COMMAND_WORD) instanceof HelpCommandUniCash);
+                HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(
-                HelpCommandUniCash.COMMAND_WORD + " 3") instanceof HelpCommandUniCash);
+                HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
     }
 
     @Test
     public void parseCommand_exitUniCash() throws Exception {
         assertTrue(parser.parseCommand(
-                ExitCommandUniCash.COMMAND_WORD) instanceof ExitCommandUniCash);
+                ExitCommand.COMMAND_WORD) instanceof ExitCommand);
         assertTrue(parser.parseCommand(
-                ExitCommandUniCash.COMMAND_WORD + " 3") instanceof ExitCommandUniCash);
+                ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
     }
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        var message = String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommandUniCash.MESSAGE_USAGE);
+        var message = String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE);
         assertThrows(ParseException.class, message, () -> parser.parseCommand(""));
     }
 

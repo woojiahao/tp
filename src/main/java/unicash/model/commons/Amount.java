@@ -1,4 +1,4 @@
-package unicash.model.transaction;
+package unicash.model.commons;
 
 import static unicash.commons.util.AppUtil.checkArgument;
 
