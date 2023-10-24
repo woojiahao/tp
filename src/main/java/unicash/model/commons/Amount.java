@@ -16,7 +16,7 @@ public class Amount {
             "Amounts must be positive.";
 
     public static final String MESSAGE_RANGE_LIMITS =
-            "Amounts must be between -2^31 and 2^31.";
+            "Amounts must be between 0 and 2^31.";
 
     public static final String MESSAGE_PRECISION_WARNING =
             "Amounts must not have more than 2 decimal places!";
