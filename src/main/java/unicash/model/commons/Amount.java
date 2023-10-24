@@ -86,22 +86,6 @@ public class Amount {
     }
 
     /**
-     * Returns true if a given amount has less than or equal to two decimal places.
-     */
-    public static boolean hasNoMoreThanTwoDecimalPlaces(double amount) {
-        String stringValue = Double.toString(amount);
-        int decimalIndex = stringValue.indexOf(".");
-
-        // If there's no decimal point, then it has no decimal places
-        if (decimalIndex == -1) {
-            return false;
-        }
-        int decimalCount = stringValue.length() - decimalIndex - 1;
-
-        return decimalCount > 2;
-    }
-
-    /**
      * Returns true if a given amount, when parsed, is a non-negative value.
      * Strict validation in place, amount must start with the currency symbol.
      */
