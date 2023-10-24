@@ -6,6 +6,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import unicash.commons.util.ToStringBuilder;
+import unicash.model.budget.Budget;
+import unicash.model.budget.BudgetList;
 import unicash.model.transaction.Transaction;
 import unicash.model.transaction.TransactionList;
 
@@ -15,6 +17,7 @@ import unicash.model.transaction.TransactionList;
 public class UniCash implements ReadOnlyUniCash {
 
     private final TransactionList transactions;
+    private final BudgetList budgets;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,6 +28,7 @@ public class UniCash implements ReadOnlyUniCash {
      */
     {
         transactions = new TransactionList();
+        budgets = new BudgetList();
     }
 
     public UniCash() {}
@@ -101,6 +105,11 @@ public class UniCash implements ReadOnlyUniCash {
     @Override
     public ObservableList<Transaction> getTransactionList() {
         return transactions.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Budget> getBudgetList() {
+        return budgets.asUnmodifiableObservableList();
     }
 
     @Override

@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import unicash.commons.core.GuiSettings;
 import unicash.commons.core.LogsCenter;
+import unicash.model.budget.Budget;
 import unicash.model.transaction.Transaction;
 
 /**
@@ -22,6 +23,7 @@ public class ModelManager implements Model {
     private final UniCash uniCash;
     private final UserPrefs userPrefs;
     private final FilteredList<Transaction> filteredTransactions;
+    private final FilteredList<Budget> filteredBudgets;
 
     /**
      * Initializes a ModelManager with the given userPrefs and UniCash.
@@ -34,6 +36,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         this.uniCash = new UniCash(uniCash);
         filteredTransactions = new FilteredList<>(this.uniCash.getTransactionList());
+        filteredBudgets = new FilteredList<>(this.uniCash.getBudgetList());
     }
 
     public ModelManager() {
@@ -125,6 +128,28 @@ public class ModelManager implements Model {
     public void updateFilteredTransactionList(Predicate<Transaction> predicate) {
         requireNonNull(predicate);
         filteredTransactions.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredBudgetList(Predicate<Budget> predicate) {
+        requireNonNull(predicate);
+        filteredBudgets.setPredicate(predicate);
+    }
+
+    /**
+     * Adds the given budget
+     *
+     * @param budget
+     */
+    @Override
+    public void addBudget(Budget budget) {
+        requireNonNull(budget);
+        updateFilteredBudgetList(PREDICATE_SHOW_ALL_BUDGETS);
+    }
+
+    @Override
+    public ObservableList<Budget> getFilteredBudgetList() {
+        return filteredBudgets;
     }
 
     @Override

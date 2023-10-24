@@ -15,6 +15,7 @@ import unicash.logic.commands.HelpCommand;
 import unicash.logic.commands.ListCommand;
 import unicash.logic.commands.ResetCommand;
 import unicash.logic.parser.Prefix;
+import unicash.model.budget.Budget;
 import unicash.model.transaction.Transaction;
 
 /**
@@ -89,6 +90,19 @@ public class UniCashMessages {
             builder.append(x.categoryToStringWithPrefix());
             builder.append(" ");
         });
+
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code budget} for display to the user.
+     */
+    public static String formatBudget(Budget budget) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Amount: ")
+                .append(budget.getAmount())
+                .append("; \nInterval: ")
+                .append(budget.getInterval());
 
         return builder.toString();
     }
