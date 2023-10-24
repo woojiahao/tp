@@ -9,6 +9,9 @@ import java.util.stream.Stream;
 import unicash.logic.commands.AddBudgetCommand;
 import unicash.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input arguments and creates a new AddBudgetCommand object
+ */
 public class AddBudgetCommandParser implements Parser<AddBudgetCommand> {
     /**
      * Parses {@code userInput} into a command and returns it.

@@ -29,6 +29,9 @@ public class AddBudgetCommand extends Command {
 
     private final Budget budget;
 
+    /**
+     * Creates an AddBudgetCommand to add the specified {@code Budget}
+     */
     public AddBudgetCommand(Budget budget) {
         requireNonNull(budget);
         this.budget = budget;

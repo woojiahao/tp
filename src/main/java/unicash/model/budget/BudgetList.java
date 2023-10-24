@@ -10,6 +10,9 @@ import javafx.collections.ObservableList;
 import unicash.model.budget.exceptions.BudgetNotFoundException;
 
 
+/**
+ * A list of budgets that enforces uniqueness between its elements and does not allow nulls.
+ */
 public class BudgetList implements Iterable<Budget> {
 
     private final ObservableList<Budget> internalList = FXCollections.observableArrayList();

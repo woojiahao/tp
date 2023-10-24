@@ -6,6 +6,9 @@ import unicash.logic.commands.exceptions.CommandException;
 import unicash.logic.parser.CliSyntax;
 import unicash.model.Model;
 
+/**
+ * Edits the budget of the specified interval.
+ */
 public class EditBudgetCommand extends Command {
     public static final String COMMAND_WORD = "edit_budget";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the budget of the specified interval. "
