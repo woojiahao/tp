@@ -26,8 +26,8 @@ public class GetTransactionCommand extends Command {
             + "\n\n"
             + "Example: get 2";
 
-    public static final String MESSAGE_GET_TRANSACTION_SUCCESS = "Transaction retrieved:"
-            + "\n\n%1$s";
+    public static final String MESSAGE_GET_TRANSACTION_SUCCESS = "Transaction %1$d retrieved:"
+            + "\n\n%2$s";
 
     private final Index index;
 
@@ -53,6 +53,6 @@ public class GetTransactionCommand extends Command {
         Transaction transactionToRetrieve = transactionList.get(index.getZeroBased());
 
         return new CommandResult(String.format(MESSAGE_GET_TRANSACTION_SUCCESS,
-                UniCashMessages.formatTransaction(transactionToRetrieve)));
+                index.getOneBased(), UniCashMessages.formatTransaction(transactionToRetrieve)));
     }
 }
