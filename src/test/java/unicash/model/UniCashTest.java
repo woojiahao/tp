@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import unicash.model.budget.Budget;
 import unicash.model.transaction.Transaction;
 import unicash.model.transaction.exceptions.TransactionNotFoundException;
 import unicash.testutil.TransactionBuilder;
@@ -134,6 +135,7 @@ public class UniCashTest {
      */
     private static class UniCashStub implements ReadOnlyUniCash {
         private final ObservableList<Transaction> transactions = FXCollections.observableArrayList();
+        private final ObservableList<Budget> budgets = FXCollections.observableArrayList();
 
         UniCashStub(Collection<Transaction> transactions) {
             this.transactions.setAll(transactions);
@@ -142,6 +144,14 @@ public class UniCashTest {
         @Override
         public ObservableList<Transaction> getTransactionList() {
             return transactions;
+        }
+
+        /**
+         * Returns an unmodifiable view of the budget list.
+         */
+        @Override
+        public ObservableList<Budget> getBudgetList() {
+            return budgets;
         }
     }
 

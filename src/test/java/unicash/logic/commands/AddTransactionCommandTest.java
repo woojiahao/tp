@@ -23,6 +23,7 @@ import unicash.model.Model;
 import unicash.model.ReadOnlyUniCash;
 import unicash.model.ReadOnlyUserPrefs;
 import unicash.model.UniCash;
+import unicash.model.budget.Budget;
 import unicash.model.transaction.Transaction;
 import unicash.testutil.TransactionBuilder;
 
@@ -157,6 +158,26 @@ public class AddTransactionCommandTest {
 
         @Override
         public void updateFilteredTransactionList(Predicate<Transaction> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Adds the given budget
+         *
+         * @param budget
+         */
+        @Override
+        public void addBudget(Budget budget) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Budget> getFilteredBudgetList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredBudgetList(Predicate<Budget> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
