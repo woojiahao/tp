@@ -199,4 +199,19 @@ public class UniqueCategoryList implements Iterable<Category> {
         }
         return true;
     }
+
+    /**
+     * Returns all categories as a single, unified string.
+     *
+     * @return all categories as a string
+     */
+    public String joinCategoriesAsString() {
+        String originalToString = this.toString();
+        String trimmedToString = originalToString
+                .substring(1, originalToString.length() - 1);
+
+        String joinedString = String.join("", trimmedToString);
+
+        return joinedString;
+    }
 }

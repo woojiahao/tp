@@ -24,25 +24,10 @@ public class TransactionCategoryContainsKeywordsPredicate
     public boolean test(Transaction transaction) {
         return keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsSubstringIgnoreCase(
-                        categoryJoiner(transaction.getCategories()), keyword));
+                        (transaction.getCategories()
+                                .joinCategoriesAsString()), keyword));
     }
 
-    /**
-     * Returns all categories as a single string.
-     *
-     * @param categoryList
-     * @return
-     */
-    public String categoryJoiner(UniqueCategoryList categoryList) {
-        String originalToString = categoryList.toString();
-        String trimmedToString = originalToString
-                .substring(1, originalToString.length() - 1);
-
-        String[] trimmedToStringArray = trimmedToString.split(", ");
-        String joinedString = String.join("", trimmedToString);
-
-        return joinedString;
-    }
 
     @Override
     public boolean equals(Object other) {
