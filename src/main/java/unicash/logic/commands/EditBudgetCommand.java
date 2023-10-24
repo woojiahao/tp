@@ -2,9 +2,11 @@ package unicash.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import unicash.commons.util.ToStringBuilder;
 import unicash.logic.commands.exceptions.CommandException;
 import unicash.logic.parser.CliSyntax;
 import unicash.model.Model;
+import unicash.model.budget.Budget;
 
 /**
  * Edits the budget of the specified interval.
@@ -25,6 +27,27 @@ public class EditBudgetCommand extends Command {
     public static final String MESSAGE_EDIT_BUDGET_SUCCESS = "Edited Budget: \n\n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
+    public final Budget budget;
+
+    public EditBudgetCommand(Budget budget) {
+        requireNonNull(budget);
+        this.budget = budget;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof EditBudgetCommand)) {
+            return false;
+        }
+
+        EditBudgetCommand e = (EditBudgetCommand) other;
+        return budget.equals(e.budget);
+    }
+
     /**
      * Executes the command and returns the result message.
      *
@@ -39,5 +62,12 @@ public class EditBudgetCommand extends Command {
         //TODO: Edit budget command
 
         return null;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("budget", budget)
+                .toString();
     }
 }
