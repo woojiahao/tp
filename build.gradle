@@ -37,6 +37,15 @@ tasks.register('uiTest', Test) {
     finalizedBy jacocoTestReport
 }
 
+jacocoTestReport {
+    dependsOn test
+    // Only run the UI tests when on Windows
+    def os = System.getProperty("os.name").toLowerCase()
+    if (!(os.contains("nux") || os.contains("ubuntu"))) {
+        dependsOn uiTest
+    }
+}
+
 task coverage(type: JacocoReport) {
     sourceDirectories.from files(sourceSets.main.allSource.srcDirs)
     classDirectories.from files(sourceSets.main.output)
