@@ -210,7 +210,8 @@ public class UniqueCategoryList implements Iterable<Category> {
         String trimmedToString = originalToString
                 .substring(1, originalToString.length() - 1);
 
-        String joinedString = String.join("", trimmedToString);
+        String[] trimmedToStringArray = trimmedToString.split(", ");
+        String joinedString = String.join(",", trimmedToStringArray);
 
         return joinedString;
     }

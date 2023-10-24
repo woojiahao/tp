@@ -196,7 +196,16 @@ public class UniqueCategoryListTest {
     @Test
     public void getSize_test() {
         UniqueCategoryList categoryList = new UniqueCategoryList();
-        assertEquals(uniqueCategoryList.getSize(), 0);
+        assertEquals(categoryList.getSize(), 0);
+    }
+
+    @Test
+    public void joinCategoriesAsStringTest() {
+        UniqueCategoryList categoryList = new UniqueCategoryList();
+        categoryList.add(ENTERTAINMENT);
+        categoryList.add(EDUCATION);
+        assertEquals(categoryList.joinCategoriesAsString(),
+                ENTERTAINMENT + "," + EDUCATION);
     }
 
     @Test

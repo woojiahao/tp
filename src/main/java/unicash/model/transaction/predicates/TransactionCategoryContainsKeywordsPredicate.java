@@ -28,7 +28,6 @@ public class TransactionCategoryContainsKeywordsPredicate
                                 .joinCategoriesAsString()), keyword));
     }
 
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
