@@ -23,6 +23,7 @@ public class TransactionDateTimeContainsKeywordsPredicate
         this.keywords = keywords;
     }
 
+    // TODO: FIX THIS TO CONFORM WITH NEW DATETIME FORMAT
     @Override
     public boolean test(Transaction transaction) {
         return transaction.getDateTime().toString().toLowerCase()

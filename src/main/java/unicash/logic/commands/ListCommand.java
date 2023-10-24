@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 import unicash.model.Model;
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all transactions in UniCa$h to the user.
  */
 public class ListCommand extends Command {
 

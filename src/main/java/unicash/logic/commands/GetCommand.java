@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static unicash.logic.UniCashMessages.MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import unicash.commons.core.index.Index;
 import unicash.logic.UniCashMessages;
@@ -12,10 +14,10 @@ import unicash.model.Model;
 import unicash.model.transaction.Transaction;
 
 /**
- * Retrieve expanded details of a specific transaction given its
- * identifier in the transactions list.
+ * Retrieves expanded details of a specific transaction given its
+ * identifier in the transactions list, and displays them to the user.
  */
-public class GetTransactionCommand extends Command {
+public class GetCommand extends Command {
 
     public static final String COMMAND_WORD = "get";
 
@@ -26,6 +28,8 @@ public class GetTransactionCommand extends Command {
             + "\n\n"
             + "Example: get 2";
 
+    private static final Logger logger = Logger.getLogger("GetCommandLogger");
+
     public static final String MESSAGE_GET_TRANSACTION_SUCCESS = "Transaction %1$d retrieved:"
             + "\n\n%2$s";
 
@@ -35,7 +39,7 @@ public class GetTransactionCommand extends Command {
      * Creates a GetTransactionCommand Object
      * @param index
      */
-    public GetTransactionCommand(Index index) {
+    public GetCommand(Index index) {
         requireNonNull(index);
         this.index = index;
     }
@@ -43,15 +47,17 @@ public class GetTransactionCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        logger.log(Level.INFO, "Executing get command");
 
         List<Transaction> transactionList = model.getFilteredTransactionList();
 
         if (index.getZeroBased() > transactionList.size()) {
+            logger.log(Level.INFO, "Get command execution failed");
             throw new CommandException(MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX);
         }
 
         Transaction transactionToRetrieve = transactionList.get(index.getZeroBased());
-
+        logger.log(Level.INFO, "Get command executed successfully");
         return new CommandResult(String.format(MESSAGE_GET_TRANSACTION_SUCCESS,
                 index.getOneBased(), UniCashMessages.formatTransaction(transactionToRetrieve)));
     }

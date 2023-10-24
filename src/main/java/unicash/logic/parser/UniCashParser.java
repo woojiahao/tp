@@ -16,7 +16,7 @@ import unicash.logic.commands.EditTransactionCommand;
 import unicash.logic.commands.ExitCommand;
 import unicash.logic.commands.FindCommand;
 import unicash.logic.commands.GetTotalExpenditureCommand;
-import unicash.logic.commands.GetTransactionCommand;
+import unicash.logic.commands.GetCommand;
 import unicash.logic.commands.HelpCommand;
 import unicash.logic.commands.ListCommand;
 import unicash.logic.commands.ResetCommand;
@@ -80,8 +80,8 @@ public class UniCashParser {
         case ResetCommand.COMMAND_WORD:
             return new ResetCommand();
 
-        case GetTransactionCommand.COMMAND_WORD:
-            return new GetTransactionCommandParser().parse(arguments);
+        case GetCommand.COMMAND_WORD:
+            return new GetCommandParser().parse(arguments);
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
