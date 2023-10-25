@@ -29,7 +29,7 @@ public class MainAppIntegrationUiTest {
         FxToolkit.registerPrimaryStage();
         FxToolkit.setupApplication(() -> new MainApp(tempDir.resolve("ui_data.json")));
         FxToolkit.showStage();
-        WaitForAsyncUtils.waitForFxEvents(100);
+        WaitForAsyncUtils.waitForFxEvents(20);
     }
 
     @AfterEach
