@@ -16,6 +16,12 @@ public class AddBudgetCommandTest {
     }
 
     @Test
+    public void execute_nullModel_throwsNullPointerException() {
+        var command = new AddBudgetCommand(DAILY);
+        assertThrows(NullPointerException.class, () -> command.execute(null));
+    }
+
+    @Test
     public void equals() {
         AddBudgetCommand addBudgetCommand = new AddBudgetCommand(DAILY);
         AddBudgetCommand addBudgetCommandCopy = new AddBudgetCommand(DAILY);
@@ -43,8 +49,5 @@ public class AddBudgetCommandTest {
                 AddBudgetCommand.class.getCanonicalName() + "{budget=" + DAILY + "}";
         assertEquals(expected, addBudgetCommand.toString());
     }
-
-
-
 
 }
