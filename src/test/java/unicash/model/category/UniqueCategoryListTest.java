@@ -204,8 +204,8 @@ public class UniqueCategoryListTest {
         UniqueCategoryList categoryList = new UniqueCategoryList();
         categoryList.add(ENTERTAINMENT);
         categoryList.add(EDUCATION);
-        assertEquals(categoryList.joinCategoriesAsString(),
-                ENTERTAINMENT + "," + EDUCATION);
+        assertEquals(ENTERTAINMENT + "," + EDUCATION,
+                categoryList.joinCategoriesAsString());
     }
 
     @Test

@@ -206,7 +206,7 @@ public class UniqueCategoryList implements Iterable<Category> {
      * @return all categories as a string
      */
     public String joinCategoriesAsString() {
-        String originalToString = this.toString();
+        String originalToString = internalList.toString();
         String trimmedToString = originalToString
                 .substring(1, originalToString.length() - 1);
 
