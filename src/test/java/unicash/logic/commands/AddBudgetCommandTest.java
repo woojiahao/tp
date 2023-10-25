@@ -5,9 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static unicash.testutil.Assert.assertThrows;
 import static unicash.testutil.TypicalBudgets.DAILY;
+import static unicash.testutil.TypicalBudgets.MONTHLY;
 import static unicash.testutil.TypicalBudgets.WEEKLY;
 
 import org.junit.jupiter.api.Test;
+
+import unicash.logic.UniCashMessages;
 
 public class AddBudgetCommandTest {
     @Test
@@ -48,6 +51,19 @@ public class AddBudgetCommandTest {
         String expected =
                 AddBudgetCommand.class.getCanonicalName() + "{budget=" + DAILY + "}";
         assertEquals(expected, addBudgetCommand.toString());
+    }
+
+    @Test
+    public void formatBudget() {
+        String expectedDaily = "Amount: " + DAILY.getAmount().toString()
+                + "; \nInterval: " + DAILY.getInterval().toString();
+        String expectedWeekly = "Amount: " + WEEKLY.getAmount().toString()
+                + "; \nInterval: " + WEEKLY.getInterval().toString();
+        String expectedMonthly = "Amount: " + MONTHLY.getAmount().toString()
+                + "; \nInterval: " + MONTHLY.getInterval().toString();
+        assertEquals(expectedDaily, UniCashMessages.formatBudget(DAILY));
+        assertEquals(expectedWeekly, UniCashMessages.formatBudget(WEEKLY));
+        assertEquals(expectedMonthly, UniCashMessages.formatBudget(MONTHLY));
     }
 
 }
