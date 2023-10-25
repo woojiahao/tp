@@ -25,7 +25,7 @@ public class MainAppUiTest {
         FxToolkit.registerPrimaryStage();
         FxToolkit.setupApplication(() -> new MainApp());
         FxToolkit.showStage();
-        WaitForAsyncUtils.waitForFxEvents(100);
+        WaitForAsyncUtils.waitForFxEvents(20);
     }
 
     @AfterEach
