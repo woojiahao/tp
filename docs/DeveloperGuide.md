@@ -204,10 +204,14 @@ the filtered transaction with a success message.
 
 This section aims to describe the implementation of the features in UniCa$h.
 
-There are 3 main group of features we have come up with.
+There are 4 main group of features that we have design and either implemented
+or propose to implement in the future.
+
+These are:
 1. Transaction Management
 2. Budget Management and Monitoring
 3. General Utility Features
+4. User Interface Auxiliary Features
 
 ### Transaction
 
