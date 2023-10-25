@@ -22,17 +22,17 @@ public class TransactionDateTimeContainsKeywordsPredicateTest {
         List<String> firstPredicateKeywordList = Collections.singletonList(FIRST_DATE);
         List<String> secondPredicateKeywordList = Arrays.asList(FIRST_DATE, SECOND_DATE);
 
-        TransactionDateTimeContainsKeywordsPredicate firstPredicate =
-                new TransactionDateTimeContainsKeywordsPredicate(firstPredicateKeywordList);
-        TransactionDateTimeContainsKeywordsPredicate secondPredicate =
-                new TransactionDateTimeContainsKeywordsPredicate(secondPredicateKeywordList);
+        TransactionDateTimeContainsValuePredicate firstPredicate =
+                new TransactionDateTimeContainsValuePredicate(firstPredicateKeywordList);
+        TransactionDateTimeContainsValuePredicate secondPredicate =
+                new TransactionDateTimeContainsValuePredicate(secondPredicateKeywordList);
 
         // same object -> returns true
         assertEquals(firstPredicate, firstPredicate);
 
         // same values -> returns true
-        TransactionDateTimeContainsKeywordsPredicate firstPredicateCopy =
-                new TransactionDateTimeContainsKeywordsPredicate(firstPredicateKeywordList);
+        TransactionDateTimeContainsValuePredicate firstPredicateCopy =
+                new TransactionDateTimeContainsValuePredicate(firstPredicateKeywordList);
         assertEquals(firstPredicate, firstPredicateCopy);
 
         // different types -> returns false
@@ -72,21 +72,21 @@ public class TransactionDateTimeContainsKeywordsPredicateTest {
     @Test
     public void test_dateTimeDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
-        TransactionDateTimeContainsKeywordsPredicate predicate =
-                new TransactionDateTimeContainsKeywordsPredicate(Collections.emptyList());
+        TransactionDateTimeContainsValuePredicate predicate =
+                new TransactionDateTimeContainsValuePredicate(Collections.emptyList());
 
         // Partial match only
-        predicate = new TransactionDateTimeContainsKeywordsPredicate(Arrays.asList("18-08"));
+        predicate = new TransactionDateTimeContainsValuePredicate(Arrays.asList("18-08"));
         assertFalse(predicate.test(new TransactionBuilder().withDateTime(FIRST_DATE).build()));
     }
 
     @Test
     public void toStringMethod() {
         List<String> keywords = List.of("keyword1", "keyword2");
-        TransactionDateTimeContainsKeywordsPredicate predicate =
-                new TransactionDateTimeContainsKeywordsPredicate(keywords);
+        TransactionDateTimeContainsValuePredicate predicate =
+                new TransactionDateTimeContainsValuePredicate(keywords);
 
-        String expected = TransactionDateTimeContainsKeywordsPredicate
+        String expected = TransactionDateTimeContainsValuePredicate
                 .class.getCanonicalName() + "{keywords=" + keywords + "}";
         assertEquals(expected, predicate.toString());
     }

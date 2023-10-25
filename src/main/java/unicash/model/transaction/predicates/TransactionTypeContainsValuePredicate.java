@@ -13,11 +13,11 @@ import unicash.model.transaction.Transaction;
  * full transaction type is specified, thus, partial matching will not be flagged as a
  * match by this predicate.
  */
-public class TransactionTypeContainsKeywordsPredicate
+public class TransactionTypeContainsValuePredicate
         implements Predicate<Transaction> {
     private final List<String> keywords;
 
-    public TransactionTypeContainsKeywordsPredicate(List<String> keywords) {
+    public TransactionTypeContainsValuePredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
@@ -35,12 +35,12 @@ public class TransactionTypeContainsKeywordsPredicate
         }
 
         // instanceof handles nulls
-        if (!(other instanceof TransactionTypeContainsKeywordsPredicate)) {
+        if (!(other instanceof TransactionTypeContainsValuePredicate)) {
             return false;
         }
 
-        TransactionTypeContainsKeywordsPredicate otherNameContainsKeywordsPredicate =
-                (TransactionTypeContainsKeywordsPredicate) other;
+        TransactionTypeContainsValuePredicate otherNameContainsKeywordsPredicate =
+                (TransactionTypeContainsValuePredicate) other;
         return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
     }
 

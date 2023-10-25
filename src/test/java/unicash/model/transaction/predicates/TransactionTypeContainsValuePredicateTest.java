@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 import unicash.commons.enums.TransactionType;
 import unicash.testutil.TransactionBuilder;
 
-public class TransactionTypeContainsKeywordsPredicateTest {
+public class TransactionTypeContainsValuePredicateTest {
     public static final String EXPENSE = String.valueOf(TransactionType.EXPENSE);
     public static final String INCOME = String.valueOf(TransactionType.EXPENSE);
 
@@ -23,17 +23,17 @@ public class TransactionTypeContainsKeywordsPredicateTest {
         List<String> firstPredicateKeywordList = Collections.singletonList(EXPENSE);
         List<String> secondPredicateKeywordList = Arrays.asList(EXPENSE, INCOME);
 
-        TransactionTypeContainsKeywordsPredicate firstPredicate =
-                new TransactionTypeContainsKeywordsPredicate(firstPredicateKeywordList);
-        TransactionTypeContainsKeywordsPredicate secondPredicate =
-                new TransactionTypeContainsKeywordsPredicate(secondPredicateKeywordList);
+        TransactionTypeContainsValuePredicate firstPredicate =
+                new TransactionTypeContainsValuePredicate(firstPredicateKeywordList);
+        TransactionTypeContainsValuePredicate secondPredicate =
+                new TransactionTypeContainsValuePredicate(secondPredicateKeywordList);
 
         // same object -> returns true
         assertEquals(firstPredicate, firstPredicate);
 
         // same values -> returns true
-        TransactionTypeContainsKeywordsPredicate firstPredicateCopy =
-                new TransactionTypeContainsKeywordsPredicate(firstPredicateKeywordList);
+        TransactionTypeContainsValuePredicate firstPredicateCopy =
+                new TransactionTypeContainsValuePredicate(firstPredicateKeywordList);
         assertEquals(firstPredicate, firstPredicateCopy);
 
         // different types -> returns false
@@ -51,24 +51,24 @@ public class TransactionTypeContainsKeywordsPredicateTest {
     @Test
     public void test_typeContainsKeywords_returnsTrue() {
         // One keyword
-        TransactionTypeContainsKeywordsPredicate predicate =
-                new TransactionTypeContainsKeywordsPredicate(Collections.singletonList(EXPENSE));
+        TransactionTypeContainsValuePredicate predicate =
+                new TransactionTypeContainsValuePredicate(Collections.singletonList(EXPENSE));
         assertTrue(predicate.test(new TransactionBuilder().withType(EXPENSE.toLowerCase()).build()));
 
         // Multiple keywords
-        predicate = new TransactionTypeContainsKeywordsPredicate(Arrays.asList(EXPENSE, INCOME));
+        predicate = new TransactionTypeContainsValuePredicate(Arrays.asList(EXPENSE, INCOME));
         assertTrue(predicate.test(new TransactionBuilder().withType(EXPENSE.toLowerCase()).build()));
 
         // Only one keyword match
-        predicate = new TransactionTypeContainsKeywordsPredicate(Arrays.asList("expense", "income"));
+        predicate = new TransactionTypeContainsValuePredicate(Arrays.asList("expense", "income"));
         assertTrue(predicate.test(new TransactionBuilder().withType(EXPENSE.toLowerCase()).build()));
     }
 
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
-        TransactionTypeContainsKeywordsPredicate predicate =
-                new TransactionTypeContainsKeywordsPredicate(Collections.emptyList());
+        TransactionTypeContainsValuePredicate predicate =
+                new TransactionTypeContainsValuePredicate(Collections.emptyList());
         assertFalse(predicate.test(new TransactionBuilder().withType(EXPENSE.toLowerCase()).build()));
 
     }
@@ -76,10 +76,10 @@ public class TransactionTypeContainsKeywordsPredicateTest {
     @Test
     public void toStringMethod() {
         List<String> keywords = List.of("keyword1", "keyword2");
-        TransactionTypeContainsKeywordsPredicate predicate =
-                new TransactionTypeContainsKeywordsPredicate(keywords);
+        TransactionTypeContainsValuePredicate predicate =
+                new TransactionTypeContainsValuePredicate(keywords);
 
-        String expected = TransactionTypeContainsKeywordsPredicate
+        String expected = TransactionTypeContainsValuePredicate
                 .class.getCanonicalName() + "{keywords=" + keywords + "}";
         assertEquals(expected, predicate.toString());
     }

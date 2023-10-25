@@ -27,12 +27,12 @@ public class TransactionContainsKeywordsPredicate
     @Override
     public boolean test(Transaction transaction) {
         List<Predicate<Transaction>> allPredicates = List.of(
-                new TransactionAmountContainsKeywordsPredicate(keywords),
+                new TransactionAmountContainsValuePredicate(keywords),
                 new TransactionCategoryContainsKeywordsPredicate(keywords),
-                new TransactionDateTimeContainsKeywordsPredicate(keywords),
+                new TransactionDateTimeContainsValuePredicate(keywords),
                 new TransactionLocationContainsKeywordsPredicate(keywords),
                 new TransactionNameContainsKeywordsPredicate(keywords),
-                new TransactionTypeContainsKeywordsPredicate(keywords)
+                new TransactionTypeContainsValuePredicate(keywords)
         );
 
         return allPredicates.stream()

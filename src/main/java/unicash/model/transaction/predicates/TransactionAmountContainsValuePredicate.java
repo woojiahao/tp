@@ -19,11 +19,11 @@ import unicash.model.transaction.Transaction;
  * symbol, this predicate forms a String of the raw amount value directly, so keyword comparisons
  * are valid regardless of currency used.
  */
-public class TransactionAmountContainsKeywordsPredicate
+public class TransactionAmountContainsValuePredicate
         implements Predicate<Transaction> {
     private final List<String> keywords;
 
-    public TransactionAmountContainsKeywordsPredicate(List<String> keywords) {
+    public TransactionAmountContainsValuePredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
@@ -42,12 +42,12 @@ public class TransactionAmountContainsKeywordsPredicate
         }
 
         // instanceof handles nulls
-        if (!(other instanceof TransactionAmountContainsKeywordsPredicate)) {
+        if (!(other instanceof TransactionAmountContainsValuePredicate)) {
             return false;
         }
 
-        TransactionAmountContainsKeywordsPredicate otherNameContainsKeywordsPredicate =
-                (TransactionAmountContainsKeywordsPredicate) other;
+        TransactionAmountContainsValuePredicate otherNameContainsKeywordsPredicate =
+                (TransactionAmountContainsValuePredicate) other;
         return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
     }
 

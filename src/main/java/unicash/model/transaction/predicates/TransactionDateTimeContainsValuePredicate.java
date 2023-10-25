@@ -15,11 +15,11 @@ import unicash.model.transaction.Transaction;
  * predicate would work for finding both date and time separately as they are separated
  * by a space and thus would parse to two words.
  */
-public class TransactionDateTimeContainsKeywordsPredicate
+public class TransactionDateTimeContainsValuePredicate
         implements Predicate<Transaction> {
     private final List<String> keywords;
 
-    public TransactionDateTimeContainsKeywordsPredicate(List<String> keywords) {
+    public TransactionDateTimeContainsValuePredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
@@ -37,12 +37,12 @@ public class TransactionDateTimeContainsKeywordsPredicate
         }
 
         // instanceof handles nulls
-        if (!(other instanceof TransactionDateTimeContainsKeywordsPredicate)) {
+        if (!(other instanceof TransactionDateTimeContainsValuePredicate)) {
             return false;
         }
 
-        TransactionDateTimeContainsKeywordsPredicate otherNameContainsKeywordsPredicate =
-                (TransactionDateTimeContainsKeywordsPredicate) other;
+        TransactionDateTimeContainsValuePredicate otherNameContainsKeywordsPredicate =
+                (TransactionDateTimeContainsValuePredicate) other;
         return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
     }
 

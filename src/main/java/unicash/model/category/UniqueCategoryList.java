@@ -206,13 +206,14 @@ public class UniqueCategoryList implements Iterable<Category> {
      * @return all categories as a string
      */
     public String joinCategoriesAsString() {
-        String originalToString = internalList.toString();
-        String trimmedToString = originalToString
-                .substring(1, originalToString.length() - 1);
+        StringBuilder categoryBuilder = new StringBuilder();
 
-        String[] trimmedToStringArray = trimmedToString.split(", ");
-        String joinedString = String.join(",", trimmedToStringArray);
+        internalList.stream().forEach(category -> {
+            categoryBuilder.append(category);
+            categoryBuilder.append(",");
+        });
 
-        return joinedString;
+        requireNonNull(categoryBuilder);
+        return categoryBuilder.substring(0, categoryBuilder.length() - 1);
     }
 }
