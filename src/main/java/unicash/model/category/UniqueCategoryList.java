@@ -212,7 +212,7 @@ public class UniqueCategoryList implements Iterable<Category> {
                 .map(category -> category.toString())
                 .collect(Collectors.joining(","));
 
-        requireAllNonNull(categoriesString);
+        requireNonNull(categoriesString);
         return categoriesString;
     }
 
