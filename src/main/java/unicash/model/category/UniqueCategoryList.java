@@ -233,5 +233,5 @@ public class UniqueCategoryList implements Iterable<Category> {
         requireNonNull(categoryList);
         return categoryList;
     }
-    
+
 }

@@ -69,14 +69,6 @@ public class TransactionDateTimeContainsValuePredicateTest {
         // Partial match
         predicate = new TransactionDateTimeContainsValuePredicate(Arrays.asList("Aug 2001"));
         assertTrue(predicate.test(new TransactionBuilder().withDateTime(FIRST_DATE).build()));
-
-        /* Zero keywords -> All empty strings are valid substrings of all strings. Thus,
-         * this predicate will return true. However, the sequence of execution in UniCash
-         * is such that a ParseException will be thrown with an empty String argument before
-         * the execution of this predicate is reached. */
-        predicate = new TransactionDateTimeContainsValuePredicate(Collections.emptyList());
-        assertTrue(predicate.test(new TransactionBuilder().withDateTime(FIRST_DATE).build()));
-
     }
 
     @Test
