@@ -21,14 +21,37 @@ checkstyle {
 }
 
 test {
+    doFirst {
+        exclude "**/**UiTest*"
+    }
     useJUnitPlatform()
     finalizedBy jacocoTestReport
+}
+
+// Specialized task to run only UI related unit tests
+tasks.register('uiTest', Test) {
+    doFirst {
+        include "**/**UiTest*"
+    }
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
+    // Only run the UI tests when on Windows
+    def disallowedOSes = ['mac', 'ubuntu', 'nux']
+    def os = System.getProperty("os.name").toLowerCase()
+    def isAllowed = disallowedOSes.every { !os.contains(it) }
+    if (isAllowed) {
+        dependsOn uiTest
+    }
 }
 
 task coverage(type: JacocoReport) {
     sourceDirectories.from files(sourceSets.main.allSource.srcDirs)
     classDirectories.from files(sourceSets.main.output)
-    executionData.from files(jacocoTestReport.executionData)
+    executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
     afterEvaluate {
         classDirectories.from files(classDirectories.files.collect {
             fileTree(dir: it, exclude: ['**/*.jar'])
@@ -63,10 +86,19 @@ dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
 
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
+
+    testImplementation "org.testfx:testfx-core:4.0.17"
+    testImplementation "org.testfx:testfx-junit5:4.0.17"
+    testImplementation group: 'org.hamcrest', name: 'hamcrest', version: '2.1'
+    testImplementation "org.testfx:openjfx-monocle:jdk-11+26"
 }
 
 shadowJar {
     archiveFileName = 'unicash.jar'
+}
+
+run {
+    enableAssertions = true
 }
 
 defaultTasks 'clean', 'test'

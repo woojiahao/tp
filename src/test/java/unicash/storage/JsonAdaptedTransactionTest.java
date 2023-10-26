@@ -22,11 +22,11 @@ import unicash.model.transaction.Type;
 import unicash.testutil.TransactionBuilder;
 
 public class JsonAdaptedTransactionTest {
-    private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_NAME = "R@chel[]";
     private static final double INVALID_AMOUNT = -10;
     private static final String INVALID_CATEGORY = "@@@";
     private static final String INVALID_DATETIME = "hi";
-    private static final String INVALID_LOCATION = "@@@@";
+    private static final String INVALID_LOCATION = "[]@@@@";
     private static final String INVALID_TYPE = "others";
 
     private static final String VALID_NAME = SHOPPING.getName().toString();

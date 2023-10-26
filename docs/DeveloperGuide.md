@@ -200,6 +200,65 @@ the filtered transaction with a success message.
   - 2a1. UniCa$h displays an error message with the correct command format.
   - Use case resumes at step 1.
 
+## Implementation
+
+This section aims to describe the implementation of the features in UniCa$h.
+
+There are 3 main group of features we have come up with.
+1. Transaction Management
+2. Budget Management and Monitoring
+3. General Utility Features
+
+### Transaction
+
+<img src="images/unicash/TransactionClassDiagram.png" width="700" />
+
+UniCa$h tracks transactions with the use of `TransactionList` and `Transaction`. `TransactionList` acts
+as a wrapper for a list of `Transaction` that enforces no `null`.
+
+The `Transaction` class is composed of the following fields
+
+1. `Name`: The name of the transaction.
+2. `Type`: The transaction type of the transaction. UniCash supports expense and income only.
+3. `Amount`: The monetary value of the transaction.
+4. `DateTime`: The date and time of the transaction to be recorded.
+5. `Location`: The location where the transaction took place.
+6. `UniqueCategoryList`: A list of categories to be tagged with the transaction.
+
+For the attributes, there are 3 compulsory fields, namely `Name`, `Type` and
+`Amount`. The remaining fields would fall back to a default value if not specified.
+
+#### Add Transaction
+
+##### Overview
+
+The `add_transaction` command adds a new `Transaction` to the `TransactionList` in UniCash.
+
+The activity diagram of adding a Transaction is as shown below
+
+<img src="images/unicash/AddTransactionActivityDiagram.png" width="1200" />
+
+The following sequence diagram shows how the different components of UniCash interact with each other
+
+<img src="images/unicash/AddTransactionSequenceDiagram.png" width="1200" />
+
+The above sequence diagram omits details on the creation of the attributes of a `Transaction` such as 
+`Name`, `Type` and `Amount` as it would make the diagram cluttered and difficult to read without adding
+additional value.
+
+ℹ️ **Note:** The lifeline for `AddTransactionCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML,
+the lifeline reaches the end of diagram.
+
+##### Details
+
+1. The user specifies the transaction to be added by stating the name, amount, transaction type as well as any other optional fields.
+2. The input will be parsed by `AddCommandTransactionParser`, and if it is invalid, `ParserException` is thrown, prompting for the user to enter again.
+3. If the input is valid, a `Transaction` object is created and passed into the `AddTransactionCommand` to be executed by the `LogicManager`.
+4. The `LogicManager` will then invoke the execute command, adding the `Transaction` to the UniCash.
+
+Note that only the `Category` field is allowed to be specified multiple times, while the other fields can only be specified once, else
+a `ParserException` is thrown. Another noteworthy point is that `Category` that are added are to be case-insensitively unique and can only be up to 
+a specified value in the `UniqueCategoryList` class. Else, a `ParserException` would be thrown.
 
 ## Links
 User Stories: [https://github.com/orgs/AY2324S1-CS2103-T16-3/projects/1/views/2](https://github.com/orgs/AY2324S1-CS2103-T16-3/projects/1/views/2)
