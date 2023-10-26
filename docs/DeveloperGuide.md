@@ -204,7 +204,7 @@ the filtered transaction with a success message.
 
 This section aims to describe the implementation of the features in UniCa$h.
 
-There are 4 main group of features that we have designed and either implemented
+There are 4 main groups of features that we have designed and either implemented
 or propose to implement in the future.
 
 These are:
