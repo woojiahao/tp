@@ -242,11 +242,11 @@ The `add_transaction` command adds a new `Transaction` to the `TransactionList` 
 
 The activity diagram of adding a Transaction is as shown below
 
-<img src="images/unicash/AddTransactionActivityDiagram.png" width="1200" />
+<img src="images/unicash/AddTransactionActivityDiagram.png" width="600" />
 
 The following sequence diagram shows how the different components of UniCash interact with each other
 
-<img src="images/unicash/AddTransactionSequenceDiagram.png" width="1200" />
+<img src="images/unicash/AddTransactionSequenceDiagram.png" width="1400" />
 
 The above sequence diagram omits details on the creation of the attributes of a `Transaction` such as 
 `Name`, `Type` and `Amount` as it would make the diagram cluttered and difficult to read without adding
