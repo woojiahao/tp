@@ -51,4 +51,18 @@ public class MainAppIntegrationUiTest {
         assertTrue(afterHelp.isPresent());
     }
 
+    /**
+     * Integration test to handle user input to showing summary window
+     */
+    @Test
+    public void userInput_summary_showSummaryWindowAsRoot(FxRobot robot) throws TimeoutException {
+        var beforeSummaryContainer = robot.lookup("#summaryMessageContainer").tryQuery();
+        assertTrue(beforeSummaryContainer.isEmpty());
+        robot.clickOn("#commandBoxPlaceholder");
+        robot.write("summary");
+        robot.press(KeyCode.ENTER);
+        var afterSummary = robot.lookup("#summaryMessageContainer").tryQuery();
+        assertTrue(afterSummary.isPresent());
+    }
+
 }

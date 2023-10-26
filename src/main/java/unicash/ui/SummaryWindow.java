@@ -40,6 +40,7 @@ public class SummaryWindow extends UiPart<Stage> {
      */
     public SummaryWindow(Stage root) {
         super(FXML, root);
+        summaryMessage.setText(SUMMARY_MESSAGE);
     }
 
     /**
