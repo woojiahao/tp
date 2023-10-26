@@ -1,4 +1,4 @@
-package unicash.model.transaction;
+package unicash.model.transaction.predicates;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
