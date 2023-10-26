@@ -211,9 +211,11 @@ These are:
 1. Transaction Management
 2. Budget Management and Monitoring
 3. General Utility Features
-4. User Interface Auxiliary Features
+4. User Interface Features
 
-### Transaction
+### Feature Group 1 - Transactions Management
+
+#### The Transaction Class
 
 <img src="images/unicash/TransactionClassDiagram.png" width="700" />
 
@@ -301,6 +303,49 @@ intentional, as the User is able to, for example, `find` a particular group of t
 by just looking at their displayed index number without having to refer to an external identifier of that transaction. UniCash will
 automatically handle the visual ordering and representation of transactions with the `TransactionsListPanel` in the UI. The details
 and diagrams for this part will be elaborated further in the UI section (and other relevant sections) of this Developer Guide.
+
+
+### Feature Group 2 - Budget Management and Monitoring
+
+### Feature Group 3 - General Utility Features
+
+This includes commands such as Clear, Reset, Help and Exit.
+
+#### Clear Transactions
+
+##### Overview
+
+The `ClearTransactionsCommand` deletes all existing `Transactions` from `TransactionList` in UniCash.
+
+The activity diagram of clearing all transactions is as shown below
+
+<img src="images/unicash/ClearTransactionsActivityDiagram.png" width="1200" />
+
+The following sequence diagram shows the interaction between different components of UniCash.
+
+<img src="images/unicash/ClearTransactionsSequenceDiagram.png" width="1200" />
+
+**Note:** Given that `ClearTransactionsCommand` takes in no arguments, it does not have an associated Parser class
+like the other `Command` classes. This is currently the case, however, given that the command entirely erases the
+existing Unicash, a `ClearTransactionsCommandParser` is proposed to be implemented at a later date to ensure an
+additional layer of safety for the User.
+
+##### Details
+
+1. The user inputs the command to reset unicash
+2. A `ClearTransactionsCommand` object is created with no arguments.
+3. `LogicManager` will invoke the `execute` method of `ClearTransactionsCommand` 
+which will replace the existing `Model` property with a new `UniCash` object which 
+would contain an empty `TransactionList`.
+
+Here, it must be noted that unlike `DeleteTransactionCommand`, individual transactions in the `TransactionList`
+are not deleted singularly. As opposed to iteratively deleting each transaction in the `TransactionList`, the more
+efficient way to achieve the same effect would be to simply set the `Model` contained in `LogicManager` to an new 
+`UniCash` object, as the newly created `UniCash` object would now have an empty `TransactionList` encapsulated within.
+This emulates the iterative deletion of all transactions in the `TransactionList`.
+
+
+### Feature Group 4 - User Interface Features
 
 ## Links
 User Stories: [https://github.com/orgs/AY2324S1-CS2103-T16-3/projects/1/views/2](https://github.com/orgs/AY2324S1-CS2103-T16-3/projects/1/views/2)
