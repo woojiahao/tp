@@ -319,11 +319,11 @@ The `ClearTransactionsCommand` deletes all existing `Transactions` from `Transac
 
 The activity diagram of clearing all transactions is as shown below
 
-<img src="images/unicash/ClearTransactionsActivityDiagram.png" width="1200" />
+<img src="images/unicash/ClearTransactionsActivityDiagram.png" width="400" />
 
 The following sequence diagram shows the interaction between different components of UniCash.
 
-<img src="images/unicash/ClearTransactionsSequenceDiagram.png" width="1200" />
+<img src="images/unicash/ClearTransactionsSequenceDiagram.png" width="800" />
 
 **Note:** Given that `ClearTransactionsCommand` takes in no arguments, it does not have an associated Parser class
 like the other `Command` classes. This is currently the case, however, given that the command entirely erases the
