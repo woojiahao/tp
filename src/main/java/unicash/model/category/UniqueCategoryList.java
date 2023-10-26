@@ -3,10 +3,10 @@ package unicash.model.category;
 import static java.util.Objects.requireNonNull;
 import static unicash.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -207,15 +207,13 @@ public class UniqueCategoryList implements Iterable<Category> {
      * @return all categories as a string
      */
     public String joinCategoriesAsString() {
-        StringBuilder categoryBuilder = new StringBuilder();
+        String categoriesString = internalList
+                .stream()
+                .map(category -> category.toString())
+                .collect(Collectors.joining(","));
 
-        internalList.stream().forEach(category -> {
-            categoryBuilder.append(category);
-            categoryBuilder.append(",");
-        });
-
-        requireNonNull(categoryBuilder);
-        return categoryBuilder.substring(0, categoryBuilder.length() - 1);
+        requireNonNull(categoriesString);
+        return categoriesString;
     }
 
     /**
@@ -224,11 +222,9 @@ public class UniqueCategoryList implements Iterable<Category> {
      * @return all categories as a List of categories
      */
     public List<Category> joinCategoriesAsList() {
-        List<Category> categoryList = new ArrayList<>();
-
-        internalList.stream().forEach(category -> {
-            categoryList.add(category);
-        });
+        List<Category> categoryList = internalList
+                .stream()
+                .collect(Collectors.toList());
 
         requireNonNull(categoryList);
         return categoryList;

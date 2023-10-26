@@ -27,11 +27,14 @@ public class TransactionCategoryContainsKeywordsPredicate
     @Override
     public boolean test(Transaction transaction) {
         return keywords
-                .stream().anyMatch(keyword -> transaction
-                        .getCategories().joinCategoriesAsList()
-                                .stream().anyMatch(category ->
-                                        StringUtil.containsSubstringIgnoreCase(
-                                                        category.toString(), keyword)
+                .stream()
+                .anyMatch(keyword -> transaction
+                        .getCategories()
+                        .joinCategoriesAsList()
+                        .stream()
+                        .anyMatch(category ->
+                                    StringUtil.containsSubstringIgnoreCase(
+                                            category.toString(), keyword)
                                 )
                 );
     }
