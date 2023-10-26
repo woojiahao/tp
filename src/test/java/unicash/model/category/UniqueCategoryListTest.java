@@ -196,7 +196,41 @@ public class UniqueCategoryListTest {
     @Test
     public void getSize_test() {
         UniqueCategoryList categoryList = new UniqueCategoryList();
-        assertEquals(uniqueCategoryList.getSize(), 0);
+        assertEquals(categoryList.getSize(), 0);
+    }
+
+    @Test
+    public void emptyList_test() {
+        UniqueCategoryList categoryList = new UniqueCategoryList();
+        assertTrue(categoryList.isEmpty());
+    }
+
+    @Test
+    public void joinCategoriesAsStringTest() {
+        UniqueCategoryList categoryList = new UniqueCategoryList();
+        categoryList.add(ENTERTAINMENT);
+        categoryList.add(EDUCATION);
+        assertEquals(ENTERTAINMENT + "," + EDUCATION,
+                categoryList.joinCategoriesAsString());
+    }
+
+    @Test
+    public void joinCategoriesAsListTest() {
+        UniqueCategoryList categoryUniqueList = new UniqueCategoryList();
+        categoryUniqueList.add(ENTERTAINMENT);
+        categoryUniqueList.add(EDUCATION);
+
+        List<Category> categoriesList = new ArrayList<>();
+        categoriesList.add(ENTERTAINMENT);
+        categoriesList.add(EDUCATION);
+
+        // List return test
+        assertEquals(categoriesList,
+                categoryUniqueList.joinCategoriesAsList());
+
+        // List toString return test
+        assertEquals("[" + ENTERTAINMENT + ", " + EDUCATION + "]",
+                categoryUniqueList.joinCategoriesAsList().toString());
     }
 
     @Test

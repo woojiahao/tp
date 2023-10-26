@@ -157,7 +157,7 @@ public class Amount {
 
     @Override
     public String toString() {
-        return CURRENCY_INDICATOR + String.format("%.2f", this.amount);
+        return String.format("%s%.2f", CURRENCY_INDICATOR, amount);
     }
 }
 
