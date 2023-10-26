@@ -18,6 +18,7 @@ public class DateTime {
     public static final String DATETIME_PATTERN_ONE = "dd-MM-uuuu HH:mm";
     public static final String DATETIME_PATTERN_TWO = "uuuu-MM-dd HH:mm";
     public static final String DATETIME_STORAGE_PATTERN = "dd MMM uuuu HH:mm";
+    public static final String DATETIME_FIND_PATTERN = "dd MMM uuuu_HH:mm";
     public static final String MESSAGE_CONSTRAINTS =
             "DateTime should be in either of the following formats: " + "\n"
                     + "1. " + DATETIME_PATTERN_ONE + "\n"

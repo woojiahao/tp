@@ -3,6 +3,7 @@ package unicash.model.transaction.predicates;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -13,7 +14,7 @@ import org.junit.jupiter.api.Test;
 import unicash.testutil.TransactionBuilder;
 
 
-public class TransactionDateTimeContainsKeywordsPredicateTest {
+public class TransactionDateTimeContainsValuePredicateTest {
     public static final String FIRST_DATE = "18-08-2001 10:10";
     public static final String SECOND_DATE = "18-08-2023 10:10";
 
@@ -47,36 +48,45 @@ public class TransactionDateTimeContainsKeywordsPredicateTest {
         assertNotEquals(firstPredicate, secondPredicate);
     }
 
-    /* TODO: FIX THIS WITH REGARD TO NEW DATETIME FORMAT
+
     @Test
     public void test_dateTimeContainsKeywords_returnsTrue() {
         // One keyword
-        TransactionDateTimeContainsKeywordsPredicate predicate =
-                new TransactionDateTimeContainsKeywordsPredicate(Collections
-                        .singletonList("18-08-2001"));
-        assertTrue(predicate.test(new TransactionBuilder().withDateTime(FIRST_DATE).build()));
-
-        // Only one matching keyword
-        predicate = new TransactionDateTimeContainsKeywordsPredicate(
-                Arrays.asList("18-08-2001", "18-09-2001"));
+        TransactionDateTimeContainsValuePredicate predicate =
+                new TransactionDateTimeContainsValuePredicate(Collections
+                        .singletonList("18 Aug 2001"));
         assertTrue(predicate.test(new TransactionBuilder().withDateTime(FIRST_DATE).build()));
 
         // Multiple keywords
-        predicate = new TransactionDateTimeContainsKeywordsPredicate(
-                Arrays.asList("18-08-2001", "10:10"));
+        predicate = new TransactionDateTimeContainsValuePredicate(
+                Arrays.asList("18 Aug 2001", "10:10"));
         assertTrue(predicate.test(new TransactionBuilder().withDateTime(FIRST_DATE).build()));
 
+        // Partial match
+        predicate = new TransactionDateTimeContainsValuePredicate(Arrays.asList("18 Aug"));
+        assertTrue(predicate.test(new TransactionBuilder().withDateTime(FIRST_DATE).build()));
 
-    }*/
+        // Partial match
+        predicate = new TransactionDateTimeContainsValuePredicate(Arrays.asList("Aug 2001"));
+        assertTrue(predicate.test(new TransactionBuilder().withDateTime(FIRST_DATE).build()));
+
+        /* Zero keywords -> All empty strings are valid substrings of all strings. Thus,
+         * this predicate will return true. However, the sequence of execution in UniCash
+         * is such that a ParseException will be thrown with an empty String argument before
+         * the execution of this predicate is reached. */
+        predicate = new TransactionDateTimeContainsValuePredicate(Collections.emptyList());
+        assertTrue(predicate.test(new TransactionBuilder().withDateTime(FIRST_DATE).build()));
+
+    }
 
     @Test
     public void test_dateTimeDoesNotContainKeywords_returnsFalse() {
-        // Zero keywords
         TransactionDateTimeContainsValuePredicate predicate =
                 new TransactionDateTimeContainsValuePredicate(Collections.emptyList());
 
-        // Partial match only
-        predicate = new TransactionDateTimeContainsValuePredicate(Arrays.asList("18-08"));
+        // One matching keyword but combined entry of keywords
+        predicate = new TransactionDateTimeContainsValuePredicate(
+                Arrays.asList("18 Aug 2001", "18 Sep 2001"));
         assertFalse(predicate.test(new TransactionBuilder().withDateTime(FIRST_DATE).build()));
     }
 

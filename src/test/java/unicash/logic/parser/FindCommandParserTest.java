@@ -24,6 +24,8 @@ public class FindCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
+
+
     @Test
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
@@ -36,3 +38,4 @@ public class FindCommandParserTest {
     }
 
 }
+

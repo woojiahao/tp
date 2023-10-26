@@ -13,7 +13,7 @@ import unicash.model.transaction.Transaction;
  *
  * </p> However, given that the actual specification splits date and time, this property
  * predicate would work for finding both date and time separately as they are separated
- * by a space and thus would parse to two words.
+ * and thus the input keyword would still match part of the word.
  */
 public class TransactionDateTimeContainsValuePredicate
         implements Predicate<Transaction> {
@@ -23,11 +23,14 @@ public class TransactionDateTimeContainsValuePredicate
         this.keywords = keywords;
     }
 
-    // TODO: FIX THIS TO CONFORM WITH NEW DATETIME FORMAT
     @Override
     public boolean test(Transaction transaction) {
-        return transaction.getDateTime().toString().toLowerCase()
-                .contains(String.join(" ", keywords));
+        // Keywords are rejoined as split by FindCommand
+        String joinedKeyword = String.join(" ", keywords);
+        String dateTimeString = transaction.getDateTime().toString();
+
+        return dateTimeString.contains(joinedKeyword);
+
     }
 
     @Override
