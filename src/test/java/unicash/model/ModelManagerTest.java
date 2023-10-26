@@ -126,8 +126,8 @@ public class ModelManagerTest {
         modelManager = new ModelManager(uniCash, userPrefs);
 
         HashMap<String, Double> expectedExpenseSummary = new HashMap<>();
-        expectedExpenseSummary.put("TA", 888.8);
-        expectedExpenseSummary.put("Food", 8.8);
+        expectedExpenseSummary.put("ta", 888.8);
+        expectedExpenseSummary.put("food", 8.8);
 
         assertEquals(modelManager.getExpenseSummary(), expectedExpenseSummary);
     }

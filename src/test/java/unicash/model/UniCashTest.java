@@ -123,7 +123,7 @@ public class UniCashTest {
                 .build();
 
         HashMap<String, Double> expectedOutput = new HashMap<>();
-        expectedOutput.put("TA", 888.80);
+        expectedOutput.put("ta", 888.80);
 
         HashMap<String, Double> actualOutput = uniCash.getSumOfExpensePerCategory();
 
@@ -158,7 +158,7 @@ public class UniCashTest {
         HashMap<String, Double> actualOutput = uniCash.getSumOfExpensePerCategory();
 
         HashMap<String, Double> expectedOutput = new HashMap<>();
-        expectedOutput.put("TA", 888.80);
+        expectedOutput.put("ta", 888.80);
         expectedOutput.put("Uncategorized", 8.21);
 
         assertEquals(expectedOutput, actualOutput);
@@ -185,7 +185,7 @@ public class UniCashTest {
 
         HashMap<String, Double> expectedOutput = new HashMap<>();
         expectedOutput.put("education", 500.1);
-        expectedOutput.put("TA", 888.8 + 500.1);
+        expectedOutput.put("ta", 888.8 + 500.1);
 
         assertEquals(expectedOutput, actualOutput);
     }

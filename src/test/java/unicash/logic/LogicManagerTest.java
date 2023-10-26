@@ -115,8 +115,8 @@ public class LogicManagerTest {
         HashMap<String, Double> actualOutput = logic.getExpenseSummary();
 
         HashMap<String, Double> expectedOutput = new HashMap<>();
-        expectedOutput.put("TA", 888.8);
-        expectedOutput.put("Food", 8.8);
+        expectedOutput.put("ta", 888.8);
+        expectedOutput.put("food", 8.8);
 
         assertEquals(actualOutput, expectedOutput);
     }
