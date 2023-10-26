@@ -65,10 +65,17 @@ public class UniqueCategoryList implements Iterable<Category> {
     }
 
     /**
-     * Returns true is the storage is full, false otherwise.
+     * Returns true if the storage is full, false otherwise.
      */
     public boolean isMax() {
         return internalList.size() == MAX_CATEGORIES;
+    }
+
+    /**
+     * Returns true if internalList is empty, false otherwise.
+     */
+    public boolean isEmpty() {
+        return internalList.size() == 0;
     }
 
     /**
@@ -212,7 +219,6 @@ public class UniqueCategoryList implements Iterable<Category> {
                 .map(category -> category.toString())
                 .collect(Collectors.joining(","));
 
-        requireNonNull(categoriesString);
         return categoriesString;
     }
 
@@ -226,7 +232,6 @@ public class UniqueCategoryList implements Iterable<Category> {
                 .stream()
                 .collect(Collectors.toList());
 
-        requireAllNonNull(categoryList);
         return categoryList;
     }
 

@@ -200,6 +200,12 @@ public class UniqueCategoryListTest {
     }
 
     @Test
+    public void emptyList_test() {
+        UniqueCategoryList categoryList = new UniqueCategoryList();
+        assertTrue(categoryList.isEmpty());
+    }
+
+    @Test
     public void joinCategoriesAsStringTest() {
         UniqueCategoryList categoryList = new UniqueCategoryList();
         categoryList.add(ENTERTAINMENT);
