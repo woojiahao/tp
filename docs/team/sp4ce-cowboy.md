@@ -20,28 +20,44 @@ code and documentation that I've contributed, the team tasks that I have been in
 enhancements that I've implemented or proposed to implement for UniCa$h.
 
 
-
 ### Project Contributions
 
 #### Features
+* **Functional Features**
+  * **Delete Transaction**: *to be added*
+  * **Clear Transactions**: *to be added*
+  * **Reset UniCash**: *to be added*
+  * **Get Transactions**: *to be added*
+  * **Filter Transactions**: *feature yet to be implemented*
 
-* **New Feature**: *to be added*
+* **User Interface Features**
+  * **View User Guide**: *to be added*
+  * **View Rolling Balance**: *to be added*
+  * **Hash-based Color generation**: *to be added*
 
-* **Code contributed**: [RepoSense Link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=T16-3&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&tabOpen=true&tabType=authorship&tabAuthor=sp4ce-cowboy&tabRepo=AY2324S1-CS2103-T16-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
-  * Storage
-    * Responsible for the Storage functionality
+* **Feature Enhancements** 
+  * **Find Transactions**: Added enhancements *to be added*
+  * **User Interface Features**: *to be added*
+    * Collaborated with [@jamz903](https://github.com/jamz903) on UI
 
-* **Project management**: *to be added*
 
-* **Enhancements to existing features**: *to be added*
+#### Code
+* Code contributed: [RepoSense Link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=T16-3&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&tabOpen=true&tabType=authorship&tabAuthor=sp4ce-cowboy&tabRepo=AY2324S1-CS2103-T16-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 
-* **Documentation**:
-    * User Guide:
-        * Added documentation for `expense` [to be added]()
-    * Developer Guide:
-        * Migrated details of the Developer Guide from an external source and consolidated them in GitHub.
+#### Documentation
+* User Guide:
+    * Added documentation for `DeleteTransaction` [to be added]()
+    * Added documentation for `ClearTransactions` [to be added]()
+* Developer Guide:
+    * Migrated details of the Developer Guide from an external source and consolidated them in GitHub.
 
-* **Community**: *to be added*
+    
+#### Project Management
+* Managed release v1.2 on GitHub - Can be found [here](https://github.com/AY2324S1-CS2103-T16-3/tp/releases/tag/v1.2). 
 
-* **Tools**: *to be added*
+#### Community
+* **Pull Requests Reviewed**: *to be added*
+* **Pull Requests Opened**: *to be added*
+* **Issues Assigned & Completed**: *to be added*
+
 
