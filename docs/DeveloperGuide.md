@@ -274,7 +274,7 @@ The `DeleteCommand` function deletes an existing `Transaction` from `Transaction
 
 The activity diagram of deleting a Transaction is as shown below
 
-<img src="images/unicash/DeleteTransactionActivityDiagram.png" width="1200" />
+<img src="images/unicash/DeleteTransactionActivityDiagram.png" width="600" />
 
 The following sequence diagram shows the interaction between different components of UniCash.
 
