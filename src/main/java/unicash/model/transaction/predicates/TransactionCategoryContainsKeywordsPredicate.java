@@ -19,13 +19,23 @@ public class TransactionCategoryContainsKeywordsPredicate
         this.keywords = keywords;
     }
 
+    /* A nested anyMatch compares each keyword for each category in the categoryList.
+     * This removes any String dependency entirely so the keyword "od,so" now will not
+     * match something like "food,social" compared to if the string representation
+     * of the categoryList was returned.
+     */
     @Override
     public boolean test(Transaction transaction) {
-        return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsSubstringIgnoreCase((
-                        transaction.getCategories()
-                                .joinCategoriesAsString()), keyword));
+        return keywords
+                .stream().anyMatch(keyword -> transaction
+                        .getCategories().joinCategoriesAsList()
+                                .stream().anyMatch(category ->
+                                        StringUtil.containsSubstringIgnoreCase(
+                                                        category.toString(), keyword)
+                                )
+                );
     }
+
 
     @Override
     public boolean equals(Object other) {

@@ -3,6 +3,7 @@ package unicash.model.category;
 import static java.util.Objects.requireNonNull;
 import static unicash.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -216,4 +217,21 @@ public class UniqueCategoryList implements Iterable<Category> {
         requireNonNull(categoryBuilder);
         return categoryBuilder.substring(0, categoryBuilder.length() - 1);
     }
+
+    /**
+     * Returns all categories as a single, unified List.
+     *
+     * @return all categories as a List of categories
+     */
+    public List<Category> joinCategoriesAsList() {
+        List<Category> categoryList = new ArrayList<>();
+
+        internalList.stream().forEach(category -> {
+            categoryList.add(category);
+        });
+
+        requireNonNull(categoryList);
+        return categoryList;
+    }
+    
 }

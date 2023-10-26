@@ -209,6 +209,25 @@ public class UniqueCategoryListTest {
     }
 
     @Test
+    public void joinCategoriesAsListTest() {
+        UniqueCategoryList categoryUniqueList = new UniqueCategoryList();
+        categoryUniqueList.add(ENTERTAINMENT);
+        categoryUniqueList.add(EDUCATION);
+
+        List<Category> categoriesList = new ArrayList<>();
+        categoriesList.add(ENTERTAINMENT);
+        categoriesList.add(EDUCATION);
+
+        // List return test
+        assertEquals(categoriesList,
+                categoryUniqueList.joinCategoriesAsList());
+
+        // List toString return test
+        assertEquals("[" + ENTERTAINMENT + ", " + EDUCATION + "]",
+                categoryUniqueList.joinCategoriesAsList().toString());
+    }
+
+    @Test
     public void hashCode_test() {
         UniqueCategoryList categoryList1 = new UniqueCategoryList();
         UniqueCategoryList categoryList2 = new UniqueCategoryList();
