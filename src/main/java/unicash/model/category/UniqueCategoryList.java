@@ -6,6 +6,7 @@ import static unicash.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -64,10 +65,17 @@ public class UniqueCategoryList implements Iterable<Category> {
     }
 
     /**
-     * Returns true is the storage is full, false otherwise.
+     * Returns true if the storage is full, false otherwise.
      */
     public boolean isMax() {
         return internalList.size() == MAX_CATEGORIES;
+    }
+
+    /**
+     * Returns true if internalList is empty, false otherwise.
+     */
+    public boolean isEmpty() {
+        return internalList.size() == 0;
     }
 
     /**
@@ -199,4 +207,32 @@ public class UniqueCategoryList implements Iterable<Category> {
         }
         return true;
     }
+
+    /**
+     * Returns all categories as a single, unified string.
+     *
+     * @return all categories as a string
+     */
+    public String joinCategoriesAsString() {
+        String categoriesString = internalList
+                .stream()
+                .map(category -> category.toString())
+                .collect(Collectors.joining(","));
+
+        return categoriesString;
+    }
+
+    /**
+     * Returns all categories as a single, unified List.
+     *
+     * @return all categories as a List of categories
+     */
+    public List<Category> joinCategoriesAsList() {
+        List<Category> categoryList = internalList
+                .stream()
+                .collect(Collectors.toList());
+
+        return categoryList;
+    }
+
 }

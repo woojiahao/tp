@@ -7,7 +7,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import unicash.logic.commands.FindCommand;
-import unicash.model.transaction.TransactionNameContainsKeywordsPredicate;
+import unicash.model.transaction.predicates.TransactionContainsKeywordsPredicate;
 
 /**
  * A class to test the FindCommandParser.
@@ -24,11 +24,13 @@ public class FindCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
+
+
     @Test
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
-                new FindCommand(new TransactionNameContainsKeywordsPredicate(Arrays.asList("Shopping", "Work")));
+                new FindCommand(new TransactionContainsKeywordsPredicate(Arrays.asList("Shopping", "Work")));
         CommandParserTestUtil.assertParseSuccess(parser, "Shopping Work", expectedFindCommand);
 
         // multiple whitespaces between keywords
@@ -36,3 +38,4 @@ public class FindCommandParserTest {
     }
 
 }
+
