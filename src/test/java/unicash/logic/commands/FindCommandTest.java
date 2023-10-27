@@ -91,7 +91,10 @@ public class FindCommandTest {
         TransactionContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(null);
         expectedModel.updateFilteredTransactionList(predicate);
-        assertThrows(AssertionError.class, () -> assertCommandSuccess(command, model, expectedMessage, expectedModel));
+
+        assertThrows(AssertionError.class, "predicate cannot be null", () ->
+                assertCommandSuccess(command, model,
+                expectedMessage, expectedModel));
     }
 
     @Test
