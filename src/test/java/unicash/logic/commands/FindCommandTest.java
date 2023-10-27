@@ -92,9 +92,7 @@ public class FindCommandTest {
         FindCommand command = new FindCommand(null);
         expectedModel.updateFilteredTransactionList(predicate);
 
-        assertThrows(AssertionError.class, "predicate cannot be null", () ->
-                assertCommandSuccess(command, model,
-                expectedMessage, expectedModel));
+        assertThrows(AssertionError.class, "predicate cannot be null", () -> command.execute(model));
     }
 
     @Test
