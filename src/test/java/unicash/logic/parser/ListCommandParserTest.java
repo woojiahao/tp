@@ -1,5 +1,6 @@
 package unicash.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static unicash.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static unicash.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static unicash.testutil.Assert.assertThrows;
@@ -33,5 +34,10 @@ public class ListCommandParserTest {
     public void parse_withNullInput_assertionFailure() {
         assertThrows(AssertionError.class, "userInput cannot be null", () -> parser.parse(null));
 
+    }
+
+    @Test
+    public void execute_predicateNotNull_assertion() {
+        assertDoesNotThrow(() -> new ListCommandParser().parse(" "));
     }
 }

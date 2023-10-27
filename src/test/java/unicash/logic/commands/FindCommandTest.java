@@ -1,5 +1,6 @@
 package unicash.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -93,6 +94,11 @@ public class FindCommandTest {
         expectedModel.updateFilteredTransactionList(predicate);
 
         assertThrows(AssertionError.class, "predicate cannot be null", () -> command.execute(model));
+    }
+
+    @Test
+    public void execute_predicateNotNull_assertion() {
+        assertDoesNotThrow(() -> new FindCommand(preparePredicate(" ")).execute(model));
     }
 
     @Test
