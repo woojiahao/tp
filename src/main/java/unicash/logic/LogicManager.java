@@ -82,7 +82,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public HashMap<String, Double> getExpenseSummary() {
-        return model.getExpenseSummary();
+    public HashMap<String, Double> getExpenseSummaryPerCategory() {
+        return model.getExpenseSummaryPerCategory();
     }
 }

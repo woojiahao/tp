@@ -92,5 +92,5 @@ public interface Model {
      */
     void updateFilteredTransactionList(Predicate<Transaction> predicate);
 
-    HashMap<String, Double> getExpenseSummary();
+    HashMap<String, Double> getExpenseSummaryPerCategory();
 }

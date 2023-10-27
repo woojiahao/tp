@@ -162,7 +162,7 @@ public class AddTransactionCommandTest {
         }
 
         @Override
-        public HashMap<String, Double> getExpenseSummary() {
+        public HashMap<String, Double> getExpenseSummaryPerCategory() {
             throw new AssertionError("This method should not be called.");
         }
     }

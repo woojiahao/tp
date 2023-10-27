@@ -128,7 +128,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public HashMap<String, Double> getExpenseSummary() {
+    public HashMap<String, Double> getExpenseSummaryPerCategory() {
         return uniCash.getSumOfExpensePerCategory();
     }
 

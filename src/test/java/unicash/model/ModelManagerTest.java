@@ -129,7 +129,7 @@ public class ModelManagerTest {
         expectedExpenseSummary.put("ta", 888.8);
         expectedExpenseSummary.put("food", 8.8);
 
-        assertEquals(modelManager.getExpenseSummary(), expectedExpenseSummary);
+        assertEquals(modelManager.getExpenseSummaryPerCategory(), expectedExpenseSummary);
     }
 
     @Test

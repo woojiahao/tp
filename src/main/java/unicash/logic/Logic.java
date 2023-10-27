@@ -47,5 +47,5 @@ public interface Logic {
     /**
      * Returns a HashMap of the expense summary from the model
      */
-    HashMap<String, Double> getExpenseSummary();
+    HashMap<String, Double> getExpenseSummaryPerCategory();
 }

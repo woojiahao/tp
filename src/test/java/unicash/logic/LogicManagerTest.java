@@ -112,7 +112,7 @@ public class LogicManagerTest {
         model.addTransaction(DINING_WITH_FRIENDS);
         model.addTransaction(INTERN);
         logic = new LogicManager(model, storage);
-        HashMap<String, Double> actualOutput = logic.getExpenseSummary();
+        HashMap<String, Double> actualOutput = logic.getExpenseSummaryPerCategory();
 
         HashMap<String, Double> expectedOutput = new HashMap<>();
         expectedOutput.put("ta", 888.8);

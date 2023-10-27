@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 import javafx.collections.ObservableList;
 import unicash.commons.util.ToStringBuilder;
 import unicash.model.category.Category;
-import unicash.model.transaction.DateTime;
 import unicash.model.transaction.Transaction;
 import unicash.model.transaction.TransactionList;
 
@@ -135,16 +134,25 @@ public class UniCash implements ReadOnlyUniCash {
             boolean hasNoCategory = t.getCategories().asUnmodifiableObservableList().isEmpty();
 
             if (hasNoCategory) {
-                handleNoCategoryTransaction(sumPerCategory, uncategorizedCategoryName, transactionAmount);
+                handleNoCategoryTransaction(
+                        sumPerCategory,
+                        uncategorizedCategoryName,
+                        transactionAmount
+                );
             } else {
-                handleCategoryTransaction(t.getCategories().asUnmodifiableObservableList(), sumPerCategory, transactionAmount);
+                handleCategoryTransaction(
+                        t.getCategories().asUnmodifiableObservableList(),
+                        sumPerCategory,
+                        transactionAmount
+                );
             }
         }
 
         return sumPerCategory;
     }
 
-    private void handleNoCategoryTransaction(HashMap<String, Double> sumPerCategory, String uncategorizedCategoryName, Double transactionAmount) {
+    private void handleNoCategoryTransaction(HashMap<String, Double> sumPerCategory, String uncategorizedCategoryName,
+                                             Double transactionAmount) {
         if (!sumPerCategory.containsKey(uncategorizedCategoryName)) {
             sumPerCategory.put(uncategorizedCategoryName, (double) 0);
         }
@@ -152,7 +160,8 @@ public class UniCash implements ReadOnlyUniCash {
         sumPerCategory.put(uncategorizedCategoryName, currAmount + transactionAmount);
     }
 
-    private void handleCategoryTransaction(ObservableList<Category> categories, HashMap<String, Double> sumPerCategory, Double transactionAmount) {
+    private void handleCategoryTransaction(ObservableList<Category> categories, HashMap<String, Double> sumPerCategory,
+                                           Double transactionAmount) {
         for (Category transactionCategory : categories) {
             if (!sumPerCategory.containsKey(transactionCategory.category)) {
                 sumPerCategory.put(transactionCategory.category, (double) 0);
