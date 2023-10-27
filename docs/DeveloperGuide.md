@@ -403,6 +403,51 @@ This emulates the iterative deletion of all transactions in the `TransactionList
 
 ### Feature Group 4 - User Interface Features
 
+UniCa$h is a Graphical User Interface (GUI) application, built using JavaFX. The following section describes the
+implementation of the various UI components in UniCa$h.
+
+#### UI Components
+UniCa$sh consists of the following UI components:
+1. Main Window
+2. Help Window
+3. Statistics / Budget Window
+
+<img src="images/unicash/UiClassDiagram.png" width="404" />
+
+In this section, we will be going through the implementation of the main window.
+
+#### 1a. Main Window Design
+The main window consists of three components: the command input box, as well as two panes,
+the transaction list pane and the command results pane.
+
+For the command input box, we have a custom `CommandBox` class that extends `TextField` to provide
+the user with the ability to type their commands into the application.
+
+For the transaction list pane, we have a custom `TransactionListPanel` class that is a `ListView` to
+provide the user with a scrollable list of transactions. This view is updated whenever the user executes
+commands that modify the transaction list. (i.e. `add`, `delete`, `edit`, `clear`)
+
+For the command results pane, we have a custom `ResultDisplay` class. This pane displays the results of the
+user's command execution. This view is updated whenever the user executes commands that modify the transaction.
+Error messages are also displayed here, such as when the user enters an invalid command.
+
+#### 1b. Main Window Implementation
+The main window for UniCa$h is implemented using the `MainWindow` class. This class is made up of:
+1. `CommandBox`: The command input box
+2. `TransactionListPanel`: The transaction list pane
+3. `ResultDisplay`: The command results pane
+
+All these components, including the `MainWindow`, inherit from the abstract `UiPart` class which provides
+the basic functionality of a UI component, such as the ability to set the root node of the component.
+
+The `UI` component uses the JavaFx UI framework to render the UI components. The layout of these parts are defined
+in the matching .fxml files that are located in `src/main/resources/view` folder. (e.g. The layout of the 
+TransactionCard is specified in`TransactionCard.fxml`)
+
+The `UI` component is also responsible for:
+- executing commands using the `Logic` component, through the `executeCommand` method
+- listening for changes to the `Model` component, through the `listenToModelChanges` method
+
 ## Continuous Integration (CI)
 
 Continuous integration consists of the following:
