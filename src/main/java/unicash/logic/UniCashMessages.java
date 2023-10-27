@@ -112,24 +112,4 @@ public class UniCashMessages {
                 .append(budget.getInterval());
         return builder.toString();
     }
-
-    /**
-     * Formats the {@code transaction} for output as a continuous string.
-     */
-    public static String formatTransactionAsString(Transaction transaction) {
-        final StringBuilder builder = new StringBuilder();
-        builder.append("Name: ")
-                .append(transaction.getName())
-                .append("; Type: ")
-                .append(transaction.getType())
-                .append("; Amount: ")
-                .append(transaction.getAmount())
-                .append("; Date: ")
-                .append(transaction.getDateTime())
-                .append("; Location: ")
-                .append(transaction.getLocation())
-                .append("; Category: ");
-        transaction.getCategories().forEach(builder::append);
-        return builder.toString();
-    }
 }
