@@ -1,9 +1,17 @@
 package unicash.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static unicash.logic.commands.CommandTestUtil.*;
+import static unicash.logic.commands.CommandTestUtil.VALID_AMOUNT_NUS;
+import static unicash.logic.commands.CommandTestUtil.VALID_LOCATION_NUS;
+import static unicash.logic.commands.CommandTestUtil.VALID_TRANSACTION_NAME_NUS;
+import static unicash.logic.commands.CommandTestUtil.VALID_TYPE_INCOME;
+
+import java.time.Clock;
+import java.time.Instant;
+import java.time.ZoneId;
 
 import org.junit.jupiter.api.Test;
+
 import unicash.model.category.UniqueCategoryList;
 import unicash.model.commons.Amount;
 import unicash.model.transaction.DateTime;
@@ -12,10 +20,6 @@ import unicash.model.transaction.Name;
 import unicash.model.transaction.Transaction;
 import unicash.model.transaction.Type;
 import unicash.testutil.TransactionBuilder;
-
-import java.time.Clock;
-import java.time.Instant;
-import java.time.ZoneId;
 
 public class JsonAdaptedTransactionIntegrationTest {
     private static final Clock clock = Clock.fixed(Instant.parse("2014-12-21T10:15:30.00Z"), ZoneId.of("UTC"));

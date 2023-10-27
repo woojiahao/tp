@@ -100,13 +100,11 @@ public class Transaction {
 
         Transaction otherTransaction = (Transaction) other;
         boolean x1 = name.equals(otherTransaction.name);
-        boolean x2 =  type.equals(otherTransaction.type);
+        boolean x2 = type.equals(otherTransaction.type);
         boolean x3 = amount.equals(otherTransaction.amount);
         boolean x4 = categories.equals(otherTransaction.categories);
         boolean x5 = dateTime.equals(otherTransaction.dateTime);
         boolean x6 = location.equals(otherTransaction.location);
-        System.out.println("*" + dateTime.getDateTime());
-        System.out.println("**" + otherTransaction.getDateTime().getDateTime());
         return x1 && x2 && x3 && x4 && x5 && x6;
     }
 
