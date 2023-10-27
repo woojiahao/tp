@@ -2,6 +2,7 @@ package unicash.logic.parser;
 
 import static unicash.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static unicash.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static unicash.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,5 +27,10 @@ public class ListCommandParserTest {
     public void parse_withExcessSpacing_throwsParseException() {
         //list with number
         assertParseSuccess(parser, "     ", new ListCommand());
+    }
+
+    @Test
+    public void parse_withNullInput_assertionFailure() {
+        assertThrows(AssertionError.class, () -> assertParseFailure(parser, null, ListCommand.MESSAGE_FAILURE));
     }
 }

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static unicash.logic.UniCashMessages.MESSAGE_TRANSACTIONS_LISTED_OVERVIEW;
 import static unicash.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static unicash.testutil.Assert.assertThrows;
 import static unicash.testutil.TypicalTransactions.INTERN;
 import static unicash.testutil.TypicalTransactions.NUS;
 import static unicash.testutil.TypicalTransactions.getTypicalUniCash;
@@ -82,6 +83,15 @@ public class FindCommandTest {
         var filteredResult = modelWithTransactions.getFilteredTransactionList();
         assertEquals(filteredResult.get(1), NUS);
         assertEquals(filteredResult.get(2), INTERN);
+    }
+
+    @Test
+    public void execute_predicateNull_assertionFailure() {
+        String expectedMessage = String.format(MESSAGE_TRANSACTIONS_LISTED_OVERVIEW, 0);
+        TransactionContainsKeywordsPredicate predicate = preparePredicate(" ");
+        FindCommand command = new FindCommand(null);
+        expectedModel.updateFilteredTransactionList(predicate);
+        assertThrows(AssertionError.class, () -> assertCommandSuccess(command, model, expectedMessage, expectedModel));
     }
 
     @Test
