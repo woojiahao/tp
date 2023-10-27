@@ -133,6 +133,16 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void updateBudget_predicateIsNull_failure() {
+        assertThrows(NullPointerException.class, () -> modelManager.updateFilteredBudgetList(null));
+    }
+
+    @Test
+    public void addBudget_budgetNotInUniCash_success() {
+        assertThrows(NullPointerException.class, () -> modelManager.addBudget(null));
+    }
+
+    @Test
     public void equals() {
         UniCash uniCash = new UniCashBuilder().withTransaction(NUS).build();
         UniCash differentUniCash = new UniCash();
