@@ -104,6 +104,11 @@ public interface Model {
     void setBudget(Budget budget);
 
     /**
+     * Returns the budget
+     */
+    Budget getBudget();
+
+    /**
      * Updates the summary of expenses saved in UniCash.
      */
     void updateExpenseSummary();

@@ -167,6 +167,12 @@ public class AddTransactionCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+
+        @Override
+        public Budget getBudget() {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public void updateExpenseSummary() {
             throw new AssertionError("This method should not be called.");
