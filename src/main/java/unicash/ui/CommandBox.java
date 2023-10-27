@@ -9,6 +9,9 @@ import unicash.logic.commands.CommandResult;
 import unicash.logic.commands.exceptions.CommandException;
 import unicash.logic.parser.exceptions.ParseException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * The UI component that is responsible for receiving user command inputs.
  */
@@ -22,6 +25,9 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     private TextField commandTextField;
 
+    private List<String> commandHistory = new ArrayList<>();
+    private int currentCommandIndex = -1; // this is to keep track of which command the user is currently on
+
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
      */
@@ -30,6 +36,18 @@ public class CommandBox extends UiPart<Region> {
         this.commandExecutor = commandExecutor;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+
+        // Iterates through history of commands held in the commandHistory List
+        commandTextField.setOnKeyPressed(event -> {
+            switch (event.getCode()) {
+            case UP:
+                showPreviousCommand();
+                break;
+            case DOWN:
+                showNextCommand();
+                break;
+            }
+        });
     }
 
     /**
@@ -43,6 +61,7 @@ public class CommandBox extends UiPart<Region> {
         }
 
         try {
+            addCommandToHistory(commandText);
             commandExecutor.execute(commandText);
             commandTextField.setText("");
         } catch (CommandException | ParseException e) {
@@ -82,5 +101,43 @@ public class CommandBox extends UiPart<Region> {
          */
         CommandResult execute(String commandText) throws CommandException, ParseException;
     }
+
+    /* Adds the input string to command history list and resets command index */
+    private void addCommandToHistory(String input) {
+        commandHistory.add(input);
+        currentCommandIndex = -1; // reset index as new command is added
+    }
+
+    /* Iterates through command history backwards and sets the commandTextField text */
+    private void showPreviousCommand() {
+        if (commandHistory.isEmpty()) {
+            return;
+        }
+
+        if (currentCommandIndex == -1) {
+            currentCommandIndex = commandHistory.size() - 1;
+        } else if (currentCommandIndex > 0) {
+            currentCommandIndex--;
+        }
+        commandTextField.setText(commandHistory.get(currentCommandIndex));
+    }
+
+    /* Iterates through command history forwards and sets the commandTextField text */
+    private void showNextCommand() {
+        if (commandHistory.isEmpty() || currentCommandIndex == -1) {
+            return;
+        }
+
+        if (currentCommandIndex < commandHistory.size() - 1) {
+            // If not at the end of the list, move one step forward i.e. down
+            currentCommandIndex++;
+            commandTextField.setText(commandHistory.get(currentCommandIndex));
+        } else {
+            // If at the end of the list, reset to -1 and clear the input
+            currentCommandIndex = -1;
+            commandTextField.setText("");
+        }
+    }
+
 
 }

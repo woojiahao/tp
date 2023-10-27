@@ -148,6 +148,8 @@ public class MainWindow extends UiPart<Stage> {
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
+
+
     /**
      * Sets the default size based on {@code guiSettings}.
      */
