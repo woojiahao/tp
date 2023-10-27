@@ -15,7 +15,12 @@ import unicash.logic.parser.exceptions.ParseException;
 
 /**
  * The UI component that is responsible for receiving user command inputs.
- * Each user input, regardless of it's correctness
+ *
+ * </p> Each user input, regardless of the correctness of input and as long as
+ * the input is not blank, will be stored in a User Input History {@code ArrayList}.
+ * The user can traverse through this history with the standard Keyboard Input
+ * {@code UP} and {@code DOWN} arrow keys. The User Input History only persists
+ * during the application's runtime, and will be reset once the application is closed.
  */
 public class CommandBox extends UiPart<Region> {
 
@@ -46,14 +51,16 @@ public class CommandBox extends UiPart<Region> {
          * the arrow "UP" key and arrow "DOWN" key are constants defined by the KeyCode
          * class, and user keyboard input is observed by the KeyEvent class. The user can
          * also input the "ESCAPE" key to blank the field, instead of having to manually
-         * backspace through the Command Text Field */
+         * backspace through the command text field */
         commandTextField.setOnKeyPressed(event -> {
             switch (event.getCode()) {
             case UP:
                 showPreviousUserInput();
+                commandTextField.end(); // Moves the text cursor to the end of the TextField
                 break;
             case DOWN:
                 showNextUserInput();
+                commandTextField.end(); // Moves the text cursor to the end of the TextField
                 break;
             case ESCAPE:
                 clearCommandTextField();
