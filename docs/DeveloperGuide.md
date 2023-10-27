@@ -302,6 +302,44 @@ a `ParserException` is thrown. Another noteworthy point is that `Category` that 
 unique and can only be up to
 a specified value in the `UniqueCategoryList` class. Else, a `ParserException` would be thrown.
 
+#### Get Total Expenditure
+
+##### Overview
+
+The `get_total_expenditure` command returns the total expenditure across a given month among all `expense` transactions in UniCa$h, with an optional filter for a given category.
+
+The activity diagram of getting the total expenditure is as shown below
+
+<img src="images/unicash/GetTotalExpenditureActivityDiagram.png" width="1200" />
+
+The following sequence diagram shows how the different components of UniCash interact with each other
+
+[//]: # (<img src="images/unicash/AddTransactionSequenceDiagram.png" width="1200" />)
+
+The above sequence diagram omits details on the creation of the attributes of a `Transaction` such as
+`Name`, `Type` and `Amount` as it would make the diagram cluttered and difficult to read without adding
+additional value.
+
+ℹ️ **Note:** The lifeline for `AddTransactionCommandParser` should end at the destroy marker (X) but due to a limitation
+of PlantUML,
+the lifeline reaches the end of diagram.
+
+##### Details
+
+1. The user specifies the transaction to be added by stating the name, amount, transaction type as well as any other
+   optional fields.
+2. The input will be parsed by `AddCommandTransactionParser`, and if it is invalid, `ParserException` is thrown,
+   prompting for the user to enter again.
+3. If the input is valid, a `Transaction` object is created and passed into the `AddTransactionCommand` to be executed
+   by the `LogicManager`.
+4. The `LogicManager` will then invoke the execute command, adding the `Transaction` to the UniCash.
+
+Note that only the `Category` field is allowed to be specified multiple times, while the other fields can only be
+specified once, else
+a `ParserException` is thrown. Another noteworthy point is that `Category` that are added are to be case-insensitively
+unique and can only be up to
+a specified value in the `UniqueCategoryList` class. Else, a `ParserException` would be thrown.
+
 ## Continuous Integration (CI)
 
 Continuous integration consists of the following:
@@ -426,7 +464,7 @@ Automated testing is achieved via the `.github/workflows/unit_test.yml` action.
 
 Automated testing is triggered on every push and pull request and is run across all three major OSes: Ubuntu, MacOS, and Windows, and comprise of the following steps:
 
-[//]: # (Insert diagram)
+<img src="images/ci/AutomatedTestingActivityDiagram.png" width="1200" />
 
 UI tests are only run on Windows as both Linux and MacOS requires headless UI testing which is not well supported with Github Actions.
 
@@ -438,7 +476,7 @@ Code coverage includes both general unit tests and UI tests, and reporting is ac
 
 Similar to automated testing, code coverage reporting is triggered on every push and pull request and is run across all three major OSes.
 
-[//]: # (Insert diagram)
+<img src="images/ci/CodeCoverageReportingActivityDiagram.png" width="1200" />
 
 To ensure that code coverage reporting includes both general unit tests and UI tests, the following changes have been made to `build.gradle`:
 
