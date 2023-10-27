@@ -44,13 +44,6 @@ public class GetTotalExpenditureCommand extends Command {
         this.categoryFilter = categoryFilter;
     }
 
-    /**
-     * Creates GetTotalExpenditureCommand with default year of the current running year.
-     */
-    public GetTotalExpenditureCommand(int month, Category categoryFilter) {
-        this(month, LocalDate.now().getYear(), categoryFilter);
-    }
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -59,7 +52,7 @@ public class GetTotalExpenditureCommand extends Command {
             throw new CommandException(UniCashMessages.MESSAGE_INVALID_MONTH);
         }
 
-        if (year < 0) {
+        if (year < 1920) {
             throw new CommandException(UniCashMessages.MESSAGE_INVALID_YEAR);
         }
 

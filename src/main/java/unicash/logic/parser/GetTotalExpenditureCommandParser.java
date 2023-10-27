@@ -3,6 +3,9 @@ package unicash.logic.parser;
 import static unicash.logic.UniCashMessages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static unicash.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static unicash.logic.parser.CliSyntax.PREFIX_MONTH;
+import static unicash.logic.parser.CliSyntax.PREFIX_YEAR;
+
+import java.time.LocalDate;
 
 import unicash.logic.commands.GetTotalExpenditureCommand;
 import unicash.logic.parser.exceptions.ParseException;
@@ -16,15 +19,14 @@ public class GetTotalExpenditureCommandParser implements Parser<GetTotalExpendit
 
     @Override
     public GetTotalExpenditureCommand parse(String args) throws ParseException {
-        // TODO: Support PREFIX_YEAR
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MONTH, PREFIX_CATEGORY);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MONTH, PREFIX_YEAR, PREFIX_CATEGORY);
 
         if (argMultimap.getValue(PREFIX_MONTH).isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, GetTotalExpenditureCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_MONTH, PREFIX_CATEGORY);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_MONTH, PREFIX_YEAR, PREFIX_CATEGORY);
 
         String categoryString = argMultimap.getValue(PREFIX_CATEGORY).orElse(null);
         Category category = null;
@@ -32,12 +34,23 @@ public class GetTotalExpenditureCommandParser implements Parser<GetTotalExpendit
             category = ParserUtil.parseCategory(categoryString);
         }
 
+        int month;
         try {
             String monthString = argMultimap.getValue(PREFIX_MONTH).get();
-            int month = Integer.parseInt(monthString);
-            return new GetTotalExpenditureCommand(month, category);
+            month = Integer.parseInt(monthString);
         } catch (NumberFormatException e) {
             throw new ParseException("Invalid month value, must be number!");
         }
+
+        int year;
+        try {
+            String yearString = argMultimap.getValue(PREFIX_YEAR).orElse(String.valueOf(LocalDate.now().getYear()));
+            year = Integer.parseInt(yearString);
+        } catch (NumberFormatException e) {
+            throw new ParseException("Invalid year value, must be number!");
+        }
+
+
+        return new GetTotalExpenditureCommand(month, year, category);
     }
 }

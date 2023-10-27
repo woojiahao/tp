@@ -33,31 +33,30 @@ public class GetTotalExpenditureCommandTest {
     }
 
     @Test
-    public void constructor_noGivenYear_defaultsYearToCurrentYear() {
-        var command = new GetTotalExpenditureCommand(10, null);
-        var currentYear = LocalDate.now().getYear();
-        var expected =
-                GetTotalExpenditureCommand.class.getCanonicalName()
-                        + "{month=10, year=" + currentYear + ", categoryFilter=null}";
-        assertEquals(expected, command.toString());
-    }
-
-    @Test
     public void execute_nullModel_throwsNullPointerException() {
-        var command = new GetTotalExpenditureCommand(10, null);
+        var command = new GetTotalExpenditureCommand(10, 2002, null);
         assertThrows(NullPointerException.class, () -> command.execute(null));
     }
 
     @Test
     public void execute_negativeMonth_throwsCommandException() {
-        var command = new GetTotalExpenditureCommand(-12, null);
+        var command = new GetTotalExpenditureCommand(-12, 2002, null);
         assertThrows(CommandException.class, () -> command.execute(BASE_MODEL));
     }
 
     @Test
     public void execute_monthGreaterThan12_throwsCommandException() {
-        var command = new GetTotalExpenditureCommand(13, null);
+        var command = new GetTotalExpenditureCommand(13, 2002, null);
         assertThrows(CommandException.class, () -> command.execute(BASE_MODEL));
+    }
+
+    @Test
+    public void execute_yearLessThan1920_throwsCommandException() {
+        var command = new GetTotalExpenditureCommand(13, 200, null);
+        assertThrows(CommandException.class, () -> command.execute(BASE_MODEL));
+
+        var negativeYearCommand = new GetTotalExpenditureCommand(13, -10, null);
+        assertThrows(CommandException.class, () -> negativeYearCommand.execute(BASE_MODEL));
     }
 
     @Test
@@ -225,8 +224,8 @@ public class GetTotalExpenditureCommandTest {
 
     @Test
     public void toString_noInput_returnsCommandStringFormatted() {
-        var command = new GetTotalExpenditureCommand(8, new Category("Food"));
         var currentYear = LocalDate.now().getYear();
+        var command = new GetTotalExpenditureCommand(8, currentYear, new Category("Food"));
         var toStringResult = command.toString();
         String expected =
                 GetTotalExpenditureCommand.class.getCanonicalName()
@@ -236,13 +235,13 @@ public class GetTotalExpenditureCommandTest {
 
     @Test
     public void equals_sameInstance_returnsTrue() {
-        var command = new GetTotalExpenditureCommand(8, new Category("Food"));
+        var command = new GetTotalExpenditureCommand(8, 2002, new Category("Food"));
         assertEquals(command, command);
     }
 
     @Test
     public void equals_differentType_returnsFalse() {
-        var command = new GetTotalExpenditureCommand(8, new Category("Food"));
+        var command = new GetTotalExpenditureCommand(8, 2002, new Category("Food"));
         assertFalse(command.equals(5));
     }
 
@@ -262,22 +261,22 @@ public class GetTotalExpenditureCommandTest {
 
     @Test
     public void equals_differentCategoryFilter_returnsFalse() {
-        var command = new GetTotalExpenditureCommand(8, new Category("Food"));
-        var other = new GetTotalExpenditureCommand(8, new Category("Others"));
+        var command = new GetTotalExpenditureCommand(8, 2002, new Category("Food"));
+        var other = new GetTotalExpenditureCommand(8, 2002, new Category("Others"));
         assertNotEquals(command, other);
     }
 
     @Test
     public void equals_differentMonth_returnsFalse() {
-        var command = new GetTotalExpenditureCommand(7, new Category("Food"));
-        var other = new GetTotalExpenditureCommand(8, new Category("Food"));
+        var command = new GetTotalExpenditureCommand(7, 2002, new Category("Food"));
+        var other = new GetTotalExpenditureCommand(8, 2002, new Category("Food"));
         assertNotEquals(command, other);
     }
 
     @Test
     public void equals_differentMonthAndCategoryFilter_returnsFalse() {
-        var command = new GetTotalExpenditureCommand(7, new Category("Food"));
-        var other = new GetTotalExpenditureCommand(8, new Category("Others"));
+        var command = new GetTotalExpenditureCommand(7, 2002, new Category("Food"));
+        var other = new GetTotalExpenditureCommand(8, 2002, new Category("Others"));
         assertNotEquals(command, other);
     }
 
@@ -297,15 +296,15 @@ public class GetTotalExpenditureCommandTest {
 
     @Test
     public void equals_nullCatFilterOtherNonNullCatFilter_returnsFalse() {
-        var command = new GetTotalExpenditureCommand(7, null);
-        var other = new GetTotalExpenditureCommand(7, new Category("Others"));
+        var command = new GetTotalExpenditureCommand(7, 2002, null);
+        var other = new GetTotalExpenditureCommand(7, 2002, new Category("Others"));
         assertNotEquals(command, other);
     }
 
     @Test
     public void equals_nullCatFilterOtherNullCatFilter_returnsTrue() {
-        var command = new GetTotalExpenditureCommand(7, null);
-        var other = new GetTotalExpenditureCommand(7, null);
+        var command = new GetTotalExpenditureCommand(7, 2002, null);
+        var other = new GetTotalExpenditureCommand(7, 2002, null);
         assertEquals(command, other);
     }
 
