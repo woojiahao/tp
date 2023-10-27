@@ -161,11 +161,6 @@ public class ModelManagerTest {
         );
         assertFalse(modelManager.equals(new ModelManager(uniCash, userPrefs)));
 
-        // different expenseSummary -> returns false
-        modelManager.addTransaction(INTERN);
-        modelManagerCopy.clearExpenseSummary();
-        assertFalse(modelManager.equals(modelManagerCopy));
-
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredTransactionList(PREDICATE_SHOW_ALL_TRANSACTIONS);
 

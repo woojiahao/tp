@@ -23,7 +23,6 @@ public class ModelManager implements Model {
     private final UniCash uniCash;
     private final UserPrefs userPrefs;
     private final FilteredList<Transaction> filteredTransactions;
-    private final HashMap<String, Double> expenseSummary;
 
     /**
      * Initializes a ModelManager with the given userPrefs and UniCash.
@@ -36,7 +35,6 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         this.uniCash = new UniCash(uniCash);
         filteredTransactions = new FilteredList<>(this.uniCash.getTransactionList());
-        expenseSummary = this.uniCash.getSumOfExpensePerCategory();
     }
 
     public ModelManager() {
@@ -82,14 +80,12 @@ public class ModelManager implements Model {
     @Override
     public void setUniCash(ReadOnlyUniCash uniCash) {
         this.uniCash.resetData(uniCash);
-        updateExpenseSummary();
     }
 
     @Override
     public void setTransaction(Transaction target, Transaction editedTransaction) {
         requireAllNonNull(target, editedTransaction);
         uniCash.setTransaction(target, editedTransaction);
-        updateExpenseSummary();
     }
 
     @Override
@@ -106,13 +102,11 @@ public class ModelManager implements Model {
     @Override
     public void deleteTransaction(Transaction target) {
         uniCash.removeTransaction(target);
-        updateExpenseSummary();
     }
 
     @Override
     public void addTransaction(Transaction transaction) {
         uniCash.addTransaction(transaction);
-        updateExpenseSummary();
         updateFilteredTransactionList(PREDICATE_SHOW_ALL_TRANSACTIONS);
     }
 
@@ -134,24 +128,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateExpenseSummary() {
-        HashMap<String, Double> newExpenseSummary = uniCash.getSumOfExpensePerCategory();
-        clearExpenseSummary();
-        expenseSummary.putAll(newExpenseSummary);
-    }
-
-    @Override
     public HashMap<String, Double> getExpenseSummary() {
-        return expenseSummary;
-    }
-
-    /**
-     * Removes all entries in expenseSummary
-     * This public methods is only used during testing to see if different ModelManager
-     * objects are equal when they have different data in {@code expenseSummary}
-     */
-    public void clearExpenseSummary() {
-        expenseSummary.clear();
+        return uniCash.getSumOfExpensePerCategory();
     }
 
     @Override
@@ -168,7 +146,6 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return uniCash.equals(otherModelManager.uniCash)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredTransactions.equals(otherModelManager.filteredTransactions)
-                && expenseSummary.equals(otherModelManager.expenseSummary);
+                && filteredTransactions.equals(otherModelManager.filteredTransactions);
     }
 }

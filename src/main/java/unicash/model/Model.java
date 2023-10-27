@@ -92,10 +92,5 @@ public interface Model {
      */
     void updateFilteredTransactionList(Predicate<Transaction> predicate);
 
-    /**
-     * Updates the summary of expenses saved in UniCash.
-     */
-    void updateExpenseSummary();
-
     HashMap<String, Double> getExpenseSummary();
 }
