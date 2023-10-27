@@ -46,7 +46,7 @@ public class AddBudgetCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.addBudget(budget);
+        model.setBudget(budget);
         return new CommandResult(String.format(MESSAGE_SUCCESS, UniCashMessages.formatBudget(budget)));
     }
 

@@ -28,6 +28,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import unicash.model.budget.Budget;
+import unicash.model.budget.Interval;
 import unicash.model.category.UniqueCategoryList;
 import unicash.model.commons.Amount;
 import unicash.model.transaction.DateTime;
@@ -223,7 +224,7 @@ public class UniCashTest {
      */
     private static class UniCashStub implements ReadOnlyUniCash {
         private final ObservableList<Transaction> transactions = FXCollections.observableArrayList();
-        private final ObservableList<Budget> budgets = FXCollections.observableArrayList();
+        private final Budget budget = new Budget(new Amount(0), new Interval("month"));
 
         UniCashStub(Collection<Transaction> transactions) {
             this.transactions.setAll(transactions);
@@ -235,11 +236,11 @@ public class UniCashTest {
         }
 
         /**
-         * Returns an unmodifiable view of the budget list.
+         * Returns an unmodifiable view of the budget.
          */
         @Override
-        public ObservableList<Budget> getBudgetList() {
-            return budgets;
+        public Budget getBudget() {
+            return budget;
         }
     }
 

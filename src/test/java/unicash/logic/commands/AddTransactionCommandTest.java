@@ -162,28 +162,13 @@ public class AddTransactionCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        /**
-         * Adds the given budget
-         *
-         * @param budget
-         */
         @Override
-        public void addBudget(Budget budget) {
+        public void setBudget(Budget budget) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void updateExpenseSummary() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Budget> getFilteredBudgetList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredBudgetList(Predicate<Budget> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 

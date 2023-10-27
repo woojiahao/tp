@@ -101,11 +101,7 @@ public interface Model {
     /**
      * Adds the given budget
      */
-    void addBudget(Budget budget);
-
-    ObservableList<Budget> getFilteredBudgetList();
-
-    void updateFilteredBudgetList(Predicate<Budget> predicate);
+    void setBudget(Budget budget);
 
     /**
      * Updates the summary of expenses saved in UniCash.

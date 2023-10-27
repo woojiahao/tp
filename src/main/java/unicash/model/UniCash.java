@@ -8,7 +8,6 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import unicash.commons.util.ToStringBuilder;
 import unicash.model.budget.Budget;
-import unicash.model.budget.BudgetList;
 import unicash.model.category.Category;
 import unicash.model.transaction.Transaction;
 import unicash.model.transaction.TransactionList;
@@ -19,7 +18,7 @@ import unicash.model.transaction.TransactionList;
 public class UniCash implements ReadOnlyUniCash {
 
     private final TransactionList transactions;
-    private final BudgetList budgets;
+    private Budget budget;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -30,7 +29,6 @@ public class UniCash implements ReadOnlyUniCash {
      */
     {
         transactions = new TransactionList();
-        budgets = new BudgetList();
     }
 
     public UniCash() {}
@@ -95,6 +93,11 @@ public class UniCash implements ReadOnlyUniCash {
         transactions.remove(key);
     }
 
+    public void setBudget(Budget budget) {
+        requireNonNull(budget);
+        this.budget = budget;
+    }
+
     /**
      * Returns the amount for each category of expenses.
      * Note: This function ignores all 'income' transactions
@@ -145,9 +148,12 @@ public class UniCash implements ReadOnlyUniCash {
         return transactions.asUnmodifiableObservableList();
     }
 
+    /**
+     * Returns an unmodifiable view of the budget.
+     */
     @Override
-    public ObservableList<Budget> getBudgetList() {
-        return budgets.asUnmodifiableObservableList();
+    public Budget getBudget() {
+        return this.budget;
     }
 
     @Override

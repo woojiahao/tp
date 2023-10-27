@@ -15,8 +15,8 @@ public interface ReadOnlyUniCash {
     ObservableList<Transaction> getTransactionList();
 
     /**
-     * Returns an unmodifiable view of the budget list.
+     * Returns an unmodifiable view of the budget.
      */
-    ObservableList<Budget> getBudgetList();
+    Budget getBudget();
 
 }
