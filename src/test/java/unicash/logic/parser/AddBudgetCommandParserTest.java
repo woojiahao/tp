@@ -35,4 +35,12 @@ public class AddBudgetCommandParserTest {
                 UniCashMessages.getErrorMessageForDuplicatePrefixes(PREFIX_INTERVAL));
 
     }
+
+    @Test
+    public void parse_missingPreamble_failure() {
+        String invalidCommand = PREFIX_AMOUNT + MONTHLY.getAmount().toString() + " "
+                + PREFIX_INTERVAL + MONTHLY.getInterval().toString();
+        assertParseFailure(parser, invalidCommand, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddBudgetCommand.MESSAGE_USAGE));
+    }
 }

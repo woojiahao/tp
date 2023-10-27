@@ -17,6 +17,12 @@ public class EditBudgetCommandTest {
     }
 
     @Test
+    public void execute_nullModel_throwsNullPointerException() {
+        var command = new EditBudgetCommand(DAILY);
+        assertThrows(NullPointerException.class, () -> command.execute(null));
+    }
+
+    @Test
     public void equals() {
         EditBudgetCommand editBudgetCommand = new EditBudgetCommand(MONTHLY);
         EditBudgetCommand editBudgetCommandCopy = new EditBudgetCommand(MONTHLY);
