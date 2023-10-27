@@ -122,6 +122,10 @@ public class ModelManager implements Model {
         uniCash.setBudget(budget);
     }
 
+    public Budget getBudget() {
+        return uniCash.getBudget();
+    }
+
     //=========== Filtered Transaction List Accessors =============================================================
 
     /**

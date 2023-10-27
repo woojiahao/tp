@@ -193,6 +193,18 @@ public class UniCashTest {
     }
 
     @Test
+    public void setBudget_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniCash.setBudget(null));
+    }
+
+    @Test
+    public void setBudget_validBudget_success() {
+        Budget budget = new Budget(new Amount(1000), new Interval("month"));
+        uniCash.setBudget(budget);
+        assertEquals(budget, uniCash.getBudget());
+    }
+
+    @Test
     public void toStringMethod() {
         String expected = UniCash.class.getCanonicalName() + "{transactions=" + uniCash.getTransactionList() + "}";
         assertEquals(expected, uniCash.toString());
