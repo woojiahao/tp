@@ -310,35 +310,29 @@ The `get_total_expenditure` command returns the total expenditure across a given
 
 The activity diagram of getting the total expenditure is as shown below
 
-<img src="images/unicash/GetTotalExpenditureActivityDiagram.png" width="1200" />
+<img src="images/unicash/GetTotalExpenditureActivityDiagram.png" width="1026" />
 
 The following sequence diagram shows how the different components of UniCash interact with each other
 
-[//]: # (<img src="images/unicash/AddTransactionSequenceDiagram.png" width="1200" />)
+<img src="images/unicash/GetTotalExpenditureSequenceDiagram.png" width="1955" />
 
-The above sequence diagram omits details on the creation of the attributes of a `Transaction` such as
-`Name`, `Type` and `Amount` as it would make the diagram cluttered and difficult to read without adding
-additional value.
+The above sequence diagram omits details on the creation of the arguments of a `GetTotalExpenditureCommand` such as
+`Category` as it would make the diagram cluttered and difficult to read without adding additional value. It also omits
+the specific `predicate` behavior of provided to perform the filtering.
 
-ℹ️ **Note:** The lifeline for `AddTransactionCommandParser` should end at the destroy marker (X) but due to a limitation
-of PlantUML,
-the lifeline reaches the end of diagram.
+ℹ️ **Note:** The lifeline for `GetTotalExpenditureCommandParser` should end at the destroy marker (X) but due to a 
+limitation of PlantUML, the lifeline reaches the end of diagram.
 
 ##### Details
 
-1. The user specifies the transaction to be added by stating the name, amount, transaction type as well as any other
-   optional fields.
-2. The input will be parsed by `AddCommandTransactionParser`, and if it is invalid, `ParserException` is thrown,
+1. The user specifies the month to retrieve the total expenditure and the optional category 
+2. The input will be parsed by `GetTotalExpenditureCommandParser`, and if it is invalid, `ParserException` is thrown,
    prompting for the user to enter again.
-3. If the input is valid, a `Transaction` object is created and passed into the `AddTransactionCommand` to be executed
-   by the `LogicManager`.
-4. The `LogicManager` will then invoke the execute command, adding the `Transaction` to the UniCash.
+3. If the input is valid, a `GetTotalExpenditureCommand` object is created to be executed by the `LogicManager`.
+4. The `LogicManager` will then invoke the `execute` method of the command, filtering the existing transaction list to only include `expense` type transactions that fall in the given month and category (if any).
+5. The `GetTotalExpenditureCommand` also calculates the total expenditure from this filtered list of transactions.
 
-Note that only the `Category` field is allowed to be specified multiple times, while the other fields can only be
-specified once, else
-a `ParserException` is thrown. Another noteworthy point is that `Category` that are added are to be case-insensitively
-unique and can only be up to
-a specified value in the `UniqueCategoryList` class. Else, a `ParserException` would be thrown.
+Note that the month to search is one-indexed, so it ranges from `[1, 12]`. The category is a single filter that is matched in a case-sensitive manner.
 
 ## Continuous Integration (CI)
 
