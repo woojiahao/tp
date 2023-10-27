@@ -204,12 +204,18 @@ the filtered transaction with a success message.
 
 This section aims to describe the implementation of the features in UniCa$h.
 
-There are 3 main group of features we have come up with.
-1. Transaction Management
-2. Budget Management and Monitoring
-3. General Utility Features
+There are 4 main groups of features that we have designed and either implemented
+or propose to implement in the future.
 
-### Transaction
+These are:
+1. Transaction Management Features
+2. Budget Management and Monitoring Features
+3. General Utility Features
+4. User Interface Features
+
+### Feature Group 1 - Transactions Management
+
+#### The Transaction Class
 
 <img src="images/unicash/TransactionClassDiagram.png" width="700" />
 
@@ -236,11 +242,11 @@ The `add_transaction` command adds a new `Transaction` to the `TransactionList` 
 
 The activity diagram of adding a Transaction is as shown below
 
-<img src="images/unicash/AddTransactionActivityDiagram.png" width="1200" />
+<img src="images/unicash/AddTransactionActivityDiagram.png" width="600" />
 
 The following sequence diagram shows how the different components of UniCash interact with each other
 
-<img src="images/unicash/AddTransactionSequenceDiagram.png" width="1200" />
+<img src="images/unicash/AddTransactionSequenceDiagram.png" width="1400" />
 
 The above sequence diagram omits details on the creation of the attributes of a `Transaction` such as 
 `Name`, `Type` and `Amount` as it would make the diagram cluttered and difficult to read without adding
@@ -259,6 +265,87 @@ the lifeline reaches the end of diagram.
 Note that only the `Category` field is allowed to be specified multiple times, while the other fields can only be specified once, else
 a `ParserException` is thrown. Another noteworthy point is that `Category` that are added are to be case-insensitively unique and can only be up to 
 a specified value in the `UniqueCategoryList` class. Else, a `ParserException` would be thrown.
+
+#### Delete Transaction
+
+##### Overview
+
+The `DeleteCommand` function deletes an existing `Transaction` from `TransactionList` in UniCash.
+
+The activity diagram of deleting a Transaction is as shown below
+
+<img src="images/unicash/DeleteTransactionActivityDiagram.png" width="600" />
+
+The following sequence diagram shows the interaction between different components of UniCash.
+
+<img src="images/unicash/DeleteTransactionSequenceDiagram.png" width="1200" />
+
+The above sequence diagram omits details on the filtering of `TransactionList` and assumes that
+the displayed `TransactionList` is showing all transactions. However, the logic of the `DeleteCommand`
+remains the same for all list deletion.
+
+ℹ️ **Note:** The lifeline for `DeleteTransactionCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML,
+the lifeline reaches the end of diagram.
+
+##### Details
+
+1. The user specifies the transaction to be deleted by stating the integer index of the transaction to be deleted.
+2. The input will be parsed by `DeleteTransactionCommandParser` and if the provided input is invalid, `ParseException` will be thrown,
+and the user is prompted to enter the command again with the correct input.
+3. If the input is valid, an `Index` object is created with the given input integer, and passed into `DeleteTransactionCommand` to be executed
+by `LogicManager`
+4. `LogicManger` will invoke the `execute` method of `DeleteTransactionCommand` which will delete the `Transaction` from UniCash.
+
+It is important to take note that when the user input is parsed, it is based on the currently displayed `TransactionList` inside
+`TransactionListPanel`. This means that even if a `TransactionList` contains `10` transactions, given a specific nominally valid
+number like `7`, it can still throw a `ParseException` if the shown `TransactionList` contains less than `7` items. This feature is
+intentional, as the User is able to, for example, `find` a particular group of transaction and immediately delete those transactions
+by just looking at their displayed index number without having to refer to an external identifier of that transaction. UniCash will
+automatically handle the visual ordering and representation of transactions with the `TransactionsListPanel` in the UI. The details
+and diagrams for this part will be elaborated further in the UI section (and other relevant sections) of this Developer Guide.
+
+
+### Feature Group 2 - Budget Management and Monitoring
+
+### Feature Group 3 - General Utility Features
+
+This includes commands such as Clear, Reset, Help and Exit.
+
+#### Clear Transactions
+
+##### Overview
+
+The `ClearTransactionsCommand` deletes all existing `Transactions` from `TransactionList` in UniCash.
+
+The activity diagram of clearing all transactions is as shown below
+
+<img src="images/unicash/ClearTransactionsActivityDiagram.png" width="400" />
+
+The following sequence diagram shows the interaction between different components of UniCash.
+
+<img src="images/unicash/ClearTransactionsSequenceDiagram.png" width="800" />
+
+**Note:** Given that `ClearTransactionsCommand` takes in no arguments, it does not have an associated Parser class
+like the other `Command` classes. This is currently the case, however, given that the command entirely erases the
+existing Unicash, a `ClearTransactionsCommandParser` is proposed to be implemented at a later date to ensure an
+additional layer of safety for the User.
+
+##### Details
+
+1. The user inputs the command to reset unicash
+2. A `ClearTransactionsCommand` object is created with no arguments.
+3. `LogicManager` will invoke the `execute` method of `ClearTransactionsCommand` 
+which will replace the existing `Model` property with a new `UniCash` object which 
+would contain an empty `TransactionList`.
+
+Here, it must be noted that unlike `DeleteTransactionCommand`, individual transactions in the `TransactionList`
+are not deleted singularly. As opposed to iteratively deleting each transaction in the `TransactionList`, the more
+efficient way to achieve the same effect would be to simply set the `Model` contained in `LogicManager` to an new 
+`UniCash` object, as the newly created `UniCash` object would now have an empty `TransactionList` encapsulated within.
+This emulates the iterative deletion of all transactions in the `TransactionList`.
+
+
+### Feature Group 4 - User Interface Features
 
 ## Links
 User Stories: [https://github.com/orgs/AY2324S1-CS2103-T16-3/projects/1/views/2](https://github.com/orgs/AY2324S1-CS2103-T16-3/projects/1/views/2)
