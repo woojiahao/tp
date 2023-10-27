@@ -1,5 +1,6 @@
 package unicash.commons.util;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static unicash.testutil.Assert.assertThrows;
@@ -64,7 +65,7 @@ public class StringUtilTest {
     @Test
     public void containsSubstringIgnoreCase_emptyWord_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, "Substring parameter cannot be empty", ()
-            -> StringUtil.containsSubstringIgnoreCase("typical sentence", "  "));
+                -> StringUtil.containsSubstringIgnoreCase("typical sentence", "  "));
     }
 
 
@@ -217,12 +218,73 @@ public class StringUtilTest {
     @Test
     public void getDetails_exceptionGiven() {
         assertTrue(StringUtil.getDetails(new FileNotFoundException("file not found"))
-            .contains("java.io.FileNotFoundException: file not found"));
+                .contains("java.io.FileNotFoundException: file not found"));
     }
 
     @Test
     public void getDetails_nullGiven_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
+    }
+
+    @Test
+    public void capitalizeString_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.capitalizeString(null));
+    }
+
+    @Test
+    public void capitalizeString_emptyString_throwsAssertionError() {
+        assertThrows(AssertionError.class, () -> StringUtil.capitalizeString(""));
+    }
+
+    @Test
+    public void capitalizeString_whitespaceOnly_throwsAssertionError() {
+        assertThrows(AssertionError.class, () -> StringUtil.capitalizeString("    "));
+    }
+
+    @Test
+    public void capitalizeString_startingAlphabetString_returnsCapitalizedString() {
+        assertEquals("Foo", StringUtil.capitalizeString("foo"));
+        assertEquals("Foo", StringUtil.capitalizeString("FOO"));
+        assertEquals("Foo", StringUtil.capitalizeString("fOO"));
+    }
+
+    @Test
+    public void capitalizeString_startingNonAlphabetString_returnsLowercaseString() {
+        assertEquals("$xyz", StringUtil.capitalizeString("$xyz"));
+        assertEquals("$xyz", StringUtil.capitalizeString("$XYZ"));
+        assertEquals("$xyz", StringUtil.capitalizeString("$xYZ"));
+    }
+
+    @Test
+    public void capitalizeString_singleAlphabetString_returnsUppercaseCharacterString() {
+        assertEquals("F", StringUtil.capitalizeString("F"));
+        assertEquals("F", StringUtil.capitalizeString("f"));
+    }
+
+    @Test
+    public void capitalizeString_singleNonAlphabetString_returnsOriginalString() {
+        assertEquals("$", StringUtil.capitalizeString("$"));
+        assertEquals("$", StringUtil.capitalizeString("$"));
+    }
+
+    @Test
+    public void capitalizeString_stringWithSurroundingWhitespace_returnsCapitalizedAndTrimmedString() {
+        assertEquals("Foo", StringUtil.capitalizeString("FOO  "));
+        assertEquals("Foo", StringUtil.capitalizeString("   FOo"));
+        assertEquals("Foo", StringUtil.capitalizeString("   FOo   "));
+    }
+
+    @Test
+    public void capitalizeString_longString_returnsNormallyCapitalizedString() {
+        assertEquals("Helloworldthisisonestring", StringUtil.capitalizeString("heLLoWorldThisIsOneStRIng"));
+    }
+
+    @Test
+    public void capitalizeString_longSentence_returnsSentenceWithFirstWordCapitalized() {
+        assertEquals(
+                "Hello world, this is a long string",
+                StringUtil.capitalizeString("hello WORLD, THIS IS A long string")
+        );
     }
 
 }
