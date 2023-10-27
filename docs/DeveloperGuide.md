@@ -308,9 +308,9 @@ and diagrams for this part will be elaborated further in the UI section (and oth
 
 ##### Overview
 
-The `edit_transaction` command edits an existing `Transaction` from the `TransactionList` in UniCash.
+The `edit_transaction` command edits an existing `Transaction` from the `TransactionList` in UniCa$h.
 
-The following sequence diagram shows how the different components of UniCash interact with each other. It is further explained in the **Details** section below.
+The following sequence diagram shows how the different components of UniCa$h interact with each other. It is further explained in the **Details** section below.
 
 <img src="images/unicash/EditTransactionSequenceDiagram.png" width="1200" />
 
@@ -320,14 +320,14 @@ The following sequence diagram shows how the different components of UniCash int
 1. The user specifies the transaction to be edited by first stating the (one-based) index of the transaction they want to edit. This
    is followed by listing the fields and updated values that they would like to edit.
    (E.g. `edit_transaction 1 n/Food Clique c/food`)
-2. The raw user input will be parsed by `EditCommandTransactionParser`, and if it is invalid, `ParserException` is thrown, prompting for the user to enter again. It is important to note that at this point, a valid index is any integer that is 1 or greater.
+2. The user input with the requested edits will be parsed by `EditCommandTransactionParser`, and if it is invalid, `ParserException` is thrown, prompting for the user to enter again. It is important to note that at this point, a valid index is any integer that is 1 or greater.
 3. If the input is valid, the `EditCommandTransactionParser` creates an `EditTransactionDescriptor` object, which contains the edits which the user wishes to make to the transaction.
 4. An `EditTransactionCommand` is constructed with the one-based index of the transaction to edit and the `EditTransactionDescriptor` object. This `EditTransactionCommand` is then returned by the `EditCommandTransactionParser`
-5. The `LogicManager` will then invoke the execute command of the `EditTransactionCommand`, editing the `Transaction` in UniCash.
+5. The `LogicManager` will then invoke the execute command of the `EditTransactionCommand`, editing the `Transaction` in UniCa$h.
 6. The `EditTransactionCommand#execute` method then first checks if the one-based index is too large (i.e. if there are only `n` transactions, but the index provided is greater than `n`). If this is true, then a `CommandException` is thrown,
    prompting the user to input an index that is at most, the number of transactions available. If the `CommandException` is not thrown at the step above, then the execution proceeds.
-7. The `EditTransactionCommand#execute` method then calls the `createEditedTransaction` method, which creates a new `Transaction` object with the updated values after editing. Note that this `Transaction` object is a different object from what is stored in UniCash.
-8. The `EditTransactionCommand#execute` method then updates UniCash with the new `Transaction` using the `Model#setTransaction` method.
+7. The `EditTransactionCommand#execute` method then calls the `createEditedTransaction` method, which creates a new `Transaction` object with the updated values after editing. Note that this `Transaction` object is a different object from what is stored in UniCa$h.
+8. The `EditTransactionCommand#execute` method then updates UniCa$h with the new `Transaction` using the `Model#setTransaction` method.
 
 Note that although all fields can be edited, the `Name`, `Amount`, and `Type` fields cannot be left blank. The constraints laid
 out in the **Add Transaction** section above also remain.
