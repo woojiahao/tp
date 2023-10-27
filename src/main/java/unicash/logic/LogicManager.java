@@ -3,6 +3,7 @@ package unicash.logic;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.time.YearMonth;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
@@ -84,5 +85,10 @@ public class LogicManager implements Logic {
     @Override
     public HashMap<String, Double> getExpenseSummaryPerCategory() {
         return model.getExpenseSummaryPerCategory();
+    }
+
+    @Override
+    public HashMap<YearMonth, Double> getExpenseSummaryPerYearMonth() {
+        return model.getExpenseSummaryPerYearMonth();
     }
 }

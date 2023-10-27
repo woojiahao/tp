@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static unicash.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.time.YearMonth;
 import java.util.HashMap;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -130,6 +131,11 @@ public class ModelManager implements Model {
     @Override
     public HashMap<String, Double> getExpenseSummaryPerCategory() {
         return uniCash.getSumOfExpensePerCategory();
+    }
+
+    @Override
+    public HashMap<YearMonth, Double> getExpenseSummaryPerYearMonth() {
+        return uniCash.getSumOfExpensePerYearMonth();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package unicash.model;
 
 import java.nio.file.Path;
+import java.time.YearMonth;
 import java.util.HashMap;
 import java.util.function.Predicate;
 
@@ -92,5 +93,13 @@ public interface Model {
      */
     void updateFilteredTransactionList(Predicate<Transaction> predicate);
 
+    /**
+     * Returns the total expense per category
+     */
     HashMap<String, Double> getExpenseSummaryPerCategory();
+
+    /**
+     * Returns the total expense per year-month
+     */
+    HashMap<YearMonth, Double> getExpenseSummaryPerYearMonth();
 }

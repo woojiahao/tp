@@ -1,6 +1,7 @@
 package unicash.logic;
 
 import java.nio.file.Path;
+import java.time.YearMonth;
 import java.util.HashMap;
 
 import javafx.collections.ObservableList;
@@ -45,7 +46,12 @@ public interface Logic {
     ObservableList<Transaction> getFilteredTransactionList();
 
     /**
-     * Returns a HashMap of the expense summary from the model
+     * Returns the total expense per category
      */
     HashMap<String, Double> getExpenseSummaryPerCategory();
+
+    /**
+     * Returns the total expense per year-month
+     */
+    HashMap<YearMonth, Double> getExpenseSummaryPerYearMonth();
 }

@@ -1,5 +1,6 @@
 package unicash.ui;
 
+import java.time.YearMonth;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
@@ -112,6 +113,9 @@ public class SummaryWindow extends UiPart<Stage> {
      */
     public void focus() {
         getRoot().requestFocus();
+    }
+
+    public void setLineGraph(HashMap<YearMonth, Double> expenseSummaryPerYearMonth) {
     }
 
 }
