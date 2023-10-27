@@ -129,9 +129,9 @@ the filtered transaction with a success message.
     - 2a1. UniCa$h displays an error message, requests for correct format.
     - 2a2. User enters command with new format.
 
-  Steps 2a1-2a2 are repeated until the format entered is correct.
+    Steps 2a1-2a2 are repeated until the format entered is correct.
 
-  Use case resumes from Step 3.
+    Use case resumes from Step 3.
 
 - 3a. UniCa$h does not find any results matching the filter.
     - 3a1. UniCa$h displays a message informing the user that no results were found.
@@ -183,8 +183,8 @@ the filtered transaction with a success message.
 
 **Extensions**
 - 2a. User enters an incorrect format.
-    - 2a1. UniCa$h displays an error message with the correct command format.
-    - Use case resumes at step 1.
+  - 2a1. UniCa$h displays an error message with the correct command format.
+  - Use case resumes at step 1.
 
 #### Use Case: UC10 - Exit UniCa$h
 **MSS:**
@@ -415,7 +415,7 @@ Automated testing is achieved via the `.github/workflows/unit_test.yml` action.
 
 Automated testing is triggered on every push and pull request and is run across all three major OSes: Ubuntu, MacOS, and Windows, and comprise of the following steps:
 
-<img src="images/unicash/ci/AutomatedTestingActivityDiagram.png" width="1200" />
+<img src="images/unicash/ci/AutomatedTestingActivityDiagram.png" width="368" />
 
 UI tests are only run on Windows as both Linux and MacOS requires headless UI testing which is not well supported with Github Actions.
 
@@ -427,7 +427,7 @@ Code coverage includes both general unit tests and UI tests, and reporting is ac
 
 Similar to automated testing, code coverage reporting is triggered on every push and pull request and is run across all three major OSes.
 
-<img src="images/unicash/ci/CodeCoverageReportingActivityDiagram.png" width="1200" />
+<img src="images/unicash/ci/CodeCoverageReportingActivityDiagram.png" width="368" />
 
 To ensure that code coverage reporting includes both general unit tests and UI tests, the following changes have been made to `build.gradle`:
 
