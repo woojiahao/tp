@@ -36,6 +36,7 @@ title: Developer Guide
 - Edit tags - change category of transaction
 - Remove tags - delete category of transaction
 
+
 ## Use Cases
 The following documents use cases for our application
 
@@ -96,6 +97,7 @@ the filtered transaction with a success message.
 - 3a. UniCa$h does not find any transactions matching the provided arguments.
     - 3a1. UniCa$h displays a message saying no results found.
     - Use Case resumes at step 1
+
 
 #### Use Case: UC05 - Listing All Transactions
 **MSS:**
@@ -193,7 +195,6 @@ the filtered transaction with a success message.
    Use Case ends
 
 **Extensions**
-
 - 2a. User enters an incorrect format.
   - 2a1. UniCa$h displays an error message with the correct command format.
   - Use case resumes at step 1.
@@ -244,7 +245,7 @@ The above sequence diagram omits details on the creation of the attributes of a 
 `Name`, `Type` and `Amount` as it would make the diagram cluttered and difficult to read without adding
 additional value.
 
-ℹ️ **Note:** The lifeline for `AddTransactionCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, 
+ℹ️ **Note:** The lifeline for `AddTransactionCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML,
 the lifeline reaches the end of diagram.
 
 ##### Details
