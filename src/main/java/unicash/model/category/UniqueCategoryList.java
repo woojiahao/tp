@@ -163,9 +163,16 @@ public class UniqueCategoryList implements Iterable<Category> {
 
     @Override
     public boolean equals(Object other) {
-        return other == this
-                || (other instanceof UniqueCategoryList
-                && new HashSet<>(internalList).equals(new HashSet<>(((UniqueCategoryList) other).internalList)));
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof UniqueCategoryList)) {
+            return false;
+        }
+
+        UniqueCategoryList otherList = (UniqueCategoryList) other;
+        return new HashSet<>(internalList).equals(new HashSet<>((otherList).internalList));
     }
 
     @Override

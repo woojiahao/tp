@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 /**
  * Represents a Transaction's dateTime.
@@ -68,7 +69,7 @@ public class DateTime {
      */
     private void init(String dateTime, Clock clock) {
         if (dateTime.isBlank()) {
-            LocalDateTime now = LocalDateTime.now(clock);
+            LocalDateTime now = LocalDateTime.now(clock).truncatedTo(ChronoUnit.MINUTES);
             this.dateTime = now;
             originalDateTime = now.format(DateTimeFormatter.ofPattern(DATETIME_STORAGE_PATTERN));
             return;
