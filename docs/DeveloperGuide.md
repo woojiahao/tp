@@ -9,7 +9,7 @@ title: Developer Guide
 
 **User Target Profile:** Our application is for university students who want to be more financially conscious about their spending habits, to enable them to make more economical decisions that provide students on a limited budget with more purchasing power.
 
-**Value Proposition:** It provides university students with an intuitive and frictionless experience to have transparency on their expenditure to help them better understand their spendings so they can develop better financial habits as they transition into adulthood.
+**Value Proposition:** It provides university students with an intuitive and frictionless experience to have transparency on their expenditure to help them better understand their spendings so they can develop better financial habits as they transition into adulthood. 
 
 ## Potential Features:
 - For every user > track individual finances (base)
@@ -163,7 +163,6 @@ the filtered transaction with a success message.
    Use Case ends
 
 **Extensions**
-
 - 2a. User enters an incorrect format.
   - 2a1. UniCa$h displays an error message with the correct command format.
   - Use case resumes at step 1.
@@ -181,7 +180,6 @@ the filtered transaction with a success message.
    Use Case ends
 
 **Extensions**
-
 - 2a. User enters an incorrect format.
     - 2a1. UniCa$h displays an error message with the correct command format.
     - Use case resumes at step 1.
@@ -246,8 +244,8 @@ The above sequence diagram omits details on the creation of the attributes of a 
 `Name`, `Type` and `Amount` as it would make the diagram cluttered and difficult to read without adding
 additional value.
 
-ℹ️ **Note:** The lifeline for `AddTransactionCommandParser` should end at the destroy marker (X) but due to a limitation
-of PlantUML, the lifeline reaches the end of diagram.
+ℹ️ **Note:** The lifeline for `AddTransactionCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, 
+the lifeline reaches the end of diagram.
 
 ##### Details
 
@@ -257,7 +255,7 @@ of PlantUML, the lifeline reaches the end of diagram.
 4. The `LogicManager` will then invoke the execute command, adding the `Transaction` to the UniCash.
 
 Note that only the `Category` field is allowed to be specified multiple times, while the other fields can only be specified once, else
-a `ParserException` is thrown. Another noteworthy point is that `Category` that are added are to be case-insensitively unique and can only be up to
+a `ParserException` is thrown. Another noteworthy point is that `Category` that are added are to be case-insensitively unique and can only be up to 
 a specified value in the `UniqueCategoryList` class. Else, a `ParserException` would be thrown.
 
 #### Get Total Expenditure
