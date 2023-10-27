@@ -246,7 +246,7 @@ The following sequence diagram shows how the different components of UniCash int
 
 <img src="images/unicash/AddTransactionSequenceDiagram.png" width="1400" />
 
-The above sequence diagram omits details on the creation of the attributes of a `Transaction` such as 
+The above sequence diagram omits details on the creation of the attributes of a `Transaction` such as
 `Name`, `Type` and `Amount` as it would make the diagram cluttered and difficult to read without adding
 additional value.
 
@@ -261,7 +261,7 @@ the lifeline reaches the end of diagram.
 4. The `LogicManager` will then invoke the execute command, adding the `Transaction` to the UniCash.
 
 Note that only the `Category` field is allowed to be specified multiple times, while the other fields can only be specified once, else
-a `ParserException` is thrown. Another noteworthy point is that `Category` that are added are to be case-insensitively unique and can only be up to 
+a `ParserException` is thrown. Another noteworthy point is that `Category` that are added are to be case-insensitively unique and can only be up to
 a specified value in the `UniqueCategoryList` class. Else, a `ParserException` would be thrown.
 
 #### Get Total Expenditure
@@ -334,6 +334,33 @@ by just looking at their displayed index number without having to refer to an ex
 automatically handle the visual ordering and representation of transactions with the `TransactionsListPanel` in the UI. The details
 and diagrams for this part will be elaborated further in the UI section (and other relevant sections) of this Developer Guide.
 
+#### Edit Transaction
+
+##### Overview
+
+The `edit_transaction` command edits an existing `Transaction` from the `TransactionList` in UniCa$h.
+
+The following sequence diagram shows how the different components of UniCa$h interact with each other. It is further explained in the **Details** section below.
+
+<img src="images/unicash/EditTransactionSequenceDiagram.png" width="1200" />
+
+
+##### Details
+
+1. The user specifies the transaction to be edited by first stating the (one-based) index of the transaction they want to edit. This
+   is followed by listing the fields and updated values that they would like to edit.
+   (E.g. `edit_transaction 1 n/Food Clique c/food`)
+2. The user input with the requested edits will be parsed by `EditCommandTransactionParser`, and if it is invalid, `ParserException` is thrown, prompting for the user to enter again. It is important to note that at this point, a valid index is any integer that is 1 or greater.
+3. If the input is valid, the `EditCommandTransactionParser` creates an `EditTransactionDescriptor` object, which contains the edits which the user wishes to make to the transaction.
+4. An `EditTransactionCommand` is constructed with the one-based index of the transaction to edit and the `EditTransactionDescriptor` object. This `EditTransactionCommand` is then returned by the `EditCommandTransactionParser`
+5. The `LogicManager` will then invoke the execute command of the `EditTransactionCommand`, editing the `Transaction` in UniCa$h.
+6. The `EditTransactionCommand#execute` method then first checks if the one-based index is too large (i.e. if there are only `n` transactions, but the index provided is greater than `n`). If this is true, then a `CommandException` is thrown,
+   prompting the user to input an index that is at most, the number of transactions available. If the `CommandException` is not thrown at the step above, then the execution proceeds.
+7. The `EditTransactionCommand#execute` method then calls the `createEditedTransaction` method, which creates a new `Transaction` object with the updated values after editing. Note that this `Transaction` object is a different object from what is stored in UniCa$h.
+8. The `EditTransactionCommand#execute` method then updates UniCa$h with the new `Transaction` using the `Model#setTransaction` method.
+
+Note that although all fields can be edited, the `Name`, `Amount`, and `Type` fields cannot be left blank. The constraints laid
+out in the **Add Transaction** section above also remain.
 
 ### Feature Group 2 - Budget Management and Monitoring
 
