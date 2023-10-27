@@ -41,7 +41,7 @@ public class GetTotalExpenditureCommandParserTest {
     }
 
     @Test
-    public void parse_withCategoryAndYear_returnsGetTotalExpenditureCommandWithYearAndCategoryFilter() throws ParseException {
+    public void parse_withCategoryAndYear_returnsCommandWithYearAndCategoryFilter() throws ParseException {
         var result = parser.parse(" month/1 c/Food year/2022");
         var expected = new GetTotalExpenditureCommand(1, 2022, new Category("Food"));
         assertEquals(expected, result);

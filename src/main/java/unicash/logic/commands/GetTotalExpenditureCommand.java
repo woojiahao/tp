@@ -5,7 +5,6 @@ import static unicash.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static unicash.logic.parser.CliSyntax.PREFIX_MONTH;
 import static unicash.logic.parser.CliSyntax.PREFIX_YEAR;
 
-import java.time.LocalDate;
 import java.time.Month;
 
 import unicash.commons.enums.TransactionType;
