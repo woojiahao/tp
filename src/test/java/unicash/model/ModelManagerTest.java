@@ -8,11 +8,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static unicash.model.Model.PREDICATE_SHOW_ALL_TRANSACTIONS;
 import static unicash.testutil.Assert.assertThrows;
 import static unicash.testutil.TypicalTransactions.BUYING_GROCERIES;
+import static unicash.testutil.TypicalTransactions.INTERN;
 import static unicash.testutil.TypicalTransactions.NUS;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.HashMap;
 
 import org.junit.jupiter.api.Test;
 
@@ -114,6 +116,23 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getExpenseSummary_success() {
+        UniCash uniCash = new UniCashBuilder()
+                .withTransaction(NUS)
+                .withTransaction(INTERN)
+                .withTransaction(BUYING_GROCERIES)
+                .build();
+        UserPrefs userPrefs = new UserPrefs();
+        modelManager = new ModelManager(uniCash, userPrefs);
+
+        HashMap<String, Double> expectedExpenseSummary = new HashMap<>();
+        expectedExpenseSummary.put("ta", 888.8);
+        expectedExpenseSummary.put("food", 8.8);
+
+        assertEquals(modelManager.getExpenseSummary(), expectedExpenseSummary);
+    }
+
+    @Test
     public void equals() {
         UniCash uniCash = new UniCashBuilder().withTransaction(NUS).build();
         UniCash differentUniCash = new UniCash();
@@ -141,6 +160,11 @@ public class ModelManagerTest {
                 new TransactionContainsKeywordsPredicate(Arrays.asList(keywords))
         );
         assertFalse(modelManager.equals(new ModelManager(uniCash, userPrefs)));
+
+        // different expenseSummary -> returns false
+        modelManager.addTransaction(INTERN);
+        modelManagerCopy.clearExpenseSummary();
+        assertFalse(modelManager.equals(modelManagerCopy));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredTransactionList(PREDICATE_SHOW_ALL_TRANSACTIONS);

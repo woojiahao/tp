@@ -10,10 +10,13 @@ public class CommandResultTest {
     @Test
     public void equals() {
         CommandResult commandResult = new CommandResult("feedback");
+        CommandResult showSummaryCommandResult = new CommandResult("feedback", false, false, true);
 
         // same values -> returns true
         assertEquals(commandResult, new CommandResult("feedback"));
         assertEquals(commandResult, new CommandResult("feedback", false, false));
+        assertEquals(commandResult, new CommandResult("feedback", false, false, false));
+        assertEquals(showSummaryCommandResult, new CommandResult("feedback", false, false, true));
 
         // same object -> returns true
         assertEquals(commandResult, commandResult);
@@ -23,7 +26,6 @@ public class CommandResultTest {
 
         // different types -> returns false
         assertNotEquals(0.5f, commandResult);
-
         assertFalse(commandResult.equals(5));
 
         // different feedbackToUser value -> returns false
@@ -34,6 +36,9 @@ public class CommandResultTest {
 
         // different exit value -> returns false
         assertNotEquals(commandResult, new CommandResult("feedback", false, true));
+
+        // different showSummary value -> returns false
+        assertNotEquals(commandResult, showSummaryCommandResult);
     }
 
     @Test
@@ -51,6 +56,9 @@ public class CommandResultTest {
 
         // different exit value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true).hashCode());
+
+        // different showSummary value -> returns different hashcode
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false, true).hashCode());
     }
 
     @Test
@@ -58,7 +66,7 @@ public class CommandResultTest {
         CommandResult commandResult = new CommandResult("feedback");
         String expected = CommandResult.class.getCanonicalName() + "{feedbackToUser="
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
-                + ", exit=" + commandResult.isExit() + "}";
+                + ", exit=" + commandResult.isExit() + ", showSummary=" + commandResult.isShowSummary() + "}";
         assertEquals(expected, commandResult.toString());
     }
 }

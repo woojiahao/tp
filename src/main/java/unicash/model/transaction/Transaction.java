@@ -50,6 +50,10 @@ public class Transaction {
         return amount;
     }
 
+    public Double getAmountAsDouble() {
+        return amount.amount;
+    }
+
     public DateTime getDateTime() {
         return dateTime;
     }
