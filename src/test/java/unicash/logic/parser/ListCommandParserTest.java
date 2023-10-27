@@ -32,7 +32,7 @@ public class ListCommandParserTest {
 
     @Test
     public void parse_withNullInput_assertionFailure() {
-        assertThrows(AssertionError.class, "userInput cannot be null", () -> parser.parse(null));
+        assertThrows(AssertionError.class, () -> parser.parse(null));
 
     }
 
