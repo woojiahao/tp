@@ -110,9 +110,10 @@ public class UniCashMessages {
                 .append(budget.getAmount())
                 .append("; \nInterval: ")
                 .append(budget.getInterval());
+        return builder.toString();
     }
 
-   /**
+    /**
      * Formats the {@code transaction} for output as a continuous string.
      */
     public static String formatTransactionAsString(Transaction transaction) {

@@ -107,7 +107,7 @@ public interface Model {
 
     void updateFilteredBudgetList(Predicate<Budget> predicate);
 
-	/**
+    /**
      * Updates the summary of expenses saved in UniCash.
      */
     void updateExpenseSummary();

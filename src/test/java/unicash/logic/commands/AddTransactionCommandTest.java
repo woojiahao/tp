@@ -169,8 +169,8 @@ public class AddTransactionCommandTest {
          */
         @Override
         public void addBudget(Budget budget) {
-			throw new AssertionError("This method should not be called.");
-		}
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public void updateExpenseSummary() {
@@ -184,10 +184,10 @@ public class AddTransactionCommandTest {
 
         @Override
         public void updateFilteredBudgetList(Predicate<Budget> predicate) {
-			throw new AssertionError("This method should not be called.");
-		}
+            throw new AssertionError("This method should not be called.");
+        }
 
-		@Override
+        @Override
         public HashMap<String, Double> getExpenseSummary() {
             throw new AssertionError("This method should not be called.");
         }

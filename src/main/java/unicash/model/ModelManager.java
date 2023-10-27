@@ -156,9 +156,9 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Budget> getFilteredBudgetList() {
         return filteredBudgets;
-	}
-	
-	@Override
+    }
+
+    @Override
     public void updateExpenseSummary() {
         HashMap<String, Double> newExpenseSummary = uniCash.getSumOfExpensePerCategory();
         clearExpenseSummary();
