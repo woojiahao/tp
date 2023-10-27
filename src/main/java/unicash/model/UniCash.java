@@ -2,12 +2,15 @@ package unicash.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.YearMonth;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import unicash.commons.util.ToStringBuilder;
 import unicash.model.category.Category;
+import unicash.model.transaction.DateTime;
 import unicash.model.transaction.Transaction;
 import unicash.model.transaction.TransactionList;
 
@@ -91,40 +94,72 @@ public class UniCash implements ReadOnlyUniCash {
         transactions.remove(key);
     }
 
+    private List<Transaction> getAllExpenses() {
+        return getTransactionList()
+                .stream()
+                .filter(t -> t.getType().toString().equals("expense"))
+                .collect(Collectors.toUnmodifiableList());
+    }
+
+    /**
+     * Returns the expense amount per yearmonth. (E.g. 2023 Jan, 2023 Feb, 2024 Jan, etc.)
+     * Note: This function ignores all 'income' transactions
+     */
+    HashMap<YearMonth, Double> getSumOfExpensePerYearMonth() {
+        HashMap<YearMonth, Double> sumPerMonth = new HashMap<>();
+        List<Transaction> allExpenses = getAllExpenses();
+
+        for (Transaction t : allExpenses) {
+            Double transactionAmount = t.getAmountAsDouble();
+            YearMonth yearMonth = t.getDateTime().getYearMonth();
+            if (!sumPerMonth.containsKey(yearMonth)) {
+                sumPerMonth.put(yearMonth, 0.0);
+            }
+            Double currAmount = sumPerMonth.get(yearMonth);
+            sumPerMonth.put(yearMonth, currAmount + transactionAmount);
+        }
+        return sumPerMonth;
+    }
+
     /**
      * Returns the amount for each category of expenses.
      * Note: This function ignores all 'income' transactions
      */
     HashMap<String, Double> getSumOfExpensePerCategory() {
         HashMap<String, Double> sumPerCategory = new HashMap<>();
-        ObservableList<Transaction> allTransactions = getTransactionList();
+        List<Transaction> allExpenses = getAllExpenses();
         String uncategorizedCategoryName = "Uncategorized";
-        for (Transaction t : allTransactions) {
-            if (t.getType().toString().equals("income")) {
-                continue;
-            }
+
+        for (Transaction t : allExpenses) {
             Double transactionAmount = t.getAmountAsDouble();
-            // If t has no categories
-            if (t.getCategories().asUnmodifiableObservableList().isEmpty()) {
-                if (!sumPerCategory.containsKey(uncategorizedCategoryName)) {
-                    sumPerCategory.put(uncategorizedCategoryName, (double) 0);
-                }
-                Double currAmount = sumPerCategory.get(uncategorizedCategoryName);
-                Double newAmount = currAmount + transactionAmount;
-                sumPerCategory.put(uncategorizedCategoryName, newAmount);
-                continue;
-            }
-            // If t has at least one category
-            for (Category transactionCategory : t.getCategories()) {
-                if (!sumPerCategory.containsKey(transactionCategory.category)) {
-                    sumPerCategory.put(transactionCategory.category, (double) 0);
-                }
-                Double currAmount = sumPerCategory.get(transactionCategory.category);
-                Double newAmount = currAmount + transactionAmount;
-                sumPerCategory.put(transactionCategory.category, newAmount);
+            boolean hasNoCategory = t.getCategories().asUnmodifiableObservableList().isEmpty();
+
+            if (hasNoCategory) {
+                handleNoCategoryTransaction(sumPerCategory, uncategorizedCategoryName, transactionAmount);
+            } else {
+                handleCategoryTransaction(t.getCategories().asUnmodifiableObservableList(), sumPerCategory, transactionAmount);
             }
         }
+
         return sumPerCategory;
+    }
+
+    private void handleNoCategoryTransaction(HashMap<String, Double> sumPerCategory, String uncategorizedCategoryName, Double transactionAmount) {
+        if (!sumPerCategory.containsKey(uncategorizedCategoryName)) {
+            sumPerCategory.put(uncategorizedCategoryName, (double) 0);
+        }
+        Double currAmount = sumPerCategory.get(uncategorizedCategoryName);
+        sumPerCategory.put(uncategorizedCategoryName, currAmount + transactionAmount);
+    }
+
+    private void handleCategoryTransaction(ObservableList<Category> categories, HashMap<String, Double> sumPerCategory, Double transactionAmount) {
+        for (Category transactionCategory : categories) {
+            if (!sumPerCategory.containsKey(transactionCategory.category)) {
+                sumPerCategory.put(transactionCategory.category, (double) 0);
+            }
+            Double currAmount = sumPerCategory.get(transactionCategory.category);
+            sumPerCategory.put(transactionCategory.category, currAmount + transactionAmount);
+        }
     }
 
     //// util methods

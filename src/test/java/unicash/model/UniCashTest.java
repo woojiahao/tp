@@ -17,6 +17,7 @@ import static unicash.testutil.TypicalTransactions.NUS;
 import static unicash.testutil.TypicalTransactions.SHOPPING;
 import static unicash.testutil.TypicalTransactions.getTypicalUniCash;
 
+import java.time.YearMonth;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -186,6 +187,148 @@ public class UniCashTest {
         HashMap<String, Double> expectedOutput = new HashMap<>();
         expectedOutput.put("education", 500.1);
         expectedOutput.put("ta", 888.8 + 500.1);
+
+        assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    public void getSumPerYearMonth_allTransactionsSameYearMonth_success() {
+        Transaction t1 = new TransactionBuilder()
+                .withName("t1")
+                .withAmount(10.0)
+                .withType("expense")
+                .withDateTime("2023-06-03 01:01")
+                .build();
+        Transaction t2 = new TransactionBuilder()
+                .withName("t2")
+                .withAmount(1.0)
+                .withType("expense")
+                .withDateTime("29-06-2023 15:29")
+                .build();
+        Transaction t3 = new TransactionBuilder()
+                .withName("t3")
+                .withAmount(0.1)
+                .withType("expense")
+                .withDateTime("13 Jun 2023 00:00")
+                .build();
+
+        UniCash uniCash = new UniCashBuilder()
+                .withTransaction(t1)
+                .withTransaction(t2)
+                .withTransaction(t3)
+                .build();
+
+        HashMap<YearMonth, Double> expectedOutput = new HashMap<>();
+        expectedOutput.put(YearMonth.of(2023, 6), 11.1);
+
+        HashMap<YearMonth, Double> actualOutput = uniCash.getSumOfExpensePerYearMonth();
+
+        assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    public void getSumPerYearMonth_hasExpenseAndIncomeTypes_success() {
+        Transaction t1 = new TransactionBuilder()
+                .withName("t1")
+                .withAmount(10.0)
+                .withType("expense")
+                .withDateTime("2023-06-03 01:01")
+                .build();
+        Transaction t2 = new TransactionBuilder()
+                .withName("t2")
+                .withAmount(1.0)
+                .withType("income")
+                .withDateTime("29-06-2023 15:29")
+                .build();
+        Transaction t3 = new TransactionBuilder()
+                .withName("t3")
+                .withAmount(0.1)
+                .withType("expense")
+                .withDateTime("13 Jun 2023 00:00")
+                .build();
+
+        UniCash uniCash = new UniCashBuilder()
+                .withTransaction(t1)
+                .withTransaction(t2)
+                .withTransaction(t3)
+                .build();
+
+        HashMap<YearMonth, Double> expectedOutput = new HashMap<>();
+        expectedOutput.put(YearMonth.of(2023, 6), 10.1);
+
+        HashMap<YearMonth, Double> actualOutput = uniCash.getSumOfExpensePerYearMonth();
+
+        assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    public void getSumPerYearMonth_differentYearSameMonth_success() {
+        Transaction t1 = new TransactionBuilder()
+                .withName("t1")
+                .withAmount(10.0)
+                .withType("expense")
+                .withDateTime("2022-06-03 01:01")
+                .build();
+        Transaction t2 = new TransactionBuilder()
+                .withName("t2")
+                .withAmount(1.0)
+                .withType("expense")
+                .withDateTime("29-06-2023 15:29")
+                .build();
+        Transaction t3 = new TransactionBuilder()
+                .withName("t3")
+                .withAmount(0.1)
+                .withType("expense")
+                .withDateTime("13 Jun 2023 00:00")
+                .build();
+
+        UniCash uniCash = new UniCashBuilder()
+                .withTransaction(t1)
+                .withTransaction(t2)
+                .withTransaction(t3)
+                .build();
+
+        HashMap<YearMonth, Double> expectedOutput = new HashMap<>();
+        expectedOutput.put(YearMonth.of(2023, 6), 1.1);
+        expectedOutput.put(YearMonth.of(2022, 6), 10.0);
+
+        HashMap<YearMonth, Double> actualOutput = uniCash.getSumOfExpensePerYearMonth();
+
+        assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    public void getSumPerYearMonth_differentMonthSameYear_success() {
+        Transaction t1 = new TransactionBuilder()
+                .withName("t1")
+                .withAmount(10.0)
+                .withType("expense")
+                .withDateTime("2023-02-03 01:01")
+                .build();
+        Transaction t2 = new TransactionBuilder()
+                .withName("t2")
+                .withAmount(1.0)
+                .withType("expense")
+                .withDateTime("29-06-2023 15:29")
+                .build();
+        Transaction t3 = new TransactionBuilder()
+                .withName("t3")
+                .withAmount(0.1)
+                .withType("expense")
+                .withDateTime("13 Jun 2023 00:00")
+                .build();
+
+        UniCash uniCash = new UniCashBuilder()
+                .withTransaction(t1)
+                .withTransaction(t2)
+                .withTransaction(t3)
+                .build();
+
+        HashMap<YearMonth, Double> expectedOutput = new HashMap<>();
+        expectedOutput.put(YearMonth.of(2023, 6), 1.1);
+        expectedOutput.put(YearMonth.of(2023, 2), 10.0);
+
+        HashMap<YearMonth, Double> actualOutput = uniCash.getSumOfExpensePerYearMonth();
 
         assertEquals(expectedOutput, actualOutput);
     }

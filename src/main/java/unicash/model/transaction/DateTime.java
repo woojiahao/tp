@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
+import java.time.YearMonth;
 import java.util.Objects;
 /**
  * Represents a Transaction's dateTime.
@@ -88,6 +89,14 @@ public class DateTime {
     public String inputString() {
         return originalDateTime;
     }
+
+    /**
+     * Returns the YearMonth corresponding to dateTime.
+     */
+    public YearMonth getYearMonth() {
+        return YearMonth.from(dateTime);
+    }
+
 
     /**
      * Returns true if a given string is a valid dateTime.
