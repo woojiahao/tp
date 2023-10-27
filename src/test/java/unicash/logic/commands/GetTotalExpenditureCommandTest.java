@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static unicash.testutil.Assert.assertThrows;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 
 import unicash.commons.enums.TransactionType;
@@ -20,6 +22,25 @@ import unicash.testutil.TransactionBuilder;
 public class GetTotalExpenditureCommandTest {
 
     private static final Model BASE_MODEL = getModel();
+
+    @Test
+    public void constructor_givenYear_usesGivenYearInsteadOfDefault() {
+        var command = new GetTotalExpenditureCommand(10, 2022, null);
+        var expected =
+                GetTotalExpenditureCommand.class.getCanonicalName()
+                        + "{month=10, year=2022, categoryFilter=null}";
+        assertEquals(expected, command.toString());
+    }
+
+    @Test
+    public void constructor_noGivenYear_defaultsYearToCurrentYear() {
+        var command = new GetTotalExpenditureCommand(10, null);
+        var currentYear = LocalDate.now().getYear();
+        var expected =
+                GetTotalExpenditureCommand.class.getCanonicalName()
+                        + "{month=10, year=" + currentYear + ", categoryFilter=null}";
+        assertEquals(expected, command.toString());
+    }
 
     @Test
     public void execute_nullModel_throwsNullPointerException() {
@@ -45,7 +66,7 @@ public class GetTotalExpenditureCommandTest {
         model.addTransaction(new TransactionBuilder().withType("income").build());
         model.addTransaction(new TransactionBuilder().withType("expense").build());
         model.addTransaction(new TransactionBuilder().withType("expense").build());
-        var command = new GetTotalExpenditureCommand(8, null);
+        var command = new GetTotalExpenditureCommand(8, 2001, null);
         command.execute(model);
         var filteredResult = model.getFilteredTransactionList();
         assertEquals(2, filteredResult.size());
@@ -60,7 +81,7 @@ public class GetTotalExpenditureCommandTest {
         model.addTransaction(new TransactionBuilder().withType("expense").build());
         model.addTransaction(new TransactionBuilder().withType("expense").withDateTime("18-07-2001 00:00").build());
         model.addTransaction(new TransactionBuilder().withType("expense").build());
-        var command = new GetTotalExpenditureCommand(8, null);
+        var command = new GetTotalExpenditureCommand(8, 2001, null);
         command.execute(model);
         var filteredResult = model.getFilteredTransactionList();
         assertEquals(2, filteredResult.size());
@@ -77,7 +98,7 @@ public class GetTotalExpenditureCommandTest {
         model.addTransaction(new TransactionBuilder().withCategories().withType("expense").build());
         model.addTransaction(new TransactionBuilder().withType("expense").withDateTime("18-07-2001 00:00").build());
         model.addTransaction(new TransactionBuilder().withType("expense").withCategories("Food").build());
-        var command = new GetTotalExpenditureCommand(8, new Category("Food"));
+        var command = new GetTotalExpenditureCommand(8, 2001, new Category("Food"));
         command.execute(model);
         var filteredResult = model.getFilteredTransactionList();
         assertEquals(1, filteredResult.size());
@@ -95,7 +116,7 @@ public class GetTotalExpenditureCommandTest {
         model.addTransaction(new TransactionBuilder().withCategories().withType("expense").build());
         model.addTransaction(new TransactionBuilder().withType("expense").withDateTime("18-07-2001 00:00").build());
         model.addTransaction(new TransactionBuilder().withType("expense").withCategories("Food").build());
-        var command = new GetTotalExpenditureCommand(8, null);
+        var command = new GetTotalExpenditureCommand(8, 2001, null);
         command.execute(model);
         var filteredResult = model.getFilteredTransactionList();
         assertEquals(2, filteredResult.size());
@@ -111,7 +132,7 @@ public class GetTotalExpenditureCommandTest {
         model.addTransaction(new TransactionBuilder().withType("expense").withCategories("Food").build());
         model.addTransaction(new TransactionBuilder().withType("expense").withCategories("Others").build());
         model.addTransaction(new TransactionBuilder().withType("expense").build());
-        var command = new GetTotalExpenditureCommand(8, new Category("Food"));
+        var command = new GetTotalExpenditureCommand(8, 2001, new Category("Food"));
         command.execute(model);
         var filteredResult = model.getFilteredTransactionList();
         assertEquals(2, filteredResult.size());
@@ -128,7 +149,7 @@ public class GetTotalExpenditureCommandTest {
         model.addTransaction(new TransactionBuilder().withType("expense").withDateTime("23-06-2001 00:00").build());
         model.addTransaction(new TransactionBuilder().withType("expense").withCategories("Others").build());
         model.addTransaction(new TransactionBuilder().withType("expense").build());
-        var command = new GetTotalExpenditureCommand(8, new Category("Food"));
+        var command = new GetTotalExpenditureCommand(8, 2001, new Category("Food"));
         command.execute(model);
         var filteredResult = model.getFilteredTransactionList();
         assertEquals(1, filteredResult.size());
@@ -147,12 +168,12 @@ public class GetTotalExpenditureCommandTest {
         model.addTransaction(new TransactionBuilder().withType("expense").withCategories("Others").build());
         model.addTransaction(new TransactionBuilder().withType("expense").build());
         model.addTransaction(new TransactionBuilder().withType("expense").withAmount(133.15).build());
-        var command = new GetTotalExpenditureCommand(8, new Category("Food"));
+        var command = new GetTotalExpenditureCommand(8, 2001, new Category("Food"));
         var result = command.execute(model);
         var filteredResult = model.getFilteredTransactionList();
         assertEquals(2, filteredResult.size());
         assertEquals(
-                String.format(GetTotalExpenditureCommand.MESSAGE_SUCCESS, "AUGUST", 123.45 + 133.15),
+                String.format(GetTotalExpenditureCommand.MESSAGE_SUCCESS, "August", 2001, 123.45 + 133.15),
                 result.getFeedbackToUser()
         );
     }
@@ -168,7 +189,7 @@ public class GetTotalExpenditureCommandTest {
         );
         model.addTransaction(new TransactionBuilder().withType("expense").withCategories().build());
         model.addTransaction(new TransactionBuilder().withType("expense").withCategories("School", "Food").build());
-        var command = new GetTotalExpenditureCommand(8, new Category("Food"));
+        var command = new GetTotalExpenditureCommand(8, 2001, new Category("Food"));
         command.execute(model);
         var filteredResult = model.getFilteredTransactionList();
         assertEquals(2, filteredResult.size());
@@ -186,10 +207,30 @@ public class GetTotalExpenditureCommandTest {
     }
 
     @Test
+    public void execute_expensesWithDifferentYears_filtersForOnlyGivenYear() throws CommandException {
+        var model = getModel();
+        model.addTransaction(new TransactionBuilder().withType("expense").withDateTime("23-06-2001 00:00").build());
+        model.addTransaction(new TransactionBuilder().withType("expense").withCategories("Others").build());
+        model.addTransaction(new TransactionBuilder().withType("expense").withDateTime("23-06-2002 00:00").build());
+        model.addTransaction(new TransactionBuilder().withType("expense").withAmount(133.15).build());
+        var command = new GetTotalExpenditureCommand(8, 2001, new Category("Food"));
+        var result = command.execute(model);
+        var filteredResult = model.getFilteredTransactionList();
+        assertEquals(1, filteredResult.size());
+        assertEquals(
+                String.format(GetTotalExpenditureCommand.MESSAGE_SUCCESS, "August", 2001, 133.15),
+                result.getFeedbackToUser()
+        );
+    }
+
+    @Test
     public void toString_noInput_returnsCommandStringFormatted() {
         var command = new GetTotalExpenditureCommand(8, new Category("Food"));
+        var currentYear = LocalDate.now().getYear();
         var toStringResult = command.toString();
-        String expected = GetTotalExpenditureCommand.class.getCanonicalName() + "{month=8, categoryFilter=food}";
+        String expected =
+                GetTotalExpenditureCommand.class.getCanonicalName()
+                        + "{month=8, year=" + currentYear + ", categoryFilter=food}";
         assertEquals(expected, toStringResult);
     }
 
@@ -206,21 +247,28 @@ public class GetTotalExpenditureCommandTest {
     }
 
     @Test
-    public void equals_sameMonthAndCategoryFilter_returnsTrue() {
-        var command = new GetTotalExpenditureCommand(8, new Category("Food"));
-        var other = new GetTotalExpenditureCommand(8, new Category("Food"));
+    public void equals_allSame_returnsTrue() {
+        var command = new GetTotalExpenditureCommand(8, 2006, new Category("Food"));
+        var other = new GetTotalExpenditureCommand(8, 2006, new Category("Food"));
         assertEquals(command, other);
     }
 
     @Test
-    public void equals_sameMonthDifferentCategoryFilter_returnsFalse() {
+    public void equals_differentYear_returnsFalse() {
+        var command = new GetTotalExpenditureCommand(8, 2007, new Category("Food"));
+        var other = new GetTotalExpenditureCommand(8, 2008, new Category("Food"));
+        assertNotEquals(command, other);
+    }
+
+    @Test
+    public void equals_differentCategoryFilter_returnsFalse() {
         var command = new GetTotalExpenditureCommand(8, new Category("Food"));
         var other = new GetTotalExpenditureCommand(8, new Category("Others"));
         assertNotEquals(command, other);
     }
 
     @Test
-    public void equals_differentMonthSameCategoryFilter_returnsFalse() {
+    public void equals_differentMonth_returnsFalse() {
         var command = new GetTotalExpenditureCommand(7, new Category("Food"));
         var other = new GetTotalExpenditureCommand(8, new Category("Food"));
         assertNotEquals(command, other);
@@ -230,6 +278,20 @@ public class GetTotalExpenditureCommandTest {
     public void equals_differentMonthAndCategoryFilter_returnsFalse() {
         var command = new GetTotalExpenditureCommand(7, new Category("Food"));
         var other = new GetTotalExpenditureCommand(8, new Category("Others"));
+        assertNotEquals(command, other);
+    }
+
+    @Test
+    public void equals_differentMonthAndYear_returnsFalse() {
+        var command = new GetTotalExpenditureCommand(7, 2006, new Category("Food"));
+        var other = new GetTotalExpenditureCommand(8, 2007, new Category("Food"));
+        assertNotEquals(command, other);
+    }
+
+    @Test
+    public void equals_differentYearAndCategoryFilter_returnsFalse() {
+        var command = new GetTotalExpenditureCommand(8, 2006, new Category("Food"));
+        var other = new GetTotalExpenditureCommand(8, 2007, new Category("Others"));
         assertNotEquals(command, other);
     }
 

@@ -33,6 +33,7 @@ public class UniCashMessages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
             "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_INVALID_MONTH = "Month must be between 1 and 12 (inclusive).";
+    public static final String MESSAGE_INVALID_YEAR = "Year must be positive.";
 
     public static final String MESSAGE_UNICASH_WELCOME = "Welcome to UniCa$h!"
             + "\n\n"
