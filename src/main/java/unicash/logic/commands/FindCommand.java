@@ -31,6 +31,7 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        assert predicate != null : "predicate cannot be null";
         model.updateFilteredTransactionList(predicate);
         return new CommandResult(
                 String.format(UniCashMessages.MESSAGE_TRANSACTIONS_LISTED_OVERVIEW,
