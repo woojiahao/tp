@@ -128,7 +128,6 @@ the filtered transaction with a success message.
 - 2a. User enters an incorrect format.
     - 2a1. UniCa$h displays an error message, requests for correct format.
     - 2a2. User enters command with new format.
-  
     Steps 2a1-2a2 are repeated until the format entered is correct.
 
     Use case resumes from Step 3.
@@ -186,7 +185,6 @@ the filtered transaction with a success message.
   - 2a1. UniCa$h displays an error message with the correct command format.
   - Use case resumes at step 1.
 
-
 #### Use Case: UC10 - Exit UniCa$h
 **MSS:**
 1. User enters the command to exit UniCa$h with the correct format (i.e. no parameters)
@@ -204,12 +202,18 @@ the filtered transaction with a success message.
 
 This section aims to describe the implementation of the features in UniCa$h.
 
-There are 3 main group of features we have come up with.
-1. Transaction Management
-2. Budget Management and Monitoring
-3. General Utility Features
+There are 4 main groups of features that we have designed and either implemented
+or propose to implement in the future.
 
-### Transaction
+These are:
+1. Transaction Management Features
+2. Budget Management and Monitoring Features
+3. General Utility Features
+4. User Interface Features
+
+### Feature Group 1 - Transactions Management
+
+#### The Transaction Class
 
 <img src="images/unicash/TransactionClassDiagram.png" width="700" />
 
@@ -236,13 +240,13 @@ The `add_transaction` command adds a new `Transaction` to the `TransactionList` 
 
 The activity diagram of adding a Transaction is as shown below
 
-<img src="images/unicash/AddTransactionActivityDiagram.png" width="1200" />
+<img src="images/unicash/AddTransactionActivityDiagram.png" width="600" />
 
 The following sequence diagram shows how the different components of UniCash interact with each other
 
-<img src="images/unicash/AddTransactionSequenceDiagram.png" width="1200" />
+<img src="images/unicash/AddTransactionSequenceDiagram.png" width="1400" />
 
-The above sequence diagram omits details on the creation of the attributes of a `Transaction` such as 
+The above sequence diagram omits details on the creation of the attributes of a `Transaction` such as
 `Name`, `Type` and `Amount` as it would make the diagram cluttered and difficult to read without adding
 additional value.
 
@@ -257,10 +261,347 @@ the lifeline reaches the end of diagram.
 4. The `LogicManager` will then invoke the execute command, adding the `Transaction` to the UniCash.
 
 Note that only the `Category` field is allowed to be specified multiple times, while the other fields can only be specified once, else
-a `ParserException` is thrown. Another noteworthy point is that `Category` that are added are to be case-insensitively unique and can only be up to 
+a `ParserException` is thrown. Another noteworthy point is that `Category` that are added are to be case-insensitively unique and can only be up to
 a specified value in the `UniqueCategoryList` class. Else, a `ParserException` would be thrown.
 
+#### Get Total Expenditure
+
+##### Overview
+
+The `get_total_expenditure` command returns the total expenditure across a given month among all `expense` transactions in UniCa$h, with an optional filter for a given category.
+
+The activity diagram of getting the total expenditure is as shown below
+
+<img src="images/unicash/GetTotalExpenditureActivityDiagram.png" width="1026" />
+
+The following sequence diagram shows how the different components of UniCash interact with each other
+
+<img src="images/unicash/GetTotalExpenditureSequenceDiagram.png" width="1955" />
+
+The above sequence diagram omits details on the creation of the arguments of a `GetTotalExpenditureCommand` such as
+`Category` as it would make the diagram cluttered and difficult to read without adding additional value. It also omits
+the specific `predicate` behavior of provided to perform the filtering.
+
+ℹ️ **Note:** The lifeline for `GetTotalExpenditureCommandParser` should end at the destroy marker (X) but due to a 
+limitation of PlantUML, the lifeline reaches the end of diagram.
+
+##### Details
+
+1. The user specifies the month to retrieve the total expenditure and the optional category 
+2. The input will be parsed by `GetTotalExpenditureCommandParser`, and if it is invalid, `ParserException` is thrown,
+   prompting for the user to enter again.
+3. If the input is valid, a `GetTotalExpenditureCommand` object is created to be executed by the `LogicManager`.
+4. The `LogicManager` will then invoke the `execute` method of the command, filtering the existing transaction list to only include `expense` type transactions that fall in the given month and category (if any).
+5. The `GetTotalExpenditureCommand` also calculates the total expenditure from this filtered list of transactions.
+
+Note that the month to search is one-indexed, so it ranges from `[1, 12]`. The category is a single filter that is matched in a case-sensitive manner.
+
+#### Delete Transaction
+
+##### Overview
+
+The `DeleteCommand` function deletes an existing `Transaction` from `TransactionList` in UniCash.
+
+The activity diagram of deleting a Transaction is as shown below
+
+<img src="images/unicash/DeleteTransactionActivityDiagram.png" width="600" />
+
+The following sequence diagram shows the interaction between different components of UniCash.
+
+<img src="images/unicash/DeleteTransactionSequenceDiagram.png" width="1200" />
+
+The above sequence diagram omits details on the filtering of `TransactionList` and assumes that
+the displayed `TransactionList` is showing all transactions. However, the logic of the `DeleteCommand`
+remains the same for all list deletion.
+
+ℹ️ **Note:** The lifeline for `DeleteTransactionCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML,
+the lifeline reaches the end of diagram.
+
+##### Details
+
+1. The user specifies the transaction to be deleted by stating the integer index of the transaction to be deleted.
+2. The input will be parsed by `DeleteTransactionCommandParser` and if the provided input is invalid, `ParseException` will be thrown,
+and the user is prompted to enter the command again with the correct input.
+3. If the input is valid, an `Index` object is created with the given input integer, and passed into `DeleteTransactionCommand` to be executed
+by `LogicManager`
+4. `LogicManger` will invoke the `execute` method of `DeleteTransactionCommand` which will delete the `Transaction` from UniCash.
+
+It is important to take note that when the user input is parsed, it is based on the currently displayed `TransactionList` inside
+`TransactionListPanel`. This means that even if a `TransactionList` contains `10` transactions, given a specific nominally valid
+number like `7`, it can still throw a `ParseException` if the shown `TransactionList` contains less than `7` items. This feature is
+intentional, as the User is able to, for example, `find` a particular group of transaction and immediately delete those transactions
+by just looking at their displayed index number without having to refer to an external identifier of that transaction. UniCash will
+automatically handle the visual ordering and representation of transactions with the `TransactionsListPanel` in the UI. The details
+and diagrams for this part will be elaborated further in the UI section (and other relevant sections) of this Developer Guide.
+
+#### Edit Transaction
+
+##### Overview
+
+The `edit_transaction` command edits an existing `Transaction` from the `TransactionList` in UniCa$h.
+
+The following sequence diagram shows how the different components of UniCa$h interact with each other. It is further explained in the **Details** section below.
+
+<img src="images/unicash/EditTransactionSequenceDiagram.png" width="1200" />
+
+
+##### Details
+
+1. The user specifies the transaction to be edited by first stating the (one-based) index of the transaction they want to edit. This
+   is followed by listing the fields and updated values that they would like to edit.
+   (E.g. `edit_transaction 1 n/Food Clique c/food`)
+2. The user input with the requested edits will be parsed by `EditCommandTransactionParser`, and if it is invalid, `ParserException` is thrown, prompting for the user to enter again. It is important to note that at this point, a valid index is any integer that is 1 or greater.
+3. If the input is valid, the `EditCommandTransactionParser` creates an `EditTransactionDescriptor` object, which contains the edits which the user wishes to make to the transaction.
+4. An `EditTransactionCommand` is constructed with the one-based index of the transaction to edit and the `EditTransactionDescriptor` object. This `EditTransactionCommand` is then returned by the `EditCommandTransactionParser`
+5. The `LogicManager` will then invoke the execute command of the `EditTransactionCommand`, editing the `Transaction` in UniCa$h.
+6. The `EditTransactionCommand#execute` method then first checks if the one-based index is too large (i.e. if there are only `n` transactions, but the index provided is greater than `n`). If this is true, then a `CommandException` is thrown,
+   prompting the user to input an index that is at most, the number of transactions available. If the `CommandException` is not thrown at the step above, then the execution proceeds.
+7. The `EditTransactionCommand#execute` method then calls the `createEditedTransaction` method, which creates a new `Transaction` object with the updated values after editing. Note that this `Transaction` object is a different object from what is stored in UniCa$h.
+8. The `EditTransactionCommand#execute` method then updates UniCa$h with the new `Transaction` using the `Model#setTransaction` method.
+
+Note that although all fields can be edited, the `Name`, `Amount`, and `Type` fields cannot be left blank. The constraints laid
+out in the **Add Transaction** section above also remain.
+
+### Feature Group 2 - Budget Management and Monitoring
+
+### Feature Group 3 - General Utility Features
+
+This includes commands such as Clear, Reset, Help and Exit.
+
+#### Clear Transactions
+
+##### Overview
+
+The `ClearTransactionsCommand` deletes all existing `Transactions` from `TransactionList` in UniCash.
+
+The activity diagram of clearing all transactions is as shown below
+
+<img src="images/unicash/ClearTransactionsActivityDiagram.png" width="400" />
+
+The following sequence diagram shows the interaction between different components of UniCash.
+
+<img src="images/unicash/ClearTransactionsSequenceDiagram.png" width="800" />
+
+**Note:** Given that `ClearTransactionsCommand` takes in no arguments, it does not have an associated Parser class
+like the other `Command` classes. This is currently the case, however, given that the command entirely erases the
+existing Unicash, a `ClearTransactionsCommandParser` is proposed to be implemented at a later date to ensure an
+additional layer of safety for the User.
+
+##### Details
+
+1. The user inputs the command to reset unicash
+2. A `ClearTransactionsCommand` object is created with no arguments.
+3. `LogicManager` will invoke the `execute` method of `ClearTransactionsCommand` 
+which will replace the existing `Model` property with a new `UniCash` object which 
+would contain an empty `TransactionList`.
+
+Here, it must be noted that unlike `DeleteTransactionCommand`, individual transactions in the `TransactionList`
+are not deleted singularly. As opposed to iteratively deleting each transaction in the `TransactionList`, the more
+efficient way to achieve the same effect would be to simply set the `Model` contained in `LogicManager` to an new 
+`UniCash` object, as the newly created `UniCash` object would now have an empty `TransactionList` encapsulated within.
+This emulates the iterative deletion of all transactions in the `TransactionList`.
+
+### Feature Group 4 - User Interface Features
+
+UniCa$h is a Graphical User Interface (GUI) application, built using JavaFX. The following section describes the
+implementation of the various UI components in UniCa$h.
+
+#### UI Components
+UniCa$sh consists of the following UI components:
+1. Main Window
+2. Help Window
+3. Statistics / Budget Window
+
+<img src="images/unicash/UiClassDiagram.png" width="404" />
+
+In this section, we will be going through the implementation of the main window.
+
+#### 1a. Main Window Design
+The main window consists of three components: the command input box, as well as two panes,
+the transaction list pane and the command results pane.
+
+For the command input box, we have a custom `CommandBox` class that extends `TextField` to provide
+the user with the ability to type their commands into the application.
+
+For the transaction list pane, we have a custom `TransactionListPanel` class that is a `ListView` to
+provide the user with a scrollable list of transactions. This view is updated whenever the user executes
+commands that modify the transaction list. (i.e. `add`, `delete`, `edit`, `clear`)
+
+For the command results pane, we have a custom `ResultDisplay` class. This pane displays the results of the
+user's command execution. This view is updated whenever the user executes commands that modify the transaction.
+Error messages are also displayed here, such as when the user enters an invalid command.
+
+#### 1b. Main Window Implementation
+The main window for UniCa$h is implemented using the `MainWindow` class. This class is made up of:
+1. `CommandBox`: The command input box
+2. `TransactionListPanel`: The transaction list pane
+3. `ResultDisplay`: The command results pane
+
+All these components, including the `MainWindow`, inherit from the abstract `UiPart` class which provides
+the basic functionality of a UI component, such as the ability to set the root node of the component.
+
+The `UI` component uses the JavaFx UI framework to render the UI components. The layout of these parts are defined
+in the matching .fxml files that are located in `src/main/resources/view` folder. (e.g. The layout of the 
+TransactionCard is specified in`TransactionCard.fxml`)
+
+The `UI` component is also responsible for:
+- executing commands using the `Logic` component, through the `executeCommand` method
+- listening for changes to the `Model` component, through the `listenToModelChanges` method
+
+## Continuous Integration (CI)
+
+Continuous integration consists of the following:
+
+1. General unit testing
+2. UI testing
+3. Automated testing on push & pull request on Github
+4. Code coverage reporting
+
+### Github Actions Primer
+
+Before diving into the various CI components, it would be good to cover some fundamental concepts about [Github Actions.](https://docs.github.com/en/actions)
+
+Github Actions is used to execute a set of behavior on a repository.
+
+Github Actions are created as YAML configuration files found in the `.github/workflows` folder.
+
+For UniCa$h, Github Actions are broken down into the following components:
+
+1. Trigger: dictates when the action is run
+2. Strategy & matrix: specifies the platform (OS) and any relevant versions to run the steps
+3. Steps: consists of individual steps that can use other Github Actions to perform a set of actions in sequential order
+
+### General unit testing
+
+General unit tests cover any non-UI related aspect of UniCa$h such as models, commands, and utility.
+
+General unit testing is achieved using [JUnit 5](https://junit.org/junit5/) with a combination of several custom built
+assertion methods like `CommandTestUtil#assertCommandSuccess` to improve the quality of life when testing.
+
+### UI testing
+
+UI testing provides a way for us to automate some manual tests by simulating button clicks and user inputs
+into the UI to assert that the UI responds appropriately.
+
+UI testing is achieved using [JUnit 5](https://junit.org/junit5/) and [TestFX](https://github.com/TestFX/TestFX).
+
+To initialize a test class to work with TestFX, annotate it with the following:
+
+```java
+
+@ExtendWith(ApplicationExtension.class)
+public class HelpWindowUiTest {
+```
+
+This leverages [JUnit 5's built-in extensions system](https://junit.org/junit5/docs/current/user-guide/#extensions) to
+inject an `FxRobot` argument in each unit test. This `FxRobot` instance is used as a driver to perform UI operations on
+the running UI, such as performing clicks, entering text, and performing keyboard inputs, along with searching for UI
+elements by `fx:id`.
+
+```java
+@Test
+public void userInput_help_showHelpWindowAsRoot(FxRobot robot)throws TimeoutException{
+    var beforeHelpContainer=robot.lookup("#helpMessageContainer").tryQuery();
+    assertTrue(beforeHelpContainer.isEmpty());
+    robot.clickOn("#commandBoxPlaceholder");
+    robot.write("help");
+    robot.press(KeyCode.ENTER);
+    var afterHelp=robot.lookup("#helpMessageContainer").tryQuery();
+    assertTrue(afterHelp.isPresent());
+}
+```
+
+There are two methods of initializing UI tests with TestFX.
+
+#### Using `@Start`
+
+When defining a `@Start` method, a `Stage` is injected through
+the [test runner](https://junit.org/junit5/docs/current/user-guide/#writing-tests-dependency-injection) and this
+allows you to initialize a new `Stage` with custom UI components.
+
+This is especially useful when working with individual UI components like `HelpWindow` and `TransactionCard` as it
+provides a medium to render these elements without running the entire UI.
+
+```java
+@Start
+public void start(Stage stage) {
+    helpWindow=new HelpWindow(stage);
+    stage.show();
+}
+```
+
+The `@Start` method is run before each test case.
+
+#### Using `@BeforeEach`
+
+When performing a general set of integration tests across the entire UI (like simulating user input to execution to
+view the resulting UI changes), it is best to define a `@BeforeEach` method instead that uses `FxToolkit` to setup
+the application (in this case, `MainApp`) with any given setup parameters like default storage location.
+
+It is important to note that if testing the entire application, a temporary storage file should be defined and
+provided for `MainApp` to avoid directly modifying the save data on your local machine.
+
+```java
+@TempDir
+Path tempDir;
+
+@BeforeEach
+public void runAppToTests() throws TimeoutException {
+    FxToolkit.registerPrimaryStage();
+    FxToolkit.setupApplication(()->new MainApp(tempDir.resolve("ui_data.json")));
+    FxToolkit.showStage();
+    WaitForAsyncUtils.waitForFxEvents(20);
+}
+```
+
+The `@BeforeEach` method is run before each test case.
+
+It is also good convention to include a `@AfterEach` method to clean up the stages created during `@BeforeEach` so
+that all resources are freed after every unit test:
+
+```java
+@AfterEach
+public void stopApp() throws TimeoutException{
+    FxToolkit.cleanupStages();
+}
+```
+
+### Automated testing on push & pull request on Github
+
+Automated testing is achieved via the `.github/workflows/unit_test.yml` action.
+
+Automated testing is triggered on every push and pull request and is run across all three major OSes: Ubuntu, MacOS, and Windows, and comprise of the following steps:
+
+<img src="images/unicash/ci/AutomatedTestingActivityDiagram.png" width="368" />
+
+UI tests are only run on Windows as both Linux and MacOS requires headless UI testing which is not well supported with Github Actions.
+
+### Code coverage reporting
+
+Code coverage is generated using Github Actions and Gradle and uploaded to [Codecov.](https://app.codecov.io/gh/AY2324S1-CS2103-T16-3)
+
+Code coverage includes both general unit tests and UI tests, and reporting is achieved through the `.github/workflows/gradle.yml` action.
+
+Similar to automated testing, code coverage reporting is triggered on every push and pull request and is run across all three major OSes.
+
+<img src="images/unicash/ci/CodeCoverageReportingActivityDiagram.png" width="368" />
+
+To ensure that code coverage reporting includes both general unit tests and UI tests, the following changes have been made to `build.gradle`:
+
+1. A new Gradle task `uiTest` was created to only run UI tests that end with `UiTest`
+2. The default `test` task is configured to exclude such files
+3. The `jacocoTestReport` task is modified to only depend on (i.e. run before) the `uiTest` task is the system's OS is not MacOS, Ubuntu or *nux (i.e. Windows only).
+4. The `coverage` task includes every `*.exec` file generated from both `uiTest` and `test` so that both coverage reports are available to Codecov
+
+These changes aim to work around the limitation of needing a headless environment in Github Actions as only Windows is able to perform UI tests on Github Action's runners.
+
+The Github action for reporting the code coverage only uploads the coverage reports to Codecov if the runner is Windows as that is when there is a complete code coverage report.
+
+By introducing UI testing into the code coverage reporting, we have been able to achieve a code coverage of > 90%!
+
 ## Links
-User Stories: [https://github.com/orgs/AY2324S1-CS2103-T16-3/projects/1/views/2](https://github.com/orgs/AY2324S1-CS2103-T16-3/projects/1/views/2)
+
+User
+Stories: [https://github.com/orgs/AY2324S1-CS2103-T16-3/projects/1/views/2](https://github.com/orgs/AY2324S1-CS2103-T16-3/projects/1/views/2)
 
 Project Website: [https://ay2324s1-cs2103-t16-3.github.io/tp/](https://ay2324s1-cs2103-t16-3.github.io/tp/)

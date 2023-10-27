@@ -3,6 +3,7 @@ package unicash.logic;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -78,5 +79,10 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Transaction> getFilteredTransactionList() {
         return model.getFilteredTransactionList();
+    }
+
+    @Override
+    public HashMap<String, Double> getExpenseSummary() {
+        return model.getExpenseSummary();
     }
 }

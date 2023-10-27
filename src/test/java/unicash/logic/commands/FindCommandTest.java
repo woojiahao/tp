@@ -1,10 +1,12 @@
 package unicash.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static unicash.logic.UniCashMessages.MESSAGE_TRANSACTIONS_LISTED_OVERVIEW;
 import static unicash.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static unicash.testutil.Assert.assertThrows;
 import static unicash.testutil.TypicalTransactions.INTERN;
 import static unicash.testutil.TypicalTransactions.NUS;
 import static unicash.testutil.TypicalTransactions.getTypicalUniCash;
@@ -19,7 +21,7 @@ import unicash.model.Model;
 import unicash.model.ModelManager;
 import unicash.model.UniCash;
 import unicash.model.UserPrefs;
-import unicash.model.transaction.TransactionNameContainsKeywordsPredicate;
+import unicash.model.transaction.predicates.TransactionContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -31,10 +33,10 @@ public class FindCommandTest {
 
     @Test
     public void equals() {
-        TransactionNameContainsKeywordsPredicate firstPredicate =
-                new TransactionNameContainsKeywordsPredicate(Collections.singletonList("first"));
-        TransactionNameContainsKeywordsPredicate secondPredicate =
-                new TransactionNameContainsKeywordsPredicate(Collections.singletonList("second"));
+        TransactionContainsKeywordsPredicate firstPredicate =
+                new TransactionContainsKeywordsPredicate(Collections.singletonList("first"));
+        TransactionContainsKeywordsPredicate secondPredicate =
+                new TransactionContainsKeywordsPredicate(Collections.singletonList("second"));
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
@@ -61,7 +63,7 @@ public class FindCommandTest {
     @Test
     public void execute_zeroKeywords_noTransactionsFound() {
         String expectedMessage = String.format(MESSAGE_TRANSACTIONS_LISTED_OVERVIEW, 0);
-        TransactionNameContainsKeywordsPredicate predicate = preparePredicate(" ");
+        TransactionContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredTransactionList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -70,8 +72,8 @@ public class FindCommandTest {
 
     @Test
     public void execute_oneKeyword_multipleTransactionsFound() {
-        String expectedMessage = String.format(MESSAGE_TRANSACTIONS_LISTED_OVERVIEW, 2);
-        TransactionNameContainsKeywordsPredicate predicate = preparePredicate("work");
+        String expectedMessage = String.format(MESSAGE_TRANSACTIONS_LISTED_OVERVIEW, 3);
+        TransactionContainsKeywordsPredicate predicate = preparePredicate("work");
         FindCommand command = new FindCommand(predicate);
 
         Model expectedModel = new ModelManager(getTypicalUniCash(), new UserPrefs());
@@ -80,13 +82,28 @@ public class FindCommandTest {
         assertCommandSuccess(command, modelWithTransactions, expectedMessage, expectedModel);
 
         var filteredResult = modelWithTransactions.getFilteredTransactionList();
-        assertEquals(filteredResult.get(0), NUS);
-        assertEquals(filteredResult.get(1), INTERN);
+        assertEquals(filteredResult.get(1), NUS);
+        assertEquals(filteredResult.get(2), INTERN);
+    }
+
+    @Test
+    public void execute_predicateNull_assertionFailure() {
+        String expectedMessage = String.format(MESSAGE_TRANSACTIONS_LISTED_OVERVIEW, 0);
+        TransactionContainsKeywordsPredicate predicate = preparePredicate(" ");
+        FindCommand command = new FindCommand(null);
+        expectedModel.updateFilteredTransactionList(predicate);
+
+        assertThrows(AssertionError.class, () -> command.execute(model));
+    }
+
+    @Test
+    public void execute_predicateNotNull_assertion() {
+        assertDoesNotThrow(() -> new FindCommand(preparePredicate(" ")).execute(model));
     }
 
     @Test
     public void toStringMethod() {
-        TransactionNameContainsKeywordsPredicate predicate = new TransactionNameContainsKeywordsPredicate(
+        TransactionContainsKeywordsPredicate predicate = new TransactionContainsKeywordsPredicate(
                 List.of("keyword"));
         FindCommand findCommand = new FindCommand(predicate);
         String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
@@ -96,7 +113,7 @@ public class FindCommandTest {
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
-    private TransactionNameContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new TransactionNameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    private TransactionContainsKeywordsPredicate preparePredicate(String userInput) {
+        return new TransactionContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 }

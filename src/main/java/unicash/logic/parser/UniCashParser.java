@@ -16,10 +16,12 @@ import unicash.logic.commands.DeleteTransactionCommand;
 import unicash.logic.commands.EditTransactionCommand;
 import unicash.logic.commands.ExitCommand;
 import unicash.logic.commands.FindCommand;
+import unicash.logic.commands.GetCommand;
 import unicash.logic.commands.GetTotalExpenditureCommand;
 import unicash.logic.commands.HelpCommand;
 import unicash.logic.commands.ListCommand;
 import unicash.logic.commands.ResetCommand;
+import unicash.logic.commands.SummaryCommand;
 import unicash.logic.parser.exceptions.ParseException;
 
 
@@ -83,12 +85,17 @@ public class UniCashParser {
         case ResetCommand.COMMAND_WORD:
             return new ResetCommand();
 
+        case GetCommand.COMMAND_WORD:
+            return new GetCommandParser().parse(arguments);
+
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
+        case SummaryCommand.COMMAND_WORD:
+            return new SummaryCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

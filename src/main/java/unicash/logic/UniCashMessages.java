@@ -10,12 +10,15 @@ import unicash.logic.commands.DeleteTransactionCommand;
 import unicash.logic.commands.EditTransactionCommand;
 import unicash.logic.commands.ExitCommand;
 import unicash.logic.commands.FindCommand;
+import unicash.logic.commands.GetCommand;
 import unicash.logic.commands.GetTotalExpenditureCommand;
 import unicash.logic.commands.HelpCommand;
 import unicash.logic.commands.ListCommand;
 import unicash.logic.commands.ResetCommand;
+import unicash.logic.commands.SummaryCommand;
 import unicash.logic.parser.Prefix;
 import unicash.model.budget.Budget;
+import unicash.model.commons.Amount;
 import unicash.model.transaction.Transaction;
 
 /**
@@ -46,7 +49,11 @@ public class UniCashMessages {
             + "\n"
             + FindCommand.COMMAND_WORD
             + "\n"
+            + GetCommand.COMMAND_WORD
+            + "\n"
             + GetTotalExpenditureCommand.COMMAND_WORD
+            + "\n"
+            + SummaryCommand.COMMAND_WORD
             + "\n\n"
             + ClearTransactionsCommand.COMMAND_WORD
             + "\n"
@@ -70,7 +77,7 @@ public class UniCashMessages {
     }
 
     /**
-     * Formats the {@code transaction} for display to the user.
+     * Formats the {@code transaction} for display to the user with line breaks.
      */
     public static String formatTransaction(Transaction transaction) {
         final StringBuilder builder = new StringBuilder();
@@ -78,8 +85,8 @@ public class UniCashMessages {
                 .append(transaction.getName())
                 .append("; \nType: ")
                 .append(transaction.getType())
-                .append("; \nAmount: ")
-                .append(transaction.getAmount())
+                .append("; \nAmount: $")
+                .append(Amount.amountToDecimalString(transaction.getAmount()))
                 .append("; \nDate: ")
                 .append(transaction.getDateTime())
                 .append("; \nLocation: ")
@@ -103,7 +110,25 @@ public class UniCashMessages {
                 .append(budget.getAmount())
                 .append("; \nInterval: ")
                 .append(budget.getInterval());
+    }
 
+   /**
+     * Formats the {@code transaction} for output as a continuous string.
+     */
+    public static String formatTransactionAsString(Transaction transaction) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Name: ")
+                .append(transaction.getName())
+                .append("; Type: ")
+                .append(transaction.getType())
+                .append("; Amount: ")
+                .append(transaction.getAmount())
+                .append("; Date: ")
+                .append(transaction.getDateTime())
+                .append("; Location: ")
+                .append(transaction.getLocation())
+                .append("; Category: ");
+        transaction.getCategories().forEach(builder::append);
         return builder.toString();
     }
 }

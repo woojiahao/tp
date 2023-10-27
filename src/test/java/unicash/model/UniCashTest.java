@@ -6,15 +6,21 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static unicash.logic.commands.CommandTestUtil.VALID_AMOUNT_INTERN;
+import static unicash.logic.commands.CommandTestUtil.VALID_CATEGORY_EDUCATION;
+import static unicash.logic.commands.CommandTestUtil.VALID_DATETIME_SHOPPING;
+import static unicash.logic.commands.CommandTestUtil.VALID_TYPE_EXPENSE;
 import static unicash.testutil.Assert.assertThrows;
 import static unicash.testutil.TypicalTransactions.BUYING_GROCERIES;
+import static unicash.testutil.TypicalTransactions.DINING_WITH_FRIENDS;
 import static unicash.testutil.TypicalTransactions.INTERN;
 import static unicash.testutil.TypicalTransactions.NUS;
+import static unicash.testutil.TypicalTransactions.SHOPPING;
 import static unicash.testutil.TypicalTransactions.getTypicalUniCash;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -22,7 +28,13 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import unicash.model.budget.Budget;
+import unicash.model.category.UniqueCategoryList;
+import unicash.model.commons.Amount;
+import unicash.model.transaction.DateTime;
+import unicash.model.transaction.Location;
+import unicash.model.transaction.Name;
 import unicash.model.transaction.Transaction;
+import unicash.model.transaction.Type;
 import unicash.model.transaction.exceptions.TransactionNotFoundException;
 import unicash.testutil.TransactionBuilder;
 import unicash.testutil.UniCashBuilder;
@@ -50,7 +62,7 @@ public class UniCashTest {
 
     @Test
     public void resetData_withDuplicateTransactions_success() {
-        // Two persons with the same identity fields
+        // Two transactions with the same identity fields
         Transaction editedNus = new TransactionBuilder(NUS).withAmount(VALID_AMOUNT_INTERN).build();
         List<Transaction> newTransactions = Arrays.asList(NUS, editedNus);
         UniCashTest.UniCashStub newData = new UniCashTest.UniCashStub(newTransactions);
@@ -69,7 +81,7 @@ public class UniCashTest {
     }
 
     @Test
-    public void hasTransaction_personInUniCash_returnsTrue() {
+    public void hasTransaction_transactionsInUniCash_returnsTrue() {
         uniCash.addTransaction(NUS);
         assertTrue(uniCash.hasTransaction(NUS));
     }
@@ -91,7 +103,7 @@ public class UniCashTest {
     }
 
     @Test
-    public void removeTransaction_personInUniCash_returnsTrue() {
+    public void removeTransaction_transactionInUniCash_returnsTrue() {
         UniCash transactionList = new UniCashBuilder().withTransaction(NUS).build();
         assertTrue(transactionList.hasTransaction(NUS));
         transactionList.removeTransaction(NUS);
@@ -101,6 +113,82 @@ public class UniCashTest {
     @Test
     public void getUniCash_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> uniCash.getTransactionList().remove(0));
+    }
+
+    @Test
+    public void getSumPerCategory_transactionsHaveExactlyOneCategory_success() {
+        UniCash uniCash = new UniCashBuilder()
+                .withTransaction(NUS)
+                .withTransaction(BUYING_GROCERIES)
+                .withTransaction(DINING_WITH_FRIENDS)
+                .build();
+
+        HashMap<String, Double> expectedOutput = new HashMap<>();
+        expectedOutput.put("ta", 888.80);
+
+        HashMap<String, Double> actualOutput = uniCash.getSumOfExpensePerCategory();
+
+        assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    public void getSumPerCategory_transactionsHaveOneOrZeroCategory_success() {
+        Transaction noCategoryExpense1 = new Transaction(
+                new Name("Test"),
+                new Type("expense"),
+                new Amount(3.21),
+                new DateTime(""),
+                new Location(""),
+                new UniqueCategoryList()
+        );
+        Transaction noCategoryExpense2 = new Transaction(
+                new Name("Test"),
+                new Type("expense"),
+                new Amount(5.00),
+                new DateTime(""),
+                new Location(""),
+                new UniqueCategoryList()
+        );
+        UniCash uniCash = new UniCashBuilder()
+                .withTransaction(NUS)
+                .withTransaction(BUYING_GROCERIES)
+                .withTransaction(DINING_WITH_FRIENDS)
+                .withTransaction(noCategoryExpense1)
+                .withTransaction(noCategoryExpense2)
+                .build();
+        HashMap<String, Double> actualOutput = uniCash.getSumOfExpensePerCategory();
+
+        HashMap<String, Double> expectedOutput = new HashMap<>();
+        expectedOutput.put("ta", 888.80);
+        expectedOutput.put("Uncategorized", 8.21);
+
+        assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    public void getSumPerCategory_transactionsHaveMultipleCategories_success() {
+
+        Transaction multipleCategoriesExpense = new TransactionBuilder().withName("test")
+                .withType(VALID_TYPE_EXPENSE)
+                .withAmount(500.1)
+                .withDateTime(VALID_DATETIME_SHOPPING)
+                .withCategories("TA", VALID_CATEGORY_EDUCATION)
+                .build();
+
+        UniCash uniCash = new UniCashBuilder()
+                .withTransaction(NUS)
+                .withTransaction(BUYING_GROCERIES)
+                .withTransaction(DINING_WITH_FRIENDS)
+                .withTransaction(SHOPPING)
+                .withTransaction(multipleCategoriesExpense)
+                .build();
+        HashMap<String, Double> actualOutput = uniCash.getSumOfExpensePerCategory();
+
+        HashMap<String, Double> expectedOutput = new HashMap<>();
+        expectedOutput.put("education", 500.1);
+        expectedOutput.put("ta", 888.8 + 500.1);
+
+        assertEquals(expectedOutput, actualOutput);
     }
 
     @Test
@@ -131,7 +219,7 @@ public class UniCashTest {
     }
 
     /**
-     * A stub ReadOnlyUniCash whose persons list can violate interface constraints.
+     * A stub ReadOnlyUniCash whose transactions list can violate interface constraints.
      */
     private static class UniCashStub implements ReadOnlyUniCash {
         private final ObservableList<Transaction> transactions = FXCollections.observableArrayList();

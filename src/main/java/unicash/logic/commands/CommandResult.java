@@ -16,6 +16,9 @@ public class CommandResult {
     /** Help information should be shown to the user. */
     private final boolean showHelp;
 
+    /** Summary information should be shown to the user. */
+    private final boolean showSummary;
+
     /** The application should exit. */
     private final boolean exit;
 
@@ -25,6 +28,7 @@ public class CommandResult {
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
+        this.showSummary = false;
         this.exit = exit;
     }
 
@@ -34,6 +38,16 @@ public class CommandResult {
      */
     public CommandResult(String feedbackToUser) {
         this(feedbackToUser, false, false);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with all available fields, including showSummary.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showSummary) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = showHelp;
+        this.exit = exit;
+        this.showSummary = showSummary;
     }
 
     public String getFeedbackToUser() {
@@ -46,6 +60,10 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isShowSummary() {
+        return showSummary;
     }
 
     @Override
@@ -62,12 +80,13 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && showSummary == otherCommandResult.showSummary;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit, showSummary);
     }
 
     @Override
@@ -76,6 +95,7 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
+                .add("showSummary", showSummary)
                 .toString();
     }
 

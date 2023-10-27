@@ -11,6 +11,7 @@ import static unicash.testutil.TypicalTransactions.NUS;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -168,6 +169,11 @@ public class AddTransactionCommandTest {
          */
         @Override
         public void addBudget(Budget budget) {
+			throw new AssertionError("This method should not be called.");
+		}
+
+        @Override
+        public void updateExpenseSummary() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -178,6 +184,11 @@ public class AddTransactionCommandTest {
 
         @Override
         public void updateFilteredBudgetList(Predicate<Budget> predicate) {
+			throw new AssertionError("This method should not be called.");
+		}
+
+		@Override
+        public HashMap<String, Double> getExpenseSummary() {
             throw new AssertionError("This method should not be called.");
         }
     }

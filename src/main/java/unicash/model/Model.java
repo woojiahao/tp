@@ -1,6 +1,7 @@
 package unicash.model;
 
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -105,4 +106,11 @@ public interface Model {
     ObservableList<Budget> getFilteredBudgetList();
 
     void updateFilteredBudgetList(Predicate<Budget> predicate);
+
+	/**
+     * Updates the summary of expenses saved in UniCash.
+     */
+    void updateExpenseSummary();
+
+    HashMap<String, Double> getExpenseSummary();
 }

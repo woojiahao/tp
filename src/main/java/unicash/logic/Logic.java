@@ -1,6 +1,7 @@
 package unicash.logic;
 
 import java.nio.file.Path;
+import java.util.HashMap;
 
 import javafx.collections.ObservableList;
 import unicash.commons.core.GuiSettings;
@@ -42,4 +43,9 @@ public interface Logic {
      * Returns an unmodifiable view of the filtered list of transactions
      */
     ObservableList<Transaction> getFilteredTransactionList();
+
+    /**
+     * Returns a HashMap of the expense summary from the model
+     */
+    HashMap<String, Double> getExpenseSummary();
 }

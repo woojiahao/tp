@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import unicash.commons.util.ToStringBuilder;
 import unicash.logic.UniCashMessages;
 import unicash.model.Model;
-import unicash.model.transaction.TransactionNameContainsKeywordsPredicate;
+import unicash.model.transaction.predicates.TransactionContainsKeywordsPredicate;
 
 /**
  * Finds and lists all transactions in UniCa$h whose name contains any of the argument keywords.
@@ -22,15 +22,16 @@ public class FindCommand extends Command {
             + "\n"
             + "Example: " + COMMAND_WORD + " chicken rice";
 
-    private final TransactionNameContainsKeywordsPredicate predicate;
+    private final TransactionContainsKeywordsPredicate predicate;
 
-    public FindCommand(TransactionNameContainsKeywordsPredicate predicate) {
+    public FindCommand(TransactionContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        assert predicate != null : "predicate cannot be null";
         model.updateFilteredTransactionList(predicate);
         return new CommandResult(
                 String.format(UniCashMessages.MESSAGE_TRANSACTIONS_LISTED_OVERVIEW,

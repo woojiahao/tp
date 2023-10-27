@@ -27,11 +27,13 @@ import unicash.logic.commands.GetTotalExpenditureCommand;
 import unicash.logic.commands.HelpCommand;
 import unicash.logic.commands.ListCommand;
 import unicash.logic.commands.ResetCommand;
+import unicash.logic.commands.SummaryCommand;
 import unicash.logic.parser.exceptions.ParseException;
 import unicash.model.budget.Budget;
 import unicash.model.transaction.Transaction;
 import unicash.model.transaction.TransactionNameContainsKeywordsPredicate;
 import unicash.testutil.BudgetBuilder;
+import unicash.model.transaction.predicates.TransactionContainsKeywordsPredicate;
 import unicash.testutil.EditTransactionDescriptorBuilder;
 import unicash.testutil.TransactionBuilder;
 import unicash.testutil.TransactionUtil;
@@ -51,7 +53,7 @@ public class UniCashParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new TransactionNameContainsKeywordsPredicate(keywords)), command);
+        assertEquals(new FindCommand(new TransactionContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
@@ -133,6 +135,14 @@ public class UniCashParserTest {
                 ExitCommand.COMMAND_WORD) instanceof ExitCommand);
         assertTrue(parser.parseCommand(
                 ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
+    }
+
+    @Test
+    public void parseCommand_summary() throws Exception {
+        assertTrue(parser.parseCommand(
+                SummaryCommand.COMMAND_WORD) instanceof SummaryCommand);
+        assertTrue(parser.parseCommand(
+                SummaryCommand.COMMAND_WORD + " 3") instanceof SummaryCommand);
     }
 
     @Test
