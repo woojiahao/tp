@@ -63,7 +63,7 @@ public class CommandBox extends UiPart<Region> {
                 commandTextField.end(); // Moves the text cursor to the end of the TextField
                 break;
             case ESCAPE:
-                clearCommandTextField();
+                clearCommandTextField(); // Clears the command text field while MainWindow is in focus
                 break;
             default:
                 break;
