@@ -128,7 +128,6 @@ the filtered transaction with a success message.
 - 2a. User enters an incorrect format.
     - 2a1. UniCa$h displays an error message, requests for correct format.
     - 2a2. User enters command with new format.
-
     Steps 2a1-2a2 are repeated until the format entered is correct.
 
     Use case resumes from Step 3.
