@@ -81,9 +81,11 @@ public class SummaryWindow extends UiPart<Stage> {
      *     </ul>
      */
     public void show(HashMap<String, Double> expenseSummary) {
-        Stage root = getRoot();
         setPieChart(expenseSummary);
-        root.show();
+        if (!expenseSummary.isEmpty()) {
+            Stage root = getRoot();
+            root.show();
+        }
     }
 
     /**

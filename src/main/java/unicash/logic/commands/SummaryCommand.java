@@ -16,8 +16,14 @@ public class SummaryCommand extends Command {
 
     public static final String SHOWING_SUMMARY_MESSAGE = "Opened UniCa$h summary window.";
 
+    public static final String NOT_SHOWING_SUMMARY_MESSAGE = "You have no expenses to summarize.";
+
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_SUMMARY_MESSAGE, false, false, true);
+        if (!model.getFilteredTransactionList().isEmpty()) {
+            return new CommandResult(SHOWING_SUMMARY_MESSAGE, false, false, true);
+        } else {
+            return new CommandResult(NOT_SHOWING_SUMMARY_MESSAGE, false, false, false);
+        }
     }
 }
