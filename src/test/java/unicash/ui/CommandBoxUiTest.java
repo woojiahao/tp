@@ -24,14 +24,6 @@ public class CommandBoxUiTest {
 
     private CommandBox commandBox;
 
-    @BeforeEach
-    public void runAppToTests() throws TimeoutException {
-        FxToolkit.registerPrimaryStage();
-        FxToolkit.setupApplication(() -> new MainApp());
-        FxToolkit.showStage();
-        WaitForAsyncUtils.waitForFxEvents(100);
-    }
-
     @Start
     public void start(Stage stage) {
         CommandBox.CommandExecutor dummyExecutor = (commandText) -> {
