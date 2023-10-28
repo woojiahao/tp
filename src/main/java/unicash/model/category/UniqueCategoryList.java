@@ -172,7 +172,7 @@ public class UniqueCategoryList implements Iterable<Category> {
         }
 
         UniqueCategoryList otherList = (UniqueCategoryList) other;
-        return new HashSet<>(internalList).equals(new HashSet<>((otherList).internalList));
+        return new HashSet<>(internalList).equals(new HashSet<>(otherList.internalList));
     }
 
     @Override
