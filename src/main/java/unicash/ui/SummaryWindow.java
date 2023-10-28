@@ -1,5 +1,6 @@
 package unicash.ui;
 
+import java.time.Year;
 import java.time.YearMonth;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -117,7 +118,7 @@ public class SummaryWindow extends UiPart<Stage> {
     public void setLineGraph(HashMap<YearMonth, Double> expenseSummary) {
         lineChart.getData().clear();
 
-        fillExpenseSummary(expenseSummary);
+        expenseSummary = fillExpenseSummary(expenseSummary);
 
         XYChart.Series<String, Double> series = new XYChart.Series<>();
         ObservableList<XYChart.Data<String, Double>> lineChartData = expenseSummary.entrySet().stream()
@@ -142,9 +143,15 @@ public class SummaryWindow extends UiPart<Stage> {
         return afterMostRecentYearMonth & beforeCurrentYearMonth;
     }
 
-    private void fillExpenseSummary(HashMap<YearMonth, Double> expenseSummary) {
-        YearMonth endYearMonth = YearMonth.now();
+    /**
+     * Fills expenseSummary with the missing year-months. A year-month is considered missing if it is after
+     * EARLIEST_YEAR_MONTH and before the current system clock's year-month.
+     * Returns a defensive copy of expenseSummary
+     */
+    private HashMap<YearMonth, Double> fillExpenseSummary(HashMap<YearMonth, Double> expenseSummary) {
+        expenseSummary = new HashMap<>(expenseSummary); // Creating a defensive copy of expenseSummary
 
+        YearMonth endYearMonth = YearMonth.now();
         YearMonth currentYearMonth = EARLIEST_YEAR_MONTH;
         while (currentYearMonth.isBefore(endYearMonth)) {
             if (!expenseSummary.containsKey(currentYearMonth)) {
@@ -152,6 +159,7 @@ public class SummaryWindow extends UiPart<Stage> {
             }
             currentYearMonth = currentYearMonth.plusMonths(1);
         }
+        return expenseSummary;
     }
 
     /**
