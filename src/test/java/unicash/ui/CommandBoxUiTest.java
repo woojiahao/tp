@@ -85,4 +85,24 @@ public class CommandBoxUiTest {
         assertEquals("", commandBox.getCommandTextField().getText());
     }
 
+    @Test
+    public void midwayTraversalOfCommandHistory_restoresInitialUserInput(FxRobot robot) {
+        String testString = "asdf";
+        robot.clickOn(commandBox.getCommandTextField())
+                .write("testCommand")
+                .type(KeyCode.ENTER)
+                .write("anotherTestCommand")
+                .type(KeyCode.ENTER)
+                .type(KeyCode.UP)
+                .type(KeyCode.UP)
+                .type(KeyCode.ESCAPE)
+                .write(testString)
+                .type(KeyCode.UP)
+                .type(KeyCode.UP)
+                .type(KeyCode.DOWN)
+                .type(KeyCode.DOWN);
+
+        assertEquals(testString, commandBox.getCommandTextField().getText());
+    }
+
 }
