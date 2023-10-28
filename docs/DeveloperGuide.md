@@ -764,7 +764,7 @@ The following are some noteworthy points regarding the attributes
 2. There is a character limit for `Name` and `Location` set at up to 500 characters.
 3. `Amount` entered has to be positive for both `income` and `expense`.
 4. `Amount` is automatically rounded to 2 decimal places.
-5. `UniqueCategoryList` enforces a unique constraint on `Category` it stores.
+5. `UniqueCategoryList` enforces a unique (case-insensitive) constraint on `Category` it stores.
 6. `UniqueCategoryList` enforces a max size of 5 `Category`
 6. There is a character limit for `Category` set at up to 15 characters/
 

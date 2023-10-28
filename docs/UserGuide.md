@@ -810,9 +810,12 @@ Command Options:
 | c/          | Yes       | Category tagged to that transaction.<br/>No categories tagged if not specified.               |
 
 Important notes:
-1. Only a maximum of 5 categories are allowed to be added.
-2. `Category` has to be unique (case-insensitive).
-3. `Amount` is automatically rounded to 2dp.
+1. There is a character limit for `Name` and `Location` set at up to 500 characters.
+2. `Amount` entered has to be positive for both `income` and `expense`.
+3. `Amount` is automatically rounded to 2 decimal places.
+4. `UniqueCategoryList` enforces a unique (case-insensitive) constraint on `Category` it stores.
+5. `UniqueCategoryList` enforces a max size of 5 `Category`
+6. There is a character limit for `Category` set at up to 15 characters/
 
 ##### Successful Execution
 
