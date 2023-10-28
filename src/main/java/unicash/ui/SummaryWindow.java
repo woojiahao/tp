@@ -48,8 +48,7 @@ public class SummaryWindow extends UiPart<Stage> {
 
     /**
      * Creates a new SummaryWindow.
-     *
-     * @param root Stage to use as the root of the HelpWindow.
+     * @param root Stage to use as the root of the SummaryWindow.
      */
     public SummaryWindow(Stage root) {
         super(FXML, root);
@@ -64,7 +63,7 @@ public class SummaryWindow extends UiPart<Stage> {
     }
 
     /**
-     * Shows the help window.
+     * Shows the summary window.
      * @throws IllegalStateException
      *     <ul>
      *         <li>
@@ -144,9 +143,8 @@ public class SummaryWindow extends UiPart<Stage> {
     }
 
     /**
-     * Fills expenseSummary with the missing year-months. A year-month is considered missing if it is after
-     * EARLIEST_YEAR_MONTH and before the current system clock's year-month.
-     * Returns a defensive copy of expenseSummary
+     * Returns a defensive copy of expenseSummary with the missing year-months. A year-month is considered missing if it
+     * is after EARLIEST_YEAR_MONTH and before the current system clock's year-month.
      */
     private HashMap<YearMonth, Double> fillExpenseSummary(HashMap<YearMonth, Double> expenseSummary) {
         expenseSummary = new HashMap<>(expenseSummary); // Creating a defensive copy of expenseSummary
