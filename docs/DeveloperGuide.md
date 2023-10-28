@@ -745,7 +745,8 @@ These are:
 
 UniCa$h tracks transactions with the use of `TransactionList` and `Transaction`. `TransactionList` acts
 as a wrapper for a list of `Transaction` that enforces no `null`. `TransactionList` does not enforce any equality
-constraints, thus any forms of duplicated `Transaction` are allowed to be stored.
+constraints, thus any forms of duplicated `Transaction` are allowed to be stored. This was an intentional decision, 
+as we want to allow users to record recurring transactions.
 
 The `Transaction` class is composed of the following fields
 
