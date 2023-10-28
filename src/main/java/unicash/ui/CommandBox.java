@@ -26,6 +26,7 @@ public class CommandBox extends UiPart<Region> {
 
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
+    private static final int DEFAULT_INDEX = -1;
 
     private final CommandExecutor commandExecutor;
 
@@ -36,7 +37,8 @@ public class CommandBox extends UiPart<Region> {
     private List<String> userInputHistory = new ArrayList<>();
 
     // To keep track of which userInput the user is currently on
-    private int currentUserInputIndex = -1;
+
+    private int currentUserInputIndex = DEFAULT_INDEX;
 
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
@@ -128,7 +130,7 @@ public class CommandBox extends UiPart<Region> {
      */
     private void addUserInputToHistory(String input) {
         userInputHistory.add(input);
-        currentUserInputIndex = -1; // reset index as new command is added
+        currentUserInputIndex = DEFAULT_INDEX; // reset index as new command is added
     }
 
     /**
@@ -147,7 +149,7 @@ public class CommandBox extends UiPart<Region> {
             return;
         }
 
-        if (currentUserInputIndex == -1) {
+        if (currentUserInputIndex == DEFAULT_INDEX) {
             currentUserInputIndex = userInputHistory.size() - 1;
 
         } else if (currentUserInputIndex > 0) {
@@ -162,7 +164,7 @@ public class CommandBox extends UiPart<Region> {
      * stopping at the latest state of the CommandTextField, which is cleared by default.
      */
     private void showNextUserInput() {
-        if (userInputHistory.isEmpty() || currentUserInputIndex == -1) {
+        if (userInputHistory.isEmpty() || currentUserInputIndex == DEFAULT_INDEX) {
             return;
         }
 
@@ -173,7 +175,7 @@ public class CommandBox extends UiPart<Region> {
 
         } else {
             // If at the end of the list, reset index to -1 and clear text field
-            currentUserInputIndex = -1;
+            currentUserInputIndex = DEFAULT_INDEX;
             clearCommandTextField();
         }
     }
