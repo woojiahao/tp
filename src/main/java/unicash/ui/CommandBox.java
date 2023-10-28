@@ -37,7 +37,6 @@ public class CommandBox extends UiPart<Region> {
     private List<String> userInputHistory = new ArrayList<>();
 
     // To keep track of which userInput the user is currently on
-
     private int currentUserInputIndex = DEFAULT_INDEX;
 
     /**
@@ -71,6 +70,28 @@ public class CommandBox extends UiPart<Region> {
                 break;
             }
         });
+    }
+
+    /**
+     * Represents a function that can execute commands.
+     */
+    @FunctionalInterface
+    public interface CommandExecutor {
+        /**
+         * Executes the command and returns the result.
+         *
+         * @see Logic#execute(String)
+         */
+        CommandResult execute(String commandText) throws CommandException, ParseException;
+    }
+
+    /**
+     * Returns the command text field as a TextField object
+     *
+     * @return the command text field
+     */
+    public TextField getCommandTextField() {
+        return this.commandTextField;
     }
 
     /**
@@ -113,19 +134,6 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
-     * Represents a function that can execute commands.
-     */
-    @FunctionalInterface
-    public interface CommandExecutor {
-        /**
-         * Executes the command and returns the result.
-         *
-         * @see Logic#execute(String)
-         */
-        CommandResult execute(String commandText) throws CommandException, ParseException;
-    }
-
-    /**
      * Adds the input string to command history list and resets command index.
      */
     private void addUserInputToHistory(String input) {
@@ -136,7 +144,7 @@ public class CommandBox extends UiPart<Region> {
     /**
      * Clears the Command Text Field.
      */
-    private void clearCommandTextField() {
+    public void clearCommandTextField() {
         commandTextField.setText("");
     }
 
