@@ -1,7 +1,9 @@
 .chart-pie-label {
     -fx-font-size: 0.75em;
+    -fx-font-family: "Inter";
 }
 
 .chart-legend {
     -fx-font-size: 0.75em;
+    -fx-font-family: "Inter";
 }

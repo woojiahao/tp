@@ -21,7 +21,7 @@
       <Scene>
          <VBox fx:id="summaryMessageContainer" alignment="CENTER" prefHeight="523.0" prefWidth="794.0">
             <children>
-               <Label fx:id="summaryMessage" text="Label" textAlignment="CENTER" underline="true" wrapText="true">
+               <Label fx:id="summaryMessage" style="-fx-font-weight: bold;" text="Label" textAlignment="CENTER" underline="true" wrapText="true">
                   <font>
                      <Font size="18.0" />
                   </font>
