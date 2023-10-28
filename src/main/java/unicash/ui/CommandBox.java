@@ -148,14 +148,6 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
-     * Adds the input string to command history list and resets command index.
-     */
-    private void addUserInputToHistory(String input) {
-        userInputHistory.add(input);
-        currentUserInputIndex = DEFAULT_INDEX; // reset index as new command is added
-    }
-
-    /**
      * Clears the Command Text Field.
      */
     public void clearCommandTextField() {
@@ -176,6 +168,14 @@ public class CommandBox extends UiPart<Region> {
     public void restoreCommandTextField() {
         commandTextField.setText(latestUserInput);
         isLatestInputCaptured = false;
+    }
+
+    /**
+     * Adds the input string to command history list and resets command index.
+     */
+    private void addUserInputToHistory(String input) {
+        userInputHistory.add(input);
+        currentUserInputIndex = DEFAULT_INDEX; // reset index as new command is added
     }
 
     /**
