@@ -36,6 +36,15 @@ public class ExampleGenerator {
 
     }
 
+    /**
+     * Generates example, prefixed by {@code commandWord} and with optional list of {@code Prefix} that provides
+     * default set of values for each type of {@code Prefix}.
+     *
+     * <p>Note, this method does not impose any duplication restrictions on the list of {@code Prefix} as future
+     * usages may include multiple prefixes, like demonstrating variadic parameters.</p>
+     *
+     * @throws NullPointerException if {@code commandWord} or any of the {@code Prefix} is null.
+     */
     public static String generate(String commandWord, Prefix... prefixes) {
         requireNonNull(commandWord);
         var stringBuilder = new StringBuilder();
