@@ -798,119 +798,108 @@ Adds a new `Transaction` to UniCa$h.
 
 Command: `add_transaction n/NAME type/TYPE amt/AMOUNT dt/DATETIME l/LOCATION c/CATEGORY`
 
-Command Argument: `name` represents the name of the expense to be added.
-
 Command Options:
 
-| Option Name | Optional? | Purpose                                                                                                            |
-|-------------|-----------|--------------------------------------------------------------------------------------------------------------------|
-| -amount     | No        | Amount of expense. Currency is SGD.                                                                                |
-| -category   | Yes       | Category/type of expense, used to group and filter expenses.<br/>Defaults to "Others" if not specified.            |
-| -date       | Yes       | Date of when the expense was made. Follows format `dd/MM/yyyy`.<br/>Defaults to date of creation if not specified. |
-| -location   | Yes       | Location where expense was made.<br/>Defaults to `NULL` if not specified.                                          |
+| Option Name | Optional? | Purpose                                                                                       |
+|-------------|-----------|-----------------------------------------------------------------------------------------------|
+| n/          | No        | Name of the transaction.                                                                      |
+| type/       | No        | Transaction type of transaction.<br/>Valid types are `income` and `expense`.                  |
+| amt/        | No        | Monetary amount of transaction. Has to be a positive value.                                   |
+| dt/         | Yes       | Date and time where transaction was made.<br/>Defaults to current date time if not specified. |
+| l/          | Yes       | Location where transaction was made.<br/>Defaults to `''` if not specified.                   |
+| c/          | Yes       | Category tagged to that transaction.<br/>No categories tagged if not specified.               |
 
-#### Expected Outputs
+Important notes:
+1. Only a maximum of 5 categories are allowed to be added.
+2. `Category` has to be unique (case-insensitive).
+3. `Amount` is automatically rounded to 2dp.
 
 ##### Successful Execution
 
 ###### Example 1
 
-> **Case**: Create expense with name, amount, date, location, and category
+> **Case**: Add transaction with name, amount, type, datetime, location and a category.
 >
-> **Input**: `create buy food -amount 7.50 -date 19/09/2023 -location Food Clique -category Food`
+> **Input**: `add_transaction n/Buying groceries type/expense amt/300 dt/18-08-2023 19:30 l/ntuc c/household`
 >
 > **Output**:
 > ```
-> Successfully created expense "buy food" of category "Food"!
+> New transaction added:
+> 
+> Name: Buying groceries;
+> Type: expense;
+> Amount: $300.00;
+> Date: 18 Aug 2023 19:30;
+> Location: ntuc;
+> Categories: #household
 > ```
->
-> **Remark**: The expense will be dated 19/09/2023.
+> 
+> <img src="images/unicash/command-outputs/addTransactionSuccessOutput1.png" width="700" />
 
 ###### Example 2
 
-> **Case**: Create expense with name, amount, location, and category but without date
+> **Case**: Add transaction with name, amount and type.
 >
-> **Input**: `create buy groceries -amount 14.30 -category Food -location Fairprice`
->
-> **Output**:
-> ```
-> Successfully created expense "buy groceries" of category "Food"!
-> ```
->
-> **Remark**: The expense will be dated whenever the `create` command was executed.
-
-###### Example 3
-
-> **Case**: Create expense with name, amount, and category but without date and location
->
-> **Input**: `create buy stuff -amount 13.00 -category Misc`
+> **Input**: `add_transaction n/Working type/income amt/8000`
 >
 > **Output**:
 > ```
-> Successfully created expense "buy stuff" of category "Misc"!
+> New transaction added:
+> 
+> Name: Working;
+> Type: income;
+> Amount: $8000.00;
+> Date: 28 Oct 2023 19:01;
+> Location: -;
+> Categories:
 > ```
 >
-> **Remark**: The expense will be dated whenever the `create` command was executed and have a `NULL` location.
-
-###### Example 4
-
-> **Case**: Create expense with name and amount but without date, location, or category
->
-> **Input**: `create buy things -amount 10.00`
->
-> **Output**:
-> ```
-> Successfully created expense "buy things" of category "Others"!
-> ```
->
-> **Remark**: The expense will be dated whenever the `create` command was executed, have a `NULL` location, and be
-> assigned to the "Others" category by default.
+> <img src="images/unicash/command-outputs/addTransactionSuccessOutput2.png" width="700" />
 
 ##### Failed Execution
 
 ###### Example 1
 
-> **Case**: Missing `name` of expense
+> **Case**: Missing compulsary fields.
 >
-> **Input**: `create`
+> **Input**: `add_transaction`
 >
 > **Output**:
 > ```
-> Cannot create expense without expense name. Please specify the expense name as such: `create <expense name>`
+> Invalid command format! 
+>
+> add_transaction: Adds a transaction to UniCa$h.
+>
+> Parameters: n/NAME type/TYPE amt/AMOUNT dt/DATETIME l/LOCATION [c/CATEGORY]...
+>
+> Example: add_transaction n/Buying groceries type/expense amt/300 dt/18-08-2023 19:30 l/ntuc c/household
 > ```
+> <img src="images/unicash/command-outputs/addTransactionFailedOutput1.png" width="700" />
 
 ###### Example 2
 
-> **Case**: Missing `amount` option of expense
+> **Case**: Duplicate categories with valid compulsory fields.
 >
-> **Input**: `create buy something!`
+> **Input**: `add_transaction n/Buying groceries type/expense amt/300 c/household c/household`
 >
 > **Output**:
 > ```
-> Cannot create expense without amount of expenditure. Please specify the expense amount as such: `create <expense name> -amount <expense amount>`
+> All categories must be case-insensitively unique, duplicate categories are not allowed.
 > ```
+> <img src="images/unicash/command-outputs/addTransactionFailedOutput2.png" width="700" />
 
 ###### Example 3
 
-> **Case**: Invalid `amount` option value.
+> **Case**: More than 5 categories with valid compulsory fields.
 >
-> **Input**: `create buy something! -amount hi`
->
-> **Output**:
-> ```
-> Failed to create expense as amount is invalid, ensure that it is a number.
-> ```
-
-###### Example 4
-
-> **Case**: Invalid `date` option value.
->
-> **Input**: `create buy something! -amount 14.30 -date today`
+> **Input**: ` add_transaction n/Buying groceries type/expense amt/300 c/household c/entertainment c/education c/fun c/school c/test`
 >
 > **Output**:
 > ```
-> Failed to create expense as date is invalid, ensure that it is the following format: `dd/MM/yyyy`.
+> There should only be a maximum of 5 unique categories.
 > ```
+> > <img src="images/unicash/command-outputs/addTransactionFailedOutput3.png" width="700" />
+
 
 #### 4.1.3 EditTransactionCommand
 
