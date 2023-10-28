@@ -117,7 +117,7 @@ public class AddTransactionCommandTest {
         }
 
         @Override
-        public void setUniCashFilePath(Path addressBookFilePath) {
+        public void setUniCashFilePath(Path uniCashFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -599,6 +599,264 @@ The Github action for reporting the code coverage only uploads the coverage repo
 
 By introducing UI testing into the code coverage reporting, we have been able to achieve a code coverage of > 90%!
 
+
+---
+# START OF NEW DG
+This header exists to separate the old and new DG format. Add your contributions to the
+relevant sections below and copy over previous contributions while doing so.  By submission time, this header should be at the top of the
+page, right below the page frontmatter.
+
+**Remove this header before final submission.**
+
+End of header.
+
+---
+
+# 1. About UniCa$h [Developer Guide]
+
+UniCa$h is this that and that.
+
+---
+
+# 2. Index of Contents
+1. About UniCa$h
+2. Index of Contents
+3. Preface
+    1. Acknowledgements
+    2. Setting up
+    3. Using this Developer Guide
+    4. Other useful guides
+        1. User Guide
+        2. Documentation Guide
+        3. Testing & Logging Guide
+        4. Configuration & DevOps
+4. Design Overview
+    1. Architecture
+    2. UI Component
+    3. Logic Component
+    4. Model Component
+    5. Storage Component
+    6. Continuous Integration
+    8. General Classes and Components
+        1. StyleSheet
+        2. MessageBuilder
+5. Features & Implementation
+    1. Transaction Management Features
+        1. Add Transaction
+        2. Delete Transaction
+        3. Edit Transaction
+        4. etc
+    2. Budget Management Features
+        1. Adding Budget
+        2. etc
+    3. General Utility Features
+        1. Clear transactions
+        2. Help Window
+        3. etc
+    4. User Interface Features
+        1. Statistics Window
+        2. etc
+    5. Minor Features
+        1. Hash-based coloring
+6. Requirements
+    1. Product Scope
+    2. User Stories
+    3. Use Cases
+    4. Non-Functional Requirements
+7. UniCa$h Application Usage Demo
+8. Individual Contributions and Efforts
+9. Glossary
+10. Appendix
+    1. Proposed Changes
+    2. Known JavaFX Bugs
+
+---
+
+## 3. Preface
+
+Some stuff we want to say before we delve into the Developer Guide.
+
+### 3.1. Acknowledgements
+
+
+### 3.2. Setting up
+
+
+### 3.3. Using this Developer Guide
+
+
+### 3.4. Other useful guides
+
+Here is some other useful information.
+
+#### 3.4.1. User Guide
+
+#### 3.4.2. Documentation Guide
+
+#### 3.4.3. Testing & Logging Guide
+
+#### 3.4.4. Configuration & DevOps
+
+---
+
+## 4. Design Overview
+
+This is the overview of our design
+
+### 4.1. Architecture
+
+### 4.2. UI Component
+
+### 4.3. Logic Component
+
+### 4.4. Model Component
+
+### 4.5. Storage Component
+
+### 4.6. Continuous Integration
+
+### 4.7. General Classes and Components
+
+Some general and miscellaneous classes
+
+#### 4.7.1. StyleSheet
+#### 4.7.2. MessageBuilder
+
+---
+
+## 5. Features & Implementation
+
+Some features that we have come up with.
+
+### 5.1. Transaction Management Features
+
+Some features directly relating to the management of transactions.
+
+#### 5.1.1. Add Transaction
+
+#### 5.1.2. Delete Transaction
+
+#### 5.1.3. Edit Transaction
+
+#### 5.1.4. etc
+
+### 5.2. Budget Management Features
+
+Some features about the management of budgets
+
+#### 5.2.1. Adding Budget
+
+#### 5.2.2. etc
+
+### 5.3. General Utility Features
+
+Some general utility features
+
+#### 5.3.1. Clear transactions
+
+#### 5.3.2. Help Window
+
+#### 5.3.3. etc
+
+### 5.4. User Interface Features
+
+Some User Interface features
+
+#### 5.4.1. Statistics Window
+
+#### 5.4.2. etc
+
+### 5.5. Minor Features
+
+Some minor, miscellaneous features
+
+#### 5.5.1. Hash-based coloring
+
+---
+
+## 6. Requirements
+
+Some project requirements under the scope of CS2103
+
+### 6.1. Product Scope
+
+### 6.2. User Stories
+
+### 6.3. Use Cases
+
+### 6.4. Non-Functional Requirements
+
+**1. Portability:** The application should be cross-platform functional on major operating
+systems (Windows, MacOS and Linux) running at least Java 11.
+
+**2. Data Persistence:** All data and commands performed by the user should be saved and
+backed up locally and be restored upon starting of a new session by the user.
+
+**3. Error Handling:** Implement system logging that is hidden from users to log errors and
+issues without inconveniencing the user.
+
+**4. User Documentation:** The User Guide should be clear and straightforward so that the
+user can perform all major tasks intuitively.
+
+**5. Maintainability:** Document all non-private methods of the features implemented to
+ensure that the code is easy to maintain.
+
+**6. Usability and User Experience:** Ensure the application has an intuitive interface
+with easy navigation and clear instructions.
+
+**7. Testability:** Ensure the application meets target test coverage of 85% with comprehensive
+test cases.
+
+**8. Performance:** A user should not experience excessive sluggishness while using the
+application.
+
+**9. Consistency:** The application should be serve the latest updates of the expense or
+income when viewing the information once these changes are confirmed.
+
+**10. Offline:** The application should not require an active Internet connection to function
+
+**11. Performance:** The plots made should be able to be generated for 1000 expenses without
+any excessive sluggishness.
+
+---
+
+## 7. UniCa$h Application Usage Demo
+
+Some information about how to actually use UniCa$h.
+
+---
+
+## 8. Individual Contributions and Efforts
+
+Here's what each of us have contributed. (Might not need this section)
+
+---
+
+## 9. Glossary
+
+---
+
+## 10. Appendix
+
+### 1. Proposed Changes
+
+### 2. Known JavaFX Bugs
+
+---
+
+
+
+## Links
+
+User
+Stories: [https://github.com/orgs/AY2324S1-CS2103-T16-3/projects/1/views/2](https://github.com/orgs/AY2324S1-CS2103-T16-3/projects/1/views/2)
+
+Project Website: [https://ay2324s1-cs2103-t16-3.github.io/tp/](https://ay2324s1-cs2103-t16-3.github.io/tp/)
+
+
+
+
+
 ## Links
 
 User
