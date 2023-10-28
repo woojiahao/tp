@@ -3,7 +3,6 @@ package unicash.logic.commands;
 import static unicash.logic.UniCashMessages.MESSAGE_UNICASH_WELCOME;
 
 import unicash.commons.util.CommandUsage;
-import unicash.commons.util.ExampleGenerator;
 import unicash.model.Model;
 
 /**

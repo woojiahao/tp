@@ -9,7 +9,6 @@ import java.time.Month;
 
 import unicash.commons.enums.TransactionType;
 import unicash.commons.util.CommandUsage;
-import unicash.commons.util.ExampleGenerator;
 import unicash.commons.util.StringUtil;
 import unicash.commons.util.ToStringBuilder;
 import unicash.logic.UniCashMessages;

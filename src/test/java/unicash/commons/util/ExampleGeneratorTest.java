@@ -23,27 +23,24 @@ public class ExampleGeneratorTest {
 
     @Test
     public void generate_nullPrefix_throwsNullPointerException() {
-        assertThrows(
-                NullPointerException.class,
-                () -> ExampleGenerator.generate(
+        assertThrows(NullPointerException.class, () -> ExampleGenerator
+                .generate(
                         "test",
                         null,
                         PREFIX_NAME,
                         PREFIX_TYPE
                 )
         );
-        assertThrows(
-                NullPointerException.class,
-                () -> ExampleGenerator.generate(
+        assertThrows(NullPointerException.class, () -> ExampleGenerator
+                .generate(
                         "test",
                         PREFIX_NAME,
                         null,
                         PREFIX_TYPE
                 )
         );
-        assertThrows(
-                NullPointerException.class,
-                () -> ExampleGenerator.generate(
+        assertThrows(NullPointerException.class, () -> ExampleGenerator
+                .generate(
                         "test",
                         PREFIX_NAME,
                         PREFIX_TYPE,

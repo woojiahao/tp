@@ -1,7 +1,6 @@
 package unicash.logic.commands;
 
 import unicash.commons.util.CommandUsage;
-import unicash.commons.util.ExampleGenerator;
 import unicash.model.Model;
 
 /**

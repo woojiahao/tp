@@ -43,9 +43,8 @@ public class CommandUsageBuilderTest {
 
     @Test
     public void addParameter_nullPrefix_throwsNullPointerException() {
-        assertThrows(
-                NullPointerException.class,
-                () -> new CommandUsage.Builder().addParameter(
+        assertThrows(NullPointerException.class, () -> new CommandUsage.Builder()
+                .addParameter(
                         null,
                         "test",
                         true,
@@ -56,9 +55,8 @@ public class CommandUsageBuilderTest {
 
     @Test
     public void addParameter_nullName_throwsNullPointerException() {
-        assertThrows(
-                NullPointerException.class,
-                () -> new CommandUsage.Builder().addParameter(
+        assertThrows(NullPointerException.class, () -> new CommandUsage.Builder()
+                .addParameter(
                         PREFIX_NAME,
                         null,
                         true,

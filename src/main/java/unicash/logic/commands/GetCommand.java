@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 
 import unicash.commons.core.index.Index;
 import unicash.commons.util.CommandUsage;
-import unicash.commons.util.ExampleGenerator;
 import unicash.commons.util.ToStringBuilder;
 import unicash.logic.UniCashMessages;
 import unicash.logic.commands.exceptions.CommandException;
