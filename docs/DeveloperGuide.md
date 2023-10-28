@@ -751,6 +751,7 @@ The `Transaction` class is composed of the following fields
 
 1. `Name`: The name of the transaction.
 2. `Type`: The transaction type of the transaction. UniCash supports expense and income only.
+   1. `TransactionType`: An enum comprising of the values `income` and `expense`.
 3. `Amount`: The monetary value of the transaction.
 4. `DateTime`: The date and time of the transaction to be recorded.
 5. `Location`: The location where the transaction took place.
@@ -807,6 +808,22 @@ a specified value in the `UniqueCategoryList` class. Else, a `ParserException` w
 
 ### 5.2. Budget Management Features
 
+#### 5.2.1 Budget Model
+
+<img src="images/unicash/BudgetClassDiagram.png" width="250" />
+
+UniCa$h tracks a user's budget with the use of `Budget`.
+
+The `Budget` class is composed of the following fields
+
+1. `Amount`: The name of the transaction.
+2. `Interval`: The budget interval of the transaction. UniCash supports expense and income only.
+   1. `BudgetInterval`: An enum consiting of the values `daily`, `weekly` and `monthly`.
+
+The following are some noteworthy points regarding the attributes
+1. `Amount` here follows the same constraints as the one mentioned in the `Transaction`'s `Amount` class.
+
+
 Some features about the management of budgets
 
 #### 5.2.1. Adding Budget
@@ -848,6 +865,29 @@ Some project requirements under the scope of CS2103
 ### 6.2. User Stories
 
 ### 6.3. Use Cases
+The following documents use cases for our application
+
+For the following Use Cases (unless specified otherwise):
+- The System is `UniCa$h`
+- The Actor is `User`
+
+#### 6.3.1 Use Case: UC01 - Adding a transaction
+
+**MSS:**
+1. User enters the command to add a transaction with the correct format.
+2. User submits the request.
+3. UniCa$h adds the transaction to the transactions list and displays success message.
+
+   Use Case ends
+
+**Extensions**
+- 2a. User enters an incorrect format
+    - 2a1. UniCa$h displays an error message with the correct command format.
+    - Use case resumes at step 1.
+- 2b. User enters an extremely high number
+    - 2b1. UniCa$h prompts the user with a warning of the input
+    - 2b2. User confirms the request
+    - Use case resumes at step 3.
 
 ### 6.4. Non-Functional Requirements
 
