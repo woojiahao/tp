@@ -99,13 +99,12 @@ public class Transaction {
         }
 
         Transaction otherTransaction = (Transaction) other;
-        boolean x1 = name.equals(otherTransaction.name);
-        boolean x2 = type.equals(otherTransaction.type);
-        boolean x3 = amount.equals(otherTransaction.amount);
-        boolean x4 = categories.equals(otherTransaction.categories);
-        boolean x5 = dateTime.equals(otherTransaction.dateTime);
-        boolean x6 = location.equals(otherTransaction.location);
-        return x1 && x2 && x3 && x4 && x5 && x6;
+        return name.equals(otherTransaction.name)
+                && type.equals(otherTransaction.type)
+                && amount.equals(otherTransaction.amount)
+                && categories.equals(otherTransaction.categories)
+                && dateTime.equals(otherTransaction.dateTime)
+                && location.equals(otherTransaction.location);
     }
 
     @Override
