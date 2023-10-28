@@ -22,11 +22,18 @@ public class ExampleGeneratorTest {
     }
 
     @Test
+    public void generate_nullArgument_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ExampleGenerator.generate(
+                "test", (String) null
+        ));
+    }
+
+    @Test
     public void generate_nullPrefix_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ExampleGenerator
                 .generate(
                         "test",
-                        null,
+                        (Prefix) null,
                         PREFIX_NAME,
                         PREFIX_TYPE
                 )

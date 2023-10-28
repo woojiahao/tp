@@ -3,6 +3,7 @@ package unicash.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import unicash.commons.util.CommandUsage;
+import unicash.commons.util.ExampleGenerator;
 import unicash.commons.util.ToStringBuilder;
 import unicash.logic.UniCashMessages;
 import unicash.model.Model;
@@ -23,7 +24,7 @@ public class FindCommand extends Command {
                             + "(case-insensitive) and displays them as a list with index numbers."
             )
             .setArgument("Keyword [More keywords]...")
-            .setExample(COMMAND_WORD, "chicken rice")
+            .setExample(ExampleGenerator.generate(COMMAND_WORD, "chicken rice"))
             .build()
             .toString();
 

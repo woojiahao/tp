@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 
 import unicash.commons.core.index.Index;
 import unicash.commons.util.CommandUsage;
+import unicash.commons.util.ExampleGenerator;
 import unicash.commons.util.ToStringBuilder;
 import unicash.logic.UniCashMessages;
 import unicash.logic.commands.exceptions.CommandException;
@@ -27,7 +28,7 @@ public class GetCommand extends Command {
             .setCommandWord(COMMAND_WORD)
             .setDescription("Displays expanded details of a specific transaction.")
             .setArgument("Index (must be a positive integer)")
-            .setExample(COMMAND_WORD, "2")
+            .setExample(ExampleGenerator.generate(COMMAND_WORD, "2"))
             .build()
             .toString();
 

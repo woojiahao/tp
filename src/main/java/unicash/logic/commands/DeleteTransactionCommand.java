@@ -6,6 +6,7 @@ import java.util.List;
 
 import unicash.commons.core.index.Index;
 import unicash.commons.util.CommandUsage;
+import unicash.commons.util.ExampleGenerator;
 import unicash.commons.util.ToStringBuilder;
 import unicash.logic.UniCashMessages;
 import unicash.logic.commands.exceptions.CommandException;
@@ -25,7 +26,7 @@ public class DeleteTransactionCommand extends Command {
                     "Deletes the transaction identified by the index number used in the displayed transaction list."
             )
             .setArgument("Index (must be a positive integer)")
-            .setExample(COMMAND_WORD, "1")
+            .setExample(ExampleGenerator.generate(COMMAND_WORD, "1"))
             .build()
             .toString();
 

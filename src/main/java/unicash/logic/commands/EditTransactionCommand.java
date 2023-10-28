@@ -16,6 +16,7 @@ import java.util.Optional;
 import unicash.commons.core.index.Index;
 import unicash.commons.util.CollectionUtil;
 import unicash.commons.util.CommandUsage;
+import unicash.commons.util.ExampleGenerator;
 import unicash.commons.util.ToStringBuilder;
 import unicash.logic.UniCashMessages;
 import unicash.logic.commands.exceptions.CommandException;
@@ -48,14 +49,16 @@ public class EditTransactionCommand extends Command {
             .addParameter(PREFIX_LOCATION, "Location", true, false)
             .addParameter(PREFIX_CATEGORY, "Category", true, true)
             .setExample(
-                    COMMAND_WORD,
-                    "1",
-                    PREFIX_NAME,
-                    PREFIX_TYPE,
-                    PREFIX_AMOUNT,
-                    PREFIX_DATETIME,
-                    PREFIX_LOCATION,
-                    PREFIX_CATEGORY
+                    ExampleGenerator.generate(
+                            COMMAND_WORD,
+                            "1",
+                            PREFIX_NAME,
+                            PREFIX_TYPE,
+                            PREFIX_AMOUNT,
+                            PREFIX_DATETIME,
+                            PREFIX_LOCATION,
+                            PREFIX_CATEGORY
+                    )
             )
             .build()
             .toString();

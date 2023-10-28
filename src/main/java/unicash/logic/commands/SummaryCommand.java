@@ -1,6 +1,7 @@
 package unicash.logic.commands;
 
 import unicash.commons.util.CommandUsage;
+import unicash.commons.util.ExampleGenerator;
 import unicash.model.Model;
 
 /**
@@ -13,7 +14,7 @@ public class SummaryCommand extends Command {
     public static final String MESSAGE_USAGE = new CommandUsage.Builder()
             .setCommandWord(COMMAND_WORD)
             .setDescription("Displays summary statistics of user's spending")
-            .setExample(COMMAND_WORD)
+            .setExample(ExampleGenerator.generate(COMMAND_WORD))
             .build()
             .toString();
 

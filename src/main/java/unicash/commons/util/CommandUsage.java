@@ -110,7 +110,7 @@ public class CommandUsage {
          * See {@link #addParameter(Prefix, String, boolean, boolean) addParameter} method for more information.
          * </p>
          */
-        public Builder addPlainParameter(Prefix prefix, String name) {
+        public Builder addParameter(Prefix prefix, String name) {
             return addParameter(prefix, name, false, false);
         }
 
@@ -138,28 +138,13 @@ public class CommandUsage {
         }
 
         /**
-         * Set example using {@link ExampleGenerator#generate(String, Prefix...)} method.
+         * Set example.
          *
-         * @throws NullPointerException if {@code commandWord} or any {@code Prefix} is null (from {@code
-         *                              ExampleGenerator}).
+         * @throws NullPointerException if {@code example} is null.
          */
-        public Builder setExample(String commandWord, Prefix... prefixes) {
-            requireNonNull(commandWord);
-            example = ExampleGenerator.generate(commandWord, prefixes);
-            return this;
-        }
-
-        /**
-         * Set example by combining {@code commandWord} with {@code argument} together and then
-         * relies on {@link #setExample(String, Prefix...) setExample} method to set the example.
-         *
-         * @throws NullPointerException if {@code commandWord} or {@code argument} is null or any {@code Prefix}
-         *                              is null (from {@code ExampleGenerator}).
-         */
-        public Builder setExample(String commandWord, String argument, Prefix... prefixes) {
-            requireNonNull(commandWord, argument);
-            var newStart = String.format("%s %s", commandWord, argument);
-            setExample(newStart, prefixes);
+        public Builder setExample(String example) {
+            requireNonNull(example);
+            this.example = example;
             return this;
         }
 

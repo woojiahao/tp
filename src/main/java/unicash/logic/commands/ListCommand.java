@@ -6,6 +6,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import unicash.commons.util.CommandUsage;
+import unicash.commons.util.ExampleGenerator;
 import unicash.model.Model;
 
 /**
@@ -22,7 +23,7 @@ public class ListCommand extends Command {
     public static final String MESSAGE_USAGE = new CommandUsage.Builder()
             .setCommandWord(COMMAND_WORD)
             .setDescription("Lists all transactions in UniCa$h.")
-            .setExample(COMMAND_WORD)
+            .setExample(ExampleGenerator.generate(COMMAND_WORD))
             .build()
             .toString();
 

@@ -32,13 +32,13 @@ public class CommandUsageBuilderTest {
     }
 
     @Test
-    public void addPlainParameter_nullPrefix_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new CommandUsage.Builder().addPlainParameter(null, "hi"));
+    public void addParameterTwoParameter_nullPrefix_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new CommandUsage.Builder().addParameter(null, "hi"));
     }
 
     @Test
-    public void addPlainParameter_nullName_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new CommandUsage.Builder().addPlainParameter(PREFIX_NAME, null));
+    public void addParameterTwoParameter_nullName_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new CommandUsage.Builder().addParameter(PREFIX_NAME, null));
     }
 
     @Test
@@ -66,7 +66,7 @@ public class CommandUsageBuilderTest {
     }
 
     @Test
-    public void setExample_nullCommandWord_throwsNullPointerException() {
+    public void setExample_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new CommandUsage.Builder().setExample(null));
     }
 

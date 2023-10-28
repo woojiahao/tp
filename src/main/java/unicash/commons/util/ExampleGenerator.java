@@ -1,6 +1,7 @@
 package unicash.commons.util;
 
 import static java.util.Objects.requireNonNull;
+import static unicash.commons.util.CollectionUtil.requireAllNonNull;
 import static unicash.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static unicash.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static unicash.logic.parser.CliSyntax.PREFIX_DATETIME;
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
 import unicash.logic.parser.Prefix;
 
 /**
- * Generates example usage of commands given predefined "good" values of each prefix.
+ * Generates example usage of commands given predefined valid values of each prefix for consistency.
  */
 public class ExampleGenerator {
     private static final Map<Prefix, String> PREFIX_VALUES = Map.ofEntries(
@@ -65,6 +66,20 @@ public class ExampleGenerator {
                 .collect(Collectors.joining(" "));
         stringBuilder.append(arguments);
         return stringBuilder.toString();
+    }
+
+
+    /**
+     * Generate example by combining {@code commandWord} with {@code argument} together and then
+     * relies on {@link #generate(String, Prefix...) generate} method to create the example.
+     *
+     * @throws NullPointerException if {@code commandWord} or {@code argument} is null or any {@code Prefix}
+     *                              is null.
+     */
+    public static String generate(String commandWord, String argument, Prefix... prefixes) {
+        requireAllNonNull(commandWord, argument);
+        var newStart = String.format("%s %s", commandWord, argument);
+        return generate(newStart, prefixes);
     }
 
 }

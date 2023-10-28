@@ -3,6 +3,7 @@ package unicash.logic.commands;
 import static unicash.logic.UniCashMessages.MESSAGE_UNICASH_WELCOME;
 
 import unicash.commons.util.CommandUsage;
+import unicash.commons.util.ExampleGenerator;
 import unicash.model.Model;
 
 /**
@@ -15,7 +16,7 @@ public class HelpCommand extends Command {
     public static final String MESSAGE_USAGE = new CommandUsage.Builder()
             .setCommandWord(COMMAND_WORD)
             .setDescription("Shows UniCa$h usage instructions.")
-            .setExample(COMMAND_WORD)
+            .setExample(ExampleGenerator.generate(COMMAND_WORD))
             .build()
             .toString();
 
