@@ -27,7 +27,7 @@ public class UniqueCategoryList implements Iterable<Category> {
     public static final String MESSAGE_SIZE_CONSTRAINTS =
             "There should only be a maximum of 5 unique categories.";
     public static final String MESSAGE_DUPLICATION_CONSTRAINTS =
-            "All categories must be unique, duplicate categories are not allowed.";
+            "All categories must be case-insensitively unique, duplicate categories are not allowed.";
     public static final int MAX_CATEGORIES = 5;
 
     private final ObservableList<Category> internalList = FXCollections.observableArrayList();
