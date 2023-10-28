@@ -1,6 +1,7 @@
 package unicash.ui;
 
 import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.logging.Logger;
@@ -30,6 +31,7 @@ public class SummaryWindow extends UiPart<Stage> {
     private static final int MAX_DISPLAYED_CATEGORIES = 10;
     private static final int MAX_DISPLAYED_YEAR_MONTHS = 12;
     private static final YearMonth EARLIEST_YEAR_MONTH = YearMonth.now().minusMonths(MAX_DISPLAYED_YEAR_MONTHS);
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MMM");
 
     @FXML
     private Label summaryMessage;
@@ -122,7 +124,7 @@ public class SummaryWindow extends UiPart<Stage> {
         ObservableList<XYChart.Data<String, Double>> lineChartData = expenseSummary.entrySet().stream()
                 .sorted(Comparator.comparing(entry -> entry.getKey().toString()))
                 .filter(entry -> isValidYearMonth(entry.getKey()))
-                .map(entry -> new XYChart.Data<>(entry.getKey().toString(), entry.getValue()))
+                .map(entry -> new XYChart.Data<>(entry.getKey().format(formatter), entry.getValue()))
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
         series.getData().addAll(lineChartData);
 
