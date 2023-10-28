@@ -93,9 +93,9 @@ public class UniCash implements ReadOnlyUniCash {
         transactions.remove(key);
     }
 
-    public void setBudget(Budget budget) {
+    public void setBudget(Budget b) {
         requireNonNull(budget);
-        this.budget = budget;
+        budget = b;
     }
 
     /**

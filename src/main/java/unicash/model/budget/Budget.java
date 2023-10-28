@@ -66,7 +66,7 @@ public class Budget {
     }
 
     public void setBudget(Budget budget) {
-        this.amount = budget.getAmount();
-        this.interval = budget.getInterval();
+        amount = budget.getAmount();
+        interval = budget.getInterval();
     }
 }
