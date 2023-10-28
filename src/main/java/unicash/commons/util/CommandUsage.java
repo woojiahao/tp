@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static unicash.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,11 +42,6 @@ public class CommandUsage {
         }
 
         if (parameters.size() > 0) {
-            // Order parameters in order of
-            // 1. Mandatory
-            // 2. Optional
-            // 3. Variadic
-            Collections.sort(parameters);
             stringBuilder.append("Parameters: ");
             var parameterString = parameters
                     .stream()
@@ -122,7 +116,7 @@ public class CommandUsage {
         }
     }
 
-    public static class Parameter implements Comparable<Parameter> {
+    public static class Parameter {
         private final String prefix;
         private final String name;
         private final boolean isOptional;
@@ -138,22 +132,6 @@ public class CommandUsage {
             this.name = name;
             this.isOptional = isOptional;
             this.isVariadic = isVariadic;
-        }
-
-        @Override
-        public int compareTo(Parameter other) {
-            if (isVariadic != other.isVariadic) {
-                // All variadic parameters go to the end
-                return isVariadic ? 1 : -1;
-            }
-
-            if (isOptional != other.isOptional) {
-                // Prioritise mandatory parameters first
-                return isOptional ? 1 : -1;
-            }
-
-            // If all the same, sort by prefix lexicographical order
-            return prefix.compareTo(other.prefix);
         }
 
         @Override
