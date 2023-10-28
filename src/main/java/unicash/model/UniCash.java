@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import unicash.commons.util.ToStringBuilder;
+import unicash.model.budget.Budget;
 import unicash.model.category.Category;
 import unicash.model.transaction.Transaction;
 import unicash.model.transaction.TransactionList;
@@ -19,6 +20,7 @@ import unicash.model.transaction.TransactionList;
 public class UniCash implements ReadOnlyUniCash {
 
     private final TransactionList transactions;
+    private Budget budget;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -120,6 +122,11 @@ public class UniCash implements ReadOnlyUniCash {
         return sumPerMonth;
     }
 
+    public void setBudget(Budget budget) {
+        requireNonNull(budget);
+        this.budget = budget;
+    }
+
     /**
      * Returns the amount for each category of expenses.
      * Note: This function ignores all 'income' transactions
@@ -183,6 +190,14 @@ public class UniCash implements ReadOnlyUniCash {
     @Override
     public ObservableList<Transaction> getTransactionList() {
         return transactions.asUnmodifiableObservableList();
+    }
+
+    /**
+     * Returns an unmodifiable view of the budget.
+     */
+    @Override
+    public Budget getBudget() {
+        return budget;
     }
 
     @Override

@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import unicash.commons.core.GuiSettings;
 import unicash.commons.core.LogsCenter;
+import unicash.model.budget.Budget;
 import unicash.model.transaction.Transaction;
 
 /**
@@ -109,6 +110,15 @@ public class ModelManager implements Model {
     public void addTransaction(Transaction transaction) {
         uniCash.addTransaction(transaction);
         updateFilteredTransactionList(PREDICATE_SHOW_ALL_TRANSACTIONS);
+    }
+
+    @Override
+    public void setBudget(Budget budget) {
+        uniCash.setBudget(budget);
+    }
+
+    public Budget getBudget() {
+        return uniCash.getBudget();
     }
 
     //=========== Filtered Transaction List Accessors =============================================================
