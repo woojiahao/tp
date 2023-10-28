@@ -9,6 +9,9 @@ import java.util.stream.Collectors;
 
 import unicash.logic.parser.Prefix;
 
+/**
+ * Generates a command's MESSAGE_USAGE using the Builder pattern.
+ */
 public class CommandUsage {
     private final String commandWord;
     private final String description;
@@ -16,6 +19,12 @@ public class CommandUsage {
     private final List<Parameter> parameters;
     private final String example;
 
+    /**
+     * Creates CommandUsage. Only {@code argument} is allowed to be null (indicating that there is no argument).
+     *
+     * @throws NullPointerException if {@code commandWord}, {@code description}, {@code parameters}, or
+     *                              {@code example} is null.
+     */
     private CommandUsage(
             String commandWord,
             String description,
@@ -49,11 +58,14 @@ public class CommandUsage {
                     .collect(Collectors.joining(" "));
             stringBuilder.append(parameterString).append("\n\n");
         }
-        stringBuilder.append(example).append("\n\n");
+        stringBuilder.append("Example: ").append(example).append("\n\n");
 
         return stringBuilder.toString();
     }
 
+    /**
+     * Builder to create a new instance of {@code CommandUsage}.
+     */
     public static class Builder {
         private String commandWord = null;
         private String description = null;
@@ -61,32 +73,60 @@ public class CommandUsage {
         private final List<Parameter> parameters = new ArrayList<>();
         private String example = null;
 
+        /**
+         * Set command word.
+         *
+         * @throws NullPointerException if {@code commandWord} is null.
+         */
         public Builder setCommandWord(String commandWord) {
+            requireNonNull(commandWord);
             this.commandWord = commandWord;
             return this;
         }
 
+        /**
+         * Set description.
+         *
+         * @throws NullPointerException if {@code description} is null.
+         */
         public Builder setDescription(String description) {
+            requireNonNull(description);
             this.description = description;
             return this;
         }
 
+        /**
+         * Set argument (null argument implies no argument).
+         */
         public Builder setArgument(String argument) {
             this.argument = argument;
             return this;
         }
 
+        /**
+         * Adds parameter with {@code isOptional} and {@code isVariadic} to {@code false}.
+         *
+         * <p>
+         * See {@link #addParameter(Prefix, String, boolean, boolean) addParameter} method for more information.
+         * </p>
+         */
         public Builder addPlainParameter(Prefix prefix, String name) {
             return addParameter(prefix, name, false, false);
         }
 
+        /**
+         * Adds parameter with given {@code Parameter} values.
+         *
+         * @throws NullPointerException if {@code prefix} or {@code name} is null.
+         */
         public Builder addParameter(
                 Prefix prefix,
                 String name,
                 boolean isOptional,
                 boolean isVariadic
         ) {
-            this.parameters.add(
+            requireAllNonNull(prefix, name);
+            parameters.add(
                     new Parameter(
                             prefix.getPrefix(),
                             name,
@@ -97,18 +137,37 @@ public class CommandUsage {
             return this;
         }
 
+        /**
+         * Set example using {@link ExampleGenerator#generate(String, Prefix...)} method.
+         *
+         * @throws NullPointerException if {@code commandWord} or any {@code Prefix} is null (from {@code
+         *                              ExampleGenerator}).
+         */
         public Builder setExample(String commandWord, Prefix... prefixes) {
-            this.example = ExampleGenerator.generate(commandWord, prefixes);
+            requireNonNull(commandWord);
+            example = ExampleGenerator.generate(commandWord, prefixes);
             return this;
         }
 
+        /**
+         * Set example by combining {@code commandWord} with {@code argument} together and then
+         * relies on {@link #setExample(String, Prefix...) setExample} method to set the example.
+         *
+         * @throws NullPointerException if {@code commandWord} or {@code argument} is null or any {@code Prefix}
+         *                              is null (from {@code ExampleGenerator}).
+         */
         public Builder setExample(String commandWord, String argument, Prefix... prefixes) {
             requireNonNull(commandWord, argument);
             var newStart = String.format("%s %s", commandWord, argument);
-            this.example = ExampleGenerator.generate(newStart, prefixes);
+            setExample(newStart, prefixes);
             return this;
         }
 
+        /**
+         * Constructs the {@code CommandUsage} instance.
+         *
+         * @throws NullPointerException if {@code commandWord}, {@code description}, or {@code example} is null.
+         */
         public CommandUsage build() {
             requireAllNonNull(commandWord, description, example);
 
@@ -116,18 +175,27 @@ public class CommandUsage {
         }
     }
 
-    public static class Parameter {
+    /**
+     * Wrapper class for common parameter attributes.
+     */
+    private static class Parameter {
         private final String prefix;
         private final String name;
         private final boolean isOptional;
         private final boolean isVariadic;
 
+        /**
+         * Creates a parameter.
+         *
+         * @throws NullPointerException if {@code prefix} or {@code name} is null.
+         */
         public Parameter(
                 String prefix,
                 String name,
                 boolean isOptional,
                 boolean isVariadic
         ) {
+            requireAllNonNull(prefix, name);
             this.prefix = prefix;
             this.name = name;
             this.isOptional = isOptional;
