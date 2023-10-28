@@ -895,7 +895,7 @@ Important notes:
 
 > **Case**: More than 5 categories with valid compulsory fields.
 >
-> **Input**: ` add_transaction n/Buying groceries type/expense amt/300 c/household c/entertainment c/education c/fun c/school c/test`
+> **Input**: `add_transaction n/Buying groceries type/expense amt/300 c/household c/entertainment c/education c/fun c/school c/test`
 >
 > **Output**:
 > ```
