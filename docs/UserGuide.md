@@ -837,7 +837,7 @@ Important notes:
 > Categories: #household
 > ```
 > 
-> <img src="images/unicash/command-outputs/addTransactionSuccessOutput1.png" width="700" />
+> <img src="images/unicash/command-outputs/addTransactionSuccessOutput1.png" width="1000" />
 
 ###### Example 2
 
@@ -857,7 +857,7 @@ Important notes:
 > Categories:
 > ```
 >
-> <img src="images/unicash/command-outputs/addTransactionSuccessOutput2.png" width="700" />
+> <img src="images/unicash/command-outputs/addTransactionSuccessOutput2.png" width="1000" />
 
 ##### Failed Execution
 
@@ -877,7 +877,7 @@ Important notes:
 >
 > Example: add_transaction n/Buying groceries type/expense amt/300 dt/18-08-2023 19:30 l/ntuc c/household
 > ```
-> <img src="images/unicash/command-outputs/addTransactionFailedOutput1.png" width="700" />
+> <img src="images/unicash/command-outputs/addTransactionFailedOutput1.png" width="1000" />
 
 ###### Example 2
 
@@ -889,7 +889,7 @@ Important notes:
 > ```
 > All categories must be case-insensitively unique, duplicate categories are not allowed.
 > ```
-> <img src="images/unicash/command-outputs/addTransactionFailedOutput2.png" width="700" />
+> <img src="images/unicash/command-outputs/addTransactionFailedOutput2.png" width="1000" />
 
 ###### Example 3
 
@@ -901,7 +901,7 @@ Important notes:
 > ```
 > There should only be a maximum of 5 unique categories.
 > ```
-> > <img src="images/unicash/command-outputs/addTransactionFailedOutput3.png" width="700" />
+> > <img src="images/unicash/command-outputs/addTransactionFailedOutput3.png" width="1000" />
 
 
 #### 4.1.3 EditTransactionCommand
