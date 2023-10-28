@@ -28,7 +28,7 @@ public class GetCommand extends Command {
             .setCommandWord(COMMAND_WORD)
             .setDescription("Displays expanded details of a specific transaction.")
             .setArgument("Index (must be a positive integer)")
-            .setExample(ExampleGenerator.generate(COMMAND_WORD, "2"))
+            .setExample(COMMAND_WORD, "2")
             .build()
             .toString();
 

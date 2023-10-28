@@ -16,7 +16,7 @@ public class HelpCommand extends Command {
     public static final String MESSAGE_USAGE = new CommandUsage.Builder()
             .setCommandWord(COMMAND_WORD)
             .setDescription("Shows UniCa$h usage instructions.")
-            .setExample(ExampleGenerator.generate(COMMAND_WORD))
+            .setExample(COMMAND_WORD)
             .build()
             .toString();
 

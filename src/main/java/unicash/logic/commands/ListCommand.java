@@ -23,7 +23,7 @@ public class ListCommand extends Command {
     public static final String MESSAGE_USAGE = new CommandUsage.Builder()
             .setCommandWord(COMMAND_WORD)
             .setDescription("Lists all transactions in UniCa$h.")
-            .setExample(ExampleGenerator.generate(COMMAND_WORD))
+            .setExample(COMMAND_WORD)
             .build()
             .toString();
 

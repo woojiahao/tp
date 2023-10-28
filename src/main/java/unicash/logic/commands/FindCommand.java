@@ -24,7 +24,7 @@ public class FindCommand extends Command {
                             + "(case-insensitive) and displays them as a list with index numbers."
             )
             .setArgument("Keyword [More keywords]...")
-            .setExample(ExampleGenerator.generate(COMMAND_WORD, "chicken rice"))
+            .setExample(COMMAND_WORD, "chicken rice")
             .build()
             .toString();
 

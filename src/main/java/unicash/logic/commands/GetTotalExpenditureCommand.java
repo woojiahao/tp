@@ -29,7 +29,7 @@ public class GetTotalExpenditureCommand extends Command {
             .addPlainParameter(PREFIX_MONTH, "Month")
             .addParameter(PREFIX_CATEGORY, "Category", true, false)
             .addParameter(PREFIX_YEAR, "Year", true, false)
-            .setExample(ExampleGenerator.generate(COMMAND_WORD, PREFIX_MONTH, PREFIX_CATEGORY, PREFIX_YEAR))
+            .setExample(COMMAND_WORD, PREFIX_MONTH, PREFIX_CATEGORY, PREFIX_YEAR)
             .build()
             .toString();
 

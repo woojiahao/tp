@@ -9,7 +9,6 @@ import static unicash.logic.parser.CliSyntax.PREFIX_NAME;
 import static unicash.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import unicash.commons.util.CommandUsage;
-import unicash.commons.util.ExampleGenerator;
 import unicash.commons.util.ToStringBuilder;
 import unicash.logic.UniCashMessages;
 import unicash.logic.commands.exceptions.CommandException;
@@ -27,15 +26,13 @@ public class AddTransactionCommand extends Command {
             .setCommandWord(COMMAND_WORD)
             .setDescription("Adds a transaction to UniCa$h.")
             .setExample(
-                    ExampleGenerator.generate(
-                            "add_transaction",
-                            PREFIX_NAME,
-                            PREFIX_TYPE,
-                            PREFIX_AMOUNT,
-                            PREFIX_DATETIME,
-                            PREFIX_LOCATION,
-                            PREFIX_CATEGORY
-                    )
+                    "add_transaction",
+                    PREFIX_NAME,
+                    PREFIX_TYPE,
+                    PREFIX_AMOUNT,
+                    PREFIX_DATETIME,
+                    PREFIX_LOCATION,
+                    PREFIX_CATEGORY
             )
             .addPlainParameter(PREFIX_NAME, "Name")
             .addPlainParameter(PREFIX_TYPE, "Type")

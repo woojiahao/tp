@@ -58,9 +58,4 @@ public class ExampleGenerator {
         return stringBuilder.toString();
     }
 
-    public static String generate(String commandWord, String argument, Prefix... prefixes) {
-        requireNonNull(commandWord, argument);
-        var newStart = String.format("%s %s", commandWord, argument);
-        return generate(newStart, prefixes);
-    }
 }

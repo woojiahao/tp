@@ -1,5 +1,6 @@
 package unicash.commons.util;
 
+import static java.util.Objects.requireNonNull;
 import static unicash.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
@@ -102,8 +103,15 @@ public class CommandUsage {
             return this;
         }
 
-        public Builder setExample(String example) {
-            this.example = example;
+        public Builder setExample(String commandWord, Prefix... prefixes) {
+            this.example = ExampleGenerator.generate(commandWord, prefixes);
+            return this;
+        }
+
+        public Builder setExample(String commandWord, String argument, Prefix... prefixes) {
+            requireNonNull(commandWord, argument);
+            var newStart = String.format("%s %s", commandWord, argument);
+            this.example = ExampleGenerator.generate(newStart, prefixes);
             return this;
         }
 

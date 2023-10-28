@@ -24,7 +24,7 @@ public class DeleteTransactionCommand extends Command {
             .setCommandWord(COMMAND_WORD)
             .setDescription("Deletes the transaction identified by the index number used in the displayed transaction list.")
             .setArgument("Index (must be a positive integer)")
-            .setExample(ExampleGenerator.generate(COMMAND_WORD, "1"))
+            .setExample(COMMAND_WORD, "1")
             .build()
             .toString();
 

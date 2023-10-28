@@ -14,7 +14,7 @@ public class SummaryCommand extends Command {
     public static final String MESSAGE_USAGE = new CommandUsage.Builder()
             .setCommandWord(COMMAND_WORD)
             .setDescription("Displays summary statistics of user's spending")
-            .setExample(ExampleGenerator.generate(COMMAND_WORD))
+            .setExample(COMMAND_WORD)
             .build()
             .toString();
 
