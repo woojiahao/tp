@@ -2,21 +2,35 @@ package unicash.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
+import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
+import org.testfx.util.WaitForAsyncUtils;
+import unicash.MainApp;
+
+import java.util.concurrent.TimeoutException;
 
 
 @ExtendWith(ApplicationExtension.class)
 public class CommandBoxUiTest {
 
     private CommandBox commandBox;
+
+    @BeforeEach
+    public void runAppToTests() throws TimeoutException {
+        FxToolkit.registerPrimaryStage();
+        FxToolkit.setupApplication(() -> new MainApp());
+        FxToolkit.showStage();
+        WaitForAsyncUtils.waitForFxEvents(100);
+    }
 
     @Start
     public void start(Stage stage) {
