@@ -732,3 +732,218 @@ the data of your previous UniCa$h home folder.
 | **Create Income**          | `create_income <name> [-value <value of income>] [-date <date of expense>]` <br> e.g., `create_income work at liho -date 19/09/2023 -value 900`                                                                                        |
 | **Delete Income**          | `delete_income <name>`                                                                                                                                                                                                                 |
 | **Find Income**            | `find_income <name> [-value_more <value of income>] [-value_less <value of income>] [-date <date of income>]` <br> e.g., `find_income work at liho`                                                                                    |
+
+
+---
+# START OF NEW UG
+This header exists to separate the old and new UG format. Add your contributions to the
+relevant sections below and copy over previous contributions while doing so.  By submission time, this header should be at the top of the
+page, right below the page frontmatter.
+
+**Remove this header before final submission.**
+
+End of header.
+
+---
+
+## 1. About UniCa$h 
+
+Unicash is this and that ...
+
+## 2. Index of Contents
+
+## 3. Quick Start
+
+### 3.1 Installation
+
+1. Ensure you have Java `11` or above installed in your Computer.
+
+2. Download the latest `unicash.jar` from [our latest release](https://github.com/AY2324S1-CS2103-T16-3/tp/releases/tag/v1.3).
+
+3. Copy the file to the folder you want to use as the _home folder_ for your UniCa$h.
+
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar unicash.jar` command to
+   run the application.
+
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   ![Ui](images/Ui.png)
+
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
+   open the help window.<br>
+
+6. Refer to the [Features](#features) below for details of each command.
+
+### 3.2 UI Layout 
+
+UI layout and description of what each section means
+
+### 3.3 Command Breakdown
+
+Breakdown the command and the different prefixes
+
+Talk about how capitalised names are used as example placeholders of values
+n/NAME, means the capitalised NAME is a placeholder value
+
+### 3.4 Command Execution Tutorial
+
+Walkthrough of how to run a command with visual guides
+
+## 4. Features
+
+### 4.1 Transaction Commands
+
+#### 4.1.1 AddTransactionCommand
+
+Adds a new `Transaction` to UniCa$h.
+
+Command: `add_transaction n/NAME type/TYPE amt/AMOUNT dt/DATETIME l/LOCATION c/CATEGORY`
+
+Command Argument: `name` represents the name of the expense to be added.
+
+Command Options:
+
+| Option Name | Optional? | Purpose                                                                                                            |
+|-------------|-----------|--------------------------------------------------------------------------------------------------------------------|
+| -amount     | No        | Amount of expense. Currency is SGD.                                                                                |
+| -category   | Yes       | Category/type of expense, used to group and filter expenses.<br/>Defaults to "Others" if not specified.            |
+| -date       | Yes       | Date of when the expense was made. Follows format `dd/MM/yyyy`.<br/>Defaults to date of creation if not specified. |
+| -location   | Yes       | Location where expense was made.<br/>Defaults to `NULL` if not specified.                                          |
+
+#### Expected Outputs
+
+##### Successful Execution
+
+###### Example 1
+
+> **Case**: Create expense with name, amount, date, location, and category
+>
+> **Input**: `create buy food -amount 7.50 -date 19/09/2023 -location Food Clique -category Food`
+>
+> **Output**:
+> ```
+> Successfully created expense "buy food" of category "Food"!
+> ```
+>
+> **Remark**: The expense will be dated 19/09/2023.
+
+###### Example 2
+
+> **Case**: Create expense with name, amount, location, and category but without date
+>
+> **Input**: `create buy groceries -amount 14.30 -category Food -location Fairprice`
+>
+> **Output**:
+> ```
+> Successfully created expense "buy groceries" of category "Food"!
+> ```
+>
+> **Remark**: The expense will be dated whenever the `create` command was executed.
+
+###### Example 3
+
+> **Case**: Create expense with name, amount, and category but without date and location
+>
+> **Input**: `create buy stuff -amount 13.00 -category Misc`
+>
+> **Output**:
+> ```
+> Successfully created expense "buy stuff" of category "Misc"!
+> ```
+>
+> **Remark**: The expense will be dated whenever the `create` command was executed and have a `NULL` location.
+
+###### Example 4
+
+> **Case**: Create expense with name and amount but without date, location, or category
+>
+> **Input**: `create buy things -amount 10.00`
+>
+> **Output**:
+> ```
+> Successfully created expense "buy things" of category "Others"!
+> ```
+>
+> **Remark**: The expense will be dated whenever the `create` command was executed, have a `NULL` location, and be
+> assigned to the "Others" category by default.
+
+##### Failed Execution
+
+###### Example 1
+
+> **Case**: Missing `name` of expense
+>
+> **Input**: `create`
+>
+> **Output**:
+> ```
+> Cannot create expense without expense name. Please specify the expense name as such: `create <expense name>`
+> ```
+
+###### Example 2
+
+> **Case**: Missing `amount` option of expense
+>
+> **Input**: `create buy something!`
+>
+> **Output**:
+> ```
+> Cannot create expense without amount of expenditure. Please specify the expense amount as such: `create <expense name> -amount <expense amount>`
+> ```
+
+###### Example 3
+
+> **Case**: Invalid `amount` option value.
+>
+> **Input**: `create buy something! -amount hi`
+>
+> **Output**:
+> ```
+> Failed to create expense as amount is invalid, ensure that it is a number.
+> ```
+
+###### Example 4
+
+> **Case**: Invalid `date` option value.
+>
+> **Input**: `create buy something! -amount 14.30 -date today`
+>
+> **Output**:
+> ```
+> Failed to create expense as date is invalid, ensure that it is the following format: `dd/MM/yyyy`.
+> ```
+
+#### 4.1.3 EditTransactionCommand
+
+#### 4.1.4 DeleteTransactionCommand
+
+#### 4.1.5 FindCommand
+
+#### 4.1.6 GetCommand
+
+#### 4.1.7 ListCommand
+
+#### 4.1.8 ClearTransactionsCommand
+
+### 4.2 Summary Commands
+
+#### 4.2.1 GetTotalExpenditureCommand
+
+#### 4.2.2 SummaryCommand
+
+### 4.3 General Utility Commands
+
+#### 4.3.1 HelpCommand
+
+#### 4.3.2 ResetCommand
+
+#### 4.3.3 ExitCommand
+
+## 5. Troubleshoot
+
+## 6. Known Issues
+
+## 7. FAQ
+
+## 8. Acknowledgements
+
+## 9. Glossary

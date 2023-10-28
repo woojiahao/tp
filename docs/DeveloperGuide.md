@@ -729,7 +729,6 @@ Some general and miscellaneous classes
 Some features that we have come up with.
 
 ### 5.1. Transaction Management Features
-
 Some features directly relating to the management of transactions.
 
 #### 5.1.1. Add Transaction
