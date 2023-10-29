@@ -1,5 +1,8 @@
 package unicash.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static unicash.logic.UniCashMessages.MESSAGE_UNKNOWN_COMMAND;
 import static unicash.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static unicash.logic.commands.HelpCommand.SHOWING_HELP_MESSAGE;
@@ -72,9 +75,9 @@ public class HelpCommandTest {
         Model expectedModel = new ModelManager();
 
         CommandResult expectedCommandResult =
-                new CommandResult(AddTransactionCommand.MESSAGE_USAGE);
+                new CommandResult(HelpCommand.MESSAGE_USAGE);
 
-        assertCommandSuccess(new HelpCommand(AddTransactionCommand.COMMAND_WORD),
+        assertCommandSuccess(new HelpCommand(HelpCommand.COMMAND_WORD),
                 model, expectedCommandResult, expectedModel);
     }
 
@@ -196,5 +199,29 @@ public class HelpCommandTest {
 
         assertCommandSuccess(new HelpCommand(SummaryCommand.COMMAND_WORD),
                 model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void equals() {
+        HelpCommand helpCommandEdit = new HelpCommand(EditTransactionCommand.COMMAND_WORD);
+        HelpCommand helpCommandDelete = new HelpCommand(DeleteTransactionCommand.COMMAND_WORD);
+
+        // same object -> returns true
+        assertEquals(helpCommandEdit, helpCommandEdit);
+
+        // same values -> returns true
+        HelpCommand helpCommandEditCopy = new HelpCommand(EditTransactionCommand.COMMAND_WORD);
+        assertEquals(helpCommandEdit, helpCommandEditCopy);
+
+        // different types -> returns false
+        assertNotEquals(1, helpCommandEdit);
+
+        // null -> returns false
+        assertNotEquals(null, helpCommandEdit);
+
+        // different HelpCommand -> returns false
+        assertNotEquals(helpCommandEdit, helpCommandDelete);
+
+        assertFalse(helpCommandEdit.equals(2));
     }
 }
