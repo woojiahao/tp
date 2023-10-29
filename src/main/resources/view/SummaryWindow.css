@@ -7,3 +7,14 @@
     -fx-font-size: 0.75em;
     -fx-font-family: "Inter";
 }
+
+.data0.chart-pie { -fx-pie-color: blue; }
+.data1.chart-pie { -fx-pie-color: red; }
+.data2.chart-pie { -fx-pie-color: darkgreen; }
+.data3.chart-pie { -fx-pie-color: yellow; }
+.data4.chart-pie { -fx-pie-color: violet; }
+.data5.chart-pie { -fx-pie-color: purple; }
+.data6.chart-pie { -fx-pie-color: orange; }
+.data7.chart-pie { -fx-pie-color: skyblue; }
+.data8.chart-pie { -fx-pie-color: maroon; }
+.data9.chart-pie { -fx-pie-color: lime; }
