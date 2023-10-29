@@ -29,14 +29,34 @@ public class SampleDataUtil {
 
     public static Transaction[] getSampleTransactions() {
         return new Transaction[]{
+
+            new Transaction(
+                    new Name("BlueSG car rental"),
+                    new Type("expense"),
+                    new Amount(10.00),
+                    new DateTime("01-05-2023 23:36"),
+                    new Location("Canberra Plaza"),
+                    getCategoryList("transportation", "rental")
+            ),
+
+            new Transaction(
+                    new Name("Gojek to school"),
+                    new Type("expense"),
+                    new Amount(20.90),
+                    new DateTime("01-08-2023 09:00"),
+                    new Location(""),
+                    getCategoryList("transportation")
+            ),
+
             new Transaction(
                     new Name("Lunch at McDonalds"),
                     new Type("expense"),
                     new Amount(17.40),
-                    new DateTime("15-09-2023 11:00"),
+                    new DateTime("10-08-2023 11:00"),
                     new Location("Clementi Mall"),
                     getCategoryList("food")
             ),
+
             new Transaction(
                     new Name("Buy clothes"),
                     new Type("expense"),
@@ -47,7 +67,7 @@ public class SampleDataUtil {
             ),
 
             new Transaction(
-                    new Name("Intern allowance september"),
+                    new Name("Intern allowance (September)"),
                     new Type("income"),
                     new Amount(1800.00),
                     new DateTime("17-09-2023 00:00"),
@@ -59,9 +79,9 @@ public class SampleDataUtil {
                     new Name("Evening with friends"),
                     new Type("expense"),
                     new Amount(49.50),
-                    new DateTime("17-09-2023 00:00"),
+                    new DateTime("05-10-2023 00:00"),
                     new Location("Clarke Quay"),
-                    getCategoryList("social")
+                    getCategoryList("social", "food")
             )
 
         };
