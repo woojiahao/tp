@@ -75,9 +75,9 @@ public class HelpCommandTest {
         Model expectedModel = new ModelManager();
 
         CommandResult expectedCommandResult =
-                new CommandResult(HelpCommand.MESSAGE_USAGE);
+                new CommandResult(AddTransactionCommand.MESSAGE_USAGE);
 
-        assertCommandSuccess(new HelpCommand(HelpCommand.COMMAND_WORD),
+        assertCommandSuccess(new HelpCommand(AddTransactionCommand.COMMAND_WORD),
                 model, expectedCommandResult, expectedModel);
     }
 
