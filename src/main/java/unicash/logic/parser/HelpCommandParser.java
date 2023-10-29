@@ -1,12 +1,12 @@
 package unicash.logic.parser;
 
-import unicash.logic.commands.ListCommand;
+import unicash.logic.commands.HelpCommand;
 import unicash.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments for the list command.
  */
-public class ListCommandParser implements Parser<ListCommand> {
+public class HelpCommandParser implements Parser<HelpCommand> {
 
     /**
      * Parses {@code userInput} into a command and returns it.
@@ -14,12 +14,9 @@ public class ListCommandParser implements Parser<ListCommand> {
      * @throws ParseException if {@code userInput} does not conform the expected format
      */
     @Override
-    public ListCommand parse(String userInput) throws ParseException {
+    public HelpCommand parse(String userInput) {
         assert userInput != null : "userInput cannot be null";
-        // list command must not have any additional arguments
-        if (!userInput.trim().isBlank()) {
-            throw new ParseException(ListCommand.MESSAGE_FAILURE);
-        }
-        return new ListCommand();
+        String trimmed = userInput.trim();
+        return new HelpCommand(trimmed);
     }
 }
