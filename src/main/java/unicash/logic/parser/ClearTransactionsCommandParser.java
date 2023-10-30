@@ -1,28 +1,28 @@
 package unicash.logic.parser;
 
 import unicash.commons.util.ToStringBuilder;
-import unicash.logic.commands.ExitCommand;
+import unicash.logic.commands.ClearTransactionsCommand;
 import unicash.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments for the list command.
  */
-public class ExitCommandParser implements Parser<ExitCommand> {
+public class ClearTransactionsCommandParser implements Parser<ClearTransactionsCommand> {
 
     /**
-     * Parses {@code userInput} into an exit command and returns it.
+     * Parses {@code userInput} into a {@code ClearTransactionsCommand} and returns it.
      *
      * @throws ParseException if {@code userInput} does not conform the expected format
      */
     @Override
-    public ExitCommand parse(String userInput) throws ParseException {
+    public ClearTransactionsCommand parse(String userInput) throws ParseException {
         assert userInput != null : "userInput cannot be null";
 
-        //exit command must not have any trailing arguments
+        // clear transactions command must not have any trailing arguments
         if (!userInput.trim().isBlank()) {
-            throw new ParseException(ExitCommand.MESSAGE_FAILURE);
+            throw new ParseException(ClearTransactionsCommand.MESSAGE_FAILURE);
         }
-        return new ExitCommand();
+        return new ClearTransactionsCommand();
     }
 
     @Override
@@ -32,11 +32,11 @@ public class ExitCommandParser implements Parser<ExitCommand> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ExitCommandParser)) {
+        if (!(other instanceof ClearTransactionsCommandParser)) {
             return false;
         }
 
-        return this instanceof ExitCommandParser;
+        return this instanceof ClearTransactionsCommandParser;
 
     }
 

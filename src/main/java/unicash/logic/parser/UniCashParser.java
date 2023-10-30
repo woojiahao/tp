@@ -78,7 +78,7 @@ public class UniCashParser {
             return new GetTotalExpenditureCommandParser().parse(arguments);
 
         case ClearTransactionsCommand.COMMAND_WORD:
-            return new ClearTransactionsCommand();
+            return new ClearTransactionsCommandParser().parse(arguments);
 
         case AddBudgetCommand.COMMAND_WORD:
             return new AddBudgetCommandParser().parse(arguments);

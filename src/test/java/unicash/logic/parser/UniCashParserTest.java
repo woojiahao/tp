@@ -87,8 +87,10 @@ public class UniCashParserTest {
     @Test
     public void parseCommand_clearTransactions() throws Exception {
         assertTrue(parser.parseCommand(ClearTransactionsCommand.COMMAND_WORD) instanceof ClearTransactionsCommand);
-        assertTrue(parser.parseCommand(ClearTransactionsCommand.COMMAND_WORD + " 3")
-                instanceof ClearTransactionsCommand);
+
+        String message = ClearTransactionsCommand.MESSAGE_FAILURE;
+        assertThrows(ParseException.class, message, () -> parser.parseCommand(
+                ClearTransactionsCommand.COMMAND_WORD + " 3"));
     }
 
     @Test
@@ -116,8 +118,8 @@ public class UniCashParserTest {
                         instanceof GetTotalExpenditureCommand
         );
         assertTrue(
-                parser.parseCommand(ClearTransactionsCommand.COMMAND_WORD + " month/8 c/Food")
-                        instanceof ClearTransactionsCommand
+                parser.parseCommand(GetTotalExpenditureCommand.COMMAND_WORD + " month/8 c/Food")
+                        instanceof GetTotalExpenditureCommand
         );
     }
 

@@ -12,7 +12,12 @@ import unicash.model.UniCash;
 public class ClearTransactionsCommand extends Command {
 
     public static final String COMMAND_WORD = "clear_transactions";
+
     public static final String MESSAGE_SUCCESS = "All transactions have been cleared!";
+
+    public static final String MESSAGE_FAILURE = String.format(
+            "Clear transactions command cannot have trailing arguments. "
+                    + "Use the command %s without any trailing arguments.", COMMAND_WORD);
 
 
     @Override
