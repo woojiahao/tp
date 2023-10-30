@@ -25,11 +25,11 @@ public class FilterCommand extends Command {
     public static final String MESSAGE_USAGE = new CommandUsage.Builder()
             .setCommandWord(COMMAND_WORD)
             .setDescription(
-                    ": Filters the transactions in UniCa$h "
-                            + "according to the specified properties"
-                            + "All properties must match in order for the transaction to be displayed."
-                            + "Multiple keywords for the same property is allowed, except for Transaction"
-                            + "Type for which there can only be one keyword. A minimum of one keyword"
+                    "Filters the transactions in UniCa$h "
+                            + "according to the specified properties. "
+                            + "Only transactions matching all specified properties. will be displayed. "
+                            + "\n\nMultiple keywords for the same property is allowed, except for Transaction "
+                            + "Type for which there can only be one keyword. A minimum of one keyword "
                             + "must be provided."
             )
             .addParameter(PREFIX_NAME, "Name", true, true)
