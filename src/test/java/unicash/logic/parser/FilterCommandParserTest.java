@@ -1,6 +1,10 @@
 package unicash.logic.parser;
 
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static unicash.logic.commands.CommandTestUtil.AMOUNT_DESC_NUS;
 import static unicash.logic.commands.CommandTestUtil.DATETIME_DESC_NUS;
 import static unicash.logic.commands.CommandTestUtil.INVALID_AMOUNT_DESC;
@@ -17,12 +21,14 @@ import static unicash.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import unicash.commons.util.ToStringBuilder;
 import unicash.logic.UniCashMessages;
 import unicash.logic.parser.exceptions.ParseException;
 import unicash.model.commons.Amount;
 import unicash.model.transaction.DateTime;
 import unicash.model.transaction.Location;
 import unicash.model.transaction.Type;
+import unicash.model.transaction.predicates.TransactionContainsAllKeywordsPredicate;
 
 
 /**
@@ -67,6 +73,38 @@ public class FilterCommandParserTest {
         // invalid datetime
         assertParseFailure(parser, TRANSACTION_NAME_DESC_NUS + AMOUNT_DESC_NUS + INVALID_DATETIME_DESC
                 + TYPE_DESC_EXPENSE, DateTime.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void sameFilterCommandParser_equalsTrue() {
+        FilterCommandParser parser = new FilterCommandParser();
+        assertTrue(parser.equals(parser));
+        assertTrue(parser.equals(new FilterCommandParser()));
+
+    }
+
+    @Test
+    public void differentCommandTypes_equalsFalse() {
+        FilterCommandParser filterCommandParser = new FilterCommandParser();
+        ListCommandParser listCommandParser = new ListCommandParser();
+        assertNotEquals(listCommandParser, filterCommandParser);
+        assertFalse(filterCommandParser.equals(listCommandParser));
+    }
+
+    @Test
+    public void nullInput_equalsFalse() {
+        assertNotEquals(null, new FilterCommandParser());
+    }
+
+    @Test
+    public void toStringTest() {
+        FilterCommandParser filterCommandParser = new FilterCommandParser();
+        TransactionContainsAllKeywordsPredicate filterPredicate =
+                new TransactionContainsAllKeywordsPredicate();
+
+        String expected = new ToStringBuilder(new FilterCommandParser())
+                .add("filterPredicate", filterPredicate).toString();
+        assertEquals(expected, filterCommandParser.toString());
     }
 
 }
