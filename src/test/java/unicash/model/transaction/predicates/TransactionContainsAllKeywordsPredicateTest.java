@@ -115,4 +115,56 @@ public class TransactionContainsAllKeywordsPredicateTest {
                 .class.getCanonicalName() + "{predicateList=" + predicateList.toString() + "}";
         assertEquals(expected, predicate.toString());
     }
+
+
+    @Test
+    public void testTransaction_allFiltersMatch_returnTrue() {
+        TransactionContainsAllKeywordsPredicate localPredicate =
+                new TransactionContainsAllKeywordsPredicate();
+
+        localPredicate.addNameKeyword("food");
+        localPredicate.addAmountKeyword("10.00");
+        localPredicate.addCategoryKeyword("social");
+        localPredicate.addTypeKeyword("expense");
+        localPredicate.addLocationKeyword("mcdonalds");
+        localPredicate.addDateTimeKeyword("10 Aug 2023 10:00"); // Input must be display i.e. toString format
+
+        Transaction testTransaction = new TransactionBuilder()
+                .withName("food")
+                .withAmount(10.00)
+                .withCategories("social")
+                .withDateTime("10-08-2023 10:00")
+                .withLocation("mcdonalds")
+                .withType("expense")
+                .build();
+
+
+        assertTrue(localPredicate.test(testTransaction));
+    }
+
+    @Test
+    public void testTransaction_wrongDateTimeFormat_returnFalse() {
+        TransactionContainsAllKeywordsPredicate localPredicate =
+                new TransactionContainsAllKeywordsPredicate();
+
+        localPredicate.addNameKeyword("food");
+        localPredicate.addAmountKeyword("10.00");
+        localPredicate.addCategoryKeyword("social");
+        localPredicate.addTypeKeyword("expense");
+        localPredicate.addLocationKeyword("mcdonalds");
+        localPredicate.addDateTimeKeyword("10-08-2023 10:00");
+
+        Transaction testTransaction = new TransactionBuilder()
+                .withName("food")
+                .withAmount(10.00)
+                .withCategories("social")
+                .withDateTime("10-08-2023 10:00")
+                .withLocation("mcdonalds")
+                .withType("expense")
+                .build();
+
+
+        assertFalse(localPredicate.test(testTransaction));
+    }
+
 }
