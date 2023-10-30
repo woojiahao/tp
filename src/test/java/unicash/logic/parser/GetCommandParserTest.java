@@ -1,12 +1,15 @@
 package unicash.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
 import unicash.commons.core.index.Index;
+import unicash.commons.util.ToStringBuilder;
 import unicash.logic.commands.GetCommand;
 import unicash.logic.parser.exceptions.ParseException;
 
@@ -45,6 +48,34 @@ public class GetCommandParserTest {
     @Test
     public void differentParse_equals_returnsFalse() {
         assertTrue(parser.equals(new GetCommandParser()));
+    }
+
+    @Test
+    public void sameGetCommandParser_equalsTrue() {
+        GetCommandParser parser = new GetCommandParser();
+        assertTrue(parser.equals(parser));
+        assertTrue(parser.equals(new GetCommandParser()));
+
+    }
+
+    @Test
+    public void differentCommandTypes_equalsFalse() {
+        GetCommandParser getCommandParser = new GetCommandParser();
+        ListCommandParser listCommandParser = new ListCommandParser();
+        assertNotEquals(listCommandParser, getCommandParser);
+        assertFalse(getCommandParser.equals(listCommandParser));
+    }
+
+    @Test
+    public void nullInput_equalsFalse() {
+        assertNotEquals(null, new GetCommandParser());
+    }
+
+    @Test
+    public void toStringTest() {
+        GetCommandParser getCommandParser = new GetCommandParser();
+        String expected = new ToStringBuilder(new GetCommandParser()).toString();
+        assertEquals(expected, getCommandParser.toString());
     }
 
 }
