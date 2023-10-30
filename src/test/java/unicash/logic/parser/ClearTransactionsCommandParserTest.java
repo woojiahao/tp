@@ -1,12 +1,17 @@
 package unicash.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static unicash.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static unicash.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static unicash.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import unicash.commons.util.ToStringBuilder;
 import unicash.logic.commands.ClearTransactionsCommand;
 
 public class ClearTransactionsCommandParserTest {
@@ -56,6 +61,35 @@ public class ClearTransactionsCommandParserTest {
     @Test
     public void execute_predicateNotNull_assertion() {
         assertDoesNotThrow(() -> new ClearTransactionsCommandParser().parse(" "));
+    }
+
+    @Test
+    public void sameClearTransactionsCommandParser_equalsTrue() {
+        ClearTransactionsCommandParser parser = new ClearTransactionsCommandParser();
+        assertTrue(parser.equals(parser));
+        assertTrue(parser.equals(new ClearTransactionsCommandParser()));
+
+    }
+
+    @Test
+    public void differentCommandTypes_equalsFalse() {
+        ClearTransactionsCommandParser clearTransactionsCommandParser =
+                new ClearTransactionsCommandParser();
+        ListCommandParser listCommandParser = new ListCommandParser();
+        assertNotEquals(listCommandParser, clearTransactionsCommandParser);
+        assertFalse(clearTransactionsCommandParser.equals(listCommandParser));
+    }
+
+    @Test
+    public void nullInput_equalsFalse() {
+        assertNotEquals(null, new ClearTransactionsCommandParser());
+    }
+
+    @Test
+    public void toStringTest() {
+        ClearTransactionsCommandParser clearTransactionsCommandParser = new ClearTransactionsCommandParser();
+        String expected = new ToStringBuilder(new ClearTransactionsCommandParser()).toString();
+        assertEquals(expected, clearTransactionsCommandParser.toString());
     }
 
 }
