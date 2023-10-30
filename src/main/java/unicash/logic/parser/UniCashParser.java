@@ -93,7 +93,7 @@ public class UniCashParser {
             return new HelpCommand();
 
         case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+            return new ExitCommandParser().parse(arguments);
 
         case SummaryCommand.COMMAND_WORD:
             return new SummaryCommand();
