@@ -32,6 +32,11 @@ public class TransactionDateTimeContainsValuePredicate
     public boolean test(Transaction transaction) {
         // Keywords are rejoined as split by FindCommand
         String joinedKeyword = String.join(" ", keywords);
+
+        /* The String representation of dateTime ensures that both the formats
+         * displayed on any Transaction List and the format required from the user
+         * to match a date with the Find/Filter Commands is the same. This provides
+         * an intuitive and consistent searching experience for the user. */
         String dateTimeString = transaction.getDateTime().toString();
 
         return StringUtil.containsSubstringIgnoreCase(dateTimeString,
@@ -57,6 +62,7 @@ public class TransactionDateTimeContainsValuePredicate
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("keywords", keywords).toString();
+        return new ToStringBuilder(this).add(
+                "keywords", keywords).toString();
     }
 }

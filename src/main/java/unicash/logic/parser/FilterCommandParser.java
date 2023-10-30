@@ -9,6 +9,7 @@ import static unicash.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static unicash.logic.parser.CliSyntax.PREFIX_NAME;
 import static unicash.logic.parser.CliSyntax.PREFIX_TYPE;
 
+import unicash.commons.util.ToStringBuilder;
 import unicash.logic.commands.FilterCommand;
 import unicash.logic.parser.exceptions.ParseException;
 import unicash.model.category.Category;
@@ -26,8 +27,15 @@ import java.util.List;
  */
 public class FilterCommandParser implements Parser<FilterCommand> {
 
-    private TransactionContainsAllKeywordsPredicate filterPredicate =
-            new TransactionContainsAllKeywordsPredicate();
+    private TransactionContainsAllKeywordsPredicate filterPredicate;
+
+    /**
+     * Creates a {@code FilterCommandParser} object with a default
+     * {@code TransactionContainsAllKeywordsPredicate} predicate.
+     */
+    FilterCommandParser() {
+        this.filterPredicate = new TransactionContainsAllKeywordsPredicate();
+    }
 
     /**
      * Parses the given {@code String} of arguments in the context of the FilterCommand
@@ -47,48 +55,104 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 
+        // TODO: Propose an future implementation with more than 2 types of transactions in DG
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TYPE);
 
-        
-        /* Parses the names provided and adds them to the all keywords predicate */
+
+        /* Parses the name keywords provided and adds them to the all keywords predicate */
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             List<String> keywordsList = argMultimap.getAllValues(PREFIX_NAME);
 
             for (String keyword : keywordsList) {
                 Name transactionName = ParserUtil.parseTransactionName(keyword);
+
                 filterPredicate.addNameKeyword(transactionName.toString());
             }
 
         }
 
+        /* Parses the amount keywords provided and adds them to the all keywords predicate */
         if (argMultimap.getValue(PREFIX_AMOUNT).isPresent()) {
-            Amount transactionAmount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
-            filterPredicate.addAmountKeyword(Amount.amountToDecimalString(transactionAmount));
+            List<String> keywordsList = argMultimap.getAllValues(PREFIX_AMOUNT);
+
+            for (String keyword : keywordsList) {
+                Amount transactionAmount = ParserUtil.parseAmount(keyword);
+
+                filterPredicate.addAmountKeyword(
+                        Amount.amountToDecimalString(transactionAmount));
+            }
+
         }
 
+        /* Parses the categories provided and adds them to the all keywords predicate */
         if (argMultimap.getValue(PREFIX_CATEGORY).isPresent()) {
-            Category transactionCategory = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
-            filterPredicate.addCategoryKeyword(transactionCategory.toString());
+            List<String> keywordsList = argMultimap.getAllValues(PREFIX_CATEGORY);
+
+            for (String keyword : keywordsList) {
+                Category transactionCategory = ParserUtil.parseCategory(keyword);
+
+                filterPredicate.addCategoryKeyword(transactionCategory.toString());
+            }
+
         }
 
+        /* Parses the location keywords provided and adds them to the all keywords predicate */
         if (argMultimap.getValue(PREFIX_LOCATION).isPresent()) {
-            Location transactionLocation = ParserUtil.parseLocation(
-                    argMultimap.getValue(PREFIX_LOCATION).get());
-            filterPredicate.addLocationKeyword(transactionLocation.toString());
+            List<String> keywordsList = argMultimap.getAllValues(PREFIX_LOCATION);
+
+            for (String keyword : keywordsList) {
+                Location transactionLocation = ParserUtil.parseLocation(keyword);
+
+                filterPredicate.addLocationKeyword(transactionLocation.toString());
+            }
+
         }
 
+        /* Parses the dateTime keywords provided and adds them to the all keywords predicate */
         if (argMultimap.getValue(PREFIX_DATETIME).isPresent()) {
-            DateTime transactionDateTime = ParserUtil.parseDateTime(
-                    argMultimap.getValue(PREFIX_DATETIME).get());
-            filterPredicate.addDateTimeKeyword(transactionDateTime.toString());
+            List<String> keywordsList = argMultimap.getAllValues(PREFIX_DATETIME);
+
+            for (String keyword : keywordsList) {
+                DateTime transactionDateTime = ParserUtil.parseDateTime(keyword);
+
+                filterPredicate.addDateTimeKeyword(transactionDateTime.toString());
+            }
+
         }
 
+        /* Parses the type keyword provided and adds it to the all keywords predicate */
         if (argMultimap.getValue(PREFIX_TYPE).isPresent()) {
-            Type transactionType = ParserUtil.parseType(argMultimap.getValue(PREFIX_TYPE).get());
+            Type transactionType = ParserUtil.parseType(
+                    argMultimap.getValue(PREFIX_TYPE).get());
             filterPredicate.addTypeKeyword(transactionType.toString());
         }
 
+
         return new FilterCommand(filterPredicate);
+
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof FilterCommandParser)) {
+            return false;
+        }
+
+        FilterCommandParser otherCommand = (FilterCommandParser) other;
+        return filterPredicate.equals(otherCommand.filterPredicate);
+
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("filterPredicate", filterPredicate)
+                .toString();
     }
 
 }
