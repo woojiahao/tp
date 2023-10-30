@@ -39,14 +39,14 @@ public class TransactionContainsAllKeywordsPredicate implements Predicate<Transa
         return predicateList.stream()
                 .allMatch(predicate -> predicate.test(transaction));
     }
-    
+
 
     /**
      * Creates a new {@code TransactionAmountContainsValuePredicate} with the
-     * given input amount as a string and adds this to the encapsulated list of
+     * given amount as a string and adds this to the encapsulated list of
      * transaction predicates.
      *
-     * @param amount the input amount to be added as a transaction predicate
+     * @param amount the amount to be added as a transaction predicate keyword
      */
     public void addAmountKeyword(String amount) {
         TransactionAmountContainsValuePredicate amountPredicate =
@@ -56,11 +56,11 @@ public class TransactionContainsAllKeywordsPredicate implements Predicate<Transa
     }
 
     /**
-     * Creates a new {@code TransactionAmountContainsValuePredicate} with the
-     * given input amount as a string and adds this to the encapsulated list of
+     * Creates a new {@code TransactionNameContainsKeywordsPredicate} with the
+     * given name as a string and adds this to the encapsulated list of
      * transaction predicates.
      *
-     * @param name the input amount to be added as a transaction predicate
+     * @param name the name to be added as a transaction predicate keyword
      */
     public void addNameKeyword(String name) {
         TransactionNameContainsKeywordsPredicate namePredicate =
@@ -70,38 +70,65 @@ public class TransactionContainsAllKeywordsPredicate implements Predicate<Transa
 
     }
 
+    /**
+     * Creates a new {@code TransactionLocationContainsKeywordsPredicate} with the
+     * given location as a string and adds this to the encapsulated list of
+     * transaction predicates.
+     *
+     * @param location the location to be added as a transaction predicate keyword
+     */
+    public void addLocationKeyword(String location) {
+        TransactionLocationContainsKeywordsPredicate locationPredicate =
+                new TransactionLocationContainsKeywordsPredicate(toKeywordList(location));
 
+        predicateList.add(locationPredicate);
 
-    public void setLocationKeyword(String location) {
-        BooleanPredicatePair predicatePair = new BooleanPredicatePair(true,
-                new TransactionLocationContainsKeywordsPredicate(
-                        Collections.singletonList(location)));
-
-        predicatePairMap.put(TransactionProperty.LOCATION, predicatePair);
     }
 
-    public void setDateTimeKeyword(String dateTime) {
-        BooleanPredicatePair predicatePair = new BooleanPredicatePair(true,
-                new TransactionDateTimeContainsValuePredicate(
-                        Collections.singletonList(dateTime)));
+    /**
+     * Creates a new {@code TransactionDateTimeContainsValuePredicate} with the
+     * given {@code DateTime} as a string and adds this to the encapsulated list of
+     * transaction predicates.
+     *
+     * @param dateTime the DateTime to be added as a transaction predicate keyword
+     */
+    public void addDateTimeKeyword(String dateTime) {
+        TransactionDateTimeContainsValuePredicate dateTimePredicate =
+                new TransactionDateTimeContainsValuePredicate(toKeywordList(dateTime));
 
-        predicatePairMap.put(TransactionProperty.NAME, predicatePair);
+        predicateList.add(dateTimePredicate);
+
     }
 
-    public void setTypeKeyword(String type) {
-        BooleanPredicatePair predicatePair = new BooleanPredicatePair(true,
-                new TransactionTypeContainsValuePredicate(
-                        Collections.singletonList(type)));
 
-        predicatePairMap.put(TransactionProperty.TYPE, predicatePair);
+    /**
+     * Creates a new {@code TransactionTypeContainsValuePredicate} with the
+     * given {@code TransactionType} as a string and adds this to the encapsulated list of
+     * transaction predicates.
+     *
+     * @param type the Transaction Type to be added as a transaction predicate keyword
+     */
+    public void addTypeKeyword(String type) {
+        TransactionTypeContainsValuePredicate typePredicate =
+                new TransactionTypeContainsValuePredicate(toKeywordList(type));
+
+        predicateList.add(typePredicate);
+
     }
 
-    public void setCategoryKeyword(String category) {
-        BooleanPredicatePair predicatePair = new BooleanPredicatePair(true,
-                new TransactionTypeContainsValuePredicate(
-                        Collections.singletonList(category)));
+    /**
+     * Creates a new {@code TransactionCategoryContainsValuePredicate} with the
+     * given {@code Category} as a string and adds this to the encapsulated list of
+     * transaction predicates.
+     *
+     * @param category the {@code Category} to be added as a transaction predicate keyword
+     */
+    public void addCategoryKeyword(String category) {
+        TransactionCategoryContainsKeywordsPredicate categoryPredicate =
+                new TransactionCategoryContainsKeywordsPredicate(toKeywordList(category));
 
-        predicatePairMap.put(TransactionProperty.CATEGORY, predicatePair);
+        predicateList.add(categoryPredicate);
+
     }
 
 
