@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import unicash.logic.commands.AddBudgetCommand;
+import unicash.logic.commands.SetBudgetCommand;
 import unicash.logic.commands.AddTransactionCommand;
 import unicash.logic.commands.ClearTransactionsCommand;
 import unicash.logic.commands.DeleteTransactionCommand;
@@ -156,11 +156,10 @@ public class UniCashParserTest {
     }
     @Test
     public void parseCommand_addBudget() throws Exception {
-        Budget budget = new BudgetBuilder().build();
-        String validCommand = "add_budget " + PREFIX_AMOUNT + MONTHLY.getAmount().toString() + " "
+        String validCommand = "set_budget " + PREFIX_AMOUNT + MONTHLY.getAmount().toString() + " "
                 + PREFIX_INTERVAL + MONTHLY.getInterval().toString();
-        AddBudgetCommand command = (AddBudgetCommand) parser.parseCommand(validCommand);
+        SetBudgetCommand command = (SetBudgetCommand) parser.parseCommand(validCommand);
         //TODO: to change when parseCommand is implemented fully
-        assertEquals(null, command);
+        assertEquals(new SetBudgetCommand(MONTHLY), command);
     }
 }

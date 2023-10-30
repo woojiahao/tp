@@ -47,7 +47,11 @@ class JsonSerializableUniCash {
                         .map(JsonAdaptedTransaction::new)
                         .collect(Collectors.toList())
         );
-        budget = new JsonAdaptedBudget(source.getBudget());
+        if (source.getBudget() != null) {
+            budget = new JsonAdaptedBudget(source.getBudget());
+        } else {
+            budget = null;
+        }
     }
 
     /**

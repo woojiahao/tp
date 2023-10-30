@@ -13,7 +13,7 @@ public class EditBudgetCommandTest {
 
     @Test
     public void constructor_nullTransaction_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddBudgetCommand(null));
+        assertThrows(NullPointerException.class, () -> new EditBudgetCommand(null));
     }
 
     @Test
