@@ -32,6 +32,7 @@ public class ExitCommandTest {
         ExitCommand exitCommand = new ExitCommand();
         assertEquals(exitCommand, new ExitCommand());
         assertTrue(exitCommand.equals(new ExitCommand()));
+        assertTrue(exitCommand.equals(exitCommand));
 
     }
 
