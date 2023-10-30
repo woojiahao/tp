@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static unicash.testutil.Assert.assertThrows;
 import static unicash.testutil.TypicalBudgets.DAILY;
 import static unicash.testutil.TypicalBudgets.MONTHLY;
@@ -172,6 +171,11 @@ public class SetBudgetCommandTest {
 
         @Override
         public void setBudget(Budget budget) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearBudget() {
             throw new AssertionError("This method should not be called.");
         }
 

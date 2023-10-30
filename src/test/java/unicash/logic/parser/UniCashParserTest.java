@@ -16,8 +16,8 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import unicash.logic.commands.SetBudgetCommand;
 import unicash.logic.commands.AddTransactionCommand;
+import unicash.logic.commands.ClearBudgetCommand;
 import unicash.logic.commands.ClearTransactionsCommand;
 import unicash.logic.commands.DeleteTransactionCommand;
 import unicash.logic.commands.EditTransactionCommand;
@@ -27,12 +27,11 @@ import unicash.logic.commands.GetTotalExpenditureCommand;
 import unicash.logic.commands.HelpCommand;
 import unicash.logic.commands.ListCommand;
 import unicash.logic.commands.ResetCommand;
+import unicash.logic.commands.SetBudgetCommand;
 import unicash.logic.commands.SummaryCommand;
 import unicash.logic.parser.exceptions.ParseException;
-import unicash.model.budget.Budget;
 import unicash.model.transaction.Transaction;
 import unicash.model.transaction.predicates.TransactionContainsKeywordsPredicate;
-import unicash.testutil.BudgetBuilder;
 import unicash.testutil.EditTransactionDescriptorBuilder;
 import unicash.testutil.TransactionBuilder;
 import unicash.testutil.TransactionUtil;
@@ -154,12 +153,19 @@ public class UniCashParserTest {
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
+
     @Test
     public void parseCommand_addBudget() throws Exception {
         String validCommand = "set_budget " + PREFIX_AMOUNT + MONTHLY.getAmount().toString() + " "
                 + PREFIX_INTERVAL + MONTHLY.getInterval().toString();
         SetBudgetCommand command = (SetBudgetCommand) parser.parseCommand(validCommand);
-        //TODO: to change when parseCommand is implemented fully
         assertEquals(new SetBudgetCommand(MONTHLY), command);
+    }
+
+    @Test
+    public void parseCommand_clearBudget() throws Exception {
+        String validCommand = "clear_budget";
+        var command = (ClearBudgetCommand) parser.parseCommand(validCommand);
+        assertEquals(new ClearBudgetCommand(), command);
     }
 }

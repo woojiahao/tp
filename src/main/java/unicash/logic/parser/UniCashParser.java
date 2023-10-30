@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import unicash.commons.core.LogsCenter;
+import unicash.logic.commands.ClearBudgetCommand;
 import unicash.logic.commands.SetBudgetCommand;
 import unicash.logic.commands.AddTransactionCommand;
 import unicash.logic.commands.ClearTransactionsCommand;
@@ -81,6 +82,9 @@ public class UniCashParser {
 
         case SetBudgetCommand.COMMAND_WORD:
             return new SetBudgetCommandParser().parse(arguments);
+
+        case ClearBudgetCommand.COMMAND_WORD:
+            return new ClearBudgetCommand();
 
         case ResetCommand.COMMAND_WORD:
             return new ResetCommand();

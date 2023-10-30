@@ -95,9 +95,24 @@ public class UniCash implements ReadOnlyUniCash {
         transactions.remove(key);
     }
 
+    /**
+     * Set budget.
+     *
+     * @throws NullPointerException if {@code budget} is null.
+     */
     public void setBudget(Budget budget) {
         requireNonNull(budget);
         this.budget = budget;
+    }
+
+    /**
+     * Clears budget by setting to null.
+     *
+     * <p>Special case of {@link #setBudget(Budget) setBudget} to avoid accidentally allowing users to set
+     * null {@code budget}</p>
+     */
+    public void clearBudget() {
+        budget = null;
     }
 
     /**
@@ -140,9 +155,7 @@ public class UniCash implements ReadOnlyUniCash {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("transactions", transactions)
-                .toString();
+        return new ToStringBuilder(this).add("transactions", transactions).toString();
     }
 
     @Override
@@ -178,11 +191,9 @@ public class UniCash implements ReadOnlyUniCash {
         UniCash otherUniCash = (UniCash) other;
         if (budget == null) {
             // If current budget is null, other budget should also be null
-            return transactions.equals(otherUniCash.transactions)
-                    && otherUniCash.budget == null;
+            return transactions.equals(otherUniCash.transactions) && otherUniCash.budget == null;
         }
-        return transactions.equals(otherUniCash.transactions)
-                && budget.equals(otherUniCash.budget);
+        return transactions.equals(otherUniCash.transactions) && budget.equals(otherUniCash.budget);
     }
 
     @Override
