@@ -1,12 +1,17 @@
 package unicash.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static unicash.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static unicash.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static unicash.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import unicash.commons.util.ToStringBuilder;
 import unicash.logic.commands.ResetCommand;
 
 /**
@@ -59,6 +64,35 @@ public class ResetCommandParserTest {
     @Test
     public void execute_predicateNotNull_assertion() {
         assertDoesNotThrow(() -> new ResetCommandParser().parse(" "));
+    }
+
+    @Test
+    public void sameResetCommandParser_equalsTrue() {
+        ResetCommandParser parser = new ResetCommandParser();
+        assertTrue(parser.equals(parser));
+        assertTrue(parser.equals(new ResetCommandParser()));
+
+    }
+
+    @Test
+    public void differentCommandTypes_equalsFalse() {
+        ResetCommandParser resetCommandParser = new ResetCommandParser();
+        ListCommandParser listCommandParser = new ListCommandParser();
+        assertNotEquals(listCommandParser, resetCommandParser);
+        assertFalse(resetCommandParser.equals(listCommandParser));
+        assertFalse(resetCommandParser.equals(new ListCommandParser()));
+    }
+
+    @Test
+    public void nullInput_equalsFalse() {
+        assertNotEquals(null, new ResetCommandParser());
+    }
+
+    @Test
+    public void toStringTest() {
+        ResetCommandParser resetCommandParser = new ResetCommandParser();
+        String expected = new ToStringBuilder(new ResetCommandParser()).toString();
+        assertEquals(expected, resetCommandParser.toString());
     }
 
 }
