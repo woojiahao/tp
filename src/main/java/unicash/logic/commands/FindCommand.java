@@ -35,7 +35,12 @@ public class FindCommand extends Command {
 
     private final TransactionContainsAnyKeywordsPredicate predicate;
 
+    /**
+     * Creates a {@code TransactionContainsAnyKeywordsPredicate} with a non-null
+     * predicate.
+     */
     public FindCommand(TransactionContainsAnyKeywordsPredicate predicate) {
+        requireNonNull(predicate);
         this.predicate = predicate;
     }
 

@@ -88,12 +88,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_predicateNull_assertionFailure() {
-        String expectedMessage = String.format(MESSAGE_TRANSACTIONS_LISTED_OVERVIEW, 0);
-        TransactionContainsAnyKeywordsPredicate predicate = preparePredicate(" ");
-        FindCommand command = new FindCommand(null);
-        expectedModel.updateFilteredTransactionList(predicate);
-
-        assertThrows(AssertionError.class, () -> command.execute(model));
+        assertThrows(NullPointerException.class, () -> new FindCommand(null));
     }
 
     @Test
