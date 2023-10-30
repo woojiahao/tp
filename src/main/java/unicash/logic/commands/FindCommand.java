@@ -20,8 +20,13 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = new CommandUsage.Builder()
             .setCommandWord(COMMAND_WORD)
             .setDescription(
-                    "Finds all transactions whose names contain any of the specified keywords "
-                            + "(case-insensitive) and displays them as a list with index numbers."
+                    "Finds any transactions whose name, amount, type, date-time, location, and categories "
+                            + "contain any of the specified keywords (case-insensitive). At least one keyword "
+                            + "must be specified. "
+                            + "\n\n"
+                            + "Any number of keywords can be specified and each keyword will be searched "
+                            + "individually for all properties except date-time, amount, and type, for which "
+                            + "the entire input will be searched as a single substring of these properties. "
             )
             .setArgument("Keyword [More keywords]...")
             .setExample(ExampleGenerator.generate(COMMAND_WORD, "chicken rice"))
