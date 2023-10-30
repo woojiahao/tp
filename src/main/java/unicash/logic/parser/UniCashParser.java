@@ -84,7 +84,7 @@ public class UniCashParser {
             return new AddBudgetCommandParser().parse(arguments);
 
         case ResetCommand.COMMAND_WORD:
-            return new ResetCommand();
+            return new ResetCommandParser().parse(arguments);
 
         case GetCommand.COMMAND_WORD:
             return new GetCommandParser().parse(arguments);

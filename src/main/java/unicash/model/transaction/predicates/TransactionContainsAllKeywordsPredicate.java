@@ -31,6 +31,10 @@ public class TransactionContainsAllKeywordsPredicate implements Predicate<Transa
         this.predicateList = new ArrayList<>();
     }
 
+    public TransactionContainsAllKeywordsPredicate(List<Predicate<Transaction>> predicateList) {
+        this.predicateList = predicateList;
+    }
+
     @Override
     public boolean test(Transaction transaction) {
         if (predicateList.isEmpty()) {

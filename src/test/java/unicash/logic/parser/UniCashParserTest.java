@@ -10,8 +10,10 @@ import static unicash.testutil.Assert.assertThrows;
 import static unicash.testutil.TypicalBudgets.MONTHLY;
 import static unicash.testutil.TypicalIndexes.INDEX_FIRST_TRANSACTION;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -22,6 +24,7 @@ import unicash.logic.commands.ClearTransactionsCommand;
 import unicash.logic.commands.DeleteTransactionCommand;
 import unicash.logic.commands.EditTransactionCommand;
 import unicash.logic.commands.ExitCommand;
+import unicash.logic.commands.FilterCommand;
 import unicash.logic.commands.FindCommand;
 import unicash.logic.commands.GetTotalExpenditureCommand;
 import unicash.logic.commands.HelpCommand;
@@ -31,7 +34,9 @@ import unicash.logic.commands.SummaryCommand;
 import unicash.logic.parser.exceptions.ParseException;
 import unicash.model.budget.Budget;
 import unicash.model.transaction.Transaction;
+import unicash.model.transaction.predicates.TransactionContainsAllKeywordsPredicate;
 import unicash.model.transaction.predicates.TransactionContainsAnyKeywordsPredicate;
+import unicash.model.transaction.predicates.TransactionNameContainsKeywordsPredicate;
 import unicash.testutil.BudgetBuilder;
 import unicash.testutil.EditTransactionDescriptorBuilder;
 import unicash.testutil.TransactionBuilder;
@@ -96,8 +101,10 @@ public class UniCashParserTest {
     @Test
     public void parseCommand_resetUniCashCommand() throws Exception {
         assertTrue(parser.parseCommand(ResetCommand.COMMAND_WORD) instanceof ResetCommand);
-        assertTrue(parser.parseCommand(ResetCommand.COMMAND_WORD + " 3")
-                instanceof ResetCommand);
+
+        String message = ResetCommand.MESSAGE_FAILURE;
+        assertThrows(ParseException.class, message, () -> parser.parseCommand(
+                ResetCommand.COMMAND_WORD + " 3"));
     }
 
     @Test
@@ -147,6 +154,29 @@ public class UniCashParserTest {
                 SummaryCommand.COMMAND_WORD) instanceof SummaryCommand);
         assertTrue(parser.parseCommand(
                 SummaryCommand.COMMAND_WORD + " 3") instanceof SummaryCommand);
+    }
+
+    @Test
+    public void parseCommand_filterCommand() throws Exception {
+
+        List<String> keywords = Arrays.asList("n/foo", "n/bar", "n/baz");
+        List<String> parsedKeywords = Arrays.asList("foo", "bar", "baz");
+        List<Predicate<Transaction>> predicateList = new ArrayList<>();
+        FilterCommand filterCommand = (FilterCommand) parser.parseCommand(
+                FilterCommand.COMMAND_WORD + " " + keywords
+                        .stream()
+                        .collect(Collectors
+                                .joining(" ")));
+
+        parsedKeywords.stream().forEach(keyword -> {
+            TransactionNameContainsKeywordsPredicate namePredicate =
+                    new TransactionNameContainsKeywordsPredicate(List.of(keyword));
+            predicateList.add(namePredicate);
+        });
+
+        assertEquals(new FilterCommand(
+                new TransactionContainsAllKeywordsPredicate(predicateList)), filterCommand);
+
     }
 
     @Test
