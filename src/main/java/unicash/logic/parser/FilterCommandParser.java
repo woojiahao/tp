@@ -9,6 +9,8 @@ import static unicash.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static unicash.logic.parser.CliSyntax.PREFIX_NAME;
 import static unicash.logic.parser.CliSyntax.PREFIX_TYPE;
 
+import java.util.List;
+
 import unicash.commons.util.ToStringBuilder;
 import unicash.logic.commands.FilterCommand;
 import unicash.logic.parser.exceptions.ParseException;
@@ -20,7 +22,6 @@ import unicash.model.transaction.Name;
 import unicash.model.transaction.Type;
 import unicash.model.transaction.predicates.TransactionContainsAllKeywordsPredicate;
 
-import java.util.List;
 
 /**
  * Parses input arguments and creates a new FilterCommand object

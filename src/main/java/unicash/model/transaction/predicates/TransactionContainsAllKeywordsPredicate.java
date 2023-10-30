@@ -1,12 +1,13 @@
 package unicash.model.transaction.predicates;
 
-import unicash.commons.util.ToStringBuilder;
-import unicash.model.transaction.Transaction;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
+
+import unicash.commons.util.ToStringBuilder;
+import unicash.model.transaction.Transaction;
+
 
 /**
  * Tests that the {@code Transactions}'s properties matches all the keywords given.

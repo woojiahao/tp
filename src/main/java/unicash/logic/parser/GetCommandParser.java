@@ -4,7 +4,6 @@ import static unicash.logic.UniCashMessages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import unicash.commons.core.index.Index;
 import unicash.commons.util.ToStringBuilder;
-import unicash.logic.commands.ClearTransactionsCommand;
 import unicash.logic.commands.GetCommand;
 import unicash.logic.parser.exceptions.ParseException;
 
