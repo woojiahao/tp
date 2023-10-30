@@ -253,6 +253,9 @@ public class UniCashTest {
         assertEquals(expected, other);
         other.setBudget(WEEKLY);
         assertNotEquals(expected, other);
+
+        var differentTransactions = new UniCash();
+        assertNotEquals(expected, differentTransactions);
     }
 
     @Test
@@ -267,6 +270,10 @@ public class UniCashTest {
         assertNotEquals(expected, other);
         other.setBudget(MONTHLY);
         assertEquals(expected, other);
+
+        var differentTransactions = new UniCash();
+        differentTransactions.setBudget(MONTHLY);
+        assertNotEquals(expected, differentTransactions);
     }
 
     /**
