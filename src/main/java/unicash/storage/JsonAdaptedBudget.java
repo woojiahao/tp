@@ -1,5 +1,7 @@
 package unicash.storage;
 
+import static java.util.Objects.requireNonNull;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -31,8 +33,11 @@ public class JsonAdaptedBudget {
 
     /**
      * Creates budget based on another {@code budget}.
+     *
+     * @throws NullPointerException if {@code budget is null}.
      */
     public JsonAdaptedBudget(Budget budget) {
+        requireNonNull(budget);
         amount = budget.getAmount().amount;
         interval = budget.getInterval().interval.getOriginalString();
     }

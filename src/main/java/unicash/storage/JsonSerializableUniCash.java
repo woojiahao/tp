@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-
 import unicash.commons.exceptions.IllegalValueException;
 import unicash.model.ReadOnlyUniCash;
 import unicash.model.UniCash;
@@ -68,6 +67,23 @@ class JsonSerializableUniCash {
             uniCash.setBudget(budget.toModelType());
         }
         return uniCash;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) {
+            return false;
+        }
+
+        if (!(other instanceof JsonSerializableUniCash)) {
+            return false;
+        }
+
+        var otherInstance = (JsonSerializableUniCash) other;
+        if (budget == null) {
+            return transactions.equals(otherInstance.transactions) && otherInstance.budget == null;
+        }
+        return transactions.equals(otherInstance.transactions) && budget.equals(otherInstance.budget);
     }
 
 }

@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import unicash.commons.core.index.Index;
 import unicash.logic.commands.AddTransactionCommand;
 import unicash.logic.commands.ClearBudgetCommand;
 import unicash.logic.commands.ClearTransactionsCommand;
@@ -23,6 +24,7 @@ import unicash.logic.commands.DeleteTransactionCommand;
 import unicash.logic.commands.EditTransactionCommand;
 import unicash.logic.commands.ExitCommand;
 import unicash.logic.commands.FindCommand;
+import unicash.logic.commands.GetCommand;
 import unicash.logic.commands.GetTotalExpenditureCommand;
 import unicash.logic.commands.HelpCommand;
 import unicash.logic.commands.ListCommand;
@@ -32,6 +34,7 @@ import unicash.logic.commands.SummaryCommand;
 import unicash.logic.parser.exceptions.ParseException;
 import unicash.model.transaction.Transaction;
 import unicash.model.transaction.predicates.TransactionContainsKeywordsPredicate;
+import unicash.model.util.SampleDataUtil;
 import unicash.testutil.EditTransactionDescriptorBuilder;
 import unicash.testutil.TransactionBuilder;
 import unicash.testutil.TransactionUtil;
@@ -167,5 +170,12 @@ public class UniCashParserTest {
         String validCommand = "clear_budget";
         var command = (ClearBudgetCommand) parser.parseCommand(validCommand);
         assertEquals(new ClearBudgetCommand(), command);
+    }
+
+    @Test
+    public void parseCommand_getCommand() throws Exception {
+        String validCommand = "get 1";
+        var command = (GetCommand) parser.parseCommand(validCommand);
+        assertEquals(new GetCommand(Index.fromOneBased(1)), command);
     }
 }
