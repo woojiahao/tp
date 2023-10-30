@@ -6,20 +6,20 @@ import static unicash.logic.parser.CliSyntax.PREFIX_INTERVAL;
 
 import java.util.stream.Stream;
 
-import unicash.logic.commands.AddBudgetCommand;
+import unicash.logic.commands.SetBudgetCommand;
 import unicash.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new AddBudgetCommand object
  */
-public class AddBudgetCommandParser implements Parser<AddBudgetCommand> {
+public class AddBudgetCommandParser implements Parser<SetBudgetCommand> {
     /**
      * Parses {@code userInput} into a command and returns it.
      *
      * @throws ParseException if {@code userInput} does not conform the expected format
      */
     @Override
-    public AddBudgetCommand parse(String args) throws ParseException {
+    public SetBudgetCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_AMOUNT, PREFIX_INTERVAL);
 
@@ -27,7 +27,7 @@ public class AddBudgetCommandParser implements Parser<AddBudgetCommand> {
         if (!arePrefixesPresent(argMultimap, PREFIX_AMOUNT, PREFIX_INTERVAL)
             || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddBudgetCommand.MESSAGE_USAGE));
+                    SetBudgetCommand.MESSAGE_USAGE));
         }
 
         //check for duplicates
