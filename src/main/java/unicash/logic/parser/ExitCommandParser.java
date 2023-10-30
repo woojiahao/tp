@@ -5,12 +5,12 @@ import unicash.logic.commands.ExitCommand;
 import unicash.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments for the list command.
+ * Parses arguments for the exit command
  */
 public class ExitCommandParser implements Parser<ExitCommand> {
 
     /**
-     * Parses {@code userInput} into an exit command and returns it.
+     * Parses {@code userInput} into an {@code ExitCommand}and returns it.
      *
      * @throws ParseException if {@code userInput} does not conform the expected format
      */

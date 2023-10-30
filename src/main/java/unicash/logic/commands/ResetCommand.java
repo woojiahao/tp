@@ -18,6 +18,11 @@ public class ResetCommand extends Command {
             "UniCa$h has been successfully restored to its original state!";
 
 
+    public static final String MESSAGE_FAILURE = String.format(
+            "Reset command cannot have trailing arguments. "
+                    + "Use the command %s without any trailing arguments.", COMMAND_WORD);
+
+
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);

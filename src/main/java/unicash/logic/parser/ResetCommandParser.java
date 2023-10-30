@@ -1,28 +1,28 @@
 package unicash.logic.parser;
 
 import unicash.commons.util.ToStringBuilder;
-import unicash.logic.commands.ClearTransactionsCommand;
+import unicash.logic.commands.ResetCommand;
 import unicash.logic.parser.exceptions.ParseException;
 
 /**
- * Parses arguments for the {@code ClearTransactionsCommand}
+ * Parses arguments for the {@code ResetCommand}
  */
-public class ClearTransactionsCommandParser implements Parser<ClearTransactionsCommand> {
+public class ResetCommandParser implements Parser<ResetCommand> {
 
     /**
-     * Parses {@code userInput} into a {@code ClearTransactionsCommand} and returns it.
+     * Parses {@code userInput} into a {@code ResetCommand} and returns it.
      *
      * @throws ParseException if {@code userInput} does not conform the expected format
      */
     @Override
-    public ClearTransactionsCommand parse(String userInput) throws ParseException {
+    public ResetCommand parse(String userInput) throws ParseException {
         assert userInput != null : "userInput cannot be null";
 
-        // clear transactions command must not have any trailing arguments
+        // reset unicash command must not have any trailing arguments
         if (!userInput.trim().isBlank()) {
-            throw new ParseException(ClearTransactionsCommand.MESSAGE_FAILURE);
+            throw new ParseException(ResetCommand.MESSAGE_FAILURE);
         }
-        return new ClearTransactionsCommand();
+        return new ResetCommand();
     }
 
     @Override
@@ -32,11 +32,11 @@ public class ClearTransactionsCommandParser implements Parser<ClearTransactionsC
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ClearTransactionsCommandParser)) {
+        if (!(other instanceof ResetCommandParser)) {
             return false;
         }
 
-        return this instanceof ClearTransactionsCommandParser;
+        return this instanceof ResetCommandParser;
 
     }
 
