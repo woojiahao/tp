@@ -17,7 +17,7 @@ import unicash.model.Model;
 import unicash.model.transaction.predicates.TransactionContainsAllKeywordsPredicate;
 
 /**
- * Filters the displayed Transactions according to certain parameters
+ * Filters the displayed Transactions according to certain parameters.
  */
 public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
@@ -28,8 +28,9 @@ public class FilterCommand extends Command {
                     ": Filters the transactions in UniCa$h "
                             + "according to the specified properties"
                             + "All properties must match in order for the transaction to be displayed."
-                            + "Any combination of any number of properties may be provided but at least "
-                            + "one property must be provided."
+                            + "Multiple keywords for the same property is allowed, except for Transaction"
+                            + "Type for which there can only be one keyword. A minimum of one keyword"
+                            + "must be provided."
             )
             .addParameter(PREFIX_NAME, "Name", true, true)
             .addParameter(PREFIX_TYPE, "Type", true, false)
@@ -51,7 +52,7 @@ public class FilterCommand extends Command {
             .build()
             .toString();
 
-    public static final String MESSAGE_SUCCESS = "Filtered %1$s Transactions";
+    public static final String MESSAGE_SUCCESS = "Filtered %1$s Transactions!";
 
     private final TransactionContainsAllKeywordsPredicate predicate;
 
