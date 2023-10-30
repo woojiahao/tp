@@ -12,10 +12,9 @@ public class ExitCommand extends Command {
 
     public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Exiting UniCa$h as requested ...";
 
-    public static final String MESSAGE_FAILURE = "Exit Command cannot have trailing arguments."
-            + "Use the command "
-            + COMMAND_WORD
-            + " without any trailing arguments.";
+    public static final String MESSAGE_FAILURE = String.format(
+            "Exit command cannot have trailing arguments. "
+                    + "Use the command %s without any trailing arguments.", COMMAND_WORD);
 
     @Override
     public CommandResult execute(Model model) {
