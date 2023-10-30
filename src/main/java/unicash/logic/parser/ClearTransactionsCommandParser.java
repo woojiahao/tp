@@ -36,7 +36,7 @@ public class ClearTransactionsCommandParser implements Parser<ClearTransactionsC
             return false;
         }
 
-        return this instanceof ClearTransactionsCommandParser;
+        return other instanceof ClearTransactionsCommandParser;
 
     }
 

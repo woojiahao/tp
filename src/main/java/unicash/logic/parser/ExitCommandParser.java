@@ -36,7 +36,7 @@ public class ExitCommandParser implements Parser<ExitCommand> {
             return false;
         }
 
-        return this instanceof ExitCommandParser;
+        return other instanceof ExitCommandParser;
 
     }
 

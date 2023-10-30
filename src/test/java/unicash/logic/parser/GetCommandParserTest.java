@@ -2,6 +2,7 @@ package unicash.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -37,6 +38,11 @@ public class GetCommandParserTest {
 
         // Float as input (assuming indices are 1-based)
         assertThrows(ParseException.class, () -> parser.parse("0.5"));
+    }
+
+    @Test
+    public void differentParse_equals_returnsFalse() {
+        assertTrue(parser.equals(new GetCommandParser()));
     }
 
 }

@@ -41,7 +41,7 @@ public class ResetCommand extends Command {
             return false;
         }
 
-        return this instanceof ResetCommand;
+        return other instanceof ResetCommand;
 
     }
 

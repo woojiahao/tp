@@ -36,7 +36,7 @@ public class ListCommandParser implements Parser<ListCommand> {
             return false;
         }
 
-        return this instanceof ListCommandParser;
+        return other instanceof ListCommandParser;
 
     }
 

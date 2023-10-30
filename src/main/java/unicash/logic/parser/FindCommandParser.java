@@ -43,7 +43,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             return false;
         }
 
-        return this instanceof FindCommandParser;
+        return other instanceof FindCommandParser;
 
     }
 

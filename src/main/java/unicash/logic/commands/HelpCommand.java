@@ -39,7 +39,7 @@ public class HelpCommand extends Command {
             return false;
         }
 
-        return this instanceof HelpCommand;
+        return other instanceof HelpCommand;
 
     }
 

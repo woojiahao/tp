@@ -32,7 +32,7 @@ public class ExitCommand extends Command {
             return false;
         }
 
-        return this instanceof ExitCommand;
+        return other instanceof ExitCommand;
 
     }
 

@@ -36,7 +36,7 @@ public class ResetCommandParser implements Parser<ResetCommand> {
             return false;
         }
 
-        return this instanceof ResetCommandParser;
+        return other instanceof ResetCommandParser;
 
     }
 

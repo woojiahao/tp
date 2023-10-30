@@ -42,7 +42,7 @@ public class GetCommandParser implements Parser<GetCommand> {
             return false;
         }
 
-        return this instanceof GetCommandParser;
+        return other instanceof GetCommandParser;
 
     }
 
