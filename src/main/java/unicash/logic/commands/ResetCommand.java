@@ -3,6 +3,7 @@ package unicash.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static unicash.model.util.SampleDataUtil.getSampleUniCash;
 
+import unicash.commons.util.ToStringBuilder;
 import unicash.model.Model;
 
 /**
@@ -22,5 +23,26 @@ public class ResetCommand extends Command {
         requireNonNull(model);
         model.setUniCash(getSampleUniCash());
         return new CommandResult(MESSAGE_SUCCESS);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ResetCommand)) {
+            return false;
+        }
+
+        return this instanceof ResetCommand;
+
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .toString();
     }
 }

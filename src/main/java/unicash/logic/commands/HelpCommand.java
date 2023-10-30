@@ -4,6 +4,7 @@ import static unicash.logic.UniCashMessages.MESSAGE_UNICASH_WELCOME;
 
 import unicash.commons.util.CommandUsage;
 import unicash.commons.util.ExampleGenerator;
+import unicash.commons.util.ToStringBuilder;
 import unicash.model.Model;
 
 /**
@@ -25,5 +26,26 @@ public class HelpCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof HelpCommand)) {
+            return false;
+        }
+
+        return this instanceof HelpCommand;
+
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .toString();
     }
 }
