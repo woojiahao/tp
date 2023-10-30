@@ -12,9 +12,9 @@ import unicash.model.commons.Amount;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Budget {
+
     private Amount amount;
     private Interval interval;
-
 
     /**
      * Constructs a Budget with all fields populated.
@@ -24,6 +24,11 @@ public class Budget {
         requireAllNonNull(amount, interval);
         this.amount = amount;
         this.interval = interval;
+    }
+
+    public Budget(Budget other) {
+        amount = new Amount(other.getAmount().amount);
+        interval = new Interval(other.getInterval().interval.getOriginalString());
     }
 
     public Amount getAmount() {

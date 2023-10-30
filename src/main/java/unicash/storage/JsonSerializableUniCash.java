@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import unicash.commons.exceptions.IllegalValueException;
 import unicash.model.ReadOnlyUniCash;
 import unicash.model.UniCash;
+import unicash.model.budget.Budget;
 import unicash.model.transaction.Transaction;
 
 /**
@@ -19,18 +20,19 @@ import unicash.model.transaction.Transaction;
 @JsonRootName(value = "unicash")
 class JsonSerializableUniCash {
 
-    public static final String MESSAGE_DUPLICATE_TRANSACTION = "Transaction list contains duplicate transaction(s).";
-
     private final List<JsonAdaptedTransaction> transactions = new ArrayList<>();
+    private final JsonAdaptedBudget budget;
 
     /**
      * Constructs a {@code JsonSerializableUniCash} with the given transactions.
      */
     @JsonCreator
     public JsonSerializableUniCash(
-            @JsonProperty("transactions") List<JsonAdaptedTransaction> transactions
+            @JsonProperty("transactions") List<JsonAdaptedTransaction> transactions,
+            @JsonProperty("budget") JsonAdaptedBudget budget
     ) {
         this.transactions.addAll(transactions);
+        this.budget = budget;
     }
 
     /**
@@ -45,6 +47,7 @@ class JsonSerializableUniCash {
                         .map(JsonAdaptedTransaction::new)
                         .collect(Collectors.toList())
         );
+        budget = new JsonAdaptedBudget(source.getBudget());
     }
 
     /**
@@ -57,6 +60,9 @@ class JsonSerializableUniCash {
         for (var jsonAdaptedTransaction : transactions) {
             Transaction transaction = jsonAdaptedTransaction.toModelType();
             uniCash.addTransaction(transaction);
+        }
+        if (budget != null) {
+            uniCash.setBudget(budget.toModelType());
         }
         return uniCash;
     }
