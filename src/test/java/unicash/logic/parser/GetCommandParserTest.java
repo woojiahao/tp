@@ -10,7 +10,9 @@ import unicash.commons.core.index.Index;
 import unicash.logic.commands.GetCommand;
 import unicash.logic.parser.exceptions.ParseException;
 
-
+/**
+ * A class to test the GetCommandParser
+ */
 public class GetCommandParserTest {
 
     private final GetCommandParser parser = new GetCommandParser();

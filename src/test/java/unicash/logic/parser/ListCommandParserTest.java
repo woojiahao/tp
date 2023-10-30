@@ -14,6 +14,9 @@ import org.junit.jupiter.api.Test;
 import unicash.commons.util.ToStringBuilder;
 import unicash.logic.commands.ListCommand;
 
+/**
+ * A class to test the ListCommandParser
+ */
 public class ListCommandParserTest {
     private final ListCommandParser parser = new ListCommandParser();
 
@@ -61,7 +64,6 @@ public class ListCommandParserTest {
         ListCommandParser listCommandParser = new ListCommandParser();
         assertNotEquals(resetCommandParser, listCommandParser);
         assertFalse(listCommandParser.equals(resetCommandParser));
-        assertFalse(listCommandParser.equals(new ResetCommandParser()));
     }
 
     @Test

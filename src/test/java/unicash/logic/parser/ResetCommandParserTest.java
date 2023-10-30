@@ -80,7 +80,6 @@ public class ResetCommandParserTest {
         ListCommandParser listCommandParser = new ListCommandParser();
         assertNotEquals(listCommandParser, resetCommandParser);
         assertFalse(resetCommandParser.equals(listCommandParser));
-        assertFalse(resetCommandParser.equals(new ListCommandParser()));
     }
 
     @Test

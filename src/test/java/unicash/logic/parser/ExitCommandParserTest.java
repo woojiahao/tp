@@ -1,17 +1,22 @@
 package unicash.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static unicash.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static unicash.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static unicash.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import unicash.commons.util.ToStringBuilder;
 import unicash.logic.commands.ExitCommand;
 
 
 /**
- * A class to test the FilterCommandParser.
+ * A class to test the ExitCommandParser.
  */
 public class ExitCommandParserTest {
     private final ExitCommandParser parser = new ExitCommandParser();
@@ -60,6 +65,35 @@ public class ExitCommandParserTest {
     @Test
     public void execute_predicateNotNull_assertion() {
         assertDoesNotThrow(() -> new ExitCommandParser().parse(" "));
+    }
+
+
+    @Test
+    public void sameExitCommandParser_equalsTrue() {
+        ExitCommandParser parser = new ExitCommandParser();
+        assertTrue(parser.equals(parser));
+        assertTrue(parser.equals(new ExitCommandParser()));
+
+    }
+
+    @Test
+    public void differentCommandTypes_equalsFalse() {
+        ExitCommandParser exitCommandParser = new ExitCommandParser();
+        ListCommandParser listCommandParser = new ListCommandParser();
+        assertNotEquals(listCommandParser, exitCommandParser);
+        assertFalse(exitCommandParser.equals(listCommandParser));
+    }
+
+    @Test
+    public void nullInput_equalsFalse() {
+        assertNotEquals(null, new ExitCommandParser());
+    }
+
+    @Test
+    public void toStringTest() {
+        ExitCommandParser exitCommandParser = new ExitCommandParser();
+        String expected = new ToStringBuilder(new ExitCommandParser()).toString();
+        assertEquals(expected, exitCommandParser.toString());
     }
 
 }

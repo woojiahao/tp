@@ -68,4 +68,5 @@ public class FilterCommandParserTest {
         assertParseFailure(parser, TRANSACTION_NAME_DESC_NUS + AMOUNT_DESC_NUS + INVALID_DATETIME_DESC
                 + TYPE_DESC_EXPENSE, DateTime.MESSAGE_CONSTRAINTS);
     }
+
 }
