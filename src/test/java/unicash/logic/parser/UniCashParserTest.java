@@ -24,6 +24,7 @@ import unicash.logic.commands.DeleteTransactionCommand;
 import unicash.logic.commands.EditTransactionCommand;
 import unicash.logic.commands.ExitCommand;
 import unicash.logic.commands.FindCommand;
+import unicash.logic.commands.GetBudgetCommand;
 import unicash.logic.commands.GetCommand;
 import unicash.logic.commands.GetTotalExpenditureCommand;
 import unicash.logic.commands.HelpCommand;
@@ -176,5 +177,12 @@ public class UniCashParserTest {
         String validCommand = "get 1";
         var command = (GetCommand) parser.parseCommand(validCommand);
         assertEquals(new GetCommand(Index.fromOneBased(1)), command);
+    }
+
+    @Test
+    public void parseCommand_getBudget() throws Exception {
+        String validCommand = "get_budget";
+        var command = (GetBudgetCommand) parser.parseCommand(validCommand);
+        assertEquals(new GetBudgetCommand(), command);
     }
 }

@@ -39,6 +39,7 @@ public class SetBudgetCommand extends Command {
         requireNonNull(budget);
         this.budget = budget;
     }
+
     /**
      * Sets the user's budget.
      *
