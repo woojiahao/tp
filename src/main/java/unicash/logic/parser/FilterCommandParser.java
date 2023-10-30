@@ -94,7 +94,6 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             filterPredicate.addTypeKeyword(transactionType.toString());
         }
 
-
         return new FilterCommand(filterPredicate);
 
     }
