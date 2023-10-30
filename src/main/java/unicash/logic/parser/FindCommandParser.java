@@ -4,6 +4,7 @@ import static unicash.logic.UniCashMessages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
 
+import unicash.commons.util.ToStringBuilder;
 import unicash.logic.commands.FindCommand;
 import unicash.logic.parser.exceptions.ParseException;
 import unicash.model.transaction.predicates.TransactionContainsAnyKeywordsPredicate;
@@ -31,6 +32,25 @@ public class FindCommandParser implements Parser<FindCommand> {
                 Arrays.asList(nameKeywords)));
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
 
+        // instanceof handles nulls
+        if (!(other instanceof FindCommandParser)) {
+            return false;
+        }
+
+        return this instanceof FindCommandParser;
+
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .toString();
+    }
 
 }

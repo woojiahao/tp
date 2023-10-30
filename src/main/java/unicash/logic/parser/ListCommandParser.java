@@ -1,7 +1,10 @@
 package unicash.logic.parser;
 
+import unicash.commons.util.ToStringBuilder;
 import unicash.logic.commands.ListCommand;
 import unicash.logic.parser.exceptions.ParseException;
+
+import java.util.List;
 
 /**
  * Parses input arguments for the list command.
@@ -22,4 +25,27 @@ public class ListCommandParser implements Parser<ListCommand> {
         }
         return new ListCommand();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ListCommandParser)) {
+            return false;
+        }
+
+        return this instanceof ListCommandParser;
+
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .toString();
+    }
+
 }
+

@@ -3,6 +3,8 @@ package unicash.logic.parser;
 import static unicash.logic.UniCashMessages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import unicash.commons.core.index.Index;
+import unicash.commons.util.ToStringBuilder;
+import unicash.logic.commands.ClearTransactionsCommand;
 import unicash.logic.commands.GetCommand;
 import unicash.logic.parser.exceptions.ParseException;
 
@@ -28,6 +30,27 @@ public class GetCommandParser implements Parser<GetCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                             GetCommand.MESSAGE_USAGE), pe);
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof GetCommandParser)) {
+            return false;
+        }
+
+        return this instanceof GetCommandParser;
+
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .toString();
     }
 
 }
