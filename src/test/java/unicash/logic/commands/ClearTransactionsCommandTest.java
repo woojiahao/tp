@@ -1,7 +1,9 @@
 package unicash.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static unicash.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static unicash.testutil.TypicalTransactions.getTypicalUniCash;
 
@@ -36,9 +38,17 @@ public class ClearTransactionsCommandTest {
     }
 
     @Test
-    public void sameClearTransactionsCommand_equalsTrue() {
+    public void multipleClearTransactionsCommand_equalsTrue() {
         ClearTransactionsCommand clearCommand = new ClearTransactionsCommand();
         assertEquals(clearCommand, new ClearTransactionsCommand());
+
+    }
+
+    @Test
+    public void sameClearTransactionsCommand_equalsTrue() {
+        ClearTransactionsCommand clearCommand = new ClearTransactionsCommand();
+        assertTrue(clearCommand.equals(clearCommand));
+        assertTrue(clearCommand.equals(new ClearTransactionsCommand()));
 
     }
 
@@ -47,6 +57,8 @@ public class ClearTransactionsCommandTest {
         Command resetCommand = new ResetCommand();
         Command clearCommand = new ClearTransactionsCommand();
         assertNotEquals(resetCommand, clearCommand);
+        assertFalse(clearCommand.equals(resetCommand));
+        assertFalse(clearCommand.equals(new ResetCommand()));
     }
 
     @Test

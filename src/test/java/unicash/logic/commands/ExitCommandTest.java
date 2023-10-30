@@ -1,7 +1,9 @@
 package unicash.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static unicash.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import org.junit.jupiter.api.Test;
@@ -29,19 +31,22 @@ public class ExitCommandTest {
     public void sameExitCommand_equalsTrue() {
         ExitCommand exitCommand = new ExitCommand();
         assertEquals(exitCommand, new ExitCommand());
+        assertTrue(exitCommand.equals(new ExitCommand()));
 
     }
 
     @Test
     public void differentCommandTypes_equalsFalse() {
         Command resetCommand = new ResetCommand();
-        Command clearCommand = new ClearTransactionsCommand();
-        assertNotEquals(resetCommand, clearCommand);
+        Command exitCommand = new ExitCommand();
+        assertNotEquals(resetCommand, exitCommand);
+        assertFalse(exitCommand.equals(resetCommand));
     }
 
     @Test
     public void nullInput_equalsFalse() {
         assertNotEquals(null, new ExitCommand());
+        assertFalse(new ExitCommand().equals(null));
     }
 
     @Test
