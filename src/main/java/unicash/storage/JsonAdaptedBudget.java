@@ -2,17 +2,24 @@ package unicash.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import unicash.commons.exceptions.IllegalValueException;
 import unicash.model.budget.Budget;
 import unicash.model.budget.Interval;
 import unicash.model.commons.Amount;
 
+/**
+ * {@code Budget} adapted to be exported to JSON.
+ */
 public class JsonAdaptedBudget {
     public static final String MISSING_FIELD_FORMAT = "Budget's %s field is missing!";
 
     private final double amount;
     private final String interval;
 
+    /**
+     * Creates budget.
+     */
     @JsonCreator
     public JsonAdaptedBudget(
             @JsonProperty("amount") double amount,
@@ -22,11 +29,19 @@ public class JsonAdaptedBudget {
         this.interval = interval;
     }
 
+    /**
+     * Creates budget based on another {@code budget}.
+     */
     public JsonAdaptedBudget(Budget budget) {
         amount = budget.getAmount().amount;
         interval = budget.getInterval().interval.getOriginalString();
     }
 
+    /**
+     * Converts {@code JsonAdaptedBudget} to {@code Budget} while performing validation.
+     *
+     * @throws IllegalValueException if there were any data constraint violations.
+     */
     public Budget toModelType() throws IllegalValueException {
         if (!Amount.isValidAmount(amount)) {
             throw new IllegalValueException(Amount.MESSAGE_CONSTRAINTS);

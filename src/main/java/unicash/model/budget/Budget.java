@@ -1,5 +1,6 @@
 package unicash.model.budget;
 
+import static java.util.Objects.requireNonNull;
 import static unicash.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
@@ -26,7 +27,13 @@ public class Budget {
         this.interval = interval;
     }
 
+    /**
+     * Creates {@code Budget} from a given {@code other} budget.
+     *
+     * @throws NullPointerException if {@code other} is null.
+     */
     public Budget(Budget other) {
+        requireNonNull(other);
         amount = new Amount(other.getAmount().amount);
         interval = new Interval(other.getInterval().interval.getOriginalString());
     }
