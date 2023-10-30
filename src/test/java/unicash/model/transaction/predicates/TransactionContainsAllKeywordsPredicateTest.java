@@ -23,6 +23,16 @@ public class TransactionContainsAllKeywordsPredicateTest {
     private static TransactionContainsAllKeywordsPredicate predicate =
             new TransactionContainsAllKeywordsPredicate();
 
+    private static Transaction testTransaction = new TransactionBuilder()
+            .withName("food")
+            .withAmount(10.00)
+            .withCategories("social")
+            .withDateTime("10-08-2023 10:00")
+            .withLocation("mcdonalds")
+            .withType("expense")
+            .build();
+
+
     @BeforeEach
     public void resetPredicate() {
         predicate = new TransactionContainsAllKeywordsPredicate();
@@ -129,16 +139,6 @@ public class TransactionContainsAllKeywordsPredicateTest {
         localPredicate.addLocationKeyword("mcdonalds");
         localPredicate.addDateTimeKeyword("10 Aug 2023 10:00"); // Input must be display i.e. toString format
 
-        Transaction testTransaction = new TransactionBuilder()
-                .withName("food")
-                .withAmount(10.00)
-                .withCategories("social")
-                .withDateTime("10-08-2023 10:00")
-                .withLocation("mcdonalds")
-                .withType("expense")
-                .build();
-
-
         assertTrue(localPredicate.test(testTransaction));
     }
 
@@ -154,15 +154,14 @@ public class TransactionContainsAllKeywordsPredicateTest {
         localPredicate.addLocationKeyword("mcdonalds");
         localPredicate.addDateTimeKeyword("10-08-2023 10:00");
 
-        Transaction testTransaction = new TransactionBuilder()
-                .withName("food")
-                .withAmount(10.00)
-                .withCategories("social")
-                .withDateTime("10-08-2023 10:00")
-                .withLocation("mcdonalds")
-                .withType("expense")
-                .build();
+        assertFalse(localPredicate.test(testTransaction));
+    }
 
+
+    @Test
+    public void testTransaction_predicateListEmpty_returnFalse() {
+        TransactionContainsAllKeywordsPredicate localPredicate =
+                new TransactionContainsAllKeywordsPredicate();
 
         assertFalse(localPredicate.test(testTransaction));
     }
