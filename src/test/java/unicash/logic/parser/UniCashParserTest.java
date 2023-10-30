@@ -34,7 +34,6 @@ import unicash.logic.commands.SummaryCommand;
 import unicash.logic.parser.exceptions.ParseException;
 import unicash.model.transaction.Transaction;
 import unicash.model.transaction.predicates.TransactionContainsKeywordsPredicate;
-import unicash.model.util.SampleDataUtil;
 import unicash.testutil.EditTransactionDescriptorBuilder;
 import unicash.testutil.TransactionBuilder;
 import unicash.testutil.TransactionUtil;

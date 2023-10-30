@@ -16,7 +16,6 @@ import unicash.commons.util.JsonUtil;
 import unicash.model.ReadOnlyUniCash;
 import unicash.model.UniCash;
 import unicash.model.util.SampleDataUtil;
-import unicash.testutil.TypicalTransactions;
 
 public class JsonSerializableUniCashTest {
 
