@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import unicash.commons.exceptions.IllegalValueException;
 import unicash.model.ReadOnlyUniCash;
 import unicash.model.UniCash;
-import unicash.model.budget.Budget;
 import unicash.model.transaction.Transaction;
 
 /**

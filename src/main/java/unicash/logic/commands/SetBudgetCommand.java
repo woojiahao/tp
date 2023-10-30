@@ -10,7 +10,6 @@ import unicash.commons.util.ExampleGenerator;
 import unicash.commons.util.ToStringBuilder;
 import unicash.logic.UniCashMessages;
 import unicash.logic.commands.exceptions.CommandException;
-import unicash.logic.parser.CliSyntax;
 import unicash.model.Model;
 import unicash.model.budget.Budget;
 

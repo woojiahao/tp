@@ -34,7 +34,7 @@ public class AmountTest {
     }
 
     @Test
-    public void constructor_stringAmountWithoutLeading$_returnsValidAmount() {
+    public void constructor_stringAmountWithoutLeadingIndicator_returnsValidAmount() {
         assertEquals(new Amount(14.47), new Amount("14.47"));
     }
 
@@ -71,7 +71,7 @@ public class AmountTest {
     }
 
     @Test
-    public void isValidAmount_stringAmountWithLeading$WithinRange_returnsTrue() {
+    public void isValidAmount_stringAmountWithLeadingIndicatorWithinRange_returnsTrue() {
         assertTrue(Amount.isValidAmount("$" + 0.000));
         assertTrue(Amount.isValidAmount("$" + 10));
         assertTrue(Amount.isValidAmount("$" + 12.13));
@@ -80,7 +80,7 @@ public class AmountTest {
     }
 
     @Test
-    public void isValidAmount_stringAmountWithoutLeading$WithinRange_returnsTrue() {
+    public void isValidAmount_stringAmountWithoutLeadingIndicatorWithinRange_returnsTrue() {
         assertTrue(Amount.isValidAmount(String.valueOf(0.000)));
         assertTrue(Amount.isValidAmount(String.valueOf(10)));
         assertTrue(Amount.isValidAmount(String.valueOf(12.13)));
@@ -89,7 +89,7 @@ public class AmountTest {
     }
 
     @Test
-    public void isValidAmount_stringAmountWithLeading$OutOfRange_returnsFalse() {
+    public void isValidAmount_stringAmountWithLeadingIndicatorOutOfRange_returnsFalse() {
         assertFalse(Amount.isValidAmount("$" + -1));
         assertFalse(Amount.isValidAmount("$" + -0.000001));
         assertFalse(Amount.isValidAmount("$" + Integer.MIN_VALUE));
@@ -98,7 +98,7 @@ public class AmountTest {
     }
 
     @Test
-    public void isValidAmount_stringAmountWithoutLeading$OutOfRange_returnsFalse() {
+    public void isValidAmount_stringAmountWithoutLeadingIndicatorOutOfRange_returnsFalse() {
         assertFalse(Amount.isValidAmount(String.valueOf(-1)));
         assertFalse(Amount.isValidAmount(String.valueOf(-0.000001)));
         assertFalse(Amount.isValidAmount(String.valueOf(Integer.MIN_VALUE)));
