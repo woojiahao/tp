@@ -70,21 +70,4 @@ class JsonSerializableUniCash {
         return uniCash;
     }
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == null) {
-            return false;
-        }
-
-        if (!(other instanceof JsonSerializableUniCash)) {
-            return false;
-        }
-
-        var otherInstance = (JsonSerializableUniCash) other;
-        if (budget == null) {
-            return transactions.equals(otherInstance.transactions) && otherInstance.budget == null;
-        }
-        return transactions.equals(otherInstance.transactions) && budget.equals(otherInstance.budget);
-    }
-
 }
