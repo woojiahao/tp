@@ -158,7 +158,7 @@ public class UniCashParserTest {
     }
 
     @Test
-    public void parseCommand_addBudget() throws Exception {
+    public void parseCommand_setBudget() throws Exception {
         String validCommand = "set_budget " + PREFIX_AMOUNT + MONTHLY.getAmount().toString() + " "
                 + PREFIX_INTERVAL + MONTHLY.getInterval().toString();
         SetBudgetCommand command = (SetBudgetCommand) parser.parseCommand(validCommand);

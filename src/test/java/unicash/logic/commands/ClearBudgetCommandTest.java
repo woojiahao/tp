@@ -33,13 +33,13 @@ public class ClearBudgetCommandTest {
     }
 
     @Test
-    public void execute_validModel_returnsSuccess() {
+    public void execute_validModel_returnsNoBudgetSuccessMessage() {
         var model = getModel();
         model.setBudget(MONTHLY);
         assertEquals(MONTHLY, model.getBudget());
         var command = new ClearBudgetCommand();
         command.execute(model);
-        assertCommandSuccess(command, model, ClearBudgetCommand.MESSAGE_SUCCESS, getModel());
+        assertCommandSuccess(command, model, ClearBudgetCommand.MESSAGE_NO_BUDGET, getModel());
     }
 
     @Test
