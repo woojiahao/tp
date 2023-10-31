@@ -15,5 +15,4 @@ public class CliSyntax {
     public static final Prefix PREFIX_MONTH = new Prefix("month/");
     public static final Prefix PREFIX_YEAR = new Prefix("year/");
     public static final Prefix PREFIX_INTERVAL = new Prefix("interval/");
-
 }
