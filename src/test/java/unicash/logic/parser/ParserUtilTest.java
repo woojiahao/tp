@@ -14,6 +14,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import unicash.logic.parser.exceptions.ParseException;
+import unicash.model.budget.Interval;
 import unicash.model.category.Category;
 import unicash.model.category.UniqueCategoryList;
 import unicash.model.commons.Amount;
@@ -28,6 +29,7 @@ public class ParserUtilTest {
     private static final String INVALID_DATETIME = "18-8-2001";
     private static final String INVALID_CATEGORY = "$$af$";
     private static final String INVALID_LOCATION = "^$2af";
+    private static final String INVALID_INTERVAL = "others";
 
     private static final String VALID_NAME = "Expense";
     private static final String VALID_AMOUNT = "3.0";
@@ -39,6 +41,7 @@ public class ParserUtilTest {
     private static final String VALID_CATEGORY_5 = "test3";
     private static final String VALID_CATEGORY_6 = "test4";
     private static final String VALID_LOCATION = "orchard road";
+    private static final String VALID_INTERVAL = "day";
     private static final String WHITESPACE = " \t\r\n";
 
     @Test
@@ -129,6 +132,29 @@ public class ParserUtilTest {
         String value = "  income   ";
         Type expected = new Type("income");
         assertEquals(expected, ParserUtil.parseType(value));
+    }
+
+    @Test
+    public void parseInterval_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseInterval(null));
+    }
+
+    @Test
+    public void parseInterval_invalidInterval_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseInterval(INVALID_INTERVAL));
+    }
+
+    @Test
+    public void parseInterval_validValueWithoutWhitespace_returnsInterval() throws ParseException {
+        var expected = new Interval(VALID_INTERVAL);
+        assertEquals(expected, ParserUtil.parseInterval(VALID_INTERVAL));
+    }
+
+    @Test
+    public void parseInterval_validValueWithWhitespace_returnsTrimmedInterval() throws ParseException {
+        var value = "  " + VALID_INTERVAL + "  ";
+        var expected = new Interval(VALID_INTERVAL);
+        assertEquals(expected, ParserUtil.parseInterval(value));
     }
 
     @Test
