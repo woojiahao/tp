@@ -792,19 +792,22 @@ Walkthrough of how to run a command with visual guides
 
 ### Features Overview
 
-For UniCa$h, we have developed and implemented 4 main groups of commands. These are: 
+For UniCa$h, we have developed and implemented 4 main groups of features. These are: 
 
-The Transaction Commands:
+The Transaction Management Commands:
 - Add Transaction
 - Delete Transaction
-- Find Transactions
-- Get Transaction
+- Edit Transaction
 - List Transactions
+- Get Transaction
+- Find Transactions
+- Filter Transactions
 - Clear All Transactions
 
-The Financial Statistics Commands:
-- Get Total Expenditure 
+The Financial Statistics Features:
+- Get Total Expenditure
 - Summary Statistics
+- Rolling Balance Indicator
 
 The General Utility Commands:
 - Show Help
@@ -815,6 +818,10 @@ The instructions for the usage of each command within each feature group are ela
 
 
 ### 4.1 Transaction Commands
+
+The _Transaction Commands_ feature group pertains directly to the management of personal finances by the user,
+allowing the user to perform actions that directly involve transactions, such as - amongst other - adding, deleting and
+editing transactions.
 
 #### 4.1.1 AddTransactionCommand
 
@@ -928,9 +935,9 @@ Important notes:
 > > <img src="images/unicash/command-outputs/addTransactionFailedOutput3.png" width="1000" />
 
 
-#### 4.1.3 EditTransactionCommand
+#### 4.1.2 EditTransactionCommand
 
-#### 4.1.4 DeleteTransactionCommand
+#### 4.1.3 DeleteTransactionCommand
 
 Deletes a `Transaction` from UniCa$h.
 
@@ -1040,9 +1047,7 @@ considered an equivalent command word.
 > ```
 > <img src="images/unicash/command-outputs/deleteTransaction/deleteFail2.png" width="1000" />
 
-#### 4.1.5 FindCommand
-
-#### 4.1.6 GetCommand
+#### 4.1.4 GetCommand
 
 Retrieves a `Transaction` from UniCa$h.
 
@@ -1151,15 +1156,42 @@ Important notes:
 > ```
 > <img src="images/unicash/command-outputs/getTransaction/getFail2.png" width="1000" />
 
+#### 4.1.5 FindCommand
+
+Searches UniCa$h for a list of `Transactions`, where any of whose properties match the given keyword.
+
+Command: `find <KEYWORD> [KEYWORDS..]`
+
+Command Word: `find` (case-insensitive)
+
+Command Arguments:
+
+| Arguments       | Optional? | Purpose                            |
+|-----------------|-----------|------------------------------------|
+| `<KEYWORD>`     | No        | The keyword to be searched         |
+| `[KEYWORDS...]` | Yes       | Additional keywords to be searched |
+
+Important notes:
+1. The `find` command word is case-insensitive, thus `FIND` is
+   considered an equivalent command word.
+
+2. Find is intended to simulate a fuzzy finder and while it might seem 
+
+
+#### 4.1.6 FilterCommand
+
+
 #### 4.1.7 ListCommand
 
 #### 4.1.8 ClearTransactionsCommand
 
-### 4.2 Financial Statistics Commands
+### 4.2 Financial Statistics Features
 
 #### 4.2.1 GetTotalExpenditureCommand
 
 #### 4.2.2 SummaryCommand
+
+#### 4.2.3 Rolling Balance Indicator
 
 ### 4.3 General Utility Commands
 
