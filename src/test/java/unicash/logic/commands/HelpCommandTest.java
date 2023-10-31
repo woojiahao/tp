@@ -143,6 +143,30 @@ public class HelpCommandTest {
     }
 
     @Test
+    public void execute_getBudgetCommand_success() {
+        Model model = new ModelManager();
+        Model expectedModel = new ModelManager();
+
+        CommandResult expectedCommandResult =
+                new CommandResult(GetBudgetCommand.MESSAGE_USAGE);
+
+        assertCommandSuccess(new HelpCommand(CommandType.GET_BUDGET.getMainCommandWord()),
+                model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void execute_clearBudgetCommand_success() {
+        Model model = new ModelManager();
+        Model expectedModel = new ModelManager();
+
+        CommandResult expectedCommandResult =
+                new CommandResult(ClearBudgetCommand.MESSAGE_USAGE);
+
+        assertCommandSuccess(new HelpCommand(CommandType.CLEAR_BUDGET.getMainCommandWord()),
+                model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
     public void execute_resetCommand_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
