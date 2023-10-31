@@ -16,7 +16,7 @@ import unicash.model.ModelManager;
 public class HelpCommandTest {
 
     @Test
-    public void constructor_nullTransaction_throwsNullPointerException() {
+    public void constructor_nullInput_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new HelpCommand(null));
     }
 

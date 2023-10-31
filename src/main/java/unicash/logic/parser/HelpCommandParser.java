@@ -1,7 +1,8 @@
 package unicash.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+
 import unicash.logic.commands.HelpCommand;
-import unicash.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments for the list command.
@@ -10,12 +11,10 @@ public class HelpCommandParser implements Parser<HelpCommand> {
 
     /**
      * Parses {@code userInput} into a command and returns it.
-     *
-     * @throws ParseException if {@code userInput} does not conform the expected format
      */
     @Override
     public HelpCommand parse(String userInput) {
-        assert userInput != null : "userInput cannot be null";
+        requireNonNull(userInput);
         String trimmed = userInput.trim();
         return new HelpCommand(trimmed);
     }

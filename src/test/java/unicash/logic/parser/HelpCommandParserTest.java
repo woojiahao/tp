@@ -18,7 +18,7 @@ public class HelpCommandParserTest {
 
     @Test
     public void parse_withNullInput_assertionFailure() {
-        assertThrows(AssertionError.class, () -> parser.parse(null));
+        assertThrows(NullPointerException.class, () -> parser.parse(null));
 
     }
 
