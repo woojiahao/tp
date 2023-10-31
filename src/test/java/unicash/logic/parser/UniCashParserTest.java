@@ -49,8 +49,6 @@ public class UniCashParserTest {
     @Test
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
-        assertThrows(ParseException.class, ExitCommand.MESSAGE_FAILURE, () -> parser.parseCommand(
-                ExitCommand.COMMAND_WORD + " 3"));
     }
 
     @Test
@@ -143,9 +141,6 @@ public class UniCashParserTest {
         assertTrue(parser.parseCommand(
                 ExitCommand.COMMAND_WORD) instanceof ExitCommand);
 
-        String message = ExitCommand.MESSAGE_FAILURE;
-        assertThrows(ParseException.class, message, () -> parser.parseCommand(
-                ExitCommand.COMMAND_WORD + " 3"));
     }
 
     @Test
