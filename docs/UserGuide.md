@@ -790,6 +790,30 @@ Walkthrough of how to run a command with visual guides
 
 ## 4. Features
 
+### Features Overview
+
+For UniCa$h, we have developed and implemented 4 main groups of commands. These are: 
+
+The Transaction Commands:
+- Add Transaction
+- Delete Transaction
+- Find Transactions
+- Get Transaction
+- List Transactions
+- Clear All Transactions
+
+The Financial Statistics Commands:
+- Get Total Expenditure 
+- Summary Statistics
+
+The General Utility Commands:
+- Show Help
+- Reset UniCa$h
+- Exit UniCa$h
+
+The instructions for the usage of each command within each feature group are elaborated in this section below.
+
+
 ### 4.1 Transaction Commands
 
 #### 4.1.1 AddTransactionCommand
@@ -1131,7 +1155,7 @@ Important notes:
 
 #### 4.1.8 ClearTransactionsCommand
 
-### 4.2 Summary Commands
+### 4.2 Financial Statistics Commands
 
 #### 4.2.1 GetTotalExpenditureCommand
 
