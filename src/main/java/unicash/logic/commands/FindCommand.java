@@ -21,13 +21,14 @@ public class FindCommand extends Command {
             .setCommandWord(COMMAND_WORD)
             .setDescription(
                     "Finds transactions in UniCa$h."
-                            + "\n\nFinds any transactions whose name, amount, type, date-time, location, and categories "
-                            + "contain any of the specified keywords (case-insensitive). At least one keyword "
-                            + "must be specified. "
+                            + "\n\nFinds any transactions whose name, amount, type, date-time, location, "
+                            + "or categories contain any of the specified keywords (case-insensitive). "
+                            + "At least one keyword must be specified. "
                             + "\n\n"
                             + "Any number of keywords can be specified and each keyword will be searched "
-                            + "individually for all properties except date-time, amount, and type, for which "
-                            + "the entire input will be searched as a single substring of these properties. "
+                            + "individually for name, location, and categories. For date-time, amount, and type "
+                            + "properties, the input keywords will be concatenated into a single string and "
+                            + "searched as a single keyword."
             )
             .setArgument("Keyword [More keywords]...")
             .setExample(ExampleGenerator.generate(COMMAND_WORD, "chicken rice"))
