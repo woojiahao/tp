@@ -3,9 +3,9 @@ package unicash.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static unicash.model.util.SampleDataUtil.getSampleUniCash;
 
-import unicash.commons.util.ToStringBuilder;
 import unicash.commons.util.CommandUsage;
 import unicash.commons.util.ExampleGenerator;
+import unicash.commons.util.ToStringBuilder;
 import unicash.model.Model;
 
 /**

@@ -66,11 +66,11 @@ public class ResetCommandTest {
 
     @Test
     public void differentCommandTypes_equalsFalse() {
-        Command helpCommand = new HelpCommand();
         Command resetCommand = new ResetCommand();
-        assertNotEquals(helpCommand, resetCommand);
-        assertFalse(resetCommand.equals(helpCommand));
-        assertFalse(resetCommand.equals(new HelpCommand()));
+        Command clearCommand = new ClearTransactionsCommand();
+        assertNotEquals(resetCommand, clearCommand);
+        assertFalse(clearCommand.equals(resetCommand));
+        assertFalse(resetCommand.equals(new ClearTransactionsCommand()));
     }
 
     @Test

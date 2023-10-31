@@ -105,24 +105,11 @@ public class HelpCommand extends Command {
         return target.equals(otherCommand.target);
     }
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof HelpCommand)) {
-            return false;
-        }
-
-        return other instanceof HelpCommand;
-
-    }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("target", target)
                 .toString();
     }
 }
