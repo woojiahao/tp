@@ -18,7 +18,7 @@ public class ListCommandParser implements Parser<ListCommand> {
     @Override
     public ListCommand parse(String userInput) throws ParseException {
         assert userInput != null : "userInput cannot be null";
-        //list command must not have any additional arguments
+        // list command must not have any additional arguments
         if (!userInput.trim().isBlank()) {
             throw new ParseException(ListCommand.MESSAGE_FAILURE);
         }
