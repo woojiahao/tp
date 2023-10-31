@@ -103,6 +103,13 @@ public class UniCash implements ReadOnlyUniCash {
     }
 
     /**
+     * Returns true if there are transactions of type "expense", and false otherwise
+     */
+    public boolean hasExpenses() {
+        return !getAllExpenses().isEmpty();
+    }
+
+    /**
      * Returns the expense amount per yearmonth. (E.g. 2023 Jan, 2023 Feb, 2024 Jan, etc.)
      * Note: This function ignores all 'income' transactions
      */

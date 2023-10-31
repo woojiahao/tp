@@ -24,7 +24,7 @@ public class SummaryCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        if (!model.getFilteredTransactionList().isEmpty()) {
+        if (model.hasExpenses()) {
             return new CommandResult(SHOWING_SUMMARY_MESSAGE, false, false, true);
         } else {
             return new CommandResult(NOT_SHOWING_SUMMARY_MESSAGE, false, false, false);

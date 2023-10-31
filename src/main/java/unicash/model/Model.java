@@ -118,4 +118,9 @@ public interface Model {
      * Returns the total expense per year-month
      */
     HashMap<YearMonth, Double> getExpenseSummaryPerYearMonth();
+
+    /**
+     * Returns true if there are transactions of type "expense", and false otherwise
+     */
+    boolean hasExpenses();
 }

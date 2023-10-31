@@ -183,6 +183,11 @@ public class AddBudgetCommandTest {
         public HashMap<YearMonth, Double> getExpenseSummaryPerYearMonth() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean hasExpenses() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     private class ModelStubAcceptingBudgetAdded extends AddBudgetCommandTest.ModelStub {

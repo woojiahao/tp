@@ -135,6 +135,48 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasExpenses_noExpenses_success() {
+        // When there is income
+        UniCash uniCashWithIncome = new UniCashBuilder()
+                .withTransaction(BUYING_GROCERIES)
+                .build();
+        UserPrefs userPrefs = new UserPrefs();
+        modelManager = new ModelManager(uniCashWithIncome, userPrefs);
+
+        assertFalse(modelManager.hasExpenses());
+
+        // When there is no income and no expenses
+        UniCash uniCashNoIncome = new UniCashBuilder()
+                .build();
+        modelManager = new ModelManager(uniCashNoIncome, userPrefs);
+
+        assertFalse(modelManager.hasExpenses());
+    }
+
+    @Test
+    public void hasExpenses_hasExpensesAndIncome_success() {
+        // When there are both income and expenses
+        UniCash uniCashWithIncome = new UniCashBuilder()
+                .withTransaction(NUS)
+                .withTransaction(INTERN)
+                .withTransaction(BUYING_GROCERIES)
+                .build();
+        UserPrefs userPrefs = new UserPrefs();
+        modelManager = new ModelManager(uniCashWithIncome, userPrefs);
+
+        assertTrue(modelManager.hasExpenses());
+
+        // When there are only expenses
+        UniCash uniCashWithoutIncome = new UniCashBuilder()
+                .withTransaction(NUS)
+                .withTransaction(INTERN)
+                .build();
+        modelManager = new ModelManager(uniCashWithoutIncome, userPrefs);
+
+        assertTrue(modelManager.hasExpenses());
+    }
+
+    @Test
     public void setBudget_nullBudget_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.setBudget(null));
     }

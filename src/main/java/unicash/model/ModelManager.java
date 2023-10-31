@@ -149,6 +149,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasExpenses() {
+        return uniCash.hasExpenses();
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;

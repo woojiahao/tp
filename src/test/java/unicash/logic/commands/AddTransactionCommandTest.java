@@ -181,6 +181,11 @@ public class AddTransactionCommandTest {
         public HashMap<YearMonth, Double> getExpenseSummaryPerYearMonth() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean hasExpenses() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
