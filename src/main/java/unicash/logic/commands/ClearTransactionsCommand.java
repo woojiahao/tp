@@ -3,6 +3,7 @@ package unicash.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import unicash.commons.enums.CommandType;
+import unicash.commons.util.ExampleGenerator;
 import unicash.model.Model;
 import unicash.model.UniCash;
 
