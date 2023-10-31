@@ -11,7 +11,7 @@ import unicash.commons.enums.BudgetInterval;
 public class Interval {
 
     public static final String MESSAGE_CONSTRAINTS =
-            String.format("Transaction must be of the following intervals: %s", BudgetInterval.listBudgetIntervals());
+            String.format("Interval value must be one of the following: %s", BudgetInterval.listBudgetIntervals());
 
     public final BudgetInterval interval;
 

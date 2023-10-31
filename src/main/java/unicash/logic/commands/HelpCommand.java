@@ -66,8 +66,8 @@ public class HelpCommand extends Command {
         case ClearTransactionsCommand.COMMAND_WORD:
             return new CommandResult(ClearTransactionsCommand.MESSAGE_USAGE);
 
-        case AddBudgetCommand.COMMAND_WORD:
-            return new CommandResult(AddBudgetCommand.MESSAGE_USAGE);
+        case SetBudgetCommand.COMMAND_WORD:
+            return new CommandResult(SetBudgetCommand.MESSAGE_USAGE);
 
         case ResetCommand.COMMAND_WORD:
             return new CommandResult(ResetCommand.MESSAGE_USAGE);
