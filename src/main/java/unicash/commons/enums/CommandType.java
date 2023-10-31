@@ -20,7 +20,7 @@ import unicash.logic.parser.CliSyntax;
  */
 public enum CommandType {
 
-    ADD_TRANSACTION("add", "add_transaction", "add_t", "add_trans", "new_transaction") {
+    ADD_TRANSACTION("add", "add_transaction", "at") {
         @Override
         public String getMessageUsage() {
             return new CommandUsage.Builder()
@@ -52,7 +52,7 @@ public enum CommandType {
             return "New transaction added: \n\n%1$s";
         }
     },
-    ADD_BUDGET("set_budget", "add_budget", "add_b") {
+    ADD_BUDGET("set_budget", "add_budget", "sb") {
         @Override
         public String getMessageUsage() {
             return getCommandWords() + ": Adds a budget to UniCa$h. \n"
@@ -71,7 +71,7 @@ public enum CommandType {
             return "New budget added: \n\n%1$s";
         }
     },
-    CLEAR_TRANSACTIONS("clear", "clear_transactions", "clear_trans", "clear_t") {
+    CLEAR_TRANSACTIONS("clear", "clear_transactions", "ct") {
         @Override
         public String getMessageUsage() {
             return getCommandWords() + ": Clears all transactions from UniCa$h.";
@@ -82,7 +82,7 @@ public enum CommandType {
             return "All transactions have been cleared!";
         }
     },
-    DELETE_TRANSACTION("delete", "delete_transaction", "delete_t", "del_t", "del") {
+    DELETE_TRANSACTION("delete", "delete_transaction", "del") {
         @Override
         public String getMessageUsage() {
             return new CommandUsage.Builder()
@@ -102,7 +102,7 @@ public enum CommandType {
             return "Deleted Transaction:\n\n%1$s";
         }
     },
-    EDIT_TRANSACTION("edit", "edit_transaction", "edit_t") {
+    EDIT_TRANSACTION("edit", "edit_transaction", "et") {
         @Override
         public String getMessageUsage() {
             return new CommandUsage.Builder()
@@ -193,7 +193,7 @@ public enum CommandType {
                     + "\n\n%2$s";
         }
     },
-    GET_TOTAL_EXPENDITURE("get_total_expenditure", "get_expenditure", "get_total_exp", "get_exp") {
+    GET_TOTAL_EXPENDITURE("get_total_expenditure", "get_total_exp", "gte") {
         @Override
         public String getMessageUsage() {
             return new CommandUsage.Builder()
@@ -230,7 +230,7 @@ public enum CommandType {
             return "Showing help page ...";
         }
     },
-    LIST("list", "list_transactions", "l") {
+    LIST("list", "list_transactions", "ls") {
         @Override
         public String getMessageUsage() {
             return new CommandUsage.Builder()
@@ -246,7 +246,8 @@ public enum CommandType {
             return "Listed all transactions.";
         }
     },
-    RESET("reset", "reset_unicash", "reset_u") {
+    //no shorter commands for this so that the user does not accidentally reset
+    RESET("reset", "reset_unicash") {
         @Override
         public String getMessageUsage() {
             return getCommandWords() + ": Resets UniCa$h.";
