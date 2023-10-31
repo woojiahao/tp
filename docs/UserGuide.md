@@ -1158,25 +1158,6 @@ Important notes:
 
 #### 4.1.5 FindCommand
 
-Searches UniCa$h for a list of `Transactions`, where any of whose properties match the given keyword.
-
-Command: `find <KEYWORD> [KEYWORDS..]`
-
-Command Word: `find` (case-insensitive)
-
-Command Arguments:
-
-| Arguments       | Optional? | Purpose                            |
-|-----------------|-----------|------------------------------------|
-| `<KEYWORD>`     | No        | The keyword to be searched         |
-| `[KEYWORDS...]` | Yes       | Additional keywords to be searched |
-
-Important notes:
-1. The `find` command word is case-insensitive, thus `FIND` is
-   considered an equivalent command word.
-
-2. Find is intended to simulate a fuzzy finder and while it might seem 
-
 
 #### 4.1.6 FilterCommand
 
