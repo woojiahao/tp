@@ -46,7 +46,13 @@ public class UniCashMessages {
             + CommandType.GET_TOTAL_EXPENDITURE.getMainCommandWord()
             + "\n"
             + CommandType.SUMMARY.getMainCommandWord()
+            + "\n"
+            + CommandType.SET_BUDGET.getMainCommandWord()
+            + "\n"
+            + CommandType.GET_BUDGET.getMainCommandWord()
             + "\n\n"
+            + CommandType.CLEAR_BUDGET.getMainCommandWord()
+            + "\n"
             + CommandType.CLEAR_TRANSACTIONS.getMainCommandWord()
             + "\n"
             + CommandType.RESET.getMainCommandWord()

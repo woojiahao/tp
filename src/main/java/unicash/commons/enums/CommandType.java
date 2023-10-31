@@ -56,7 +56,7 @@ public enum CommandType {
         @Override
         public String getMessageUsage() {
             return new CommandUsage.Builder()
-                    .setCommandWord(getMainCommandWord())
+                    .setCommandWord(getCommandWords())
                     .setDescription("Sets the user's budget on UniCa$h.")
                     .addParameter(PREFIX_AMOUNT, "Amount")
                     .addParameter(PREFIX_INTERVAL, "Interval")
@@ -91,7 +91,7 @@ public enum CommandType {
         @Override
         public String getMessageUsage() {
             return new CommandUsage.Builder()
-                    .setCommandWord(getMainCommandWord())
+                    .setCommandWord(getCommandWords())
                     .setDescription(
                             "Retrieves the budget and the spending over the given interval.\n"
                                     + "If you are missing transactions, consider using list first."
@@ -116,7 +116,7 @@ public enum CommandType {
         @Override
         public String getMessageUsage() {
             return new CommandUsage.Builder()
-                    .setCommandWord(getMainCommandWord())
+                    .setCommandWord(getCommandWords())
                     .setDescription("Clears all existing transactions.")
                     .setExample(ExampleGenerator.generate(getMainCommandWord()))
                     .build()
@@ -194,7 +194,7 @@ public enum CommandType {
         @Override
         public String getMessageUsage() {
             return new CommandUsage.Builder()
-                    .setCommandWord(getMainCommandWord())
+                    .setCommandWord(getCommandWords())
                     .setDescription("Exit from UniCa$h.")
                     .setExample(ExampleGenerator.generate(getMainCommandWord()))
                     .build()
@@ -269,12 +269,12 @@ public enum CommandType {
         @Override
         public String getMessageUsage() {
             return new CommandUsage.Builder()
-                    .setCommandWord(getMainCommandWord())
+                    .setCommandWord(getCommandWords())
                     .setDescription("Shows UniCa$h general usage instructions and specific command"
                             + " usage by specifying the command word.")
                     .setArgument("Command word specified must be a valid command word present in "
                             + "the help command")
-                    .setExample(ExampleGenerator.generate(getMainCommandWord(), "add_transaction"))
+                    .setExample(ExampleGenerator.generate(getMainCommandWord(), "add"))
                     .build()
                     .toString();
         }
@@ -305,7 +305,7 @@ public enum CommandType {
         @Override
         public String getMessageUsage() {
             return new CommandUsage.Builder()
-                    .setCommandWord(getMainCommandWord())
+                    .setCommandWord(getCommandWords())
                     .setDescription("Reset UniCa$h to its original state with pre-existing transactions.")
                     .setExample(ExampleGenerator.generate(getMainCommandWord()))
                     .build()
