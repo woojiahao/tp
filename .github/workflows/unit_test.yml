@@ -1,4 +1,4 @@
-name: Java CI
+name: Java Unit Tests
 
 on: [push, pull_request]
 
@@ -35,3 +35,7 @@ jobs:
 
       - name: Run unit tests
         run: ./gradlew test
+
+      - name: Run UI unit tests (on Windows only)
+        if: runner.os == 'Windows'
+        run: ./gradlew uiTest
