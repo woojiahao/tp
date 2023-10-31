@@ -934,7 +934,7 @@ considered an equivalent command word.
    `20` of those transactions are displayed in the current `Transactions List`, the maximum `INDEX` allowed
    would be `20`
 
-5. Given `2.` and `3.`, the maximum allowed `<INDEX>` is the smaller value of the two.
+5. Given `3.` and `4.`, the maximum allowed `<INDEX>` is the smaller value of the two.
 
 ##### Successful Execution
 
@@ -955,10 +955,10 @@ considered an equivalent command word.
 > Location: Clarke Quay;
 > Categories: #social
 > ```
-> Before:
-> <img src="images/unicash/command-outputs/deleteTransactionInitialState.png" width="1000" />
-> After:
-> <img src="images/unicash/command-outputs/deleteTransactionSuccess1FinalState.png" width="1000" />
+> Input:
+> <img src="images/unicash/command-outputs/deleteTransaction/deleteTransactionInitialState.png" width="1000" />
+> Output:
+> <img src="images/unicash/command-outputs/deleteTransaction/deleteTransactionSuccess1FinalState.png" width="1000" />
 
 ###### Example 2
 
@@ -977,9 +977,9 @@ considered an equivalent command word.
 > Location: Clementi Mall;
 > Categories: #food
 > ```
-> Before:
+> Input:
 > <img src="images/unicash/command-outputs/deleteTransaction/deleteTransactionInitialState2.png" width="1000" />
-> After:
+> Ouput:
 > <img src="images/unicash/command-outputs/deleteTransaction/deleteTransactionSuccess2FinalState.png" width="1000" />
 
 
@@ -1006,7 +1006,7 @@ considered an equivalent command word.
 ###### Example 2
 
 > **Case**: Invalid `<INDEX>` provided
-> (`<INDEX>`given as `10` given when only `5` transactions are presently displayed)
+> (`<INDEX>` given as `10` given when only `5` transactions are presently displayed)
 >
 > **Input**: `delete_transaction 10`
 >
@@ -1019,6 +1019,113 @@ considered an equivalent command word.
 #### 4.1.5 FindCommand
 
 #### 4.1.6 GetCommand
+
+Retrieves a `Transaction` from UniCa$h.
+
+Command: `get <INDEX>`
+
+Command Word: `get` (case-insensitive)
+
+Command Argument: `<INDEX>` is the displayed transaction index
+of the transaction to be retrieved, as shown in the `Transactions List`.
+
+| Arguments | Optional? | Purpose                                              |
+|-----------|-----------|------------------------------------------------------|
+| `<INDEX>` | No        | Transaction index of the transaction to be retrieved |
+
+Important notes:
+1. The `get` command word is case-insensitive, thus `GET` is
+   considered an equivalent command word.
+
+2. `<INDEX>` must be a positive integer, i.e. a number greater than 0.
+
+3. `<INDEX>` must be equal to or smaller than 2,147,483,647 which is the `Integer.MAX_VALUE` provided by Java 11.
+
+4. `<INDEX>` must be equal to or smaller than the largest displayed transaction index
+   of all transactions as shown in the `Transactions List`. Thus, even if there are `100` total transactions but only
+   `20` of those transactions are displayed in the current `Transactions List`, the maximum `INDEX` allowed
+   would be `20`
+
+5. Given `3.` and `4.`, the maximum allowed `<INDEX>` is the smaller value of the two.
+
+##### Successful Execution
+
+###### Example 1
+
+> **Case**: Retrieve a transaction with the correctly specified `<INDEX>`.
+>
+> **Input**: `get 5`
+>
+> **Output**:
+> ```
+> Transaction 5 retrieved:
+> 
+> Name: Taxi;
+> Type: expense;
+> Amount: $20.00;
+> Date: 18 Sep 2023 11:30;
+> Location: Bugis;
+> Categories: #transport
+> ```
+> Input:
+> <img src="images/unicash/command-outputs/getTransaction/getInitial1.png" width="1000" />
+> Ouput:
+> <img src="images/unicash/command-outputs/getTransaction/getSuccessFinal1.png" width="1000" />
+
+###### Example 2
+
+> **Case**: Retrieve a transaction with the currently not visible but correctly specified `<INDEX>`.
+>
+> **Input**: `get 1`
+>
+> **Output**:
+> ```
+> Transaction 1 retrieved:
+>
+> Name: Buy clothes;
+> Type: expense;
+> Amount: $109.00;
+> Date: 17 Sep 2023 18:30;
+> Location: Uniqlo Bugis;
+> Categories: #shopping
+> ```
+> Input:
+> <img src="images/unicash/command-outputs/getTransaction/getInitial2.png" width="1000" />
+> Ouput:
+> <img src="images/unicash/command-outputs/getTransaction/getSuccessFinal2.png" width="1000" />
+
+##### Failed Execution
+
+###### Example 1
+
+> **Case**: Missing compulsory fields.
+>
+> **Input**: `get`
+>
+> **Output**:
+> ```
+> Invalid command format! 
+>
+> get: Displays expanded details of a specific transaction.
+>
+> Argument: Index (must be a positive integer)
+>
+> Example: get 2
+> ```
+> <img src="images/unicash/command-outputs/getTransaction/getFail1.png" width="1000" />
+
+###### Example 2
+
+> **Case**: Invalid `<INDEX>` provided
+> (`<INDEX>` given as `10` given when only `5` transactions are presently displayed)
+>
+> **Input**: `get 10`
+>
+> **Output**:
+> ```
+> The transaction index provided is invalid
+> ```
+> <img src="images/unicash/command-outputs/getTransaction/getFail2.png" width="1000" />
 
 #### 4.1.7 ListCommand
 
