@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static unicash.testutil.Assert.assertThrows;
 import static unicash.testutil.TypicalBudgets.DAILY;
 import static unicash.testutil.TypicalBudgets.MONTHLY;
@@ -26,15 +27,15 @@ import unicash.model.UniCash;
 import unicash.model.budget.Budget;
 import unicash.model.transaction.Transaction;
 
-public class AddBudgetCommandTest {
+public class SetBudgetCommandTest {
     @Test
-    public void constructor_nullTransaction_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddBudgetCommand(null));
+    public void constructor_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new SetBudgetCommand(null));
     }
 
     @Test
     public void execute_nullModel_throwsNullPointerException() {
-        var command = new AddBudgetCommand(DAILY);
+        var command = new SetBudgetCommand(DAILY);
         assertThrows(NullPointerException.class, () -> command.execute(null));
     }
 
@@ -43,41 +44,46 @@ public class AddBudgetCommandTest {
         ModelStubAcceptingBudgetAdded modelStub = new ModelStubAcceptingBudgetAdded();
         Budget validBudget = DAILY;
 
-        CommandResult commandResult = new AddBudgetCommand(validBudget).execute(modelStub);
+        assertNull(modelStub.budget);
 
-        assertEquals(String.format(AddBudgetCommand.MESSAGE_SUCCESS,
-                UniCashMessages.formatBudget(validBudget)),
-                commandResult.getFeedbackToUser());
+        CommandResult commandResult = new SetBudgetCommand(validBudget).execute(modelStub);
+
+        var expected = String.format(
+                SetBudgetCommand.MESSAGE_SUCCESS,
+                UniCashMessages.formatBudget(validBudget)
+        );
+
+        assertEquals(expected, commandResult.getFeedbackToUser());
         assertEquals(validBudget, modelStub.budget);
     }
 
     @Test
     public void equals() {
-        AddBudgetCommand addBudgetCommand = new AddBudgetCommand(DAILY);
-        AddBudgetCommand addBudgetCommandCopy = new AddBudgetCommand(DAILY);
-        AddBudgetCommand addDifferentBudgetCommand = new AddBudgetCommand(WEEKLY);
+        SetBudgetCommand setBudgetCommand = new SetBudgetCommand(DAILY);
+        SetBudgetCommand setBudgetCommandCopy = new SetBudgetCommand(DAILY);
+        SetBudgetCommand addDifferentBudgetCommand = new SetBudgetCommand(WEEKLY);
 
         //same values -> returns true
-        assertEquals(addBudgetCommand, addBudgetCommandCopy);
+        assertEquals(setBudgetCommand, setBudgetCommandCopy);
 
         //same budget command -> returns true
-        assertEquals(addBudgetCommand, addBudgetCommand);
+        assertEquals(setBudgetCommand, setBudgetCommand);
 
         //null -> returns false
-        assertNotEquals(null, addBudgetCommand);
+        assertNotEquals(null, setBudgetCommand);
 
         //different type -> returns false
-        assertNotEquals(addDifferentBudgetCommand, addBudgetCommand);
+        assertNotEquals(addDifferentBudgetCommand, setBudgetCommand);
 
-        assertFalse(addBudgetCommand.equals(5));
+        assertFalse(setBudgetCommand.equals(5));
     }
 
     @Test
     public void toStringMethod() {
-        AddBudgetCommand addBudgetCommand = new AddBudgetCommand(DAILY);
+        SetBudgetCommand setBudgetCommand = new SetBudgetCommand(DAILY);
         String expected =
-                AddBudgetCommand.class.getCanonicalName() + "{budget=" + DAILY + "}";
-        assertEquals(expected, addBudgetCommand.toString());
+                SetBudgetCommand.class.getCanonicalName() + "{budget=" + DAILY + "}";
+        assertEquals(expected, setBudgetCommand.toString());
     }
 
     @Test
@@ -170,6 +176,11 @@ public class AddBudgetCommandTest {
         }
 
         @Override
+        public void clearBudget() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Budget getBudget() {
             throw new AssertionError("This method should not be called.");
         }
@@ -190,7 +201,7 @@ public class AddBudgetCommandTest {
         }
     }
 
-    private class ModelStubAcceptingBudgetAdded extends AddBudgetCommandTest.ModelStub {
+    private class ModelStubAcceptingBudgetAdded extends SetBudgetCommandTest.ModelStub {
         private Budget budget;
 
         public boolean hasBudget(Budget budget) {

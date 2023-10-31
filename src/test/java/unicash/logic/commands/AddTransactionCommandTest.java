@@ -168,6 +168,11 @@ public class AddTransactionCommandTest {
         }
 
         @Override
+        public void clearBudget() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Budget getBudget() {
             throw new AssertionError("This method should not be called.");
         }

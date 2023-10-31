@@ -1,5 +1,6 @@
 package unicash.model.budget;
 
+import static java.util.Objects.requireNonNull;
 import static unicash.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
@@ -12,9 +13,9 @@ import unicash.model.commons.Amount;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Budget {
+
     private Amount amount;
     private Interval interval;
-
 
     /**
      * Constructs a Budget with all fields populated.
@@ -24,6 +25,17 @@ public class Budget {
         requireAllNonNull(amount, interval);
         this.amount = amount;
         this.interval = interval;
+    }
+
+    /**
+     * Creates {@code Budget} from a given {@code other} budget.
+     *
+     * @throws NullPointerException if {@code other} is null.
+     */
+    public Budget(Budget other) {
+        requireNonNull(other);
+        amount = new Amount(other.getAmount().amount);
+        interval = new Interval(other.getInterval().interval.getOriginalString());
     }
 
     public Amount getAmount() {

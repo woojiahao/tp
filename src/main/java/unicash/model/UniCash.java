@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.time.YearMonth;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
@@ -22,21 +23,19 @@ public class UniCash implements ReadOnlyUniCash {
     private final TransactionList transactions;
     private Budget budget;
 
-    /*
-     * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
-     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
-     *
-     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
-     *   among constructors.
+    /**
+     * Creates UniCash instance with starting values of {@code TransactionList} and {@code Budget}.
      */
-    {
+    public UniCash() {
         transactions = new TransactionList();
+        // Null budget is equivalent to having no budget
+        budget = null;
     }
 
-    public UniCash() {}
-
     /**
-     * Creates an UniCash using the Transactions in the {@code toBeCopied}
+     * Creates an UniCash using the Transactions in the {@code toBeCopied}.
+     *
+     * <p>Sets default values before copying any values over using {@link #UniCash() constructor}.</p>
      */
     public UniCash(ReadOnlyUniCash toBeCopied) {
         this();
@@ -60,6 +59,9 @@ public class UniCash implements ReadOnlyUniCash {
         requireNonNull(newData);
 
         setTransactions(newData.getTransactionList());
+        if (newData.getBudget() != null) {
+            setBudget(newData.getBudget());
+        }
     }
 
     //// Transaction-level operations
@@ -129,9 +131,24 @@ public class UniCash implements ReadOnlyUniCash {
         return sumPerMonth;
     }
 
+    /**
+     * Set budget.
+     *
+     * @throws NullPointerException if {@code budget} is null.
+     */
     public void setBudget(Budget budget) {
         requireNonNull(budget);
         this.budget = budget;
+    }
+
+    /**
+     * Clears budget by setting to null.
+     *
+     * <p>Special case of {@link #setBudget(Budget) setBudget} to avoid accidentally allowing users to set
+     * null {@code budget}</p>
+     */
+    public void clearBudget() {
+        budget = null;
     }
 
     /**
@@ -189,9 +206,7 @@ public class UniCash implements ReadOnlyUniCash {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("transactions", transactions)
-                .toString();
+        return new ToStringBuilder(this).add("transactions", transactions).toString();
     }
 
     @Override
@@ -201,10 +216,16 @@ public class UniCash implements ReadOnlyUniCash {
 
     /**
      * Returns an unmodifiable view of the budget.
+     *
+     * <p>If current budget is null, there is no user imposed budget, so null should be returned as well.</p>
      */
     @Override
     public Budget getBudget() {
-        return budget;
+        if (budget == null) {
+            return null;
+        }
+        // Create a deep copy of the current budget so that a direct object reference is not passed to callee
+        return new Budget(budget);
     }
 
     @Override
@@ -219,11 +240,15 @@ public class UniCash implements ReadOnlyUniCash {
         }
 
         UniCash otherUniCash = (UniCash) other;
-        return transactions.equals(otherUniCash.transactions);
+        if (budget == null) {
+            // If current budget is null, other budget should also be null
+            return transactions.equals(otherUniCash.transactions) && otherUniCash.budget == null;
+        }
+        return transactions.equals(otherUniCash.transactions) && budget.equals(otherUniCash.budget);
     }
 
     @Override
     public int hashCode() {
-        return transactions.hashCode();
+        return Objects.hash(transactions, budget);
     }
 }

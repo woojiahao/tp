@@ -4,12 +4,15 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static unicash.logic.commands.CommandTestUtil.VALID_AMOUNT_INTERN;
 import static unicash.logic.commands.CommandTestUtil.VALID_CATEGORY_EDUCATION;
 import static unicash.logic.commands.CommandTestUtil.VALID_DATETIME_SHOPPING;
 import static unicash.logic.commands.CommandTestUtil.VALID_TYPE_EXPENSE;
 import static unicash.testutil.Assert.assertThrows;
+import static unicash.testutil.TypicalBudgets.MONTHLY;
+import static unicash.testutil.TypicalBudgets.WEEKLY;
 import static unicash.testutil.TypicalTransactions.BUYING_GROCERIES;
 import static unicash.testutil.TypicalTransactions.DINING_WITH_FRIENDS;
 import static unicash.testutil.TypicalTransactions.INTERN;
@@ -38,6 +41,7 @@ import unicash.model.transaction.Name;
 import unicash.model.transaction.Transaction;
 import unicash.model.transaction.Type;
 import unicash.model.transaction.exceptions.TransactionNotFoundException;
+import unicash.model.util.SampleDataUtil;
 import unicash.testutil.TransactionBuilder;
 import unicash.testutil.UniCashBuilder;
 
@@ -414,6 +418,15 @@ public class UniCashTest {
     }
 
     @Test
+    public void clearBudget() {
+        Budget budget = new Budget(new Amount(1000), new Interval("month"));
+        uniCash.setBudget(budget);
+        assertEquals(budget, uniCash.getBudget());
+        uniCash.clearBudget();
+        assertNull(uniCash.getBudget());
+    }
+
+    @Test
     public void toStringMethod() {
         String expected = UniCash.class.getCanonicalName() + "{transactions=" + uniCash.getTransactionList() + "}";
         assertEquals(expected, uniCash.toString());
@@ -438,6 +451,38 @@ public class UniCashTest {
         assertNotEquals(null, transactionList);
 
         assertFalse(transactionList.equals(1));
+    }
+
+    @Test
+    public void equals_noBudget() {
+        UniCash expected = new UniCash();
+        expected.setTransactions(Arrays.asList(SampleDataUtil.getSampleTransactions()));
+        var other = new UniCash();
+        other.setTransactions(Arrays.asList(SampleDataUtil.getSampleTransactions()));
+        assertEquals(expected, other);
+        other.setBudget(WEEKLY);
+        assertNotEquals(expected, other);
+
+        var differentTransactions = new UniCash();
+        assertNotEquals(expected, differentTransactions);
+    }
+
+    @Test
+    public void equals_withBudget() {
+        UniCash expected = new UniCash();
+        expected.setTransactions(Arrays.asList(SampleDataUtil.getSampleTransactions()));
+        expected.setBudget(MONTHLY);
+        var other = new UniCash();
+        other.setTransactions(Arrays.asList(SampleDataUtil.getSampleTransactions()));
+        assertNotEquals(expected, other);
+        other.setBudget(WEEKLY);
+        assertNotEquals(expected, other);
+        other.setBudget(MONTHLY);
+        assertEquals(expected, other);
+
+        var differentTransactions = new UniCash();
+        differentTransactions.setBudget(MONTHLY);
+        assertNotEquals(expected, differentTransactions);
     }
 
     /**

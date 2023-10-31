@@ -100,9 +100,14 @@ public interface Model {
     void updateFilteredTransactionList(Predicate<Transaction> predicate);
 
     /**
-     * Adds the given budget
+     * Adds the given budget.
      */
     void setBudget(Budget budget);
+
+    /**
+     * Clears given budget.
+     */
+    void clearBudget();
 
     /**
      * Returns the budget
