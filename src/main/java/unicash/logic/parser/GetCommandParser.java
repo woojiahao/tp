@@ -37,11 +37,6 @@ public class GetCommandParser implements Parser<GetCommand> {
             return true;
         }
 
-        // instanceof handles nulls
-        if (!(other instanceof GetCommandParser)) {
-            return false;
-        }
-
         return other instanceof GetCommandParser;
 
     }

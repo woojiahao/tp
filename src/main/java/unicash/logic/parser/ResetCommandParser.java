@@ -31,11 +31,6 @@ public class ResetCommandParser implements Parser<ResetCommand> {
             return true;
         }
 
-        // instanceof handles nulls
-        if (!(other instanceof ResetCommandParser)) {
-            return false;
-        }
-
         return other instanceof ResetCommandParser;
 
     }

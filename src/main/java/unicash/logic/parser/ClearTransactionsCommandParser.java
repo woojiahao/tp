@@ -31,11 +31,6 @@ public class ClearTransactionsCommandParser implements Parser<ClearTransactionsC
             return true;
         }
 
-        // instanceof handles nulls
-        if (!(other instanceof ClearTransactionsCommandParser)) {
-            return false;
-        }
-
         return other instanceof ClearTransactionsCommandParser;
 
     }

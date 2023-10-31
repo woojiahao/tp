@@ -31,11 +31,6 @@ public class ListCommandParser implements Parser<ListCommand> {
             return true;
         }
 
-        // instanceof handles nulls
-        if (!(other instanceof ListCommandParser)) {
-            return false;
-        }
-
         return other instanceof ListCommandParser;
 
     }
