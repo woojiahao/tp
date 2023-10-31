@@ -933,16 +933,17 @@ Important notes:
 
 ### 4.2 Budget Commands
 
-The budget serves as a warning system to notify users when their expenses for the given interval exceeds their preset amount.
+The budget serves as a warning system to notify users when their expenses for the given interval exceeds their preset
+amount.
 
-The user's spending is calculated by: budget + interval income - interval expenses.
+The user's spending is calculated by: `budget + interval income - interval expenses`.
 
-> 💡 NOTE: For this team project, we have opted to simplify the budgeting feature by limiting the user to a single budget at a time
-that can be configured for different intervals and amounts.
+> 💡 NOTE: For this team project, we have opted to simplify the budgeting feature by limiting the user to a single budget
+> at a time that can be configured for different intervals and amounts.
 
 #### 4.2.1 SetBudgetCommand
 
-Sets the user's budget on UniCa$h.
+Sets the user's budget on UniCa$h to be a given amount and within a given interval.
 
 Command: `set_budget amt/AMOUNT interval/INTERVAL`
 
@@ -966,13 +967,16 @@ Important notes:
 > **Case**: Set budget of $600 for every month.
 >
 > **Input**: `set_budget amt/600 interval/month`
-> 
+>
 > **Output**:
 > ```
-> Budget set for $600.00 every month.
+> New budget added:
+>
+> Amount: $600.00;
+> Interval: month
 > ```
 >
-> <img src="images/unicash/command-outputs/setBudgetSuccessOutput.png" width="1000" />
+> <img src="images/unicash/command-outputs/set-budget/setBudgetSuccessOutput.png" width="1000" />
 
 ##### Failed Execution
 
@@ -984,8 +988,16 @@ Important notes:
 >
 > **Output**:
 > ```
-> Missing amount for budget.
+> Invalid command format! 
+>
+> set_budget: Sets the user's budget on UniCa$h.
+>
+> Parameters: amt/Amount interval/Interval
+>
+> Example: set_budget month/10 interval/day
 > ```
+>
+> <img src="images/unicash/command-outputs/set-budget/setBudgetFailureNoAmount.png" width="1000">
 
 ###### Example 2
 
@@ -995,8 +1007,16 @@ Important notes:
 >
 > **Output**:
 > ```
-> Missing interval for budget.
+> Invalid command format! 
+>
+> set_budget: Sets the user's budget on UniCa$h.
+>
+> Parameters: amt/Amount interval/Interval
+>
+> Example: set_budget month/10 interval/day
 > ```
+>
+> <img src="images/unicash/command-outputs/set-budget/setBudgetFailureNoInterval.png" width="1000">
 
 ###### Example 3
 
@@ -1006,8 +1026,16 @@ Important notes:
 >
 > **Output**:
 > ```
-> Missing amount for budget.
+> Invalid command format! 
+>
+> set_budget: Sets the user's budget on UniCa$h.
+>
+> Parameters: amt/Amount interval/Interval
+>
+> Example: set_budget month/10 interval/day
 > ```
+>
+> <img src="images/unicash/command-outputs/set-budget/setBudgetFailureNoArguments.png" width="1000">
 
 ###### Example 4
 
@@ -1017,8 +1045,10 @@ Important notes:
 >
 > **Output**:
 > ```
-> Budget amount cannot be negative.
+> Amounts must be within range of [0, 2,147,483,647] and either start with $ or nothing at all
 > ```
+>
+> <img src="images/unicash/command-outputs/set-budget/setBudgetFailureNegativeAmount.png" width="1000">
 
 ###### Example 5
 
@@ -1028,16 +1058,18 @@ Important notes:
 >
 > **Output**:
 > ```
-> Budget interval must be "day", "week", or "month".
+> Interval value must be one of the following: day, week, month
 > ```
+>
+> <img src="images/unicash/command-outputs/set-budget/setBudgetFailureInvalidInterval.png" width="1000">
 
 #### 4.2.2 ClearBudgetCommand
 
-Clears the user's budget set in UniCa$h.
+Clears the user's budget set in UniCa$h. If no budget is set yet, the user is prompted to set one first instead.
 
 Command: `clear_budget`
 
-Command Options: N/A
+Command Options: This command does not take in any arguments and will not process any arguments.
 
 ##### Successful Execution
 
@@ -1052,10 +1084,65 @@ Command Options: N/A
 > Budget cleared.
 > ```
 >
+> <img src="images/unicash/command-outputs/clear-budget/clearBudgetSuccess.png" width="1000" />
 
-[//]: # (TODO: Add image)
+###### Example 2
 
-[//]: # (> <img src="images/unicash/command-outputs/addTransactionSuccessOutput1.png" width="1000" />)
+> **Case**: Clear without set budget.
+>
+> **Input**: `clear_budget`
+>
+> **Output**:
+> ```
+> No budget to clear.
+>
+> Consider using set_budget amt/Amount interval/Interval first!
+> ```
+>
+> <img src="images/unicash/command-outputs/clear-budget/clearBudgetNoBudgetSuccess.png" width="1000" />
+
+#### 4.2.3 GetBudgetCommand
+
+Retrieves the set budget and the spending over the given interval. The usage is calculated from the list of filtered
+transactions so to view the budget remainder across all transactions, use the `list` command first.
+
+If no budget has been set, the user will be prompted to set one first instead.
+
+The user's spending is calculated by: `budget + interval income - interval expenses`.
+
+Command: `get_budget`
+
+Command Options: This command does not take in any arguments and will not process any arguments.
+
+##### Successful Execution
+
+###### Example 1
+
+> **Case**: Get user's set budget and spending remainder.
+>
+> **Input**: `get_budget`
+>
+> **Output**:
+> ```
+> Monthly budget of $600.00
+>
+> Net amount of $587.00
+> ```
+>
+> <img src="images/unicash/command-outputs/get-budget/getBudgetSuccess.png" width="1000" />
+
+###### Example 2
+
+> **Case**: Get budget without budget set.
+>
+> **Input**: `get_budget`
+>
+> **Output**:
+> ```
+> No budget set. Use set_budget amt/Amount interval/Interval
+> ```
+>
+> <img src="images/unicash/command-outputs/get-budget/getBudgetNoBudgetSuccess.png" width="1000" />
 
 ### 4.3 Summary Commands
 

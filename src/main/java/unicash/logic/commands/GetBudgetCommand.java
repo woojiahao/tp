@@ -30,7 +30,7 @@ public class GetBudgetCommand extends Command {
     public static final String MESSAGE_USAGE = new CommandUsage.Builder()
             .setCommandWord(COMMAND_WORD)
             .setDescription(
-                    "Retrieves the budget and the usage over the given interval.\n"
+                    "Retrieves the budget and the spending over the given interval.\n"
                             + "If you are missing transactions, consider using list first."
             )
             .setExample(ExampleGenerator.generate(COMMAND_WORD))
