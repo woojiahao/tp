@@ -16,6 +16,6 @@ public class HelpCommandParser implements Parser<HelpCommand> {
     public HelpCommand parse(String userInput) {
         requireNonNull(userInput);
         String trimmed = userInput.trim();
-        return new HelpCommand(trimmed);
+        return new HelpCommand(trimmed.toLowerCase());
     }
 }
