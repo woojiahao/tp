@@ -40,7 +40,6 @@ import unicash.model.transaction.Transaction;
 import unicash.model.transaction.predicates.TransactionContainsAllKeywordsPredicate;
 import unicash.model.transaction.predicates.TransactionContainsAnyKeywordsPredicate;
 import unicash.model.transaction.predicates.TransactionNameContainsKeywordsPredicate;
-import unicash.testutil.BudgetBuilder;
 import unicash.testutil.EditTransactionDescriptorBuilder;
 import unicash.testutil.TransactionBuilder;
 import unicash.testutil.TransactionUtil;
