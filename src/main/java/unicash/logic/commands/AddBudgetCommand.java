@@ -2,10 +2,10 @@ package unicash.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import unicash.commons.enums.CommandType;
 import unicash.commons.util.ToStringBuilder;
 import unicash.logic.UniCashMessages;
 import unicash.logic.commands.exceptions.CommandException;
-import unicash.logic.parser.CliSyntax;
 import unicash.model.Model;
 import unicash.model.budget.Budget;
 
@@ -13,19 +13,11 @@ import unicash.model.budget.Budget;
  * Adds a budget to UniCash.
  */
 public class AddBudgetCommand extends Command {
-    public static final String COMMAND_WORD = "add_budget";
+    public static final String COMMAND_WORD = CommandType.ADD_BUDGET.getCommandWords();
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a budget to UniCa$h. \n"
-            + "\n"
-            + "Parameters: "
-            + CliSyntax.PREFIX_AMOUNT + "AMOUNT "
-            + CliSyntax.PREFIX_INTERVAL + "TYPE "
-            + "\n"
-            + "Example: " + COMMAND_WORD + " "
-            + CliSyntax.PREFIX_AMOUNT + "300 "
-            + CliSyntax.PREFIX_INTERVAL + "month ";
+    public static final String MESSAGE_USAGE = CommandType.ADD_BUDGET.getMessageUsage();
 
-    public static final String MESSAGE_SUCCESS = "New budget added: \n\n%1$s";
+    public static final String MESSAGE_SUCCESS = CommandType.ADD_BUDGET.getMessageSuccess();
 
     private final Budget budget;
 

@@ -1,5 +1,6 @@
 package unicash.logic.commands;
 
+import unicash.commons.enums.CommandType;
 import unicash.model.Model;
 
 /**
@@ -7,9 +8,9 @@ import unicash.model.Model;
  */
 public class ExitCommand extends Command {
 
-    public static final String COMMAND_WORD = "exit";
+    public static final String COMMAND_WORD = CommandType.EXIT.getCommandWords();
 
-    public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Exiting UniCa$h as requested ...";
+    public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = CommandType.EXIT.getMessageSuccess();
 
     @Override
     public CommandResult execute(Model model) {

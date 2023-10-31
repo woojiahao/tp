@@ -3,6 +3,7 @@ package unicash.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static unicash.model.util.SampleDataUtil.getSampleUniCash;
 
+import unicash.commons.enums.CommandType;
 import unicash.model.Model;
 
 /**
@@ -12,9 +13,8 @@ import unicash.model.Model;
  */
 public class ResetCommand extends Command {
 
-    public static final String COMMAND_WORD = "reset_unicash";
-    public static final String MESSAGE_SUCCESS =
-            "UniCa$h has been successfully restored to its original state!";
+    public static final String COMMAND_WORD = CommandType.RESET.getCommandWords();
+    public static final String MESSAGE_SUCCESS = CommandType.RESET.getMessageSuccess();
 
 
     @Override

@@ -2,8 +2,7 @@ package unicash.logic.commands;
 
 import static unicash.logic.UniCashMessages.MESSAGE_UNICASH_WELCOME;
 
-import unicash.commons.util.CommandUsage;
-import unicash.commons.util.ExampleGenerator;
+import unicash.commons.enums.CommandType;
 import unicash.model.Model;
 
 /**
@@ -11,14 +10,9 @@ import unicash.model.Model;
  */
 public class HelpCommand extends Command {
 
-    public static final String COMMAND_WORD = "help";
+    public static final String COMMAND_WORD = CommandType.HELP.getCommandWords();
 
-    public static final String MESSAGE_USAGE = new CommandUsage.Builder()
-            .setCommandWord(COMMAND_WORD)
-            .setDescription("Shows UniCa$h usage instructions.")
-            .setExample(ExampleGenerator.generate(COMMAND_WORD))
-            .build()
-            .toString();
+    public static final String MESSAGE_USAGE = CommandType.HELP.getMessageUsage();
 
     public static final String SHOWING_HELP_MESSAGE = MESSAGE_UNICASH_WELCOME;
 
