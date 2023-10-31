@@ -804,7 +804,43 @@ Walkthrough of how to run a command with visual guides
 
 ## 4. Features
 
+### Features Overview
+
+For UniCa$h, we have developed and implemented 4 main groups of features. These are: 
+
+The Transaction Management Commands:
+- Add Transaction
+- Delete Transaction
+- Edit Transaction
+- List Transactions
+- Get Transaction
+- Find Transactions
+- Filter Transactions
+- Clear All Transactions
+  
+The Budget Management Features
+- Set Budget
+- Clear Budget
+- Get Budget
+
+The Financial Statistics Features:
+- Get Total Expenditure
+- Summary Statistics
+- Rolling Balance Indicator
+
+The General Utility Commands:
+- Show Help
+- Reset UniCa$h
+- Exit UniCa$h
+
+The instructions for the usage of each command within each feature group are elaborated in this section below.
+
+
 ### 4.1 Transaction Commands
+
+The _Transaction Commands_ feature group pertains directly to the management of personal finances by the user,
+allowing the user to perform actions that directly involve transactions, such as - amongst other - adding, deleting and
+editing transactions.
 
 #### 4.1.1 AddTransactionCommand
 
@@ -878,7 +914,7 @@ Important notes:
 
 ###### Example 1
 
-> **Case**: Missing compulsary fields.
+> **Case**: Missing compulsory fields.
 >
 > **Input**: `add_transaction`
 >
@@ -919,13 +955,235 @@ Important notes:
 > ```
 > > <img src="images/unicash/command-outputs/addTransactionFailedOutput3.png" width="1000" />
 
+#### 4.1.2 EditTransactionCommand
+
+#### 4.1.3 DeleteTransactionCommand
+
+Deletes a `Transaction` from UniCa$h.
+
+Command: `delete_transaction <INDEX>`
+
+Command Word: `delete_transaction` (case-insensitive)
+
+Command Argument: `<INDEX>` is the displayed transaction index 
+of the transaction to be deleted, as shown in the `Transactions List`.
+
+| Arguments | Optional? | Purpose                                            |
+|-----------|-----------|----------------------------------------------------|
+| `<INDEX>` | No        | Transaction index of the transaction to be deleted |
+
+Important notes:
+1. The `delete_transaction` command word is case-insensitive, thus `DELETE_TRANSACTION` is 
+considered an equivalent command word. 
+
+2. `<INDEX>` must be a positive integer, i.e. a number greater than 0.
+
+3. `<INDEX>` must be equal to or smaller than 2,147,483,647 which is the `Integer.MAX_VALUE` provided by Java 11.
+
+4. `<INDEX>` must be equal to or smaller than the largest displayed transaction index
+   of all transactions as shown in the `Transactions List`. Thus, even if there are `100` total transactions but only
+   `20` of those transactions are displayed in the current `Transactions List`, the maximum `INDEX` allowed
+   would be `20`
+
+5. Given `3.` and `4.`, the maximum allowed `<INDEX>` is the smaller value of the two.
+
+##### Successful Execution
+
+###### Example 1
+
+> **Case**: Delete a transaction with the correctly specified `<INDEX>`.
+>
+> **Input**: `delete_transaction 1`
+>
+> **Output**:
+> ```
+> Deleted Transaction:
+>
+> Name: Evening with friends;
+> Type: expense;
+> Amount: $49.50;
+> Date: 17 Sep 2023 00:00;
+> Location: Clarke Quay;
+> Categories: #social
+> ```
+> Input:
+> <img src="images/unicash/command-outputs/deleteTransaction/deleteTransactionInitialState.png" width="1000" />
+> Output:
+> <img src="images/unicash/command-outputs/deleteTransaction/deleteTransactionSuccess1FinalState.png" width="1000" />
+
+###### Example 2
+
+> **Case**: Delete a transaction with the currently not visible but correctly specified `<INDEX>`.
+>
+> **Input**: `delete_transaction 1`
+>
+> **Output**:
+> ```
+> Deleted Transaction:
+> 
+> Name: Lunch at McDonalds;
+> Type: expense;
+> Amount: $17.40;
+> Date: 15 Sep 2023 11:00;
+> Location: Clementi Mall;
+> Categories: #food
+> ```
+> Input:
+> <img src="images/unicash/command-outputs/deleteTransaction/deleteTransactionInitialState2.png" width="1000" />
+> Ouput:
+> <img src="images/unicash/command-outputs/deleteTransaction/deleteTransactionSuccess2FinalState.png" width="1000" />
+
+
+##### Failed Execution
+
+###### Example 1
+
+> **Case**: Missing compulsory fields.
+>
+> **Input**: `delete_transaction`
+>
+> **Output**:
+> ```
+> Invalid command format! 
+>
+> delete_transaction: Deletes the transaction identified by the index number used in the displayed transaction list.
+>
+> Argument: Index (must be a positive integer)
+>
+> Example: delete_transaction 1
+> ```
+> <img src="images/unicash/command-outputs/deleteTransaction/deleteFail1.png" width="1000" />
+
+###### Example 2
+
+> **Case**: Invalid `<INDEX>` provided
+> (`<INDEX>` given as `10` given when only `5` transactions are presently displayed)
+>
+> **Input**: `delete_transaction 10`
+>
+> **Output**:
+> ```
+> The transaction index provided is invalid
+> ```
+> <img src="images/unicash/command-outputs/deleteTransaction/deleteFail2.png" width="1000" />
+  
 #### 4.1.3 EditTransactionCommand
 
-#### 4.1.4 DeleteTransactionCommand
+#### 4.1.4 GetCommand
+
+Retrieves a `Transaction` from UniCa$h.
+
+Command: `get <INDEX>`
+
+Command Word: `get` (case-insensitive)
+
+Command Argument: `<INDEX>` is the displayed transaction index
+of the transaction to be retrieved, as shown in the `Transactions List`.
+
+| Arguments | Optional? | Purpose                                              |
+|-----------|-----------|------------------------------------------------------|
+| `<INDEX>` | No        | Transaction index of the transaction to be retrieved |
+
+Important notes:
+1. The `get` command word is case-insensitive, thus `GET` is
+   considered an equivalent command word.
+
+2. `<INDEX>` must be a positive integer, i.e. a number greater than 0.
+
+3. `<INDEX>` must be equal to or smaller than 2,147,483,647 which is the `Integer.MAX_VALUE` provided by Java 11.
+
+4. `<INDEX>` must be equal to or smaller than the largest displayed transaction index
+   of all transactions as shown in the `Transactions List`. Thus, even if there are `100` total transactions but only
+   `20` of those transactions are displayed in the current `Transactions List`, the maximum `INDEX` allowed
+   would be `20`
+
+5. Given `3.` and `4.`, the maximum allowed `<INDEX>` is the smaller value of the two.
+
+##### Successful Execution
+
+###### Example 1
+
+> **Case**: Retrieve a transaction with the correctly specified `<INDEX>`.
+>
+> **Input**: `get 5`
+>
+> **Output**:
+> ```
+> Transaction 5 retrieved:
+> 
+> Name: Taxi;
+> Type: expense;
+> Amount: $20.00;
+> Date: 18 Sep 2023 11:30;
+> Location: Bugis;
+> Categories: #transport
+> ```
+> Input:
+> <img src="images/unicash/command-outputs/getTransaction/getInitial1.png" width="1000" />
+> Ouput:
+> <img src="images/unicash/command-outputs/getTransaction/getSuccessFinal1.png" width="1000" />
+
+###### Example 2
+
+> **Case**: Retrieve a transaction with the currently not visible but correctly specified `<INDEX>`.
+>
+> **Input**: `get 1`
+>
+> **Output**:
+> ```
+> Transaction 1 retrieved:
+>
+> Name: Buy clothes;
+> Type: expense;
+> Amount: $109.00;
+> Date: 17 Sep 2023 18:30;
+> Location: Uniqlo Bugis;
+> Categories: #shopping
+> ```
+> Input:
+> <img src="images/unicash/command-outputs/getTransaction/getInitial2.png" width="1000" />
+> Ouput:
+> <img src="images/unicash/command-outputs/getTransaction/getSuccessFinal2.png" width="1000" />
+
+##### Failed Execution
+
+###### Example 1
+
+> **Case**: Missing compulsory fields.
+>
+> **Input**: `get`
+>
+> **Output**:
+> ```
+> Invalid command format! 
+>
+> get: Displays expanded details of a specific transaction.
+>
+> Argument: Index (must be a positive integer)
+>
+> Example: get 2
+> ```
+> <img src="images/unicash/command-outputs/getTransaction/getFail1.png" width="1000" />
+
+###### Example 2
+
+> **Case**: Invalid `<INDEX>` provided
+> 
+> **Context**: `10` given as `<INDEX>` when only `5` transactions are presently displayed.
+>
+> **Input**: `get 10`
+>
+> **Output**:
+> ```
+> The transaction index provided is invalid
+> ```
+> <img src="images/unicash/command-outputs/getTransaction/getFail2.png" width="1000" />
 
 #### 4.1.5 FindCommand
 
-#### 4.1.6 GetCommand
+
+#### 4.1.6 FilterCommand
+
 
 #### 4.1.7 ListCommand
 
@@ -1144,11 +1402,13 @@ Command Options: This command does not take in any arguments and will not proces
 >
 > <img src="images/unicash/command-outputs/get-budget/getBudgetNoBudgetSuccess.png" width="1000" />
 
-### 4.3 Summary Commands
+### 4.3 Financial Statistics Features
 
 #### 4.3.1 GetTotalExpenditureCommand
 
 #### 4.3.2 SummaryCommand
+
+#### 4.3.3 Rolling Balance Indicator
 
 ### 4.4 General Utility Commands
 
