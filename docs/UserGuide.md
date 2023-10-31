@@ -1146,7 +1146,8 @@ Important notes:
 ###### Example 2
 
 > **Case**: Invalid `<INDEX>` provided
-> (`<INDEX>` given as `10` given when only `5` transactions are presently displayed)
+> 
+> **Context**: `10` given as `<INDEX>` when only `5` transactions are presently displayed.
 >
 > **Input**: `get 10`
 >
