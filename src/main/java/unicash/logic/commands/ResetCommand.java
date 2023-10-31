@@ -15,6 +15,7 @@ public class ResetCommand extends Command {
 
     public static final String COMMAND_WORD = CommandType.RESET.getCommandWords();
     public static final String MESSAGE_SUCCESS = CommandType.RESET.getMessageSuccess();
+    public static final String MESSAGE_USAGE = CommandType.RESET.getMessageUsage();
 
 
     @Override

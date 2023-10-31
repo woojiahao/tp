@@ -74,7 +74,12 @@ public enum CommandType {
     CLEAR_TRANSACTIONS("clear", "clear_transactions", "ct") {
         @Override
         public String getMessageUsage() {
-            return getCommandWords() + ": Clears all transactions from UniCa$h.";
+            return new CommandUsage.Builder()
+                    .setCommandWord(getMainCommandWord())
+                    .setDescription("Clears all existing transactions.")
+                    .setExample(ExampleGenerator.generate(getMainCommandWord()))
+                    .build()
+                    .toString();
         }
 
         @Override
@@ -147,7 +152,12 @@ public enum CommandType {
     EXIT("exit", "quit", "bye") {
         @Override
         public String getMessageUsage() {
-            return getCommandWords() + ": Exits the program.";
+            return new CommandUsage.Builder()
+                    .setCommandWord(getMainCommandWord())
+                    .setDescription("Exit from UniCa$h.")
+                    .setExample(ExampleGenerator.generate(getMainCommandWord()))
+                    .build()
+                    .toString();
         }
 
         @Override
@@ -218,9 +228,12 @@ public enum CommandType {
         @Override
         public String getMessageUsage() {
             return new CommandUsage.Builder()
-                    .setCommandWord(getCommandWords())
-                    .setDescription("Shows UniCa$h usage instructions.")
-                    .setExample(ExampleGenerator.generate(getMainCommandWord()))
+                    .setCommandWord(getMainCommandWord())
+                    .setDescription("Shows UniCa$h general usage instructions and specific command"
+                            + " usage by specifying the command word.")
+                    .setArgument("Command word specified must be a valid command word present in "
+                            + "the help command")
+                    .setExample(ExampleGenerator.generate(getMainCommandWord(), "add_transaction"))
                     .build()
                     .toString();
         }
@@ -250,7 +263,12 @@ public enum CommandType {
     RESET("reset", "reset_unicash") {
         @Override
         public String getMessageUsage() {
-            return getCommandWords() + ": Resets UniCa$h.";
+            return new CommandUsage.Builder()
+                    .setCommandWord(getMainCommandWord())
+                    .setDescription("Reset UniCa$h to its original state with pre-existing transactions.")
+                    .setExample(ExampleGenerator.generate(getMainCommandWord()))
+                    .build()
+                    .toString();
         }
 
         @Override
