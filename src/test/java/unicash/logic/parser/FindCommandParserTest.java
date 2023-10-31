@@ -51,7 +51,7 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void differentCommandTypes_equalsFalse() {
+    public void equalsMethod_differentCommandTypes_returnsFalse() {
         FindCommandParser findCommandParser = new FindCommandParser();
         ListCommandParser listCommandParser = new ListCommandParser();
         assertNotEquals(listCommandParser, findCommandParser);
@@ -59,7 +59,7 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void nullInput_equalsFalse() {
+    public void equalsMethod_nullInput_returnsFalse() {
         assertNotEquals(null, new FindCommandParser());
     }
 

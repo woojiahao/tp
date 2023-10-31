@@ -46,7 +46,7 @@ public class ClearTransactionsCommand extends Command {
             return false;
         }
 
-        return other instanceof ClearTransactionsCommand;
+        return true;
 
     }
 

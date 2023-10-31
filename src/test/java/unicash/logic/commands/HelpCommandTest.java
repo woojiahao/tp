@@ -229,7 +229,7 @@ public class HelpCommandTest {
 
 
     @Test
-    public void differentCommandTypes_equalsFalse() {
+    public void equalsMethod_differentCommandTypes_returnsFalse() {
         Command helpCommand = new HelpCommand(ResetCommand.COMMAND_WORD);;
         assertFalse(helpCommand.equals(new ResetCommand()));
     }

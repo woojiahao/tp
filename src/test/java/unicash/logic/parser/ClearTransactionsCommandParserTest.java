@@ -64,7 +64,7 @@ public class ClearTransactionsCommandParserTest {
     }
 
     @Test
-    public void sameClearTransactionsCommandParser_equalsTrue() {
+    public void equals_Method_sameClearTransactionsCommandParserInput_returnsTrue() {
         ClearTransactionsCommandParser parser = new ClearTransactionsCommandParser();
         assertTrue(parser.equals(parser));
         assertTrue(parser.equals(new ClearTransactionsCommandParser()));
@@ -72,7 +72,7 @@ public class ClearTransactionsCommandParserTest {
     }
 
     @Test
-    public void differentCommandTypes_equalsFalse() {
+    public void equalsMethod_differentCommandTypes_returnsFalse() {
         ClearTransactionsCommandParser clearTransactionsCommandParser =
                 new ClearTransactionsCommandParser();
         ListCommandParser listCommandParser = new ListCommandParser();
@@ -81,7 +81,7 @@ public class ClearTransactionsCommandParserTest {
     }
 
     @Test
-    public void nullInput_equalsFalse() {
+    public void equalsMethod_nullInput_returnsFalse() {
         assertNotEquals(null, new ClearTransactionsCommandParser());
     }
 

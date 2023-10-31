@@ -37,7 +37,7 @@ public class ExitCommandTest {
     }
 
     @Test
-    public void differentCommandTypes_equalsFalse() {
+    public void equalsMethod_differentCommandTypes_returnsFalse() {
         Command resetCommand = new ResetCommand();
         Command exitCommand = new ExitCommand();
         assertNotEquals(resetCommand, exitCommand);
@@ -45,7 +45,7 @@ public class ExitCommandTest {
     }
 
     @Test
-    public void nullInput_equalsFalse() {
+    public void equalsMethod_nullInput_returnsFalse() {
         assertNotEquals(null, new ExitCommand());
         assertFalse(new ExitCommand().equals(null));
     }

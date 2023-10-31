@@ -84,7 +84,7 @@ public class FilterCommandParserTest {
     }
 
     @Test
-    public void differentCommandTypes_equalsFalse() {
+    public void equalsMethod_differentCommandTypes_returnsFalse() {
         FilterCommandParser filterCommandParser = new FilterCommandParser();
         ListCommandParser listCommandParser = new ListCommandParser();
         assertNotEquals(listCommandParser, filterCommandParser);
@@ -92,7 +92,7 @@ public class FilterCommandParserTest {
     }
 
     @Test
-    public void nullInput_equalsFalse() {
+    public void equalsMethod_nullInput_returnsFalse() {
         assertNotEquals(null, new FilterCommandParser());
     }
 

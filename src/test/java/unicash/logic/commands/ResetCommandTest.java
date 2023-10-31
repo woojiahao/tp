@@ -65,16 +65,17 @@ public class ResetCommandTest {
     }
 
     @Test
-    public void differentCommandTypes_equalsFalse() {
+    public void equalsMethod_differentCommandTypes_returnsFalse() {
         Command resetCommand = new ResetCommand();
         Command clearCommand = new ClearTransactionsCommand();
         assertNotEquals(resetCommand, clearCommand);
         assertFalse(clearCommand.equals(resetCommand));
         assertFalse(resetCommand.equals(new ClearTransactionsCommand()));
+
     }
 
     @Test
-    public void nullInput_equalsFalse() {
+    public void equalsMethod_nullInput_returnsFalse() {
         assertNotEquals(null, new ResetCommand());
         assertFalse(new ResetCommand().equals(null));
     }
