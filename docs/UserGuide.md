@@ -966,16 +966,13 @@ Important notes:
 > **Case**: Set budget of $600 for every month.
 >
 > **Input**: `set_budget amt/600 interval/month`
->
+> 
 > **Output**:
 > ```
 > Budget set for $600.00 every month.
 > ```
 >
-
-[//]: # (TODO: Add image)
-
-[//]: # (> <img src="images/unicash/command-outputs/addTransactionSuccessOutput1.png" width="1000" />)
+> <img src="images/unicash/command-outputs/setBudgetSuccessOutput.png" width="1000" />
 
 ##### Failed Execution
 
