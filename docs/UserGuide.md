@@ -956,118 +956,6 @@ Important notes:
 > > <img src="images/unicash/command-outputs/addTransactionFailedOutput3.png" width="1000" />
 
 #### 4.1.2 EditTransactionCommand
-
-#### 4.1.3 DeleteTransactionCommand
-
-Deletes a `Transaction` from UniCa$h.
-
-Command: `delete_transaction <INDEX>`
-
-Command Word: `delete_transaction` (case-insensitive)
-
-Command Argument: `<INDEX>` is the displayed transaction index 
-of the transaction to be deleted, as shown in the `Transactions List`.
-
-| Arguments | Optional? | Purpose                                            |
-|-----------|-----------|----------------------------------------------------|
-| `<INDEX>` | No        | Transaction index of the transaction to be deleted |
-
-Important notes:
-1. The `delete_transaction` command word is case-insensitive, thus `DELETE_TRANSACTION` is 
-considered an equivalent command word. 
-
-2. `<INDEX>` must be a positive integer, i.e. a number greater than 0.
-
-3. `<INDEX>` must be equal to or smaller than 2,147,483,647 which is the `Integer.MAX_VALUE` provided by Java 11.
-
-4. `<INDEX>` must be equal to or smaller than the largest displayed transaction index
-   of all transactions as shown in the `Transactions List`. Thus, even if there are `100` total transactions but only
-   `20` of those transactions are displayed in the current `Transactions List`, the maximum `INDEX` allowed
-   would be `20`
-
-5. Given `3.` and `4.`, the maximum allowed `<INDEX>` is the smaller value of the two.
-
-##### Successful Execution
-
-###### Example 1
-
-> **Case**: Delete a transaction with the correctly specified `<INDEX>`.
->
-> **Input**: `delete_transaction 1`
->
-> **Output**:
-> ```
-> Deleted Transaction:
->
-> Name: Evening with friends;
-> Type: expense;
-> Amount: $49.50;
-> Date: 17 Sep 2023 00:00;
-> Location: Clarke Quay;
-> Categories: #social
-> ```
-> Input:
-> <img src="images/unicash/command-outputs/deleteTransaction/deleteTransactionInitialState.png" width="1000" />
-> Output:
-> <img src="images/unicash/command-outputs/deleteTransaction/deleteTransactionSuccess1FinalState.png" width="1000" />
-
-###### Example 2
-
-> **Case**: Delete a transaction with the currently not visible but correctly specified `<INDEX>`.
->
-> **Input**: `delete_transaction 1`
->
-> **Output**:
-> ```
-> Deleted Transaction:
-> 
-> Name: Lunch at McDonalds;
-> Type: expense;
-> Amount: $17.40;
-> Date: 15 Sep 2023 11:00;
-> Location: Clementi Mall;
-> Categories: #food
-> ```
-> Input:
-> <img src="images/unicash/command-outputs/deleteTransaction/deleteTransactionInitialState2.png" width="1000" />
-> Ouput:
-> <img src="images/unicash/command-outputs/deleteTransaction/deleteTransactionSuccess2FinalState.png" width="1000" />
-
-
-##### Failed Execution
-
-###### Example 1
-
-> **Case**: Missing compulsory fields.
->
-> **Input**: `delete_transaction`
->
-> **Output**:
-> ```
-> Invalid command format! 
->
-> delete_transaction: Deletes the transaction identified by the index number used in the displayed transaction list.
->
-> Argument: Index (must be a positive integer)
->
-> Example: delete_transaction 1
-> ```
-> <img src="images/unicash/command-outputs/deleteTransaction/deleteFail1.png" width="1000" />
-
-###### Example 2
-
-> **Case**: Invalid `<INDEX>` provided
-> (`<INDEX>` given as `10` given when only `5` transactions are presently displayed)
->
-> **Input**: `delete_transaction 10`
->
-> **Output**:
-> ```
-> The transaction index provided is invalid
-> ```
-> <img src="images/unicash/command-outputs/deleteTransaction/deleteFail2.png" width="1000" />
-  
-#### 4.1.3 EditTransactionCommand
 Edits an existing transaction in UniCa$h.
 
 Command: `edit_transaction INDEX [n/NAME] [type/TYPE] [amt/AMOUNT] [dt/DATETIME] [l/LOCATION] [c/CATEGORY]`
@@ -1264,6 +1152,115 @@ Important notes:
 >
 > <img src="images/unicash/command-outputs/editTransactionFailedOutput7.png" width="1000" />
 
+#### 4.1.3 DeleteTransactionCommand
+
+Deletes a `Transaction` from UniCa$h.
+
+Command: `delete_transaction <INDEX>`
+
+Command Word: `delete_transaction` (case-insensitive)
+
+Command Argument: `<INDEX>` is the displayed transaction index 
+of the transaction to be deleted, as shown in the `Transactions List`.
+
+| Arguments | Optional? | Purpose                                            |
+|-----------|-----------|----------------------------------------------------|
+| `<INDEX>` | No        | Transaction index of the transaction to be deleted |
+
+Important notes:
+1. The `delete_transaction` command word is case-insensitive, thus `DELETE_TRANSACTION` is 
+considered an equivalent command word. 
+
+2. `<INDEX>` must be a positive integer, i.e. a number greater than 0.
+
+3. `<INDEX>` must be equal to or smaller than 2,147,483,647 which is the `Integer.MAX_VALUE` provided by Java 11.
+
+4. `<INDEX>` must be equal to or smaller than the largest displayed transaction index
+   of all transactions as shown in the `Transactions List`. Thus, even if there are `100` total transactions but only
+   `20` of those transactions are displayed in the current `Transactions List`, the maximum `INDEX` allowed
+   would be `20`
+
+5. Given `3.` and `4.`, the maximum allowed `<INDEX>` is the smaller value of the two.
+
+##### Successful Execution
+
+###### Example 1
+
+> **Case**: Delete a transaction with the correctly specified `<INDEX>`.
+>
+> **Input**: `delete_transaction 1`
+>
+> **Output**:
+> ```
+> Deleted Transaction:
+>
+> Name: Evening with friends;
+> Type: expense;
+> Amount: $49.50;
+> Date: 17 Sep 2023 00:00;
+> Location: Clarke Quay;
+> Categories: #social
+> ```
+> Input:
+> <img src="images/unicash/command-outputs/deleteTransaction/deleteTransactionInitialState.png" width="1000" />
+> Output:
+> <img src="images/unicash/command-outputs/deleteTransaction/deleteTransactionSuccess1FinalState.png" width="1000" />
+
+###### Example 2
+
+> **Case**: Delete a transaction with the currently not visible but correctly specified `<INDEX>`.
+>
+> **Input**: `delete_transaction 1`
+>
+> **Output**:
+> ```
+> Deleted Transaction:
+> 
+> Name: Lunch at McDonalds;
+> Type: expense;
+> Amount: $17.40;
+> Date: 15 Sep 2023 11:00;
+> Location: Clementi Mall;
+> Categories: #food
+> ```
+> Input:
+> <img src="images/unicash/command-outputs/deleteTransaction/deleteTransactionInitialState2.png" width="1000" />
+> Ouput:
+> <img src="images/unicash/command-outputs/deleteTransaction/deleteTransactionSuccess2FinalState.png" width="1000" />
+
+
+##### Failed Execution
+
+###### Example 1
+
+> **Case**: Missing compulsory fields.
+>
+> **Input**: `delete_transaction`
+>
+> **Output**:
+> ```
+> Invalid command format! 
+>
+> delete_transaction: Deletes the transaction identified by the index number used in the displayed transaction list.
+>
+> Argument: Index (must be a positive integer)
+>
+> Example: delete_transaction 1
+> ```
+> <img src="images/unicash/command-outputs/deleteTransaction/deleteFail1.png" width="1000" />
+
+###### Example 2
+
+> **Case**: Invalid `<INDEX>` provided
+> (`<INDEX>` given as `10` given when only `5` transactions are presently displayed)
+>
+> **Input**: `delete_transaction 10`
+>
+> **Output**:
+> ```
+> The transaction index provided is invalid
+> ```
+> <img src="images/unicash/command-outputs/deleteTransaction/deleteFail2.png" width="1000" />
 
 #### 4.1.4 GetCommand
 
