@@ -145,7 +145,7 @@ public class TransactionContainsAllKeywordsPredicate implements Predicate<Transa
      * @return the keyword as a single List.
      */
     private static List<String> toKeywordList(String keyword) {
-        return Collections.singletonList(keyword);
+        return Collections.singletonList(keyword.toLowerCase());
     }
 
 

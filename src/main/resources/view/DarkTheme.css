@@ -446,10 +446,6 @@
     -fx-font-size: 13pt;
 }
 
-.normal-label-menubar {
-    -fx-font-size: 13pt;
-}
-
 .status-bar-color {
     -fx-font-family: "Inter";
     -fx-background-color: black;

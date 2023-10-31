@@ -166,4 +166,15 @@ public class TransactionContainsAllKeywordsPredicateTest {
         assertFalse(localPredicate.test(testTransaction));
     }
 
+    @Test
+    public void testTransaction_negatedTypes_returnFalse() {
+        TransactionContainsAllKeywordsPredicate localPredicate =
+                new TransactionContainsAllKeywordsPredicate();
+
+        localPredicate.addTypeKeyword("expense");
+        localPredicate.addTypeKeyword("income");
+
+        assertFalse(localPredicate.test(testTransaction));
+    }
+
 }

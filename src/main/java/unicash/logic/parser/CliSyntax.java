@@ -1,7 +1,5 @@
 package unicash.logic.parser;
 
-import java.util.List;
-
 /**
  * Contains Command Line Interface (CLI) syntax definitions common to multiple commands
  */
@@ -18,8 +16,4 @@ public class CliSyntax {
     public static final Prefix PREFIX_YEAR = new Prefix("year/");
     public static final Prefix PREFIX_INTERVAL = new Prefix("interval/");
 
-    /* Returns the prefixes associated with a Transaction as a list */
-    public static final List<Prefix> TRANSACTION_PREFIX_LIST =
-            List.of(PREFIX_NAME, PREFIX_TYPE, PREFIX_AMOUNT,
-            PREFIX_DATETIME, PREFIX_CATEGORY, PREFIX_LOCATION);
 }
