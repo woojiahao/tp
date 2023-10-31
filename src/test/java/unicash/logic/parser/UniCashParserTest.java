@@ -16,8 +16,8 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import unicash.commons.core.index.Index;
 import unicash.commons.enums.CommandType;
-import unicash.logic.commands.AddBudgetCommand;
 import unicash.logic.commands.AddTransactionCommand;
 import unicash.logic.commands.ClearBudgetCommand;
 import unicash.logic.commands.ClearTransactionsCommand;

@@ -57,8 +57,14 @@ public class HelpCommand extends Command {
         case CLEAR_TRANSACTIONS:
             return new CommandResult(ClearTransactionsCommand.MESSAGE_USAGE);
 
-        case ADD_BUDGET:
-            return new CommandResult(AddBudgetCommand.MESSAGE_USAGE);
+        case SET_BUDGET:
+            return new CommandResult(SetBudgetCommand.MESSAGE_USAGE);
+
+        case GET_BUDGET:
+            return new CommandResult(GetBudgetCommand.MESSAGE_USAGE);
+
+        case CLEAR_BUDGET:
+            return new CommandResult(ClearBudgetCommand.MESSAGE_USAGE);
 
         case RESET:
             return new CommandResult(ResetCommand.MESSAGE_USAGE);

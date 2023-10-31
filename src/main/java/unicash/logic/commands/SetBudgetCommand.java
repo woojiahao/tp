@@ -13,11 +13,11 @@ import unicash.model.budget.Budget;
  * Sets budget for UniCa$h.
  */
 public class SetBudgetCommand extends Command {
-    public static final String COMMAND_WORD = CommandType.ADD_BUDGET.getCommandWords();
+    public static final String COMMAND_WORD = CommandType.SET_BUDGET.getCommandWords();
 
-    public static final String MESSAGE_USAGE = CommandType.ADD_BUDGET.getMessageUsage();
+    public static final String MESSAGE_USAGE = CommandType.SET_BUDGET.getMessageUsage();
 
-    public static final String MESSAGE_SUCCESS = CommandType.ADD_BUDGET.getMessageSuccess();
+    public static final String MESSAGE_SUCCESS = CommandType.SET_BUDGET.getMessageSuccess();
 
     private final Budget budget;
 

@@ -138,7 +138,7 @@ public class HelpCommandTest {
         CommandResult expectedCommandResult =
                 new CommandResult(SetBudgetCommand.MESSAGE_USAGE);
 
-        assertCommandSuccess(new HelpCommand(CommandType.ADD_BUDGET.getMainCommandWord()),
+        assertCommandSuccess(new HelpCommand(CommandType.SET_BUDGET.getMainCommandWord()),
                 model, expectedCommandResult, expectedModel);
     }
 

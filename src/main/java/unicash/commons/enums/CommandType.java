@@ -3,6 +3,7 @@ package unicash.commons.enums;
 import static unicash.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static unicash.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static unicash.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static unicash.logic.parser.CliSyntax.PREFIX_INTERVAL;
 import static unicash.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static unicash.logic.parser.CliSyntax.PREFIX_MONTH;
 import static unicash.logic.parser.CliSyntax.PREFIX_NAME;
@@ -13,7 +14,6 @@ import java.util.Arrays;
 
 import unicash.commons.util.CommandUsage;
 import unicash.commons.util.ExampleGenerator;
-import unicash.logic.parser.CliSyntax;
 
 /**
  * Represents the type of command that can be executed by UniCa$h.
@@ -52,24 +52,65 @@ public enum CommandType {
             return "New transaction added: \n\n%1$s";
         }
     },
-    ADD_BUDGET("set_budget", "add_budget", "sb") {
+    SET_BUDGET("set_budget", "sb", "budget") {
         @Override
         public String getMessageUsage() {
-            return getCommandWords() + ": Adds a budget to UniCa$h. \n"
-                    + "\n"
-                    + "Parameters: "
-                    + CliSyntax.PREFIX_AMOUNT + "AMOUNT "
-                    + CliSyntax.PREFIX_INTERVAL + "TYPE "
-                    + "\n"
-                    + "Example: " + getMainCommandWord() + " "
-                    + CliSyntax.PREFIX_AMOUNT + "300 "
-                    + CliSyntax.PREFIX_INTERVAL + "month ";
+            return new CommandUsage.Builder()
+                    .setCommandWord(getMainCommandWord())
+                    .setDescription("Sets the user's budget on UniCa$h.")
+                    .addParameter(PREFIX_AMOUNT, "Amount")
+                    .addParameter(PREFIX_INTERVAL, "Interval")
+                    .setExample(ExampleGenerator.generate(getMainCommandWord(), PREFIX_MONTH, PREFIX_INTERVAL))
+                    .build()
+                    .toString();
         }
 
         @Override
         public String getMessageSuccess() {
             return "New budget added: \n\n%1$s";
         }
+    },
+    CLEAR_BUDGET("clear_budget", "cb") {
+        @Override
+        public String getMessageUsage() {
+            return "Clears the current set budget in UniCa$h.";
+        }
+
+        @Override
+        public String getMessageSuccess() {
+            return "Budget cleared.";
+        }
+
+        @Override
+        public String getMessageFailure() {
+            return "No budget to clear."
+                    + "\n\nConsider using set_budget amt/Amount interval/Interval first!";
+        }
+    },
+    GET_BUDGET("get_budget", "gb") {
+        @Override
+        public String getMessageUsage() {
+            return new CommandUsage.Builder()
+                    .setCommandWord(getMainCommandWord())
+                    .setDescription(
+                            "Retrieves the budget and the spending over the given interval.\n"
+                                    + "If you are missing transactions, consider using list first."
+                    )
+                    .setExample(ExampleGenerator.generate(getMainCommandWord()))
+                    .build()
+                    .toString();
+        }
+
+        @Override
+        public String getMessageSuccess() {
+            return "%s budget of %s\n\nNet amount of $%.2f\n\n";
+        }
+
+        @Override
+        public String getMessageFailure() {
+            return "No budget set. Use set_budget amt/Amount interval/Interval\n\n";
+        }
+
     },
     CLEAR_TRANSACTIONS("clear", "clear_transactions", "ct") {
         @Override

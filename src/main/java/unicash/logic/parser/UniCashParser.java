@@ -9,12 +9,13 @@ import java.util.regex.Pattern;
 
 import unicash.commons.core.LogsCenter;
 import unicash.commons.enums.CommandType;
+import unicash.logic.commands.ClearBudgetCommand;
 import unicash.logic.commands.ClearTransactionsCommand;
 import unicash.logic.commands.Command;
 import unicash.logic.commands.ExitCommand;
+import unicash.logic.commands.GetBudgetCommand;
 import unicash.logic.commands.HelpCommand;
 import unicash.logic.commands.ResetCommand;
-import unicash.logic.commands.SetBudgetCommand;
 import unicash.logic.commands.SummaryCommand;
 import unicash.logic.parser.exceptions.ParseException;
 
@@ -73,13 +74,13 @@ public class UniCashParser {
         case CLEAR_TRANSACTIONS:
             return new ClearTransactionsCommand();
 
-        case SetBudgetCommand.COMMAND_WORD:
+        case SET_BUDGET:
             return new SetBudgetCommandParser().parse(arguments);
 
-        case ClearBudgetCommand.COMMAND_WORD:
+        case CLEAR_BUDGET:
             return new ClearBudgetCommand();
 
-        case GetBudgetCommand.COMMAND_WORD:
+        case GET_BUDGET:
             return new GetBudgetCommand();
 
         case RESET:
