@@ -64,7 +64,7 @@ public class ClearTransactionsCommandParserTest {
     }
 
     @Test
-    public void equals_Method_sameClearTransactionsCommandParserInput_returnsTrue() {
+    public void equalsMethod_sameClearTransactionsCommandParserInput_returnsTrue() {
         ClearTransactionsCommandParser parser = new ClearTransactionsCommandParser();
         assertTrue(parser.equals(parser));
         assertTrue(parser.equals(new ClearTransactionsCommandParser()));
