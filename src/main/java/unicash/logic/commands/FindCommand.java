@@ -20,7 +20,8 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = new CommandUsage.Builder()
             .setCommandWord(COMMAND_WORD)
             .setDescription(
-                    "Finds any transactions whose name, amount, type, date-time, location, and categories "
+                    "Finds transactions in UniCa$h."
+                            + "\n\nFinds any transactions whose name, amount, type, date-time, location, and categories "
                             + "contain any of the specified keywords (case-insensitive). At least one keyword "
                             + "must be specified. "
                             + "\n\n"

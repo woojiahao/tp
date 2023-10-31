@@ -17,6 +17,11 @@ public class HelpCommandParserTest {
     }
 
     @Test
+    public void parse_withExcessSpacingAfterWords_success() {
+        assertParseSuccess(parser, "test     ", new HelpCommand("test"));
+    }
+
+    @Test
     public void parse_withNullInput_assertionFailure() {
         assertThrows(NullPointerException.class, () -> parser.parse(null));
 
@@ -25,5 +30,10 @@ public class HelpCommandParserTest {
     @Test
     public void execute_predicateNotNull_assertion() {
         assertDoesNotThrow(() -> new ListCommandParser().parse(" "));
+    }
+
+    @Test
+    public void parse_withMixedCase_success() {
+        assertParseSuccess(parser, "ReSeT_uniCaSh", new HelpCommand("reset_unicash"));
     }
 }
