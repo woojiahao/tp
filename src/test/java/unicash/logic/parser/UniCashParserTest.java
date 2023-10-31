@@ -86,7 +86,8 @@ public class UniCashParserTest {
 
     @Test
     public void parseCommand_clearTransactions() throws Exception {
-        assertTrue(parser.parseCommand(CommandType.CLEAR_TRANSACTIONS.getMainCommandWord()) instanceof ClearTransactionsCommand);
+        assertTrue(parser.parseCommand(CommandType.CLEAR_TRANSACTIONS.getMainCommandWord())
+                instanceof ClearTransactionsCommand);
         assertTrue(parser.parseCommand(CommandType.CLEAR_TRANSACTIONS.getMainCommandWord() + " 3")
                 instanceof ClearTransactionsCommand);
     }
@@ -103,7 +104,8 @@ public class UniCashParserTest {
         Transaction transaction = new TransactionBuilder().build();
         EditTransactionCommand.EditTransactionDescriptor descriptor = new EditTransactionDescriptorBuilder(transaction)
                 .build();
-        String input = CommandType.EDIT_TRANSACTION.getMainCommandWord() + " " + INDEX_FIRST_TRANSACTION.getOneBased() + " ";
+        String input = CommandType.EDIT_TRANSACTION.getMainCommandWord() + " "
+                + INDEX_FIRST_TRANSACTION.getOneBased() + " ";
         input += TransactionUtil.getEditTransactionDescriptorDetails(descriptor);
         EditTransactionCommand command = (EditTransactionCommand) parser.parseCommand(input);
         assertEquals(new EditTransactionCommand(INDEX_FIRST_TRANSACTION, descriptor), command);
