@@ -13,7 +13,9 @@ public class ClearBudgetCommand extends Command {
     public static final String COMMAND_WORD = CommandType.CLEAR_BUDGET.getCommandWords();
     public static final String MESSAGE_SUCCESS = CommandType.CLEAR_BUDGET.getMessageSuccess();
     public static final String MESSAGE_USAGE = CommandType.CLEAR_BUDGET.getMessageUsage();
-    public static final String MESSAGE_NO_BUDGET = CommandType.CLEAR_BUDGET.getMessageFailure();
+    //alternative success case
+    public static final String MESSAGE_NO_BUDGET = "No budget to clear."
+            + "\n\nConsider using set_budget amt/Amount interval/Interval first!";
 
     @Override
     public CommandResult execute(Model model) {

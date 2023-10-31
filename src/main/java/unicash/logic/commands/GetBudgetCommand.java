@@ -29,7 +29,8 @@ public class GetBudgetCommand extends Command {
     public static final String MESSAGE_USAGE = CommandType.GET_BUDGET.getMessageUsage();
 
     public static final String MESSAGE_SUCCESS = CommandType.GET_BUDGET.getMessageSuccess();
-    public static final String MESSAGE_NO_BUDGET = CommandType.GET_BUDGET.getMessageFailure();
+    //alternative success case
+    public static final String MESSAGE_NO_BUDGET = "No budget set. Use set_budget amt/Amount interval/Interval\n\n";
 
     /**
      * Time to calculate all interval offsets from. Provided to make testing easy.

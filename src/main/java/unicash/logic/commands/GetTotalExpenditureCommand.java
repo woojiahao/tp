@@ -21,7 +21,7 @@ public class GetTotalExpenditureCommand extends Command {
 
     public static final String MESSAGE_USAGE = CommandType.GET_TOTAL_EXPENDITURE.getMessageUsage();
 
-    public static final String MESSAGE_SUCCESS = "Your total expenditure in %1$s %2$d was %3$.2f";
+    public static final String MESSAGE_SUCCESS = CommandType.GET_TOTAL_EXPENDITURE.getMessageSuccess();
 
     private final int month;
     private final int year;

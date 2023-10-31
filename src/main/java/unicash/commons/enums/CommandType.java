@@ -80,12 +80,6 @@ public enum CommandType {
         public String getMessageSuccess() {
             return "Budget cleared.";
         }
-
-        @Override
-        public String getMessageFailure() {
-            return "No budget to clear."
-                    + "\n\nConsider using set_budget amt/Amount interval/Interval first!";
-        }
     },
     GET_BUDGET("get_budget", "gb") {
         @Override
@@ -104,11 +98,6 @@ public enum CommandType {
         @Override
         public String getMessageSuccess() {
             return "%s budget of %s\n\nNet amount of $%.2f\n\n";
-        }
-
-        @Override
-        public String getMessageFailure() {
-            return "No budget set. Use set_budget amt/Amount interval/Interval\n\n";
         }
 
     },
