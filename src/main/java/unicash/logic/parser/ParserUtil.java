@@ -9,6 +9,7 @@ import java.util.List;
 import unicash.commons.core.index.Index;
 import unicash.commons.util.StringUtil;
 import unicash.logic.parser.exceptions.ParseException;
+import unicash.model.budget.Interval;
 import unicash.model.category.Category;
 import unicash.model.category.UniqueCategoryList;
 import unicash.model.commons.Amount;
@@ -66,17 +67,10 @@ public class ParserUtil {
     public static Amount parseAmount(String amount) throws ParseException {
         requireNonNull(amount);
         String trimmedAmount = amount.trim();
-        double castedAmount;
-        try {
-            castedAmount = Double.parseDouble(trimmedAmount);
-        } catch (NumberFormatException ex) {
+        if (!Amount.isValidAmount(trimmedAmount)) {
             throw new ParseException(Amount.MESSAGE_CONSTRAINTS);
         }
-
-        if (!Amount.isValidAmount(castedAmount)) {
-            throw new ParseException(Amount.MESSAGE_CONSTRAINTS);
-        }
-        return new Amount(castedAmount);
+        return new Amount(trimmedAmount);
     }
 
     /**
@@ -160,5 +154,21 @@ public class ParserUtil {
         }
 
         return new UniqueCategoryList(categoryList);
+    }
+
+    /**
+     * Parses a {@code String interval} into a {@code Interval}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if {@code interval} is invalid.
+     * @throws NullPointerException if {@code interval} is null.
+     */
+    public static Interval parseInterval(String interval) throws ParseException {
+        requireNonNull(interval);
+        String trimmedInterval = interval.trim();
+        if (!Interval.isValidInterval(trimmedInterval)) {
+            throw new ParseException(Interval.MESSAGE_CONSTRAINTS);
+        }
+        return new Interval(trimmedInterval);
     }
 }

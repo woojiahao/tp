@@ -14,6 +14,7 @@ import unicash.logic.commands.Command;
 import unicash.logic.commands.ExitCommand;
 import unicash.logic.commands.HelpCommand;
 import unicash.logic.commands.ResetCommand;
+import unicash.logic.commands.SetBudgetCommand;
 import unicash.logic.commands.SummaryCommand;
 import unicash.logic.parser.exceptions.ParseException;
 
@@ -72,8 +73,14 @@ public class UniCashParser {
         case CLEAR_TRANSACTIONS:
             return new ClearTransactionsCommand();
 
-        case ADD_BUDGET:
-            return new AddBudgetCommandParser().parse(arguments);
+        case SetBudgetCommand.COMMAND_WORD:
+            return new SetBudgetCommandParser().parse(arguments);
+
+        case ClearBudgetCommand.COMMAND_WORD:
+            return new ClearBudgetCommand();
+
+        case GetBudgetCommand.COMMAND_WORD:
+            return new GetBudgetCommand();
 
         case RESET:
             return new ResetCommand();

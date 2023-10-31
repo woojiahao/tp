@@ -10,9 +10,9 @@ import unicash.model.Model;
 import unicash.model.budget.Budget;
 
 /**
- * Adds a budget to UniCash.
+ * Sets budget for UniCa$h.
  */
-public class AddBudgetCommand extends Command {
+public class SetBudgetCommand extends Command {
     public static final String COMMAND_WORD = CommandType.ADD_BUDGET.getCommandWords();
 
     public static final String MESSAGE_USAGE = CommandType.ADD_BUDGET.getMessageUsage();
@@ -22,14 +22,15 @@ public class AddBudgetCommand extends Command {
     private final Budget budget;
 
     /**
-     * Creates an AddBudgetCommand to add the specified {@code Budget}
+     * Creates an SetBudgetCommand.
      */
-    public AddBudgetCommand(Budget budget) {
+    public SetBudgetCommand(Budget budget) {
         requireNonNull(budget);
         this.budget = budget;
     }
+
     /**
-     * Executes the command and returns the result message.
+     * Sets the user's budget.
      *
      * @param model {@code Model} which the command should operate on.
      * @return feedback message of the operation result for display
@@ -48,11 +49,11 @@ public class AddBudgetCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof AddBudgetCommand)) {
+        if (!(other instanceof SetBudgetCommand)) {
             return false;
         }
 
-        AddBudgetCommand otherCommand = (AddBudgetCommand) other;
+        SetBudgetCommand otherCommand = (SetBudgetCommand) other;
         return budget.equals(otherCommand.budget);
     }
 

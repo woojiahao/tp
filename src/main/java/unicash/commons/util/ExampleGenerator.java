@@ -5,6 +5,7 @@ import static unicash.commons.util.CollectionUtil.requireAllNonNull;
 import static unicash.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static unicash.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static unicash.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static unicash.logic.parser.CliSyntax.PREFIX_INTERVAL;
 import static unicash.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static unicash.logic.parser.CliSyntax.PREFIX_MONTH;
 import static unicash.logic.parser.CliSyntax.PREFIX_NAME;
@@ -30,7 +31,8 @@ public class ExampleGenerator {
             new SimpleEntry<>(PREFIX_CATEGORY, "Food"),
             new SimpleEntry<>(PREFIX_LOCATION, "NTUC"),
             new SimpleEntry<>(PREFIX_MONTH, "10"),
-            new SimpleEntry<>(PREFIX_YEAR, "2006")
+            new SimpleEntry<>(PREFIX_YEAR, "2006"),
+            new SimpleEntry<>(PREFIX_INTERVAL, "day")
     );
 
     private ExampleGenerator() {
