@@ -261,7 +261,7 @@ public enum CommandType {
                     .setCommandWord(getCommandWords())
                     .setDescription("Shows UniCa$h general usage instructions and specific command"
                             + " usage by specifying the command word.")
-                    .setArgument("COMMAND_WORD (must be a valid command word)")
+                    .setArgument("COMMAND_WORD (must be a valid command word present in the help command)")
                     .setExample(ExampleGenerator.generate(getMainCommandWord(), "add"))
                     .build()
                     .toString();
