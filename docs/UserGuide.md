@@ -1625,9 +1625,11 @@ Important notes:
 > ```
 > Opened UniCa$h summary window.
 > ```
+> 
 > <img src="images/unicash/command-outputs/summarySuccessOutput2.png" width="1000" />
 >
 > Here is what the summary pop-up window looks like:
+> 
 > <img src="images/unicash/command-outputs/summarySuccessOutput1.png" width="1000" />
 
 ###### Example 2
@@ -1637,11 +1639,10 @@ Important notes:
 > **Input**: `clear_transactions`
 >
 > **Output**: Here is what the summary window will look like
+> 
 > <img src="images/unicash/command-outputs/summarySuccessOutput3.png" width="1000" />
 
-##### Failed Execution
-
-###### Example 1
+###### Example 3
 
 > **Case**: There are no expenses saved in UniCa$h, and the summary window is closed.
 >
@@ -1651,7 +1652,7 @@ Important notes:
 > ```
 > You have no expenses to summarize.
 > ```
-> <img src="images/unicash/command-outputs/summaryFailedOutput1.png" width="1000" />
+> <img src="images/unicash/command-outputs/summarySuccessOutput4.png" width="1000" />
 > Note: The summary pop-up window does not appear.
 
 #### 4.3.3 Rolling Balance Indicator
