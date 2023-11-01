@@ -845,7 +845,7 @@ Some general utility features
 The `help` command can be used in 2 different ways.
 
 1. `help` with no arguments.
-2. `help <command_word>` with 1 argument containing a command word.
+2. `help COMMAND_WORD` with 1 argument containing a command word.
 
 ##### Details
 

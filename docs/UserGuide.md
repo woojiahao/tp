@@ -1415,13 +1415,13 @@ Command Options: This command does not take in any arguments and will not proces
 
 Get help for UniCa$h.
 
-Command: `help [<COMMAND_WORD>]`
+Command: `help COMMAND_WORD`
 
-Command Argument: `<COMMAND_WORD>` is the command to get help for. If no 
+Command Argument: `COMMAND_WORD` is the command to get help for. If no 
 argument is specified, a general help message is shown as well as a pop up 
 containing a link to our User Guide.
 
-> To get a list of `<COMMAND_WORD>`, do `help` with no arguments
+> To get a list of `COMMAND_WORD`, do `help` with no arguments
 
 ##### Successful Execution
 
