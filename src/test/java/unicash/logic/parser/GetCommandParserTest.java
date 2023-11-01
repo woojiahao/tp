@@ -59,7 +59,7 @@ public class GetCommandParserTest {
     }
 
     @Test
-    public void equalsMethod_differentCommandTypes_returnsFalse() {
+    public void equals_differentCommandTypes_returnsFalse() {
         GetCommandParser getCommandParser = new GetCommandParser();
         ListCommandParser listCommandParser = new ListCommandParser();
         assertNotEquals(listCommandParser, getCommandParser);
@@ -67,7 +67,7 @@ public class GetCommandParserTest {
     }
 
     @Test
-    public void equalsMethod_nullInput_returnsFalse() {
+    public void equals_nullInput_returnsFalse() {
         assertNotEquals(null, new GetCommandParser());
     }
 

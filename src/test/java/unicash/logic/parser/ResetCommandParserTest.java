@@ -75,7 +75,7 @@ public class ResetCommandParserTest {
     }
 
     @Test
-    public void equalsMethod_differentCommandTypes_returnsFalse() {
+    public void equals_differentCommandTypes_returnsFalse() {
         ResetCommandParser resetCommandParser = new ResetCommandParser();
         ListCommandParser listCommandParser = new ListCommandParser();
         assertNotEquals(listCommandParser, resetCommandParser);
@@ -83,7 +83,7 @@ public class ResetCommandParserTest {
     }
 
     @Test
-    public void equalsMethod_nullInput_returnsFalse() {
+    public void equals_nullInput_returnsFalse() {
         assertNotEquals(null, new ResetCommandParser());
     }
 

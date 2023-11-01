@@ -51,7 +51,7 @@ public class ListCommandParserTest {
 
 
     @Test
-    public void equalsMethod_sameListCommandParserInput_returnsTrue() {
+    public void equals_sameListCommandParserObject_returnsTrue() {
         ListCommandParser parser = new ListCommandParser();
         assertTrue(parser.equals(parser));
         assertTrue(parser.equals(new ListCommandParser()));
@@ -59,7 +59,7 @@ public class ListCommandParserTest {
     }
 
     @Test
-    public void equalsMethod_differentCommandTypes_returnsFalse() {
+    public void equals_differentCommandTypes_returnsFalse() {
         ResetCommandParser resetCommandParser = new ResetCommandParser();
         ListCommandParser listCommandParser = new ListCommandParser();
         assertNotEquals(resetCommandParser, listCommandParser);
@@ -67,7 +67,7 @@ public class ListCommandParserTest {
     }
 
     @Test
-    public void equalsMethod_nullInput_returnsFalse() {
+    public void equals_nullInput_returnsFalse() {
         assertNotEquals(null, new ListCommandParser());
     }
 

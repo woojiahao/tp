@@ -53,7 +53,7 @@ public class ClearTransactionsCommandTest {
     }
 
     @Test
-    public void equalsMethod_differentCommandTypes_returnsFalse() {
+    public void equals_differentCommandTypes_returnsFalse() {
         Command resetCommand = new ResetCommand();
         Command clearCommand = new ClearTransactionsCommand();
         assertNotEquals(resetCommand, clearCommand);
@@ -62,7 +62,7 @@ public class ClearTransactionsCommandTest {
     }
 
     @Test
-    public void equalsMethod_nullInput_returnsFalse() {
+    public void equals_nullInput_returnsFalse() {
         assertNotEquals(null, new ClearTransactionsCommand());
     }
 
