@@ -14,15 +14,16 @@ import static unicash.testutil.TypicalTransactions.NUS;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import unicash.commons.core.GuiSettings;
 import unicash.model.budget.Budget;
 import unicash.model.transaction.exceptions.TransactionNotFoundException;
-import unicash.model.transaction.predicates.TransactionContainsKeywordsPredicate;
+import unicash.model.transaction.predicates.TransactionContainsAllKeywordsPredicate;
+import unicash.model.transaction.predicates.TransactionNameContainsKeywordsPredicate;
 import unicash.testutil.UniCashBuilder;
 
 public class ModelManagerTest {
@@ -213,8 +214,9 @@ public class ModelManagerTest {
         // different filteredList -> returns false
         String[] keywords = new String[] {"internship"};
         modelManager.updateFilteredTransactionList(
-                new TransactionContainsKeywordsPredicate(Arrays.asList(keywords))
-        );
+                new TransactionContainsAllKeywordsPredicate(List.of(
+                        new TransactionNameContainsKeywordsPredicate(List.of(keywords)))));
+
         assertFalse(modelManager.equals(new ModelManager(uniCash, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests

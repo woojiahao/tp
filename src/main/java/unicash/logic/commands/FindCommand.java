@@ -6,7 +6,7 @@ import unicash.commons.enums.CommandType;
 import unicash.commons.util.ToStringBuilder;
 import unicash.logic.UniCashMessages;
 import unicash.model.Model;
-import unicash.model.transaction.predicates.TransactionContainsKeywordsPredicate;
+import unicash.model.transaction.predicates.TransactionContainsAllKeywordsPredicate;
 
 /**
  * Finds and lists all transactions in UniCa$h whose name contains any of the argument keywords.
@@ -15,12 +15,16 @@ import unicash.model.transaction.predicates.TransactionContainsKeywordsPredicate
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = CommandType.FIND.getCommandWords();
-
     public static final String MESSAGE_USAGE = CommandType.FIND.getMessageUsage();
 
-    private final TransactionContainsKeywordsPredicate predicate;
+    private final TransactionContainsAllKeywordsPredicate predicate;
 
-    public FindCommand(TransactionContainsKeywordsPredicate predicate) {
+    /**
+     * Creates a {@code TransactionContainsAnyKeywordsPredicate} with a non-null
+     * predicate.
+     */
+    public FindCommand(TransactionContainsAllKeywordsPredicate predicate) {
+        requireNonNull(predicate);
         this.predicate = predicate;
     }
 

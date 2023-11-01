@@ -10,12 +10,10 @@ import java.util.regex.Pattern;
 import unicash.commons.core.LogsCenter;
 import unicash.commons.enums.CommandType;
 import unicash.logic.commands.ClearBudgetCommand;
-import unicash.logic.commands.ClearTransactionsCommand;
 import unicash.logic.commands.Command;
 import unicash.logic.commands.ExitCommand;
 import unicash.logic.commands.GetBudgetCommand;
 import unicash.logic.commands.HelpCommand;
-import unicash.logic.commands.ResetCommand;
 import unicash.logic.commands.SummaryCommand;
 import unicash.logic.parser.exceptions.ParseException;
 
@@ -72,7 +70,7 @@ public class UniCashParser {
             return new GetTotalExpenditureCommandParser().parse(arguments);
 
         case CLEAR_TRANSACTIONS:
-            return new ClearTransactionsCommand();
+            return new ClearTransactionsCommandParser().parse(arguments);
 
         case SET_BUDGET:
             return new SetBudgetCommandParser().parse(arguments);
@@ -84,7 +82,7 @@ public class UniCashParser {
             return new GetBudgetCommand();
 
         case RESET:
-            return new ResetCommand();
+            return new ResetCommandParser().parse(arguments);
 
         case GET:
             return new GetCommandParser().parse(arguments);

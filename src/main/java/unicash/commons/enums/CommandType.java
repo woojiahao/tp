@@ -101,7 +101,8 @@ public enum CommandType {
         }
 
     },
-    CLEAR_TRANSACTIONS("clear", "clear_transactions", "ct") {
+    // No shortcuts for this command as to safeguard the user from accidental file deletion
+    CLEAR_TRANSACTIONS("clear_transactions") {
         @Override
         public String getMessageUsage() {
             return new CommandUsage.Builder()
@@ -115,6 +116,14 @@ public enum CommandType {
         @Override
         public String getMessageSuccess() {
             return "All transactions have been cleared!";
+        }
+
+        @Override
+        public String getMessageFailure() {
+            return String.format(
+                    "Clear transactions command cannot have trailing arguments. "
+                            + "Use the command %s without any trailing arguments.",
+                    getCommandWords());
         }
     },
     DELETE_TRANSACTION("delete", "delete_transaction", "del") {
@@ -201,11 +210,28 @@ public enum CommandType {
             return new CommandUsage.Builder()
                     .setCommandWord(getCommandWords())
                     .setDescription(
-                            "Finds all transactions whose names contain any of the specified keywords "
-                                    + "(case-insensitive) and displays them as a list with index numbers."
+                            "Finds all transactions whose properties match all of the specified keywords "
+                                    + "(case-insensitive) and displays them as a list with index numbers. "
+                                    + "\n\nOnly one keyword can be specified for each property and at least "
+                                    + "one keyword must be provided in total. "
                     )
-                    .setArgument("Keyword [More keywords]...")
-                    .setExample(ExampleGenerator.generate(getMainCommandWord(), "chicken rice"))
+                    .addParameter(PREFIX_NAME, "Name", true, false)
+                    .addParameter(PREFIX_TYPE, "Type", true, false)
+                    .addParameter(PREFIX_AMOUNT, "Amount", true, false)
+                    .addParameter(PREFIX_DATETIME, "DateTime", true, false)
+                    .addParameter(PREFIX_LOCATION, "Location", true, false)
+                    .addParameter(PREFIX_CATEGORY, "Category", true, false)
+                    .setExample(
+                            ExampleGenerator.generate(
+                                    getCommandWords(),
+                                    PREFIX_NAME,
+                                    PREFIX_TYPE,
+                                    PREFIX_AMOUNT,
+                                    PREFIX_DATETIME,
+                                    PREFIX_LOCATION,
+                                    PREFIX_CATEGORY
+                            )
+                    )
                     .build()
                     .toString();
         }
@@ -289,7 +315,7 @@ public enum CommandType {
         }
     },
     //no shorter commands for this so that the user does not accidentally reset
-    RESET("reset", "reset_unicash") {
+    RESET("reset_unicash") {
         @Override
         public String getMessageUsage() {
             return new CommandUsage.Builder()
@@ -298,6 +324,14 @@ public enum CommandType {
                     .setExample(ExampleGenerator.generate(getMainCommandWord()))
                     .build()
                     .toString();
+        }
+
+        @Override
+        public String getMessageFailure() {
+            return String.format(
+                    "Reset command cannot have trailing arguments. "
+                            + "Use the command %s without any trailing arguments.",
+                    getCommandWords());
         }
 
         @Override

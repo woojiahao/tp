@@ -5,6 +5,7 @@ import static unicash.logic.UniCashMessages.MESSAGE_UNICASH_WELCOME;
 import static unicash.logic.UniCashMessages.MESSAGE_UNKNOWN_COMMAND;
 
 import unicash.commons.enums.CommandType;
+import unicash.commons.util.ToStringBuilder;
 import unicash.model.Model;
 
 /**
@@ -100,5 +101,13 @@ public class HelpCommand extends Command {
 
         HelpCommand otherCommand = (HelpCommand) other;
         return target.equals(otherCommand.target);
+    }
+
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("target", target)
+                .toString();
     }
 }

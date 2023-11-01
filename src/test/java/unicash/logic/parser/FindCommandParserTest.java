@@ -1,13 +1,27 @@
 package unicash.logic.parser;
 
-import static unicash.logic.UniCashMessages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.Arrays;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static unicash.logic.commands.CommandTestUtil.INVALID_CATEGORY_DESC;
+import static unicash.logic.commands.CommandTestUtil.INVALID_LOCATION_DESC;
+import static unicash.logic.commands.CommandTestUtil.INVALID_TRANSACTION_NAME_DESC;
+import static unicash.logic.commands.CommandTestUtil.TRANSACTION_NAME_DESC_NUS;
+import static unicash.logic.parser.CliSyntax.PREFIX_NAME;
+import static unicash.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static unicash.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import unicash.logic.commands.FindCommand;
-import unicash.model.transaction.predicates.TransactionContainsKeywordsPredicate;
+import unicash.commons.util.ToStringBuilder;
+import unicash.logic.UniCashMessages;
+import unicash.logic.parser.exceptions.ParseException;
+import unicash.model.category.Category;
+import unicash.model.transaction.Location;
+import unicash.model.transaction.predicates.TransactionContainsAllKeywordsPredicate;
+
 
 /**
  * A class to test the FindCommandParser.
@@ -18,24 +32,62 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        CommandParserTestUtil.assertParseFailure(parser, "     ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        CommandParserTestUtil.assertParseFailure(parser, "",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        String emptyArgument = "";
+        assertThrows(ParseException.class, () -> parser.parse(emptyArgument));
+
     }
 
+    @Test
+    public void parse_repeatedType_failure() {
+        assertParseFailure(parser, TRANSACTION_NAME_DESC_NUS + TRANSACTION_NAME_DESC_NUS,
+                UniCashMessages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
+    }
 
 
     @Test
-    public void parse_validArgs_returnsFindCommand() {
-        // no leading and trailing whitespaces
-        FindCommand expectedFindCommand =
-                new FindCommand(new TransactionContainsKeywordsPredicate(Arrays.asList("Shopping", "Work")));
-        CommandParserTestUtil.assertParseSuccess(parser, "Shopping Work", expectedFindCommand);
+    public void parse_invalidValue_failure() {
+        // invalid name
+        assertParseFailure(parser, INVALID_TRANSACTION_NAME_DESC,
+                unicash.model.transaction.Name.MESSAGE_CONSTRAINTS);
 
-        // multiple whitespaces between keywords
-        CommandParserTestUtil.assertParseSuccess(parser, " \n Shopping \n \t Work  \t", expectedFindCommand);
+        // invalid location
+        assertParseFailure(parser, INVALID_LOCATION_DESC, Location.MESSAGE_CONSTRAINTS);
+
+        // invalid datetime
+        assertParseFailure(parser, INVALID_CATEGORY_DESC, Category.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void equals_sameFindCommandParserObject_returnsTrue() {
+        FindCommandParser parser = new FindCommandParser();
+        assertTrue(parser.equals(parser));
+        assertTrue(parser.equals(new FindCommandParser()));
+
+    }
+
+    @Test
+    public void equals_differentCommandTypes_returnsFalse() {
+        FindCommandParser findCommandParser = new FindCommandParser();
+        ListCommandParser listCommandParser = new ListCommandParser();
+        assertNotEquals(listCommandParser, findCommandParser);
+        assertFalse(findCommandParser.equals(listCommandParser));
+    }
+
+    @Test
+    public void equals_nullInput_returnsFalse() {
+        assertNotEquals(null, new FindCommandParser());
+        assertFalse(new FindCommandParser().equals(null));
+    }
+
+    @Test
+    public void toStringMethod() {
+        FindCommandParser findCommandParser = new FindCommandParser();
+        TransactionContainsAllKeywordsPredicate findPredicate =
+                new TransactionContainsAllKeywordsPredicate();
+
+        String expected = new ToStringBuilder(new FindCommandParser())
+                .add("findPredicate", findPredicate).toString();
+        assertEquals(expected, findCommandParser.toString());
     }
 
 }
-

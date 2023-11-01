@@ -33,9 +33,9 @@
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false"
                       onAction="#handleHelp" text="Help" styleClass="normal-label" />
           </Menu>
-          <Menu mnemonicParsing="false" text="User Guide">
-            <MenuItem fx:id="userGuideMenuItem" text="Open..."
-                      styleClass="normal-label" onAction="#handleOpenUserGuide"/>
+          <Menu mnemonicParsing="false" text="Summary">
+            <MenuItem fx:id="summaryMenuItem" text="Open..."
+                      styleClass="normal-label" onAction="#handleSummary"/>
           </Menu>
         </MenuBar>
 
@@ -66,9 +66,9 @@
           </VBox>
 
           <!-- The below VBox sits on the right side of the Split Pane-->
-          <VBox minWidth="300" prefWidth="300" styleClass="pane-with-border" >
-            <StackPane fx:id="resultDisplayPlaceholder" maxHeight="310" minHeight="310"
-                       prefHeight="310" styleClass="pane-with-border">
+          <VBox minWidth="320" prefWidth="320" styleClass="pane-with-border">
+            <StackPane fx:id="resultDisplayPlaceholder" maxHeight="380" minHeight="380"
+                       prefHeight="380" styleClass="pane-with-border">
               <padding>
                 <Insets bottom="5" left="4" right="10" top="5" />
               </padding>

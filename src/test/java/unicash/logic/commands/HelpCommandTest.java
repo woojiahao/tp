@@ -11,8 +11,11 @@ import static unicash.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import unicash.commons.enums.CommandType;
+import unicash.commons.util.ToStringBuilder;
 import unicash.model.Model;
 import unicash.model.ModelManager;
+
+
 
 public class HelpCommandTest {
 
@@ -248,5 +251,21 @@ public class HelpCommandTest {
         assertNotEquals(helpCommandEdit, helpCommandDelete);
 
         assertFalse(helpCommandEdit.equals(2));
+    }
+
+
+    @Test
+    public void equals_differentCommandTypes_returnsFalse() {
+        Command helpCommand = new HelpCommand(ResetCommand.COMMAND_WORD);;
+        assertFalse(helpCommand.equals(new ResetCommand()));
+    }
+
+
+    @Test
+    public void toStringMethod() {
+        HelpCommand helpCommand = new HelpCommand(HelpCommand.COMMAND_WORD);
+        String expected = new ToStringBuilder(helpCommand)
+                .add("target", HelpCommand.COMMAND_WORD).toString();
+        assertEquals(expected, helpCommand.toString());
     }
 }

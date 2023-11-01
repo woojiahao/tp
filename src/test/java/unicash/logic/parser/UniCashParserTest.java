@@ -10,8 +10,10 @@ import static unicash.testutil.Assert.assertThrows;
 import static unicash.testutil.TypicalBudgets.MONTHLY;
 import static unicash.testutil.TypicalIndexes.INDEX_FIRST_TRANSACTION;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -35,7 +37,7 @@ import unicash.logic.commands.SetBudgetCommand;
 import unicash.logic.commands.SummaryCommand;
 import unicash.logic.parser.exceptions.ParseException;
 import unicash.model.transaction.Transaction;
-import unicash.model.transaction.predicates.TransactionContainsKeywordsPredicate;
+import unicash.model.transaction.predicates.TransactionContainsAllKeywordsPredicate;
 import unicash.testutil.EditTransactionDescriptorBuilder;
 import unicash.testutil.TransactionBuilder;
 import unicash.testutil.TransactionUtil;
@@ -48,14 +50,6 @@ public class UniCashParserTest {
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(CommandType.EXIT.getMainCommandWord()) instanceof ExitCommand);
         assertTrue(parser.parseCommand(CommandType.EXIT.getMainCommandWord() + " 3") instanceof ExitCommand);
-    }
-
-    @Test
-    public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                CommandType.FIND.getMainCommandWord() + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new TransactionContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
@@ -90,15 +84,20 @@ public class UniCashParserTest {
     public void parseCommand_clearTransactions() throws Exception {
         assertTrue(parser.parseCommand(CommandType.CLEAR_TRANSACTIONS.getMainCommandWord())
                 instanceof ClearTransactionsCommand);
-        assertTrue(parser.parseCommand(CommandType.CLEAR_TRANSACTIONS.getMainCommandWord() + " 3")
-                instanceof ClearTransactionsCommand);
+
+        String message = ClearTransactionsCommand.MESSAGE_FAILURE;
+        assertThrows(ParseException.class, message, () -> parser.parseCommand(
+                CommandType.CLEAR_TRANSACTIONS.getMainCommandWord() + " 3"));
+
     }
 
     @Test
     public void parseCommand_resetUniCashCommand() throws Exception {
         assertTrue(parser.parseCommand(CommandType.RESET.getMainCommandWord()) instanceof ResetCommand);
-        assertTrue(parser.parseCommand(CommandType.RESET.getMainCommandWord() + " 3")
-                instanceof ResetCommand);
+
+        String message = ResetCommand.MESSAGE_FAILURE;
+        assertThrows(ParseException.class, message, () -> parser.parseCommand(
+                CommandType.RESET.getMainCommandWord() + " 3"));
     }
 
     @Test
@@ -120,8 +119,8 @@ public class UniCashParserTest {
                         instanceof GetTotalExpenditureCommand
         );
         assertTrue(
-                parser.parseCommand(CommandType.CLEAR_TRANSACTIONS.getMainCommandWord() + " month/8 c/Food")
-                        instanceof ClearTransactionsCommand
+                parser.parseCommand(CommandType.GET_TOTAL_EXPENDITURE.getMainCommandWord() + " month/8 c/Food")
+                        instanceof GetTotalExpenditureCommand
         );
     }
 
@@ -147,6 +146,33 @@ public class UniCashParserTest {
                 CommandType.SUMMARY.getMainCommandWord()) instanceof SummaryCommand);
         assertTrue(parser.parseCommand(
                 CommandType.SUMMARY.getMainCommandWord() + " 3") instanceof SummaryCommand);
+    }
+
+    @Test
+    public void parseCommand_findCommand() throws Exception {
+        List<String> keywords = Arrays.asList("n/foo", "l/bar", "c/baz");
+        TransactionContainsAllKeywordsPredicate allKeywordsPredicate = getSamplePredicate();
+
+        var joinedKeywords = keywords.stream().collect(Collectors.joining(" "));
+        var findCommand = (FindCommand) parser.parseCommand(
+                CommandType.FIND.getMainCommandWord() + " " + joinedKeywords
+        );
+
+        assertEquals(new FindCommand(allKeywordsPredicate), findCommand);
+
+    }
+
+    private static TransactionContainsAllKeywordsPredicate getSamplePredicate() {
+        List<String> parsedKeywords = Arrays.asList("foo", "bar", "baz");
+        List<Predicate<Transaction>> predicateList = new ArrayList<>();
+
+        TransactionContainsAllKeywordsPredicate allKeywordsPredicate =
+                new TransactionContainsAllKeywordsPredicate(predicateList);
+
+        allKeywordsPredicate.addNameKeyword((parsedKeywords.get(0)));
+        allKeywordsPredicate.addCategoryKeyword(parsedKeywords.get(2));
+        allKeywordsPredicate.addLocationKeyword(parsedKeywords.get(1));
+        return allKeywordsPredicate;
     }
 
     @Test
