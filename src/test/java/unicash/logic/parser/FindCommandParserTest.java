@@ -99,11 +99,11 @@ public class FindCommandParserTest {
     @Test
     public void toStringTest() {
         FindCommandParser findCommandParser = new FindCommandParser();
-        TransactionContainsAllKeywordsPredicate filterPredicate =
+        TransactionContainsAllKeywordsPredicate findPredicate =
                 new TransactionContainsAllKeywordsPredicate();
 
         String expected = new ToStringBuilder(new FindCommandParser())
-                .add("filterPredicate", filterPredicate).toString();
+                .add("findPredicate", findPredicate).toString();
         assertEquals(expected, findCommandParser.toString());
     }
 
