@@ -30,8 +30,8 @@ public class ResetCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
+        if (other == null) {
+            return false;
         }
 
         return other instanceof ResetCommand;
