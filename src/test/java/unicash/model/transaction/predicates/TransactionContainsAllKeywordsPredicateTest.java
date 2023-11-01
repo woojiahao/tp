@@ -133,11 +133,8 @@ public class TransactionContainsAllKeywordsPredicateTest {
                 new TransactionContainsAllKeywordsPredicate();
 
         localPredicate.addNameKeyword("food");
-        localPredicate.addAmountKeyword("10.00");
         localPredicate.addCategoryKeyword("social");
-        localPredicate.addTypeKeyword("expense");
         localPredicate.addLocationKeyword("mcdonalds");
-        localPredicate.addDateTimeKeyword("10 Aug 2023 10:00"); // Input must be display i.e. toString format
 
         assertTrue(localPredicate.test(testTransaction));
     }
@@ -148,13 +145,10 @@ public class TransactionContainsAllKeywordsPredicateTest {
                 new TransactionContainsAllKeywordsPredicate();
 
         localPredicate.addNameKeyword("food");
-        localPredicate.addAmountKeyword("10.00");
         localPredicate.addCategoryKeyword("social");
-        localPredicate.addTypeKeyword("expense");
         localPredicate.addLocationKeyword("mcdonalds");
-        localPredicate.addDateTimeKeyword("10-08-2023 10:00");
 
-        assertFalse(localPredicate.test(testTransaction));
+        assertTrue(localPredicate.test(testTransaction));
     }
 
 
@@ -162,17 +156,6 @@ public class TransactionContainsAllKeywordsPredicateTest {
     public void testTransaction_predicateListEmpty_returnFalse() {
         TransactionContainsAllKeywordsPredicate localPredicate =
                 new TransactionContainsAllKeywordsPredicate();
-
-        assertFalse(localPredicate.test(testTransaction));
-    }
-
-    @Test
-    public void testTransaction_negatedTypes_returnFalse() {
-        TransactionContainsAllKeywordsPredicate localPredicate =
-                new TransactionContainsAllKeywordsPredicate();
-
-        localPredicate.addTypeKeyword("expense");
-        localPredicate.addTypeKeyword("income");
 
         assertFalse(localPredicate.test(testTransaction));
     }

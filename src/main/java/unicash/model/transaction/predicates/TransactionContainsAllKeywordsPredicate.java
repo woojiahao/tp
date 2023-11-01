@@ -47,20 +47,6 @@ public class TransactionContainsAllKeywordsPredicate implements Predicate<Transa
 
 
     /**
-     * Creates a new {@code TransactionAmountContainsValuePredicate} with the
-     * given amount as a string and adds this to the encapsulated list of
-     * transaction predicates.
-     *
-     * @param amount the amount to be added as a transaction predicate keyword
-     */
-    public void addAmountKeyword(String amount) {
-        TransactionAmountContainsValuePredicate amountPredicate =
-                new TransactionAmountContainsValuePredicate(toKeywordList(amount));
-
-        predicateList.add(amountPredicate);
-    }
-
-    /**
      * Creates a new {@code TransactionNameContainsKeywordsPredicate} with the
      * given name as a string and adds this to the encapsulated list of
      * transaction predicates.
@@ -90,36 +76,6 @@ public class TransactionContainsAllKeywordsPredicate implements Predicate<Transa
 
     }
 
-    /**
-     * Creates a new {@code TransactionDateTimeContainsValuePredicate} with the
-     * given {@code DateTime} as a string and adds this to the encapsulated list of
-     * transaction predicates.
-     *
-     * @param dateTime the DateTime to be added as a transaction predicate keyword
-     */
-    public void addDateTimeKeyword(String dateTime) {
-        TransactionDateTimeContainsValuePredicate dateTimePredicate =
-                new TransactionDateTimeContainsValuePredicate(toKeywordList(dateTime));
-
-        predicateList.add(dateTimePredicate);
-
-    }
-
-
-    /**
-     * Creates a new {@code TransactionTypeContainsValuePredicate} with the
-     * given {@code TransactionType} as a string and adds this to the encapsulated list of
-     * transaction predicates.
-     *
-     * @param type the Transaction Type to be added as a transaction predicate keyword
-     */
-    public void addTypeKeyword(String type) {
-        TransactionTypeContainsValuePredicate typePredicate =
-                new TransactionTypeContainsValuePredicate(toKeywordList(type));
-
-        predicateList.add(typePredicate);
-
-    }
 
     /**
      * Creates a new {@code TransactionCategoryContainsValuePredicate} with the
