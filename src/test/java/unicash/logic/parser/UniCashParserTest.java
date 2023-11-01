@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import unicash.commons.core.index.Index;
+import unicash.commons.enums.CommandType;
 import unicash.logic.commands.AddTransactionCommand;
 import unicash.logic.commands.ClearBudgetCommand;
 import unicash.logic.commands.ClearTransactionsCommand;
@@ -45,27 +46,27 @@ public class UniCashParserTest {
 
     @Test
     public void parseCommand_exit() throws Exception {
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
+        assertTrue(parser.parseCommand(CommandType.EXIT.getMainCommandWord()) instanceof ExitCommand);
+        assertTrue(parser.parseCommand(CommandType.EXIT.getMainCommandWord() + " 3") instanceof ExitCommand);
     }
 
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+                CommandType.FIND.getMainCommandWord() + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCommand(new TransactionContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
     public void parseCommand_help() throws Exception {
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+        assertTrue(parser.parseCommand(CommandType.HELP.getMainCommandWord()) instanceof HelpCommand);
+        assertTrue(parser.parseCommand(CommandType.HELP.getMainCommandWord() + " 3") instanceof HelpCommand);
     }
 
     @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
+        assertTrue(parser.parseCommand(CommandType.LIST.getMainCommandWord()) instanceof ListCommand);
     }
 
     @Test
@@ -80,22 +81,23 @@ public class UniCashParserTest {
     public void parseCommand_deleteTransaction() throws Exception {
         DeleteTransactionCommand command = (DeleteTransactionCommand)
                 parser.parseCommand(
-                        DeleteTransactionCommand.COMMAND_WORD + " "
+                        CommandType.DELETE_TRANSACTION.getMainCommandWord() + " "
                                 + INDEX_FIRST_TRANSACTION.getOneBased());
         assertEquals(new DeleteTransactionCommand(INDEX_FIRST_TRANSACTION), command);
     }
 
     @Test
     public void parseCommand_clearTransactions() throws Exception {
-        assertTrue(parser.parseCommand(ClearTransactionsCommand.COMMAND_WORD) instanceof ClearTransactionsCommand);
-        assertTrue(parser.parseCommand(ClearTransactionsCommand.COMMAND_WORD + " 3")
+        assertTrue(parser.parseCommand(CommandType.CLEAR_TRANSACTIONS.getMainCommandWord())
+                instanceof ClearTransactionsCommand);
+        assertTrue(parser.parseCommand(CommandType.CLEAR_TRANSACTIONS.getMainCommandWord() + " 3")
                 instanceof ClearTransactionsCommand);
     }
 
     @Test
     public void parseCommand_resetUniCashCommand() throws Exception {
-        assertTrue(parser.parseCommand(ResetCommand.COMMAND_WORD) instanceof ResetCommand);
-        assertTrue(parser.parseCommand(ResetCommand.COMMAND_WORD + " 3")
+        assertTrue(parser.parseCommand(CommandType.RESET.getMainCommandWord()) instanceof ResetCommand);
+        assertTrue(parser.parseCommand(CommandType.RESET.getMainCommandWord() + " 3")
                 instanceof ResetCommand);
     }
 
@@ -104,7 +106,8 @@ public class UniCashParserTest {
         Transaction transaction = new TransactionBuilder().build();
         EditTransactionCommand.EditTransactionDescriptor descriptor = new EditTransactionDescriptorBuilder(transaction)
                 .build();
-        String input = EditTransactionCommand.COMMAND_WORD + " " + INDEX_FIRST_TRANSACTION.getOneBased() + " ";
+        String input = CommandType.EDIT_TRANSACTION.getMainCommandWord() + " "
+                + INDEX_FIRST_TRANSACTION.getOneBased() + " ";
         input += TransactionUtil.getEditTransactionDescriptorDetails(descriptor);
         EditTransactionCommand command = (EditTransactionCommand) parser.parseCommand(input);
         assertEquals(new EditTransactionCommand(INDEX_FIRST_TRANSACTION, descriptor), command);
@@ -113,11 +116,11 @@ public class UniCashParserTest {
     @Test
     public void parseCommand_getTotalExpenditure() throws Exception {
         assertTrue(
-                parser.parseCommand(GetTotalExpenditureCommand.COMMAND_WORD + " month/8")
+                parser.parseCommand(CommandType.GET_TOTAL_EXPENDITURE.getMainCommandWord() + " month/8")
                         instanceof GetTotalExpenditureCommand
         );
         assertTrue(
-                parser.parseCommand(ClearTransactionsCommand.COMMAND_WORD + " month/8 c/Food")
+                parser.parseCommand(CommandType.CLEAR_TRANSACTIONS.getMainCommandWord() + " month/8 c/Food")
                         instanceof ClearTransactionsCommand
         );
     }
@@ -125,25 +128,25 @@ public class UniCashParserTest {
     @Test
     public void parseCommand_helpUniCash() throws Exception {
         assertTrue(parser.parseCommand(
-                HelpCommand.COMMAND_WORD) instanceof HelpCommand);
+                CommandType.HELP.getMainCommandWord()) instanceof HelpCommand);
         assertTrue(parser.parseCommand(
-                HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+                CommandType.HELP.getMainCommandWord() + " 3") instanceof HelpCommand);
     }
 
     @Test
     public void parseCommand_exitUniCash() throws Exception {
         assertTrue(parser.parseCommand(
-                ExitCommand.COMMAND_WORD) instanceof ExitCommand);
+                CommandType.EXIT.getMainCommandWord()) instanceof ExitCommand);
         assertTrue(parser.parseCommand(
-                ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
+                CommandType.EXIT.getMainCommandWord() + " 3") instanceof ExitCommand);
     }
 
     @Test
     public void parseCommand_summary() throws Exception {
         assertTrue(parser.parseCommand(
-                SummaryCommand.COMMAND_WORD) instanceof SummaryCommand);
+                CommandType.SUMMARY.getMainCommandWord()) instanceof SummaryCommand);
         assertTrue(parser.parseCommand(
-                SummaryCommand.COMMAND_WORD + " 3") instanceof SummaryCommand);
+                CommandType.SUMMARY.getMainCommandWord() + " 3") instanceof SummaryCommand);
     }
 
     @Test

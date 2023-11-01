@@ -8,9 +8,8 @@ import java.time.temporal.WeekFields;
 import java.util.function.Function;
 
 import unicash.commons.enums.BudgetInterval;
+import unicash.commons.enums.CommandType;
 import unicash.commons.enums.TransactionType;
-import unicash.commons.util.CommandUsage;
-import unicash.commons.util.ExampleGenerator;
 import unicash.logic.commands.exceptions.CommandException;
 import unicash.model.Model;
 import unicash.model.transaction.Transaction;
@@ -25,21 +24,13 @@ import unicash.model.transaction.Transaction;
  * the same for both week and month.</p>
  */
 public class GetBudgetCommand extends Command {
-    public static final String COMMAND_WORD = "get_budget";
+    public static final String COMMAND_WORD = CommandType.GET_BUDGET.getCommandWords();
 
-    public static final String MESSAGE_USAGE = new CommandUsage.Builder()
-            .setCommandWord(COMMAND_WORD)
-            .setDescription(
-                    "Retrieves the budget and the spending over the given interval.\n"
-                            + "If you are missing transactions, consider using list first."
-            )
-            .setExample(ExampleGenerator.generate(COMMAND_WORD))
-            .build()
-            .toString();
+    public static final String MESSAGE_USAGE = CommandType.GET_BUDGET.getMessageUsage();
 
-    public static final String MESSAGE_SUCCESS = "%s budget of %s\n\nNet amount of $%.2f\n\n";
-    public static final String MESSAGE_NO_BUDGET =
-            "No budget set. Use set_budget amt/Amount interval/Interval\n\n";
+    public static final String MESSAGE_SUCCESS = CommandType.GET_BUDGET.getMessageSuccess();
+    //alternative success case
+    public static final String MESSAGE_NO_BUDGET = "No budget set. Use set_budget amt/Amount interval/Interval\n\n";
 
     /**
      * Time to calculate all interval offsets from. Provided to make testing easy.

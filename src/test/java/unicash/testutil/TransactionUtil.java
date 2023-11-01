@@ -9,7 +9,7 @@ import static unicash.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import java.util.List;
 
-import unicash.logic.commands.AddTransactionCommand;
+import unicash.commons.enums.CommandType;
 import unicash.logic.commands.EditTransactionCommand;
 import unicash.model.category.Category;
 import unicash.model.transaction.Transaction;
@@ -24,7 +24,7 @@ public class TransactionUtil {
      * Returns an add command string for adding the {@code transaction}.
      */
     public static String getAddTransactionCommand(Transaction transaction) {
-        return AddTransactionCommand.COMMAND_WORD + " " + getTransactionDetails(transaction);
+        return CommandType.ADD_TRANSACTION.getMainCommandWord() + " " + getTransactionDetails(transaction);
     }
 
     /**
