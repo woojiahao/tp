@@ -1427,6 +1427,7 @@ Important notes:
 1. `Month` must be an integer between 1 and 12 (inclusive).
 2. `Year` must be an integer greater than or equal to 1920.
 3. `Category` cannot be blank, must be alphanumeric, and can only contain up to 15 characters.
+4. `Category` is case-insensitive.
 
 ##### Successful Execution
 
