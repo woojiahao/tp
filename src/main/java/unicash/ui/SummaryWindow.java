@@ -1,5 +1,6 @@
 package unicash.ui;
 
+import java.time.Year;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
@@ -29,8 +30,9 @@ public class SummaryWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(SummaryWindow.class);
     private static final String FXML = "SummaryWindow.fxml";
     private static final int MAX_DISPLAYED_CATEGORIES = 10;
-    private static final int MAX_DISPLAYED_YEAR_MONTHS = 12;
-    private static final YearMonth EARLIEST_YEAR_MONTH = YearMonth.now().minusMonths(MAX_DISPLAYED_YEAR_MONTHS);
+    private static final int NUM_YEAR_MONTHS_TO_DISPLAY = 12;
+    private static final YearMonth EARLIEST_YEAR_MONTH = YearMonth.now().minusMonths(NUM_YEAR_MONTHS_TO_DISPLAY - 1);
+    private static final YearMonth LATEST_YEAR_MONTH = YearMonth.now();
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MMM");
 
     @FXML
@@ -118,7 +120,7 @@ public class SummaryWindow extends UiPart<Stage> {
     public void setLineGraph(HashMap<YearMonth, Double> expenseSummary) {
         lineChart.getData().clear();
 
-        expenseSummary = fillExpenseSummary(expenseSummary);
+        expenseSummary = preprocessExpenseSummary(expenseSummary);
 
         XYChart.Series<String, Double> series = new XYChart.Series<>();
         ObservableList<XYChart.Data<String, Double>> lineChartData = expenseSummary.entrySet().stream()
@@ -139,8 +141,16 @@ public class SummaryWindow extends UiPart<Stage> {
      */
     private static boolean isValidYearMonth(YearMonth yearMonth) {
         boolean afterMostRecentYearMonth = yearMonth.compareTo(EARLIEST_YEAR_MONTH) >= 0;
-        boolean beforeCurrentYearMonth = yearMonth.compareTo(YearMonth.now()) <= 0;
+        boolean beforeCurrentYearMonth = yearMonth.compareTo(LATEST_YEAR_MONTH) <= 0;
         return afterMostRecentYearMonth & beforeCurrentYearMonth;
+    }
+
+    /**
+     * Returns a defensive copy of expenseSummary after going through preprocessing. The missing year-months are filled
+     * by {@code fillExpenseSummary}, and the extra year-months are removed by {@code filterExpenseSummary}.
+     */
+    private HashMap<YearMonth, Double> preprocessExpenseSummary(HashMap<YearMonth, Double> expenseSummary) {
+        return filterExpenseSummary(fillExpenseSummary(expenseSummary));
     }
 
     /**
@@ -150,14 +160,28 @@ public class SummaryWindow extends UiPart<Stage> {
     private HashMap<YearMonth, Double> fillExpenseSummary(HashMap<YearMonth, Double> expenseSummary) {
         expenseSummary = new HashMap<>(expenseSummary); // Creating a defensive copy of expenseSummary
 
-        YearMonth endYearMonth = YearMonth.now();
+        YearMonth endYearMonth = LATEST_YEAR_MONTH;
         YearMonth currentYearMonth = EARLIEST_YEAR_MONTH;
-        while (currentYearMonth.isBefore(endYearMonth)) {
+        while (currentYearMonth.isBefore(endYearMonth) | currentYearMonth.equals(endYearMonth)) {
             if (!expenseSummary.containsKey(currentYearMonth)) {
                 expenseSummary.put(currentYearMonth, 0.0);
             }
             currentYearMonth = currentYearMonth.plusMonths(1);
         }
+        return expenseSummary;
+    }
+
+    /**
+     * Returns a defensive copy of expenseSummary with the extra year-months removed (if any). A year-month is
+     * considered extra if it is before EARLIEST_YEAR_MONTH and after the current system clock's year-month.
+     */
+    private HashMap<YearMonth, Double> filterExpenseSummary(HashMap<YearMonth, Double> expenseSummary) {
+        expenseSummary = new HashMap<>(expenseSummary); // Creating a defensive copy of expenseSummary
+
+        expenseSummary.entrySet().removeIf(entry -> {
+            YearMonth yearMonth = entry.getKey();
+            return yearMonth.isBefore(EARLIEST_YEAR_MONTH) || yearMonth.isAfter(LATEST_YEAR_MONTH);
+        });
         return expenseSummary;
     }
 
