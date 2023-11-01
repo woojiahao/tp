@@ -15,10 +15,7 @@ public class ClearTransactionsCommand extends Command {
     public static final String COMMAND_WORD = CommandType.CLEAR_TRANSACTIONS.getCommandWords();
     public static final String MESSAGE_SUCCESS = CommandType.CLEAR_TRANSACTIONS.getMessageSuccess();
     public static final String MESSAGE_USAGE = CommandType.CLEAR_TRANSACTIONS.getMessageUsage();
-
-    public static final String MESSAGE_FAILURE = String.format(
-            "Clear transactions command cannot have trailing arguments. "
-                    + "Use the command %s without any trailing arguments.", COMMAND_WORD);
+    public static final String MESSAGE_FAILURE = CommandType.CLEAR_TRANSACTIONS.getMessageFailure();
 
 
     @Override
@@ -30,8 +27,8 @@ public class ClearTransactionsCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
+        if (other == null) {
+            return false;
         }
 
         return other instanceof ClearTransactionsCommand;

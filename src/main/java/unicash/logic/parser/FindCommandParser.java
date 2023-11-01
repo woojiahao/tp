@@ -27,15 +27,8 @@ import unicash.model.transaction.predicates.TransactionContainsAllKeywordsPredic
  */
 public class FindCommandParser implements Parser<FindCommand> {
 
-    private TransactionContainsAllKeywordsPredicate findPredicate;
-
-    /**
-     * Creates a {@code FindCommandParser} object with a default
-     * {@code TransactionContainsAllKeywordsPredicate} predicate.
-     */
-    FindCommandParser() {
-        findPredicate = new TransactionContainsAllKeywordsPredicate();
-    }
+    private TransactionContainsAllKeywordsPredicate findPredicate =
+            new TransactionContainsAllKeywordsPredicate();
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
@@ -94,8 +87,8 @@ public class FindCommandParser implements Parser<FindCommand> {
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
+        if (other == null) {
+            return false;
         }
 
         // instanceof handles nulls

@@ -18,10 +18,7 @@ public class ResetCommand extends Command {
     public static final String MESSAGE_SUCCESS = CommandType.RESET.getMessageSuccess();
     public static final String MESSAGE_USAGE = CommandType.RESET.getMessageUsage();
 
-
-    public static final String MESSAGE_FAILURE = String.format(
-            "Reset command cannot have trailing arguments. "
-                    + "Use the command %s without any trailing arguments.", COMMAND_WORD);
+    public static final String MESSAGE_FAILURE = CommandType.RESET.getMessageFailure();
 
 
     @Override

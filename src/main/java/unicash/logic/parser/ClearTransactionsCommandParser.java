@@ -27,8 +27,8 @@ public class ClearTransactionsCommandParser implements Parser<ClearTransactionsC
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
+        if (other == null) {
+            return false;
         }
 
         return other instanceof ClearTransactionsCommandParser;

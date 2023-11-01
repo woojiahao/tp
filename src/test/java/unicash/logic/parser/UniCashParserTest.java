@@ -150,8 +150,19 @@ public class UniCashParserTest {
 
     @Test
     public void parseCommand_findCommand() throws Exception {
-
         List<String> keywords = Arrays.asList("n/foo", "l/bar", "c/baz");
+        TransactionContainsAllKeywordsPredicate allKeywordsPredicate = getSamplePredicate();
+
+        var joinedKeywords = keywords.stream().collect(Collectors.joining(" "));
+        var findCommand = (FindCommand) parser.parseCommand(
+                CommandType.FIND.getMainCommandWord() + " " + joinedKeywords
+        );
+
+        assertEquals(new FindCommand(allKeywordsPredicate), findCommand);
+
+    }
+
+    private static TransactionContainsAllKeywordsPredicate getSamplePredicate() {
         List<String> parsedKeywords = Arrays.asList("foo", "bar", "baz");
         List<Predicate<Transaction>> predicateList = new ArrayList<>();
 
@@ -161,16 +172,7 @@ public class UniCashParserTest {
         allKeywordsPredicate.addNameKeyword((parsedKeywords.get(0)));
         allKeywordsPredicate.addCategoryKeyword(parsedKeywords.get(2));
         allKeywordsPredicate.addLocationKeyword(parsedKeywords.get(1));
-
-
-        FindCommand findCommand = (FindCommand) parser.parseCommand(
-                CommandType.FIND.getMainCommandWord() + " " + keywords
-                        .stream()
-                        .collect(Collectors
-                                .joining(" ")));
-
-        assertEquals(new FindCommand(allKeywordsPredicate), findCommand);
-
+        return allKeywordsPredicate;
     }
 
     @Test
