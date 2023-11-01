@@ -22,8 +22,8 @@ public class HelpCommandParser implements Parser<HelpCommand> {
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
+        if (other == null) {
+            return false;
         }
 
         return other instanceof HelpCommandParser;

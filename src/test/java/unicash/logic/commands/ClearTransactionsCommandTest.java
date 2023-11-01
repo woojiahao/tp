@@ -64,6 +64,7 @@ public class ClearTransactionsCommandTest {
     @Test
     public void equals_nullInput_returnsFalse() {
         assertNotEquals(null, new ClearTransactionsCommand());
+        assertFalse(new ClearTransactionsCommand().equals(null));
     }
 
     @Test

@@ -85,6 +85,7 @@ public class ResetCommandParserTest {
     @Test
     public void equals_nullInput_returnsFalse() {
         assertNotEquals(null, new ResetCommandParser());
+        assertFalse(new ResetCommandParser().equals(null));
     }
 
     @Test

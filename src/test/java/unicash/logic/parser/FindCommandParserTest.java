@@ -76,6 +76,7 @@ public class FindCommandParserTest {
     @Test
     public void equals_nullInput_returnsFalse() {
         assertNotEquals(null, new FindCommandParser());
+        assertFalse(new FindCommandParser().equals(null));
     }
 
     @Test

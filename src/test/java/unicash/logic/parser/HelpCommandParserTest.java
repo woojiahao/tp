@@ -1,11 +1,14 @@
 package unicash.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static unicash.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static unicash.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import unicash.commons.util.ToStringBuilder;
 import unicash.logic.commands.HelpCommand;
 
 public class HelpCommandParserTest {
@@ -35,5 +38,18 @@ public class HelpCommandParserTest {
     @Test
     public void parse_withMixedCase_success() {
         assertParseSuccess(parser, "ReSeT_uniCaSh", new HelpCommand("reset_unicash"));
+    }
+
+    @Test
+    public void equals_nullInput_returnsFalse() {
+        assertFalse(new HelpCommandParser().equals(null));
+    }
+
+    @Test
+    public void toStringMethod() {
+        HelpCommandParser helpCommandParser = new HelpCommandParser();
+
+        String expected = new ToStringBuilder(new HelpCommandParser()).toString();
+        assertEquals(expected, helpCommandParser.toString());
     }
 }

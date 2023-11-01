@@ -83,6 +83,7 @@ public class ClearTransactionsCommandParserTest {
     @Test
     public void equals_nullInput_returnsFalse() {
         assertNotEquals(null, new ClearTransactionsCommandParser());
+        assertFalse(new ClearTransactionsCommandParser().equals(null));
     }
 
     @Test
