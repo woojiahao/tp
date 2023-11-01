@@ -9,15 +9,16 @@ import static unicash.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static unicash.logic.parser.CliSyntax.PREFIX_NAME;
 import static unicash.logic.parser.CliSyntax.PREFIX_TYPE;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Stream;
+
 import unicash.commons.util.ToStringBuilder;
 import unicash.logic.commands.FindCommand;
 import unicash.logic.parser.exceptions.ParseException;
 import unicash.model.category.Category;
-import unicash.model.commons.Amount;
-import unicash.model.transaction.DateTime;
 import unicash.model.transaction.Location;
 import unicash.model.transaction.Name;
-import unicash.model.transaction.Type;
 import unicash.model.transaction.predicates.TransactionContainsAllKeywordsPredicate;
 
 
@@ -36,7 +37,6 @@ public class FindCommandParser implements Parser<FindCommand> {
         findPredicate = new TransactionContainsAllKeywordsPredicate();
     }
 
-
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
@@ -46,59 +46,51 @@ public class FindCommandParser implements Parser<FindCommand> {
     public FindCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
-                args, PREFIX_NAME, PREFIX_TYPE, PREFIX_AMOUNT,
-                PREFIX_DATETIME, PREFIX_CATEGORY, PREFIX_LOCATION);
+                args, PREFIX_NAME, PREFIX_CATEGORY, PREFIX_LOCATION);
 
         String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty() || !argMultimap.getPreamble().isEmpty()) {
+        if (trimmedArgs.isEmpty() || !argMultimap.getPreamble().isEmpty()
+                || arePrefixesPresent(argMultimap, PREFIX_TYPE, PREFIX_DATETIME, PREFIX_AMOUNT)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_TYPE, PREFIX_AMOUNT,
-                PREFIX_DATETIME, PREFIX_CATEGORY, PREFIX_LOCATION);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_CATEGORY, PREFIX_LOCATION);
 
-        /* Parses the name keywords provided and adds them to the all keywords predicate */
-        for (String keyword : argMultimap.getAllValues(PREFIX_NAME)) {
-            Name transactionName = ParserUtil.parseTransactionName(keyword);
+        HashMap<Prefix, String> prefixMap = new HashMap<>();
+        List.of(PREFIX_NAME, PREFIX_CATEGORY, PREFIX_LOCATION)
+                .stream()
+                .forEach(prefix -> {
+                    if (argMultimap.getValue(prefix).isPresent()) {
+                        prefixMap.put(prefix, argMultimap.getValue(prefix).get());
+                    }
+                });
+
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            Name transactionName = ParserUtil.parseTransactionName(prefixMap.get(PREFIX_NAME));
             findPredicate.addNameKeyword(transactionName.toString());
         }
 
-        /* Parses the amount keywords provided and adds them to the all keywords predicate */
-        for (String keyword : argMultimap.getAllValues(PREFIX_AMOUNT)) {
-            Amount transactionAmount = ParserUtil.parseAmount(keyword);
-            findPredicate.addAmountKeyword(
-                    Amount.amountToDecimalString(transactionAmount));
-        }
-
-        /* Parses the categories provided and adds them to the all keywords predicate */
-        for (String keyword : argMultimap.getAllValues(PREFIX_CATEGORY)) {
-            Category transactionCategory = ParserUtil.parseCategory(keyword);
+        if (argMultimap.getValue(PREFIX_CATEGORY).isPresent()) {
+            Category transactionCategory = ParserUtil.parseCategory(prefixMap.get(PREFIX_CATEGORY));
             findPredicate.addCategoryKeyword(transactionCategory.toString());
         }
 
-        /* Parses the location keywords provided and adds them to the all keywords predicate */
-        for (String keyword : argMultimap.getAllValues(PREFIX_LOCATION)) {
-            Location transactionLocation = ParserUtil.parseLocation(keyword);
+        if (argMultimap.getValue(PREFIX_LOCATION).isPresent()) {
+            Location transactionLocation = ParserUtil.parseLocation(prefixMap.get(PREFIX_LOCATION));
             findPredicate.addLocationKeyword(transactionLocation.toString());
         }
-
-        /* Parses the dateTime keywords provided and adds them to the all keywords predicate */
-        for (String keyword : argMultimap.getAllValues(PREFIX_DATETIME)) {
-            DateTime transactionDateTime = ParserUtil.parseDateTime(keyword);
-            findPredicate.addDateTimeKeyword(transactionDateTime.toString());
-        }
-
-        /* Parses the type keyword provided and adds it to the all keywords predicate */
-        for (String keyword : argMultimap.getAllValues(PREFIX_TYPE)) {
-            Type transactionType = ParserUtil.parseType(keyword);
-            findPredicate.addTypeKeyword(transactionType.toString());
-        }
-
         return new FindCommand(findPredicate);
 
     }
 
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
 
     @Override
     public boolean equals(Object other) {
