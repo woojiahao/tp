@@ -37,15 +37,9 @@ public class ClearTransactionsCommandTest {
                 ClearTransactionsCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
-    @Test
-    public void multipleClearTransactionsCommand_equalsTrue() {
-        ClearTransactionsCommand clearCommand = new ClearTransactionsCommand();
-        assertEquals(clearCommand, new ClearTransactionsCommand());
-
-    }
 
     @Test
-    public void sameClearTransactionsCommand_equalsTrue() {
+    public void equals_sameClearTransactionsCommandObject_returnsTrue() {
         ClearTransactionsCommand clearCommand = new ClearTransactionsCommand();
         assertTrue(clearCommand.equals(clearCommand));
         assertTrue(clearCommand.equals(new ClearTransactionsCommand()));

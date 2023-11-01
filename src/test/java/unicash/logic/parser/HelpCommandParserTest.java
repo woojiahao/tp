@@ -32,7 +32,7 @@ public class HelpCommandParserTest {
     }
 
     @Test
-    public void execute_predicateNotNull_assertion() {
+    public void execute_withTrailingWhiteSpace_doesNotThrowAssertion() {
         assertDoesNotThrow(() -> new ListCommandParser().parse(" "));
     }
 

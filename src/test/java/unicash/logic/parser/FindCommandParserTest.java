@@ -58,7 +58,7 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void sameFindCommandParser_equalsTrue() {
+    public void equals_sameFindCommandParserObject_returnsTrue() {
         FindCommandParser parser = new FindCommandParser();
         assertTrue(parser.equals(parser));
         assertTrue(parser.equals(new FindCommandParser()));

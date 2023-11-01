@@ -50,14 +50,14 @@ public class ResetCommandTest {
     }
 
     @Test
-    public void multipleResetCommand_equalsTrue() {
+    public void equals_multipleResetCommandObjects_returnsTrue() {
         ResetCommand resetCommand = new ResetCommand();
         assertEquals(resetCommand, new ResetCommand());
 
     }
 
     @Test
-    public void sameResetCommand_equalsTrue() {
+    public void equals_sameResetCommandObject_returnsTrue() {
         ResetCommand resetCommand = new ResetCommand();
         assertTrue(resetCommand.equals(resetCommand));
         assertTrue(resetCommand.equals(new ResetCommand()));

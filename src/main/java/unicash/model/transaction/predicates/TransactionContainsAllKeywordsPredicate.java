@@ -107,8 +107,8 @@ public class TransactionContainsAllKeywordsPredicate implements Predicate<Transa
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
+        if (other == null) {
+            return false;
         }
 
         // instanceof handles nulls

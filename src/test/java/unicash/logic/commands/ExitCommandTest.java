@@ -28,7 +28,7 @@ public class ExitCommandTest {
     }
 
     @Test
-    public void sameExitCommand_equalsTrue() {
+    public void equals_sameExitCommandObject_returnsTrue() {
         ExitCommand exitCommand = new ExitCommand();
         assertEquals(exitCommand, new ExitCommand());
         assertTrue(exitCommand.equals(new ExitCommand()));

@@ -67,7 +67,7 @@ public class ResetCommandParserTest {
     }
 
     @Test
-    public void sameResetCommandParser_equalsTrue() {
+    public void equals_sameResetCommandParserObject_returnsTrue() {
         ResetCommandParser parser = new ResetCommandParser();
         assertTrue(parser.equals(parser));
         assertTrue(parser.equals(new ResetCommandParser()));

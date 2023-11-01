@@ -45,13 +45,9 @@ public class GetCommandParserTest {
         assertThrows(ParseException.class, () -> parser.parse("0.5"));
     }
 
-    @Test
-    public void differentParse_equals_returnsFalse() {
-        assertTrue(parser.equals(new GetCommandParser()));
-    }
 
     @Test
-    public void sameGetCommandParser_equalsTrue() {
+    public void equals_sameGetCommandParserObject_returnsTrue() {
         GetCommandParser parser = new GetCommandParser();
         assertTrue(parser.equals(parser));
         assertTrue(parser.equals(new GetCommandParser()));
