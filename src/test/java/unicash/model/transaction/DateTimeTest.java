@@ -127,7 +127,7 @@ public class DateTimeTest {
     }
 
     @Test
-    public void getYearMonth_test() {
+    public void getYearMonth_equalsOtherYearMonth() {
         DateTime datetime1 = new DateTime("01-01-2001 01:01");
         DateTime datetime2 = new DateTime("2001-01-01 01:01");
         DateTime datetime3 = new DateTime("01 Jan 2001 01:01");

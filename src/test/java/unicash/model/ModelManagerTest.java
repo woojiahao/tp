@@ -118,7 +118,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void getExpenseSummary_success() {
+    public void getExpenseSummaryPerCategory_calculatesSummaryCorrectly() {
         UniCash uniCash = new UniCashBuilder()
                 .withTransaction(NUS)
                 .withTransaction(INTERN)
@@ -135,7 +135,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasExpenses_noExpenses_success() {
+    public void hasExpenses_noExpenses_returnsFalse() {
         // When there is income
         UniCash uniCashWithIncome = new UniCashBuilder()
                 .withTransaction(BUYING_GROCERIES)
@@ -154,7 +154,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasExpenses_hasExpensesAndIncome_success() {
+    public void hasExpenses_hasExpensesAndIncome_returnsTrue() {
         // When there are both income and expenses
         UniCash uniCashWithIncome = new UniCashBuilder()
                 .withTransaction(NUS)

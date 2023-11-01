@@ -1,6 +1,5 @@
 package unicash.ui;
 
-import java.time.Year;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
@@ -25,7 +24,7 @@ import unicash.commons.core.LogsCenter;
 public class SummaryWindow extends UiPart<Stage> {
 
     public static final String SUMMARY_MESSAGE = "Expense Summary:";
-    public static final String SUMMARY_MESSAGE_WHEN_NO_TRANSACTIONS = "There are no transactions available";
+    public static final String SUMMARY_MESSAGE_WHEN_NO_TRANSACTIONS = "There are no expenses available";
 
     private static final Logger logger = LogsCenter.getLogger(SummaryWindow.class);
     private static final String FXML = "SummaryWindow.fxml";
@@ -33,7 +32,7 @@ public class SummaryWindow extends UiPart<Stage> {
     private static final int NUM_YEAR_MONTHS_TO_DISPLAY = 12;
     private static final YearMonth EARLIEST_YEAR_MONTH = YearMonth.now().minusMonths(NUM_YEAR_MONTHS_TO_DISPLAY - 1);
     private static final YearMonth LATEST_YEAR_MONTH = YearMonth.now();
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MMM");
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM-yyyy");
 
     @FXML
     private Label summaryMessage;
@@ -83,7 +82,6 @@ public class SummaryWindow extends UiPart<Stage> {
      *     </ul>
      */
     public void show(HashMap<String, Double> expenseSummary) {
-        setPieChart(expenseSummary);
         if (!expenseSummary.isEmpty()) {
             Stage root = getRoot();
             root.show();
@@ -158,17 +156,16 @@ public class SummaryWindow extends UiPart<Stage> {
      * is after EARLIEST_YEAR_MONTH and before the current system clock's year-month.
      */
     private HashMap<YearMonth, Double> fillExpenseSummary(HashMap<YearMonth, Double> expenseSummary) {
-        expenseSummary = new HashMap<>(expenseSummary); // Creating a defensive copy of expenseSummary
+        HashMap<YearMonth, Double> updatedExpenseSummary = new HashMap<>(expenseSummary); // Creating a defensive copy of expenseSummary
 
-        YearMonth endYearMonth = LATEST_YEAR_MONTH;
-        YearMonth currentYearMonth = EARLIEST_YEAR_MONTH;
-        while (currentYearMonth.isBefore(endYearMonth) | currentYearMonth.equals(endYearMonth)) {
-            if (!expenseSummary.containsKey(currentYearMonth)) {
-                expenseSummary.put(currentYearMonth, 0.0);
+        for (int i = 0; i < NUM_YEAR_MONTHS_TO_DISPLAY; i++) {
+            YearMonth currentYearMonth = LATEST_YEAR_MONTH.minusMonths(i);
+            if (!updatedExpenseSummary.containsKey(currentYearMonth)) {
+                updatedExpenseSummary.put(currentYearMonth, 0.0);
             }
-            currentYearMonth = currentYearMonth.plusMonths(1);
         }
-        return expenseSummary;
+
+        return updatedExpenseSummary;
     }
 
     /**
@@ -176,13 +173,13 @@ public class SummaryWindow extends UiPart<Stage> {
      * considered extra if it is before EARLIEST_YEAR_MONTH and after the current system clock's year-month.
      */
     private HashMap<YearMonth, Double> filterExpenseSummary(HashMap<YearMonth, Double> expenseSummary) {
-        expenseSummary = new HashMap<>(expenseSummary); // Creating a defensive copy of expenseSummary
+        HashMap<YearMonth, Double> updatedExpenseSummary = new HashMap<>(expenseSummary); // Creating a defensive copy of expenseSummary
 
-        expenseSummary.entrySet().removeIf(entry -> {
+        updatedExpenseSummary.entrySet().removeIf(entry -> {
             YearMonth yearMonth = entry.getKey();
             return yearMonth.isBefore(EARLIEST_YEAR_MONTH) || yearMonth.isAfter(LATEST_YEAR_MONTH);
         });
-        return expenseSummary;
+        return updatedExpenseSummary;
     }
 
     /**

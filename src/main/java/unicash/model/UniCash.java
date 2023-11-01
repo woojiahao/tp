@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
+import unicash.commons.enums.TransactionType;
 import unicash.commons.util.ToStringBuilder;
 import unicash.model.budget.Budget;
 import unicash.model.category.Category;
@@ -100,7 +101,7 @@ public class UniCash implements ReadOnlyUniCash {
     private List<Transaction> getAllExpenses() {
         return getTransactionList()
                 .stream()
-                .filter(t -> t.getType().toString().equals("expense"))
+                .filter(t -> t.getType().toString().equals(TransactionType.EXPENSE.getOriginalString()))
                 .collect(Collectors.toUnmodifiableList());
     }
 
@@ -115,7 +116,7 @@ public class UniCash implements ReadOnlyUniCash {
      * Returns the expense amount per yearmonth. (E.g. 2023 Jan, 2023 Feb, 2024 Jan, etc.)
      * Note: This function ignores all 'income' transactions
      */
-    HashMap<YearMonth, Double> getSumOfExpensePerYearMonth() {
+    public HashMap<YearMonth, Double> getSumOfExpensePerYearMonth() {
         HashMap<YearMonth, Double> sumPerMonth = new HashMap<>();
         List<Transaction> allExpenses = getAllExpenses();
 
@@ -155,7 +156,7 @@ public class UniCash implements ReadOnlyUniCash {
      * Returns the amount for each category of expenses.
      * Note: This function ignores all 'income' transactions
      */
-    HashMap<String, Double> getSumOfExpensePerCategory() {
+    public HashMap<String, Double> getSumOfExpensePerCategory() {
         HashMap<String, Double> sumPerCategory = new HashMap<>();
         List<Transaction> allExpenses = getAllExpenses();
         String uncategorizedCategoryName = "Uncategorized";
@@ -182,8 +183,10 @@ public class UniCash implements ReadOnlyUniCash {
         return sumPerCategory;
     }
 
-    private void handleNoCategoryTransaction(HashMap<String, Double> sumPerCategory, String uncategorizedCategoryName,
-                                             Double transactionAmount) {
+    private void handleNoCategoryTransaction(
+            HashMap<String, Double> sumPerCategory,
+            String uncategorizedCategoryName,
+            Double transactionAmount) {
         if (!sumPerCategory.containsKey(uncategorizedCategoryName)) {
             sumPerCategory.put(uncategorizedCategoryName, (double) 0);
         }
@@ -191,8 +194,10 @@ public class UniCash implements ReadOnlyUniCash {
         sumPerCategory.put(uncategorizedCategoryName, currAmount + transactionAmount);
     }
 
-    private void handleCategoryTransaction(ObservableList<Category> categories, HashMap<String, Double> sumPerCategory,
-                                           Double transactionAmount) {
+    private void handleCategoryTransaction(
+            ObservableList<Category> categories,
+            HashMap<String, Double> sumPerCategory,
+            Double transactionAmount) {
         for (Category transactionCategory : categories) {
             if (!sumPerCategory.containsKey(transactionCategory.category)) {
                 sumPerCategory.put(transactionCategory.category, (double) 0);

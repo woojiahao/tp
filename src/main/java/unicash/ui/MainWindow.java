@@ -213,6 +213,8 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             summaryWindow.setPieChart(logic.getExpenseSummaryPerCategory());
             summaryWindow.setLineGraph(logic.getExpenseSummaryPerYearMonth());
+            summaryWindow.setPieChart(logic.getExpenseSummaryPerCategory());
+            summaryWindow.setLineGraph(logic.getExpenseSummaryPerYearMonth());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

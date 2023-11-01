@@ -1,8 +1,8 @@
 package unicash.logic.commands;
 
 import static unicash.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static unicash.logic.commands.SummaryCommand.NOT_SHOWING_SUMMARY_MESSAGE;
-import static unicash.logic.commands.SummaryCommand.SHOWING_SUMMARY_MESSAGE;
+import static unicash.logic.commands.SummaryCommand.MESSAGE_SHOWING_SUMMARY_FAILURE;
+import static unicash.logic.commands.SummaryCommand.MESSAGE_SHOWING_SUMMARY_SUCCESS;
 import static unicash.testutil.TypicalTransactions.NUS;
 
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,7 @@ public class SummaryCommandTest {
         Model emptyModel = new ModelManager();
         Model expectedEmptyModel = new ModelManager();
         CommandResult emptyModelExpectedCommandResult =
-                new CommandResult(NOT_SHOWING_SUMMARY_MESSAGE, false, false, false);
+                new CommandResult(MESSAGE_SHOWING_SUMMARY_FAILURE, false, false, false);
         assertCommandSuccess(new SummaryCommand(), emptyModel,
                 emptyModelExpectedCommandResult, expectedEmptyModel);
 
@@ -25,7 +25,7 @@ public class SummaryCommandTest {
         Model expectedNonEmptyModel = new ModelManager();
         expectedNonEmptyModel.addTransaction(NUS);
         CommandResult nonEmptyModelExpectedCommandResult =
-                new CommandResult(SHOWING_SUMMARY_MESSAGE, false, false, true);
+                new CommandResult(MESSAGE_SHOWING_SUMMARY_SUCCESS, false, false, true);
         assertCommandSuccess(new SummaryCommand(), nonEmptyModel,
                 nonEmptyModelExpectedCommandResult, expectedNonEmptyModel);
     }
