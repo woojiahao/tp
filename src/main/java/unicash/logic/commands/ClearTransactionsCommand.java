@@ -3,6 +3,7 @@ package unicash.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import unicash.commons.enums.CommandType;
+import unicash.commons.util.ToStringBuilder;
 import unicash.model.Model;
 import unicash.model.UniCash;
 
@@ -32,8 +33,8 @@ public class ClearTransactionsCommand extends Command {
         if (other == this) {
             return true;
         }
-      
-      return other instanceof ClearTransactionsCommand;
+
+        return other instanceof ClearTransactionsCommand;
 
     }
 

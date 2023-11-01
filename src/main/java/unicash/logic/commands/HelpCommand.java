@@ -5,6 +5,7 @@ import static unicash.logic.UniCashMessages.MESSAGE_UNICASH_WELCOME;
 import static unicash.logic.UniCashMessages.MESSAGE_UNKNOWN_COMMAND;
 
 import unicash.commons.enums.CommandType;
+import unicash.commons.util.ToStringBuilder;
 import unicash.model.Model;
 
 /**

@@ -1,6 +1,7 @@
 package unicash.logic.commands;
 
 import unicash.commons.enums.CommandType;
+import unicash.commons.util.ToStringBuilder;
 import unicash.model.Model;
 
 /**

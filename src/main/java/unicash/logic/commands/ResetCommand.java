@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static unicash.model.util.SampleDataUtil.getSampleUniCash;
 
 import unicash.commons.enums.CommandType;
+import unicash.commons.util.ToStringBuilder;
 import unicash.model.Model;
 
 /**

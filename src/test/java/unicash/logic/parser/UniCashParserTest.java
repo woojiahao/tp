@@ -95,16 +95,18 @@ public class UniCashParserTest {
     public void parseCommand_clearTransactions() throws Exception {
         assertTrue(parser.parseCommand(CommandType.CLEAR_TRANSACTIONS.getMainCommandWord())
                 instanceof ClearTransactionsCommand);
-      
+
         String message = ClearTransactionsCommand.MESSAGE_FAILURE;
         assertThrows(ParseException.class, message, () -> parser.parseCommand(
                 ClearTransactionsCommand.COMMAND_WORD + " 3"));
+
     }
 
     @Test
     public void parseCommand_resetUniCashCommand() throws Exception {
         assertTrue(parser.parseCommand(CommandType.RESET.getMainCommandWord()) instanceof ResetCommand);
-                String message = ResetCommand.MESSAGE_FAILURE;
+
+        String message = ResetCommand.MESSAGE_FAILURE;
         assertThrows(ParseException.class, message, () -> parser.parseCommand(
                 ResetCommand.COMMAND_WORD + " 3"));
     }
@@ -143,8 +145,8 @@ public class UniCashParserTest {
 
     @Test
     public void parseCommand_exitUniCash() throws Exception {
-        CommandType.EXIT.getMainCommandWord()) instanceof ExitCommand);
-        
+        assertTrue(parser.parseCommand(
+                CommandType.EXIT.getMainCommandWord()) instanceof ExitCommand);
         assertTrue(parser.parseCommand(
                 CommandType.EXIT.getMainCommandWord() + " 3") instanceof ExitCommand);
     }

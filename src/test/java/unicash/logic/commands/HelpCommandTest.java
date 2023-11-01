@@ -11,6 +11,7 @@ import static unicash.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import unicash.commons.enums.CommandType;
+import unicash.commons.util.ToStringBuilder;
 import unicash.model.Model;
 import unicash.model.ModelManager;
 

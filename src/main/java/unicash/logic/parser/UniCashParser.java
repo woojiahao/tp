@@ -10,14 +10,10 @@ import java.util.regex.Pattern;
 import unicash.commons.core.LogsCenter;
 import unicash.commons.enums.CommandType;
 import unicash.logic.commands.ClearBudgetCommand;
-import unicash.logic.commands.ClearTransactionsCommand;
 import unicash.logic.commands.Command;
 import unicash.logic.commands.ExitCommand;
-import unicash.logic.commands.FilterCommand;
-import unicash.logic.commands.FindCommand;
 import unicash.logic.commands.GetBudgetCommand;
 import unicash.logic.commands.HelpCommand;
-import unicash.logic.commands.ResetCommand;
 import unicash.logic.commands.SummaryCommand;
 import unicash.logic.parser.exceptions.ParseException;
 
@@ -100,8 +96,8 @@ public class UniCashParser {
         case SUMMARY:
             return new SummaryCommand();
 
-        case FilterCommand.COMMAND_WORD:
-            return new FilterCommandParser().parse(arguments);
+        //case FilterCommand.COMMAND_WORD:
+        //    return new FilterCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
