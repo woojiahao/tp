@@ -69,6 +69,6 @@ public class GetTotalExpenditureCommandParserTest {
 
     @Test
     public void parse_nonIntegerYear_throwsParseException() {
-        assertThrows(ParseException.class, () -> parser.parse(" month/hi year/hi"));
+        assertThrows(ParseException.class, () -> parser.parse(" month/12 year/hi"));
     }
 }
