@@ -11,9 +11,11 @@ import static unicash.testutil.TypicalTransactions.INTERN;
 import static unicash.testutil.TypicalTransactions.NUS;
 import static unicash.testutil.TypicalTransactions.getTypicalUniCash;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +23,9 @@ import unicash.model.Model;
 import unicash.model.ModelManager;
 import unicash.model.UniCash;
 import unicash.model.UserPrefs;
-import unicash.model.transaction.predicates.TransactionContainsAnyKeywordsPredicate;
+import unicash.model.transaction.Transaction;
+import unicash.model.transaction.predicates.TransactionContainsAllKeywordsPredicate;
+import unicash.model.transaction.predicates.TransactionNameContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -33,10 +37,10 @@ public class FindCommandTest {
 
     @Test
     public void equals() {
-        TransactionContainsAnyKeywordsPredicate firstPredicate =
-                new TransactionContainsAnyKeywordsPredicate(Collections.singletonList("first"));
-        TransactionContainsAnyKeywordsPredicate secondPredicate =
-                new TransactionContainsAnyKeywordsPredicate(Collections.singletonList("second"));
+        TransactionContainsAllKeywordsPredicate firstPredicate =
+                new TransactionContainsAllKeywordsPredicate();
+        TransactionContainsAllKeywordsPredicate secondPredicate =
+                new TransactionContainsAllKeywordsPredicate();
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
@@ -54,8 +58,8 @@ public class FindCommandTest {
         // null -> returns false
         assertNotEquals(null, findFirstCommand);
 
-        // different transaction -> returns false
-        assertNotEquals(findFirstCommand, findSecondCommand);
+        // same predicate -> returns true
+        assertEquals(findFirstCommand, findSecondCommand);
 
         assertFalse(findFirstCommand.equals(3));
     }
@@ -63,7 +67,7 @@ public class FindCommandTest {
     @Test
     public void execute_zeroKeywords_noTransactionsFound() {
         String expectedMessage = String.format(MESSAGE_TRANSACTIONS_LISTED_OVERVIEW, 0);
-        TransactionContainsAnyKeywordsPredicate predicate = preparePredicate(" ");
+        TransactionContainsAllKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredTransactionList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -73,7 +77,7 @@ public class FindCommandTest {
     @Test
     public void execute_oneKeyword_multipleTransactionsFound() {
         String expectedMessage = String.format(MESSAGE_TRANSACTIONS_LISTED_OVERVIEW, 3);
-        TransactionContainsAnyKeywordsPredicate predicate = preparePredicate("work");
+        TransactionContainsAllKeywordsPredicate predicate = preparePredicate("work");
         FindCommand command = new FindCommand(predicate);
 
         Model expectedModel = new ModelManager(getTypicalUniCash(), new UserPrefs());
@@ -93,22 +97,50 @@ public class FindCommandTest {
 
     @Test
     public void execute_predicateNotNull_assertion() {
-        assertDoesNotThrow(() -> new FindCommand(preparePredicate(" ")).execute(model));
+        assertDoesNotThrow(() -> new FindCommand(preparePredicate()).execute(model));
     }
 
     @Test
     public void toStringMethod() {
-        TransactionContainsAnyKeywordsPredicate predicate = new TransactionContainsAnyKeywordsPredicate(
-                List.of("keyword"));
+        TransactionContainsAllKeywordsPredicate predicate =
+                new TransactionContainsAllKeywordsPredicate();
+
         FindCommand findCommand = new FindCommand(predicate);
         String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, findCommand.toString());
     }
 
     /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     * Generates a {@code TransactionContainsAllKeywordsPredicate} object
      */
-    private TransactionContainsAnyKeywordsPredicate preparePredicate(String userInput) {
-        return new TransactionContainsAnyKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    private TransactionContainsAllKeywordsPredicate preparePredicate() {
+
+        List<String> parsedKeywords = Arrays.asList("foo", "bar", "baz");
+        List<Predicate<Transaction>> predicateList = new ArrayList<>();
+
+        parsedKeywords.stream().forEach(keyword -> {
+            TransactionNameContainsKeywordsPredicate namePredicate =
+                    new TransactionNameContainsKeywordsPredicate(List.of(keyword));
+            predicateList.add(namePredicate);
+        });
+
+        return new TransactionContainsAllKeywordsPredicate(predicateList);
+    }
+
+    /**
+     * Generates a {@code TransactionContainsAllKeywordsPredicate} object with an input string
+     */
+    private TransactionContainsAllKeywordsPredicate preparePredicate(String string) {
+
+        List<String> parsedKeywords = Arrays.asList(string);
+        List<Predicate<Transaction>> predicateList = new ArrayList<>();
+
+        parsedKeywords.stream().forEach(keyword -> {
+            TransactionNameContainsKeywordsPredicate namePredicate =
+                    new TransactionNameContainsKeywordsPredicate(List.of(keyword));
+            predicateList.add(namePredicate);
+        });
+
+        return new TransactionContainsAllKeywordsPredicate(predicateList);
     }
 }

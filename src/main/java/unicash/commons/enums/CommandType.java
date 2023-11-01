@@ -201,11 +201,28 @@ public enum CommandType {
             return new CommandUsage.Builder()
                     .setCommandWord(getCommandWords())
                     .setDescription(
-                            "Finds all transactions whose names contain any of the specified keywords "
-                                    + "(case-insensitive) and displays them as a list with index numbers."
+                            "Finds all transactions whose properties match all of the specified keywords "
+                                    + "(case-insensitive) and displays them as a list with index numbers. "
+                                    + "\n\n Only one keyword can be specified for each property and at least "
+                                    + "one keyword must be provided. "
                     )
-                    .setArgument("Keyword [More keywords]...")
-                    .setExample(ExampleGenerator.generate(getMainCommandWord(), "chicken rice"))
+                    .addParameter(PREFIX_NAME, "Name", true, false)
+                    .addParameter(PREFIX_TYPE, "Type", true, false)
+                    .addParameter(PREFIX_AMOUNT, "Amount", true, false)
+                    .addParameter(PREFIX_DATETIME, "DateTime", true, false)
+                    .addParameter(PREFIX_LOCATION, "Location", true, false)
+                    .addParameter(PREFIX_CATEGORY, "Category", true, false)
+                    .setExample(
+                            ExampleGenerator.generate(
+                                    getCommandWords(),
+                                    PREFIX_NAME,
+                                    PREFIX_TYPE,
+                                    PREFIX_AMOUNT,
+                                    PREFIX_DATETIME,
+                                    PREFIX_LOCATION,
+                                    PREFIX_CATEGORY
+                            )
+                    )
                     .build()
                     .toString();
         }

@@ -26,7 +26,6 @@ import unicash.logic.commands.ClearTransactionsCommand;
 import unicash.logic.commands.DeleteTransactionCommand;
 import unicash.logic.commands.EditTransactionCommand;
 import unicash.logic.commands.ExitCommand;
-import unicash.logic.commands.FilterCommand;
 import unicash.logic.commands.FindCommand;
 import unicash.logic.commands.GetBudgetCommand;
 import unicash.logic.commands.GetCommand;
@@ -39,8 +38,6 @@ import unicash.logic.commands.SummaryCommand;
 import unicash.logic.parser.exceptions.ParseException;
 import unicash.model.transaction.Transaction;
 import unicash.model.transaction.predicates.TransactionContainsAllKeywordsPredicate;
-import unicash.model.transaction.predicates.TransactionContainsAnyKeywordsPredicate;
-import unicash.model.transaction.predicates.TransactionNameContainsKeywordsPredicate;
 import unicash.testutil.EditTransactionDescriptorBuilder;
 import unicash.testutil.TransactionBuilder;
 import unicash.testutil.TransactionUtil;
@@ -53,14 +50,6 @@ public class UniCashParserTest {
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(CommandType.EXIT.getMainCommandWord()) instanceof ExitCommand);
         assertTrue(parser.parseCommand(CommandType.EXIT.getMainCommandWord() + " 3") instanceof ExitCommand);
-    }
-
-    @Test
-    public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                CommandType.FIND.getMainCommandWord() + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new TransactionContainsAnyKeywordsPredicate(keywords)), command);
     }
 
     @Test
@@ -160,25 +149,27 @@ public class UniCashParserTest {
     }
 
     @Test
-    public void parseCommand_filterCommand() throws Exception {
+    public void parseCommand_findCommand() throws Exception {
 
-        List<String> keywords = Arrays.asList("n/foo", "n/bar", "n/baz");
+        List<String> keywords = Arrays.asList("n/foo", "l/bar", "c/baz");
         List<String> parsedKeywords = Arrays.asList("foo", "bar", "baz");
         List<Predicate<Transaction>> predicateList = new ArrayList<>();
-        FilterCommand filterCommand = (FilterCommand) parser.parseCommand(
-                FilterCommand.COMMAND_WORD + " " + keywords
+
+        TransactionContainsAllKeywordsPredicate allKeywordsPredicate =
+                new TransactionContainsAllKeywordsPredicate(predicateList);
+
+        allKeywordsPredicate.addNameKeyword((parsedKeywords.get(0)));
+        allKeywordsPredicate.addCategoryKeyword(parsedKeywords.get(2));
+        allKeywordsPredicate.addLocationKeyword(parsedKeywords.get(1));
+
+
+        FindCommand findCommand = (FindCommand) parser.parseCommand(
+                CommandType.FIND.getMainCommandWord() + " " + keywords
                         .stream()
                         .collect(Collectors
                                 .joining(" ")));
 
-        parsedKeywords.stream().forEach(keyword -> {
-            TransactionNameContainsKeywordsPredicate namePredicate =
-                    new TransactionNameContainsKeywordsPredicate(List.of(keyword));
-            predicateList.add(namePredicate);
-        });
-
-        assertEquals(new FilterCommand(
-                new TransactionContainsAllKeywordsPredicate(predicateList)), filterCommand);
+        assertEquals(new FindCommand(allKeywordsPredicate), findCommand);
 
     }
 

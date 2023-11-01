@@ -2,6 +2,7 @@ package unicash.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import unicash.commons.util.ToStringBuilder;
 import unicash.logic.commands.HelpCommand;
 
 /**
@@ -17,5 +18,21 @@ public class HelpCommandParser implements Parser<HelpCommand> {
         requireNonNull(userInput);
         String trimmed = userInput.trim();
         return new HelpCommand(trimmed.toLowerCase());
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        return other instanceof HelpCommandParser;
+
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .toString();
     }
 }
