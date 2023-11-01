@@ -1251,7 +1251,7 @@ Important notes:
 >
 > Parameters: amt/Amount interval/Interval
 >
-> Example: set_budget month/10 interval/day
+> Example: set_budget amt/300 interval/day
 > ```
 >
 > <img src="images/unicash/command-outputs/set-budget/setBudgetFailureNoAmount.png" width="1000">
@@ -1270,7 +1270,7 @@ Important notes:
 >
 > Parameters: amt/Amount interval/Interval
 >
-> Example: set_budget month/10 interval/day
+> Example: set_budget amt/300 interval/day
 > ```
 >
 > <img src="images/unicash/command-outputs/set-budget/setBudgetFailureNoInterval.png" width="1000">
@@ -1289,7 +1289,7 @@ Important notes:
 >
 > Parameters: amt/Amount interval/Interval
 >
-> Example: set_budget month/10 interval/day
+> Example: set_budget amt/300 interval/day
 > ```
 >
 > <img src="images/unicash/command-outputs/set-budget/setBudgetFailureNoArguments.png" width="1000">
