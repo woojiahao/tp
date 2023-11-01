@@ -27,7 +27,7 @@ public class UniCashMessages {
 
     public static final String MESSAGE_UNICASH_WELCOME = "Welcome to UniCa$h!"
             + "\n\n"
-            + "For more detailed help on a command: help <command_word>"
+            + "For more detailed help on a command: help COMMAND_WORD"
             + "\n\n"
             + "Available Commands:"
             + "\n"
