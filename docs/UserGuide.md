@@ -1401,9 +1401,213 @@ Command Options: This command does not take in any arguments and will not proces
 >
 > <img src="images/unicash/command-outputs/get-budget/getBudgetNoBudgetSuccess.png" width="1000" />
 
+[//]: # (TODO: maybe add failed case if more arguments provided)
+
 ### 4.3 Financial Statistics Features
 
 #### 4.3.1 GetTotalExpenditureCommand
+
+Retrieves the total expenditure by month with optional filters for category and year. Also filters the transactions
+by the given month, year, and category.
+
+Use `list` to view all transactions again.
+
+Command: `get_total_expenditure month/Month [c/Category] [year/Year]`
+
+Command Options:
+
+| Option Name | Optional? | Purpose                                                                               |
+|-------------|-----------|---------------------------------------------------------------------------------------|
+| month/      | No        | Month to calculate the total expenditure.                                             |
+| c/          | Yes       | Category of expenditure to retrieve.<br>Defaults to all categories if not provided.   |
+| year/       | Yes       | Year to calculate the total expenditure.<br>Defaults to current year if not provided. |
+
+Important notes:
+
+1. `Month` must be an integer between 1 and 12 (inclusive).
+2. `Year` must be an integer greater than or equal to 1920.
+3. `Category` cannot be blank, must be alphanumeric, and can only contain up to 15 characters.
+4. `Category` is case-insensitive.
+
+##### Successful Execution
+
+###### Example 1
+
+> Case: Get total expenditure with month only.
+>
+> Input: `get_total_expenditure month/10`
+>
+> Output:
+> ```
+> Your total expenditure in October 2023 was $1028.00
+> ```
+>
+> <img src="images/unicash/command-outputs/get-total-expenditure/getTotalExpenditureMonthOnlySuccess.png" width="1000" />
+
+###### Example 2
+
+> Case: Get total expenditure with month and year.
+>
+> Input: `get_total_expenditure month/10 year/2023`
+>
+> Output:
+> ```
+> Your total expenditure in October 2023 was $1028.00
+> ```
+>
+> <img src="images/unicash/command-outputs/get-total-expenditure/getTotalExpenditureMonthOnlySuccess.png" width="1000" />
+
+###### Example 3
+
+> Case: Get total expenditure with month and category.
+>
+> Input: `get_total_expenditure month/9 c/social`
+>
+> Output:
+> ```
+> Your total expenditure in September 2023 for "social" was $49.50
+> ```
+>
+> <img src="images/unicash/command-outputs/get-total-expenditure/monthAndCategory.png" width="1000" />
+
+###### Example 4
+
+> Case: Get total expenditure with month, category, and year.
+>
+> Input: `get_total_expenditure month/9 c/shopping year/2023`
+> 
+> Output:
+> ```
+> Your total expenditure in September 2023 for "shopping" was $109.00
+> ```
+>
+>
+> <img src="images/unicash/command-outputs/get-total-expenditure/monthYearCategory.png" width="1000" />
+
+###### Example 5
+
+> Case: Get total expenditure but no matches.
+>
+> Input: `get_total_expenditure month/1`
+>
+> Output:
+> ```
+> Your total expenditure in September 2023 for "shopping" was $109.00
+> ```
+>
+> <img src="images/unicash/command-outputs/get-total-expenditure/noMatch.png" width="1000" />
+
+##### Failed Execution
+
+###### Example 1
+
+> Case: No month provided.
+>
+> Input: `get_total_expenditure`
+>
+> Output:
+> ```
+> Invalid command format! 
+>
+> get_total_expenditure: Retrieves the total expenditure by month with optional filters for category and year.
+>
+> Parameters: month/Month [c/Category] [year/Year]
+>
+> Example: get_total_expenditure month/10 c/Food year/2006
+> ```
+>
+> <img src="images/unicash/command-outputs/get-total-expenditure/noMonth.png" width="1000" />
+
+###### Example 2
+
+> Case: Negative month.
+>
+> Input: `get_total_expenditure month/-10`
+>
+> Output:
+> ```
+> Month must be between 1 and 12 (inclusive).
+> ```
+>
+> <img src="images/unicash/command-outputs/get-total-expenditure/negativeMonth.png" width="1000" />
+
+###### Example 3
+
+> Case: Month greater than 12.
+>
+> Input: `get_total_expenditure month/14`
+>
+> Output:
+> ```
+> Month must be between 1 and 12 (inclusive).
+> ```
+>
+> <img src="images/unicash/command-outputs/get-total-expenditure/oobMonth.png" width="1000" />
+
+###### Example 4
+
+> Case: Month is not an integer.
+>
+> Input: `get_total_expenditure month/hi`
+>
+> Output:
+> ```
+> Invalid month value, must be an integer!
+> ```
+>
+> <img src="images/unicash/command-outputs/get-total-expenditure/nonIntMonth.png" width="1000" />
+
+###### Example 5
+
+> Case: Year is less than 1920.
+>
+> Input: `get_total_expenditure month/9 year/1800`
+>
+> Output:
+> ```
+> Year must be after 1920.
+> ```
+>
+> <img src="images/unicash/command-outputs/get-total-expenditure/oobYear.png" width="1000" />
+
+###### Example 6
+
+> Case: Year is not an integer.
+>
+> Input: `get_total_expenditure month/9 year/hi`
+>
+> Output:
+> ```
+> Invalid year value, must be an integer!
+> ```
+>
+> <img src="images/unicash/command-outputs/get-total-expenditure/nonIntYear.png" width="1000" />
+
+###### Example 7
+
+> Case: Category contains non-alphanumeric characters.
+>
+> Input: `get_total_expenditure month/9 c/@123`
+>
+> Output:
+> ```
+> Category names should be alphanumeric and up to 15 characters long.
+> ```
+>
+> <img src="images/unicash/command-outputs/get-total-expenditure/nonAlphanumericCategory.png" width="1000" />
+
+###### Example 8
+
+> Case: Category length is greater than 15.
+>
+> Input: `get_total_expenditure month/9 c/abcdefghijklmnopqrs`
+>
+> Output:
+> ```
+> Category names should be alphanumeric and up to 15 characters long.
+> ```
+>
+> <img src="images/unicash/command-outputs/get-total-expenditure/longCategory.png" width="1000" />
 
 #### 4.3.2 SummaryCommand
 

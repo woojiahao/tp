@@ -172,7 +172,13 @@ public class GetTotalExpenditureCommandTest {
         var filteredResult = model.getFilteredTransactionList();
         assertEquals(2, filteredResult.size());
         assertEquals(
-                String.format(GetTotalExpenditureCommand.MESSAGE_SUCCESS, "August", 2001, 123.45 + 133.15),
+                String.format(
+                        GetTotalExpenditureCommand.MESSAGE_SUCCESS_WITH_CATEGORY,
+                        "August",
+                        2001,
+                        "food",
+                        123.45 + 133.15
+                ),
                 result.getFeedbackToUser()
         );
     }
@@ -217,7 +223,35 @@ public class GetTotalExpenditureCommandTest {
         var filteredResult = model.getFilteredTransactionList();
         assertEquals(1, filteredResult.size());
         assertEquals(
-                String.format(GetTotalExpenditureCommand.MESSAGE_SUCCESS, "August", 2001, 133.15),
+                String.format(
+                        GetTotalExpenditureCommand.MESSAGE_SUCCESS_WITH_CATEGORY,
+                        "August",
+                        2001,
+                        "food",
+                        133.15
+                ),
+                result.getFeedbackToUser()
+        );
+    }
+
+    @Test
+    public void execute_differentFieldsWithoutCategory_returnsNoCategorySuccess() throws CommandException {
+        var model = getModel();
+        model.addTransaction(new TransactionBuilder().withType("expense").withDateTime("23-06-2001 00:00").build());
+        model.addTransaction(new TransactionBuilder().withType("expense").withCategories("Others").build());
+        model.addTransaction(new TransactionBuilder().withType("expense").withDateTime("23-06-2002 00:00").build());
+        model.addTransaction(new TransactionBuilder().withType("expense").withAmount(133.15).build());
+        var command = new GetTotalExpenditureCommand(8, 2001, null);
+        var result = command.execute(model);
+        var filteredResult = model.getFilteredTransactionList();
+        assertEquals(2, filteredResult.size());
+        assertEquals(
+                String.format(
+                        GetTotalExpenditureCommand.MESSAGE_SUCCESS,
+                        "August",
+                        2001,
+                        123.45 + 133.15
+                ),
                 result.getFeedbackToUser()
         );
     }
