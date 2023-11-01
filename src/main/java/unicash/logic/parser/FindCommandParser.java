@@ -2,16 +2,9 @@ package unicash.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static unicash.logic.UniCashMessages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static unicash.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static unicash.logic.parser.CliSyntax.PREFIX_CATEGORY;
-import static unicash.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static unicash.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static unicash.logic.parser.CliSyntax.PREFIX_NAME;
-import static unicash.logic.parser.CliSyntax.PREFIX_TYPE;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.stream.Stream;
 
 import unicash.commons.util.ToStringBuilder;
 import unicash.logic.commands.FindCommand;
@@ -42,47 +35,33 @@ public class FindCommandParser implements Parser<FindCommand> {
                 args, PREFIX_NAME, PREFIX_CATEGORY, PREFIX_LOCATION);
 
         String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty() || !argMultimap.getPreamble().isEmpty()
-                || arePrefixesPresent(argMultimap, PREFIX_TYPE, PREFIX_DATETIME, PREFIX_AMOUNT)) {
+        if (trimmedArgs.isEmpty() || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_CATEGORY, PREFIX_LOCATION);
 
-        HashMap<Prefix, String> prefixMap = new HashMap<>();
-        List.of(PREFIX_NAME, PREFIX_CATEGORY, PREFIX_LOCATION)
-                .stream()
-                .forEach(prefix -> {
-                    if (argMultimap.getValue(prefix).isPresent()) {
-                        prefixMap.put(prefix, argMultimap.getValue(prefix).get());
-                    }
-                });
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            Name transactionName = ParserUtil.parseTransactionName(prefixMap.get(PREFIX_NAME));
+            Name transactionName = ParserUtil.parseTransactionName(
+                    argMultimap.getValue(PREFIX_NAME).get());
             findPredicate.addNameKeyword(transactionName.toString());
         }
 
         if (argMultimap.getValue(PREFIX_CATEGORY).isPresent()) {
-            Category transactionCategory = ParserUtil.parseCategory(prefixMap.get(PREFIX_CATEGORY));
+            Category transactionCategory = ParserUtil.parseCategory(
+                    argMultimap.getValue(PREFIX_CATEGORY).get());
             findPredicate.addCategoryKeyword(transactionCategory.toString());
         }
 
         if (argMultimap.getValue(PREFIX_LOCATION).isPresent()) {
-            Location transactionLocation = ParserUtil.parseLocation(prefixMap.get(PREFIX_LOCATION));
+            Location transactionLocation = ParserUtil.parseLocation(
+                    argMultimap.getValue(PREFIX_LOCATION).get());
             findPredicate.addLocationKeyword(transactionLocation.toString());
         }
         return new FindCommand(findPredicate);
 
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
     @Override

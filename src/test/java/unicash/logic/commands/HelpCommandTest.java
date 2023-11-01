@@ -49,6 +49,7 @@ public class HelpCommandTest {
                 expectedCommandResult, expectedModel);
     }
 
+    @Test
     public void execute_findCommand_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();

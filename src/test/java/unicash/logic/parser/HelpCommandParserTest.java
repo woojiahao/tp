@@ -3,6 +3,7 @@ package unicash.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static unicash.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static unicash.testutil.Assert.assertThrows;
 
@@ -43,6 +44,11 @@ public class HelpCommandParserTest {
     @Test
     public void equals_nullInput_returnsFalse() {
         assertFalse(new HelpCommandParser().equals(null));
+    }
+
+    @Test
+    public void equals_helpCommandParserObject_returnsTrue() {
+        assertTrue(new HelpCommandParser().equals(new HelpCommandParser()));
     }
 
     @Test
