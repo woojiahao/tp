@@ -1416,7 +1416,7 @@ Command Options: This command does not take in any arguments and will not proces
 
 Get help for UniCa$h.
 
-Command: `help <COMMAND_WORD>`
+Command: `help [<COMMAND_WORD>]`
 
 Command Argument: `<COMMAND_WORD>` is the command to get help for. If no 
 argument is specified, a general help message is shown as well as a pop up 
@@ -1447,6 +1447,7 @@ containing a link to our User Guide.
 > get
 > get_total_expenditure
 > summary
+> set_budget
 >
 > clear_transactions
 > reset_unicash
