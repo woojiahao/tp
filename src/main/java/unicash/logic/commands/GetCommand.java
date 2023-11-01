@@ -8,8 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import unicash.commons.core.index.Index;
-import unicash.commons.util.CommandUsage;
-import unicash.commons.util.ExampleGenerator;
+import unicash.commons.enums.CommandType;
 import unicash.commons.util.ToStringBuilder;
 import unicash.logic.UniCashMessages;
 import unicash.logic.commands.exceptions.CommandException;
@@ -22,15 +21,9 @@ import unicash.model.transaction.Transaction;
  */
 public class GetCommand extends Command {
 
-    public static final String COMMAND_WORD = "get";
+    public static final String COMMAND_WORD = CommandType.GET.getCommandWords();
 
-    public static final String MESSAGE_USAGE = new CommandUsage.Builder()
-            .setCommandWord(COMMAND_WORD)
-            .setDescription("Displays expanded details of a specific transaction.")
-            .setArgument("Index (must be a positive integer)")
-            .setExample(ExampleGenerator.generate(COMMAND_WORD, "2"))
-            .build()
-            .toString();
+    public static final String MESSAGE_USAGE = CommandType.GET.getMessageUsage();
 
     public static final String MESSAGE_GET_TRANSACTION_SUCCESS = "Transaction %1$d retrieved:"
             + "\n\n%2$s";

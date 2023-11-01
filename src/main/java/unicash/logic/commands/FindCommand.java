@@ -2,8 +2,7 @@ package unicash.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import unicash.commons.util.CommandUsage;
-import unicash.commons.util.ExampleGenerator;
+import unicash.commons.enums.CommandType;
 import unicash.commons.util.ToStringBuilder;
 import unicash.logic.UniCashMessages;
 import unicash.model.Model;
@@ -15,25 +14,8 @@ import unicash.model.transaction.predicates.TransactionContainsAnyKeywordsPredic
  */
 public class FindCommand extends Command {
 
-    public static final String COMMAND_WORD = "find";
-
-    public static final String MESSAGE_USAGE = new CommandUsage.Builder()
-            .setCommandWord(COMMAND_WORD)
-            .setDescription(
-                    "Finds transactions in UniCa$h."
-                            + "\n\nFinds any transactions whose name, amount, type, date-time, location, "
-                            + "or categories contain any of the specified keywords (case-insensitive). "
-                            + "At least one keyword must be specified. "
-                            + "\n\n"
-                            + "Any number of keywords can be specified and each keyword will be searched "
-                            + "individually for name, location, and categories. For date-time, amount, and type "
-                            + "properties, the input keywords will be concatenated into a single string and "
-                            + "searched as a single keyword."
-            )
-            .setArgument("Keyword [More keywords]...")
-            .setExample(ExampleGenerator.generate(COMMAND_WORD, "chicken rice"))
-            .build()
-            .toString();
+    public static final String COMMAND_WORD = CommandType.FIND.getCommandWords();
+    public static final String MESSAGE_USAGE = CommandType.FIND.getMessageUsage();
 
     private final TransactionContainsAnyKeywordsPredicate predicate;
 

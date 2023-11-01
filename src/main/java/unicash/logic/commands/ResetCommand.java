@@ -3,9 +3,7 @@ package unicash.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static unicash.model.util.SampleDataUtil.getSampleUniCash;
 
-import unicash.commons.util.CommandUsage;
-import unicash.commons.util.ExampleGenerator;
-import unicash.commons.util.ToStringBuilder;
+import unicash.commons.enums.CommandType;
 import unicash.model.Model;
 
 /**
@@ -15,15 +13,9 @@ import unicash.model.Model;
  */
 public class ResetCommand extends Command {
 
-    public static final String COMMAND_WORD = "reset_unicash";
-    public static final String MESSAGE_SUCCESS =
-            "UniCa$h has been successfully restored to its original state!";
-    public static final String MESSAGE_USAGE = new CommandUsage.Builder()
-            .setCommandWord(COMMAND_WORD)
-            .setDescription("Reset UniCa$h to its original state with pre-existing transactions.")
-            .setExample(ExampleGenerator.generate(COMMAND_WORD))
-            .build()
-            .toString();
+    public static final String COMMAND_WORD = CommandType.RESET.getCommandWords();
+    public static final String MESSAGE_SUCCESS = CommandType.RESET.getMessageSuccess();
+    public static final String MESSAGE_USAGE = CommandType.RESET.getMessageUsage();
 
 
     public static final String MESSAGE_FAILURE = String.format(
@@ -42,11 +34,6 @@ public class ResetCommand extends Command {
     public boolean equals(Object other) {
         if (other == this) {
             return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof ResetCommand)) {
-            return false;
         }
 
         return other instanceof ResetCommand;
