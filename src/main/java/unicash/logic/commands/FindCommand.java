@@ -2,8 +2,7 @@ package unicash.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import unicash.commons.util.CommandUsage;
-import unicash.commons.util.ExampleGenerator;
+import unicash.commons.enums.CommandType;
 import unicash.commons.util.ToStringBuilder;
 import unicash.logic.UniCashMessages;
 import unicash.model.Model;
@@ -15,18 +14,9 @@ import unicash.model.transaction.predicates.TransactionContainsKeywordsPredicate
  */
 public class FindCommand extends Command {
 
-    public static final String COMMAND_WORD = "find";
+    public static final String COMMAND_WORD = CommandType.FIND.getCommandWords();
 
-    public static final String MESSAGE_USAGE = new CommandUsage.Builder()
-            .setCommandWord(COMMAND_WORD)
-            .setDescription(
-                    "Finds all transactions whose names contain any of the specified keywords "
-                            + "(case-insensitive) and displays them as a list with index numbers."
-            )
-            .setArgument("Keyword [More keywords]...")
-            .setExample(ExampleGenerator.generate(COMMAND_WORD, "chicken rice"))
-            .build()
-            .toString();
+    public static final String MESSAGE_USAGE = CommandType.FIND.getMessageUsage();
 
     private final TransactionContainsKeywordsPredicate predicate;
 
