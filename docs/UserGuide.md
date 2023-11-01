@@ -256,12 +256,13 @@ Command Options:
 > ```
 
 ### Delete Expense [coming soon]
+
 Allows a user to delete a previously added expense and all information associated with that expense.
 
 Command: `delete <name>`
 
-Command Argument: `name` represents the exact name of the expense intended to be deleted. 
-Has to exactly match a given expense, or else the command will do nothing, 
+Command Argument: `name` represents the exact name of the expense intended to be deleted.
+Has to exactly match a given expense, or else the command will do nothing,
 so as to ensure the integrity of user data.
 
 #### Expected Outputs
@@ -270,10 +271,10 @@ so as to ensure the integrity of user data.
 
 ###### Example 1
 
->**Case**:  Delete expense named “friday mcdonalds”
+> **Case**:  Delete expense named “friday mcdonalds”
 >
 >**Input**: `delete "friday mcdonalds"`
-> 
+>
 > **Output**:
 >```
 >Successfully deleted expense “friday mcdonalds”!
@@ -284,10 +285,10 @@ so as to ensure the integrity of user data.
 
 ###### Example 1
 
->**Case**:  Delete expense command entered with no argument provided
+> **Case**:  Delete expense command entered with no argument provided
 >
 >**Input**: `delete `
-> 
+>
 >**Output**:
 >```
 >No expense deleted. Delete command must be followed with an expense to be deleted like this: delete <expense>.
@@ -296,23 +297,23 @@ so as to ensure the integrity of user data.
 
 ###### Example 2
 
->**Case**:  Delete expense command entered with no matching expense name
+> **Case**:  Delete expense command entered with no matching expense name
 >
 >**Input**: `delete asdf`
-> 
+>
 >**Output**:
 >```
 >No expense deleted. Delete command must be followed with a valid expense name.
 >```
 >**Remark**: No expenses will be removed and no changes made to file.
 
-
 ### Mass Delete Expense [coming soon]
+
 Allows a user to delete all added expenses, and all associated information.
 
 Command: `delete_all_expenses`
 
-Command Argument:  No arguments are needed for this command. 
+Command Argument:  No arguments are needed for this command.
 The command is intentionally lengthy to ensure that mass deletion of all expenses is done intentionally.
 
 Remarks: Confirmation for mass deletion to be implemented at a later date.
@@ -323,10 +324,10 @@ Remarks: Confirmation for mass deletion to be implemented at a later date.
 
 ###### Example 1
 
->**Case**:  Delete all expenses
+> **Case**:  Delete all expenses
 >
 >**Input**: `delete_all_expenses`
-> 
+>
 >**Output**:
 >```
 >Successfully deleted all expenses!
@@ -337,10 +338,10 @@ Remarks: Confirmation for mass deletion to be implemented at a later date.
 
 ###### Example 1
 
->**Case**:  Mass deletion command entered improperly
+> **Case**:  Mass deletion command entered improperly
 >
 >**Input**: `delete_all `
-> 
+>
 >**Output**:
 >```
 > Invalid command.
@@ -349,25 +350,26 @@ Remarks: Confirmation for mass deletion to be implemented at a later date.
 
 ###### Example 2
 
->**Case**:  Wrong delete command entered
+> **Case**:  Wrong delete command entered
 >
 >**Input**: `delete`
-> 
+>
 >**Output**:
 >```
 > No expense deleted. Delete command must be followed with an expense to be deleted like this: delete <expense>.
 >```
->**Remark**: No expenses will be removed and no changes made to file. 
-> The above error is the same as the one for the simple “delete” function. 
-> In the above example, the delete_all_expenses functionality is 
-> intentionally obfuscated to prevent the user from accidental mass deletions. 
-> The rationale is that a user unsure of a basic command like delete is probably a new user, 
-> and a new user should not be directed to mass delete information. 
+>**Remark**: No expenses will be removed and no changes made to file.
+> The above error is the same as the one for the simple “delete” function.
+> In the above example, the delete_all_expenses functionality is
+> intentionally obfuscated to prevent the user from accidental mass deletions.
+> The rationale is that a user unsure of a basic command like delete is probably a new user,
+> and a new user should not be directed to mass delete information.
 > There are other, more proper ways to convey this information, such as this User Guide.
 
-
 ### List Expenses [coming soon]
-Allows a user to retrieve a list of all their past expenses with details on where it was spent, type of spending and how much was spent.
+
+Allows a user to retrieve a list of all their past expenses with details on where it was spent, type of spending and how
+much was spent.
 
 Command: `list`
 
@@ -377,7 +379,7 @@ Command: `list`
 
 ###### Example 1
 
->**Case**:  Calling the command when there are no existing expenses.
+> **Case**:  Calling the command when there are no existing expenses.
 >
 >**Input**: `list`
 >
@@ -388,7 +390,7 @@ Command: `list`
 
 ###### Example 2
 
->**Case**:  Calling the command with existing expenses.
+> **Case**:  Calling the command with existing expenses.
 >
 >**Input**: `list`
 >
@@ -401,7 +403,8 @@ Command: `list`
 ##### Failed Execution
 
 ###### Example 1
->**Case**: Calling the command with any parameters
+
+> **Case**: Calling the command with any parameters
 >
 >**Input**: `list 5`
 >
@@ -411,11 +414,13 @@ Command: `list`
 >```
 
 ### Find Expenses [coming soon]
+
 Allows a user to retrieve the expense(s) that contain/matches any of the given keywords.
 
 Command: `find <keyword>`
 
-Command Parameters: `<keyword>` is the keyword to look for in any of the stored expenses, it can be a single word or multiple words separated by spaces.
+Command Parameters: `<keyword>` is the keyword to look for in any of the stored expenses, it can be a single word or
+multiple words separated by spaces.
 
 #### Expected Outputs
 
@@ -423,7 +428,7 @@ Command Parameters: `<keyword>` is the keyword to look for in any of the stored 
 
 ###### Example 1
 
->**Case**:  Calling the command when there are no matching expenses.
+> **Case**:  Calling the command when there are no matching expenses.
 >
 >**Input**: `find chicken`
 >
@@ -434,7 +439,7 @@ Command Parameters: `<keyword>` is the keyword to look for in any of the stored 
 
 ###### Example 2
 
->**Case**:  Calling the command with keywords that match existing expenses.
+> **Case**:  Calling the command with keywords that match existing expenses.
 >
 >**Input**: `find lunch`
 >
@@ -445,12 +450,14 @@ Command Parameters: `<keyword>` is the keyword to look for in any of the stored 
 >1. lunch at holland 16/09/23 - $15.20 (groceries)
 >4. lunch at fc 23/09/23 - $5.50 (meals)
 >```
->**Note:** Index of retrieved list is respective to the order of the full expense list so index of 4 is the 4th expense stored in the system.
+>**Note:** Index of retrieved list is respective to the order of the full expense list so index of 4 is the 4th expense
+> stored in the system.
 
 ##### Failed Execution
 
 ###### Example 1
->**Case**: Calling the command without any parameters
+
+> **Case**: Calling the command without any parameters
 >
 >**Input**: `find`
 >
@@ -460,6 +467,7 @@ Command Parameters: `<keyword>` is the keyword to look for in any of the stored 
 >```
 
 ### Tabulate Total Expense [coming soon]
+
 Allows a user to view their total expenditure, filtered by category of spending or by month.
 
 Command: `total [-category <category>] [-month <month>]`
@@ -477,7 +485,7 @@ Command Options:
 
 ###### Example 1
 
->**Case**:  Calling the command with no options.
+> **Case**:  Calling the command with no options.
 >
 >**Input**: `total`
 >
@@ -488,7 +496,7 @@ Command Options:
 
 ###### Example 2
 
->**Case**:  Calling the command with a specified category.
+> **Case**:  Calling the command with a specified category.
 >
 >**Input**: `total -category food`
 >
@@ -499,7 +507,7 @@ Command Options:
 
 ###### Example 3
 
->**Case**:  Calling the command with a specified month.
+> **Case**:  Calling the command with a specified month.
 >
 >**Input**: `total -month June`
 >
@@ -510,7 +518,7 @@ Command Options:
 
 ###### Example 4
 
->**Case**:  Calling the command with a specified category and month.
+> **Case**:  Calling the command with a specified category and month.
 >
 >**Input**: `total -category food -month June`
 >
@@ -522,7 +530,8 @@ Command Options:
 ##### Failed Execution
 
 ###### Example 1
->**Case**: Calling the command with a category that doesn’t exist.
+
+> **Case**: Calling the command with a category that doesn’t exist.
 >
 >**Input**: `total -category chicken -month june`
 >
@@ -532,7 +541,8 @@ Command Options:
 >```
 
 ###### Example 2
->**Case**: Calling the command with a month that doesn’t exist.
+
+> **Case**: Calling the command with a month that doesn’t exist.
 >
 >**Input**: `total -category food -month juely`
 >
@@ -542,7 +552,8 @@ Command Options:
 >```
 
 ###### Example 3
->**Case**: Calling the command with a category and month that doesn’t exist.
+
+> **Case**: Calling the command with a category and month that doesn’t exist.
 >
 >**Input**: `total -category chicken -month juely`
 >
@@ -733,11 +744,13 @@ the data of your previous UniCa$h home folder.
 | **Delete Income**          | `delete_income <name>`                                                                                                                                                                                                                 |
 | **Find Income**            | `find_income <name> [-value_more <value of income>] [-value_less <value of income>] [-date <date of income>]` <br> e.g., `find_income work at liho`                                                                                    |
 
-
 ---
+
 # START OF NEW UG
+
 This header exists to separate the old and new UG format. Add your contributions to the
-relevant sections below and copy over previous contributions while doing so.  By submission time, this header should be at the top of the
+relevant sections below and copy over previous contributions while doing so. By submission time, this header should be
+at the top of the
 page, right below the page frontmatter.
 
 **Remove this header before final submission.**
@@ -746,7 +759,7 @@ End of header.
 
 ---
 
-## 1. About UniCa$h 
+## 1. About UniCa$h
 
 Unicash is this and that ...
 
@@ -758,7 +771,8 @@ Unicash is this and that ...
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `unicash.jar` from [our latest release](https://github.com/AY2324S1-CS2103-T16-3/tp/releases/tag/v1.3).
+2. Download the latest `unicash.jar`
+   from [our latest release](https://github.com/AY2324S1-CS2103-T16-3/tp/releases/tag/v1.3).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your UniCa$h.
 
@@ -773,7 +787,7 @@ Unicash is this and that ...
 
 6. Refer to the [Features](#features) below for details of each command.
 
-### 3.2 UI Layout 
+### 3.2 UI Layout
 
 UI layout and description of what each section means
 
@@ -790,7 +804,43 @@ Walkthrough of how to run a command with visual guides
 
 ## 4. Features
 
+### Features Overview
+
+For UniCa$h, we have developed and implemented 4 main groups of features. These are: 
+
+The Transaction Management Commands:
+- Add Transaction
+- Delete Transaction
+- Edit Transaction
+- List Transactions
+- Get Transaction
+- Find Transactions
+- Filter Transactions
+- Clear All Transactions
+  
+The Budget Management Features
+- Set Budget
+- Clear Budget
+- Get Budget
+
+The Financial Statistics Features:
+- Get Total Expenditure
+- Summary Statistics
+- Rolling Balance Indicator
+
+The General Utility Commands:
+- Show Help
+- Reset UniCa$h
+- Exit UniCa$h
+
+The instructions for the usage of each command within each feature group are elaborated in this section below.
+
+
 ### 4.1 Transaction Commands
+
+The _Transaction Commands_ feature group pertains directly to the management of personal finances by the user,
+allowing the user to perform actions that directly involve transactions, such as - amongst other - adding, deleting and
+editing transactions.
 
 #### 4.1.1 AddTransactionCommand
 
@@ -810,6 +860,7 @@ Command Options:
 | c/          | Yes       | Category tagged to that transaction.<br/>No categories tagged if not specified.               |
 
 Important notes:
+
 1. There is a character limit for `Name` and `Location` set at up to 500 characters.
 2. `Amount` entered has to be positive for both `income` and `expense`.
 3. `Amount` is automatically rounded to 2 decimal places.
@@ -836,7 +887,7 @@ Important notes:
 > Location: ntuc;
 > Categories: #household
 > ```
-> 
+>
 > <img src="images/unicash/command-outputs/addTransactionSuccessOutput1.png" width="1000" />
 
 ###### Example 2
@@ -863,7 +914,7 @@ Important notes:
 
 ###### Example 1
 
-> **Case**: Missing compulsary fields.
+> **Case**: Missing compulsory fields.
 >
 > **Input**: `add_transaction`
 >
@@ -895,7 +946,8 @@ Important notes:
 
 > **Case**: More than 5 categories with valid compulsory fields.
 >
-> **Input**: `add_transaction n/Buying groceries type/expense amt/300 c/household c/entertainment c/education c/fun c/school c/test`
+> **Input
+**: `add_transaction n/Buying groceries type/expense amt/300 c/household c/entertainment c/education c/fun c/school c/test`
 >
 > **Output**:
 > ```
@@ -903,32 +955,468 @@ Important notes:
 > ```
 > > <img src="images/unicash/command-outputs/addTransactionFailedOutput3.png" width="1000" />
 
+#### 4.1.2 EditTransactionCommand
 
+#### 4.1.3 DeleteTransactionCommand
+
+Deletes a `Transaction` from UniCa$h.
+
+Command: `delete_transaction <INDEX>`
+
+Command Word: `delete_transaction` (case-insensitive)
+
+Command Argument: `<INDEX>` is the displayed transaction index 
+of the transaction to be deleted, as shown in the `Transactions List`.
+
+| Arguments | Optional? | Purpose                                            |
+|-----------|-----------|----------------------------------------------------|
+| `<INDEX>` | No        | Transaction index of the transaction to be deleted |
+
+Important notes:
+1. The `delete_transaction` command word is case-insensitive, thus `DELETE_TRANSACTION` is 
+considered an equivalent command word. 
+
+2. `<INDEX>` must be a positive integer, i.e. a number greater than 0.
+
+3. `<INDEX>` must be equal to or smaller than 2,147,483,647 which is the `Integer.MAX_VALUE` provided by Java 11.
+
+4. `<INDEX>` must be equal to or smaller than the largest displayed transaction index
+   of all transactions as shown in the `Transactions List`. Thus, even if there are `100` total transactions but only
+   `20` of those transactions are displayed in the current `Transactions List`, the maximum `INDEX` allowed
+   would be `20`
+
+5. Given `3.` and `4.`, the maximum allowed `<INDEX>` is the smaller value of the two.
+
+##### Successful Execution
+
+###### Example 1
+
+> **Case**: Delete a transaction with the correctly specified `<INDEX>`.
+>
+> **Input**: `delete_transaction 1`
+>
+> **Output**:
+> ```
+> Deleted Transaction:
+>
+> Name: Evening with friends;
+> Type: expense;
+> Amount: $49.50;
+> Date: 17 Sep 2023 00:00;
+> Location: Clarke Quay;
+> Categories: #social
+> ```
+> Input:
+> <img src="images/unicash/command-outputs/deleteTransaction/deleteTransactionInitialState.png" width="1000" />
+> Output:
+> <img src="images/unicash/command-outputs/deleteTransaction/deleteTransactionSuccess1FinalState.png" width="1000" />
+
+###### Example 2
+
+> **Case**: Delete a transaction with the currently not visible but correctly specified `<INDEX>`.
+>
+> **Input**: `delete_transaction 1`
+>
+> **Output**:
+> ```
+> Deleted Transaction:
+> 
+> Name: Lunch at McDonalds;
+> Type: expense;
+> Amount: $17.40;
+> Date: 15 Sep 2023 11:00;
+> Location: Clementi Mall;
+> Categories: #food
+> ```
+> Input:
+> <img src="images/unicash/command-outputs/deleteTransaction/deleteTransactionInitialState2.png" width="1000" />
+> Ouput:
+> <img src="images/unicash/command-outputs/deleteTransaction/deleteTransactionSuccess2FinalState.png" width="1000" />
+
+
+##### Failed Execution
+
+###### Example 1
+
+> **Case**: Missing compulsory fields.
+>
+> **Input**: `delete_transaction`
+>
+> **Output**:
+> ```
+> Invalid command format! 
+>
+> delete_transaction: Deletes the transaction identified by the index number used in the displayed transaction list.
+>
+> Argument: Index (must be a positive integer)
+>
+> Example: delete_transaction 1
+> ```
+> <img src="images/unicash/command-outputs/deleteTransaction/deleteFail1.png" width="1000" />
+
+###### Example 2
+
+> **Case**: Invalid `<INDEX>` provided
+> (`<INDEX>` given as `10` given when only `5` transactions are presently displayed)
+>
+> **Input**: `delete_transaction 10`
+>
+> **Output**:
+> ```
+> The transaction index provided is invalid
+> ```
+> <img src="images/unicash/command-outputs/deleteTransaction/deleteFail2.png" width="1000" />
+  
 #### 4.1.3 EditTransactionCommand
 
-#### 4.1.4 DeleteTransactionCommand
+#### 4.1.4 GetCommand
+
+Retrieves a `Transaction` from UniCa$h.
+
+Command: `get <INDEX>`
+
+Command Word: `get` (case-insensitive)
+
+Command Argument: `<INDEX>` is the displayed transaction index
+of the transaction to be retrieved, as shown in the `Transactions List`.
+
+| Arguments | Optional? | Purpose                                              |
+|-----------|-----------|------------------------------------------------------|
+| `<INDEX>` | No        | Transaction index of the transaction to be retrieved |
+
+Important notes:
+1. The `get` command word is case-insensitive, thus `GET` is
+   considered an equivalent command word.
+
+2. `<INDEX>` must be a positive integer, i.e. a number greater than 0.
+
+3. `<INDEX>` must be equal to or smaller than 2,147,483,647 which is the `Integer.MAX_VALUE` provided by Java 11.
+
+4. `<INDEX>` must be equal to or smaller than the largest displayed transaction index
+   of all transactions as shown in the `Transactions List`. Thus, even if there are `100` total transactions but only
+   `20` of those transactions are displayed in the current `Transactions List`, the maximum `INDEX` allowed
+   would be `20`
+
+5. Given `3.` and `4.`, the maximum allowed `<INDEX>` is the smaller value of the two.
+
+##### Successful Execution
+
+###### Example 1
+
+> **Case**: Retrieve a transaction with the correctly specified `<INDEX>`.
+>
+> **Input**: `get 5`
+>
+> **Output**:
+> ```
+> Transaction 5 retrieved:
+> 
+> Name: Taxi;
+> Type: expense;
+> Amount: $20.00;
+> Date: 18 Sep 2023 11:30;
+> Location: Bugis;
+> Categories: #transport
+> ```
+> Input:
+> <img src="images/unicash/command-outputs/getTransaction/getInitial1.png" width="1000" />
+> Ouput:
+> <img src="images/unicash/command-outputs/getTransaction/getSuccessFinal1.png" width="1000" />
+
+###### Example 2
+
+> **Case**: Retrieve a transaction with the currently not visible but correctly specified `<INDEX>`.
+>
+> **Input**: `get 1`
+>
+> **Output**:
+> ```
+> Transaction 1 retrieved:
+>
+> Name: Buy clothes;
+> Type: expense;
+> Amount: $109.00;
+> Date: 17 Sep 2023 18:30;
+> Location: Uniqlo Bugis;
+> Categories: #shopping
+> ```
+> Input:
+> <img src="images/unicash/command-outputs/getTransaction/getInitial2.png" width="1000" />
+> Ouput:
+> <img src="images/unicash/command-outputs/getTransaction/getSuccessFinal2.png" width="1000" />
+
+##### Failed Execution
+
+###### Example 1
+
+> **Case**: Missing compulsory fields.
+>
+> **Input**: `get`
+>
+> **Output**:
+> ```
+> Invalid command format! 
+>
+> get: Displays expanded details of a specific transaction.
+>
+> Argument: Index (must be a positive integer)
+>
+> Example: get 2
+> ```
+> <img src="images/unicash/command-outputs/getTransaction/getFail1.png" width="1000" />
+
+###### Example 2
+
+> **Case**: Invalid `<INDEX>` provided
+> 
+> **Context**: `10` given as `<INDEX>` when only `5` transactions are presently displayed.
+>
+> **Input**: `get 10`
+>
+> **Output**:
+> ```
+> The transaction index provided is invalid
+> ```
+> <img src="images/unicash/command-outputs/getTransaction/getFail2.png" width="1000" />
 
 #### 4.1.5 FindCommand
 
-#### 4.1.6 GetCommand
+
+#### 4.1.6 FilterCommand
+
 
 #### 4.1.7 ListCommand
 
 #### 4.1.8 ClearTransactionsCommand
 
-### 4.2 Summary Commands
+### 4.2 Budget Commands
 
-#### 4.2.1 GetTotalExpenditureCommand
+The budget serves as a warning system to notify users when their expenses for the given interval exceeds their preset
+amount.
 
-#### 4.2.2 SummaryCommand
+The user's spending is calculated by: `budget + interval income - interval expenses`.
 
-### 4.3 General Utility Commands
+> 💡 NOTE: For this team project, we have opted to simplify the budgeting feature by limiting the user to a single budget
+> at a time that can be configured for different intervals and amounts.
 
-#### 4.3.1 HelpCommand
+#### 4.2.1 SetBudgetCommand
 
-#### 4.3.2 ResetCommand
+Sets the user's budget on UniCa$h to be a given amount and within a given interval.
 
-#### 4.3.3 ExitCommand
+Command: `set_budget amt/AMOUNT interval/INTERVAL`
+
+Command Options:
+
+| Option Name | Optional? | Purpose                                                         |
+|-------------|-----------|-----------------------------------------------------------------|
+| amt/        | No        | Monetary amount of budget. Has to be a positive value.          |
+| interval/   | No        | Interval of budget, can be of values "day", "week", or "month". |
+
+Important notes:
+
+1. `Amount` entered has to be positive for any `interval` value.
+2. `Amount` is automatically rounded to 2 decimal places.
+3. `Interval` must be of values "day", "week", or "month".
+
+##### Successful Execution
+
+###### Example 1
+
+> **Case**: Set budget of $600 for every month.
+>
+> **Input**: `set_budget amt/600 interval/month`
+>
+> **Output**:
+> ```
+> New budget added:
+>
+> Amount: $600.00;
+> Interval: month
+> ```
+>
+> <img src="images/unicash/command-outputs/set-budget/setBudgetSuccessOutput.png" width="1000" />
+
+##### Failed Execution
+
+###### Example 1
+
+> **Case**: Missing amount.
+>
+> **Input**: `set_budget interval/month`
+>
+> **Output**:
+> ```
+> Invalid command format! 
+>
+> set_budget: Sets the user's budget on UniCa$h.
+>
+> Parameters: amt/Amount interval/Interval
+>
+> Example: set_budget month/10 interval/day
+> ```
+>
+> <img src="images/unicash/command-outputs/set-budget/setBudgetFailureNoAmount.png" width="1000">
+
+###### Example 2
+
+> **Case**: Missing interval.
+>
+> **Input**: `set_budget amt/600`
+>
+> **Output**:
+> ```
+> Invalid command format! 
+>
+> set_budget: Sets the user's budget on UniCa$h.
+>
+> Parameters: amt/Amount interval/Interval
+>
+> Example: set_budget month/10 interval/day
+> ```
+>
+> <img src="images/unicash/command-outputs/set-budget/setBudgetFailureNoInterval.png" width="1000">
+
+###### Example 3
+
+> **Case**: No fields.
+>
+> **Input**: `set_budget`
+>
+> **Output**:
+> ```
+> Invalid command format! 
+>
+> set_budget: Sets the user's budget on UniCa$h.
+>
+> Parameters: amt/Amount interval/Interval
+>
+> Example: set_budget month/10 interval/day
+> ```
+>
+> <img src="images/unicash/command-outputs/set-budget/setBudgetFailureNoArguments.png" width="1000">
+
+###### Example 4
+
+> **Case**: Negative amount.
+>
+> **Input**: `set_budget amt/-123 interval/day`
+>
+> **Output**:
+> ```
+> Amounts must be within range of [0, 2,147,483,647] and either start with $ or nothing at all
+> ```
+>
+> <img src="images/unicash/command-outputs/set-budget/setBudgetFailureNegativeAmount.png" width="1000">
+
+###### Example 5
+
+> **Case**: Invalid interval value.
+>
+> **Input**: `set_budget amt/600 interval/hi`
+>
+> **Output**:
+> ```
+> Interval value must be one of the following: day, week, month
+> ```
+>
+> <img src="images/unicash/command-outputs/set-budget/setBudgetFailureInvalidInterval.png" width="1000">
+
+#### 4.2.2 ClearBudgetCommand
+
+Clears the user's budget set in UniCa$h. If no budget is set yet, the user is prompted to set one first instead.
+
+Command: `clear_budget`
+
+Command Options: This command does not take in any arguments and will not process any arguments.
+
+##### Successful Execution
+
+###### Example 1
+
+> **Case**: Clear user set budget.
+>
+> **Input**: `clear_budget`
+>
+> **Output**:
+> ```
+> Budget cleared.
+> ```
+>
+> <img src="images/unicash/command-outputs/clear-budget/clearBudgetSuccess.png" width="1000" />
+
+###### Example 2
+
+> **Case**: Clear without set budget.
+>
+> **Input**: `clear_budget`
+>
+> **Output**:
+> ```
+> No budget to clear.
+>
+> Consider using set_budget amt/Amount interval/Interval first!
+> ```
+>
+> <img src="images/unicash/command-outputs/clear-budget/clearBudgetNoBudgetSuccess.png" width="1000" />
+
+#### 4.2.3 GetBudgetCommand
+
+Retrieves the set budget and the spending over the given interval. The usage is calculated from the list of filtered
+transactions so to view the budget remainder across all transactions, use the `list` command first.
+
+If no budget has been set, the user will be prompted to set one first instead.
+
+The user's spending is calculated by: `budget + interval income - interval expenses`.
+
+Command: `get_budget`
+
+Command Options: This command does not take in any arguments and will not process any arguments.
+
+##### Successful Execution
+
+###### Example 1
+
+> **Case**: Get user's set budget and spending remainder.
+>
+> **Input**: `get_budget`
+>
+> **Output**:
+> ```
+> Monthly budget of $600.00
+>
+> Net amount of $587.00
+> ```
+>
+> <img src="images/unicash/command-outputs/get-budget/getBudgetSuccess.png" width="1000" />
+
+###### Example 2
+
+> **Case**: Get budget without budget set.
+>
+> **Input**: `get_budget`
+>
+> **Output**:
+> ```
+> No budget set. Use set_budget amt/Amount interval/Interval
+> ```
+>
+> <img src="images/unicash/command-outputs/get-budget/getBudgetNoBudgetSuccess.png" width="1000" />
+
+### 4.3 Financial Statistics Features
+
+#### 4.3.1 GetTotalExpenditureCommand
+
+#### 4.3.2 SummaryCommand
+
+#### 4.3.3 Rolling Balance Indicator
+
+### 4.4 General Utility Commands
+
+#### 4.4.1 HelpCommand
+
+#### 4.4.2 ResetCommand
+
+#### 4.4.3 ExitCommand
 
 ### 4.3 Summary Commands
 

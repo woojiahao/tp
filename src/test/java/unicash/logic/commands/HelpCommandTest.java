@@ -130,14 +130,14 @@ public class HelpCommandTest {
     }
 
     @Test
-    public void execute_addBudgetCommand_success() {
+    public void execute_setBudgetCommand_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
         CommandResult expectedCommandResult =
-                new CommandResult(AddBudgetCommand.MESSAGE_USAGE);
+                new CommandResult(SetBudgetCommand.MESSAGE_USAGE);
 
-        assertCommandSuccess(new HelpCommand(AddBudgetCommand.COMMAND_WORD),
+        assertCommandSuccess(new HelpCommand(SetBudgetCommand.COMMAND_WORD),
                 model, expectedCommandResult, expectedModel);
     }
 

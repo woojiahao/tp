@@ -122,6 +122,12 @@ public class ModelManager implements Model {
         uniCash.setBudget(budget);
     }
 
+    @Override
+    public void clearBudget() {
+        uniCash.clearBudget();
+    }
+
+    @Override
     public Budget getBudget() {
         return uniCash.getBudget();
     }
