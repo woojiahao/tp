@@ -203,8 +203,8 @@ public enum CommandType {
                     .setDescription(
                             "Finds all transactions whose properties match all of the specified keywords "
                                     + "(case-insensitive) and displays them as a list with index numbers. "
-                                    + "\n\n Only one keyword can be specified for each property and at least "
-                                    + "one keyword must be provided. "
+                                    + "\n\nOnly one keyword can be specified for each property and at least "
+                                    + "one keyword must be provided in total. "
                     )
                     .addParameter(PREFIX_NAME, "Name", true, false)
                     .addParameter(PREFIX_TYPE, "Type", true, false)

@@ -26,14 +26,14 @@ import unicash.model.transaction.predicates.TransactionContainsAllKeywordsPredic
  */
 public class FindCommandParser implements Parser<FindCommand> {
 
-    private TransactionContainsAllKeywordsPredicate filterPredicate;
+    private TransactionContainsAllKeywordsPredicate findPredicate;
 
     /**
      * Creates a {@code FindCommandParser} object with a default
      * {@code TransactionContainsAllKeywordsPredicate} predicate.
      */
     FindCommandParser() {
-        filterPredicate = new TransactionContainsAllKeywordsPredicate();
+        findPredicate = new TransactionContainsAllKeywordsPredicate();
     }
 
 
@@ -61,41 +61,41 @@ public class FindCommandParser implements Parser<FindCommand> {
         /* Parses the name keywords provided and adds them to the all keywords predicate */
         for (String keyword : argMultimap.getAllValues(PREFIX_NAME)) {
             Name transactionName = ParserUtil.parseTransactionName(keyword);
-            filterPredicate.addNameKeyword(transactionName.toString());
+            findPredicate.addNameKeyword(transactionName.toString());
         }
 
         /* Parses the amount keywords provided and adds them to the all keywords predicate */
         for (String keyword : argMultimap.getAllValues(PREFIX_AMOUNT)) {
             Amount transactionAmount = ParserUtil.parseAmount(keyword);
-            filterPredicate.addAmountKeyword(
+            findPredicate.addAmountKeyword(
                     Amount.amountToDecimalString(transactionAmount));
         }
 
         /* Parses the categories provided and adds them to the all keywords predicate */
         for (String keyword : argMultimap.getAllValues(PREFIX_CATEGORY)) {
             Category transactionCategory = ParserUtil.parseCategory(keyword);
-            filterPredicate.addCategoryKeyword(transactionCategory.toString());
+            findPredicate.addCategoryKeyword(transactionCategory.toString());
         }
 
         /* Parses the location keywords provided and adds them to the all keywords predicate */
         for (String keyword : argMultimap.getAllValues(PREFIX_LOCATION)) {
             Location transactionLocation = ParserUtil.parseLocation(keyword);
-            filterPredicate.addLocationKeyword(transactionLocation.toString());
+            findPredicate.addLocationKeyword(transactionLocation.toString());
         }
 
         /* Parses the dateTime keywords provided and adds them to the all keywords predicate */
         for (String keyword : argMultimap.getAllValues(PREFIX_DATETIME)) {
             DateTime transactionDateTime = ParserUtil.parseDateTime(keyword);
-            filterPredicate.addDateTimeKeyword(transactionDateTime.toString());
+            findPredicate.addDateTimeKeyword(transactionDateTime.toString());
         }
 
         /* Parses the type keyword provided and adds it to the all keywords predicate */
         for (String keyword : argMultimap.getAllValues(PREFIX_TYPE)) {
             Type transactionType = ParserUtil.parseType(keyword);
-            filterPredicate.addTypeKeyword(transactionType.toString());
+            findPredicate.addTypeKeyword(transactionType.toString());
         }
 
-        return new FindCommand(filterPredicate);
+        return new FindCommand(findPredicate);
 
     }
 
@@ -112,14 +112,14 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         FindCommandParser otherCommand = (FindCommandParser) other;
-        return filterPredicate.equals(otherCommand.filterPredicate);
+        return findPredicate.equals(otherCommand.findPredicate);
 
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("filterPredicate", filterPredicate)
+                .add("findPredicate", findPredicate)
                 .toString();
     }
 
