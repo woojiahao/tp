@@ -156,7 +156,8 @@ public class SummaryWindow extends UiPart<Stage> {
      * is after EARLIEST_YEAR_MONTH and before the current system clock's year-month.
      */
     private HashMap<YearMonth, Double> fillExpenseSummary(HashMap<YearMonth, Double> expenseSummary) {
-        HashMap<YearMonth, Double> updatedExpenseSummary = new HashMap<>(expenseSummary); // Creating a defensive copy of expenseSummary
+        HashMap<YearMonth, Double> updatedExpenseSummary =
+                new HashMap<>(expenseSummary); // Creating a defensive copy of expenseSummary
 
         for (int i = 0; i < NUM_YEAR_MONTHS_TO_DISPLAY; i++) {
             YearMonth currentYearMonth = LATEST_YEAR_MONTH.minusMonths(i);
@@ -173,7 +174,8 @@ public class SummaryWindow extends UiPart<Stage> {
      * considered extra if it is before EARLIEST_YEAR_MONTH and after the current system clock's year-month.
      */
     private HashMap<YearMonth, Double> filterExpenseSummary(HashMap<YearMonth, Double> expenseSummary) {
-        HashMap<YearMonth, Double> updatedExpenseSummary = new HashMap<>(expenseSummary); // Creating a defensive copy of expenseSummary
+        HashMap<YearMonth, Double> updatedExpenseSummary =
+                new HashMap<>(expenseSummary); // Creating a defensive copy of expenseSummary
 
         updatedExpenseSummary.entrySet().removeIf(entry -> {
             YearMonth yearMonth = entry.getKey();
