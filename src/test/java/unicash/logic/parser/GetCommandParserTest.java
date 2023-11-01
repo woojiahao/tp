@@ -72,7 +72,7 @@ public class GetCommandParserTest {
     }
 
     @Test
-    public void toStringTest() {
+    public void toStringMethod() {
         GetCommandParser getCommandParser = new GetCommandParser();
         String expected = new ToStringBuilder(new GetCommandParser()).toString();
         assertEquals(expected, getCommandParser.toString());

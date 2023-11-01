@@ -51,7 +51,7 @@ public class ExitCommandTest {
     }
 
     @Test
-    public void toStringTest() {
+    public void toStringMethod() {
         ExitCommand exitCommand = new ExitCommand();
         String expected = new ToStringBuilder(new ExitCommand()).toString();
         assertEquals(expected, exitCommand.toString());

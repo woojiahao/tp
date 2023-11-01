@@ -79,7 +79,7 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void toStringTest() {
+    public void toStringMethod() {
         FindCommandParser findCommandParser = new FindCommandParser();
         TransactionContainsAllKeywordsPredicate findPredicate =
                 new TransactionContainsAllKeywordsPredicate();

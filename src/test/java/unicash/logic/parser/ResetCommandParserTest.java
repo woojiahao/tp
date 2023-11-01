@@ -88,7 +88,7 @@ public class ResetCommandParserTest {
     }
 
     @Test
-    public void toStringTest() {
+    public void toStringMethod() {
         ResetCommandParser resetCommandParser = new ResetCommandParser();
         String expected = new ToStringBuilder(new ResetCommandParser()).toString();
         assertEquals(expected, resetCommandParser.toString());

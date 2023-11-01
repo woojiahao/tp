@@ -81,7 +81,7 @@ public class ResetCommandTest {
     }
 
     @Test
-    public void toStringTest() {
+    public void toStringMethod() {
         ResetCommand resetCommand = new ResetCommand();
         String expected = new ToStringBuilder(new ResetCommand()).toString();
         assertEquals(expected, resetCommand.toString());

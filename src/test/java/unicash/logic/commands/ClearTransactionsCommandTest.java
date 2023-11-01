@@ -67,7 +67,7 @@ public class ClearTransactionsCommandTest {
     }
 
     @Test
-    public void toStringTest() {
+    public void toStringMethod() {
         ClearTransactionsCommand clearCommand = new ClearTransactionsCommand();
         String expected = new ToStringBuilder(new ClearTransactionsCommand()).toString();
         assertEquals(expected, clearCommand.toString());

@@ -72,7 +72,7 @@ public class ListCommandParserTest {
     }
 
     @Test
-    public void toStringTest() {
+    public void toStringMethod() {
         ListCommandParser listCommandParser = new ListCommandParser();
         String expected = new ToStringBuilder(new ListCommandParser()).toString();
         assertEquals(expected, listCommandParser.toString());

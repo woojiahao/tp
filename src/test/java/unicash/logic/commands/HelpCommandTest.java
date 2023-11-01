@@ -261,7 +261,7 @@ public class HelpCommandTest {
 
 
     @Test
-    public void toStringTest() {
+    public void toStringMethod() {
         HelpCommand helpCommand = new HelpCommand(HelpCommand.COMMAND_WORD);
         String expected = new ToStringBuilder(helpCommand)
                 .add("target", HelpCommand.COMMAND_WORD).toString();
