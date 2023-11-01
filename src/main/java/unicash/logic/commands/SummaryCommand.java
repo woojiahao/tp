@@ -21,6 +21,6 @@ public class SummaryCommand extends Command {
         if (model.hasExpenses()) {
             return new CommandResult(MESSAGE_SHOWING_SUMMARY_SUCCESS, false, false, true);
         }
-        return new CommandResult(MESSAGE_NOT_SHOWING_SUMMARY, false, false, false);
+        return new CommandResult(MESSAGE_NOT_SHOWING_SUMMARY);
     }
 }
