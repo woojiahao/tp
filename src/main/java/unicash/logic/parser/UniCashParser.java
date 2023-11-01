@@ -8,24 +8,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import unicash.commons.core.LogsCenter;
-import unicash.logic.commands.AddTransactionCommand;
+import unicash.commons.enums.CommandType;
 import unicash.logic.commands.ClearBudgetCommand;
 import unicash.logic.commands.ClearTransactionsCommand;
 import unicash.logic.commands.Command;
-import unicash.logic.commands.DeleteTransactionCommand;
-import unicash.logic.commands.EditTransactionCommand;
 import unicash.logic.commands.ExitCommand;
-import unicash.logic.commands.FindCommand;
 import unicash.logic.commands.GetBudgetCommand;
-import unicash.logic.commands.GetCommand;
-import unicash.logic.commands.GetTotalExpenditureCommand;
 import unicash.logic.commands.HelpCommand;
-import unicash.logic.commands.ListCommand;
 import unicash.logic.commands.ResetCommand;
-import unicash.logic.commands.SetBudgetCommand;
 import unicash.logic.commands.SummaryCommand;
 import unicash.logic.parser.exceptions.ParseException;
-
 
 /**
  * Parses user input.
@@ -53,56 +45,57 @@ public class UniCashParser {
 
         final String commandWord = matcher.group("commandWord").toLowerCase();
         final String arguments = matcher.group("arguments");
+        CommandType commandType = CommandType.parseCommandType(commandWord);
 
         // Note to developers: Change the log level in config.json to enable lower level (i.e., FINE, FINER and lower)
         // log messages such as the one below.
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
-        switch (commandWord) {
-        case FindCommand.COMMAND_WORD:
+        switch (commandType) {
+        case FIND:
             return new FindCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
+        case LIST:
             return new ListCommandParser().parse(arguments);
 
-        case AddTransactionCommand.COMMAND_WORD:
+        case ADD_TRANSACTION:
             return new AddTransactionCommandParser().parse(arguments);
 
-        case EditTransactionCommand.COMMAND_WORD:
+        case EDIT_TRANSACTION:
             return new EditTransactionCommandParser().parse(arguments);
 
-        case DeleteTransactionCommand.COMMAND_WORD:
+        case DELETE_TRANSACTION:
             return new DeleteTransactionCommandParser().parse(arguments);
 
-        case GetTotalExpenditureCommand.COMMAND_WORD:
+        case GET_TOTAL_EXPENDITURE:
             return new GetTotalExpenditureCommandParser().parse(arguments);
 
-        case ClearTransactionsCommand.COMMAND_WORD:
+        case CLEAR_TRANSACTIONS:
             return new ClearTransactionsCommand();
 
-        case SetBudgetCommand.COMMAND_WORD:
+        case SET_BUDGET:
             return new SetBudgetCommandParser().parse(arguments);
 
-        case ClearBudgetCommand.COMMAND_WORD:
+        case CLEAR_BUDGET:
             return new ClearBudgetCommand();
 
-        case GetBudgetCommand.COMMAND_WORD:
+        case GET_BUDGET:
             return new GetBudgetCommand();
 
-        case ResetCommand.COMMAND_WORD:
+        case RESET:
             return new ResetCommand();
 
-        case GetCommand.COMMAND_WORD:
+        case GET:
             return new GetCommandParser().parse(arguments);
 
-        case HelpCommand.COMMAND_WORD:
+        case HELP:
             return new HelpCommandParser().parse(arguments);
 
-        case ExitCommand.COMMAND_WORD:
+        case EXIT:
             return new ExitCommand();
 
-        case SummaryCommand.COMMAND_WORD:
+        case SUMMARY:
             return new SummaryCommand();
 
         default:

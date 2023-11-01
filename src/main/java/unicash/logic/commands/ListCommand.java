@@ -5,8 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import unicash.commons.util.CommandUsage;
-import unicash.commons.util.ExampleGenerator;
+import unicash.commons.enums.CommandType;
 import unicash.model.Model;
 
 /**
@@ -14,18 +13,13 @@ import unicash.model.Model;
  */
 public class ListCommand extends Command {
 
-    public static final String COMMAND_WORD = "list";
+    public static final String COMMAND_WORD = CommandType.LIST.getCommandWords();
 
-    public static final String MESSAGE_SUCCESS = "Listed all transactions";
+    public static final String MESSAGE_USAGE = CommandType.LIST.getMessageUsage();
+
+    public static final String MESSAGE_SUCCESS = CommandType.LIST.getMessageSuccess();
 
     private static final Logger logger = Logger.getLogger("ListCommandLogger");
-
-    public static final String MESSAGE_USAGE = new CommandUsage.Builder()
-            .setCommandWord(COMMAND_WORD)
-            .setDescription("Lists all transactions in UniCa$h.")
-            .setExample(ExampleGenerator.generate(COMMAND_WORD))
-            .build()
-            .toString();
 
     public static final String MESSAGE_FAILURE = "Command not recognised. Try using the command " + COMMAND_WORD
             + " without any parameters instead.";

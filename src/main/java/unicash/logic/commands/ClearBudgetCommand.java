@@ -2,6 +2,7 @@ package unicash.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import unicash.commons.enums.CommandType;
 import unicash.model.Model;
 
 /**
@@ -9,8 +10,10 @@ import unicash.model.Model;
  */
 public class ClearBudgetCommand extends Command {
 
-    public static final String COMMAND_WORD = "clear_budget";
-    public static final String MESSAGE_SUCCESS = "Budget cleared.";
+    public static final String COMMAND_WORD = CommandType.CLEAR_BUDGET.getCommandWords();
+    public static final String MESSAGE_SUCCESS = CommandType.CLEAR_BUDGET.getMessageSuccess();
+    public static final String MESSAGE_USAGE = CommandType.CLEAR_BUDGET.getMessageUsage();
+    //alternative success case
     public static final String MESSAGE_NO_BUDGET = "No budget to clear."
             + "\n\nConsider using set_budget amt/Amount interval/Interval first!";
 
