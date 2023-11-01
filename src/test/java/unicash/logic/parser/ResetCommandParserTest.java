@@ -23,35 +23,35 @@ public class ResetCommandParserTest {
     @Test
     public void parse_withArgsWord_throwsParseException() {
 
-        //clear command with trailing text
+        //reset command with trailing text
         assertParseFailure(parser, " abc", ResetCommand.MESSAGE_FAILURE);
     }
 
     @Test
     public void parse_withArgsNumber_throwsParseException() {
 
-        //clear command with trailing number
+        //rest command with trailing number
         assertParseFailure(parser, " 1", ResetCommand.MESSAGE_FAILURE);
     }
 
     @Test
     public void parse_withExcessSpacing_doesNotThrowParseException() {
 
-        //clear command with trailing number
+        //reset command with trailing number
         assertParseSuccess(parser, "     ", new ResetCommand());
     }
 
     @Test
     public void parse_withAllErrors_throwsParseException() {
 
-        //clear command with trailing numbers, spaces and letters
+        //reset command with trailing numbers, spaces and letters
         assertParseFailure(parser, "   1 a b c ,,  ", ResetCommand.MESSAGE_FAILURE);
     }
 
     @Test
     public void parse_withNonAsciiSymbols_throwsParseException() {
 
-        //clear command with trailing non-ascii symbols
+        //reset command with trailing non-ascii symbols
         assertParseFailure(parser, "∑∆˙©˚©˚˚∆˙©", ResetCommand.MESSAGE_FAILURE);
     }
 
