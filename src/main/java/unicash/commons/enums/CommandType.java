@@ -316,7 +316,7 @@ public enum CommandType {
         }
     },
     //no shorter commands for this so that the user does not accidentally reset
-    RESET("reset", "reset_unicash") {
+    RESET("reset_unicash") {
         @Override
         public String getMessageUsage() {
             return new CommandUsage.Builder()
