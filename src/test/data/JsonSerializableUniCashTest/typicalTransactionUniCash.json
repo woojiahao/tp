@@ -1,8 +1,22 @@
 {
   "transactions" : [ {
+    "name" : "BlueSG car rental",
+    "amount" : 10.0,
+    "dateTime" : "01-05-2023 23:36",
+    "location" : "Canberra Plaza",
+    "type" : "expense",
+    "categories" : [ "transportation", "rental" ]
+  }, {
+    "name" : "Gojek to school",
+    "amount" : 20.9,
+    "dateTime" : "01-08-2023 09:00",
+    "location" : "-",
+    "type" : "expense",
+    "categories" : [ "transportation" ]
+  }, {
     "name" : "Lunch at McDonalds",
     "amount" : 17.4,
-    "dateTime" : "15-09-2023 11:00",
+    "dateTime" : "10-08-2023 11:00",
     "location" : "Clementi Mall",
     "type" : "expense",
     "categories" : [ "food" ]
@@ -14,7 +28,7 @@
     "type" : "expense",
     "categories" : [ "shopping" ]
   }, {
-    "name" : "Intern allowance september",
+    "name" : "Intern allowance (September)",
     "amount" : 1800.0,
     "dateTime" : "17-09-2023 00:00",
     "location" : "-",
@@ -23,9 +37,9 @@
   }, {
     "name" : "Evening with friends",
     "amount" : 49.5,
-    "dateTime" : "17-09-2023 00:00",
+    "dateTime" : "05-10-2023 00:00",
     "location" : "Clarke Quay",
     "type" : "expense",
-    "categories" : [ "social" ]
+    "categories" : [ "social", "food" ]
   } ]
 }

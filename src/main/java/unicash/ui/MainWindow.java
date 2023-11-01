@@ -178,7 +178,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void handleSummary() {
         if (!summaryWindow.isShowing()) {
-            summaryWindow.show(logic.getExpenseSummary());
+            summaryWindow.show(logic.getExpenseSummaryPerCategory());
         } else {
             summaryWindow.focus();
         }
@@ -211,7 +211,8 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            summaryWindow.setPieChart(logic.getExpenseSummary());
+            summaryWindow.setPieChart(logic.getExpenseSummaryPerCategory());
+            summaryWindow.setLineGraph(logic.getExpenseSummaryPerYearMonth());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

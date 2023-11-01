@@ -1,6 +1,7 @@
 package unicash.model;
 
 import java.nio.file.Path;
+import java.time.YearMonth;
 import java.util.HashMap;
 import java.util.function.Predicate;
 
@@ -114,9 +115,17 @@ public interface Model {
     Budget getBudget();
 
     /**
-     * Updates the summary of expenses saved in UniCash.
+     * Returns the total expense per category
      */
-    void updateExpenseSummary();
+    HashMap<String, Double> getExpenseSummaryPerCategory();
 
-    HashMap<String, Double> getExpenseSummary();
+    /**
+     * Returns the total expense per year-month
+     */
+    HashMap<YearMonth, Double> getExpenseSummaryPerYearMonth();
+
+    /**
+     * Returns true if there are transactions of type "expense", and false otherwise
+     */
+    boolean hasExpenses();
 }

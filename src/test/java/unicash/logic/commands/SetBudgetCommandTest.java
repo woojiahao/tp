@@ -11,6 +11,7 @@ import static unicash.testutil.TypicalBudgets.MONTHLY;
 import static unicash.testutil.TypicalBudgets.WEEKLY;
 
 import java.nio.file.Path;
+import java.time.YearMonth;
 import java.util.HashMap;
 import java.util.function.Predicate;
 
@@ -185,12 +186,17 @@ public class SetBudgetCommandTest {
         }
 
         @Override
-        public void updateExpenseSummary() {
+        public HashMap<String, Double> getExpenseSummaryPerCategory() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public HashMap<String, Double> getExpenseSummary() {
+        public HashMap<YearMonth, Double> getExpenseSummaryPerYearMonth() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasExpenses() {
             throw new AssertionError("This method should not be called.");
         }
     }
