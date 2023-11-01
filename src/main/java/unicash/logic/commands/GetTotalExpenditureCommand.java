@@ -33,7 +33,9 @@ public class GetTotalExpenditureCommand extends Command {
             .build()
             .toString();
 
-    public static final String MESSAGE_SUCCESS = "Your total expenditure in %1$s %2$d was %3$.2f";
+    public static final String MESSAGE_SUCCESS = "Your total expenditure in %1$s %2$d was $%3$.2f";
+    public static final String MESSAGE_SUCCESS_WITH_CATEGORY =
+            "Your total expenditure in %1$s %2$d for \"%3$s\" was $%4$.2f";
 
     private final int month;
     private final int year;
@@ -92,7 +94,19 @@ public class GetTotalExpenditureCommand extends Command {
 
         String monthString = StringUtil.capitalizeString(Month.of(month).name());
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, monthString, year, totalExpenditure));
+        if (categoryFilter == null) {
+            return new CommandResult(String.format(MESSAGE_SUCCESS, monthString, year, totalExpenditure));
+        }
+
+        return new CommandResult(
+                String.format(
+                        MESSAGE_SUCCESS_WITH_CATEGORY,
+                        monthString,
+                        year,
+                        categoryFilter,
+                        totalExpenditure
+                )
+        );
     }
 
     @Override
