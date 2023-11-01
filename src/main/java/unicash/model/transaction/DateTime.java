@@ -5,6 +5,7 @@ import static unicash.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.Clock;
 import java.time.LocalDateTime;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
@@ -91,6 +92,14 @@ public class DateTime {
     public String inputString() {
         return originalDateTime;
     }
+
+    /**
+     * Returns the YearMonth corresponding to dateTime.
+     */
+    public YearMonth getYearMonth() {
+        return YearMonth.from(dateTime);
+    }
+
 
     /**
      * Returns true if a given string is a valid dateTime.

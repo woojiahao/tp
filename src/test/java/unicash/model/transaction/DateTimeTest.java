@@ -9,6 +9,7 @@ import static unicash.testutil.Assert.assertThrows;
 
 import java.time.Clock;
 import java.time.Instant;
+import java.time.YearMonth;
 import java.time.ZoneId;
 
 import org.junit.jupiter.api.Test;
@@ -123,5 +124,17 @@ public class DateTimeTest {
         DateTime dateTime3 = new DateTime("01-01-2002 12:12");
         assertEquals(dateTime1.hashCode(), dateTime2.hashCode());
         assertNotEquals(dateTime1.hashCode(), dateTime3.hashCode());
+    }
+
+    @Test
+    public void getYearMonth_equalsOtherYearMonth() {
+        DateTime datetime1 = new DateTime("01-01-2001 01:01");
+        DateTime datetime2 = new DateTime("2001-01-01 01:01");
+        DateTime datetime3 = new DateTime("01 Jan 2001 01:01");
+        YearMonth expectedYearMonth = YearMonth.of(2001, 1);
+
+        assertTrue(datetime1.getYearMonth().equals(expectedYearMonth));
+        assertTrue(datetime2.getYearMonth().equals(expectedYearMonth));
+        assertTrue(datetime3.getYearMonth().equals(expectedYearMonth));
     }
 }
