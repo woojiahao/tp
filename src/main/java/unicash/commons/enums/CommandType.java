@@ -321,11 +321,6 @@ public enum CommandType {
         public String getMessageSuccess() {
             return "Opened UniCa$h summary window.";
         }
-
-        @Override
-        public String getMessageFailure() {
-            return "You have no expenses to summarize.";
-        }
     },
     DEFAULT() {
         @Override

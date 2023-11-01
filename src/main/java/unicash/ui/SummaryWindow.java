@@ -118,10 +118,10 @@ public class SummaryWindow extends UiPart<Stage> {
     public void setLineGraph(HashMap<YearMonth, Double> expenseSummary) {
         lineChart.getData().clear();
 
-        expenseSummary = preprocessExpenseSummary(expenseSummary);
+        HashMap<YearMonth, Double> updatedExpenseSummary = preprocessExpenseSummary(expenseSummary);
 
         XYChart.Series<String, Double> series = new XYChart.Series<>();
-        ObservableList<XYChart.Data<String, Double>> lineChartData = expenseSummary.entrySet().stream()
+        ObservableList<XYChart.Data<String, Double>> lineChartData = updatedExpenseSummary.entrySet().stream()
                 .sorted(Comparator.comparing(entry -> entry.getKey().toString()))
                 .filter(entry -> isValidYearMonth(entry.getKey()))
                 .map(entry -> new XYChart.Data<>(entry.getKey().format(formatter), entry.getValue()))

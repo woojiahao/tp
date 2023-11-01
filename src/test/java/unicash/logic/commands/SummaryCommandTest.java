@@ -1,7 +1,7 @@
 package unicash.logic.commands;
 
 import static unicash.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static unicash.logic.commands.SummaryCommand.MESSAGE_SHOWING_SUMMARY_FAILURE;
+import static unicash.logic.commands.SummaryCommand.MESSAGE_NOT_SHOWING_SUMMARY;
 import static unicash.logic.commands.SummaryCommand.MESSAGE_SHOWING_SUMMARY_SUCCESS;
 import static unicash.testutil.TypicalTransactions.NUS;
 
@@ -16,7 +16,7 @@ public class SummaryCommandTest {
         Model emptyModel = new ModelManager();
         Model expectedEmptyModel = new ModelManager();
         CommandResult emptyModelExpectedCommandResult =
-                new CommandResult(MESSAGE_SHOWING_SUMMARY_FAILURE, false, false, false);
+                new CommandResult(MESSAGE_NOT_SHOWING_SUMMARY, false, false, false);
         assertCommandSuccess(new SummaryCommand(), emptyModel,
                 emptyModelExpectedCommandResult, expectedEmptyModel);
 
