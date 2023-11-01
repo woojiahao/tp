@@ -98,7 +98,7 @@ public class UniCashParserTest {
 
         String message = ClearTransactionsCommand.MESSAGE_FAILURE;
         assertThrows(ParseException.class, message, () -> parser.parseCommand(
-                ClearTransactionsCommand.COMMAND_WORD + " 3"));
+                CommandType.CLEAR_TRANSACTIONS.getMainCommandWord() + " 3"));
 
     }
 
@@ -108,7 +108,7 @@ public class UniCashParserTest {
 
         String message = ResetCommand.MESSAGE_FAILURE;
         assertThrows(ParseException.class, message, () -> parser.parseCommand(
-                ResetCommand.COMMAND_WORD + " 3"));
+                CommandType.RESET.getMainCommandWord() + " 3"));
     }
 
     @Test
@@ -130,7 +130,7 @@ public class UniCashParserTest {
                         instanceof GetTotalExpenditureCommand
         );
         assertTrue(
-                parser.parseCommand(GetTotalExpenditureCommand.COMMAND_WORD + " month/8 c/Food")
+                parser.parseCommand(CommandType.GET_TOTAL_EXPENDITURE.getMainCommandWord() + " month/8 c/Food")
                         instanceof GetTotalExpenditureCommand
         );
     }
