@@ -1435,7 +1435,7 @@ containing a link to our User Guide.
 > ```
 > Welcome to UniCa$h!
 > 
-> For more detailed help on a command: help <command_word>
+> For more detailed help on a command: help COMMAND_WORD
 >
 > Available Commands:
 > add
