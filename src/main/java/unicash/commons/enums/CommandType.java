@@ -60,7 +60,7 @@ public enum CommandType {
                     .setDescription("Sets the user's budget on UniCa$h.")
                     .addParameter(PREFIX_AMOUNT, "Amount")
                     .addParameter(PREFIX_INTERVAL, "Interval")
-                    .setExample(ExampleGenerator.generate(getMainCommandWord(), PREFIX_MONTH, PREFIX_INTERVAL))
+                    .setExample(ExampleGenerator.generate(getMainCommandWord(), PREFIX_AMOUNT, PREFIX_INTERVAL))
                     .build()
                     .toString();
         }
@@ -369,6 +369,7 @@ public enum CommandType {
 
 
     private final String[] commandWords;
+
     CommandType(String... commandWords) {
         this.commandWords = commandWords;
     }
