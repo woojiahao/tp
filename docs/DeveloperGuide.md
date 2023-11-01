@@ -844,15 +844,14 @@ Some general utility features
 
 The `help` command can be used in 2 different ways.
 
-1. `help` with no arguments
+1. `help` with no arguments.
 2. `help <command_word>` with 1 argument containing a command word.
 
 ##### Details
 
 1. `help`
 
-Opens a Help Window with a link to our User Guide. 
-Displays a help message on the right panel containing a list of all our commands.
+Opens a Help Window with a link to our User Guide and displays a help message on the right panel containing a list of all our commands.
 
 2. `help add_transaction`
 

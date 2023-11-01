@@ -1434,22 +1434,24 @@ containing a link to our User Guide.
 > **Output**:
 > ```
 > Welcome to UniCa$h!
->
->For more detailed help on a command: help <command_word>
+> 
+> For more detailed help on a command: help <command_word>
 >
 > Available Commands:
-> add_transaction
-> delete_transaction
-> edit_transaction
+> add
+> delete
+> edit
 > list
 > find
 > get
 > get_total_expenditure
 > summary
 > set_budget
+> get_budget
 >
-> clear_transactions
-> reset_unicash
+> clear_budget
+> clear
+> reset
 >
 > help
 > exit
