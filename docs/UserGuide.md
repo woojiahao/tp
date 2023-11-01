@@ -7,8 +7,7 @@ UniCa$h is a **is a desktop application used for university students who want to
 optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (
 GUI). If you can type fast, UniCa$h can get your contact management tasks done faster than traditional GUI apps.
 
-* Table of Contents
-  {:toc}
+{% include toc.html %}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1616,6 +1615,92 @@ Important notes:
 ### 4.4 General Utility Commands
 
 #### 4.4.1 HelpCommand
+
+Get help for UniCa$h.
+
+Command: `help COMMAND_WORD`
+
+Command Argument: `COMMAND_WORD` is the command to get help for. If no 
+argument is specified, a general help message is shown as well as a pop up 
+containing a link to our User Guide.
+
+> To get a list of `COMMAND_WORD`, do `help` with no arguments
+
+##### Successful Execution
+
+###### Example 1
+
+> **Case**: Get general help.
+>
+> **Input**: `help`
+>
+> **Output**:
+> ```
+> Welcome to UniCa$h!
+> 
+> For more detailed help on a command: help COMMAND_WORD
+>
+> Available Commands:
+> add
+> delete
+> edit
+> list
+> find
+> get
+> get_total_expenditure
+> summary
+> set_budget
+> get_budget
+>
+> clear_budget
+> clear
+> reset
+>
+> help
+> exit
+> ```
+>
+> The following output is shown as well as the popup.
+> <img src="images/unicash/HelpSuccess1.png" width="1000" />
+> <img src="images/unicash/HelpPopup.png" width="1000" />
+
+###### Example 2
+
+> **Case**: Get general for a specific command.
+>
+> **Input**: `help add_transaction`
+>
+> **Output**:
+> ```
+> add_transaction: Adds a transaction to UniCa$h.
+>
+> Parameters: n/Name type/Type amt/Amount [dt/DateTime] [l/Location] [c/Category]...
+>
+> Example: add_transaction n/Buying groceries type/expense amt/300 dt/18-08-2023 19:30 l/NTUC c/Food
+> ```
+>
+> <img src="images/unicash/HelpSuccess2.png" width="1000" />
+
+##### Failed Execution
+
+##### Example 1
+
+> **Case**: Get help for an unknown command.
+>
+> **Input**: `help foo`
+>
+> **Output**:
+> ```
+> Unknown command
+>
+> help: Shows UniCa$h general usage instructions and specific command usage by specifying the command word.
+>
+> Argument: Command word specified must be a valid command word present in the help command
+>
+> Example: help add_transaction
+> ```
+>
+> <img src="images/unicash/HelpFailed1.png" width="1000" />
 
 #### 4.4.2 ResetCommand
 

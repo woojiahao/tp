@@ -838,9 +838,31 @@ Some general utility features
 
 #### 5.3.1. Clear transactions
 
-#### 5.3.2. Help Window
+#### 5.3.2. Help 
 
-#### 5.3.3. etc
+##### Overview
+
+The `help` command can be used in 2 different ways.
+
+1. `help` with no arguments.
+2. `help COMMAND_WORD` with 1 argument containing a command word.
+
+##### Details
+
+1. `help`
+
+Opens a Help Window with a link to our User Guide and displays a help message on the right panel containing a list of all our commands.
+
+2. `help add_transaction`
+
+A help message specific to the command word on the right panel. The message will contain
+information on that command and provide instructions on how to run that command.
+
+#### 5.3.3. Exit
+
+`exit`
+
+This command will exit UniCa$h.
 
 ### 5.4. User Interface Features
 
