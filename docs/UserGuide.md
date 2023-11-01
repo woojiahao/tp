@@ -1706,20 +1706,6 @@ containing a link to our User Guide.
 
 #### 4.4.3 ExitCommand
 
-### 4.3 Summary Commands
-
-#### 4.3.1 GetTotalExpenditureCommand
-
-#### 4.3.2 SummaryCommand
-
-### 4.4 General Utility Commands
-
-#### 4.4.1 HelpCommand
-
-#### 4.4.2 ResetCommand
-
-#### 4.4.3 ExitCommand
-
 ## 5. Troubleshoot
 
 ## 6. Known Issues
