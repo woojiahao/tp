@@ -8,6 +8,7 @@ import unicash.logic.UniCashMessages;
 import unicash.logic.commands.exceptions.CommandException;
 import unicash.model.Model;
 import unicash.model.transaction.Transaction;
+import unicash.model.transaction.TransactionList;
 
 
 /**
@@ -33,6 +34,9 @@ public class AddTransactionCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        if (model.isFull()) {
+            throw new CommandException(TransactionList.MESSAGE_SIZE_CONSTRAINTS);
+        }
         model.addTransaction(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, UniCashMessages.formatTransaction(toAdd)));
     }
