@@ -866,6 +866,7 @@ Important notes:
 4. `UniqueCategoryList` enforces a unique (case-insensitive) constraint on `Category` it stores.
 5. `UniqueCategoryList` enforces a max size of 5 `Category`
 6. There is a character limit for `Category` set at up to 15 characters/
+7. There is a limit of 100,000 transactions you can add to UniCa$h.
 
 ##### Successful Execution
 
