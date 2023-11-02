@@ -6,7 +6,6 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":UniCashParser" as UniCashParser LOGIC_COLOR
 participant ":GetTotalExpenditureCommandParser" as GetTotalExpenditureCommandParser LOGIC_COLOR
-participant "transaction:Transaction" as Transaction LOGIC_COLOR
 participant "command:GetTotalExpenditureCommand" as GetTotalExpenditureCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 
