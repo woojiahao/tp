@@ -1,7 +1,6 @@
 package unicash.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static unicash.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
 import java.time.temporal.WeekFields;
@@ -12,7 +11,6 @@ import unicash.commons.enums.CommandType;
 import unicash.commons.enums.TransactionType;
 import unicash.logic.commands.exceptions.CommandException;
 import unicash.model.Model;
-import unicash.model.transaction.Transaction;
 
 /**
  * Calculates the total expenditure used relative to the assigned budget for a given interval.
