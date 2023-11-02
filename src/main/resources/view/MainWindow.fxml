@@ -33,10 +33,6 @@
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false"
                       onAction="#handleHelp" text="Help" styleClass="normal-label" />
           </Menu>
-          <Menu mnemonicParsing="false" text="Summary">
-            <MenuItem fx:id="summaryMenuItem" text="Open..."
-                      styleClass="normal-label" onAction="#handleSummary"/>
-          </Menu>
         </MenuBar>
 
         <!-- The below code contains the CommandBox -->
