@@ -1088,7 +1088,7 @@ Important notes:
 
 ###### Example 3
 
-> **Case**: Attempting to leave compulsory fields (E.g. `name`) blank
+> **Case**: Attempting to leave compulsory field (E.g. `name`) blank
 >
 > **Input**: `edit_transaction 5 n/`
 >
@@ -1101,32 +1101,6 @@ Important notes:
 
 ###### Example 4
 
-> **Case**: Attempting to leave compulsory fields (E.g. `amount`) blank
->
-> **Input**: `edit_transaction 5 amt/`
->
-> **Output**:
-> ```
-> Amounts must be positive. 
-> ```
->
-> <img src="images/unicash/command-outputs/editTransaction/editTransactionFailedOutput4.png" width="1000" />
-
-###### Example 5
-
-> **Case**: Attempting to leave compulsory fields (E.g. `type`) blank
->
-> **Input**: `edit_transaction 5 type/`
->
-> **Output**:
-> ```
-> Transaction must be of the following types: expense, income
-> ```
->
-> <img src="images/unicash/command-outputs/editTransaction/editTransactionFailedOutput5.png" width="1000" />
-
-###### Example 6
-
 > **Case**: There are only 5 transactions, but the user tries to edit expense 6
 >
 > **Input**: `edit_transaction 6 n/Dog food`
@@ -1136,9 +1110,9 @@ Important notes:
 > The transaction index provided is invalid
 > ```
 >
-> <img src="images/unicash/command-outputs/editTransaction/editTransactionFailedOutput6.png" width="1000" />
+> <img src="images/unicash/command-outputs/editTransaction/editTransactionFailedOutput4.png" width="1000" />
 
-###### Example 7
+###### Example 5
 
 > **Case**: Wrong input format (e.g. `Datetime` is not specified in any of the accepted formats)
 >
@@ -1152,7 +1126,7 @@ Important notes:
 > 3. dd MMM uuuu HH:mm
 > ```
 >
-> <img src="images/unicash/command-outputs/editTransaction/editTransactionFailedOutput7.png" width="1000" />
+> <img src="images/unicash/command-outputs/editTransaction/editTransactionFailedOutput5.png" width="1000" />
 
 #### 4.1.3 DeleteTransactionCommand
 
@@ -1831,11 +1805,11 @@ Important notes:
 > Opened UniCa$h summary window.
 > ```
 > 
-> <img src="images/unicash/command-outputs/summary/summarySuccessOutput2.png" width="1000" />
+> <img src="images/unicash/command-outputs/summary/summarySuccessOutput1.png" width="1000" />
 >
 > Here is what the summary pop-up window looks like:
 > 
-> <img src="images/unicash/command-outputs/summary/summarySuccessOutput1.png" width="1000" />
+> <img src="images/unicash/command-outputs/summary/summarySuccessOutput2.png" width="1000" />
 
 ###### Example 2
 
