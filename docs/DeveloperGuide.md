@@ -676,8 +676,6 @@ UniCa$h is this that and that.
 
 ---
 
-{% @include toc.html %}
-
 # 2. Index of Contents
 1. About UniCa$h
 2. Index of Contents
