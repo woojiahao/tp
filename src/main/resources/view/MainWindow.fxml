@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.stage.*?>
 
-<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="UniCa$h"
+<fx:root minHeight="620" minWidth="850" onCloseRequest="#handleExit" title="UniCa$h"
          type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17.0.2-ea"
          xmlns:fx="http://javafx.com/fxml/1">
 
@@ -63,8 +63,8 @@
 
           <!-- The below VBox sits on the right side of the Split Pane-->
           <VBox minWidth="320" prefWidth="320" styleClass="pane-with-border">
-            <StackPane fx:id="resultDisplayPlaceholder" maxHeight="380" minHeight="380"
-                       prefHeight="380" styleClass="pane-with-border">
+            <StackPane fx:id="resultDisplayPlaceholder" maxHeight="460" minHeight="460"
+                       prefHeight="460" styleClass="pane-with-border">
               <padding>
                 <Insets bottom="5" left="4" right="10" top="5" />
               </padding>
