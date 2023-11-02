@@ -103,4 +103,33 @@ public class CommandBoxUiTest {
         assertEquals("asdf", commandBox.getCommandTextField().getText());
     }
 
+    @Test
+    public void commandBoxHistory_upKeyPressedMoreThanTenTimes_showsOnlyTenMostRecentInputs(FxRobot robot) {
+        robot.clickOn(commandBox.getCommandTextField())
+                .write("a").type(KeyCode.ENTER)
+                .write("b").type(KeyCode.ENTER)
+                .write("c").type(KeyCode.ENTER)
+                .write("d").type(KeyCode.ENTER)
+                .write("e").type(KeyCode.ENTER)
+                .write("f").type(KeyCode.ENTER)
+                .write("g").type(KeyCode.ENTER)
+                .write("h").type(KeyCode.ENTER)
+                .write("i").type(KeyCode.ENTER)
+                .write("j").type(KeyCode.ENTER)
+                .write("k").type(KeyCode.ENTER)
+                .type(KeyCode.UP)
+                .type(KeyCode.UP)
+                .type(KeyCode.UP)
+                .type(KeyCode.UP)
+                .type(KeyCode.UP)
+                .type(KeyCode.UP)
+                .type(KeyCode.UP)
+                .type(KeyCode.UP)
+                .type(KeyCode.UP)
+                .type(KeyCode.UP)
+                .type(KeyCode.UP);
+
+        assertEquals("b", commandBox.getCommandTextField().getText());
+    }
+
 }
