@@ -39,7 +39,7 @@ public class GetTotalExpenditureCommandParser implements Parser<GetTotalExpendit
             String monthString = argMultimap.getValue(PREFIX_MONTH).get();
             month = Integer.parseInt(monthString);
         } catch (NumberFormatException e) {
-            throw new ParseException("Invalid month value, must be number!");
+            throw new ParseException("Invalid month value, must be an integer!");
         }
 
         int year;
@@ -47,7 +47,7 @@ public class GetTotalExpenditureCommandParser implements Parser<GetTotalExpendit
             String yearString = argMultimap.getValue(PREFIX_YEAR).orElse(String.valueOf(LocalDate.now().getYear()));
             year = Integer.parseInt(yearString);
         } catch (NumberFormatException e) {
-            throw new ParseException("Invalid year value, must be number!");
+            throw new ParseException("Invalid year value, must be an integer!");
         }
 
 

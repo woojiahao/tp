@@ -14,15 +14,16 @@ import static unicash.testutil.TypicalTransactions.NUS;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import unicash.commons.core.GuiSettings;
 import unicash.model.budget.Budget;
 import unicash.model.transaction.exceptions.TransactionNotFoundException;
-import unicash.model.transaction.predicates.TransactionContainsKeywordsPredicate;
+import unicash.model.transaction.predicates.TransactionContainsAllKeywordsPredicate;
+import unicash.model.transaction.predicates.TransactionNameContainsKeywordsPredicate;
 import unicash.testutil.UniCashBuilder;
 
 public class ModelManagerTest {
@@ -118,7 +119,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void getExpenseSummary_success() {
+    public void getExpenseSummaryPerCategory_calculatesSummaryCorrectly() {
         UniCash uniCash = new UniCashBuilder()
                 .withTransaction(NUS)
                 .withTransaction(INTERN)
@@ -131,7 +132,49 @@ public class ModelManagerTest {
         expectedExpenseSummary.put("ta", 888.8);
         expectedExpenseSummary.put("food", 8.8);
 
-        assertEquals(modelManager.getExpenseSummary(), expectedExpenseSummary);
+        assertEquals(modelManager.getExpenseSummaryPerCategory(), expectedExpenseSummary);
+    }
+
+    @Test
+    public void hasExpenses_noExpenses_returnsFalse() {
+        // When there is income
+        UniCash uniCashWithIncome = new UniCashBuilder()
+                .withTransaction(BUYING_GROCERIES)
+                .build();
+        UserPrefs userPrefs = new UserPrefs();
+        modelManager = new ModelManager(uniCashWithIncome, userPrefs);
+
+        assertFalse(modelManager.hasExpenses());
+
+        // When there is no income and no expenses
+        UniCash uniCashNoIncome = new UniCashBuilder()
+                .build();
+        modelManager = new ModelManager(uniCashNoIncome, userPrefs);
+
+        assertFalse(modelManager.hasExpenses());
+    }
+
+    @Test
+    public void hasExpenses_hasExpensesAndIncome_returnsTrue() {
+        // When there are both income and expenses
+        UniCash uniCashWithIncome = new UniCashBuilder()
+                .withTransaction(NUS)
+                .withTransaction(INTERN)
+                .withTransaction(BUYING_GROCERIES)
+                .build();
+        UserPrefs userPrefs = new UserPrefs();
+        modelManager = new ModelManager(uniCashWithIncome, userPrefs);
+
+        assertTrue(modelManager.hasExpenses());
+
+        // When there are only expenses
+        UniCash uniCashWithoutIncome = new UniCashBuilder()
+                .withTransaction(NUS)
+                .withTransaction(INTERN)
+                .build();
+        modelManager = new ModelManager(uniCashWithoutIncome, userPrefs);
+
+        assertTrue(modelManager.hasExpenses());
     }
 
     @Test
@@ -171,14 +214,10 @@ public class ModelManagerTest {
         // different filteredList -> returns false
         String[] keywords = new String[] {"internship"};
         modelManager.updateFilteredTransactionList(
-                new TransactionContainsKeywordsPredicate(Arrays.asList(keywords))
-        );
-        assertFalse(modelManager.equals(new ModelManager(uniCash, userPrefs)));
+                new TransactionContainsAllKeywordsPredicate(List.of(
+                        new TransactionNameContainsKeywordsPredicate(List.of(keywords)))));
 
-        // different expenseSummary -> returns false
-        modelManager.addTransaction(INTERN);
-        modelManagerCopy.clearExpenseSummary();
-        assertFalse(modelManager.equals(modelManagerCopy));
+        assertFalse(modelManager.equals(new ModelManager(uniCash, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredTransactionList(PREDICATE_SHOW_ALL_TRANSACTIONS);

@@ -10,8 +10,12 @@ import static unicash.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import unicash.commons.enums.CommandType;
+import unicash.commons.util.ToStringBuilder;
 import unicash.model.Model;
 import unicash.model.ModelManager;
+
+
 
 public class HelpCommandTest {
 
@@ -53,7 +57,7 @@ public class HelpCommandTest {
         CommandResult expectedCommandResult =
                 new CommandResult(FindCommand.MESSAGE_USAGE);
 
-        assertCommandSuccess(new HelpCommand(FindCommand.COMMAND_WORD),
+        assertCommandSuccess(new HelpCommand(CommandType.FIND.getMainCommandWord()),
                 model, expectedCommandResult, expectedModel);
     }
 
@@ -65,7 +69,7 @@ public class HelpCommandTest {
         CommandResult expectedCommandResult =
                 new CommandResult(ListCommand.MESSAGE_USAGE);
 
-        assertCommandSuccess(new HelpCommand(ListCommand.COMMAND_WORD),
+        assertCommandSuccess(new HelpCommand(CommandType.LIST.getMainCommandWord()),
                 model, expectedCommandResult, expectedModel);
     }
 
@@ -77,7 +81,7 @@ public class HelpCommandTest {
         CommandResult expectedCommandResult =
                 new CommandResult(AddTransactionCommand.MESSAGE_USAGE);
 
-        assertCommandSuccess(new HelpCommand(AddTransactionCommand.COMMAND_WORD),
+        assertCommandSuccess(new HelpCommand(CommandType.ADD_TRANSACTION.getMainCommandWord()),
                 model, expectedCommandResult, expectedModel);
     }
 
@@ -89,7 +93,7 @@ public class HelpCommandTest {
         CommandResult expectedCommandResult =
                 new CommandResult(EditTransactionCommand.MESSAGE_USAGE);
 
-        assertCommandSuccess(new HelpCommand(EditTransactionCommand.COMMAND_WORD),
+        assertCommandSuccess(new HelpCommand(CommandType.EDIT_TRANSACTION.getMainCommandWord()),
                 model, expectedCommandResult, expectedModel);
     }
 
@@ -101,7 +105,7 @@ public class HelpCommandTest {
         CommandResult expectedCommandResult =
                 new CommandResult(DeleteTransactionCommand.MESSAGE_USAGE);
 
-        assertCommandSuccess(new HelpCommand(DeleteTransactionCommand.COMMAND_WORD),
+        assertCommandSuccess(new HelpCommand(CommandType.DELETE_TRANSACTION.getMainCommandWord()),
                 model, expectedCommandResult, expectedModel);
     }
 
@@ -113,7 +117,7 @@ public class HelpCommandTest {
         CommandResult expectedCommandResult =
                 new CommandResult(GetTotalExpenditureCommand.MESSAGE_USAGE);
 
-        assertCommandSuccess(new HelpCommand(GetTotalExpenditureCommand.COMMAND_WORD),
+        assertCommandSuccess(new HelpCommand(CommandType.GET_TOTAL_EXPENDITURE.getMainCommandWord()),
                 model, expectedCommandResult, expectedModel);
     }
 
@@ -125,7 +129,7 @@ public class HelpCommandTest {
         CommandResult expectedCommandResult =
                 new CommandResult(ClearTransactionsCommand.MESSAGE_USAGE);
 
-        assertCommandSuccess(new HelpCommand(ClearTransactionsCommand.COMMAND_WORD),
+        assertCommandSuccess(new HelpCommand(CommandType.CLEAR_TRANSACTIONS.getMainCommandWord()),
                 model, expectedCommandResult, expectedModel);
     }
 
@@ -137,7 +141,31 @@ public class HelpCommandTest {
         CommandResult expectedCommandResult =
                 new CommandResult(SetBudgetCommand.MESSAGE_USAGE);
 
-        assertCommandSuccess(new HelpCommand(SetBudgetCommand.COMMAND_WORD),
+        assertCommandSuccess(new HelpCommand(CommandType.SET_BUDGET.getMainCommandWord()),
+                model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void execute_getBudgetCommand_success() {
+        Model model = new ModelManager();
+        Model expectedModel = new ModelManager();
+
+        CommandResult expectedCommandResult =
+                new CommandResult(GetBudgetCommand.MESSAGE_USAGE);
+
+        assertCommandSuccess(new HelpCommand(CommandType.GET_BUDGET.getMainCommandWord()),
+                model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void execute_clearBudgetCommand_success() {
+        Model model = new ModelManager();
+        Model expectedModel = new ModelManager();
+
+        CommandResult expectedCommandResult =
+                new CommandResult(ClearBudgetCommand.MESSAGE_USAGE);
+
+        assertCommandSuccess(new HelpCommand(CommandType.CLEAR_BUDGET.getMainCommandWord()),
                 model, expectedCommandResult, expectedModel);
     }
 
@@ -149,7 +177,7 @@ public class HelpCommandTest {
         CommandResult expectedCommandResult =
                 new CommandResult(ResetCommand.MESSAGE_USAGE);
         System.out.println("***" + expectedCommandResult);
-        assertCommandSuccess(new HelpCommand(ResetCommand.COMMAND_WORD),
+        assertCommandSuccess(new HelpCommand(CommandType.RESET.getMainCommandWord()),
                 model, expectedCommandResult, expectedModel);
     }
 
@@ -161,7 +189,7 @@ public class HelpCommandTest {
         CommandResult expectedCommandResult =
                 new CommandResult(GetCommand.MESSAGE_USAGE);
 
-        assertCommandSuccess(new HelpCommand(GetCommand.COMMAND_WORD),
+        assertCommandSuccess(new HelpCommand(CommandType.GET.getMainCommandWord()),
                 model, expectedCommandResult, expectedModel);
     }
 
@@ -173,7 +201,7 @@ public class HelpCommandTest {
         CommandResult expectedCommandResult =
                 new CommandResult(HelpCommand.MESSAGE_USAGE);
 
-        assertCommandSuccess(new HelpCommand(HelpCommand.COMMAND_WORD),
+        assertCommandSuccess(new HelpCommand(CommandType.HELP.getMainCommandWord()),
                 model, expectedCommandResult, expectedModel);
     }
 
@@ -185,7 +213,7 @@ public class HelpCommandTest {
         CommandResult expectedCommandResult =
                 new CommandResult(ExitCommand.MESSAGE_USAGE);
 
-        assertCommandSuccess(new HelpCommand(ExitCommand.COMMAND_WORD),
+        assertCommandSuccess(new HelpCommand(CommandType.EXIT.getMainCommandWord()),
                 model, expectedCommandResult, expectedModel);
     }
 
@@ -223,5 +251,21 @@ public class HelpCommandTest {
         assertNotEquals(helpCommandEdit, helpCommandDelete);
 
         assertFalse(helpCommandEdit.equals(2));
+    }
+
+
+    @Test
+    public void equals_differentCommandTypes_returnsFalse() {
+        Command helpCommand = new HelpCommand(ResetCommand.COMMAND_WORD);;
+        assertFalse(helpCommand.equals(new ResetCommand()));
+    }
+
+
+    @Test
+    public void toStringMethod() {
+        HelpCommand helpCommand = new HelpCommand(HelpCommand.COMMAND_WORD);
+        String expected = new ToStringBuilder(helpCommand)
+                .add("target", HelpCommand.COMMAND_WORD).toString();
+        assertEquals(expected, helpCommand.toString());
     }
 }

@@ -3,39 +3,85 @@ layout: page
 title: Developer Guide
 ---
 
-# UniCa$h Developer Guide [CS2103 T16-Group_3 TP]
+**Team:** T16-03
 
 **Name:** UniCa$h
 
-**User Target Profile:** Our application is for university students who want to be more financially conscious about their spending habits, to enable them to make more economical decisions that provide students on a limited budget with more purchasing power.
+**User Target Profile:** Our application is for university students who want to be more financially conscious about their spending habits, enabling them to make wiser economic decisions, providing students on a limited budget with more purchasing power.
 
-**Value Proposition:** It provides university students with an intuitive and frictionless experience to have transparency on their expenditure to help them better understand their spendings so they can develop better financial habits as they transition into adulthood. 
+**Value Proposition:** It provides university students with an intuitive and frictionless experience to have transparency on their expenditure to help them better understand their expenditure so they can develop better financial habits as they transition into adulthood.
 
-## Potential Features:
-- For every user > track individual finances (base)
-- Input spending & set budgets (base)
-- Tag another user and distribute the spendings during outings (extension)
-- Viewing spending habits (extension)
-- Provide price list comparison for all available food outlets near NUS (extension)
-- Allow users to set repeating events (extension)
-- Tagging people for payments gives them a notification (extension)
+{% include toc.html %}
 
-## Feature List [v1.2]
+## Terminology
+
+| Term        | Meaning                                                                                           |
+|-------------|---------------------------------------------------------------------------------------------------|
+| Transaction | Represents both an expense or an income. Expenses cause a net loss while incomes cause a net gain |
+
+## Features Implemented
+
+Every user can...
+
+- Track and manage their expenses
+- Manage a budget
+- View their total expenditure by the month/year
+- Visualise their spending habits
+
+## Feature Development Tracking
+
+Features were developed over two sprints, each sprint lasting two weeks.
+
+### Milestone v1.2
+
 #### Track Finances
-- Create transactions - Name, date, location, Tag (type/category)
-  - Input either Income or Expense
-- Delete transactions - Delete a single transaction
-  - Remove either an Income or an Expense
-- Clear transactions - Mass delete all transactions
-- Edit transactions - Modify transactions
-- Find transaction - Find a transaction by a given keyword 
-- Tabulate total expenditure  - Sum of all expenses & remaining balance
 
+[//]: # (TODO: Link to each DG/UG entry)
+
+- Add transaction
+- Delete transaction
+- Clear all transaction
+- Edit transaction
+- Find transaction(s)
+- Get total expenditure
+ 
 #### Categorize Finances
-- Add tags – provide category of transaction
-- Edit tags - change category of transaction
-- Remove tags - delete category of transaction
 
+This feature serves as an extension to adding a transaction as categories provide finer details about a transaction.
+
+Using the `edit_transaction` command, users can now:
+
+- Add categories
+- Edit existing categories
+- Remove existing categories
+
+#### Others
+
+- Support file storage of transactions
+- Remove all dependencies to original AB3
+- Clean up package structure
+
+### Milestone v1.3
+
+- Support multi-format date time strings
+- Expand search functionality of `find` command
+- Add year support when retrieving total expenditure
+- Summary visualizations for expenses
+- UI improvements
+- Support file storage of budget
+
+## Non-Functional Requirements
+
+1. The application should be cross-platform functional on major operating systems, i.e. Windows, MacOS, Linux, running at least Java 11
+2. All transactions and budget managed by the user should be saved and backed up locally and restored the next session as long as the data has not been corrupted
+3. The user guide should be clear and straightforward so that the user can perform all major tasks intuitively
+4. All non-private methods should be well-documented to ensure that the codebase is maintainable
+5. The application should have an intuitive interface with easy navigation commands and clear instructions/errors
+6. The application achieves at least 85% in test coverage with comprehensive unit and integration tests
+7. The user should not experience excessive sluggishness while using the application
+8. The application should serve the latest updates of transactions the moment these updates are confirmed
+9. The application should not require an active Internet connection to function
+10. The application should be able to generate visualisations for 1000 expenses without any excessive sluggishness
 
 ## Use Cases
 The following documents use cases for our application
@@ -838,9 +884,31 @@ Some general utility features
 
 #### 5.3.1. Clear transactions
 
-#### 5.3.2. Help Window
+#### 5.3.2. Help 
 
-#### 5.3.3. etc
+##### Overview
+
+The `help` command can be used in 2 different ways.
+
+1. `help` with no arguments.
+2. `help COMMAND_WORD` with 1 argument containing a command word.
+
+##### Details
+
+1. `help`
+
+Opens a Help Window with a link to our User Guide and displays a help message on the right panel containing a list of all our commands.
+
+2. `help add_transaction`
+
+A help message specific to the command word on the right panel. The message will contain
+information on that command and provide instructions on how to run that command.
+
+#### 5.3.3. Exit
+
+`exit`
+
+This command will exit UniCa$h.
 
 ### 5.4. User Interface Features
 
@@ -951,18 +1019,13 @@ Here's what each of us have contributed. (Might not need this section)
 
 ---
 
+## Potential Features
 
+Every user can...
 
-## Links
-
-User
-Stories: [https://github.com/orgs/AY2324S1-CS2103-T16-3/projects/1/views/2](https://github.com/orgs/AY2324S1-CS2103-T16-3/projects/1/views/2)
-
-Project Website: [https://ay2324s1-cs2103-t16-3.github.io/tp/](https://ay2324s1-cs2103-t16-3.github.io/tp/)
-
-
-
-
+- Divide a group spending and tag friends involved in the spending
+- View a price list comparison of all available shops near NUS
+- Set recurring transactions
 
 ## Links
 

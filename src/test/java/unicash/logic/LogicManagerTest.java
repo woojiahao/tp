@@ -27,7 +27,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import unicash.commons.core.GuiSettings;
-import unicash.logic.commands.AddTransactionCommand;
+import unicash.commons.enums.CommandType;
 import unicash.logic.commands.CommandResult;
 import unicash.logic.commands.ListCommand;
 import unicash.logic.commands.exceptions.CommandException;
@@ -76,7 +76,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_validCommand_success() throws Exception {
-        String listCommand = ListCommand.COMMAND_WORD;
+        String listCommand = CommandType.LIST.getMainCommandWord();
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
     }
 
@@ -112,7 +112,7 @@ public class LogicManagerTest {
         model.addTransaction(DINING_WITH_FRIENDS);
         model.addTransaction(INTERN);
         logic = new LogicManager(model, storage);
-        HashMap<String, Double> actualOutput = logic.getExpenseSummary();
+        HashMap<String, Double> actualOutput = logic.getExpenseSummaryPerCategory();
 
         HashMap<String, Double> expectedOutput = new HashMap<>();
         expectedOutput.put("ta", 888.8);
@@ -217,7 +217,7 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Triggers the saveUniCash method by executing an add command
-        String addCommand = AddTransactionCommand.COMMAND_WORD
+        String addCommand = CommandType.ADD_TRANSACTION.getMainCommandWord()
                 + TRANSACTION_NAME_DESC_NUS
                 + CATEGORY_DESC_NUS
                 + AMOUNT_DESC_NUS

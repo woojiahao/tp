@@ -1,7 +1,6 @@
 package unicash.logic.commands;
 
-import unicash.commons.util.CommandUsage;
-import unicash.commons.util.ExampleGenerator;
+import unicash.commons.enums.CommandType;
 import unicash.model.Model;
 
 /**
@@ -9,20 +8,19 @@ import unicash.model.Model;
  */
 public class SummaryCommand extends Command {
 
-    public static final String COMMAND_WORD = "summary";
+    public static final String COMMAND_WORD = CommandType.SUMMARY.getCommandWords();
 
-    public static final String MESSAGE_USAGE = new CommandUsage.Builder()
-            .setCommandWord(COMMAND_WORD)
-            .setDescription("Displays summary statistics of user's spending")
-            .setExample(ExampleGenerator.generate(COMMAND_WORD))
-            .build()
-            .toString();
+    public static final String MESSAGE_USAGE = CommandType.SUMMARY.getMessageUsage();
 
-    public static final String SHOWING_SUMMARY_MESSAGE = "Opened UniCa$h summary window.";
+    public static final String MESSAGE_SHOWING_SUMMARY_SUCCESS = CommandType.SUMMARY.getMessageSuccess();
+
+    public static final String MESSAGE_NOT_SHOWING_SUMMARY = "You have no expenses to summarize.";
 
     @Override
     public CommandResult execute(Model model) {
-        model.updateExpenseSummary();
-        return new CommandResult(SHOWING_SUMMARY_MESSAGE, false, false, true);
+        if (model.hasExpenses()) {
+            return new CommandResult(MESSAGE_SHOWING_SUMMARY_SUCCESS, false, false, true);
+        }
+        return new CommandResult(MESSAGE_NOT_SHOWING_SUMMARY);
     }
 }

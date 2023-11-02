@@ -4,18 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import unicash.logic.commands.AddTransactionCommand;
-import unicash.logic.commands.ClearTransactionsCommand;
-import unicash.logic.commands.DeleteTransactionCommand;
-import unicash.logic.commands.EditTransactionCommand;
-import unicash.logic.commands.ExitCommand;
-import unicash.logic.commands.FindCommand;
-import unicash.logic.commands.GetCommand;
-import unicash.logic.commands.GetTotalExpenditureCommand;
-import unicash.logic.commands.HelpCommand;
-import unicash.logic.commands.ListCommand;
-import unicash.logic.commands.ResetCommand;
-import unicash.logic.commands.SummaryCommand;
+import unicash.commons.enums.CommandType;
 import unicash.logic.parser.Prefix;
 import unicash.model.budget.Budget;
 import unicash.model.commons.Amount;
@@ -38,33 +27,39 @@ public class UniCashMessages {
 
     public static final String MESSAGE_UNICASH_WELCOME = "Welcome to UniCa$h!"
             + "\n\n"
-            + "For more detailed help on a command: help <command_word>"
+            + "For more detailed help on a command: help COMMAND_WORD"
             + "\n\n"
             + "Available Commands:"
             + "\n"
-            + AddTransactionCommand.COMMAND_WORD
+            + CommandType.ADD_TRANSACTION.getMainCommandWord()
             + "\n"
-            + DeleteTransactionCommand.COMMAND_WORD
+            + CommandType.DELETE_TRANSACTION.getMainCommandWord()
             + "\n"
-            + EditTransactionCommand.COMMAND_WORD
+            + CommandType.EDIT_TRANSACTION.getMainCommandWord()
             + "\n"
-            + ListCommand.COMMAND_WORD
+            + CommandType.LIST.getMainCommandWord()
             + "\n"
-            + FindCommand.COMMAND_WORD
+            + CommandType.FIND.getMainCommandWord()
             + "\n"
-            + GetCommand.COMMAND_WORD
+            + CommandType.GET.getMainCommandWord()
             + "\n"
-            + GetTotalExpenditureCommand.COMMAND_WORD
+            + CommandType.GET_TOTAL_EXPENDITURE.getMainCommandWord()
             + "\n"
-            + SummaryCommand.COMMAND_WORD
+            + CommandType.SUMMARY.getMainCommandWord()
+            + "\n"
+            + CommandType.SET_BUDGET.getMainCommandWord()
+            + "\n"
+            + CommandType.GET_BUDGET.getMainCommandWord()
             + "\n\n"
-            + ClearTransactionsCommand.COMMAND_WORD
+            + CommandType.CLEAR_BUDGET.getMainCommandWord()
             + "\n"
-            + ResetCommand.COMMAND_WORD
+            + CommandType.CLEAR_TRANSACTIONS.getMainCommandWord()
+            + "\n"
+            + CommandType.RESET.getMainCommandWord()
             + "\n\n"
-            + HelpCommand.COMMAND_WORD
+            + CommandType.HELP.getMainCommandWord()
             + "\n"
-            + ExitCommand.COMMAND_WORD;
+            + CommandType.EXIT.getMainCommandWord();
 
 
     /**

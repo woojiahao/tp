@@ -1,10 +1,15 @@
 package unicash.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static unicash.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static unicash.testutil.TypicalTransactions.getTypicalUniCash;
 
 import org.junit.jupiter.api.Test;
 
+import unicash.commons.util.ToStringBuilder;
 import unicash.model.Model;
 import unicash.model.ModelManager;
 import unicash.model.UniCash;
@@ -30,6 +35,37 @@ public class ClearTransactionsCommandTest {
 
         assertCommandSuccess(new ClearTransactionsCommand(), model,
                 ClearTransactionsCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+
+    @Test
+    public void equals_sameClearTransactionsCommandObject_returnsTrue() {
+        ClearTransactionsCommand clearCommand = new ClearTransactionsCommand();
+        assertTrue(clearCommand.equals(clearCommand));
+        assertTrue(clearCommand.equals(new ClearTransactionsCommand()));
+
+    }
+
+    @Test
+    public void equals_differentCommandTypes_returnsFalse() {
+        Command resetCommand = new ResetCommand();
+        Command clearCommand = new ClearTransactionsCommand();
+        assertNotEquals(resetCommand, clearCommand);
+        assertFalse(clearCommand.equals(resetCommand));
+        assertFalse(clearCommand.equals(new ResetCommand()));
+    }
+
+    @Test
+    public void equals_nullInput_returnsFalse() {
+        assertNotEquals(null, new ClearTransactionsCommand());
+        assertFalse(new ClearTransactionsCommand().equals(null));
+    }
+
+    @Test
+    public void toStringMethod() {
+        ClearTransactionsCommand clearCommand = new ClearTransactionsCommand();
+        String expected = new ToStringBuilder(new ClearTransactionsCommand()).toString();
+        assertEquals(expected, clearCommand.toString());
     }
 
 }

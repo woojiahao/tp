@@ -1,39 +1,30 @@
 package unicash.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static unicash.logic.parser.CliSyntax.PREFIX_CATEGORY;
-import static unicash.logic.parser.CliSyntax.PREFIX_MONTH;
-import static unicash.logic.parser.CliSyntax.PREFIX_YEAR;
 
 import java.time.Month;
 
+import unicash.commons.enums.CommandType;
 import unicash.commons.enums.TransactionType;
-import unicash.commons.util.CommandUsage;
-import unicash.commons.util.ExampleGenerator;
 import unicash.commons.util.StringUtil;
 import unicash.commons.util.ToStringBuilder;
 import unicash.logic.UniCashMessages;
 import unicash.logic.commands.exceptions.CommandException;
 import unicash.model.Model;
 import unicash.model.category.Category;
+import unicash.model.transaction.Transaction;
 
 /**
  * Calculates and returns the total expenditure of a user in a given month and (optionally) category and year.
  */
 public class GetTotalExpenditureCommand extends Command {
-    public static final String COMMAND_WORD = "get_total_expenditure";
+    public static final String COMMAND_WORD = CommandType.GET_TOTAL_EXPENDITURE.getCommandWords();
 
-    public static final String MESSAGE_USAGE = new CommandUsage.Builder()
-            .setCommandWord(COMMAND_WORD)
-            .setDescription("Retrieves the total expenditure by month with optional filters for category and year.")
-            .addParameter(PREFIX_MONTH, "Month")
-            .addParameter(PREFIX_CATEGORY, "Category", true, false)
-            .addParameter(PREFIX_YEAR, "Year", true, false)
-            .setExample(ExampleGenerator.generate(COMMAND_WORD, PREFIX_MONTH, PREFIX_CATEGORY, PREFIX_YEAR))
-            .build()
-            .toString();
+    public static final String MESSAGE_USAGE = CommandType.GET_TOTAL_EXPENDITURE.getMessageUsage();
 
-    public static final String MESSAGE_SUCCESS = "Your total expenditure in %1$s %2$d was %3$.2f";
+    public static final String MESSAGE_SUCCESS = CommandType.GET_TOTAL_EXPENDITURE.getMessageSuccess();
+    public static final String MESSAGE_SUCCESS_WITH_CATEGORY =
+            "Your total expenditure in %1$s %2$d for \"%3$s\" was $%4$.2f";
 
     private final int month;
     private final int year;
@@ -60,39 +51,53 @@ public class GetTotalExpenditureCommand extends Command {
             throw new CommandException(UniCashMessages.MESSAGE_INVALID_YEAR);
         }
 
-        model.updateFilteredTransactionList(transaction -> {
-            boolean isExpense = transaction.getType().type.equals(TransactionType.EXPENSE);
-
-            var dateTime = transaction.getDateTime().getDateTime();
-            boolean isSameMonth = dateTime.getMonthValue() == month;
-            boolean isSameYear = dateTime.getYear() == year;
-            boolean isSameDateFields = isSameMonth && isSameYear;
-
-            if (categoryFilter == null) {
-                // No category filter so just get all expenses of the month
-                return isExpense && isSameDateFields;
-            }
-
-            // If category filter exists and expense contains no category, it will not have the category
-            // Note: If the stream is empty then false is returned and the predicate is not evaluated.
-            // Case insensitivity is handled by the creation of Category objects
-            boolean hasCategory = transaction
-                    .getCategories()
-                    .asUnmodifiableObservableList()
-                    .stream()
-                    .anyMatch(cat -> cat.equals(categoryFilter));
-
-            return isExpense && isSameDateFields && hasCategory;
-        });
-
+        model.updateFilteredTransactionList(this::isMatchingTransaction);
         var filteredList = model.getFilteredTransactionList();
+
         double totalExpenditure = filteredList
                 .stream()
                 .reduce(0.0, (acc, cur) -> acc + cur.getAmount().amount, Double::sum);
 
         String monthString = StringUtil.capitalizeString(Month.of(month).name());
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, monthString, year, totalExpenditure));
+        if (categoryFilter == null) {
+            return new CommandResult(String.format(MESSAGE_SUCCESS, monthString, year, totalExpenditure));
+        }
+
+        return new CommandResult(
+                String.format(
+                        MESSAGE_SUCCESS_WITH_CATEGORY,
+                        monthString,
+                        year,
+                        categoryFilter,
+                        totalExpenditure
+                )
+        );
+    }
+
+    private boolean isMatchingTransaction(Transaction transaction) {
+        boolean isExpense = transaction.getType().type.equals(TransactionType.EXPENSE);
+
+        var dateTime = transaction.getDateTime().getDateTime();
+        boolean isSameMonth = dateTime.getMonthValue() == month;
+        boolean isSameYear = dateTime.getYear() == year;
+        boolean isSameDateFields = isSameMonth && isSameYear;
+
+        if (categoryFilter == null) {
+            // No category filter so just get all expenses of the month
+            return isExpense && isSameDateFields;
+        }
+
+        // If category filter exists and expense contains no category, it will not have the category
+        // Note: If the stream is empty then false is returned and the predicate is not evaluated.
+        // Case insensitivity is handled by the creation of Category objects
+        boolean hasCategory = transaction
+                .getCategories()
+                .asUnmodifiableObservableList()
+                .stream()
+                .anyMatch(cat -> cat.equals(categoryFilter));
+
+        return isExpense && isSameDateFields && hasCategory;
     }
 
     @Override

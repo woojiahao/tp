@@ -10,6 +10,7 @@ import static unicash.testutil.TypicalTransactions.INTERN;
 import static unicash.testutil.TypicalTransactions.NUS;
 
 import java.nio.file.Path;
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -162,7 +163,6 @@ public class AddTransactionCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        @Override
         public void setBudget(Budget budget) {
             throw new AssertionError("This method should not be called.");
         }
@@ -178,12 +178,17 @@ public class AddTransactionCommandTest {
         }
 
         @Override
-        public void updateExpenseSummary() {
+        public HashMap<String, Double> getExpenseSummaryPerCategory() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public HashMap<String, Double> getExpenseSummary() {
+        public HashMap<YearMonth, Double> getExpenseSummaryPerYearMonth() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasExpenses() {
             throw new AssertionError("This method should not be called.");
         }
     }
