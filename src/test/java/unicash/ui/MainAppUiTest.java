@@ -45,4 +45,13 @@ public class MainAppUiTest {
         );
     }
 
+    @Test
+    public void statusBar_unicashResetState_showsDefaultBalance(FxRobot robot) {
+        var rollingBalanceNode = robot.lookup("#balanceIndicator").tryQuery();
+        Assertions.assertTrue(rollingBalanceNode.isPresent());
+        var rollingBalanceNodeLabel = (Label) rollingBalanceNode.get();
+        var userPrefs = new UserPrefs();
+        Assertions.assertEquals(rollingBalanceNodeLabel.getText(), "Rolling Balance: $1593.20");
+    }
+
 }
