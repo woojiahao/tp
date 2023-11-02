@@ -12,6 +12,7 @@ import unicash.logic.UniCashMessages;
 import unicash.logic.commands.exceptions.CommandException;
 import unicash.model.Model;
 import unicash.model.category.Category;
+import unicash.model.transaction.Transaction;
 
 /**
  * Calculates and returns the total expenditure of a user in a given month and (optionally) category and year.
@@ -50,32 +51,9 @@ public class GetTotalExpenditureCommand extends Command {
             throw new CommandException(UniCashMessages.MESSAGE_INVALID_YEAR);
         }
 
-        model.updateFilteredTransactionList(transaction -> {
-            boolean isExpense = transaction.getType().type.equals(TransactionType.EXPENSE);
-
-            var dateTime = transaction.getDateTime().getDateTime();
-            boolean isSameMonth = dateTime.getMonthValue() == month;
-            boolean isSameYear = dateTime.getYear() == year;
-            boolean isSameDateFields = isSameMonth && isSameYear;
-
-            if (categoryFilter == null) {
-                // No category filter so just get all expenses of the month
-                return isExpense && isSameDateFields;
-            }
-
-            // If category filter exists and expense contains no category, it will not have the category
-            // Note: If the stream is empty then false is returned and the predicate is not evaluated.
-            // Case insensitivity is handled by the creation of Category objects
-            boolean hasCategory = transaction
-                    .getCategories()
-                    .asUnmodifiableObservableList()
-                    .stream()
-                    .anyMatch(cat -> cat.equals(categoryFilter));
-
-            return isExpense && isSameDateFields && hasCategory;
-        });
-
+        model.updateFilteredTransactionList(this::isMatchingTransaction);
         var filteredList = model.getFilteredTransactionList();
+
         double totalExpenditure = filteredList
                 .stream()
                 .reduce(0.0, (acc, cur) -> acc + cur.getAmount().amount, Double::sum);
@@ -95,6 +73,31 @@ public class GetTotalExpenditureCommand extends Command {
                         totalExpenditure
                 )
         );
+    }
+
+    private boolean isMatchingTransaction(Transaction transaction) {
+        boolean isExpense = transaction.getType().type.equals(TransactionType.EXPENSE);
+
+        var dateTime = transaction.getDateTime().getDateTime();
+        boolean isSameMonth = dateTime.getMonthValue() == month;
+        boolean isSameYear = dateTime.getYear() == year;
+        boolean isSameDateFields = isSameMonth && isSameYear;
+
+        if (categoryFilter == null) {
+            // No category filter so just get all expenses of the month
+            return isExpense && isSameDateFields;
+        }
+
+        // If category filter exists and expense contains no category, it will not have the category
+        // Note: If the stream is empty then false is returned and the predicate is not evaluated.
+        // Case insensitivity is handled by the creation of Category objects
+        boolean hasCategory = transaction
+                .getCategories()
+                .asUnmodifiableObservableList()
+                .stream()
+                .anyMatch(cat -> cat.equals(categoryFilter));
+
+        return isExpense && isSameDateFields && hasCategory;
     }
 
     @Override
