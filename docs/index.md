@@ -10,22 +10,21 @@ title: UniCa$h
 
 ## About
 
-[//]: # (TODO Change this image)
 ![Ui](images/Ui.png)
 
 User Target Profile: Our application is for university students who want to be more financially conscious about their
-spending habits, to enable them to make more economical decisions that provide students on a limited budget with more
+spending habits, enabling them to make wiser economic decisions, providing students on a limited budget with more
 purchasing power.
 
 Value Proposition: It provides university students with an intuitive and frictionless experience to have transparency on
-their expenditure to help them better understand their spendings so they can develop better financial habits as they
+their expenditure to help them better understand their expenditure so they can develop better financial habits as they
 transition into adulthood.
 
 ## Navigation
 
 * If you are interested in using UniCa$h, head over to the
   [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing UniCa$h, the [**Developer Guide**](DeveloperGuide.html) is a good place to
+* If you are interested in developing UniCa$h, the [**Developer Guide**](DeveloperGuide.html) is a good place to
   start.
 
 ## Acknowledgements
@@ -37,3 +36,4 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 * [JavaFX](https://openjfx.io/)
 * [Jackson](https://github.com/FasterXML/jackson)
 * [JUnit5](https://github.com/junit-team/junit5)
+* [TestFX](https://github.com/TestFX/TestFX)
