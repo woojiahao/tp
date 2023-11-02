@@ -13,7 +13,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import unicash.commons.enums.TransactionType;
-import unicash.model.commons.Amount;
 import unicash.model.transaction.Transaction;
 
 /**
@@ -24,8 +23,8 @@ import unicash.model.transaction.Transaction;
 public class StatusBarFooter extends UiPart<Region> {
 
     private static final String FXML = "StatusBarFooter.fxml";
-    private static final String POSITIVE_BALANCE_STRING = "Rolling Balance: ";
-    private static final String NEGATIVE_BALANCE_STRING = "Rolling Balance: -";
+    private static final String POSITIVE_BALANCE_STRING = "Rolling Balance: $";
+    private static final String NEGATIVE_BALANCE_STRING = "Rolling Balance: -$";
 
     @FXML
     private Label saveLocationStatus;
@@ -94,9 +93,11 @@ public class StatusBarFooter extends UiPart<Region> {
         }
 
         if (Double.compare(balance, 0) < 0) {
-            balanceString = NEGATIVE_BALANCE_STRING + new Amount(Math.abs(balance));
+            double formattedNegativeBalance = Math.round((Math.abs(balance) * 100.0 / 100.0));
+            balanceString = NEGATIVE_BALANCE_STRING + String.format("%.2f", formattedNegativeBalance);
         } else {
-            balanceString = POSITIVE_BALANCE_STRING + new Amount(balance);
+            double formattedPositiveBalance = Math.round(balance * 100.0 / 100.0);
+            balanceString = POSITIVE_BALANCE_STRING + String.format("%.2f", formattedPositiveBalance);
         }
 
         balanceIndicator.setText(balanceString);
