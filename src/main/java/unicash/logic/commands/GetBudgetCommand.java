@@ -27,6 +27,8 @@ public class GetBudgetCommand extends Command {
     public static final String MESSAGE_USAGE = CommandType.GET_BUDGET.getMessageUsage();
 
     public static final String MESSAGE_SUCCESS = CommandType.GET_BUDGET.getMessageSuccess();
+    public static final String MESSAGE_SUCCESS_NEGATIVE_BUDGET = "%s budget of %s\n\nNet amount of -$%.2f\n\n";
+
     //alternative success case
     public static final String MESSAGE_NO_BUDGET = "No budget set. Use set_budget amt/Amount interval/Interval\n\n";
 
@@ -72,6 +74,15 @@ public class GetBudgetCommand extends Command {
                 .filter(t -> filter.apply(t.getDateTime().getDateTime()).equals(filter.apply(from)))
                 .map(t -> -1 * t.getAmount().amount)
                 .reduce(budget.getAmount().amount, Double::sum, Double::sum);
+
+        if (calculatedRemainder < 0) {
+            return new CommandResult(String.format(
+                    MESSAGE_SUCCESS_NEGATIVE_BUDGET,
+                    intervalString,
+                    budget.getAmount().toString(),
+                    Math.abs(calculatedRemainder)
+            ));
+        }
 
         return new CommandResult(String.format(
                 MESSAGE_SUCCESS,

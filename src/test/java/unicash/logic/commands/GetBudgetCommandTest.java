@@ -59,10 +59,10 @@ public class GetBudgetCommandTest {
                 command,
                 model,
                 String.format(
-                        GetBudgetCommand.MESSAGE_SUCCESS,
+                        GetBudgetCommand.MESSAGE_SUCCESS_NEGATIVE_BUDGET,
                         "Daily",
                         DAILY.getAmount().toString(),
-                        expectedRemainder
+                        Math.abs(expectedRemainder)
                 ),
                 model
         );
@@ -114,10 +114,10 @@ public class GetBudgetCommandTest {
                 command,
                 model,
                 String.format(
-                        GetBudgetCommand.MESSAGE_SUCCESS,
+                        GetBudgetCommand.MESSAGE_SUCCESS_NEGATIVE_BUDGET,
                         "Daily",
                         DAILY.getAmount().toString(),
-                        expectedRemainder
+                        Math.abs(expectedRemainder)
                 ),
                 model
         );
@@ -148,10 +148,10 @@ public class GetBudgetCommandTest {
                 command,
                 model,
                 String.format(
-                        GetBudgetCommand.MESSAGE_SUCCESS,
+                        GetBudgetCommand.MESSAGE_SUCCESS_NEGATIVE_BUDGET,
                         "Weekly",
                         WEEKLY.getAmount().toString(),
-                        expectedRemainder
+                        Math.abs(expectedRemainder)
                 ),
                 model
         );
@@ -205,10 +205,10 @@ public class GetBudgetCommandTest {
                 command,
                 model,
                 String.format(
-                        GetBudgetCommand.MESSAGE_SUCCESS,
+                        GetBudgetCommand.MESSAGE_SUCCESS_NEGATIVE_BUDGET,
                         "Monthly",
                         MONTHLY.getAmount().toString(),
-                        expectedRemainder
+                        Math.abs(expectedRemainder)
                 ),
                 model
         );
