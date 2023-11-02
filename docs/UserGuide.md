@@ -973,29 +973,20 @@ Command: `edit_transaction INDEX [n/NAME] [type/TYPE] [amt/AMOUNT] [dt/DATETIME]
 
 Command Options:
 
-| Option Name | Optional? | Purpose                                                                                       |
-|-------------|-----------|-----------------------------------------------------------------------------------------------|
-| INDEX       | No        | (One-based) index of the transaction to edit.                                                 |
-| n/          | Yes       | Name of the transaction.                                                                      |
-| type/       | Yes       | Transaction type of transaction.<br/>Valid types are `income` and `expense`.                  |
-| amt/        | Yes       | Monetary amount of transaction. Has to be a positive value.                                   |
-| dt/         | Yes       | Date and time where transaction was made.<br/>Defaults to current date time if not specified. |
-| l/          | Yes       | Location where transaction was made.<br/>Defaults to `''` if not specified.                   |
-| c/          | Yes       | Category tagged to that transaction.<br/>No categories tagged if not specified.               |
+| Option Name | Optional? | Purpose                                                                                       | Remarks                                                                                                                                                        |
+|-------------|-----------|-----------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| INDEX       | No        | (One-based) index of the transaction to edit.                                                 | This ranges from 1 to the number of transactions saved                                                                                                         |
+| n/          | Yes       | Name of the transaction.                                                                      | There is a 500-character limit                                                                                                                                 |
+| type/       | Yes       | Transaction type of transaction.<br/>Valid types are `income` and `expense`.                  |                                                                                                                                                                |
+| amt/        | Yes       | Monetary amount of transaction. Has to be a positive value.                                   | Automatically rounded to 2 decimal places.                                                                                                                     |
+| dt/         | Yes       | Date and time where transaction was made.<br/>Defaults to current date time if not specified. | Can be in the `dd-MM-uuuu HH:mm` (e.g. 31-10-2023 12:00), `uuuu-MM-dd HH:mm` (e.g. 2023-10-31 22:59), or `dd MMM uuuu HH:mm` (e.g. 31 Oct 2023 22:59) formats. |
+| l/          | Yes       | Location where transaction was made.<br/>Defaults to `'-'` if not specified.                  | There is a 500-character limit                                                                                                                                 |
+| c/          | Yes       | Category tagged to that transaction.<br/>No categories tagged if not specified.               | There is a 15-character limit.<br/>`Category` entered will be converted and stored as all lowercase.<br/>Each transaction can have at most 5 categories.       |
 
 Important notes:
-1. There is a character limit for `Name` and `Location` set at up to 500 characters.
-2. `Amount` entered has to be positive for both `income` and `expense`.
-3. `Amount` is automatically rounded to 2 decimal places.
-4. `Datetime` entered can be in the `dd-MM-uuuu HH:mm` (e.g. 31-10-2023 12:00), `uuuu-MM-dd HH:mm` (e.g. 2023-10-31 22:59), or `dd MMM uuuu HH:mm` (e.g. 31 Oct 2023 22:59) formats.
-5. `Category` entered will be converted and stored as all lowercase.
-6. Each transaction is able to have a maximum of 5 categories.
-7. There is a character limit for `Category` set at up to 15 characters.
-8. While all options besides `INDEX` are optional, **you must specify at least one field** you wish to edit (i.e. `Name`, `Type`, `Amount`, `Datetime`, `Location`, or `Category`).
-9. You must provide values for `Name`, `Type`, and `Amount`; they cannot be left empty.
-10. The `INDEX` option must be specified first. The order in which you specify the other options does not matter.
-11. If you do not provide a value for the `Datetime` option, your system's current datetime will be used as a default.
-12. If you do not provide a value for the `Location` option, `-` will be used as a default.
+1. While all options besides `INDEX` are optional, **you must specify at least one field** you wish to edit (i.e. `Name`, `Type`, `Amount`, `Datetime`, `Location`, or `Category`).
+2. You must provide a non-empty value for the `Name`, `Type`, and `Amount` fields if you wish to edit them; they cannot be left empty.
+3. The `INDEX` option must be specified first. The order in which you specify the other options does not matter.
 
 ##### Successful Execution
 
@@ -1017,7 +1008,7 @@ Important notes:
 > Categories: #tuition
 > ```
 >
-> <img src="images/unicash/command-outputs/editTransactionSuccessOutput1.png" width="1000" />
+> <img src="images/unicash/command-outputs/editTransaction/editTransactionSuccessOutput1.png" width="1000" />
 
 ###### Example 2
 
@@ -1037,7 +1028,7 @@ Important notes:
 > Categories: #tuition
 > ```
 >
-> <img src="images/unicash/command-outputs/editTransactionSuccessOutput2.png" width="1000" />
+> <img src="images/unicash/command-outputs/editTransaction/editTransactionSuccessOutput2.png" width="1000" />
 
 ###### Example 3
 
@@ -1057,7 +1048,7 @@ Important notes:
 > Categories:
 > ```
 >
-> <img src="images/unicash/command-outputs/editTransactionSuccessOutput3.png" width="1000" />
+> <img src="images/unicash/command-outputs/editTransaction/editTransactionSuccessOutput3.png" width="1000" />
 
 ##### Failed Execution
 
@@ -1072,7 +1063,7 @@ Important notes:
 > At least one field to edit must be provided.
 > ```
 >
-> <img src="images/unicash/command-outputs/editTransactionFailedOutput1.png" width="1000" />
+> <img src="images/unicash/command-outputs/editTransaction/editTransactionFailedOutput1.png" width="1000" />
 
 ###### Example 2
 
@@ -1093,7 +1084,7 @@ Important notes:
 > Example: edit_transaction 1 n/Buying groceries type/expense amt/300 dt/18-08-2023 19:30 l/NTUC c/Food
 > ```
 >
-> <img src="images/unicash/command-outputs/editTransactionFailedOutput2.png" width="1000" />
+> <img src="images/unicash/command-outputs/editTransaction/editTransactionFailedOutput2.png" width="1000" />
 
 ###### Example 3
 
@@ -1106,7 +1097,7 @@ Important notes:
 > Names should only contain alphanumeric characters, spaces, (, ), _, @, -, #, &, ., and ',', up to 500 characters and it should not be blank
 > ```
 >
-> <img src="images/unicash/command-outputs/editTransactionFailedOutput3.png" width="1000" />
+> <img src="images/unicash/command-outputs/editTransaction/editTransactionFailedOutput3.png" width="1000" />
 
 ###### Example 4
 
@@ -1119,7 +1110,7 @@ Important notes:
 > Amounts must be positive. 
 > ```
 >
-> <img src="images/unicash/command-outputs/editTransactionFailedOutput4.png" width="1000" />
+> <img src="images/unicash/command-outputs/editTransaction/editTransactionFailedOutput4.png" width="1000" />
 
 ###### Example 5
 
@@ -1132,7 +1123,7 @@ Important notes:
 > Transaction must be of the following types: expense, income
 > ```
 >
-> <img src="images/unicash/command-outputs/editTransactionFailedOutput5.png" width="1000" />
+> <img src="images/unicash/command-outputs/editTransaction/editTransactionFailedOutput5.png" width="1000" />
 
 ###### Example 6
 
@@ -1145,7 +1136,7 @@ Important notes:
 > The transaction index provided is invalid
 > ```
 >
-> <img src="images/unicash/command-outputs/editTransactionFailedOutput6.png" width="1000" />
+> <img src="images/unicash/command-outputs/editTransaction/editTransactionFailedOutput6.png" width="1000" />
 
 ###### Example 7
 
@@ -1161,7 +1152,7 @@ Important notes:
 > 3. dd MMM uuuu HH:mm
 > ```
 >
-> <img src="images/unicash/command-outputs/editTransactionFailedOutput7.png" width="1000" />
+> <img src="images/unicash/command-outputs/editTransaction/editTransactionFailedOutput7.png" width="1000" />
 
 #### 4.1.3 DeleteTransactionCommand
 
@@ -1820,7 +1811,7 @@ Displays a summary of the expenses saved in UniCa$h.
 Command: `summary`
 
 Important notes:
-1. If you have no expenses saved in UniCa$h, the summary pop-up window will not appear. However, if you have previously opened the summary window and then remove all expenses, it will remain open until you manually close it.
+1. Expected Behaviour: The summary of expenses is a pop-up window. If there are no expenses saved in UniCa$h, the pop-up window will not appear. Do note that the summary window will remain open should you decide to remove all expenses after it is opened, until you manually close it.
 2. When making changes to your transactions in UniCa$h, the plots in the summary window will automatically update to reflect your modifications.
 3. The pie chart showcases the **top 10 expense categories** based on their respective amounts.
 4. The line chart exclusively showcases expenses **from the past one year**, according to the system's clock.
@@ -1840,11 +1831,11 @@ Important notes:
 > Opened UniCa$h summary window.
 > ```
 > 
-> <img src="images/unicash/command-outputs/summarySuccessOutput2.png" width="1000" />
+> <img src="images/unicash/command-outputs/summary/summarySuccessOutput2.png" width="1000" />
 >
 > Here is what the summary pop-up window looks like:
 > 
-> <img src="images/unicash/command-outputs/summarySuccessOutput1.png" width="1000" />
+> <img src="images/unicash/command-outputs/summary/summarySuccessOutput1.png" width="1000" />
 
 ###### Example 2
 
@@ -1854,7 +1845,7 @@ Important notes:
 >
 > **Output**: Here is what the summary window will look like
 > 
-> <img src="images/unicash/command-outputs/summarySuccessOutput3.png" width="1000" />
+> <img src="images/unicash/command-outputs/summary/summarySuccessOutput3.png" width="1000" />
 
 ###### Example 3
 
@@ -1866,7 +1857,7 @@ Important notes:
 > ```
 > You have no expenses to summarize.
 > ```
-> <img src="images/unicash/command-outputs/summarySuccessOutput4.png" width="1000" />
+> <img src="images/unicash/command-outputs/summary/summarySuccessOutput4.png" width="1000" />
 > Note: The summary pop-up window does not appear.
 
 #### 4.3.3 Rolling Balance Indicator
