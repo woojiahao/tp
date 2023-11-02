@@ -788,7 +788,119 @@ Unicash is this and that ...
 
 ### 3.2 UI Layout
 
-UI layout and description of what each section means
+UniCa$h is designed with users who prefer to use the keyboard in mind. Thus, almost all
+user input is designed for CLI-type usage, i.e. text-based keyboard input, and UI elements are intended 
+to supplement this main functionality.
+
+When UniCa$h is first opened, it would look something like this:
+
+![img_1.png](images/unicash/UniCashWelcome.png)
+
+By default, the Welcome Message will be displayed in the `Results Display`.
+This message can also be invoked with the `help` command which will be explained
+later on in this User Guide. Below are the main User Interface (UI) component features
+we have implemented in UniCa$h.
+
+![img_2.png](images/unicash/UniCashUIAnnotated.png)
+
+Explained below are the main UI components. For the purposes of demonstrating certain UI features, certain commands
+and inputs that are yet to be explained are mentioned here. However, at a later section of this User Guide,
+all of these commands and inputs will be explained, feel free to refer to them at your discretion. _Where applicable,
+consider those explanations as the single source of authority for those commands as the representation here is merely
+for UI demonstration purposes only._
+
+
+
+#### UniCa$h Main Window Components
+
+- The Main Window in UniCa$h is resizeable, but has a minimum size enforced.
+- The Menu bar contains the `File` and `Help` menus, of which `Help` can be opened with the
+`F1` keyboard shortcut, which is also default to the original `AB-3`.
+
+
+- _Note: On macOS, using UniCa$h in fullscreen will cause the Summary Window and Help Window to also
+open in fullscreen, however this is an expected behaviour caused by macOS's window management style, and does not
+cause any functional issues._ 
+
+#### Command Box
+- The `Command Box` is the primary means by which the user interacts actively with the application.
+- The user types specific inputs into the `Command Box` and presses `ENTER` after typing to "communicate" with UniCa$h.
+- The responses from UniCa$h for each input will be as defined in the subsection for each command in the later part of this User Guide
+- Given that our application is targeted for users who prefer CLI-type text input interaction, the `Command Box`
+is configured such that it can remember up to `10` latest user inputs. 
+  - When a user presses `ENTER` on any input, the input is stored regardless of its validity.
+  - These inputs can be traversed through with the `UP` and `DOWN` arrow keys on the keyboard.
+  - Only the `10` most recent inputs are stored by the `Command Box`
+
+  - _Note that due to a JavaFX built-in cursor control functionality (i.e. arrows keys can be used to navigate the menu bar),
+  the mouse cursor being too close to the menu can occasionally trigger this functionality instead, simply move your
+  mouse cursor away from the menu bar if this happens to alleviate the issue._
+- At any point in time, the user can press the `ESC` to empty the current text field in the `Command Box` 
+
+#### Transactions List
+- Each transaction input by the user is displayed in the `Transactions List`. 
+- The entire `Transactions List` will be displayed initially, however certain commands might limit this
+listing, which can be reversed with the `list` command to show the entire list again.
+- The `Transactions List` is ordered by the time at which the user inputs the transaction,
+not the actual date and time associated with that particular transactions.
+- Transactions added will immediately appear at the top of the `Transactions List`, and this is to
+provide immediate response to the user as they will be able to see their most recently input 
+transaction right away.
+- The most recent transactions appear at the top of the `Transactions List`.
+
+#### Transaction
+- The `Transactions List` contains individual `Transactions` that look like this:
+
+![img_1.png](images/unicash/TransactionCardAnnotated.png)
+
+- **Transaction ID/Index/Number:** All terms used synonymously to refer to the number shown on the left partition of the blue box. Based
+on the configuration of `Transactions List`, this number might change, and that is the intended effect, the use for which 
+will be explained in the applicable commands, including `delete`, `edit` and `get` commands.
+- **Transaction Name:** The name of the given transaction, shown on the right partition of the blue box.
+- **Transaction Date:** The date assigned to the transaction, shown inside the pink box.
+- **Transaction Location:** The location assigned to the transaction, shown inside the red box.
+- **Transaction Categories:** The category/categories assigned to the transaction, shown inside the yellow box.
+- **Transaction Amount:** The expense or income assigned to the transaction, shown inside the black box.
+  - Expenses will be preceded with a `negative` sign and in red color, whereas incomes will not be preceded with any
+  sign and displayed in green color. 
+  - _This applies to the amount `0.00` as well, thus display color
+is based only on transaction type`._
+
+Note: Certain properties above (such as name, location, categories and amount)
+are allowed values that exceed the UI's capacity to display them fully. For 
+example, a transaction name that is too long will be shortened by the application,
+
+![img_1.png](images/unicash/TransactionCardFull.png)
+
+This effect is accounted for as we do not wish to limit the user to arbitrary
+lengths. Thus, the `get` command is available to retrieve the full, expanded details
+of these transactions and display them in the `Results Display` component.
+
+#### Results Display
+
+- The `Results Display` is the primary means by which UniCa$h "responds" back
+to the user via text output.
+- The `Results Display` can be scrolled if the text output displayed is too long.
+
+#### Data Source Indicator
+
+- The `Data Source Indicator` shows the location of the current UniCa$h storage file.
+
+
+#### Rolling Balance Indicator
+
+- The `Rolling Balance Indicator` shows the net sum (i.e. `total income - total expense`) 
+for the **currently displayed `Transactions List`**.
+- For example, if the input `find n/friends` was used to find transactions whose names 
+contain the keyword `friends`, the `Transactions List` would be updated to
+only show matching transactions and likewise the `Rolling Balance Indicator` 
+would reflect the net sum for these transactions.
+- If the currently displayed `Transactions List` is the entire list (i.e. after using 
+the `list` command), then the `Rolling Balance Indicator` would show the net sum of all 
+transactions in UniCa$h. 
+- _Note: Unlike the color of an amount of a transaction in `Transactions List`, the color of
+the `Rolling Balance Indicator` will change based on whether the net sum is positive (green)
+or negative (red) or zero (black)._
 
 ### 3.3 Command Breakdown
 
@@ -825,7 +937,6 @@ The Budget Management Features
 The Financial Statistics Features:
 - Get Total Expenditure
 - Summary Statistics
-- Rolling Balance Indicator
 
 The General Utility Commands:
 - Show Help
@@ -1350,13 +1461,41 @@ Important notes:
 
 #### 4.1.5 FindCommand
 
+Finds a `Transaction` in UniCa$h.
 
-#### 4.1.6 FilterCommand
+Command: `find n/NAME l/LOCATION c/CATEGORY`
 
+Command Word: `find` (case-insensitive)
 
-#### 4.1.7 ListCommand
+Command Argument: `<INDEX>` is the displayed transaction index
+of the transaction to be retrieved, as shown in the `Transactions List`.
 
-#### 4.1.8 ClearTransactionsCommand
+Command Options:
+
+| Option Name      | Optional?       | Purpose                                                      |
+|------------------|-----------------|--------------------------------------------------------------|
+| n/               | Yes*            | Search keyword for the name of a transaction.                |
+| l/               | Yes*            | Search keyword for the location of a transaction.            |
+| c/               | Yes*            | Search keyword for a category tagged to a transaction        |
+| Any of the above | Min. one option | At least one option must be specified for the `find` command |
+
+Important notes:
+1. The `find` command word is case-insensitive, thus `FIND` is
+   considered an equivalent command word.
+
+2. *While each option is considered Optional, at least one option must be specified in total
+
+3. All keywords specified must match in order for a transaction to be displayed.
+4. Only one instance of each option can be specified, i.e. `/n Friends n/Dinner` is invalid as the name 
+option is specified more than once.
+5. For each keyword, a full substring match is required, thus `find n/Lunch with friends` with search for transactions
+whose name contains the String `Lunch with friends` and not `Lunch`, `with`, and `friends` separately. However, an 
+exact match is not required as a transaction with the name `Lunch with friends outside` contains the above substring
+and therefore it will be flagged as a match.
+
+#### 4.1.6 ListCommand
+
+#### 4.1.7 ClearTransactionsCommand
 
 ### 4.2 Budget Commands
 
@@ -1833,8 +1972,6 @@ Important notes:
 > ```
 > <img src="images/unicash/command-outputs/summary/summarySuccessOutput4.png" width="1000" />
 > Note: The summary pop-up window does not appear.
-
-#### 4.3.3 Rolling Balance Indicator
 
 ### 4.4 General Utility Commands
 
