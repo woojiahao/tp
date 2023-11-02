@@ -17,7 +17,7 @@ import unicash.model.transaction.Transaction;
 /**
  * Calculates the total expenditure used relative to the assigned budget for a given interval.
  *
- * <p>Calculation format = {@code Budget - Total Expenses + Total Income} where the total values
+ * <p>Calculation format = {@code Budget - Total Expenses} where the total values
  * are accumulated over the given interval.</p>
  *
  * <p>If the interval is a day, the calculation only contains transactions within the same day,
@@ -64,13 +64,15 @@ public class GetBudgetCommand extends Command {
         var interval = budget.getInterval().interval;
         Function<LocalDateTime, Integer> filter = getIntervalFilter(interval);
         String intervalString = getIntervalString(interval);
-        requireAllNonNull(filter, intervalString);
+        assert filter != null;
+        assert intervalString != null;
 
         double calculatedRemainder = model
                 .getFilteredTransactionList()
                 .stream()
+                .filter(t -> t.getType().type.equals(TransactionType.EXPENSE))
                 .filter(t -> filter.apply(t.getDateTime().getDateTime()).equals(filter.apply(from)))
-                .map(this::getAmountByType)
+                .map(t -> -1 * t.getAmount().amount)
                 .reduce(budget.getAmount().amount, Double::sum, Double::sum);
 
         return new CommandResult(String.format(
@@ -89,18 +91,6 @@ public class GetBudgetCommand extends Command {
 
         // Note that from field is not used for computation as that is unnecessary
         return other instanceof GetBudgetCommand;
-    }
-
-    /**
-     * Maps an transactions overall amount based on the type of transaction. Expenses cause a deficit,
-     * incomes cause an increase.
-     */
-    private double getAmountByType(Transaction transaction) {
-        int sign = 1;
-        if (transaction.getType().type.equals(TransactionType.EXPENSE)) {
-            sign = -1;
-        }
-        return sign * transaction.getAmount().amount;
     }
 
     /**
