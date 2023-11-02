@@ -50,12 +50,22 @@ Features were developed over two sprints, each sprint lasting two weeks.
 
 [//]: # (TODO: Link to each DG/UG entry)
 
-- Add transactions
-- Delete transactions
-- Clear transactions
-- Edit transactions
-- Find transaction
+- Add transaction
+- Delete transaction
+- Clear all transaction
+- Edit transaction
+- Find transaction(s)
 - Get total expenditure
+ 
+#### Categorize Finances
+
+This feature serves as an extension to adding a transaction as categories provide finer details about a transaction.
+
+Using the `edit_transaction` command, users can now:
+
+- Add categories
+- Edit existing categories
+- Remove existing categories
 
 #### Others
 
@@ -63,22 +73,12 @@ Features were developed over two sprints, each sprint lasting two weeks.
 - Remove all dependencies to original AB3
 - Clean up package structure
 
-[//]: # (TODO: Maybe don't need to talk about this since it's part of "add transaction" now and Lip Wei can elaborate on this separately)
-
-#### Categorize Finances
-
-This feature serves as an extension to adding a transaction as categories provide finer details about a transaction.
-
-- Add tags – provide category of transaction
-- Edit tags - change category of transaction
-- Remove tags - delete category of transaction
-
 ### Milestone v1.3
 
 - Support multi-format date time strings
-- Expand find search functionality
+- Expand search functionality of `find` command
 - Add year support when retrieving total expenditure
-- Visualizations for expenses
+- Summary visualizations for expenses
 - UI improvements
 - Support file storage of budget
 
