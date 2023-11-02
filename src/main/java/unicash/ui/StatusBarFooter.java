@@ -93,10 +93,10 @@ public class StatusBarFooter extends UiPart<Region> {
         }
 
         if (Double.compare(balance, 0) < 0) {
-            double formattedNegativeBalance = Math.round((Math.abs(balance) * 100.0 / 100.0));
+            double formattedNegativeBalance = (Math.abs(balance) * 100.0 / 100.0);
             balanceString = NEGATIVE_BALANCE_STRING + String.format("%.2f", formattedNegativeBalance);
         } else {
-            double formattedPositiveBalance = Math.round(balance * 100.0 / 100.0);
+            double formattedPositiveBalance = (balance * 100.0 / 100.0);
             balanceString = POSITIVE_BALANCE_STRING + String.format("%.2f", formattedPositiveBalance);
         }
 
