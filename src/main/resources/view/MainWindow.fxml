@@ -63,8 +63,8 @@
 
           <!-- The below VBox sits on the right side of the Split Pane-->
           <VBox minWidth="320" prefWidth="320" styleClass="pane-with-border">
-            <StackPane fx:id="resultDisplayPlaceholder" maxHeight="460" minHeight="460"
-                       prefHeight="460" styleClass="pane-with-border">
+            <StackPane fx:id="resultDisplayPlaceholder" maxHeight="465" minHeight="465"
+                       prefHeight="465" styleClass="pane-with-border">
               <padding>
                 <Insets bottom="5" left="4" right="10" top="5" />
               </padding>
