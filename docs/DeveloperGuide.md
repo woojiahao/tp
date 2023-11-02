@@ -11,7 +11,7 @@ title: Developer Guide
 
 **Value Proposition:** It provides university students with an intuitive and frictionless experience to have transparency on their expenditure to help them better understand their expenditure so they can develop better financial habits as they transition into adulthood.
 
-{% @include toc.html %}
+{% include toc.html %}
 
 ## Terminology
 
