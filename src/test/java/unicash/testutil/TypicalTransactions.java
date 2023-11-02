@@ -23,6 +23,7 @@ import java.util.List;
 
 import unicash.model.UniCash;
 import unicash.model.transaction.Transaction;
+import unicash.model.transaction.TransactionList;
 
 /**
  * A utility class containing a list of {@code Transaction} objects to be used in tests.
@@ -81,6 +82,19 @@ public class TypicalTransactions {
             typicalUnicash.addTransaction(transaction);
         }
         return typicalUnicash;
+    }
+
+    /**
+     * Returns a TransactionList with max capacity.
+     */
+    public static List<Transaction> getMaxTransactionList() {
+        List<Transaction> transactionList = new ArrayList<>();
+        Transaction validTransaction = new TransactionBuilder().build();
+        for (int i = 0; i < TransactionList.MAX_TRANSACTIONS; i++) {
+            transactionList.add(validTransaction);
+        }
+
+        return transactionList;
     }
 
     public static List<Transaction> getTypicalTransactions() {

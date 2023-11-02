@@ -83,6 +83,13 @@ public class UniCash implements ReadOnlyUniCash {
     }
 
     /**
+     * Returns true if UniCash is at its max Transaction capacity.
+     */
+    public boolean isMax() {
+        return transactions.isMax();
+    }
+
+    /**
      * Replaces the given Transaction {@code target} in the list with {@code editedTransaction}.
      */
     public void setTransaction(Transaction target, Transaction editedTransaction) {

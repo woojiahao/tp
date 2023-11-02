@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import unicash.commons.core.GuiSettings;
 import unicash.logic.UniCashMessages;
+import unicash.logic.commands.exceptions.CommandException;
 import unicash.model.Model;
 import unicash.model.ReadOnlyUniCash;
 import unicash.model.ReadOnlyUserPrefs;
@@ -56,6 +57,15 @@ public class AddTransactionCommandTest {
         ModelStub modelStub = new ModelStubWithTransaction(validTransaction);
 
         assertDoesNotThrow(() -> addTransactionCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_maxTransaction_throwCommandException() {
+        Transaction validTransaction = new TransactionBuilder().build();
+        AddTransactionCommand addTransactionCommand = new AddTransactionCommand(validTransaction);
+        ModelStub modelStub = new ModelStubWithMaxTransactions(validTransaction);
+
+        assertThrows(CommandException.class, () -> addTransactionCommand.execute(modelStub));
     }
 
     @Test
@@ -126,6 +136,11 @@ public class AddTransactionCommandTest {
         @Override
         public void setTransaction(Transaction target, Transaction editedTransaction) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isMax() {
+            return false;
         }
 
         @Override
@@ -208,6 +223,33 @@ public class AddTransactionCommandTest {
         public boolean hasTransaction(Transaction transaction) {
             requireNonNull(transaction);
             return this.transaction.equals(transaction);
+        }
+
+        @Override
+        public void addTransaction(Transaction transaction) {
+        }
+    }
+
+    /**
+     * A Model stub that contains a single transaction.
+     */
+    private class ModelStubWithMaxTransactions extends AddTransactionCommandTest.ModelStub {
+        private final Transaction transaction;
+
+        ModelStubWithMaxTransactions(Transaction transaction) {
+            requireNonNull(transaction);
+            this.transaction = transaction;
+        }
+
+        @Override
+        public boolean hasTransaction(Transaction transaction) {
+            requireNonNull(transaction);
+            return this.transaction.equals(transaction);
+        }
+
+        @Override
+        public boolean isMax() {
+            return true;
         }
 
         @Override

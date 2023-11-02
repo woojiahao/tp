@@ -67,7 +67,7 @@ public interface Model {
     void setUniCash(ReadOnlyUniCash uniCash);
 
     /**
-     * Returns UniCash
+     * Returns UniCash.
      */
     ReadOnlyUniCash getUniCash();
 
@@ -81,6 +81,11 @@ public interface Model {
      * Adds the given transaction.
      */
     void addTransaction(Transaction transaction);
+
+    /**
+     * Returns true if UniCash has reached max transaction capacity.
+     */
+    boolean isMax();
 
     /**
      * Returns true if a transaction with the same identity as {@code transaction} exists in UniCash.

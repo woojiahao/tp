@@ -18,6 +18,7 @@ import static unicash.testutil.TypicalTransactions.DINING_WITH_FRIENDS;
 import static unicash.testutil.TypicalTransactions.INTERN;
 import static unicash.testutil.TypicalTransactions.NUS;
 import static unicash.testutil.TypicalTransactions.SHOPPING;
+import static unicash.testutil.TypicalTransactions.getMaxTransactionList;
 import static unicash.testutil.TypicalTransactions.getTypicalUniCash;
 
 import java.time.YearMonth;
@@ -106,6 +107,17 @@ public class UniCashTest {
     public void setTransaction_transactionInUniCash_success() {
         uniCash.addTransaction(NUS);
         assertDoesNotThrow(() -> uniCash.setTransaction(NUS, BUYING_GROCERIES));
+    }
+
+    @Test
+    public void isMax_maxTransactions_true() {
+        uniCash.setTransactions(getMaxTransactionList());
+        assertTrue(uniCash.isMax());
+    }
+
+    @Test
+    public void isMax_notMaxTransactions_false() {
+        assertFalse(uniCash.isMax());
     }
 
     @Test
