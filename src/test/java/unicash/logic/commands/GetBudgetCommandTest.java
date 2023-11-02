@@ -29,7 +29,6 @@ import unicash.model.budget.Budget;
 import unicash.model.transaction.DateTime;
 import unicash.testutil.TransactionBuilder;
 
-// TODO: Must include unit tests to ensure overflows don't happen
 public class GetBudgetCommandTest {
     @Test
     public void execute_null_throwsNullPointerException() {
@@ -45,7 +44,32 @@ public class GetBudgetCommandTest {
     }
 
     @Test
-    public void execute_noTransactionWithinInterval_calculatesFullBudgetRemainder() {
+    public void execute_containsIncome_remainderDoesNotIncludeIncome() {
+        var uniCash = new UniCash();
+        var model = new ModelManager(uniCash, new UserPrefs());
+        model.setBudget(new Budget(DAILY));
+        var now = localDateTimeToString(LocalDateTime.now());
+        model.addTransaction(new TransactionBuilder(NUS).withType("expense").withDateTime(now).build());
+        model.addTransaction(new TransactionBuilder(INTERN).withType("income").withDateTime(now).build());
+
+        var expectedRemainder = DAILY.getAmount().amount - NUS.getAmount().amount;
+
+        var command = new GetBudgetCommand();
+        assertCommandSuccess(
+                command,
+                model,
+                String.format(
+                        GetBudgetCommand.MESSAGE_SUCCESS,
+                        "Daily",
+                        DAILY.getAmount().toString(),
+                        expectedRemainder
+                ),
+                model
+        );
+    }
+
+    @Test
+    public void execute_noTransactionWithinInterval_calculatesFullBudgetAsRemainder() {
         var uniCash = new UniCash();
         var model = new ModelManager(uniCash, new UserPrefs());
         model.setBudget(new Budget(DAILY));
@@ -83,8 +107,9 @@ public class GetBudgetCommandTest {
 
         var command = new GetBudgetCommand();
         var expectedRemainder =
-                DAILY.getAmount().amount - NUS.getAmount().amount
-                        - INTERN.getAmount().amount + SHOPPING.getAmount().amount;
+                DAILY.getAmount().amount
+                        - NUS.getAmount().amount
+                        - INTERN.getAmount().amount;
         assertCommandSuccess(
                 command,
                 model,
@@ -173,8 +198,9 @@ public class GetBudgetCommandTest {
 
         var command = new GetBudgetCommand(today);
         var expectedRemainder =
-                MONTHLY.getAmount().amount - NUS.getAmount().amount
-                        - INTERN.getAmount().amount + SHOPPING.getAmount().amount;
+                MONTHLY.getAmount().amount
+                        - NUS.getAmount().amount
+                        - INTERN.getAmount().amount;
         assertCommandSuccess(
                 command,
                 model,

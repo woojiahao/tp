@@ -80,12 +80,9 @@ public class Amount {
      * Returns a rounded two-decimal precision String version of an {@code Amount}.
      */
     public static String amountToDecimalString(Amount amt) {
-        double roundedAmount = round(amt.amount);
-        return String.format("%.2f", roundedAmount);
+        return String.format("%.2f", amt.amount);
     }
 
-
-    //TODO: Consider making currency indicators available for the user to input
 
     /**
      * Returns the amount along as a string with no currency prefix.

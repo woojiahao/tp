@@ -67,6 +67,7 @@ public class AmountTest {
         assertFalse(Amount.isValidAmount(-0.000001));
         assertFalse(Amount.isValidAmount(Integer.MIN_VALUE));
         assertFalse(Amount.isValidAmount((double) (Integer.MAX_VALUE + 1)));
+        assertFalse(Amount.isValidAmount((double) (Integer.MAX_VALUE + 0.002)));
         assertFalse(Amount.isValidAmount((double) Long.MAX_VALUE));
     }
 
