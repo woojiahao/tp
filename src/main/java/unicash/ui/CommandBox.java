@@ -119,7 +119,13 @@ public class CommandBox extends UiPart<Region> {
         }
 
         try {
-            addUserInputToHistory(commandText);
+            // Limits user input history to 10 previous entries
+            if (userInputHistory.size() < 10) {
+                addUserInputToHistory(commandText);
+            } else {
+                userInputHistory.remove(0);
+                addUserInputToHistory(commandText);
+            }
             commandExecutor.execute(commandText);
             clearCommandTextField();
         } catch (CommandException | ParseException e) {
