@@ -1193,8 +1193,6 @@ Important notes:
 The budget serves as a warning system to notify users when their expenses for the given interval exceeds their preset
 amount.
 
-The user's spending is calculated by: `budget + interval income - interval expenses`.
-
 > 💡 NOTE: For this team project, we have opted to simplify the budgeting feature by limiting the user to a single budget
 > at a time that can be configured for different intervals and amounts.
 
@@ -1215,7 +1213,8 @@ Important notes:
 
 1. `Amount` entered has to be positive for any `interval` value.
 2. `Amount` is automatically rounded to 2 decimal places.
-3. `Interval` must be of values "day", "week", or "month".
+3. `Amount` must be less than `2,147,483,647`.
+4. `Interval` must be of values "day", "week", or "month".
 
 ##### Successful Execution
 
@@ -1361,11 +1360,11 @@ Command Options: This command does not take in any arguments and will not proces
 #### 4.2.3 GetBudgetCommand
 
 Retrieves the set budget and the spending over the given interval. The usage is calculated from the list of filtered
-transactions so to view the budget remainder across all transactions, use the `list` command first.
+transactions so to view the budget remainder across expense transactions, use the `list` command first.
 
 If no budget has been set, the user will be prompted to set one first instead.
 
-The user's spending is calculated by: `budget + interval income - interval expenses`.
+The user's spending is calculated by: `budget - interval expenses`.
 
 Command: `get_budget`
 
@@ -1383,7 +1382,7 @@ Command Options: This command does not take in any arguments and will not proces
 > ```
 > Monthly budget of $600.00
 >
-> Net amount of $587.00
+> Net amount of $585.00
 > ```
 >
 > <img src="images/unicash/command-outputs/get-budget/getBudgetSuccess.png" width="1000" />
