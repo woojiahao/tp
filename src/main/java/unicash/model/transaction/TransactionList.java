@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import unicash.model.transaction.exceptions.MaxTransactionException;
 import unicash.model.transaction.exceptions.TransactionNotFoundException;
 
 /**
@@ -15,7 +16,9 @@ import unicash.model.transaction.exceptions.TransactionNotFoundException;
  * Supports a minimal set of list operations.
  */
 public class TransactionList implements Iterable<Transaction> {
-
+    public static final int MAX_TRANSACTIONS = 100000;
+    public static final String MESSAGE_SIZE_CONSTRAINTS =
+            "UniCa$h supports up to a maximum of 100,000 transactions.";
     private final ObservableList<Transaction> internalList = FXCollections.observableArrayList();
     private final ObservableList<Transaction> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
@@ -33,6 +36,9 @@ public class TransactionList implements Iterable<Transaction> {
      */
     public void add(Transaction toAdd) {
         requireNonNull(toAdd);
+        if (isFull()) {
+            throw new MaxTransactionException();
+        }
         internalList.add(toAdd);
     }
 
@@ -63,6 +69,13 @@ public class TransactionList implements Iterable<Transaction> {
     }
 
     /**
+     * Returns true if the storage is full, false otherwise.
+     */
+    public boolean isFull() {
+        return internalList.size() == MAX_TRANSACTIONS;
+    }
+
+    /**
      * Replaces the contents of this list with {@code replacement}
      * @param replacement the TransactionList to replace with
      */
@@ -77,6 +90,10 @@ public class TransactionList implements Iterable<Transaction> {
      */
     public void setTransactions(List<Transaction> transactions) {
         requireAllNonNull(transactions);
+        if (isMoreThanMax(transactions)) {
+            throw new MaxTransactionException();
+        }
+
         internalList.setAll(transactions);
     }
 
@@ -105,6 +122,13 @@ public class TransactionList implements Iterable<Transaction> {
 
         TransactionList otherTransactionList = (TransactionList) other;
         return internalList.equals(otherTransactionList.internalList);
+    }
+
+    /**
+     * Returns true if a given list of transactions is less than the maximum allowed transactions.
+     */
+    public static boolean isMoreThanMax(List<Transaction> transactions) {
+        return transactions.size() > MAX_TRANSACTIONS;
     }
 
     @Override

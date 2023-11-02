@@ -10,6 +10,8 @@ import static unicash.testutil.Assert.assertThrows;
 import static unicash.testutil.TypicalTransactions.BUYING_GROCERIES;
 import static unicash.testutil.TypicalTransactions.INTERN;
 import static unicash.testutil.TypicalTransactions.NUS;
+import static unicash.testutil.TypicalTransactions.getMaxTransactionList;
+import static unicash.testutil.TypicalTransactions.getTypicalTransactions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,6 +20,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import unicash.model.transaction.exceptions.MaxTransactionException;
 import unicash.model.transaction.exceptions.TransactionNotFoundException;
 import unicash.testutil.TransactionBuilder;
 
@@ -58,6 +61,12 @@ public class TransactionListTest {
     public void add_duplicateTransaction_doesNotThrow() {
         transactionList.add(NUS);
         assertDoesNotThrow(() -> transactionList.add(NUS));
+    }
+
+    @Test
+    public void add_maxTransactions_throwsMaxTransactionException() {
+        transactionList.setTransactions(getMaxTransactionList());
+        assertThrows(MaxTransactionException.class, () -> transactionList.add(NUS));
     }
 
     @Test
@@ -112,6 +121,18 @@ public class TransactionListTest {
     }
 
     @Test
+    public void isFull() {
+        transactionList.setTransactions(getMaxTransactionList());
+
+        // equal to max transactions -> true
+        assertTrue(transactionList.isFull());
+
+        // less than max transactions -> false
+        transactionList.setTransactions(getTypicalTransactions());
+        assertFalse(transactionList.isFull());
+    }
+
+    @Test
     public void setTransactions_nullTransactionList_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> transactionList.setTransactions((TransactionList) null));
     }
@@ -144,6 +165,20 @@ public class TransactionListTest {
         List<Transaction> listWithDuplicateTransactions = Arrays.asList(NUS, NUS);
         assertDoesNotThrow(() -> transactionList.setTransactions(listWithDuplicateTransactions));
     }
+
+    @Test
+    public void setTransactions_notMoreThanMaxTransactions_success() {
+        List<Transaction> maxTransactions = getMaxTransactionList();
+        assertDoesNotThrow(() -> transactionList.setTransactions(maxTransactions));
+    }
+
+    @Test
+    public void setTransactions_moreThanMaxTransactions_success() {
+        List<Transaction> maxTransactions = getMaxTransactionList();
+        maxTransactions.add(NUS);
+        assertThrows(MaxTransactionException.class, () -> transactionList.setTransactions(maxTransactions));
+    }
+
 
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
@@ -192,6 +227,20 @@ public class TransactionListTest {
         assertNotEquals(null, transactionList);
 
         assertFalse(transactionList.equals(null));
+    }
+
+    @Test
+    public void isMoreThanMax() {
+
+        // EP 1 > 100000
+        List<Transaction> transactionsList = getMaxTransactionList();
+        transactionsList.add(NUS);
+        assertTrue(TransactionList.isMoreThanMax(transactionsList));
+
+        // EP 2 <= 100000
+        transactionsList = getMaxTransactionList();
+        assertFalse(TransactionList.isMoreThanMax(transactionsList));
+        assertFalse(TransactionList.isMoreThanMax(getTypicalTransactions()));
     }
 
     @Test

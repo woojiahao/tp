@@ -1,5 +1,5 @@
 @startuml
-
+!pragma useVerticalIf on
 skin rose
 skinparam ActivityFontSize 15
 skinparam ArrowFontSize 12
@@ -10,7 +10,10 @@ start
 if () then ([else])
   :Parse exception thrown;
   stop
-else ([All compulsory fields are present and in the correct format])
+([All compulsory fields are present and in the correct format]) elseif () then ([else])
+    :Error: Insufficient storage space for Items;
+    stop
+else ([Max transaction capacity is not reached])
   :Transaction successfully added ;
 endif
 

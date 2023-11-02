@@ -13,7 +13,7 @@ import static unicash.commons.util.AppUtil.checkArgument;
 public class Amount {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Amounts must be within range of [0, 2,147,483,647] and either start with $ or nothing at all";
+            "Amounts must be within range of [0, 2147483647] and either start with $ or nothing at all";
 
     // Indicates the currency currently being used, set to dollar by default.
     public static final String CURRENCY_INDICATOR = "$";

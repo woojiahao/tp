@@ -113,6 +113,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean isFull() {
+        return uniCash.isFull();
+    }
+
+    @Override
     public void setBudget(Budget budget) {
         uniCash.setBudget(budget);
     }

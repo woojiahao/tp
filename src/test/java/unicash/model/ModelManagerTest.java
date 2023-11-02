@@ -11,6 +11,7 @@ import static unicash.testutil.TypicalBudgets.DAILY;
 import static unicash.testutil.TypicalTransactions.BUYING_GROCERIES;
 import static unicash.testutil.TypicalTransactions.INTERN;
 import static unicash.testutil.TypicalTransactions.NUS;
+import static unicash.testutil.TypicalTransactions.getMaxTransactionList;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -99,6 +100,19 @@ public class ModelManagerTest {
     public void hasTransaction_transactionInUniCash_returnsTrue() {
         modelManager.addTransaction(NUS);
         assertTrue(modelManager.hasTransaction(NUS));
+    }
+
+    @Test
+    public void isFull_maxUniCash_returnsTrue() {
+        UniCash uniCash = new UniCash();
+        uniCash.setTransactions(getMaxTransactionList());
+        modelManager.setUniCash(uniCash);
+        assertTrue(modelManager.isFull());
+    }
+
+    @Test
+    public void isFull_notMaxUnICash_returnsFalse() {
+        assertFalse(modelManager.isFull());
     }
 
     @Test

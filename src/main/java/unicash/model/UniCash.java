@@ -83,6 +83,13 @@ public class UniCash implements ReadOnlyUniCash {
     }
 
     /**
+     * Returns true if UniCash is at its full Transaction capacity.
+     */
+    public boolean isFull() {
+        return transactions.isFull();
+    }
+
+    /**
      * Replaces the given Transaction {@code target} in the list with {@code editedTransaction}.
      */
     public void setTransaction(Transaction target, Transaction editedTransaction) {
