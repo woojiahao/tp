@@ -139,7 +139,7 @@ public class AddTransactionCommandTest {
         }
 
         @Override
-        public boolean isMax() {
+        public boolean isFull() {
             return false;
         }
 
@@ -248,7 +248,7 @@ public class AddTransactionCommandTest {
         }
 
         @Override
-        public boolean isMax() {
+        public boolean isFull() {
             return true;
         }
 

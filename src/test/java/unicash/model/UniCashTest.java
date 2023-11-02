@@ -110,14 +110,14 @@ public class UniCashTest {
     }
 
     @Test
-    public void isMax_maxTransactions_true() {
+    public void isFull_maxTransactions_true() {
         uniCash.setTransactions(getMaxTransactionList());
-        assertTrue(uniCash.isMax());
+        assertTrue(uniCash.isFull());
     }
 
     @Test
-    public void isMax_notMaxTransactions_false() {
-        assertFalse(uniCash.isMax());
+    public void isFull_notMaxTransactions_false() {
+        assertFalse(uniCash.isFull());
     }
 
     @Test

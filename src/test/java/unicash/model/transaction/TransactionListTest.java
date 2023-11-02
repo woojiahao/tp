@@ -121,15 +121,15 @@ public class TransactionListTest {
     }
 
     @Test
-    public void isMax() {
+    public void isFull() {
         transactionList.setTransactions(getMaxTransactionList());
 
         // equal to max transactions -> true
-        assertTrue(transactionList.isMax());
+        assertTrue(transactionList.isFull());
 
         // less than max transactions -> false
         transactionList.setTransactions(getTypicalTransactions());
-        assertFalse(transactionList.isMax());
+        assertFalse(transactionList.isFull());
     }
 
     @Test

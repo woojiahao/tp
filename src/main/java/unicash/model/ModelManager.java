@@ -113,8 +113,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean isMax() {
-        return uniCash.isMax();
+    public boolean isFull() {
+        return uniCash.isFull();
     }
 
     @Override

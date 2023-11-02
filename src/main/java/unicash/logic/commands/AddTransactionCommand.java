@@ -34,7 +34,7 @@ public class AddTransactionCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (model.isMax()) {
+        if (model.isFull()) {
             throw new CommandException(TransactionList.MESSAGE_SIZE_CONSTRAINTS);
         }
         model.addTransaction(toAdd);

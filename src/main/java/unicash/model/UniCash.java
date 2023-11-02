@@ -83,10 +83,10 @@ public class UniCash implements ReadOnlyUniCash {
     }
 
     /**
-     * Returns true if UniCash is at its max Transaction capacity.
+     * Returns true if UniCash is at its full Transaction capacity.
      */
-    public boolean isMax() {
-        return transactions.isMax();
+    public boolean isFull() {
+        return transactions.isFull();
     }
 
     /**

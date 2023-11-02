@@ -103,16 +103,16 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void isMax_maxUniCash_returnsTrue() {
+    public void isFull_maxUniCash_returnsTrue() {
         UniCash uniCash = new UniCash();
         uniCash.setTransactions(getMaxTransactionList());
         modelManager.setUniCash(uniCash);
-        assertTrue(modelManager.isMax());
+        assertTrue(modelManager.isFull());
     }
 
     @Test
-    public void isMax_notMaxUnICash_returnsFalse() {
-        assertFalse(modelManager.isMax());
+    public void isFull_notMaxUnICash_returnsFalse() {
+        assertFalse(modelManager.isFull());
     }
 
     @Test

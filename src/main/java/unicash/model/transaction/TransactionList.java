@@ -36,7 +36,7 @@ public class TransactionList implements Iterable<Transaction> {
      */
     public void add(Transaction toAdd) {
         requireNonNull(toAdd);
-        if (isMax()) {
+        if (isFull()) {
             throw new MaxTransactionException();
         }
         internalList.add(toAdd);
@@ -71,7 +71,7 @@ public class TransactionList implements Iterable<Transaction> {
     /**
      * Returns true if the storage is full, false otherwise.
      */
-    public boolean isMax() {
+    public boolean isFull() {
         return internalList.size() == MAX_TRANSACTIONS;
     }
 

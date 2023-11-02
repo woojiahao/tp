@@ -83,9 +83,9 @@ public interface Model {
     void addTransaction(Transaction transaction);
 
     /**
-     * Returns true if UniCash has reached max transaction capacity.
+     * Returns true if UniCash has reached its full transaction capacity.
      */
-    boolean isMax();
+    boolean isFull();
 
     /**
      * Returns true if a transaction with the same identity as {@code transaction} exists in UniCash.
