@@ -3,39 +3,97 @@ layout: page
 title: Developer Guide
 ---
 
-# UniCa$h Developer Guide [CS2103 T16-Group_3 TP]
+**Team:** T16-03
 
 **Name:** UniCa$h
 
-**User Target Profile:** Our application is for university students who want to be more financially conscious about their spending habits, to enable them to make more economical decisions that provide students on a limited budget with more purchasing power.
+**User Target Profile:** Our application is for university students who want to be more financially conscious about their spending habits, enabling them to make wiser economic decisions, providing students on a limited budget with more purchasing power.
 
-**Value Proposition:** It provides university students with an intuitive and frictionless experience to have transparency on their expenditure to help them better understand their spendings so they can develop better financial habits as they transition into adulthood. 
+**Value Proposition:** It provides university students with an intuitive and frictionless experience to have transparency on their expenditure to help them better understand their expenditure so they can develop better financial habits as they transition into adulthood.
+
+{% @include toc.html %}
+
+## Terminology
+
+| Term        | Meaning                                                                                           |
+|-------------|---------------------------------------------------------------------------------------------------|
+| Transaction | Represents both an expense or an income. Expenses cause a net loss while incomes cause a net gain |
 
 ## Potential Features:
-- For every user > track individual finances (base)
-- Input spending & set budgets (base)
-- Tag another user and distribute the spendings during outings (extension)
-- Viewing spending habits (extension)
-- Provide price list comparison for all available food outlets near NUS (extension)
-- Allow users to set repeating events (extension)
-- Tagging people for payments gives them a notification (extension)
 
-## Feature List [v1.2]
+Potential features are split into two categories, must-haves and good-to-haves. Our focus this project was to flesh out the must-haves first.
+
+### Must-haves
+
+Every user can...
+
+- Track and manage their expenses
+- Manage a budget
+- View their total expenditure by the month/year
+
+### Good-to-haves
+
+Every user can...
+
+- Visualise their spending habits
+- Divide a group spending and tag friends involved in the spending
+- View a price list comparison of all available shops near NUS
+- Set recurring transactions
+
+## Feature Development Tracking
+
+Features were developed over two sprints, each sprint lasting two weeks.
+
+### Milestone v1.2
+
 #### Track Finances
-- Create transactions - Name, date, location, Tag (type/category)
-  - Input either Income or Expense
-- Delete transactions - Delete a single transaction
-  - Remove either an Income or an Expense
-- Clear transactions - Mass delete all transactions
-- Edit transactions - Modify transactions
-- Find transaction - Find a transaction by a given keyword 
-- Tabulate total expenditure  - Sum of all expenses & remaining balance
+
+[//]: # (TODO: Link to each DG/UG entry)
+
+- Add transactions
+- Delete transactions
+- Clear transactions
+- Edit transactions
+- Find transaction
+- Get total expenditure
+
+#### Others
+
+- Support file storage of transactions
+- Remove all dependencies to original AB3
+- Clean up package structure
+
+[//]: # (TODO: Maybe don't need to talk about this since it's part of "add transaction" now and Lip Wei can elaborate on this separately)
 
 #### Categorize Finances
+
+This feature serves as an extension to adding a transaction as categories provide finer details about a transaction.
+
 - Add tags – provide category of transaction
 - Edit tags - change category of transaction
 - Remove tags - delete category of transaction
 
+### Milestone v1.3
+
+- Support multi-format date time strings
+- Expand find search functionality
+- Add year support when retrieving total expenditure
+- Visualizations for expenses
+- UI improvements
+- Support file storage of budget
+
+## Non-Functional Requirements
+
+1. The application should be cross-platform functional on major operating systems, i.e. Windows, MacOS, Linux, running at least Java 11
+2. All transactions and budget managed by the user should be saved and backed up locally and restored the next session as long as the data has not been corrupted
+3. The user guide should be clear and straightforward so that the user can perform all major tasks intuitively
+4. All non-private methods should be well-documented to ensure that the codebase is maintainable
+5. The application should have an intuitive interface with easy navigation commands and clear instructions/errors
+6. The application achieves at least 85% in test coverage with comprehensive unit and integration tests
+7. The user should not experience excessive sluggishness while using the application
+8. The application should serve the latest updates of transactions the moment these updates are confirmed
+9. The application should not require an active Internet connection to function
+10. The application should be able to generate visualisations for 1000 expenses without any excessive sluggishness
 
 ## Use Cases
 The following documents use cases for our application
@@ -617,6 +675,8 @@ End of header.
 UniCa$h is this that and that.
 
 ---
+
+{% @include toc.html %}
 
 # 2. Index of Contents
 1. About UniCa$h
