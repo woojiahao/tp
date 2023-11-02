@@ -66,7 +66,7 @@ public class GetBudgetCommand extends Command {
         String intervalString = getIntervalString(interval);
         requireAllNonNull(filter, intervalString);
 
-        var calculatedRemainder = model
+        double calculatedRemainder = model
                 .getFilteredTransactionList()
                 .stream()
                 .filter(t -> filter.apply(t.getDateTime().getDateTime()).equals(filter.apply(from)))
