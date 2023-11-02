@@ -19,26 +19,14 @@ title: Developer Guide
 |-------------|---------------------------------------------------------------------------------------------------|
 | Transaction | Represents both an expense or an income. Expenses cause a net loss while incomes cause a net gain |
 
-## Potential Features:
-
-Potential features are split into two categories, must-haves and good-to-haves. Our focus this project was to flesh out the must-haves first.
-
-### Must-haves
+## Features Implemented
 
 Every user can...
 
 - Track and manage their expenses
 - Manage a budget
 - View their total expenditure by the month/year
-
-### Good-to-haves
-
-Every user can...
-
 - Visualise their spending habits
-- Divide a group spending and tag friends involved in the spending
-- View a price list comparison of all available shops near NUS
-- Set recurring transactions
 
 ## Feature Development Tracking
 
@@ -1031,18 +1019,13 @@ Here's what each of us have contributed. (Might not need this section)
 
 ---
 
+## Potential Features
 
+Every user can...
 
-## Links
-
-User
-Stories: [https://github.com/orgs/AY2324S1-CS2103-T16-3/projects/1/views/2](https://github.com/orgs/AY2324S1-CS2103-T16-3/projects/1/views/2)
-
-Project Website: [https://ay2324s1-cs2103-t16-3.github.io/tp/](https://ay2324s1-cs2103-t16-3.github.io/tp/)
-
-
-
-
+- Divide a group spending and tag friends involved in the spending
+- View a price list comparison of all available shops near NUS
+- Set recurring transactions
 
 ## Links
 
