@@ -151,7 +151,7 @@ public class SetBudgetCommandTest {
         }
 
         @Override
-        public boolean isMax() {
+        public boolean isFull() {
             throw new AssertionError("This method should not be called.");
         }
 
