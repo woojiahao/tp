@@ -1213,7 +1213,7 @@ Important notes:
 
 1. `Amount` entered has to be positive for any `interval` value.
 2. `Amount` is automatically rounded to 2 decimal places.
-3. `Amount` must be less than `2,147,483,647`.
+3. `Amount` must be less than or equal to `2,147,483,647`.
 4. `Interval` must be of values "day", "week", or "month".
 
 ##### Successful Execution
