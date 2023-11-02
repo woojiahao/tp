@@ -967,6 +967,166 @@ Important notes:
 > > <img src="images/unicash/command-outputs/addTransactionFailedOutput4.png" width="1000" />
 
 #### 4.1.2 EditTransactionCommand
+Edits an existing transaction in UniCa$h.
+
+Command: `edit_transaction INDEX [n/NAME] [type/TYPE] [amt/AMOUNT] [dt/DATETIME] [l/LOCATION] [c/CATEGORY]`
+
+Command Options:
+
+| Option Name | Optional? | Purpose                                                                                       | Remarks                                                                                                                                                        |
+|-------------|-----------|-----------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| INDEX       | No        | (One-based) index of the transaction to edit.                                                 | This ranges from 1 to the number of transactions saved                                                                                                         |
+| n/          | Yes       | Name of the transaction.                                                                      | There is a 500-character limit                                                                                                                                 |
+| type/       | Yes       | Transaction type of transaction.<br/>Valid types are `income` and `expense`.                  |                                                                                                                                                                |
+| amt/        | Yes       | Monetary amount of transaction. Has to be a positive value.                                   | Automatically rounded to 2 decimal places.                                                                                                                     |
+| dt/         | Yes       | Date and time where transaction was made.<br/>Defaults to current date time if not specified. | Can be in the `dd-MM-uuuu HH:mm` (e.g. 31-10-2023 12:00), `uuuu-MM-dd HH:mm` (e.g. 2023-10-31 22:59), or `dd MMM uuuu HH:mm` (e.g. 31 Oct 2023 22:59) formats. |
+| l/          | Yes       | Location where transaction was made.<br/>Defaults to `'-'` if not specified.                  | There is a 500-character limit                                                                                                                                 |
+| c/          | Yes       | Category tagged to that transaction.<br/>No categories tagged if not specified.               | There is a 15-character limit.<br/>`Category` entered will be converted and stored as all lowercase.<br/>Each transaction can have at most 5 categories.       |
+
+Important notes:
+1. While all options besides `INDEX` are optional, **you must specify at least one field** you wish to edit (i.e. `Name`, `Type`, `Amount`, `Datetime`, `Location`, or `Category`).
+2. You must provide a non-empty value for the `Name`, `Type`, and `Amount` fields if you wish to edit them; they cannot be left empty.
+3. The `INDEX` option must be specified first. The order in which you specify the other options does not matter.
+
+##### Successful Execution
+
+###### Example 1
+
+> **Case**: Edit an existing transaction's name, amount, type, datetime, location and categories.
+>
+> **Input**: `edit_transaction 5 n/Tuition Income type/income amt/1000 dt/2023-10-31 10:00 l/John home c/tuition`
+>
+> **Output**:
+> ```
+> Edited Transaction:
+> 
+> Name: Tuition Income;
+> Type: income;
+> Amount: $1000.00;
+> Date: 31 Oct 2023 10:00;
+> Location: John home;
+> Categories: #tuition
+> ```
+>
+> <img src="images/unicash/command-outputs/editTransaction/editTransactionSuccessOutput1.png" width="1000" />
+
+###### Example 2
+
+> **Case**: Edit an existing transaction's datetime and amount only.
+>
+> **Input**: `edit_transaction 5 dt/31 Oct 2023 12:00 amt/1200`
+>
+> **Output**:
+> ```
+> Edited Transaction:
+> 
+> Name: Tuition Income;
+> Type: income;
+> Amount: $1200.00;
+> Date: 31 Oct 2023 12:00;
+> Location: John home;
+> Categories: #tuition
+> ```
+>
+> <img src="images/unicash/command-outputs/editTransaction/editTransactionSuccessOutput2.png" width="1000" />
+
+###### Example 3
+
+> **Case**: Edit an existing transaction's location and categories to default.
+>
+> **Input**: `edit_transaction 5 l/ c/`
+>
+> **Output**:
+> ```
+> Edited Transaction:
+>
+> Name: Tuition Income;
+> Type: income;
+> Amount: $1200.00;
+> Date: 31 Oct 2023 12:00;
+> Location: -;
+> Categories:
+> ```
+>
+> <img src="images/unicash/command-outputs/editTransaction/editTransactionSuccessOutput3.png" width="1000" />
+
+##### Failed Execution
+
+###### Example 1
+
+> **Case**: No attributes to edit
+>
+> **Input**: `edit_transaction 5`
+>
+> **Output**:
+> ```
+> At least one field to edit must be provided.
+> ```
+>
+> <img src="images/unicash/command-outputs/editTransaction/editTransactionFailedOutput1.png" width="1000" />
+
+###### Example 2
+
+> **Case**: No index provided
+>
+> **Input**: `edit_transaction n/Donation`
+>
+> **Output**:
+> ```
+> Invalid command format! 
+> 
+> edit_transaction: Edits the details of the transaction identified by the index number used in the displayed transaction list.
+> 
+> Argument: Index (must be a positive integer)
+> 
+> Parameters: [n/Name] [type/Type] [amt/Amount] [dt/DateTime] [l/Location] [c/Category]...
+> 
+> Example: edit_transaction 1 n/Buying groceries type/expense amt/300 dt/18-08-2023 19:30 l/NTUC c/Food
+> ```
+>
+> <img src="images/unicash/command-outputs/editTransaction/editTransactionFailedOutput2.png" width="1000" />
+
+###### Example 3
+
+> **Case**: Attempting to leave compulsory field (E.g. `name`) blank
+>
+> **Input**: `edit_transaction 5 n/`
+>
+> **Output**:
+> ```
+> Names should only contain alphanumeric characters, spaces, (, ), _, @, -, #, &, ., and ',', up to 500 characters and it should not be blank
+> ```
+>
+> <img src="images/unicash/command-outputs/editTransaction/editTransactionFailedOutput3.png" width="1000" />
+
+###### Example 4
+
+> **Case**: There are only 5 transactions, but the user tries to edit expense 6
+>
+> **Input**: `edit_transaction 6 n/Dog food`
+>
+> **Output**:
+> ```
+> The transaction index provided is invalid
+> ```
+>
+> <img src="images/unicash/command-outputs/editTransaction/editTransactionFailedOutput4.png" width="1000" />
+
+###### Example 5
+
+> **Case**: Wrong input format (e.g. `Datetime` is not specified in any of the accepted formats)
+>
+> **Input**: `edit_transaction 5 dt/23 March 2023 8:15pm`
+>
+> **Output**:
+> ```
+> DateTime should be in either of the following formats: 
+> 1. dd-MM-uuuu HH:mm
+> 2. uuuu-MM-dd HH:mm
+> 3. dd MMM uuuu HH:mm
+> ```
+>
+> <img src="images/unicash/command-outputs/editTransaction/editTransactionFailedOutput5.png" width="1000" />
 
 #### 4.1.3 DeleteTransactionCommand
 
@@ -1077,8 +1237,6 @@ considered an equivalent command word.
 > The transaction index provided is invalid
 > ```
 > <img src="images/unicash/command-outputs/deleteTransaction/deleteFail2.png" width="1000" />
-  
-#### 4.1.3 EditTransactionCommand
 
 #### 4.1.4 GetCommand
 
@@ -1621,6 +1779,60 @@ Important notes:
 > <img src="images/unicash/command-outputs/get-total-expenditure/longCategory.png" width="1000" />
 
 #### 4.3.2 SummaryCommand
+
+Displays a summary of the expenses saved in UniCa$h.
+
+Command: `summary`
+
+Important notes:
+1. Expected Behaviour: The summary of expenses is a pop-up window. If there are no expenses saved in UniCa$h, the pop-up window will not appear. Do note that the summary window will remain open should you decide to remove all expenses after it is opened, until you manually close it.
+2. When making changes to your transactions in UniCa$h, the plots in the summary window will automatically update to reflect your modifications.
+3. The pie chart showcases the **top 10 expense categories** based on their respective amounts.
+4. The line chart exclusively showcases expenses **from the past one year**, according to the system's clock.
+
+##### Successful Execution
+
+###### Example 1
+
+> **Case**: There are expenses saved in UniCa$h
+>
+> **Input**: `summary`
+>
+> **Output**:
+>
+> The output displayed in the main window is:
+> ```
+> Opened UniCa$h summary window.
+> ```
+> 
+> <img src="images/unicash/command-outputs/summary/summarySuccessOutput1.png" width="1000" />
+>
+> Here is what the summary pop-up window looks like:
+> 
+> <img src="images/unicash/command-outputs/summary/summarySuccessOutput2.png" width="1000" />
+
+###### Example 2
+
+> **Case**: All expenses are removed from UniCa$h while the summary window was open
+>
+> **Input**: `clear_transactions`
+>
+> **Output**: Here is what the summary window will look like
+> 
+> <img src="images/unicash/command-outputs/summary/summarySuccessOutput3.png" width="1000" />
+
+###### Example 3
+
+> **Case**: There are no expenses saved in UniCa$h, and the summary window is closed.
+>
+> **Input**: `summary`
+>
+> **Output**:
+> ```
+> You have no expenses to summarize.
+> ```
+> <img src="images/unicash/command-outputs/summary/summarySuccessOutput4.png" width="1000" />
+> Note: The summary pop-up window does not appear.
 
 #### 4.3.3 Rolling Balance Indicator
 
