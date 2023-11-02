@@ -3,7 +3,6 @@ package unicash.ui;
 import java.nio.file.Paths;
 import java.util.concurrent.TimeoutException;
 
-import javafx.scene.input.KeyCode;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,6 +14,7 @@ import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.util.WaitForAsyncUtils;
 
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
 import unicash.MainApp;
 import unicash.model.UserPrefs;
 
