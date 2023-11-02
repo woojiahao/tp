@@ -3,6 +3,7 @@ package unicash.ui;
 import java.nio.file.Paths;
 import java.util.concurrent.TimeoutException;
 
+import javafx.scene.input.KeyCode;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -51,6 +52,9 @@ public class MainAppUiTest {
         Assertions.assertTrue(rollingBalanceNode.isPresent());
         var rollingBalanceNodeLabel = (Label) rollingBalanceNode.get();
         var userPrefs = new UserPrefs();
+        robot.clickOn("#commandBoxPlaceholder");
+        robot.write("reset_unicash");
+        robot.press(KeyCode.ENTER);
         Assertions.assertEquals(rollingBalanceNodeLabel.getText(), "Rolling Balance: $1593.20");
     }
 
