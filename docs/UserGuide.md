@@ -946,14 +946,25 @@ Important notes:
 
 > **Case**: More than 5 categories with valid compulsory fields.
 >
-> **Input
-**: `add_transaction n/Buying groceries type/expense amt/300 c/household c/entertainment c/education c/fun c/school c/test`
+> **Input**: `add_transaction n/Buying groceries type/expense amt/300 c/household c/entertainment c/education c/fun c/school c/test`
 >
 > **Output**:
 > ```
 > There should only be a maximum of 5 unique categories.
 > ```
 > > <img src="images/unicash/command-outputs/addTransactionFailedOutput3.png" width="1000" />
+
+###### Example 4
+
+> **Case**: More than 100,000 transactions added.
+>
+> **Input**: `add n/test amt/300 type/expense`
+>
+> **Output**:
+> ```
+> UniCa$h supports up to a maximum of 100,000 transactions.
+> ```
+> > <img src="images/unicash/command-outputs/addTransactionFailedOutput4.png" width="1000" />
 
 #### 4.1.2 EditTransactionCommand
 
