@@ -73,13 +73,11 @@ public class GetBudgetCommand extends Command {
                 .map(this::getAmountByType)
                 .reduce(budget.getAmount().amount, Double::sum, Double::sum);
 
-        var roundedRemainder = (calculatedRemainder * 100.0) / 100.0;
-
         return new CommandResult(String.format(
                 MESSAGE_SUCCESS,
                 intervalString,
                 budget.getAmount().toString(),
-                roundedRemainder
+                calculatedRemainder
         ));
     }
 
