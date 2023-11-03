@@ -64,13 +64,13 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 [//]: # ()
 [//]: # (#### 3.4.4. Configuration & DevOps)
 
----
-
 ### Terminology
 
 | Term        | Meaning                                                                                           |
 |-------------|---------------------------------------------------------------------------------------------------|
 | Transaction | Represents both an expense or an income. Expenses cause a net loss while incomes cause a net gain |
+
+---
 
 ## Feature Tracking
 
@@ -404,7 +404,6 @@ UI testing is achieved using [JUnit 5](https://junit.org/junit5/) and [TestFX](h
 To initialize a test class to work with TestFX, annotate it with the following:
 
 ```java
-
 @ExtendWith(ApplicationExtension.class)
 public class HelpWindowUiTest {
 ```
