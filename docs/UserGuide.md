@@ -1413,8 +1413,18 @@ containing a link to our User Guide.
 > <img src="images/unicash/HelpFailed1.png" width="1000" />
 
 #### Reset UniCa$h
+Resets UniCa$h to its default state.
+
+Command: `reset_unicash`
+
+Command Words Accepted: `reset_unicash` (case-insensitive)
 
 #### Exit UniCa$h
+Exit UniCa$h.
+
+Command: `exit`
+
+Command Words Accepted: `exit`, `quit`, `bye` (case-insensitive)
 
 ### Summary
 
