@@ -226,7 +226,7 @@ Adds a new `Transaction` to UniCa$h.
 
 Command: `add_transaction n/NAME type/TYPE amt/AMOUNT [dt/DATETIME] [l/LOCATION] [c/CATEGORY]`
 
-Command Words Accepted: `add_transaction`, `add`, `at`
+Command Words Accepted: `add_transaction`, `add`, `at` (case-insensitive)
 
 Command Options:
 
@@ -354,7 +354,7 @@ Edits an existing transaction in UniCa$h.
 
 Command: `edit_transaction INDEX [n/NAME] [type/TYPE] [amt/AMOUNT] [dt/DATETIME] [l/LOCATION] [c/CATEGORY]`
 
-Command Words Accepted: `edit_transaction`, `edit`, `et`
+Command Words Accepted: `edit_transaction`, `edit`, `et` (case-insensitive)
 
 Command Options:
 
@@ -522,7 +522,7 @@ Deletes a `Transaction` from UniCa$h.
 
 Command: `delete_transaction INDEX`
 
-Command Words Accepted: `delete_transaction`, `delete`, `del`
+Command Words Accepted: `delete_transaction`, `delete`, `del` (case-insensitive)
 
 Command Argument: `<INDEX>` is the displayed transaction index
 of the transaction to be deleted, as shown in the `Transactions List`.
@@ -632,7 +632,7 @@ Retrieves a `Transaction` from UniCa$h.
 
 Command: `get <INDEX>`
 
-Command Words Accepted: `get`, `g`
+Command Words Accepted: `get`, `g` (case-insensitive)
 
 Command Argument: `<INDEX>` is the displayed transaction index
 of the transaction to be retrieved, as shown in the `Transactions List`.
@@ -743,7 +743,7 @@ Finds a `Transaction` in UniCa$h.
 
 Command: `find [n/NAME] [l/LOCATION] [c/CATEGORY]`
 
-Command Words Accepted: `find`, `search`, `f`
+Command Words Accepted: `find`, `search`, `f` (case-insensitive)
 
 Command Argument: `<INDEX>` is the displayed transaction index
 of the transaction to be retrieved, as shown in the `Transactions List`.
@@ -828,7 +828,7 @@ Clears all transactions in UniCa$h.
 
 Command: `clear_transactions`
 
-Command Words Accepted: `clear_transactions`
+Command Words Accepted: `clear_transactions` (case-insensitive)
 
 ### Budget Management
 
@@ -969,7 +969,7 @@ Clears the user's budget set in UniCa$h. If no budget is set yet, the user is pr
 
 Command: `clear_budget`
 
-Command Words Accepted: `clear_budget`, `cb`
+Command Words Accepted: `clear_budget`, `cb` (case-insensitive)
 
 Command Options: This command does not take in any arguments and will not process any arguments.
 
@@ -1013,6 +1013,8 @@ If no budget has been set, the user will be prompted to set one first instead.
 The user's spending is calculated by: `budget - interval expenses`.
 
 Command: `get_budget`
+
+Command Words Accepted: `get_budget`, `gb` (case-insensitive)
 
 Command Options: This command does not take in any arguments and will not process any arguments.
 
@@ -1059,7 +1061,7 @@ Use `list` to view all transactions again.
 
 Command: `get_total_expenditure month/Month [c/Category] [year/Year]`
 
-Command Words Accepted: `get_total_expenditure`, `get_total_exp`, `gte`
+Command Words Accepted: `get_total_expenditure`, `get_total_exp`, `gte` (case-insensitive)
 
 Command Options:
 
@@ -1262,7 +1264,7 @@ Displays a summary of the expenses saved in UniCa$h.
 
 Command: `summary`
 
-Command Words Accepted: `summary`
+Command Words Accepted: `summary` (case-insensitive)
 
 Important notes:
 
@@ -1326,7 +1328,7 @@ Get help for UniCa$h.
 
 Command: `help COMMAND_WORD`
 
-Command Words Accepted: `help`, `h`
+Command Words Accepted: `help`, `h` (case-insensitive)
 
 Command Argument: `COMMAND_WORD` is the command to get help for. If no
 argument is specified, a general help message is shown as well as a pop up
