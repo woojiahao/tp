@@ -364,7 +364,156 @@ The `UI` component is also responsible for:
 
 ### Storage Component
 
-### Continuous Integration
+### Continuous Integration (CI)
+
+Continuous integration consists of the following:
+
+1. General unit testing
+2. UI testing
+3. Automated testing on push & pull request on Github
+4. Code coverage reporting
+
+#### Github Actions Primer
+
+Before diving into the various CI components, it would be good to cover some fundamental concepts about [Github Actions.](https://docs.github.com/en/actions)
+
+Github Actions is used to execute a set of behavior on a repository.
+
+Github Actions are created as YAML configuration files found in the `.github/workflows` folder.
+
+For UniCa$h, Github Actions are broken down into the following components:
+
+1. Trigger: dictates when the action is run
+2. Strategy & matrix: specifies the platform (OS) and any relevant versions to run the steps
+3. Steps: consists of individual steps that can use other Github Actions to perform a set of actions in sequential order
+
+#### General unit testing
+
+General unit tests cover any non-UI related aspect of UniCa$h such as models, commands, and utility.
+
+General unit testing is achieved using [JUnit 5](https://junit.org/junit5/) with a combination of several custom built
+assertion methods like `CommandTestUtil#assertCommandSuccess` to improve the quality of life when testing.
+
+#### UI testing
+
+UI testing provides a way for us to automate some manual tests by simulating button clicks and user inputs
+into the UI to assert that the UI responds appropriately.
+
+UI testing is achieved using [JUnit 5](https://junit.org/junit5/) and [TestFX](https://github.com/TestFX/TestFX).
+
+To initialize a test class to work with TestFX, annotate it with the following:
+
+```java
+
+@ExtendWith(ApplicationExtension.class)
+public class HelpWindowUiTest {
+```
+
+This leverages [JUnit 5's built-in extensions system](https://junit.org/junit5/docs/current/user-guide/#extensions) to
+inject an `FxRobot` argument in each unit test. This `FxRobot` instance is used as a driver to perform UI operations on
+the running UI, such as performing clicks, entering text, and performing keyboard inputs, along with searching for UI
+elements by `fx:id`.
+
+```java
+@Test
+public void userInput_help_showHelpWindowAsRoot(FxRobot robot)throws TimeoutException{
+    var beforeHelpContainer=robot.lookup("#helpMessageContainer").tryQuery();
+    assertTrue(beforeHelpContainer.isEmpty());
+    robot.clickOn("#commandBoxPlaceholder");
+    robot.write("help");
+    robot.press(KeyCode.ENTER);
+    var afterHelp=robot.lookup("#helpMessageContainer").tryQuery();
+    assertTrue(afterHelp.isPresent());
+}
+```
+
+There are two methods of initializing UI tests with TestFX.
+
+##### Using `@Start`
+
+When defining a `@Start` method, a `Stage` is injected through
+the [test runner](https://junit.org/junit5/docs/current/user-guide/#writing-tests-dependency-injection) and this
+allows you to initialize a new `Stage` with custom UI components.
+
+This is especially useful when working with individual UI components like `HelpWindow` and `TransactionCard` as it
+provides a medium to render these elements without running the entire UI.
+
+```java
+@Start
+public void start(Stage stage) {
+    helpWindow=new HelpWindow(stage);
+    stage.show();
+}
+```
+
+The `@Start` method is run before each test case.
+
+##### Using `@BeforeEach`
+
+When performing a general set of integration tests across the entire UI (like simulating user input to execution to
+view the resulting UI changes), it is best to define a `@BeforeEach` method instead that uses `FxToolkit` to setup
+the application (in this case, `MainApp`) with any given setup parameters like default storage location.
+
+It is important to note that if testing the entire application, a temporary storage file should be defined and
+provided for `MainApp` to avoid directly modifying the save data on your local machine.
+
+```java
+@TempDir
+Path tempDir;
+
+@BeforeEach
+public void runAppToTests() throws TimeoutException {
+    FxToolkit.registerPrimaryStage();
+    FxToolkit.setupApplication(()->new MainApp(tempDir.resolve("ui_data.json")));
+    FxToolkit.showStage();
+    WaitForAsyncUtils.waitForFxEvents(20);
+}
+```
+
+The `@BeforeEach` method is run before each test case.
+
+It is also good convention to include a `@AfterEach` method to clean up the stages created during `@BeforeEach` so
+that all resources are freed after every unit test:
+
+```java
+@AfterEach
+public void stopApp() throws TimeoutException{
+    FxToolkit.cleanupStages();
+}
+```
+
+#### Automated testing on push & pull request on Github
+
+Automated testing is achieved via the `.github/workflows/unit_test.yml` action.
+
+Automated testing is triggered on every push and pull request and is run across all three major OSes: Ubuntu, MacOS, and Windows, and comprise of the following steps:
+
+<img src="images/unicash/ci/AutomatedTestingActivityDiagram.png" width="368" />
+
+UI tests are only run on Windows as both Linux and MacOS requires headless UI testing which is not well supported with Github Actions.
+
+#### Code coverage reporting
+
+Code coverage is generated using Github Actions and Gradle and uploaded to [Codecov.](https://app.codecov.io/gh/AY2324S1-CS2103-T16-3)
+
+Code coverage includes both general unit tests and UI tests, and reporting is achieved through the `.github/workflows/gradle.yml` action.
+
+Similar to automated testing, code coverage reporting is triggered on every push and pull request and is run across all three major OSes.
+
+<img src="images/unicash/ci/CodeCoverageReportingActivityDiagram.png" width="368" />
+
+To ensure that code coverage reporting includes both general unit tests and UI tests, the following changes have been made to `build.gradle`:
+
+1. A new Gradle task `uiTest` was created to only run UI tests that end with `UiTest`
+2. The default `test` task is configured to exclude such files
+3. The `jacocoTestReport` task is modified to only depend on (i.e. run before) the `uiTest` task is the system's OS is not MacOS, Ubuntu or *nux (i.e. Windows only).
+4. The `coverage` task includes every `*.exec` file generated from both `uiTest` and `test` so that both coverage reports are available to Codecov
+
+These changes aim to work around the limitation of needing a headless environment in Github Actions as only Windows is able to perform UI tests on Github Action's runners.
+
+The Github action for reporting the code coverage only uploads the coverage reports to Codecov if the runner is Windows as that is when there is a complete code coverage report.
+
+By introducing UI testing into the code coverage reporting, we have been able to achieve a code coverage of > 85%!
 
 ### General Classes and Components
 
@@ -605,156 +754,6 @@ efficient way to achieve the same effect would be to simply set the `Model` cont
 `UniCash` object, as the newly created `UniCash` object would now have an empty `TransactionList` encapsulated within.
 This emulates the iterative deletion of all transactions in the `TransactionList`.
 
-## Continuous Integration (CI)
-
-Continuous integration consists of the following:
-
-1. General unit testing
-2. UI testing
-3. Automated testing on push & pull request on Github
-4. Code coverage reporting
-
-### Github Actions Primer
-
-Before diving into the various CI components, it would be good to cover some fundamental concepts about [Github Actions.](https://docs.github.com/en/actions)
-
-Github Actions is used to execute a set of behavior on a repository.
-
-Github Actions are created as YAML configuration files found in the `.github/workflows` folder.
-
-For UniCa$h, Github Actions are broken down into the following components:
-
-1. Trigger: dictates when the action is run
-2. Strategy & matrix: specifies the platform (OS) and any relevant versions to run the steps
-3. Steps: consists of individual steps that can use other Github Actions to perform a set of actions in sequential order
-
-### General unit testing
-
-General unit tests cover any non-UI related aspect of UniCa$h such as models, commands, and utility.
-
-General unit testing is achieved using [JUnit 5](https://junit.org/junit5/) with a combination of several custom built
-assertion methods like `CommandTestUtil#assertCommandSuccess` to improve the quality of life when testing.
-
-### UI testing
-
-UI testing provides a way for us to automate some manual tests by simulating button clicks and user inputs
-into the UI to assert that the UI responds appropriately.
-
-UI testing is achieved using [JUnit 5](https://junit.org/junit5/) and [TestFX](https://github.com/TestFX/TestFX).
-
-To initialize a test class to work with TestFX, annotate it with the following:
-
-```java
-
-@ExtendWith(ApplicationExtension.class)
-public class HelpWindowUiTest {
-```
-
-This leverages [JUnit 5's built-in extensions system](https://junit.org/junit5/docs/current/user-guide/#extensions) to
-inject an `FxRobot` argument in each unit test. This `FxRobot` instance is used as a driver to perform UI operations on
-the running UI, such as performing clicks, entering text, and performing keyboard inputs, along with searching for UI
-elements by `fx:id`.
-
-```java
-@Test
-public void userInput_help_showHelpWindowAsRoot(FxRobot robot)throws TimeoutException{
-    var beforeHelpContainer=robot.lookup("#helpMessageContainer").tryQuery();
-    assertTrue(beforeHelpContainer.isEmpty());
-    robot.clickOn("#commandBoxPlaceholder");
-    robot.write("help");
-    robot.press(KeyCode.ENTER);
-    var afterHelp=robot.lookup("#helpMessageContainer").tryQuery();
-    assertTrue(afterHelp.isPresent());
-}
-```
-
-There are two methods of initializing UI tests with TestFX.
-
-#### Using `@Start`
-
-When defining a `@Start` method, a `Stage` is injected through
-the [test runner](https://junit.org/junit5/docs/current/user-guide/#writing-tests-dependency-injection) and this
-allows you to initialize a new `Stage` with custom UI components.
-
-This is especially useful when working with individual UI components like `HelpWindow` and `TransactionCard` as it
-provides a medium to render these elements without running the entire UI.
-
-```java
-@Start
-public void start(Stage stage) {
-    helpWindow=new HelpWindow(stage);
-    stage.show();
-}
-```
-
-The `@Start` method is run before each test case.
-
-#### Using `@BeforeEach`
-
-When performing a general set of integration tests across the entire UI (like simulating user input to execution to
-view the resulting UI changes), it is best to define a `@BeforeEach` method instead that uses `FxToolkit` to setup
-the application (in this case, `MainApp`) with any given setup parameters like default storage location.
-
-It is important to note that if testing the entire application, a temporary storage file should be defined and
-provided for `MainApp` to avoid directly modifying the save data on your local machine.
-
-```java
-@TempDir
-Path tempDir;
-
-@BeforeEach
-public void runAppToTests() throws TimeoutException {
-    FxToolkit.registerPrimaryStage();
-    FxToolkit.setupApplication(()->new MainApp(tempDir.resolve("ui_data.json")));
-    FxToolkit.showStage();
-    WaitForAsyncUtils.waitForFxEvents(20);
-}
-```
-
-The `@BeforeEach` method is run before each test case.
-
-It is also good convention to include a `@AfterEach` method to clean up the stages created during `@BeforeEach` so
-that all resources are freed after every unit test:
-
-```java
-@AfterEach
-public void stopApp() throws TimeoutException{
-    FxToolkit.cleanupStages();
-}
-```
-
-### Automated testing on push & pull request on Github
-
-Automated testing is achieved via the `.github/workflows/unit_test.yml` action.
-
-Automated testing is triggered on every push and pull request and is run across all three major OSes: Ubuntu, MacOS, and Windows, and comprise of the following steps:
-
-<img src="images/unicash/ci/AutomatedTestingActivityDiagram.png" width="368" />
-
-UI tests are only run on Windows as both Linux and MacOS requires headless UI testing which is not well supported with Github Actions.
-
-### Code coverage reporting
-
-Code coverage is generated using Github Actions and Gradle and uploaded to [Codecov.](https://app.codecov.io/gh/AY2324S1-CS2103-T16-3)
-
-Code coverage includes both general unit tests and UI tests, and reporting is achieved through the `.github/workflows/gradle.yml` action.
-
-Similar to automated testing, code coverage reporting is triggered on every push and pull request and is run across all three major OSes.
-
-<img src="images/unicash/ci/CodeCoverageReportingActivityDiagram.png" width="368" />
-
-To ensure that code coverage reporting includes both general unit tests and UI tests, the following changes have been made to `build.gradle`:
-
-1. A new Gradle task `uiTest` was created to only run UI tests that end with `UiTest`
-2. The default `test` task is configured to exclude such files
-3. The `jacocoTestReport` task is modified to only depend on (i.e. run before) the `uiTest` task is the system's OS is not MacOS, Ubuntu or *nux (i.e. Windows only).
-4. The `coverage` task includes every `*.exec` file generated from both `uiTest` and `test` so that both coverage reports are available to Codecov
-
-These changes aim to work around the limitation of needing a headless environment in Github Actions as only Windows is able to perform UI tests on Github Action's runners.
-
-The Github action for reporting the code coverage only uploads the coverage reports to Codecov if the runner is Windows as that is when there is a complete code coverage report.
-
-By introducing UI testing into the code coverage reporting, we have been able to achieve a code coverage of > 90%!
 #### Help 
 
 ##### Overview
