@@ -1493,6 +1493,50 @@ whose name contains the String `Lunch with friends` and not `Lunch`, `with`, and
 exact match is not required as a transaction with the name `Lunch with friends outside` contains the above substring
 and therefore it will be flagged as a match.
 
+##### Successful Execution
+
+###### Example 1
+
+> **Case**: Retrieve a transaction with the correctly specified options.
+>
+> **Input**: `find n/friends`
+>
+> **Output**:
+> ```
+> 
+> 1 Transactions listed!
+> 
+> ```
+> Input:
+> <img src="images/unicash/command-outputs/find/FindCommandSuccessInitial1.png" width="1000" />
+> 
+> Output:
+> <img src="images/unicash/command-outputs/find/FindSuccess1.png" width="1000" />
+
+##### Failed Execution
+
+###### Example 1
+
+> **Case**: Command entered with no parameters
+>
+> **Input**: `find`
+>
+> **Output**:
+> ```
+> Invalid command format! 
+> 
+> find, search, f: Finds all transactions whose properties match all of thespecified keywords (case-insensitive) and displays them as a list with index numbers.
+> 
+> Only one keyword can be specified for each property and at least one keyword must be provided in total.
+> 
+> Parameters: [n/Name] [type/Type] [amt/Amount] [dt/DateTime] [l/Location] [c/Category]
+> 
+> Example: find, search, f n/Buying groceries type/expense amt/300 dt/18-08-2023 19:30 l/NTUC c/Food
+> 
+> ```
+> Output:
+> <img src="images/unicash/command-outputs/find/FindFailure1.png" width="1000" />
+> 
 #### 4.1.6 ListCommand
 
 #### 4.1.7 ClearTransactionsCommand
