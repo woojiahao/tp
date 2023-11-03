@@ -226,6 +226,8 @@ Adds a new `Transaction` to UniCa$h.
 
 Command: `add_transaction n/NAME type/TYPE amt/AMOUNT [dt/DATETIME] [l/LOCATION] [c/CATEGORY]`
 
+Command Words Accepted: `add_transaction`, `add`, `at`
+
 Command Options:
 
 | Option Name | Optional? | Purpose                                                                                       |
@@ -351,6 +353,8 @@ Important notes:
 Edits an existing transaction in UniCa$h.
 
 Command: `edit_transaction INDEX [n/NAME] [type/TYPE] [amt/AMOUNT] [dt/DATETIME] [l/LOCATION] [c/CATEGORY]`
+
+Command Words Accepted: `edit_transaction`, `edit`, `et`
 
 Command Options:
 
@@ -518,7 +522,7 @@ Deletes a `Transaction` from UniCa$h.
 
 Command: `delete_transaction INDEX`
 
-Command Word: `delete_transaction` (case-insensitive)
+Command Words Accepted: `delete_transaction`, `delete`, `del`
 
 Command Argument: `<INDEX>` is the displayed transaction index
 of the transaction to be deleted, as shown in the `Transactions List`.
@@ -628,7 +632,7 @@ Retrieves a `Transaction` from UniCa$h.
 
 Command: `get <INDEX>`
 
-Command Word: `get` (case-insensitive)
+Command Words Accepted: `get`, `g`
 
 Command Argument: `<INDEX>` is the displayed transaction index
 of the transaction to be retrieved, as shown in the `Transactions List`.
@@ -739,7 +743,7 @@ Finds a `Transaction` in UniCa$h.
 
 Command: `find [n/NAME] [l/LOCATION] [c/CATEGORY]`
 
-Command Word: `find` (case-insensitive)
+Command Words Accepted: `find`, `search`, `f`
 
 Command Argument: `<INDEX>` is the displayed transaction index
 of the transaction to be retrieved, as shown in the `Transactions List`.
@@ -813,8 +817,18 @@ and therefore it will be flagged as a match.
 > 
 
 #### List Transactions
+Shows the list of all transactions in UniCa$h.
+
+Command: `list`
+
+Command Words Accepted: `list`, `ls`
 
 #### Clear Transactions
+Clears all transactions in UniCa$h.
+
+Command: `clear_transactions`
+
+Command Words Accepted: `clear_transactions`
 
 ### Budget Management
 
@@ -829,6 +843,8 @@ amount.
 Sets the user's budget on UniCa$h to be a given amount and within a given interval.
 
 Command: `set_budget amt/AMOUNT interval/INTERVAL`
+
+Command Words Accepted: `set_budget`, `sb`, `budget`
 
 Command Options:
 
@@ -953,6 +969,8 @@ Clears the user's budget set in UniCa$h. If no budget is set yet, the user is pr
 
 Command: `clear_budget`
 
+Command Words Accepted: `clear_budget`, `cb`
+
 Command Options: This command does not take in any arguments and will not process any arguments.
 
 ##### Successful Execution
@@ -1040,6 +1058,8 @@ by the given month, year, and category.
 Use `list` to view all transactions again.
 
 Command: `get_total_expenditure month/Month [c/Category] [year/Year]`
+
+Command Words Accepted: `get_total_expenditure`, `get_total_exp`, `gte`
 
 Command Options:
 
@@ -1242,6 +1262,8 @@ Displays a summary of the expenses saved in UniCa$h.
 
 Command: `summary`
 
+Command Words Accepted: `summary`
+
 Important notes:
 
 1. Expected Behaviour: The summary of expenses is a pop-up window. If there are no expenses saved in UniCa$h, the pop-up
@@ -1303,6 +1325,8 @@ Important notes:
 Get help for UniCa$h.
 
 Command: `help COMMAND_WORD`
+
+Command Words Accepted: `help`, `h`
 
 Command Argument: `COMMAND_WORD` is the command to get help for. If no
 argument is specified, a general help message is shown as well as a pop up
