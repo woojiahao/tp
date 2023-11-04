@@ -268,8 +268,6 @@ Important notes:
 > Location: ntuc;
 > Categories: #household
 > ```
->
-> <img src="images/unicash/command-outputs/addTransactionSuccessOutput1.png" width="1000" />
 
 ###### Example 2
 
@@ -288,8 +286,6 @@ Important notes:
 > Location: -;
 > Categories:
 > ```
->
-> <img src="images/unicash/command-outputs/addTransactionSuccessOutput2.png" width="1000" />
 
 ##### Failed Execution
 
@@ -309,7 +305,6 @@ Important notes:
 >
 > Example: add_transaction n/Buying groceries type/expense amt/300 dt/18-08-2023 19:30 l/ntuc c/household
 > ```
-> <img src="images/unicash/command-outputs/addTransactionFailedOutput1.png" width="1000" />
 
 ###### Example 2
 
@@ -321,7 +316,6 @@ Important notes:
 > ```
 > All categories must be case-insensitively unique, duplicate categories are not allowed.
 > ```
-> <img src="images/unicash/command-outputs/addTransactionFailedOutput2.png" width="1000" />
 
 ###### Example 3
 
@@ -334,7 +328,6 @@ Important notes:
 > ```
 > There should only be a maximum of 5 unique categories.
 > ```
-> > <img src="images/unicash/command-outputs/addTransactionFailedOutput3.png" width="1000" />
 
 ###### Example 4
 
@@ -346,7 +339,6 @@ Important notes:
 > ```
 > UniCa$h supports up to a maximum of 100,000 transactions.
 > ```
-> > <img src="images/unicash/command-outputs/addTransactionFailedOutput4.png" width="1000" />
 
 #### Edit Transaction
 
@@ -375,6 +367,13 @@ Important notes:
 2. You must provide a non-empty value for the `Name`, `Type`, and `Amount` fields if you wish to edit them; they cannot
    be left empty.
 3. The `INDEX` option must be specified first. The order in which you specify the other options does not matter.
+4. Modifying a transaction's category will result in the replacement of all existing categories. 
+   - For example, in the case of a `Transaction` with two existing categories (Entertainment and Hobbies), editing it with `edit INDEX c/Education` will replace all existing categories, leaving the transaction with a single category, Education."
+
+
+
+
+  
 
 ##### Successful Execution
 
@@ -1347,7 +1346,7 @@ containing a link to our User Guide.
 > **Output**:
 > ```
 > Welcome to UniCa$h!
-> 
+>
 > For more detailed help on a command: help COMMAND_WORD
 >
 > Available Commands:
@@ -1363,8 +1362,8 @@ containing a link to our User Guide.
 > get_budget
 >
 > clear_budget
-> clear
-> reset
+> clear_transactions
+> reset_unicash
 >
 > help
 > exit
@@ -1388,8 +1387,6 @@ containing a link to our User Guide.
 >
 > Example: add_transaction n/Buying groceries type/expense amt/300 dt/18-08-2023 19:30 l/NTUC c/Food
 > ```
->
-> <img src="images/unicash/HelpSuccess2.png" width="1000" />
 
 ##### Failed Execution
 
@@ -1409,8 +1406,6 @@ containing a link to our User Guide.
 >
 > Example: help add_transaction
 > ```
->
-> <img src="images/unicash/HelpFailed1.png" width="1000" />
 
 #### Reset UniCa$h
 Resets UniCa$h to its default state.
