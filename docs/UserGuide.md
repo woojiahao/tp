@@ -375,6 +375,13 @@ Important notes:
 2. You must provide a non-empty value for the `Name`, `Type`, and `Amount` fields if you wish to edit them; they cannot
    be left empty.
 3. The `INDEX` option must be specified first. The order in which you specify the other options does not matter.
+4. Modifying a transaction's category will result in the replacement of all existing categories. 
+   - For example, in the case of a `Transaction` with two existing categories (Entertainment and Hobbies), editing it with `edit INDEX c/Education` will replace all existing categories, leaving the transaction with a single category, Education."
+
+
+
+
+  
 
 ##### Successful Execution
 
