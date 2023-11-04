@@ -1347,7 +1347,7 @@ containing a link to our User Guide.
 > **Output**:
 > ```
 > Welcome to UniCa$h!
-> 
+>
 > For more detailed help on a command: help COMMAND_WORD
 >
 > Available Commands:
@@ -1363,8 +1363,8 @@ containing a link to our User Guide.
 > get_budget
 >
 > clear_budget
-> clear
-> reset
+> clear_transactions
+> reset_unicash
 >
 > help
 > exit
