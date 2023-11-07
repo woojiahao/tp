@@ -66,8 +66,12 @@ Commands in UniCa$h have the following structure:
 
 **Notes:**
 
-1. `INDEX` values that are `< 1` will throw an `ParseException` while values that are greater than supported range will throw an equivalent "out-of-bounds" error.
-2. `INDEX` uses positive integers which we define as integers that are strictly greater than `0`. 
+1. `INDEX` uses positive integers which we define as integers that are strictly greater than `0`. 
+2. UniCa$h divides the error handling for `INDEX` into two cases, non-positive integers, i.e. `<= 0` values, are treated as invalid command formats while values that exceed the transaction list will be treated as being an invalid index as the supported values are `[1, transaction list size]`.
+
+<div class="callout callout-info" markdown="span">
+For more clarity about how commands are parsed and why `INDEX` is parsed this way, please refer to our [developer guide](DeveloperGuide.html#delete-transaction) on how some commands like `delete_transaction` handles `INDEX`.
+</div>
 
 #### Prefixes
 
