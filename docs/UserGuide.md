@@ -861,7 +861,7 @@ Important notes:
 
 ##### Successful Execution
 
-###### Example 1
+**Example 1**
 
 > **Case**: Set budget of $600 for every month.
 >
@@ -877,7 +877,7 @@ Important notes:
 
 ##### Failed Execution
 
-###### Example 1
+**Example 1**
 
 > **Case**: Missing amount.
 >
@@ -894,7 +894,7 @@ Important notes:
 > Example: set_budget amt/300 interval/day
 > ```
 
-###### Example 2
+**Example 2**
 
 > **Case**: Missing interval.
 >
@@ -911,7 +911,7 @@ Important notes:
 > Example: set_budget amt/300 interval/day
 > ```
 
-###### Example 3
+**Example 3**
 
 > **Case**: No fields.
 >
@@ -928,7 +928,7 @@ Important notes:
 > Example: set_budget amt/300 interval/day
 > ```
 
-###### Example 4
+**Example 4**
 
 > **Case**: Negative amount.
 >
@@ -939,7 +939,7 @@ Important notes:
 > Amounts must be within range of [0, 2,147,483,647] and either start with $ or nothing at all
 > ```
 
-###### Example 5
+**Example 5**
 
 > **Case**: Invalid interval value.
 >
@@ -962,7 +962,7 @@ Command Options: This command does not take in any arguments and will not proces
 
 ##### Successful Execution
 
-###### Example 1
+**Example 1**
 
 > **Case**: Clear user set budget.
 >
@@ -973,7 +973,7 @@ Command Options: This command does not take in any arguments and will not proces
 > Budget cleared.
 > ```
 
-###### Example 2
+**Example 2**
 
 > **Case**: Clear without set budget.
 >
@@ -1003,7 +1003,7 @@ Command Options: This command does not take in any arguments and will not proces
 
 ##### Successful Execution
 
-###### Example 1
+**Example 1**
 
 > **Case**: Get user's set budget and spending remainder.
 >
@@ -1016,7 +1016,7 @@ Command Options: This command does not take in any arguments and will not proces
 > Net amount of $585.00
 > ```
 
-###### Example 2
+**Example 2**
 
 > **Case**: Get budget without budget set.
 >
@@ -1059,7 +1059,7 @@ Important notes:
 
 ##### Successful Execution
 
-###### Example 1
+**Example 1**
 
 > Case: Get total expenditure with month only.
 >
@@ -1072,7 +1072,7 @@ Important notes:
 > 
 > <img src="images/unicash/command-outputs/get-total-expenditure/getTotalExpenditureMonthOnlySuccess.png">
 
-###### Example 2
+**Example 2**
 
 > Case: Get total expenditure with month and year.
 >
@@ -1083,7 +1083,7 @@ Important notes:
 > Your total expenditure in October 2023 was $1028.00
 > ```
 
-###### Example 3
+**Example 3**
 
 > Case: Get total expenditure with month and category.
 >
@@ -1094,7 +1094,7 @@ Important notes:
 > Your total expenditure in September 2023 for "social" was $49.50
 > ```
 
-###### Example 4
+**Example 4**
 
 > Case: Get total expenditure with month, category, and year.
 >
@@ -1105,7 +1105,7 @@ Important notes:
 > Your total expenditure in September 2023 for "shopping" was $109.00
 > ```
 
-###### Example 5
+**Example 5**
 
 > Case: Get total expenditure but no matches.
 >
@@ -1118,7 +1118,7 @@ Important notes:
 
 ##### Failed Execution
 
-###### Example 1
+**Example 1**
 
 > Case: No month provided.
 >
@@ -1135,7 +1135,7 @@ Important notes:
 > Example: get_total_expenditure month/10 c/Food year/2006
 > ```
 
-###### Example 2
+**Example 2**
 
 > Case: Negative month.
 >
@@ -1146,7 +1146,7 @@ Important notes:
 > Month must be between 1 and 12 (inclusive).
 > ```
 
-###### Example 3
+**Example 3**
 
 > Case: Month greater than 12.
 >
@@ -1157,7 +1157,7 @@ Important notes:
 > Month must be between 1 and 12 (inclusive).
 > ```
 
-###### Example 4
+**Example 4**
 
 > Case: Month is not an integer.
 >
@@ -1168,7 +1168,7 @@ Important notes:
 > Invalid month value, must be an integer!
 > ```
 
-###### Example 5
+**Example 5**
 
 > Case: Year is less than 1920.
 >
@@ -1179,7 +1179,7 @@ Important notes:
 > Year must be after 1920.
 > ```
 
-###### Example 6
+**Example 6**
 
 > Case: Year is not an integer.
 >
@@ -1190,7 +1190,7 @@ Important notes:
 > Invalid year value, must be an integer!
 > ```
 
-###### Example 7
+**Example 7**
 
 > Case: Category contains non-alphanumeric characters.
 >
@@ -1201,7 +1201,7 @@ Important notes:
 > Category names should be alphanumeric and up to 15 characters long.
 > ```
 
-###### Example 8
+**Example 8**
 
 > Case: Category length is greater than 15.
 >
