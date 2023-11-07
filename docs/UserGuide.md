@@ -874,8 +874,6 @@ Important notes:
 > Amount: $600.00;
 > Interval: month
 > ```
->
-> <img src="images/unicash/command-outputs/set-budget/setBudgetSuccessOutput.png" width="1000" />
 
 ##### Failed Execution
 
@@ -895,8 +893,6 @@ Important notes:
 >
 > Example: set_budget amt/300 interval/day
 > ```
->
-> <img src="images/unicash/command-outputs/set-budget/setBudgetFailureNoAmount.png" width="1000">
 
 ###### Example 2
 
@@ -914,8 +910,6 @@ Important notes:
 >
 > Example: set_budget amt/300 interval/day
 > ```
->
-> <img src="images/unicash/command-outputs/set-budget/setBudgetFailureNoInterval.png" width="1000">
 
 ###### Example 3
 
@@ -933,8 +927,6 @@ Important notes:
 >
 > Example: set_budget amt/300 interval/day
 > ```
->
-> <img src="images/unicash/command-outputs/set-budget/setBudgetFailureNoArguments.png" width="1000">
 
 ###### Example 4
 
@@ -946,8 +938,6 @@ Important notes:
 > ```
 > Amounts must be within range of [0, 2,147,483,647] and either start with $ or nothing at all
 > ```
->
-> <img src="images/unicash/command-outputs/set-budget/setBudgetFailureNegativeAmount.png" width="1000">
 
 ###### Example 5
 
@@ -959,8 +949,6 @@ Important notes:
 > ```
 > Interval value must be one of the following: day, week, month
 > ```
->
-> <img src="images/unicash/command-outputs/set-budget/setBudgetFailureInvalidInterval.png" width="1000">
 
 #### Clear Budget
 
@@ -984,8 +972,6 @@ Command Options: This command does not take in any arguments and will not proces
 > ```
 > Budget cleared.
 > ```
->
-> <img src="images/unicash/command-outputs/clear-budget/clearBudgetSuccess.png" width="1000" />
 
 ###### Example 2
 
@@ -999,8 +985,6 @@ Command Options: This command does not take in any arguments and will not proces
 >
 > Consider using set_budget amt/Amount interval/Interval first!
 > ```
->
-> <img src="images/unicash/command-outputs/clear-budget/clearBudgetNoBudgetSuccess.png" width="1000" />
 
 #### Get Budget
 
@@ -1031,8 +1015,6 @@ Command Options: This command does not take in any arguments and will not proces
 >
 > Net amount of $585.00
 > ```
->
-> <img src="images/unicash/command-outputs/get-budget/getBudgetSuccess.png" width="1000" />
 
 ###### Example 2
 
@@ -1044,8 +1026,6 @@ Command Options: This command does not take in any arguments and will not proces
 > ```
 > No budget set. Use set_budget amt/Amount interval/Interval
 > ```
->
-> <img src="images/unicash/command-outputs/get-budget/getBudgetNoBudgetSuccess.png" width="1000" />
 
 [//]: # (TODO: maybe add failed case if more arguments provided)
 
