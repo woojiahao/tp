@@ -1089,8 +1089,8 @@ Important notes:
 > ```
 > Your total expenditure in October 2023 was $1028.00
 > ```
->
-> <img src="images/unicash/command-outputs/get-total-expenditure/getTotalExpenditureMonthOnlySuccess.png" width="1000" />
+> 
+> <img src="images/unicash/command-outputs/get-total-expenditure/getTotalExpenditureMonthOnlySuccess.png">
 
 ###### Example 2
 
@@ -1102,8 +1102,6 @@ Important notes:
 > ```
 > Your total expenditure in October 2023 was $1028.00
 > ```
->
-> <img src="images/unicash/command-outputs/get-total-expenditure/getTotalExpenditureMonthOnlySuccess.png" width="1000" />
 
 ###### Example 3
 
@@ -1115,8 +1113,6 @@ Important notes:
 > ```
 > Your total expenditure in September 2023 for "social" was $49.50
 > ```
->
-> <img src="images/unicash/command-outputs/get-total-expenditure/monthAndCategory.png" width="1000" />
 
 ###### Example 4
 
@@ -1128,9 +1124,6 @@ Important notes:
 > ```
 > Your total expenditure in September 2023 for "shopping" was $109.00
 > ```
->
->
-> <img src="images/unicash/command-outputs/get-total-expenditure/monthYearCategory.png" width="1000" />
 
 ###### Example 5
 
@@ -1142,8 +1135,6 @@ Important notes:
 > ```
 > Your total expenditure in September 2023 for "shopping" was $109.00
 > ```
->
-> <img src="images/unicash/command-outputs/get-total-expenditure/noMatch.png" width="1000" />
 
 ##### Failed Execution
 
@@ -1163,8 +1154,6 @@ Important notes:
 >
 > Example: get_total_expenditure month/10 c/Food year/2006
 > ```
->
-> <img src="images/unicash/command-outputs/get-total-expenditure/noMonth.png" width="1000" />
 
 ###### Example 2
 
@@ -1176,8 +1165,6 @@ Important notes:
 > ```
 > Month must be between 1 and 12 (inclusive).
 > ```
->
-> <img src="images/unicash/command-outputs/get-total-expenditure/negativeMonth.png" width="1000" />
 
 ###### Example 3
 
@@ -1189,8 +1176,6 @@ Important notes:
 > ```
 > Month must be between 1 and 12 (inclusive).
 > ```
->
-> <img src="images/unicash/command-outputs/get-total-expenditure/oobMonth.png" width="1000" />
 
 ###### Example 4
 
@@ -1202,8 +1187,6 @@ Important notes:
 > ```
 > Invalid month value, must be an integer!
 > ```
->
-> <img src="images/unicash/command-outputs/get-total-expenditure/nonIntMonth.png" width="1000" />
 
 ###### Example 5
 
@@ -1215,8 +1198,6 @@ Important notes:
 > ```
 > Year must be after 1920.
 > ```
->
-> <img src="images/unicash/command-outputs/get-total-expenditure/oobYear.png" width="1000" />
 
 ###### Example 6
 
@@ -1228,8 +1209,6 @@ Important notes:
 > ```
 > Invalid year value, must be an integer!
 > ```
->
-> <img src="images/unicash/command-outputs/get-total-expenditure/nonIntYear.png" width="1000" />
 
 ###### Example 7
 
@@ -1241,8 +1220,6 @@ Important notes:
 > ```
 > Category names should be alphanumeric and up to 15 characters long.
 > ```
->
-> <img src="images/unicash/command-outputs/get-total-expenditure/nonAlphanumericCategory.png" width="1000" />
 
 ###### Example 8
 
@@ -1254,8 +1231,6 @@ Important notes:
 > ```
 > Category names should be alphanumeric and up to 15 characters long.
 > ```
->
-> <img src="images/unicash/command-outputs/get-total-expenditure/longCategory.png" width="1000" />
 
 #### Summary Statistics
 
