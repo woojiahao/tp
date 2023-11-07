@@ -79,10 +79,14 @@ Prefixes are in the format:
 
 Prefixes have several variations with different notations:
 
-||Mandatory|Optional|
+||Mandatory|Optional<sup>1</sup>|
 ||---------|--------|
 |Not variadic|`prefix/Value`|`[prefix/Value]`|
 |Variadic|`prefix/Value...`|`[prefix/Value]...`|
+
+**Notes:**
+
+1. Optional fields imply that the _omission_, not the absence of value when used, is supported. This means that `l/` is **_NOT_** an optional parameter, but rather a blank one.
 
 #### Prefix Types
 
