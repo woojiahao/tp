@@ -151,7 +151,8 @@ For the following Use Cases (unless specified otherwise):
 - The System is `UniCa$h`
 - The Actor is `User`
 
-#### Use Case: UC01 - Adding a transaction
+**Use Case: UC01 - Adding a transaction**
+
 **MSS:**
 1. User enters the command to add a transaction with the correct format.
 2. User submits the request.
@@ -168,7 +169,8 @@ For the following Use Cases (unless specified otherwise):
   - 2b2. User confirms the request
   - Use case resumes at step 3.
 
-#### Use Case: UC02 - Finding a transaction
+**Use Case: UC02 - Finding a transaction**
+
 **MSS:**
 1. User enters the command to find a transaction with the correct format.
 2. User submits the request.
@@ -186,7 +188,8 @@ the filtered transaction with a success message.
   - 3a1. UniCa$h displays a message saying no results found.
   - Use Case resumes at step 1
 
-#### Use Case: UC03 - Delete a transaction
+**Use Case: UC03 - Delete a transaction**
+
 **MSS:**
 1. User enters the command to delete a transaction with the correct format.
 2. User submits the request.
@@ -206,7 +209,8 @@ the filtered transaction with a success message.
     - Use Case resumes at step 1
 
 
-#### Use Case: UC05 - Listing All Transactions
+**Use Case: UC04 - Listing All Transactions**
+
 **MSS:**
 1. User enters the command to list all transactions with the correct format (i.e. no parameters).
 2. User submits the request.
@@ -220,10 +224,11 @@ the filtered transaction with a success message.
     - Use case resumes from step 1.
 
 - 3a. There are no transactions for UniCa$h to retrieve.
-    - 3a1. UniCa$h displays a message informing the User that there are no expenses. 
+    - 3a1. UniCa$h displays no transactions, and informs the user that all transactions have been retrieved. 
     - Use Case ends.
 
-#### Use Case: UC06 - Finding a Transaction
+**Use Case: UC05 - Finding a Transaction**
+
 **MSS:**
 1. User enters the command to find transaction with the correct format.
 2. User submits the request.
@@ -243,7 +248,8 @@ the filtered transaction with a success message.
     - 3a1. UniCa$h displays a message informing the user that no results were found.
     - Use Case ends.
 
-#### Use Case: UC07 - Tabulate Total Expenditure
+**Use Case: UC06 - Tabulate Total Expenditure**
+
 **MSS:**
 1. User enters the command to tabulate total expenditure.
 2. User submits the request.
@@ -261,7 +267,8 @@ the filtered transaction with a success message.
 
   Use case resumes from Step 3.
 
-#### Use Case: UC08 - Clear all transactions
+**Use Case: UC07 - Clear all transactions**
+
 **MSS:**
 1. User enters the command to clear all transactions with the correct format. (i.e. no parameters)
 2. User submits the request.
@@ -279,7 +286,8 @@ the filtered transaction with a success message.
   - 3a1. UniCa$h displays a message saying that transactions list is empty.
   - Use Case resumes at step 1
 
-#### Use Case: UC09 - Show UniCa$h Help
+**Use Case: UC08 - Show UniCa$h Help**
+
 **MSS:**
 1. User enters the command to show help with the correct format. (i.e. no parameters)
 2. User submits the request.
@@ -292,7 +300,8 @@ the filtered transaction with a success message.
   - 2a1. UniCa$h displays an error message with the correct command format.
   - Use case resumes at step 1.
 
-#### Use Case: UC10 - Exit UniCa$h
+**Use Case: UC09 - Exit UniCa$h**
+
 **MSS:**
 1. User enters the command to exit UniCa$h with the correct format (i.e. no parameters)
 2. User submits the request. 
@@ -363,6 +372,33 @@ The `UI` component is also responsible for:
 ### Model Component
 
 ### Storage Component
+
+<img src="images/StorageClassDiagram.png" width="500">
+
+UniCa$h stores any persistent data as local [JSON files](https://www.json.org/json-en.html), located in the same folder where the JAR file is run.
+
+The following are the files that are created:
+
+- `config.json`
+- `preferences.json`
+- `data/unicash.json`
+
+[Jackson](https://github.com/FasterXML/jackson) is used for JSON (de)serialization and it relies on adapted models similar to the [Data Transfer Object pattern.](https://www.baeldung.com/java-dto-pattern)
+
+
+#### Malformed JSONs
+
+<div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
+If a JSON file is malformed, the contents will not be loaded and a log message will be printed. 
+<br><br>
+However, no proactive measures are applied to rectify the issue such as automatically deleting the file or fixing the error to avoid prescribing a fixed approach to resolving malformed JSONs.
+</div>
+
+While we do not make assumptions about the intended action when encountering a malformed JSON file, most JSON files will be overwritten at some point, so the malformed JSON should eventually be overwritten with proper JSON.
+
+For `data/unicash.json`, this occurs when adding, editing, or deleting the transaction list or updating the budget.
+
+For `config.json` and `preferences.json`, this occurs in the `MainApp#initConfig` and `MainApp#initPrefs` methods.
 
 ### Continuous Integration (CI)
 
