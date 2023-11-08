@@ -14,7 +14,8 @@ Given below are my contributions to the project.
 * **New Feature**: `Budget` class [[PR #103]](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/103)
     * What it does: Provides the representation of a `Budget` in UniCa$h. Users are able to set either a weekly, monthly, or yearly budget.
     * Justification: Represents the `Budget` a user can set for themselves. It is a core feature of UniCa$h, and is used to calculate the amount of money a user has left to spend.
-* **New Feature**: `Add Budget` command [[PR #103]](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/103)
+* **New Feature**: `Set Budget` command [[PR #103]](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/103)
+    * _Note: This was worked on with Jiahao, where he added the budget logic._
     * What it does: Adds a `Budget` to UniCa$h.
     * Justification: Allows users to set a `Budget` for themselves.
 
@@ -23,7 +24,8 @@ Given below are my contributions to the project.
     * Justification: The `List` command was refactored from AB3's implementation to allow for the listing of all transaction fields.
     * Credits: AddressBook3's implementation of the `List` command
 * **Refactored Feature**: `Find` command [[PR #69]](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/69)
-    * What it does: Finds all the transactions in UniCa$h that match the given keyword. (This command was enhanced in another PR by Rubesh)
+    * _Note: This command was enhanced in another PR by Rubesh_
+    * What it does: Finds all the transactions in UniCa$h that match the given keyword.
     * Justification: The `Find` command was refactored from AB3's implementation to allow for the finding of all transaction fields.
     * Credits: AddressBook3's implementation of the `Find` command
 
