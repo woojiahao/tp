@@ -931,33 +931,23 @@ Command Words Accepted: `clear_transactions` (case-insensitive)
 
 ### Budget Management
 
-The budget serves as a warning system to notify users when their expenses for the given interval exceeds their preset
-amount.
+The budget serves as an observable metric used to allow users to understand when their expenses over a given interval. They can use this information to better understand if they should be controlling their spending or adjusting their budget.
 
-> 💡 NOTE: For this team project, we have opted to simplify the budgeting feature by limiting the user to a single budget
-> at a time that can be configured for different intervals and amounts.
+<div class="callout callout-info" markdown="span">
+For this team project, we have opted to simplify the budgeting feature by limiting the user to a single budget at a time that can be configured for different intervals and amounts.
+</div>
 
 #### Set Budget
 
 Sets the user's budget on UniCa$h to be a given amount and within a given interval.
 
-Command: `set_budget amt/AMOUNT interval/INTERVAL`
+Command: `set_budget amt/Amount interval/Interval`
+
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
+For more information about the prefix constraints, refer to the [command breakdown's prefix types section](#prefix-types)
+</div>
 
 Command Words Accepted: `set_budget`, `sb`, `budget`
-
-Command Options:
-
-| Option Name | Optional? | Purpose                                                         |
-|-------------|-----------|-----------------------------------------------------------------|
-| amt/        | No        | Monetary amount of budget. Has to be a positive value.          |
-| interval/   | No        | Interval of budget, can be of values "day", "week", or "month". |
-
-Important notes:
-
-1. `Amount` entered has to be positive for any `interval` value.
-2. `Amount` is automatically rounded to 2 decimal places.
-3. `Amount` must be less than or equal to `2,147,483,647`.
-4. `Interval` must be of values "day", "week", or "month".
 
 ##### Successful Execution
 
@@ -1058,7 +1048,9 @@ Command: `clear_budget`
 
 Command Words Accepted: `clear_budget`, `cb` (case-insensitive)
 
-Command Options: This command does not take in any arguments and will not process any arguments.
+<div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
+`clear_budget` will not parse any additional argument or parameters.
+</div>
 
 ##### Successful Execution
 
@@ -1088,18 +1080,28 @@ Command Options: This command does not take in any arguments and will not proces
 
 #### Get Budget
 
-Retrieves the set budget and the spending over the given interval. The usage is calculated from the list of filtered
-transactions so to view the budget remainder across expense transactions, use the `list` command first.
+Retrieves the set budget and the spending over the given interval. 
 
 If no budget has been set, the user will be prompted to set one first instead.
 
 The user's spending is calculated by: `budget - interval expenses`.
 
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
+For more information about how intervals are handled, please refer to the [prefix types section.](#prefix-types)
+</div>
+
+[//]: # (TODO: Believe this should be resolved soon)
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
+The usage is calculated from the list of filtered transactions so to view the budget remainder across expense transactions, use the `list` command first.
+</div>
+
 Command: `get_budget`
 
 Command Words Accepted: `get_budget`, `gb` (case-insensitive)
 
-Command Options: This command does not take in any arguments and will not process any arguments.
+<div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
+`get_budget` will not parse any additional argument or parameters.
+</div>
 
 ##### Successful Execution
 
@@ -1127,91 +1129,82 @@ Command Options: This command does not take in any arguments and will not proces
 > No budget set. Use set_budget amt/Amount interval/Interval
 > ```
 
-[//]: # (TODO: maybe add failed case if more arguments provided)
-
 ### Financial Statistics
 
 #### Get Total Expenditure
 
-Retrieves the total expenditure by month with optional filters for category and year. Also filters the transactions
-by the given month, year, and category.
+Retrieves the total expenditure by month with optional filters for category and year. Also filters the transaction list by the given month, year, and category.
 
-Use `list` to view all transactions again.
+[//]: # (TODO: Believe this should be resolved soon)
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
+The total expenditure is calculated from the list of filtered transactions so to view the total expenditure across expense transactions, use the `list` command first.
+</div>
 
 Command: `get_total_expenditure month/Month [c/Category] [year/Year]`
 
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
+For more information about the prefix constraints, refer to the [command breakdown's prefix types section](#prefix-types)
+</div>
+
 Command Words Accepted: `get_total_expenditure`, `get_total_exp`, `gte` (case-insensitive)
-
-Command Options:
-
-| Option Name | Optional? | Purpose                                                                               |
-|-------------|-----------|---------------------------------------------------------------------------------------|
-| month/      | No        | Month to calculate the total expenditure.                                             |
-| c/          | Yes       | Category of expenditure to retrieve.<br>Defaults to all categories if not provided.   |
-| year/       | Yes       | Year to calculate the total expenditure.<br>Defaults to current year if not provided. |
-
-Important notes:
-
-1. `Month` must be an integer between 1 and 12 (inclusive).
-2. `Year` must be an integer greater than or equal to 1920.
-3. `Category` cannot be blank, must be alphanumeric, and can only contain up to 15 characters.
-4. `Category` is case-insensitive.
 
 ##### Successful Execution
 
 **Example 1**
 
-> Case: Get total expenditure with month only.
+> **Case:** Get total expenditure with month only.
 >
-> Input: `get_total_expenditure month/10`
+> **Input:** `get_total_expenditure month/10`
 >
-> Output:
+> **Output:**
 > ```
 > Your total expenditure in October 2023 was $1028.00
 > ```
 > 
-> <img src="images/unicash/command-outputs/get-total-expenditure/getTotalExpenditureMonthOnlySuccess.png">
+> **Note:** The transaction list will be filtered
+> 
+> <img src="images/unicash/command-outputs/get-total-expenditure/getTotalExpenditureMonthOnlySuccess.png" width="400">
 
 **Example 2**
 
-> Case: Get total expenditure with month and year.
+> **Case:** Get total expenditure with month and year.
 >
-> Input: `get_total_expenditure month/10 year/2023`
+> **Input:** `get_total_expenditure month/10 year/2023`
 >
-> Output:
+> **Output:**
 > ```
 > Your total expenditure in October 2023 was $1028.00
 > ```
 
 **Example 3**
 
-> Case: Get total expenditure with month and category.
+> **Case:** Get total expenditure with month and category.
 >
-> Input: `get_total_expenditure month/9 c/social`
+> **Input:** `get_total_expenditure month/9 c/social`
 >
-> Output:
+> **Output:**
 > ```
 > Your total expenditure in September 2023 for "social" was $49.50
 > ```
 
 **Example 4**
 
-> Case: Get total expenditure with month, category, and year.
+> **Case:** Get total expenditure with month, category, and year.
 >
-> Input: `get_total_expenditure month/9 c/shopping year/2023`
+> **Input:** `get_total_expenditure month/9 c/shopping year/2023`
 >
-> Output:
+> **Output:**
 > ```
 > Your total expenditure in September 2023 for "shopping" was $109.00
 > ```
 
 **Example 5**
 
-> Case: Get total expenditure but no matches.
+> **Case:** Get total expenditure but no matches.
 >
-> Input: `get_total_expenditure month/1`
+> **Input:** `get_total_expenditure month/1`
 >
-> Output:
+> **Output:**
 > ```
 > Your total expenditure in September 2023 for "shopping" was $109.00
 > ```
@@ -1220,11 +1213,11 @@ Important notes:
 
 **Example 1**
 
-> Case: No month provided.
+> **Case:** No month provided.
 >
-> Input: `get_total_expenditure`
+> **Input:** `get_total_expenditure`
 >
-> Output:
+> **Output:**
 > ```
 > Invalid command format! 
 >
@@ -1237,77 +1230,77 @@ Important notes:
 
 **Example 2**
 
-> Case: Negative month.
+> **Case:** Negative month.
 >
-> Input: `get_total_expenditure month/-10`
+> **Input:** `get_total_expenditure month/-10`
 >
-> Output:
+> **Output:**
 > ```
 > Month must be between 1 and 12 (inclusive).
 > ```
 
 **Example 3**
 
-> Case: Month greater than 12.
+> **Case:** Month greater than 12.
 >
-> Input: `get_total_expenditure month/14`
+> **Input:** `get_total_expenditure month/14`
 >
-> Output:
+> **Output:**
 > ```
 > Month must be between 1 and 12 (inclusive).
 > ```
 
 **Example 4**
 
-> Case: Month is not an integer.
+> **Case:** Month is not an integer.
 >
-> Input: `get_total_expenditure month/hi`
+> **Input:** `get_total_expenditure month/hi`
 >
-> Output:
+> **Output:**
 > ```
 > Invalid month value, must be an integer!
 > ```
 
 **Example 5**
 
-> Case: Year is less than 1920.
+> **Case:** Year is less than 1920.
 >
-> Input: `get_total_expenditure month/9 year/1800`
+> **Input:** `get_total_expenditure month/9 year/1800`
 >
-> Output:
+> **Output:**
 > ```
 > Year must be after 1920.
 > ```
 
 **Example 6**
 
-> Case: Year is not an integer.
+> **Case:** Year is not an integer.
 >
-> Input: `get_total_expenditure month/9 year/hi`
+> **Input:** `get_total_expenditure month/9 year/hi`
 >
-> Output:
+> **Output:**
 > ```
 > Invalid year value, must be an integer!
 > ```
 
 **Example 7**
 
-> Case: Category contains non-alphanumeric characters.
+> **Case:** Category contains non-alphanumeric characters.
 >
-> Input: `get_total_expenditure month/9 c/@123`
+> **Input:** `get_total_expenditure month/9 c/@123`
 >
-> Output:
+> **Output:**
 > ```
 > Category names should be alphanumeric and up to 15 characters long.
 > ```
 
 **Example 8**
 
-> Case: Category length is greater than 15.
+> **Case:** Category length is greater than 15.
 >
-> Input: `get_total_expenditure month/9 c/abcdefghijklmnopqrs`
+> **Input:** `get_total_expenditure month/9 c/abcdefghijklmnopqrs`
 >
-> Output:
+> **Output:**
 > ```
 > Category names should be alphanumeric and up to 15 characters long.
 > ```
