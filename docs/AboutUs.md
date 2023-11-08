@@ -18,7 +18,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/woojiahao.md)]
 
 * Role: Developer 
-* Responsibilities: Documentation, Testing, PR review, Continuous Integration
+* Responsibilities: Documentation, Testing, PR reviews, Continuous Integration
 
 ### Jamie Toh
 
