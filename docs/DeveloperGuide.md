@@ -735,24 +735,113 @@ out in the **Add Transaction** section above also remain.
 
 <img src="images/unicash/BudgetClassDiagram.png" width="250" />
 
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
+The budget is stored in `data/unicash.json`, much like the transactions. Refer to the [storage component](#storage-component) for more details.
+</div>
+
+<div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
+For this team project, we have opted to simplify the budgeting feature by limiting the user to a single budget at a time that can be configured for different intervals and amounts.
+</div>
+
 UniCa$h tracks a user's budget with the use of `Budget`.
 
 The `Budget` class is composed of the following fields
 
-1. `Amount`: The name of the transaction.
-2. `Interval`: The budget interval of the transaction. UniCash supports expense and income only.
-   1. `BudgetInterval`: An enum consisting of the values `daily`, `weekly` and `monthly`.
+1. `Amount`: The amount allocated to the budget.
+2. `Interval`: The budget interval of the transaction.
+   1. `BudgetInterval`: An enum consisting of the values `day`, `week` and `month`.
 
 The following are some noteworthy points regarding the attributes
 1. `Amount` here follows the same constraints as the one mentioned in the `Transaction`'s `Amount` class.
 
-Some features about the management of budgets
-
 #### Set Budget
+
+**Overview**
+
+The `set_budget` command sets a user defined budget globally across UniCa$h.
+
+The activity diagram of getting the total expenditure is as shown below
+
+<img src="images/unicash/budget-management/SetBudgetActivityDiagram.png" width="450" />
+
+The following sequence diagram shows how the different components of UniCash interact with each other
+
+<img src="images/unicash/budget-management/SetBudgetSequenceDiagram.png" width="1622" />
+
+The above sequence diagram omits details on the creation of the arguments of a `SetBudgetCommand` such as
+`Amount` and `Interval` as it would make the diagram cluttered and difficult to read without adding additional value. 
+
+It also omits the file saving aspect of this, where the updated budget is saved to the `data/unicash.json` file.
+
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
+The lifeline for `GetTotalExpenditureCommandParser` should end at the destroy marker (X) but due to a
+limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+**Details**
+
+1. The user specifies amount and interval that the budget will operate on
+2. The input will be parsed by `SetBudgetCommandParser`, and if it is invalid, `ParserException` is thrown,
+   prompting for the user to enter again
+3. If the input is valid, a `SetBudgetCommand` object is created to be executed by the `LogicManager`
+4. The `LogicManager` will then invoke the `execute` method of the command, setting the budget in the `ModelManager`
 
 #### Clear Budget
 
+**Overview**
+
+The `clear_budget` command removes the globally set UniCa$h budget.
+
+<div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
+`clear_budget` will not parse any additional argument or parameters.
+</div>
+
+The following sequence diagram shows how the different components of UniCash interact with each other
+
+<img src="images/unicash/budget-management/ClearBudgetSequenceDiagram.png" width="700" />
+
+It also omits the file saving aspect of this, where `data/unicash.json` is updated to now hold a `null` budget.
+
+**Details**
+
+1. The user runs the clear budget command
+2. The command will be parsed by `UniCashParser` and a `ClearBudgetCommand` object is created and executed by the `LogicManager`
+3. The `LogicManager` will then invoke the `execute` method of the command
+4. The command will check if UniCa$h currently contains an existing budget, if it does not, a "no budget" message is returned, otherwise, the existing budget is cleared and a success message is returned instead
+
 #### Get Budget
+
+**Overview**
+
+The `get_budget` command computes the total expenditure relative to the existing budget within the given interval.
+
+Intervals work by filtering by the specified time period:
+- For `day` intervals, only transactions of the same day are found
+- For `week` intervals, only transactions of the same [week of year](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/time/temporal/WeekFields.html#weekOfYear()) are found
+- For `month` intervals, only transactions of the same month are found
+
+<div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
+`get_budget` will not parse any additional argument or parameters.
+</div>
+
+The following sequence diagram shows how the different components of UniCash interact with each other
+
+<img src="images/unicash/budget-management/GetBudgetSequenceDiagram.png" width="700" />
+
+The above sequence diagram omits details such as internal method calls to `GetBudgetCommand#getIntervalFilter` and `GetBudgetCommand#getIntervalString` to reduce clutter.
+
+**Details**
+
+1. The user runs the get budget command
+2. The command will be parsed by `UniCashParser` and a `GetBudgetCommand` object is created and executed by the `LogicManager`
+3. The `LogicManager` will then invoke the `execute` method of the command
+4. The command will check if UniCa$h currently contains an existing budget, if it does not, a "no budget" message is returned, otherwise, the budget remainder will be calculated
+5. If the remainder amount is negative (`< 0.00`), then a negative amount message will be returned
+6. Otherwise, a non-negative message will be returned
+
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
+The only difference between the negative and non-negative messages is that the negative message places the `-` symbol before the `$` so `-$xx.xx` whereas the non-negative message does not contain the `-` symbol
+</div>
 
 ### General Utility
 
