@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-UniCa$h is a **is a desktop application used for university students who want to be more financially conscious,
+UniCa$h **is a desktop application used for university students who want to be more financially conscious,
 optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface
 (GUI). If you can type fast, UniCa$h can get your contact management tasks done faster than traditional GUI apps.
 
@@ -876,7 +876,51 @@ Shows the list of all transactions in UniCa$h.
 
 Command: `list`
 
-Command Words Accepted: `list`, `ls`
+Command Words Accepted: `list`, `ls` (case-insensitive)
+
+##### Successful Execution
+
+###### Example 1
+
+> **Case**: Calling the command when there are no existing transactions.
+>
+> **Input**: `list`
+>
+> **Output**:
+> ```
+> Listed all transactions.
+> ```
+> Output:
+> <img src="images/unicash/command-outputs/list/noTransactions.png" width="1000" />
+>
+> **Note:** There are no transactions to display, so the GUI will be empty. This is expected behaviour.
+###### Example 2
+
+> **Case**: Calling the command with existing transactions.
+>
+> **Input**: `list`
+>
+> **Output**:
+> ```
+> 
+> Listed all transactions.
+> 
+> ```
+> Output:
+> <img src="images/unicash/command-outputs/list/withTransactions.png" width="1000" />
+
+##### Failed Execution
+
+###### Example 1
+
+> **Case**: Command entered with parameters
+>
+> **Input**: `list 5`
+>
+> **Output**:
+> ```
+> Command not recognised. Try using the command list, list_transactions, ls without any parameters instead.
+> ```
 
 #### Clear Transactions
 Clears all transactions in UniCa$h.
