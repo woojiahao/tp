@@ -547,8 +547,6 @@ By introducing UI testing into the code coverage reporting, we have been able to
 
 #### Command Usage Message Builder
 
-<img src="images/unicash/message-builder/MessageUsageGenerationClassDiagram.png" width="700">
-
 Uniformly generates `MESSAGE_USAGE` strings to be used per command. Works well with `ExampleGenerator` to create consistent examples for every command using each type of prefix. Reduces the overhead of ensuring that all example values are accurate or ensuring that formatting for command usage is uniform.
 
 Relies heavily on the [builder design pattern.](https://refactoring.guru/design-patterns/builder)
