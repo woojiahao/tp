@@ -364,6 +364,33 @@ The `UI` component is also responsible for:
 
 ### Storage Component
 
+<img src="images/StorageClassDiagram.png" width="500">
+
+UniCa$h stores any persistent data as local [JSON files](https://www.json.org/json-en.html), located in the same folder where the JAR file is run.
+
+The following are the files that are created:
+
+- `config.json`
+- `preferences.json`
+- `data/unicash.json`
+
+[Jackson](https://github.com/FasterXML/jackson) is used for JSON (de)serialization and it relies on adapted models similar to the [Data Transfer Object pattern.](https://www.baeldung.com/java-dto-pattern)
+
+
+#### Malformed JSONs
+
+<div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
+If a JSON file is malformed, the contents will not be loaded and a log message will be printed. 
+<br><br>
+However, no proactive measures are applied to rectify the issue such as automatically deleting the file or fixing the error to avoid prescribing a fixed approach to resolving malformed JSONs.
+</div>
+
+While we do not make assumptions about the intended action when encountering a malformed JSON file, most JSON files will be overwritten at some point, so the malformed JSON should eventually be overwritten with proper JSON.
+
+For `data/unicash.json`, this occurs when adding, editing, or deleting the transaction list or updating the budget.
+
+For `config.json` and `preferences.json`, this occurs in the `MainApp#initConfig` and `MainApp#initPrefs` methods.
+
 ### Continuous Integration (CI)
 
 Continuous integration consists of the following:
