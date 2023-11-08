@@ -12,25 +12,25 @@ Given below are my contributions to the project.
 
 * **Get Total Expenditure**: pull requests [\#143](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/143), [\#115](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/115), [\#80](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/80), [\#65](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/65)
   * What it does: retrieves the total expenditure of the user given a mandatory month and optional category and year. Only includes the spending on expense transactions.
-  * Justification: our users may want to view an overview of their total expenditure in a month to more accurately set their budgets.
+  * Justification: our users may want to view an overview of their total expenditure in a month to more accurately set their budget.
   * Highlights: provides users with a refined way to search by month (+ year) (+ category).
 * **Budget Management Logic**: pull requests [\#129](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/129), [\#145](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/145)
-  * What it does: provides users with a way to create a global daily/weekly/monthly budget to track their overall expenditure constrained to the budget.
+  * What it does: provides users with a way to create a global daily/weekly/monthly budget to track their overall expenditure with respect to the budget.
   * Justification: after understanding their total expenditure, users may want to then set budgets to better manage and track their spending.
   * Highlights: modified the persistence system to also store the budget information.
 * **Setup TestFX for UI testing**: pull requests [\#93](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/93)
   * What it does: provides ways to automatically perform UI testing such as button clicks or keyboard inputs.
   * Justification: ensure that common manual testing cases are checked without human intervention.
-  * Highlights: increased unit test coverage from ~80% to > 90%, modified the continuous integration flow from GitHub Actions and Gradle to ensure that reported coverage on CodeCov includes UI tests
+  * Highlights: increased unit test coverage from ~80% to > 90%, modified the CI using GitHub Actions and Gradle to ensure that reported coverage on CodeCov includes UI tests.
 * **Command Usage Message Builder**: pull requests [\#117](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/117)
   * What it does: generates command usage messages in a standardised format.
-  * Justification: the previous way that AB3 uses is very prone to human error and would be likely to create irregularities.
-  * Highlights: using builder pattern.
+  * Justification: generating raw command usage `MESSAGE_USAGE` with String concatenation is prone to human error and may not be uniform across commands.
+  * Highlights: using builder pattern to implement usage message builder.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=t16-3&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&tabOpen=true&tabType=authorship&tabAuthor=woojiahao&tabRepo=AY2324S1-CS2103-T16-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 
 * **Project management**:
-  * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+  * Managed releases `v1.4` (1 release) on GitHub
 
 * **Enhancements to existing features**:
   * Refactor codebase to remove any dependency to AB3 (Pull requests [#75](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/75))
@@ -44,20 +44,20 @@ Given below are my contributions to the project.
     * Implement custom callout elements for documentation (Pull request [\#175](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/175))
     * Implement "Back to Top" button for documentation pages (Pull request [\#175](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/175))
   * User Guide:
-    * Added documentation for own features like get total expenditure and budget management logic:
-    * Added documentation on command breakdown and constraints of argument and prefixes:
-    * Migrated old AB3 layout to use new layout including TOC and callouts:
+    * Added documentation for own features like get total expenditure and budget management logic
+    * Added documentation on command breakdown and constraints of argument and prefixes
+    * Migrated old AB3 layout to use new layout including TOC and callouts
   * Developer Guide:
-    * Added implementation details of own features like get total expenditure and budget management logic.
-    * Added documentation on continuous integration.
-    * Migrated old AB3 layout to use new layout including TOC and callouts.
+    * Added implementation details of own features like get total expenditure and budget management logic
+    * Added documentation on continuous integration
+    * Added documentation on storage component
+    * Migrated old AB3 layout to use new layout including TOC and callouts
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): refer to [here.](https://github.com/AY2324S1-CS2103-T16-3/tp/pulls?q=is%3Apr+reviewed-by%3Awoojiahao)
-    * Reviewed **47/104** PRs opened with a total of **213** comments and increasing...
-  * Contributed to forum discussions: refer to [here.](https://nus-cs2103-ay2324s1.github.io/dashboards/contents/forum-activities.html) 
-    * Provided assistance and participated in discussions on the forum with **70** posts.
+  * PRs reviewed (with non-trivial review comments): refer to [here](https://github.com/AY2324S1-CS2103-T16-3/tp/pulls?q=is%3Apr+reviewed-by%3Awoojiahao)
+    * Reviewed **47/104** PRs with a total of **213** comments and increasing
+  * Contributed to forum discussions: refer to [here](https://nus-cs2103-ay2324s1.github.io/dashboards/contents/forum-activities.html) 
+    * Provided assistance and participated in discussions on the forum with **70** posts
 
 * **Tools**:
   * Integrated TestFX to the project (Pull request [\#93](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/93))
-  * Integrated a new Github plugin (CircleCI) to the team repo
