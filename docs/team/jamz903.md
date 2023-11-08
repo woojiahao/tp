@@ -30,25 +30,30 @@ Given below are my contributions to the project.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=T16&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&tabOpen=true&tabType=authorship&tabAuthor=jamz903&tabRepo=AY2324S1-CS2103-T16-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 
+
 * **Project management**:
     * Managed releases `v1.2a` (1 release) on GitHub
+
 
 * **Enhancements to existing features**:
     * Enhance Style & Display of Ui to match prototype [[PR #76]](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/76)
     * Add support for user to input multiple DateTime formats [[PR #87]](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/87)
     * Add support for multiple command shortcuts for the same command [[PR #133]](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/133)
 
+
 * **Other enhancements**:
     * Unify `COMMAND_WORD` and `MESSAGE_USAGE` through a common `CommandType` enum class [[PR #133]](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/133)
 
+
 * **Documentation**:
     * User Guide:
-        * *to be added*
+        * Remove AB3 content from the User Guide & replace it with UniCa$h content [[PR #43]](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/43/files)
+        * Add documentation for `List` and `Find` commands [[PR #51]](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/51/files)
+        * Add documentation for accepted alternative command words [[PR #149]](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/149)
+    
     * Developer Guide:
-        * *to be added*
+      * Add Use Cases for `List` and `Find` commands [[PR #56]](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/56)
+      * Added implementation details for the UI components [[PR #108]](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/108)
 
 * **Community**:
-    * *to be added*
-
-* **Tools**:
-    * *to be added*
+    * PRs reviewed (with non-trival review comments): [[PR #93]](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/93), [[PR #130]](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/130), [[PR #136]](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/136), [[PR #141]](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/141)
