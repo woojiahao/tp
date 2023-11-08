@@ -38,7 +38,7 @@ Given below are my contributions to the project.
 
 
 * **Enhancements to existing features**:
-    * Enhance Style & Display of Ui to match prototype [[PR #76]](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/76)
+    * Enhance Style & Display of UI to match prototype [[PR #76]](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/76)
     * Add support for user to input multiple DateTime formats [[PR #87]](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/87)
     * Add support for multiple command shortcuts for the same command [[PR #133]](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/133)
 
