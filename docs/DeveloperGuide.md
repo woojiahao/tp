@@ -580,7 +580,30 @@ By introducing UI testing into the code coverage reporting, we have been able to
 
 #### StyleSheet
 
-#### MessageBuilder
+#### Command Usage Message Builder
+
+Uniformly generates `MESSAGE_USAGE` strings to be used per command. Works well with `ExampleGenerator` to create consistent examples for every command using each type of prefix. Reduces the overhead of ensuring that all example values are accurate or ensuring that formatting for command usage is uniform.
+
+Relies heavily on the [builder design pattern.](https://refactoring.guru/design-patterns/builder)
+
+Example usage of `CommandUsage` would be:
+
+```java
+private static final MESSAGE_USAGE = new CommandUsage.Builder()
+    .setCommandWord("set_budget")
+    .setDescription("Sets the user's budget on UniCa$h.")
+    .addParameter(PREFIX_AMOUNT, "Amount")
+    .addParameter(PREFIX_INTERVAL, "Interval") 
+    .setExample(
+        ExampleGenerator.generate(
+            "set_budget", 
+            PREFIX_AMOUNT, 
+            PREFIX_INTERVAL
+        )
+    ) 
+    .build()
+    .toString();
+```
 
 ---
 
