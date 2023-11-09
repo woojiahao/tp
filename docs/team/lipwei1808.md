@@ -15,12 +15,11 @@ Given below are my contributions to the project.
     * Justification: It is necessary to provide an internal representation of a `Transaction` as it serves as the primary object used throughout UniCa$h. Helps to map out business logic into code through the attributes in the `Transaction` class.
     * Highlights: By taking inspiration from the implementation of `Tag` and `UniquePersonList` in AB3, I developed the `UniqueCategoryList` as an attribute in `Transaction`. This enforced uniqueness in the `Category` added to a `Transaction`.
     * Challenges: Before we developed `Transaction`, we had thought to split the class into 2 separate classes `Income` and `Expense`. However, this proved to be a less effective approach which led to the pivoting to 1 consolidated `Transaction` class during `milestone 1.2`.
-    * Credits: AB3: `Tag`, `Person`, `UniquePersonList`
 * **UniCash and TransactionList Model**: pull requests  [\#53](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/53), [\#121](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/121), [\#146](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/146)
     * What it does: The combination of the 2 `TransactionList` and `UniCash` models provides an internal encapsulation of transactions in UniCa$h. 
     * Justification: As our application serves as a platform for users to manage transactions, we had to encapsulate certain key business logic of transactions into a class.
     * Highlights: I developed the 2 classes by taking inspiration from the implementation of `UniquePersonList` and `AddressBook` classes in AB3. I also morphed the implementation to fit into our business needs of allowing duplicate transactions.
-      * * Later into the project, we discovered a potential room where a bug could arise due to there being too many `Transaction`. Hence, I later on added more constraints to the `TransactionList` class where a limit of 100000 `Transaction` was set.
+      * Later into the project, we discovered a potential room where a bug could arise due to there being too many `Transaction`. Hence, I later on added more constraints to the `TransactionList` class where a limit of 100000 `Transaction` was set.
 * **Add Transaction Command**: pull requests [\#53](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/53), [\#95](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/95)
     * What it does: Provide a CLI command for users to add a transaction into UniCa$h.
     * Justification: As an application optimised for CLI users, I had to come up with the command as well as the related fields to add a transaction.
