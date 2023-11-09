@@ -289,6 +289,8 @@ For more information about the prefix constraints, refer to the [command breakdo
 Command Words Accepted: `add_transaction`, `add`, `at` (case-insensitive)
 
 <div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
+**Added Constraints**
+<br><br>
 There is a limit of 5 `Category` that can be added to a `Transaction`. <br/>
 There is a limit of 100,000 transactions you can add to UniCa$h.
 </div>
