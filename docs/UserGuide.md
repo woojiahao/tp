@@ -282,28 +282,22 @@ Adds a new `Transaction` to UniCa$h.
 
 Command: `add_transaction n/NAME type/TYPE amt/AMOUNT [dt/DATETIME] [l/LOCATION] [c/CATEGORY]`
 
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
+For more information about the prefix constraints, refer to the [command breakdown's prefix types section](#prefix-types)
+</div>
+
 Command Words Accepted: `add_transaction`, `add`, `at` (case-insensitive)
 
-Command Options:
-
-| Option Name | Optional? | Purpose                                                                                       |
-|-------------|-----------|-----------------------------------------------------------------------------------------------|
-| n/          | No        | Name of the transaction.                                                                      |
-| type/       | No        | Transaction type of transaction.<br/>Valid types are `income` and `expense`.                  |
-| amt/        | No        | Monetary amount of transaction. Has to be a positive value.                                   |
-| dt/         | Yes       | Date and time where transaction was made.<br/>Defaults to current date time if not specified. |
-| l/          | Yes       | Location where transaction was made.<br/>Defaults to `''` if not specified.                   |
-| c/          | Yes       | Category tagged to that transaction.<br/>No categories tagged if not specified.               |
+<div class="callout callout-warning" markdown="span" style="margin-bottom: 20px;">
+<div><strong>Important notes</strong></div>
+<div>
+1. `UniqueCategoryList` enforces a max size of 5 `Category`<br/>
+2. There is a limit of 100,000 transactions you can add to UniCa$h.
+</div>
+</div>
 
 Important notes:
 
-1. There is a character limit for `Name` and `Location` set at up to 500 characters.
-2. `Amount` entered has to be positive for both `income` and `expense`.
-3. `Amount` is automatically rounded to 2 decimal places.
-4. `UniqueCategoryList` enforces a unique (case-insensitive) constraint on `Category` it stores.
-5. `UniqueCategoryList` enforces a max size of 5 `Category`
-6. There is a character limit for `Category` set at up to 15 characters/
-7. There is a limit of 100,000 transactions you can add to UniCa$h.
 
 ##### Successful Execution
 
