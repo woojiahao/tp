@@ -367,8 +367,7 @@ There is a limit of 100,000 transactions you can add to UniCa$h.
 
 > **Case**: More than 5 categories with valid compulsory fields.
 >
-> **Input
-**: `add_transaction n/Buying groceries type/expense amt/300 c/household c/entertainment c/education c/fun c/school c/test`
+> **Input**: `add_transaction n/Buying groceries type/expense amt/300 c/household c/entertainment c/education c/fun c/school c/test`
 >
 > **Output**:
 > ```
@@ -1371,7 +1370,9 @@ Command Argument: `COMMAND_WORD` is the command to get help for. If no
 argument is specified, a general help message is shown as well as a pop up
 containing a link to our User Guide.
 
-> To get a list of `COMMAND_WORD`, do `help` with no arguments
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
+To get a list of `COMMAND_WORD`, do `help` with no arguments
+</div>
 
 ##### Successful Execution
 
@@ -1408,7 +1409,6 @@ containing a link to our User Guide.
 > ```
 >
 > The following output is shown as well as the popup.
-> <img src="images/unicash/HelpSuccess1.png" width="1000" />
 > <img src="images/unicash/HelpPopup.png" width="1000" />
 
 **Example 2**
