@@ -314,6 +314,57 @@ the filtered transaction with a success message.
   - 2a1. UniCa$h displays an error message with the correct command format.
   - Use case resumes at step 1.
 
+**Use Case: UC11 - Set Budget**
+
+**MSS:**
+1. User enters the command to set the budget with the correct format (i.e. specifying the amount and interval).
+2. User submits the request.
+3. UniCa$h sets the global budget.
+4. UniCa$h displays the new budget.
+
+   Use Case ends.
+
+**Extensions:**
+
+- 1a. User enters the incorrect format (missing fields)
+  - 1a1. UniCa$h displays an error message with the correct command format
+  - Use case resumes at step 1.
+- 3a. UniCa$h contains existing budget.
+  - 3a1. UniCa$h replaces existing budget with new one.
+  - Use case resumes at step 4.
+
+**Use Case: UC12 - Clear Budget**
+
+**MSS:**
+1. User enters the command to clear the budget.
+2. User submits the request.
+3. UniCa$h clears the existing budget.
+4. UniCa$h displays a success message.
+
+   Use Case ends.
+
+**Extensions:**
+
+- 3a. UniCa$h does not contain an existing budget.
+    - 3a1. UniCa$h displays a prompt to create a budget first.
+    - Use case ends.
+
+**Use Case: UC13 - Get Budget**
+
+**MSS:**
+1. User enters the command to get the budget.
+2. User submits the request.
+3. UniCa$h tabulates the expenditure relative to the budget set for the given interval.
+4. UniCa$h displays the budget and the net amount of the budget.
+
+   Use Case ends.
+
+**Extensions:**
+
+- 3a. UniCa$h does not contain an existing budget.
+    - 3a1. UniCa$h displays a prompt to create a budget first.
+    - Use case ends.
+
 ---
 
 ## Design Overview
