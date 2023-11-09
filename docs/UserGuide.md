@@ -282,32 +282,22 @@ Adds a new `Transaction` to UniCa$h.
 
 Command: `add_transaction n/NAME type/TYPE amt/AMOUNT [dt/DATETIME] [l/LOCATION] [c/CATEGORY]`
 
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
+For more information about the prefix constraints, refer to the [command breakdown's prefix types section](#prefix-types)
+</div>
+
 Command Words Accepted: `add_transaction`, `add`, `at` (case-insensitive)
 
-Command Options:
-
-| Option Name | Optional? | Purpose                                                                                       |
-|-------------|-----------|-----------------------------------------------------------------------------------------------|
-| n/          | No        | Name of the transaction.                                                                      |
-| type/       | No        | Transaction type of transaction.<br/>Valid types are `income` and `expense`.                  |
-| amt/        | No        | Monetary amount of transaction. Has to be a positive value.                                   |
-| dt/         | Yes       | Date and time where transaction was made.<br/>Defaults to current date time if not specified. |
-| l/          | Yes       | Location where transaction was made.<br/>Defaults to `''` if not specified.                   |
-| c/          | Yes       | Category tagged to that transaction.<br/>No categories tagged if not specified.               |
-
-Important notes:
-
-1. There is a character limit for `Name` and `Location` set at up to 500 characters.
-2. `Amount` entered has to be positive for both `income` and `expense`.
-3. `Amount` is automatically rounded to 2 decimal places.
-4. `UniqueCategoryList` enforces a unique (case-insensitive) constraint on `Category` it stores.
-5. `UniqueCategoryList` enforces a max size of 5 `Category`
-6. There is a character limit for `Category` set at up to 15 characters/
-7. There is a limit of 100,000 transactions you can add to UniCa$h.
+<div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
+**Added Constraints**
+<br><br>
+There is a limit of 5 `Category` that can be added to a `Transaction`. <br/>
+There is a limit of 100,000 transactions you can add to UniCa$h.
+</div>
 
 ##### Successful Execution
 
-###### Example 1
+**Example 1**
 
 > **Case**: Add transaction with name, amount, type, datetime, location and a category.
 >
@@ -325,7 +315,7 @@ Important notes:
 > Categories: #household
 > ```
 
-###### Example 2
+**Example 2**
 
 > **Case**: Add transaction with name, amount and type.
 >
@@ -345,7 +335,7 @@ Important notes:
 
 ##### Failed Execution
 
-###### Example 1
+**Example 1**
 
 > **Case**: Missing compulsory fields.
 >
@@ -362,7 +352,7 @@ Important notes:
 > Example: add_transaction n/Buying groceries type/expense amt/300 dt/18-08-2023 19:30 l/ntuc c/household
 > ```
 
-###### Example 2
+**Example 2**
 
 > **Case**: Duplicate categories with valid compulsory fields.
 >
@@ -373,7 +363,7 @@ Important notes:
 > All categories must be case-insensitively unique, duplicate categories are not allowed.
 > ```
 
-###### Example 3
+**Example 3**
 
 > **Case**: More than 5 categories with valid compulsory fields.
 >
@@ -385,7 +375,7 @@ Important notes:
 > There should only be a maximum of 5 unique categories.
 > ```
 
-###### Example 4
+**Example 4**
 
 > **Case**: More than 100,000 transactions added.
 >
@@ -1385,7 +1375,7 @@ containing a link to our User Guide.
 
 ##### Successful Execution
 
-###### Example 1
+**Example 1**
 
 > **Case**: Get general help.
 >
@@ -1421,7 +1411,7 @@ containing a link to our User Guide.
 > <img src="images/unicash/HelpSuccess1.png" width="1000" />
 > <img src="images/unicash/HelpPopup.png" width="1000" />
 
-###### Example 2
+**Example 2**
 
 > **Case**: Get general for a specific command.
 >
@@ -1438,7 +1428,7 @@ containing a link to our User Guide.
 
 ##### Failed Execution
 
-##### Example 1
+**Example 1**
 
 > **Case**: Get help for an unknown command.
 >
