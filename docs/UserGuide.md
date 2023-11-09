@@ -288,16 +288,10 @@ For more information about the prefix constraints, refer to the [command breakdo
 
 Command Words Accepted: `add_transaction`, `add`, `at` (case-insensitive)
 
-<div class="callout callout-warning" markdown="span" style="margin-bottom: 20px;">
-<div><strong>Important notes</strong></div>
-<div>
-1. `UniqueCategoryList` enforces a max size of 5 `Category`<br/>
-2. There is a limit of 100,000 transactions you can add to UniCa$h.
+<div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
+There is a limit of 5 `Category` that can be added to a `Transaction`. <br/>
+There is a limit of 100,000 transactions you can add to UniCa$h.
 </div>
-</div>
-
-Important notes:
-
 
 ##### Successful Execution
 
