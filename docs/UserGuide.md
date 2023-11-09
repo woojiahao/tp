@@ -297,7 +297,7 @@ There is a limit of 100,000 transactions you can add to UniCa$h.
 
 ##### Successful Execution
 
-###### Example 1
+**Example 1**
 
 > **Case**: Add transaction with name, amount, type, datetime, location and a category.
 >
@@ -315,7 +315,7 @@ There is a limit of 100,000 transactions you can add to UniCa$h.
 > Categories: #household
 > ```
 
-###### Example 2
+**Example 2**
 
 > **Case**: Add transaction with name, amount and type.
 >
@@ -335,7 +335,7 @@ There is a limit of 100,000 transactions you can add to UniCa$h.
 
 ##### Failed Execution
 
-###### Example 1
+**Example 1**
 
 > **Case**: Missing compulsory fields.
 >
@@ -352,7 +352,7 @@ There is a limit of 100,000 transactions you can add to UniCa$h.
 > Example: add_transaction n/Buying groceries type/expense amt/300 dt/18-08-2023 19:30 l/ntuc c/household
 > ```
 
-###### Example 2
+**Example 2**
 
 > **Case**: Duplicate categories with valid compulsory fields.
 >
@@ -363,7 +363,7 @@ There is a limit of 100,000 transactions you can add to UniCa$h.
 > All categories must be case-insensitively unique, duplicate categories are not allowed.
 > ```
 
-###### Example 3
+**Example 3**
 
 > **Case**: More than 5 categories with valid compulsory fields.
 >
@@ -375,7 +375,7 @@ There is a limit of 100,000 transactions you can add to UniCa$h.
 > There should only be a maximum of 5 unique categories.
 > ```
 
-###### Example 4
+**Example 4**
 
 > **Case**: More than 100,000 transactions added.
 >
@@ -1375,7 +1375,7 @@ containing a link to our User Guide.
 
 ##### Successful Execution
 
-###### Example 1
+**Example 1**
 
 > **Case**: Get general help.
 >
@@ -1411,7 +1411,7 @@ containing a link to our User Guide.
 > <img src="images/unicash/HelpSuccess1.png" width="1000" />
 > <img src="images/unicash/HelpPopup.png" width="1000" />
 
-###### Example 2
+**Example 2**
 
 > **Case**: Get general for a specific command.
 >
@@ -1428,7 +1428,7 @@ containing a link to our User Guide.
 
 ##### Failed Execution
 
-##### Example 1
+**Example 1**
 
 > **Case**: Get help for an unknown command.
 >
