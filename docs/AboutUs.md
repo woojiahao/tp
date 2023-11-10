@@ -57,4 +57,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/sp4ce-cowboy.md))]
 
 * Role: Developer
-* Responsibilities: Storage
+* Responsibilities: User Interface, Documentation and Testing.
