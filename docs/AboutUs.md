@@ -47,7 +47,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/elhy1999.md)]
 
 * Role: Developer
-* Responsibilities: Documentations
+* Responsibilities: Documentation, Testing
 
 ### Rubesh Suresh
 
