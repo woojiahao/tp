@@ -151,7 +151,7 @@ For the following Use Cases (unless specified otherwise):
 - The System is `UniCa$h`
 - The Actor is `User`
 
-**Use Case: UC01 - Adding a transaction**
+**Use Case: UC01 - Adding a Transaction**
 
 **MSS:**
 1. User enters the command to add a transaction with the correct format.
@@ -169,7 +169,7 @@ For the following Use Cases (unless specified otherwise):
   - 2b2. User confirms the request
   - Use case resumes at step 3.
 
-**Use Case: UC02 - Finding a transaction**
+**Use Case: UC02 - Finding a Transaction**
 
 **MSS:**
 1. User enters the command to find a transaction with the correct format.
@@ -188,7 +188,7 @@ the filtered transaction with a success message.
   - 3a1. UniCa$h displays a message saying no results found.
   - Use Case resumes at step 1
 
-**Use Case: UC03 - Delete a transaction**
+**Use Case: UC03 - Delete a Transaction**
 
 **MSS:**
 1. User enters the command to delete a transaction with the correct format.
@@ -208,8 +208,31 @@ the filtered transaction with a success message.
     - 3a1. UniCa$h displays a message saying no results found.
     - Use Case resumes at step 1
 
+**Use Case: UC04 - Editing a Transaction**
 
-**Use Case: UC04 - Listing All Transactions**
+**MSS:**
+1. User enters the command to edit an existing transaction's fields in the correct format.
+2. User submits the request.
+3. UniCa$h makes the edits specified in the command and displays all the fields of that transaction.
+
+   Use Case ends.
+
+**Extensions**
+- 2a. User provides a field in an incorrect format. (e.g. amount is not expressed as a float, name is empty,
+  unrecognized datetime format, etc.)
+    - 2a1. UniCa$h displays an error message that requests for correct format.
+    - Use case resumes at step 1.
+
+- 2b. User requests to edit a transaction that does not exist
+    - 2b1. UniCa$h displays an error message informing the user that the transaction cannot be found.
+    - Use case resumes at step 1.
+
+- 2c. User does not specify which field of a transaction to edit
+    - 2c1. UniCa$h displays an error message and displays the correct way to format the edit command.
+    - Use case resumes at step 1.
+
+
+**Use Case: UC05 - Listing all Transactions**
 
 **MSS:**
 1. User enters the command to list all transactions with the correct format (i.e. no parameters).
@@ -227,7 +250,7 @@ the filtered transaction with a success message.
     - 3a1. UniCa$h displays no transactions, and informs the user that all transactions have been retrieved. 
     - Use Case ends.
 
-**Use Case: UC05 - Finding a Transaction**
+**Use Case: UC06 - Finding a Transaction**
 
 **MSS:**
 1. User enters the command to find transaction with the correct format.
@@ -248,7 +271,7 @@ the filtered transaction with a success message.
     - 3a1. UniCa$h displays a message informing the user that no results were found.
     - Use Case ends.
 
-**Use Case: UC06 - Tabulate Total Expenditure**
+**Use Case: UC07 - Tabulate Total Expenditure**
 
 **MSS:**
 1. User enters the command to tabulate total expenditure.
@@ -267,7 +290,7 @@ the filtered transaction with a success message.
 
   Use case resumes from Step 3.
 
-**Use Case: UC07 - Clear all transactions**
+**Use Case: UC08 - Clear All Transactions**
 
 **MSS:**
 1. User enters the command to clear all transactions with the correct format. (i.e. no parameters)
@@ -286,7 +309,23 @@ the filtered transaction with a success message.
   - 3a1. UniCa$h displays a message saying that transactions list is empty.
   - Use Case resumes at step 1
 
-**Use Case: UC08 - Show UniCa$h Help**
+**Use Case: UC09 - Show Summary Statistics**
+
+**MSS:**
+1. User enters the command to get the summary for their expenses.
+2. User submits the request.
+3. UniCa$h summarizes the user's saved expenses by month and by category.
+4. UniCa$h displays summary plots for the user to analyze their expenses.
+
+   Use Case ends.
+
+**Extensions:**
+
+- 2a. UniCa$h does not contain any of the user's expenses.
+    - 2a1. UniCa$h displays a prompt informing the user that there are no expenses available.
+    - Use case ends.
+
+**Use Case: UC10 - Show UniCa$h Help**
 
 **MSS:**
 1. User enters the command to show help with the correct format. (i.e. no parameters)
@@ -300,7 +339,7 @@ the filtered transaction with a success message.
   - 2a1. UniCa$h displays an error message with the correct command format.
   - Use case resumes at step 1.
 
-**Use Case: UC09 - Exit UniCa$h**
+**Use Case: UC11 - Exit UniCa$h**
 
 **MSS:**
 1. User enters the command to exit UniCa$h with the correct format (i.e. no parameters)
@@ -314,7 +353,7 @@ the filtered transaction with a success message.
   - 2a1. UniCa$h displays an error message with the correct command format.
   - Use case resumes at step 1.
 
-**Use Case: UC11 - Set Budget**
+**Use Case: UC12 - Set Budget**
 
 **MSS:**
 1. User enters the command to set the budget with the correct format (i.e. specifying the amount and interval).
@@ -333,7 +372,7 @@ the filtered transaction with a success message.
   - 3a1. UniCa$h replaces existing budget with new one.
   - Use case resumes at step 4.
 
-**Use Case: UC12 - Clear Budget**
+**Use Case: UC13 - Clear Budget**
 
 **MSS:**
 1. User enters the command to clear the budget.
@@ -349,7 +388,7 @@ the filtered transaction with a success message.
     - 3a1. UniCa$h displays a prompt to create a budget first.
     - Use case ends.
 
-**Use Case: UC13 - Get Budget**
+**Use Case: UC14 - Get Budget**
 
 **MSS:**
 1. User enters the command to get the budget.
@@ -959,33 +998,45 @@ the activities shown in the activity diagram above. The sequence diagram below d
 
 <img src="images/unicash/SummaryUiSequenceDiagram.png" width="700" />
 
-From the sequence diagram above, we see that after getting `commandResult`, `MainWindow` updates `ResultDisplay` next.
-Afterwards, it retrieves the updated expense data from `LogicManager` and updates the pie chart and line chart data with
-the `setPieChart` and `setLineChart` methods. Note that the methods up to this stage will be called every time a new
-command is entered. This allows the pie chart and line chart to be updated automatically every time the user makes
-commands that may modify the list of transactions. It is within the `handleSummary` method, which is called next, where
-we see the inner workings of the activity diagram shown above.
+**Details**
 
-Within the `handleSummary` method, we first check if the summary window is already opened using the `isShowing` method.
-If it is, then we simply call the `focus()` method from `SummaryWindow` before finishing execution. Otherwise, we
-retrieve the updated expenses per category from `LogicManager` before calling the `show(expenseSummary)` method of
-`SummaryWindow`. At this point, `SummaryWindow` checks if `expenseSummary` is empty. The summary window is opened only
-if there are expenses available.
+1. The user runs the "summary" command
+2. The command is parsed by the `Logic` component, which is explained in another sequence diagram below, and returns a
+   CommandResult object.
+3. `MainWindow` updates the `ResultDisplay` object with the `CommandResult#getFeedbackToUser` method.
+4. `MainWindow` retrieves the updated expense summary per category and per year-month from the `Logic` component. It
+   then calls `setPieChart` and `setLineChart` on the result to update the pie chart and line chart data (stored within
+   `SummaryWindow`).
+5. If the `commandResult` object's `showSummary` attribute is `true`, then it indicates that the summary window should
+   open. Subsequently, `MainWindow` performs a self-invocation by calling its own `handleSummary` method. Otherwise,
+   the execution ends.
+6. Under the `handleSummary` method:
+   1. `MainWindow` checks to see if `SummaryWindow` is already opened by calling `SummaryWindow#isShowing`. If this is
+      false, then `SummaryWindow#focus` is called.
+   2. Otherwise, `Logic#getExpenseSummaryPerCategory` is called to retrieve the expense summary per category formatted
+      in a `HashMap<String, Double>`. The result is passed as an argument when calling the `SummaryWindow#show` method.
+   3. Within the `SummaryWindow#show` method, a check is first performed to determine if the expense summary is empty.
+      If this is true, then the summary window does not open. Otherwise, the summary window is opened.
 
-Next, let's go over the `LogicManager.execute("summary")` sequence diagram shown below:
+ℹ️ **Note:** Steps 1 to 5 will be called every time a new command is entered. This allows the pie chart and  line chart
+to be updated automatically every time the user makes commands that may modify the list of transactions.
+
+Next, we delve deeper into the `Logic` component, specifically when `MainWindow` executed the
+`LogicManager.execute("summary")` line of code. The sequence diagram for this portion is given below. 
 
 <img src="images/unicash/SummaryExecuteSequenceDiagram.png" width="700" />
 
 Similar to all other commands, the raw user input String "summary" is parsed by `UniCashParser` to create a
 `SummaryCommand` object, which is returned to `LogicManager`. `LogicManager` then calls the `execute` method of the
 newly-created `SummaryCommand` object. At this point, the `SummaryCommand` object first checks if there are any expenses
-available by calling `Model#hasExpense`. It then instantiates a commandResult object to be returned to `MainWindow`.
+available by calling `Model#hasExpense`. It then instantiates a `CommandResult` object to be returned to `MainWindow`.
 
-It is important to note that the parameters provided when instantiating `commandResult` depends on whether there are
-expenses available or not. In particular, the `feedbackToUser` parameter of the `CommandResult` constructor differs, as
-well as its `showSummary` parameter. If there are no expenses available, the `feedbackToUser` string will contain a
-message to tell users that they have no expenses to summarize. Furthermore, the `showSummary` parameter will be set to
-`false`, which prevents the `MainWindow#handleSummary` method from running. This prevents the summary window from opening.
+ℹ️ **Note:** The arguments provided to the `CommandResult` constructor depends on whether `Model#hasExpense` evaluates to
+`true`. In particular, the `feedbackToUser` and `showSummary` parameters of the `CommandResult` constructor differ. If
+there are no expenses available, the `feedbackToUser` string will contain a message to tell users that they have no
+expenses to summarize. This allows us to display different messages to `ResultDisplay` according to whether there are 
+expenses available or not. Also, the `showSummary` parameter will be set to `false`, preventing the
+`MainWindow#handleSummary` method from running, as explained in the prior sequence diagram.
 
 ### General Utility
 
