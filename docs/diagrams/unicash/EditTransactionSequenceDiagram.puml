@@ -53,7 +53,7 @@ deactivate EditTransactionCommandParser
 UniCashParser --> LogicManager : command
 deactivate UniCashParser
 
-LogicManager -> EditTransactionCommand : command.execute(model)
+LogicManager -> EditTransactionCommand : execute(model)
 activate EditTransactionCommand
 
 create Transaction

@@ -943,6 +943,50 @@ The above sequence diagram omits details such as internal method calls to `GetBu
 The only difference between the negative and non-negative messages is that the negative message places the `-` symbol before the `$` so `-$xx.xx` whereas the non-negative message does not contain the `-` symbol
 </div>
 
+#### Summary Statistics
+
+**Overview**
+
+The `summary` command creates a pop-up summary window that contains summary plots to provide some basic analytics about
+the user's expense data. 
+
+The activity diagram of the `summary` command is given below:
+
+<img src="images/unicash/SummaryActivityDiagram.png" width="700" />
+
+Let's first go over the sequence of events that occur within the Ui component first to understand the code that performs
+the activities shown in the activity diagram above. The sequence diagram below documents this:
+
+<img src="images/unicash/SummaryUiSequenceDiagram.png" width="700" />
+
+From the sequence diagram above, we see that after getting `commandResult`, `MainWindow` updates `ResultDisplay` next.
+Afterwards, it retrieves the updated expense data from `LogicManager` and updates the pie chart and line chart data with
+the `setPieChart` and `setLineChart` methods. Note that the methods up to this stage will be called every time a new
+command is entered. This allows the pie chart and line chart to be updated automatically every time the user makes
+commands that may modify the list of transactions. It is within the `handleSummary` method, which is called next, where
+we see the inner workings of the activity diagram shown above.
+
+Within the `handleSummary` method, we first check if the summary window is already opened using the `isShowing` method.
+If it is, then we simply call the `focus()` method from `SummaryWindow` before finishing execution. Otherwise, we
+retrieve the updated expenses per category from `LogicManager` before calling the `show(expenseSummary)` method of
+`SummaryWindow`. At this point, `SummaryWindow` checks if `expenseSummary` is empty. The summary window is opened only
+if there are expenses available.
+
+Next, let's go over the `LogicManager.execute("summary")` sequence diagram shown below:
+
+<img src="images/unicash/SummaryExecuteSequenceDiagram.png" width="700" />
+
+Similar to all other commands, the raw user input String "summary" is parsed by `UniCashParser` to create a
+`SummaryCommand` object, which is returned to `LogicManager`. `LogicManager` then calls the `execute` method of the
+newly-created `SummaryCommand` object. At this point, the `SummaryCommand` object first checks if there are any expenses
+available by calling `Model#hasExpense`. It then instantiates a commandResult object to be returned to `MainWindow`.
+
+It is important to note that the parameters provided when instantiating `commandResult` depends on whether there are
+expenses available or not. In particular, the `feedbackToUser` parameter of the `CommandResult` constructor differs, as
+well as its `showSummary` parameter. If there are no expenses available, the `feedbackToUser` string will contain a
+message to tell users that they have no expenses to summarize. Furthermore, the `showSummary` parameter will be set to
+`false`, which prevents the `MainWindow#handleSummary` method from running. This prevents the summary window from opening.
+
 ### General Utility
 
 #### Clear Transactions
