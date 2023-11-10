@@ -25,8 +25,28 @@ I have been involved in.
 
 ### 2 – Project Contributions
 
-My contributions span across User Interface features, functional features, and some
-decomissioned features.
+#### Functional Features
+
+* **Delete Transaction Command**:
+  * What it does: A CLI command to remove a transaction from UniCa$h, as specified by the user.
+  * Justification: As a finances management app, removal of transactions is an important core utility
+    especially if the user had entered the information incorrectly or if the user wants to
+    delete a transaction in general.
+  * Credits: AddressBook3's implementation of the `Delete` command
+
+* **Clear Transactions Command**:
+  * What it does: A CLI command to remove all transactions from UniCa$h.
+  * Justification: A user might want to clear all their previous transactions and
+    start over on a blank slate.
+
+
+* **Reset UniCash**: *to be added*
+* **Help Command** *to be added*
+* **Get Transactions**: *to be added*
+
+
+* **Feature Enhancements**
+  * **Find Transactions**: Added enhancements *to be added*
 
 #### User Interface Features
 
@@ -103,32 +123,6 @@ found out that certain design elements contribute to increase user engagement by
   The UI components are intended to increased engagement with UniCa$h by our target user, 
 would lead to a overall improvements in their personal finances management. 
 
-#### Functional Features
-
-* **Delete Transaction Command**:
-  * What it does: A CLI command to remove a transaction from UniCa$h, as specified by the user.
-  * Justification: As a finances management app, removal of transactions is an important core utility
-  especially if the user had entered the information incorrectly or if the user wants to
-  delete a transaction in general.
-  * Credits: AddressBook3's implementation of the `Delete` command
-
-* **Clear Transactions Command**:
-  * What it does: 
-* **Reset UniCash**: *to be added*
-* **Help Command**
-  * Note: This was massively enhanced by Lip wei
-* **Get Transactions**: *to be added*
-* **Filter Transactions**: *feature yet to be implemented*
-
-* **Feature Enhancements** 
-  * **Find Transactions**: Added enhancements *to be added*
-  * **User Interface Features**: *to be added*
-    * Collaborated with [@jamz903](https://github.com/jamz903) on UI
-
-* ****
-  * **Find Transactions**: Added enhancements *to be added*
-  * **User Interface Features**: *to be added*
-    * Collaborated with [@jamz903](https://github.com/jamz903) on UI
 
 #### Decommissioned Features
 
@@ -150,12 +144,10 @@ were removed due to certain considerations.
 * Developer Guide:
     * Migrated details of the Developer Guide from an external source (Google Docs) 
   and consolidated them in GitHub.
-    * 
 
     
 #### Project Management
-* Managed release v1.3a on GitHub - Can be found [here](https://github.com/AY2324S1-CS2103-T16-3/tp/releases/tag/v1.2). 
-* Managed the 
+* Managed release v1.3a on GitHub - Can be found [here](https://github.com/AY2324S1-CS2103-T16-3/tp/releases/tag/v1.2).
 
 #### Community
 * **Pull Requests Reviewed**: *to be added*
