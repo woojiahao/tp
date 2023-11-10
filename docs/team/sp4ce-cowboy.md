@@ -5,40 +5,20 @@ title: Rubesh Suresh's Project Portfolio Page
 
 ## Project: UniCa$h
 
----
-
-### 1 – Project Overview
-
-
 UniCa$h is a desktop application for university students who want to be more financially conscious.
 The user interacts with it using a CLI, and it has a GUI created with JavaFX. UniCa$h is designed
-for users who are proficient with using the Command Line, and want effective and efficient digital
-management of their finances. 
-
-UniCa$h is written in Java 11, spanning about [20 KLoC](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=T16-3&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=AY2324S1-CS2103-T16-3%2Ftp%5Bmaster%5D&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&isTabOnMergedGroup=true&tabOpen=true&tabType=authorship&tabAuthor=elhy1999&tabRepo=AY2324S1-CS2103-T16-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=true&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false) built with Gradle, packaged into a jar file and can be run on any
-device running Java 11 or above, and it can be run locally with no network access required.
-
-This project was developed in a team of 5 members, as part of the course requirements for 
-[CS2103 Software Engineering](https://nusmods.com/courses/CS2103/software-engineering), in Semester 1 of AY23/24. 
-Given below are my contributions to the project, including the features that I've implemented, the
-enhancements that I've implemented, code and documentation that I've contributed and the team tasks that
-I have been involved in.
+for users who are proficient with the CLI. UniCa$h is written in Java 11, spanning about [20 KLoC](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=T16-3&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=AY2324S1-CS2103-T16-3%2Ftp%5Bmaster%5D&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&isTabOnMergedGroup=true&tabOpen=true&tabType=authorship&tabAuthor=elhy1999&tabRepo=AY2324S1-CS2103-T16-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=true&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 
 ---
 
-### 2 – Project Contributions
-
-My contributions span across functional features, UI features, and some
-decommissioned features.
+### My Contributions
 
 
 ### Functional Features
 
 * **Delete Transaction Command**: [PRs: [#62](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/62)]
-  * **What it does:** A CLI command to remove a transaction from UniCa$h, as specified by the user.
-  * **Justification:** As a finances management app, removal of transactions is an important core utility
-    especially if the user had entered the information incorrectly or if the user wants to
-    delete a transaction in general.
+  * **What it does:** A CLI command to remove a specified transaction from UniCa$h.
+  * **Justification:** Core utility of a Finance Management App.
   * **Credits:** AB3's implementation of the `Delete` command
 
 
@@ -46,54 +26,38 @@ decommissioned features.
 [#63](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/63)
 [#138](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/138/)]
   * **What it does:** A CLI command to remove all transactions from UniCa$h, and 
-  a parser class for this command.
-  * **Justification:** A user might want to clear all their previous transactions and
-    start over on a clean slate. The parser exists to enforce the intentionality 
-  behind the user's action to irreversibly delete all their transactions, thereby
-  adding a layer of safety to the user's data.
-  * **Credits:** AB3's implementation of the `Clear` command, partially.
-  The original command did not have a parser class.
+  a parser class
+  * **Justification:** To allow the user to start on a blank slate. Parser ensures that
+  mass-deletion is intentional, adding a layer of safety.
+  * **Credits:** AB3's implementation of the `Clear` command.
 
 
 * **Reset UniCash Command**: [PRs:
 [#90](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/90)
 [#138](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/138/)]
   * **What it does:** A CLI Command to restore UniCa$h to its original state with
-  the same default transactions that appear when the app is opened for the first time, and an
-  accompanying parser class for this command.
+  the same default transactions that appear when the app is opened for the first time.
   * **Justification:** An easy way for users and testers of the application alike to re-start
-  using UniCa$h from its default state. Unlike the Clear Transactions Command, which is intended
-  more for users who are already familiar with the application, the Reset Command is more for
-  users who are new to the application who would benefit from the initial visual state of UniCa$h. 
-  Similar to Clear Transactions Command, the parser protects the user from unintentional data erasure.
+  using UniCa$h from its default state.
   
   
 * **Help Command & UniCash Welcome Window** [PRs:
   [#96](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/96)]
-  * **What it does:** A CLI command that the user can invoke to see the Help Window with the 
-  URL to UniCa$h's user guide. Additionally, I have made the Help Command also invoke a
-  Message with a collated list of commands available to the user, and UniCa$h is configured
-  to display this collated list upon start up.
-  * **Justification:** The user would initially be unsure of what commands are available and
-  would have to refer to the lengthy user guide, and given out target users' propensity for
-  busy schedules, this might not be feasible. This feature would allow a user or a tester
-  of the application to quickly refer to the commands available without hassle.
-
+  * **What it does:** A CLI command to open the Help Window with the 
+  URL to UniCa$h's user guide, and also display a Message with a collated list of commands available,
+  which is also set as the start-up Welcome Window.
+  * **Justification:** To allow the user quick access to an overview of commands available.
   * **Credits:** AB3's implementation of the `Help` command, partially.
-  The original command only opened the Help Window.
-  * _**Note:** The Help Command has been greatly enhanced by [Lip Wei](https://github.com/lipwei1808)
+  * _**Note:** The Help Command has been enhanced by [Lip Wei](https://github.com/lipwei1808)
         as mentioned [here](lipwei1808.md)._
 
     
 * **Get Transaction Command** [PRs: 
 [#101](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/101)]
-  * **What it does:** A CLI Command that the user can invoke to see expanded details of a specified
-  transaction.
-  * **Justification:** A user is able to enter a transaction with properties that are longer than the UI
-  space allocated for them. Thus, the details of a transaction might be cut off in the Transactions List Panel.
-  As we did not want to unnecessarily restrict the user to arbitrary property lengths, the Get Command is
-  provided to retrieve the full, expanded details of a command to display them inside the Results Display.
-  * **Highlights:** This Command is intended to be complementary to the Find command where a user can
+  * **What it does:** A CLI Command to see expanded details of a specific transaction.
+  * **Justification:** To allow a user to see details of a transaction whose properties' lengths
+  can extend beyond the UI's ability to display them.
+  * **Highlights:** This Command complements the Find command where a user can
   search for a keyword with the Find Command and retrieve details of a transaction with the Get Command. The 
   Find Command alters the visible Transactions List Panel, but the Get Command does not!
 
@@ -102,7 +66,7 @@ decommissioned features.
   [#101](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/101)
   [#138](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/138)]
   * **What it does:** A CLI command that allows the user to search for specific transactions based
-  on certain keywords, and the transaction will only be listed if all keywords match.
+  on certain keywords.
   * **Justification:** The user might accumulate many transactions over a prolonged period of time
   using the app, and this command allows the user to search for specific transactions.
   * **Highlights:** This command complements the Get Command and the Rolling Balance Indicator.
