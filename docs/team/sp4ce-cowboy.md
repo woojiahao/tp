@@ -25,9 +25,12 @@ I have been involved in.
 
 ### 2 – Project Contributions
 
+My contributions span across User Interface features, functional features, and some
+decomissioned features.
+
 #### User Interface Features
 
-* **User Interface Overhaul/Enhancement** [PRs:
+* **User Interface Overhaul & Enhancement** [PRs:
 [#78](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/78)
 [#82](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/82)
 [#86](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/86)
@@ -69,23 +72,53 @@ I have been involved in.
   requiring repeated usage of the same command in a much more efficient way,
   amongst other benefits of a real CLI experience.
 
-* **StyleSheet** [PRs: [#96](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/96)]
-  * To provide a seamless
+
+* **StyleSheet Class** [PRs: [#96](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/96)]
+  * To provide a seamless visual experience across UniCa$h, a StyleSheet class 
+  was created such that all components involving any form of visual or graphical
+  representation have a centralized and singular source of reference. 
+  * Justification: To provide a seamless and unified visual theme across UniCa$h
+  and thereby facilitate a better user-experience.
+  * [Possible Future Addition]: The universality and extensibility of the StyleSheet class is such that it
+  is possible to allow the user themselves to create and select certain custom themes
+  which can then be applied across all visual elements in UniCa$h. 
+
+
+* **Hash-based category coloring** [PRs: [#96](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/96)]
+  * A sub-set of the StyleSheet class, this feature allows for a consistent color pattern
+  across categories. In UniCa$h, the user is not restricted to any number of categories
+    (in total). Thus, it is not possible to hard-code any color value into every single category.
+    The hash-based color generation ensures that every category has a unique color assigned to
+    it, without each of the color values having to be pre-determined and assigned manually.
+  * Justification: Each category having the same specific color assigned to it would lead to better
+  visual consistency and therefore, better overall user experience.
+
+
+**Addendum**: Especially for this feature and the above mentioned StyleSheet class, the focus on colors
+ consistency and user experience consistency across UniCa$h is motivated by the fact that certain scientific
+  [studies](https://www.sciencedirect.com/science/article/abs/pii/S0167811623000599])
+  have shown a positive correlation between color complexity and user engagement.
+  Additionally, [this](https://www.diva-portal.org/smash/record.jsf?pid=diva2%3A1788177&dswid=-2283) study also
+found out that certain design elements contribute to increase user engagement by young adults.
+  The UI components are intended to increased engagement with UniCa$h by our target user, 
+would lead to a overall improvements in their personal finances management. 
 
 #### Functional Features
-* **Functional Features**
-  * **Delete Transaction**: *to be added*
-  * **Clear Transactions**: *to be added*
-  * **Reset UniCash**: *to be added*
-  * **Help Command**
-    * Note: This was massively enhanced by Lip wei
-  * **Get Transactions**: *to be added*
-  * **Filter Transactions**: *feature yet to be implemented*
 
-* **User Interface Features**
-  * **View User Guide**: *to be added*
-  * **View Rolling Balance**: *to be added*
-  * **Hash-based Color generation**: *to be added*
+* **Delete Transaction Command**:
+  * What it does: A CLI command to remove a transaction from UniCa$h, as specified by the user.
+  * Justification: As a finances management app, removal of transactions is an important core utility
+  especially if the user had entered the information incorrectly or if the user wants to
+  delete a transaction in general.
+  * Credits: AddressBook3's implementation of the `Delete` command
+
+* **Clear Transactions Command**:
+  * What it does: 
+* **Reset UniCash**: *to be added*
+* **Help Command**
+  * Note: This was massively enhanced by Lip wei
+* **Get Transactions**: *to be added*
+* **Filter Transactions**: *feature yet to be implemented*
 
 * **Feature Enhancements** 
   * **Find Transactions**: Added enhancements *to be added*
@@ -96,6 +129,15 @@ I have been involved in.
   * **Find Transactions**: Added enhancements *to be added*
   * **User Interface Features**: *to be added*
     * Collaborated with [@jamz903](https://github.com/jamz903) on UI
+
+#### Decommissioned Features
+
+Below are some of the features that I had implemented prior, but
+were removed due to certain considerations.
+
+* **Fuzzy-Find Transactions**: *feature yet to be implemented*
+* **Filter Transactions**: *feature yet to be implemented*
+* **Local User Guide**: *feature yet to be implemented*
 
 
 #### Code
