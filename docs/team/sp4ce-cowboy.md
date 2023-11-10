@@ -148,7 +148,7 @@ were removed due to certain considerations.
 
     
 #### Project Management
-* Managed release v1.3a on GitHub - Can be found [here](https://github.com/AY2324S1-CS2103-T16-3/tp/releases/tag/v1.2).
+* Managed release v1.3a on GitHub - Can be found [here](https://github.com/AY2324S1-CS2103-T16-3/tp/releases/tag/v1.3).
 
 #### Community
 * **Pull Requests Reviewed**: *to be added*
