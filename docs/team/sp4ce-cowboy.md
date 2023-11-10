@@ -8,9 +8,9 @@ title: Rubesh Suresh's Project Portfolio Page
 UniCa$h is a desktop application for university students who want to be more financially conscious.
 The user interacts with it using a CLI, and it has a GUI created with JavaFX. UniCa$h is designed
 for users who are proficient with the CLI, written in Java 11, spanning about [20 KLoC](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=T16-3&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=AY2324S1-CS2103-T16-3%2Ftp%5Bmaster%5D&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&isTabOnMergedGroup=true&tabOpen=true&tabType=authorship&tabAuthor=elhy1999&tabRepo=AY2324S1-CS2103-T16-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=true&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false).
-My contributions are given below.
+My contributions are explained below. Code contributed by me: [RepoSense Link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=T16-3&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&tabOpen=true&tabType=authorship&tabAuthor=sp4ce-cowboy&tabRepo=AY2324S1-CS2103-T16-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 
-#### Functional Features
+**Functional Features**
 
 * **Delete Transaction Command**: [PRs: [#62](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/62)]
   * **What it does:** A CLI command to remove a specified transaction from UniCa$h.
@@ -65,7 +65,7 @@ My contributions are given below.
   * _Note: The initial Find Command was implemented by [Jamie](https://github.com/jamz903)
   as mentioned [here](jamz903.md)_
 
-#### User Interface Features
+**User Interface Features**
 
 * **User Interface Overhaul & Enhancement** [PRs:
 [#78](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/78)
@@ -134,9 +134,7 @@ our target users (university students) are mostly young adults, The UI component
 target user engagement with UniCa$h, which would indirectly lead to overall improvements in their personal financial
 management, despite not being direct CLI features in and of themselves.
 
----
-
-#### Decommissioned Features
+**Decommissioned Features**
 
 Below are some of the features that I had implemented prior, but were removed due to various project constraints.
 
@@ -188,12 +186,7 @@ _Both features were simplified and integrated into the existing Find Command.
 [PR: [#138](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/138)]_
 
 
-
-
-#### Minor Contributions:
-
-Here are some minor features/contributions that I have made. Note that some of these features have been
-augmented by the entire team.
+**Minor Contributions:**
 
 * **UniCash Messages** - A class to encapsulate and consolidate messages displayed in a central location.
 [PR: [#62](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/62)]
@@ -202,29 +195,23 @@ augmented by the entire team.
   (credits to [Jamie](jamz903.md) for finding the font) and a custom wallet icon.
   [PR: [#78](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/78)]
 
-#### Code
-* Code contributed: [RepoSense Link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=T16-3&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&tabOpen=true&tabType=authorship&tabAuthor=sp4ce-cowboy&tabRepo=AY2324S1-CS2103-T16-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
-
-#### Documentation
+**Documentation**
 * User Guide:
-    * Added documentation for own features
-      * Delete, Clear, Reset, Find, Get, Help Commands
-      * UI Features and Overview of UI
+  * Added documentation for own features (Delete, Clear, Reset, Find, Get, Help Commands)
+  * UI Features and Overview of UI
 * Developer Guide:
   * Migrated details of the Developer Guide from an external source (Google Docs) and consolidated them in GitHub.
   * Set up structure skeleton for Developer Guide for easy and structured documentation by the team.
-  * Add documentation for own features
-    * Delete, Clear, Reset, Find, Get, Help Commands
+  * Add documentation for own features (Delete, Clear, Reset, Find, Get, Help Commands)
   * Add documentation for UI and UI features
-  
-  
-#### Project Management
+
+**Project Management**
 * Created and initialized the CS2103-T16-3 organization on GitHub
 * Created a testing branch to test new features in UniCa$h
 * Managed release v1.3a on GitHub - Can be found [here](https://github.com/AY2324S1-CS2103-T16-3/tp/releases/tag/v1.3).
 * Made and released demo video for release v1.3b [here](https://github.com/AY2324S1-CS2103-T16-3/tp/releases/tag/v1.3b)
 
-#### Community
+**Community**
 * **Pull Requests Reviewed**: Refer to [here](https://github.com/AY2324S1-CS2103-T16-3/tp/pulls?q=is%3Apr+reviewed-by%3Asp4ce-cowboy)
   * Reviewed 41 PRs, with 91 PR comments in total thus far.
 * **Pull Requests Opened**: Refer to [here](https://github.com/AY2324S1-CS2103-T16-3/tp/pulls?q=is%3Apr+author%3Asp4ce-cowboy+)
