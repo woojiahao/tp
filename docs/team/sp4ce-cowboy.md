@@ -7,12 +7,9 @@ title: Rubesh Suresh's Project Portfolio Page
 
 UniCa$h is a desktop application for university students who want to be more financially conscious.
 The user interacts with it using a CLI, and it has a GUI created with JavaFX. UniCa$h is designed
-for users who are proficient with the CLI. UniCa$h is written in Java 11, spanning about [20 KLoC](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=T16-3&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=AY2324S1-CS2103-T16-3%2Ftp%5Bmaster%5D&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&isTabOnMergedGroup=true&tabOpen=true&tabType=authorship&tabAuthor=elhy1999&tabRepo=AY2324S1-CS2103-T16-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=true&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
-
+for users who are proficient with the CLI, written in Java 11, spanning about [20 KLoC](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=T16-3&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=AY2324S1-CS2103-T16-3%2Ftp%5Bmaster%5D&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&isTabOnMergedGroup=true&tabOpen=true&tabType=authorship&tabAuthor=elhy1999&tabRepo=AY2324S1-CS2103-T16-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=true&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false).
+My contributions are given below.
 ---
-
-### My Contributions
-
 
 ### Functional Features
 
@@ -47,7 +44,6 @@ for users who are proficient with the CLI. UniCa$h is written in Java 11, spanni
   URL to UniCa$h's user guide, and also display a Message with a collated list of commands available,
   which is also set as the start-up Welcome Window.
   * **Justification:** To allow the user quick access to an overview of commands available.
-  * **Credits:** AB3's implementation of the `Help` command, partially.
   * _**Note:** The Help Command has been enhanced by [Lip Wei](https://github.com/lipwei1808)
         as mentioned [here](lipwei1808.md)._
 
@@ -67,15 +63,13 @@ for users who are proficient with the CLI. UniCa$h is written in Java 11, spanni
   [#138](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/138)]
   * **What it does:** A CLI command that allows the user to search for specific transactions based
   on certain keywords.
-  * **Justification:** The user might accumulate many transactions over a prolonged period of time
-  using the app, and this command allows the user to search for specific transactions.
+  * **Justification:** To allow the user to search for specific transactions especially if there are
+  many transactions stored.
   * **Highlights:** This command complements the Get Command and the Rolling Balance Indicator.
   * **Possible Future Additions:** The Find command is limited to Name, Category and Location. This
   can be expanded to include the other properties in the future.
   * _Note: The initial Find Command was implemented by [Jamie](https://github.com/jamz903)
   as mentioned [here](jamz903.md)_
-
----
 
 ### User Interface Features
 
@@ -86,8 +80,8 @@ for users who are proficient with the CLI. UniCa$h is written in Java 11, spanni
 [#94](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/94)
 [#96](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/96)]
   * The UI of UniCa$h has been enhanced with an adjustable vertical SplitPane,
-  a larger `Results Display Box`, a reversed `Transactions List Panel`, color-coded 
-  signed representation of currencies, and other minor UI modifications.
+  a larger `Results Display Box`, a reversed `Transactions List Panel`, colored 
+  currencies representation, and other minor UI modifications.
   * Justification: To better fit our GUI needs for UniCa$h such that the
   implementation of our chosen features and their corresponding visual
   representation would be appropriate both in the context of our target user 
