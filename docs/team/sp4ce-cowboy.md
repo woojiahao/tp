@@ -56,7 +56,7 @@ My contributions are given below.
   * **Highlights:** This Command complements the Find command where a user can
   search for a keyword with the Find Command and retrieve details of a transaction with the Get Command. The 
   Find Command alters the visible Transactions List Panel, but the Get Command does not!
-
+  
     
 * **Find Transactions Command Enhancement**: [PRs:
   [#101](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/101)
@@ -91,32 +91,23 @@ My contributions are given below.
 
 
 * **Rolling Balance Indicator** [PRs: [#96](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/96)]
-  * A rolling balance indicator is added to the `StatusBarFooter` of the UniCa$h UI
-  that can be used to visually indicate the current balance of any group
+  * A rolling balance indicator is added to the `StatusBarFooter` of the UniCa$h UI to visually indicate the current balance of any group
   of transactions. At start-up and by default, the user will be able to see
   their net total balance. Upon the usage of certain commands like `find`, the
-  the user will be able to see their total expenditure for a group of expenses,
-  total earned income for a group of incomes, or a net total expenses for a mixture
-  of both.
-  * **Justification:** With the total balance, the user will be able to get a holistic 
-  sense of their current financial state. Additionally, the user will also be able to
-  determine quantitatively certain spending patterns in associated or related transactions, thereby
-  having a better understanding of their own financial habits.
+  the user will be able to see their net total expenditure for a group of transactions.
+  * **Justification:** For the user to get a holistic sense of their current financial state and
+    quantitatively determine certain spending patterns in related transactions.
 
 
 * **Command Box History & Enhancements** [PRs:
 [#110](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/110)
 [#119](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/119)]
   * The `CommandBox` is made to remember the user's previous inputs, up to a
-  maximum of 10 previous inputs, and detect the `ESC` key. The user can, at any point in time,
-  use the arrow keys to traverse through their history of inputs, and press the `ESC` to clear
-  the command box.
-  * **Justification:** Given our target users being CLI-proficient, we want to
-  provide a more intuitive and convenient means for them to interact with
-  UniCa$h similar to that of a real CLI, such that they can carry out tasks
-  requiring repeated usage of the same command in a much more efficient way,
-  amongst other benefits of a real CLI experience.
-  
+  maximum of 10 previous inputs. The user can use the arrow keys to traverse through their history
+  of inputs, and press the `ESC` to clear the command box.
+  * **Justification:** TO provide our CLI-proficient targe users a more intuitive,
+  convenient and efficient means for them to interact with UniCa$h, similar to that of a real CLI.
+
 
 * **StyleSheet Class** [PRs: [#96](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/96)]
   * To provide a seamless visual experience across UniCa$h, a StyleSheet class 
