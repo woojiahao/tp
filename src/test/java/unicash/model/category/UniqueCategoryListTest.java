@@ -338,7 +338,7 @@ public class UniqueCategoryListTest {
         // null -> returns false
         assertNotEquals(null, categoryList);
 
-        assertFalse(categoryList.equals(null));
+        assertFalse(categoryList.equals(5));
     }
 
     @Test
