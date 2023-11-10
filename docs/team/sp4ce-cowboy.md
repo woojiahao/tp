@@ -213,9 +213,9 @@ _Both features were simplified and integrated into the existing Find Command.
 
 **Community**
 * **Pull Requests Reviewed**: Refer to [here](https://github.com/AY2324S1-CS2103-T16-3/tp/pulls?q=is%3Apr+reviewed-by%3Asp4ce-cowboy)
-  * Reviewed 41 PRs, with 91 PR comments in total thus far.
+[Reviewed 41 PRs, with 91 PR comments in total thus far.]
 * **Pull Requests Opened**: Refer to [here](https://github.com/AY2324S1-CS2103-T16-3/tp/pulls?q=is%3Apr+author%3Asp4ce-cowboy+)
-  * Opened 33 PRs, of which 28 were merged to the main codebase.
+[Opened 33 PRs. Almost all major PRs have full details and screenshots.]
 * **Issues Assigned & Completed**: Refer to [here](https://github.com/AY2324S1-CS2103-T16-3/tp/issues?q=is%3Aissue+author%3Asp4ce-cowboy+is%3Aclosed+)
 
 
