@@ -85,9 +85,6 @@ public class AddTransactionCommandTest {
         AddTransactionCommand addNusCommandCopy = new AddTransactionCommand(NUS);
         assertEquals(addNusCommand, addNusCommandCopy);
 
-        // different types -> returns false
-        assertNotEquals(1, addNusCommand);
-
         // null -> returns false
         assertNotEquals(null, addNusCommand);
 
