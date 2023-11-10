@@ -120,8 +120,9 @@ I have been involved in.
   have shown a positive correlation between color complexity and user engagement.
   Additionally, [this](https://www.diva-portal.org/smash/record.jsf?pid=diva2%3A1788177&dswid=-2283) study also
 found out that certain design elements contribute to increase user engagement by young adults.
-  The UI components are intended to increased engagement with UniCa$h by our target user, 
-would lead to a overall improvements in their personal finances management. 
+  Given that our target users (university students) are mostly young adults, The UI components are intended to
+increase target user engagement with UniCa$h, which would lead to overall improvements in their personal
+financial management. 
 
 
 #### Decommissioned Features
