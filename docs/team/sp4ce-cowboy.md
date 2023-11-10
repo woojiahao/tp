@@ -123,24 +123,17 @@ management, despite not being direct CLI features._
 Below are some of the features that I had implemented prior, but were removed due to various project constraints.
 
 * **Local User Guide**: [PRs: [#82](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/82)]
-  * **What it was:** A PDF version of the user guide was packaged into the UniCa$h jar file, and the user
-  would be able to click on a UI Menu button to open the User Guide locally. Additionally, a command word was
-  planned to be implemented (`show_userguide`) that would open the User Guide with CLI input.
-  * **Motivation for Implementation:** Given one of the UniCa$h's non-functional requirements (NFR) of offline usage,
-  it would be useful for the User to have immediate and local access to the User Guide, as opposed to having to open the
-  help window and follow the link to the User Guide online.
-  * **Justification for Removal:** The functionality depended on the host machine to display the PDF file, and given
-  another one of our NFRs of cross-platform support, it was not possible to confidently ascertain the host machine's ability to
-  display the PDF file. In the context of the project, we can assume that all Users already have direct access to our
-  User Guide. Thus, this feature was deemed unnecessary.
-
+  * **What it was:** A PDF version of the user guide (UG) that the user can access directly from UniCa$h
+  * **Motivation for Implementation:** Given the NFR of offline usage, it would be useful for the User to
+  have local access to the UG.
+  * **Justification for Removal:** It depended on the host machine to display the PDF, which was unreliable, and
+  difficult to test. Furthermore, we were allowed to assume that all users have access to the UG.
 
 * **Test Command**: [PRs: [#126](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/126)]
   * **What it was:** A temporary Test Command intended for internal testing of UniCa$h.
   * **Motivation for Implementation:** To test UniCa$h's GUI and functionality by populating it with a
   lot more transactions than the default UniCa$h.
-  * **Justification for Removal:** Better to merge onto a separate testing branch, which I also opened.
-
+  * **Justification for Removal:** Merge onto a separate testing branch instead, which I also opened.
 
 * **Fuzzy-Find Transactions**: [PRs: [#110](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/110)]
   * **What it was:** This was the initial implementation of the existing Find Command. As opposed to being limited to Name,
@@ -153,7 +146,6 @@ Below are some of the features that I had implemented prior, but were removed du
   * **Justification for Removal:** The feature is too expansive in its breadth of search, and initial users might feel
   overwhelmed or confused by its functionality. Furthermore, its expansive nature might be outside the scope of UniCa$h, 
   on top of other functional constraints like insufficient testability.
-
 
 * **Filter Transactions**: [PRs: [#130](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/130)]
   * **What it was:** This feature was intended to complement the Fuzzy-Find transaction feature. While the Fuzzy-Find
