@@ -78,12 +78,10 @@ My contributions are given below. Code contributed by me: [RepoSense](https://nu
   of our implemented features for UniCa$h.
   * _Note: The original UI transition was done by [Jamie](https://github.com/jamz903) as mentioned [here](jamz903.md)_
 
-
 * **Rolling Balance Indicator** [PRs: [#96](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/96)]
-  * A rolling balance indicator is added to the `StatusBarFooter` of the UniCa$h UI to visually indicate the current balance of any group
-  of transactions. At start-up and by default, the user will be able to see
-  their net total balance. Upon the usage of certain commands like `find`, the
-  the user will be able to see their net total expenditure for a group of transactions.
+  * Added to the `StatusBarFooter` of the UniCa$h UI to explicitly indicate the current balance of any group
+  of transactions. At start-up the user will see their net total balance. With certain commands like `find`, the
+  the user will see their net total expenditure for a group of transactions.
   * **Justification:** For the user to get a holistic sense of their current financial state and
     quantitatively determine certain spending patterns in related transactions.
 
@@ -94,40 +92,31 @@ My contributions are given below. Code contributed by me: [RepoSense](https://nu
   * The `CommandBox` is made to remember the user's previous inputs, up to a
   maximum of 10 previous inputs. The user can use the arrow keys to traverse through their history
   of inputs, and press the `ESC` to clear the command box.
-  * **Justification:** TO provide our CLI-proficient targe users a more intuitive,
+  * **Justification:** To provide our CLI-proficient targe users a more intuitive,
   convenient and efficient means for them to interact with UniCa$h, similar to that of a real CLI.
 
 
 * **StyleSheet Class** [PRs: [#96](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/96)]
-  * To provide a seamless visual experience across UniCa$h, a StyleSheet class 
-  was created such that all components involving any form of visual or graphical
-  representation have a centralized and singular source of reference. 
-  * **Justification:** To provide a seamless and unified visual theme across UniCa$h
-  and thereby facilitate a better user-experience.
-  * **[Possible Future Addition]:** The universality and extensibility of the StyleSheet class is such that it
-  is possible to allow the user themselves to create and select certain custom themes
-  which can then be applied across all visual elements in UniCa$h. 
+  * A StyleSheet class was created such that all components involving any form of graphical
+  representation have a centralized source of reference.
+  * **Justification:** To provide a seamless visual experience across UniCa$h for a better user-experience.
 
 
 * **Hash-based Category Coloring** [PRs: [#96](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/96)]
-  * A sub-set of the StyleSheet class, this feature allows for a consistent color pattern
-  across categories. In UniCa$h, the user is not restricted to any number of categories
-    (in total). Thus, it is not possible to hard-code any color value into every single category.
-    The hash-based color generation ensures that every unique category has a unique color assigned to
-    it, without each of the color values having to be pre-determined and assigned manually.
+  * This feature allows for a consistent color pattern across unique categories without having to hard-code colors, as 
+  there is no limit to total category count.
   * **Justification:** Each category having the same specific color assigned to it would lead to better
   visual consistency and therefore, better overall user experience.
 
 
-**Addendum**: Especially for this feature and the above-mentioned StyleSheet class, the focus on colors
- consistency and user experience consistency across UniCa$h is motivated by the fact that certain scientific
-[studies](https://www.sciencedirect.com/science/article/abs/pii/S0167811623000599]) have shown a positive 
+_**Addendum**: The focus on color consistency and user experience across UniCa$h is motivated by certain scientific
+[studies](https://www.sciencedirect.com/science/article/abs/pii/S0167811623000599]) that show a positive 
 correlation between color complexity and user engagement. Additionally,
 [this](https://www.diva-portal.org/smash/record.jsf?pid=diva2%3A1788177&dswid=-2283) study also found out
 that certain design elements contribute to increased user engagement especially by young adults. Given that
-our target users (university students) are mostly young adults, The UI components are intended to increase
+our target users (university students) are mostly young adults, the UI components are intended to increase
 target user engagement with UniCa$h, which would indirectly lead to overall improvements in their personal financial
-management, despite not being direct CLI features in and of themselves.
+management, despite not being direct CLI features._
 
 **Decommissioned Features**
 
