@@ -65,7 +65,7 @@ My contributions are given below.
   * _Note: The initial Find Command was implemented by [Jamie](https://github.com/jamz903)
   as mentioned [here](jamz903.md)_
 
-### User Interface Features
+#### User Interface Features
 
 * **User Interface Overhaul & Enhancement** [PRs:
 [#78](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/78)
@@ -136,7 +136,7 @@ management, despite not being direct CLI features in and of themselves.
 
 ---
 
-### Decommissioned Features
+#### Decommissioned Features
 
 Below are some of the features that I had implemented prior, but were removed due to various project constraints.
 
@@ -155,13 +155,9 @@ Below are some of the features that I had implemented prior, but were removed du
 
 * **Test Command**: [PRs: [#126](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/126)]
   * **What it was:** A temporary Test Command intended for internal testing of UniCa$h.
-  * **Motivation for Implementation:** To test UniCa$h's GUI and functionality with a lot more transactions
-  than the default UniCa$h. The default UniCa$h presented by the Reset Command would be in a reasonable and visually way
-  as it is intended for new users to get an understanding of the App. However, to test various edge cases, we wanted
-  to use a separate Test command that would populate UniCa$h with these transactions.
-  * **Justification for Removal:** To ensure safety of the main codebase, it was best to not include
-  any additional commands not intended for production as removing them might introduce previously
-  unaccounted bugs.
+  * **Motivation for Implementation:** To test UniCa$h's GUI and functionality by populating it with a
+  lot more transactions than the default UniCa$h.
+  * **Justification for Removal:** Better to merge onto a separate testing branch, which I also opened.
 
 
 * **Fuzzy-Find Transactions**: [PRs: [#110](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/110)]
@@ -224,6 +220,7 @@ augmented by the entire team.
   
 #### Project Management
 * Created and initialized the CS2103-T16-3 organization on GitHub
+* Created a testing branch to test new features in UniCa$h
 * Managed release v1.3a on GitHub - Can be found [here](https://github.com/AY2324S1-CS2103-T16-3/tp/releases/tag/v1.3).
 * Made and released demo video for release v1.3b [here](https://github.com/AY2324S1-CS2103-T16-3/tp/releases/tag/v1.3b)
 
