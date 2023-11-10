@@ -3,21 +3,19 @@ layout: page
 title: Rubesh Suresh's Project Portfolio Page
 ---
 
-## Project: UniCa$h
+### Project: UniCa$h
 
 UniCa$h is a desktop application for university students who want to be more financially conscious.
 The user interacts with it using a CLI, and it has a GUI created with JavaFX. UniCa$h is designed
 for users who are proficient with the CLI, written in Java 11, spanning about [20 KLoC](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=T16-3&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=AY2324S1-CS2103-T16-3%2Ftp%5Bmaster%5D&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&isTabOnMergedGroup=true&tabOpen=true&tabType=authorship&tabAuthor=elhy1999&tabRepo=AY2324S1-CS2103-T16-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=true&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false).
 My contributions are given below.
----
 
-### Functional Features
+#### Functional Features
 
 * **Delete Transaction Command**: [PRs: [#62](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/62)]
   * **What it does:** A CLI command to remove a specified transaction from UniCa$h.
   * **Justification:** Core utility of a Finance Management App.
   * **Credits:** AB3's implementation of the `Delete` command
-
 
 * **Clear Transactions Command**: [PRs:
 [#63](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/63)
@@ -28,7 +26,6 @@ My contributions are given below.
   mass-deletion is intentional, adding a layer of safety.
   * **Credits:** AB3's implementation of the `Clear` command.
 
-
 * **Reset UniCash Command**: [PRs:
 [#90](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/90)
 [#138](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/138/)]
@@ -36,8 +33,7 @@ My contributions are given below.
   the same default transactions that appear when the app is opened for the first time.
   * **Justification:** An easy way for users and testers of the application alike to re-start
   using UniCa$h from its default state.
-  
-  
+
 * **Help Command & UniCash Welcome Window** [PRs:
   [#96](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/96)]
   * **What it does:** A CLI command to open the Help Window with the 
@@ -46,8 +42,7 @@ My contributions are given below.
   * **Justification:** To allow the user quick access to an overview of commands available.
   * _**Note:** The Help Command has been enhanced by [Lip Wei](https://github.com/lipwei1808)
         as mentioned [here](lipwei1808.md)._
-
-    
+ 
 * **Get Transaction Command** [PRs: 
 [#101](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/101)]
   * **What it does:** A CLI Command to see expanded details of a specific transaction.
@@ -56,8 +51,7 @@ My contributions are given below.
   * **Highlights:** This Command complements the Find command where a user can
   search for a keyword with the Find Command and retrieve details of a transaction with the Get Command. The 
   Find Command alters the visible Transactions List Panel, but the Get Command does not!
-  
-    
+   
 * **Find Transactions Command Enhancement**: [PRs:
   [#101](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/101)
   [#138](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/138)]
