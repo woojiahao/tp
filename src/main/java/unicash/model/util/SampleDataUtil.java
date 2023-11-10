@@ -370,14 +370,6 @@ public class SampleDataUtil {
         return sample;
     }
 
-    public static ReadOnlyUniCash getTestUniCash() {
-        UniCash sample = new UniCash();
-        for (var transaction : getTestTransactions()) {
-            sample.addTransaction(transaction);
-        }
-        return sample;
-    }
-
     /**
      * Returns a category set containing the list of strings given.
      */
