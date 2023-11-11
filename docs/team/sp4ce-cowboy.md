@@ -116,7 +116,7 @@ and consequently lead to improvement in personal financial management.
   **Justification for Removal:** Unreliable to depend on the host machine to display the PDF and
   difficult to test. Furthermore, we were allowed to assume that all users have access to the UG.
 
-* **Test Command**: [PRs: [#126](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/126)]
+* **Test Command**: 
   * **What it was:** A temporary Test Command intended for internal testing of UniCa$h.
   **Motivation for Implementation:** To test UniCa$h's GUI and functionality by populating it with a
   lot more transactions than the default UniCa$h. 
@@ -133,15 +133,16 @@ and consequently lead to improvement in personal financial management.
 * **Filter Transactions**: [PRs: [#130](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/130)]
   * **What it was:** Intended to complement the Fuzzy-Find transaction feature. While the Fuzzy-Find
   acted like a logical `OR` amongst keywords, Filter was intended to act as a logical `AND`, a direct inverse analogue.
-  * **Motivation for Implementation:** Combined with the Fuzzy-Find feature, the user would have maximum control
+  **Motivation for Implementation:** Combined with the Fuzzy-Find feature, the user would have maximum control
   over the scope of transactions to search. Combined with the Rolling Balance Indicator, the user would be able to tabulate total expenses for any conceivable
-  combination of transaction properties. **Justification for Removal:** Same as Fuzzy-Find.
+  combination of transaction properties.
+  **Justification for Removal:** Same as Fuzzy-Find.
   Both features were simplified and integrated into the existing Find Command.
 [PR: [#138](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/138)]
 
 **Documentation**
 * User Guide:
-  * Added documentation for Delete, Clear, Reset, Find, Get, Help
+  * Added documentation for own features (Delete, Clear, Reset, Find, Get, Help)
   * UI Features and Overview of UI
 * Developer Guide:
   * Migrated details of the DG from an external source (G Docs) and consolidated them in GitHub.
@@ -151,9 +152,16 @@ and consequently lead to improvement in personal financial management.
 
 **Project Management & Team Tasks**
 * Created and initialized the CS2103-T16-3 organization on GitHub
-* Created a testing branch for in UniCa$h [PR: [#126](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/126)]
-* Refactored the codebase to refer to UniCash instead of AB3. [PR: [#77](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/62)]
-* Managed release [v1.3b](https://github.com/AY2324S1-CS2103-T16-3/tp/releases/tag/v1.3b) and [v1.3.1](https://github.com/AY2324S1-CS2103-T16-3/tp/releases/tag/v1.3.1) on GitHub
+* Created a centralized meeting minutes repository for the team
+[here](https://docs.google.com/document/d/1EI2YeRjxt59N0oc0bauGXI06uFQLI_O54JJci_-JKGc/edit)
+* Created a testing branch for in UniCa$h
+[PR: [#126](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/126)]
+* Added a TestCommand for the above branch, intended for internal testing of UniCa$h.
+[PRs: [#126](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/126)]
+* Refactored the codebase to refer to UniCash instead of AB3.
+[PR: [#77](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/62)]
+* Managed release [v1.3b](https://github.com/AY2324S1-CS2103-T16-3/tp/releases/tag/v1.3b)
+and [v1.3.1](https://github.com/AY2324S1-CS2103-T16-3/tp/releases/tag/v1.3.1) on GitHub
 * Made and released demo video for release v1.3b [here](https://github.com/AY2324S1-CS2103-T16-3/tp/releases/tag/v1.3b)
 
 **Community**
