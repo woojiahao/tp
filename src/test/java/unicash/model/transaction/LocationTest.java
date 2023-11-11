@@ -61,11 +61,22 @@ public class LocationTest {
         assertNotEquals(null, name);
 
         // different types -> returns false
-        assertNotEquals(5.0f, name);
-
         assertFalse(name.equals(5));
 
         // different values -> returns false
         assertNotEquals(name, new Location("Other Valid Location"));
+    }
+
+    @Test
+    public void hashCodeMethod() {
+        var location = new Location("Valid location");
+        var locationCopy = new Location(location.location);
+        assertEquals(location.hashCode(), locationCopy.hashCode());
+    }
+
+    @Test
+    public void toStringMethod() {
+        assertEquals("Valid location", new Location("Valid location").toString());
+        assertEquals("-", new Location("").toString());
     }
 }
