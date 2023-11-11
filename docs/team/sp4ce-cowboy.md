@@ -147,8 +147,8 @@ and consequently lead to improvement in personal financial management._
 * Developer Guide:
   * Migrated details of the DG from an external source (G Docs) and consolidated them in GitHub.
   * Set up DG skeleton for structured and convenient documentation by the team.
-  * Add documentation for own features (Delete, Clear, Reset, Find, Get, Help)
-  * Add documentation for UI and UI features
+  * Added documentation for own features (Delete, Clear, Reset, Find, Get, Help)
+  * Added documentation for UI and UI features
 
 **Project Management & Team Tasks**
 * Created and initialized the CS2103-T16-3 organization on GitHub
@@ -161,8 +161,8 @@ and consequently lead to improvement in personal financial management._
 * Refactored the codebase to refer to UniCash instead of AB3.
 [PR: [#77](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/62)]
 * Managed release [v1.3b](https://github.com/AY2324S1-CS2103-T16-3/tp/releases/tag/v1.3b)
-and [v1.3.1](https://github.com/AY2324S1-CS2103-T16-3/tp/releases/tag/v1.3.1) on GitHub
-* Made and released demo video for release v1.3b [here](https://github.com/AY2324S1-CS2103-T16-3/tp/releases/tag/v1.3b)
+and [v1.3.1](https://github.com/AY2324S1-CS2103-T16-3/tp/releases/tag/v1.3.1) on GitHub,
+also made and released demo video for release v1.3b [here](https://github.com/AY2324S1-CS2103-T16-3/tp/releases/tag/v1.3b)
 
 **Community**
 * **Pull Requests Reviewed**: Refer [here](https://github.com/AY2324S1-CS2103-T16-3/tp/pulls?q=is%3Apr+reviewed-by%3Asp4ce-cowboy)
