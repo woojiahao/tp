@@ -55,6 +55,9 @@ public class FindCommandParser implements Parser<FindCommand> {
                 args, PREFIX_NAME, PREFIX_CATEGORY, PREFIX_LOCATION);
 
         String trimmedArgs = args.trim();
+
+        /* Throws a ParseException if the argument does not contain any non-whitespace characters
+         * or if there are any non-whitespace characters preceding the first valid prefix */
         if (trimmedArgs.isEmpty() || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
@@ -64,18 +67,21 @@ public class FindCommandParser implements Parser<FindCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_CATEGORY, PREFIX_LOCATION);
 
 
+        /* If present, add the argument following the Name prefix as a name predicate keyword */
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             Name transactionName = ParserUtil.parseTransactionName(
                     argMultimap.getValue(PREFIX_NAME).get());
             findPredicate.addNameKeyword(transactionName.toString());
         }
 
+        /* If present, add the argument following the Category prefix as a category predicate keyword */
         if (argMultimap.getValue(PREFIX_CATEGORY).isPresent()) {
             Category transactionCategory = ParserUtil.parseCategory(
                     argMultimap.getValue(PREFIX_CATEGORY).get());
             findPredicate.addCategoryKeyword(transactionCategory.toString());
         }
 
+        /* If present, add the argument following the Location prefix as a location predicate keyword */
         if (argMultimap.getValue(PREFIX_LOCATION).isPresent()) {
             Location transactionLocation = ParserUtil.parseLocation(
                     argMultimap.getValue(PREFIX_LOCATION).get());
@@ -112,8 +118,12 @@ public class FindCommandParser implements Parser<FindCommand> {
     /**
      * Returns true if any of the prefixes contains any {@code Optional} values in the given
      * {@code ArgumentMultimap}.
+     *
+     * @param argumentMultimap the input {@code ArgumentMultimap}
+     * @param prefixes the input prefixes to check with the {@code ArgumentMultimap}
+     * @return true if any input prefix is present in {@code ArgumentMultimap}, false otherwise
      */
-    private static boolean areAnyPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+    public static boolean areAnyPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes)
                 .anyMatch(prefix -> argumentMultimap
                         .getValue(prefix)
