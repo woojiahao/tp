@@ -11,21 +11,21 @@ import org.junit.jupiter.api.Test;
 public class AmountTest {
 
     private static final double[] VALID_AMOUNTS = {
-            0.000,
-            0.001,
-            10,
-            12.13,
-            Integer.MAX_VALUE,
-            Integer.MAX_VALUE - 1,
+        0.000,
+        0.001,
+        10,
+        12.13,
+        Integer.MAX_VALUE,
+        Integer.MAX_VALUE - 1,
     };
 
     private static final double[] INVALID_AMOUNTS = {
-            -1,
-            -0.000001,
-            Integer.MIN_VALUE,
-            (double) (Integer.MAX_VALUE) + 1,
-            (double) (Integer.MAX_VALUE + 0.002),
-            (double) Long.MAX_VALUE,
+        -1,
+        -0.000001,
+        Integer.MIN_VALUE,
+        (double) (Integer.MAX_VALUE) + 1,
+        (double) (Integer.MAX_VALUE) + 0.002,
+        (double) Long.MAX_VALUE,
     };
 
     @Test

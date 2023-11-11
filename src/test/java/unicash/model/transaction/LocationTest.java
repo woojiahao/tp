@@ -11,27 +11,27 @@ import org.junit.jupiter.api.Test;
 public class LocationTest {
 
     private static final String[] INVALID_LOCATIONS = {
-            "",  // empty string
-            " ",  // whitespace
-            "^",  // only non-supported characters
-            "peter*",  // non-supported characters
-            "a".repeat(501)  // too long
+        "", // empty string
+        " ", // whitespace
+        "^", // only non-supported characters
+        "peter*", // non-supported characters
+        "a".repeat(501) // too long
     };
 
     private static final String[] VALID_LOCATIONS = {
-            "fairprice", // alphabets only
-            "12345", // numbers only
-            "block 283", // alphanumeric characters
-            "Fairprice", // with capital letters
-            "Fairprice at NUS University Town", // long names
-            "Fairprice (NUS)", // ()
-            "Fairprice #02-160", // # and -
-            "Fairprice (NUS_UTown)", // _
-            "Ben & Jerry", // &
-            "First Avenue, Block 283", // ,
-            "First Avenue, Block 28.3", // ,
-            "-", // Blank location
-            "a".repeat(500)  // exactly max length characters
+        "fairprice", // alphabets only
+        "12345", // numbers only
+        "block 283", // alphanumeric characters
+        "Fairprice", // with capital letters
+        "Fairprice at NUS University Town", // long names
+        "Fairprice (NUS)", // ()
+        "Fairprice #02-160", // # and -
+        "Fairprice (NUS_UTown)", // _
+        "Ben & Jerry", // &
+        "First Avenue, Block 283", // ,
+        "First Avenue, Block 28.3", // ,
+        "-", // Blank location
+        "a".repeat(500)// exactly max length characters
     };
 
     @Test

@@ -12,21 +12,21 @@ import org.junit.jupiter.api.Test;
 public class NameTest {
 
     private static final String[] INVALID_NAMES = {
-            "",  // empty string
-            " ",  // whitespace
-            "^",  // only non-supported characters
-            "peter*",  // non-supported characters
-            "a".repeat(501)  // too long
+        "", // empty string
+        " ", // whitespace
+        "^", // only non-supported characters
+        "peter*", // non-supported characters
+        "a".repeat(501) // too long
     };
 
     private static final String[] VALID_NAMES = {
-            "peter jack",  // alphabets only
-            "12345",  // numbers only
-            "peter the 2nd",  // alphanumeric
-            "Capital Tan",  // capital letters
-            "David Roger Jackson Ray Jr 2nd",  // longer names
-            "hello (world) @ NUS School_of-Computing #1234 & Longer, longer.",  // Symbols
-            "a".repeat(500)  // exactly max length characters
+        "peter jack", // alphabets only
+        "12345", // numbers only
+        "peter the 2nd", // alphanumeric
+        "Capital Tan", // capital letters
+        "David Roger Jackson Ray Jr 2nd", // longer names
+        "hello (world) @ NUS School_of-Computing #1234 & Longer, longer.", // Symbols
+        "a".repeat(500) // exactly max length characters
     };
 
     @Test
