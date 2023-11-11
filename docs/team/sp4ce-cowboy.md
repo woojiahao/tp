@@ -92,24 +92,23 @@ _**Note:** The Help Command has been enhanced by [Lip Wei](https://github.com/li
   visual consistency and therefore, better overall user experience.
 
 
-_**Addendum**: The focus on color consistency and user experience across UniCa$h is motivated by certain scientific
-[studies](https://www.sciencedirect.com/science/article/abs/pii/S0167811623000599]) that show a positive 
-correlation between color complexity and user engagement. Additionally,
-[this](https://www.diva-portal.org/smash/record.jsf?pid=diva2%3A1788177&dswid=-2283) study also found out
-that certain design elements contribute to increased user engagement especially by young adults. Given that
-our target users (university students) are mostly young adults, the UI components are intended to increase
-target user engagement with UniCa$h, which would indirectly lead to overall improvements in their personal financial
-management, despite not being direct CLI features._
+_**Addendum**: The focus on color consistency and user experience across UniCa$h is motivated
+by certain scientific [studies](https://www.sciencedirect.com/science/article/abs/pii/S0167811623000599]) that show a positive correlation between color complexity
+and user engagement. [This](https://www.diva-portal.org/smash/record.jsf?pid=diva2%3A1788177&dswid=-2283) study also found out that certain design elements contribute
+to increased user engagement especially by young adults. Given that our target users
+(university students) are mostly young adults, the UI components are intended to increase target
+user engagement with UniCa$h, which would indirectly lead to overall improvements in their
+personal financial management, despite not being direct CLI features._
 
 **Decommissioned Features**
 
 Below are some of the features that I had implemented prior, but were removed due to various project constraints.
 
 * **Local User Guide**: [PRs: [#82](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/82)]
-  * **What it was:** A PDF version of the user guide (UG) that the user can access directly from UniCa$h 
+  * **What it was:** A PDF version of the UGthat the user can access directly from UniCa$h 
   **Motivation for Implementation:** Given the NFR of offline usage, it would be useful for the User to
   have local access to the UG.
-  **Justification for Removal:** It depended on the host machine to display the PDF, which was unreliable, and
+  **Justification for Removal:** Unreliable to depend on the host machine to display the PDF and
   difficult to test. Furthermore, we were allowed to assume that all users have access to the UG.
 
 * **Test Command**: [PRs: [#126](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/126)]
