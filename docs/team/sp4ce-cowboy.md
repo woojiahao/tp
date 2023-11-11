@@ -63,11 +63,10 @@ _**Note:** The Help Command has been enhanced by [Lip Wei](https://github.com/li
 [#94](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/94)
 [#96](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/96)]
   * The UI of UniCa$h has been enhanced with an adjustable vertical SplitPane,
-  a larger `Results Display Box`, a reversed `Transactions List Panel`, colored 
-  currencies representation, and other minor UI modifications.
-  * Justification: To better fit our GUI needs corresponding to the visual representation
-  of our implemented features for UniCa$h.
-  * _Note: The original UI transition was done by [Jamie](https://github.com/jamz903) as mentioned [here](jamz903.md)_
+  a larger `Results Display Box`, a reversed `Transactions List Panel`, custom fonts,
+  and custom app icon. * Justification:
+  To better fit our GUI needs corresponding to the visual representation of our implemented
+  features for UniCa$h. * _Note: The original UI transition was done by [Jamie](https://github.com/jamz903) as mentioned [here](jamz903.md)_
 
 * **Rolling Balance Indicator** [PRs: [#96](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/96)]
   * Added to the `StatusBarFooter` of the UniCa$h UI to explicitly indicate the current balance of any group
@@ -75,26 +74,19 @@ _**Note:** The Help Command has been enhanced by [Lip Wei](https://github.com/li
   the user will see their net total expenditure for a group of transactions.
   * **Justification:** For the user to get a holistic sense of their current financial state and
     quantitatively determine certain spending patterns in related transactions.
-
-
 * **Command Box History & Enhancements** [PRs:
 [#110](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/110)
 [#119](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/119)]
-  * The `CommandBox` is made to remember the user's previous inputs, up to a
-  maximum of 10 previous inputs. The user can use the arrow keys to traverse through their history
-  of inputs, and press the `ESC` to clear the command box.
-  * **Justification:** To provide our CLI-proficient targe users a more intuitive,
-  convenient and efficient means for them to interact with UniCa$h, similar to that of a real CLI.
+  * The `CommandBox` can remember up to a maximum of 10 previous user inputs,
+  which can be traversed with the up/down arrow keys. `ESC` will clear the command box. 
+  **Justification:** To provide our CLI-proficient targe users a more intuitive,
+  convenient and efficient means for them to interact with UniCa$h, similar to a real CLI.
 
-
-* **StyleSheet Class** [PRs: [#96](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/96)]
-  * A StyleSheet class was created such that all components involving any form of graphical
+* **UI Features** 
+  * A StyleSheet class [PRs: [#96](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/96)] was created such that all components involving any form of graphical
   representation have a centralized source of reference.
-  * **Justification:** To provide a seamless visual experience across UniCa$h for a better user-experience.
-
-
-* **Hash-based Category Coloring** [PRs: [#96](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/96)]
-  * This feature allows for a consistent color pattern across unique categories without having to hard-code colors, as 
+  **Justification:** To provide a seamless visual experience across UniCa$h for a better user-experience.
+  * Hash-based Category Coloring [PRs: [#96](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/96)] This feature allows for a consistent color pattern across unique categories without having to hard-code colors, as 
   there is no limit to total category count.
   * **Justification:** Each category having the same specific color assigned to it would lead to better
   visual consistency and therefore, better overall user experience.
@@ -153,7 +145,7 @@ _Both features were simplified and integrated into the existing Find Command.
 [PR: [#138](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/138)]_
 
 
-**Minor Contributions:**
+**Other Contributions:**
 
 * **UniCash Messages** - A class to encapsulate and consolidate messages displayed in a central location.
 [PR: [#62](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/62)]
@@ -164,7 +156,7 @@ _Both features were simplified and integrated into the existing Find Command.
 
 **Documentation**
 * User Guide:
-  * Added documentation for own features (Delete, Clear, Reset, Find, Get, Help Commands)
+  * Added documentation for Delete, Clear, Reset, Find, Get, Help Commands)
   * UI Features and Overview of UI
 * Developer Guide:
   * Migrated details of the Developer Guide from an external source (Google Docs) and consolidated them in GitHub.
@@ -172,7 +164,7 @@ _Both features were simplified and integrated into the existing Find Command.
   * Add documentation for own features (Delete, Clear, Reset, Find, Get, Help Commands)
   * Add documentation for UI and UI features
 
-**Project Management**
+**Project Management & Team Tasks**
 * Created and initialized the CS2103-T16-3 organization on GitHub
 * Created a testing branch to test new features in UniCa$h
 * Managed release v1.3a on GitHub - Can be found [here](https://github.com/AY2324S1-CS2103-T16-3/tp/releases/tag/v1.3).
@@ -182,7 +174,7 @@ _Both features were simplified and integrated into the existing Find Command.
 * **Pull Requests Reviewed**: Refer to [here](https://github.com/AY2324S1-CS2103-T16-3/tp/pulls?q=is%3Apr+reviewed-by%3Asp4ce-cowboy)
 [Reviewed 41 PRs, with 91 PR comments in total thus far.]
 * **Pull Requests Opened**: Refer to [here](https://github.com/AY2324S1-CS2103-T16-3/tp/pulls?q=is%3Apr+author%3Asp4ce-cowboy+)
-[Opened 33 PRs. Almost all major PRs have full details and screenshots.]
+[Opened 33 PRs. Almost all major PRs have full details and/or screenshots.]
 * **Issues Assigned & Completed**: Refer to [here](https://github.com/AY2324S1-CS2103-T16-3/tp/issues?q=is%3Aissue+author%3Asp4ce-cowboy+is%3Aclosed+)
 
 
