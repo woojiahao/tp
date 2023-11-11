@@ -100,9 +100,7 @@ to increased user engagement especially by young adults. Given that our target u
 user engagement with UniCa$h, which would indirectly lead to overall improvements in their
 personal financial management, despite not being direct CLI features._
 
-**Decommissioned Features**
-
-Below are some of the features that I had implemented prior, but were removed due to various project constraints.
+**Decommissioned Features** (Some of the features that I had implemented prior, but removed due to various constraints)
 
 * **Local User Guide**: [PRs: [#82](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/82)]
   * **What it was:** A PDF version of the UGthat the user can access directly from UniCa$h 
