@@ -3,7 +3,7 @@ layout: page
 title: Rubesh Suresh's Project Portfolio Page
 ---
 
-### Project: UniCa$h
+#### Project: UniCa$h
 
 UniCa$h is a desktop application for university students who want to be more financially conscious.
 The user interacts with it using a CLI, and it has a GUI created with JavaFX. UniCa$h is designed
@@ -15,43 +15,51 @@ explanations in the respective PRs.
 
 * **Delete Transaction Command**: [PRs: [#62](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/62)]
   {_**Credits:** AB3's `Delete` command._}
-  * A CLI command to remove a specified transaction from UniCa$h. **Justification:** Core utility of a Finance Management App.
+  * A CLI command to remove a specified transaction from UniCa$h.
+  **Justification:** Core utility of a Finance Management App.
 
 * **Clear Transactions Command**: [PRs:
 [#63](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/63)
 [#138](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/138/)]
   {_**Credits:** AB3's `Clear` command._}
-  * **What it does:** A CLI command to remove all transactions, and a parser class. **Justification:** To allow the user to start on a clean slate. Parser ensures that
+  * **What it does:** A CLI command to remove all transactions, and a parser class.
+  **Justification:** To allow the user to start on a clean slate. Parser ensures that
   mass-deletion is intentional, adding a layer of safety.
 
 * **Reset UniCash Command**: [PRs:
 [#90](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/90)
 [#138](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/138/)]
   * **What it does:** A CLI Command to restore UniCa$h to its original state with
-  the same default transactions that appear when the app is opened for the first time. **Justification:** An easy way for users and testers of the application alike to re-start
+  the same default transactions that appear when the app is opened for the first time.
+  **Justification:** An easy way for users and testers of the application alike to re-start
   using UniCa$h from its default state.
 
 * **Help Command & UniCash Welcome Window** [PRs:
   [#96](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/96)]
   * **What it does:** A CLI command to open the Help Window with the 
   URL to UniCa$h's user guide, and also display a Message with a collated list of commands available,
-  which is also set as the start-up Welcome Window. **Justification:** To allow the user quick access to an overview of commands available.
-_**Note:** The Help Command has been enhanced by [Lip Wei](https://github.com/lipwei1808)
+  which is also set as the start-up Welcome Window.
+  **Justification:** To allow the user quick access to an overview of commands available.
+  _**Note:** The Help Command has been enhanced by [Lip Wei](https://github.com/lipwei1808)
         as mentioned [here](lipwei1808.md)._
  
 * **Get Transaction Command** [PRs: 
 [#101](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/101)]
-  * **What it does:** A CLI Command to see expanded details of a specific transaction. **Justification:** To allow a user to see details of a transaction whose properties' lengths
+  * **What it does:** A CLI Command to see expanded details of a specific transaction.
+  **Justification:** To allow a user to see details of a transaction whose properties' lengths
   can extend beyond the UI's ability to display them.
 
 * **Find Transactions Command Enhancement**: [PRs:
   [#101](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/101)
   [#138](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/138)]
-  * **What it does:** A CLI command that allows the user to search for specific transactions based
-  on certain keywords. **Justification:** To allow the user to search for specific transactions especially if there are
-  many transactions stored. **Highlights:** Complements the Get Command and the Rolling Balance Indicator. **Possible Future Additions:** The Find command is limited to Name, Category and Location. This
+  * **What it does:** A CLI command to allow the user to search for specific transactions based
+  on certain keywords.
+  **Justification:** To allow the user find specific transactions especially if there are
+  many transactions stored.
+  **Highlights:** Complements the Get Command and the Rolling Balance Indicator.
+  **Possible Future Additions:** The Find command is limited to Name, Category and Location. This
   can be expanded to include the other properties in the future.
-  * _Note: The initial Find Command was implemented by [Jamie](https://github.com/jamz903)
+  _Note: The initial Find Command was implemented by [Jamie](https://github.com/jamz903)
   as mentioned [here](jamz903.md)_
 
 **User Interface Features**
@@ -66,10 +74,11 @@ _**Note:** The Help Command has been enhanced by [Lip Wei](https://github.com/li
   a larger `Results Display Box`, a reversed `Transactions List Panel`, custom fonts,
   and custom app icon. * Justification:
   To better fit our GUI needs corresponding to the visual representation of our implemented
-  features for UniCa$h. * _Note: The original UI transition was done by [Jamie](https://github.com/jamz903) as mentioned [here](jamz903.md)_
+  features for UniCa$h.
+  _Note: The original UI transition was done by [Jamie](https://github.com/jamz903) as mentioned [here](jamz903.md)_
 
 * **Rolling Balance Indicator** [PRs: [#96](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/96)]
-  * Added to the `StatusBarFooter` of the UniCa$h UI to explicitly indicate the current balance of any group
+  * What it does: Added to the `StatusBarFooter` of the UniCa$h UI to explicitly indicate the current balance of any group
   of transactions. At start-up the user will see their net total balance. With certain commands like `find`, the
   the user will see their net total expenditure for a group of transactions.
   * **Justification:** For the user to get a holistic sense of their current financial state and
@@ -78,27 +87,25 @@ _**Note:** The Help Command has been enhanced by [Lip Wei](https://github.com/li
 [#110](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/110)
 [#119](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/119)]
   * The `CommandBox` can remember up to a maximum of 10 previous user inputs,
-  which can be traversed with the up/down arrow keys. `ESC` will clear the command box. 
+  which can be traversed with the up/down arrow keys. `ESC` will clear the command box.
   **Justification:** To provide our CLI-proficient targe users a more intuitive,
   convenient and efficient means for them to interact with UniCa$h, similar to a real CLI.
 
 * **UI Features** 
-  * A StyleSheet class [PRs: [#96](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/96)] was created such that all components involving any form of graphical
+  * **A StyleSheet class** [PRs: [#96](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/96)] was created such that all components involving any form of graphical
   representation have a centralized source of reference.
-  **Justification:** To provide a seamless visual experience across UniCa$h for a better user-experience.
-  * Hash-based Category Coloring [PRs: [#96](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/96)] This feature allows for a consistent color pattern across unique categories without having to hard-code colors, as 
-  there is no limit to total category count.
-  * **Justification:** Each category having the same specific color assigned to it would lead to better
-  visual consistency and therefore, better overall user experience.
+  * **Hash-based Category Coloring** [PRs: [#96](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/96)]
+  This feature allows for a consistent color pattern across unique categories without having to hard-code colors, as 
+  there is no limit for total category count in UniCa$h.
+  **Justification:** To provide a seamless and consistent visual experience across UniCa$h for a better user-experience.
 
 
 _**Addendum**: The focus on color consistency and user experience across UniCa$h is motivated
 by certain scientific [studies](https://www.sciencedirect.com/science/article/abs/pii/S0167811623000599]) that show a positive correlation between color complexity
-and user engagement. [This](https://www.diva-portal.org/smash/record.jsf?pid=diva2%3A1788177&dswid=-2283) study also found out that certain design elements contribute
-to increased user engagement especially by young adults. Given that our target users
-(university students) are mostly young adults, the UI components are intended to increase target
-user engagement with UniCa$h, which would indirectly lead to overall improvements in their
-personal financial management, despite not being direct CLI features._
+and user engagement. [This](https://www.diva-portal.org/smash/record.jsf?pid=diva2%3A1788177&dswid=-2283) study found certain design elements contribute
+to increased user engagement especially by young adults. The UI components are intended to 
+increase target user (university students, are mostly young adults) engagement with UniCa$h,
+and consequently lead to improvement in personal financial management.
 
 **Decommissioned Features** (Some features that I had implemented but removed due to various constraints)
 
