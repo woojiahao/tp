@@ -25,8 +25,8 @@ public class FindCommand extends Command {
     private static final Logger logger = Logger.getLogger("FindCommandLogger");
 
     /**
-     * Creates a {@code TransactionContainsAnyKeywordsPredicate} with a non-null
-     * predicate.
+     * Creates a {@code FindCommand} object with a non-null
+     * {@code TransactionContainsAllKeywordsPredicate} object.
      */
     public FindCommand(TransactionContainsAllKeywordsPredicate predicate) {
         requireNonNull(predicate);
