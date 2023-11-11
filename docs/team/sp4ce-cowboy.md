@@ -16,7 +16,7 @@ explanations in the respective PRs.
 * **Delete Transaction Command**: [PRs: [#62](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/62)]
   {_**Credits:** AB3's `Delete` command._}
   * A command to remove a specified transaction from UniCa$h.
-  **Justification:** Core utility of a Finance Management App.
+  **Justification:** Core utility of a finance tracking app.
 
 * **Clear Transactions Command**: [PRs:
 [#63](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/63)
@@ -105,7 +105,7 @@ explanations in the respective PRs.
   color complexity and target user engagement, which is also elaborated in the Developer Guide._
 
 
-**Decommissioned Features** (Some features that I had implemented but removed due to various constraints)
+**Decommissioned Features** (Some features that I had implemented prior but removed due to various constraints)
 
 * **Local User Guide**: [PRs: [#82](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/82)]
   * **What it was:** A PDF version of the UGthat the user can access directly from UniCa$h 
