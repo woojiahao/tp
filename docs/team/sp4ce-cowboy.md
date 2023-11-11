@@ -70,11 +70,11 @@ explanations in the respective PRs.
 [#86](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/86)
 [#94](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/94)
 [#96](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/96)]
-  * The UI of UniCa$h has been enhanced with an adjustable vertical SplitPane,
+  * The UI of UniCa$h has been enhanced with an adjustable vertical `SplitPane`,
   a larger `Results Display Box`, a reversed `Transactions List Panel`, custom fonts,
-  and custom app icon. * Justification:
-  To better fit our GUI needs corresponding to the visual representation of our implemented
-  features for UniCa$h.
+  custom app icon, CSS additions, and other miscellaneous UI changes.
+  **Justification:** To better fit our GUI needs corresponding to the visual
+  representation of our implemented features for UniCa$h.
   _Note: The original UI transition was done by [Jamie](https://github.com/jamz903) as mentioned [here](jamz903.md)_
 
 * **Rolling Balance Indicator** [PRs: [#96](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/96)]
@@ -93,9 +93,12 @@ explanations in the respective PRs.
 
 * **UI/UX Visual Features** 
   * A **StyleSheet class** [PRs: [#96](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/96)] was created such that all components involving any form of graphical
-  representation have a centralized source of reference.
+  representation have a centralized source of reference. **[Highlights/Possible Future Addition]:**
+  The universality and extensibility of the StyleSheet class is such that it is possible to allow the
+  user themselves to create and select certain custom themes which can then be applied across
+  all visual elements in UniCa$h.
   * **Hash-based Category Coloring** [PRs: [#96](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/96)]
-  This feature allows for a consistent color pattern across unique categories without having to hard-code colors, as 
+  This feature allows for a consistent color scheme across unique categories without having to hard-code colors, as 
   there is no limit for total category count in UniCa$h.
   **Justification:** To provide a seamless and consistent visual experience across UniCa$h for a better user-experience.
 
