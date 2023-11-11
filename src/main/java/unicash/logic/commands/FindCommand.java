@@ -2,14 +2,16 @@ package unicash.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import unicash.commons.enums.CommandType;
 import unicash.commons.util.ToStringBuilder;
 import unicash.logic.UniCashMessages;
 import unicash.model.Model;
 import unicash.model.transaction.predicates.TransactionContainsAllKeywordsPredicate;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  * Finds and lists all transactions in UniCa$h whose name contains any of the argument keywords.
@@ -20,10 +22,11 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = CommandType.FIND.getCommandWords();
     public static final String MESSAGE_USAGE = CommandType.FIND.getMessageUsage();
 
-    private final TransactionContainsAllKeywordsPredicate predicate;
-
     private static final Logger logger = Logger.getLogger("FindCommandLogger");
 
+    private final TransactionContainsAllKeywordsPredicate predicate;
+
+    
     /**
      * Creates a {@code FindCommand} object with a non-null
      * {@code TransactionContainsAllKeywordsPredicate} object.
