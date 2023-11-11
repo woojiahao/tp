@@ -100,7 +100,7 @@ to increased user engagement especially by young adults. Given that our target u
 user engagement with UniCa$h, which would indirectly lead to overall improvements in their
 personal financial management, despite not being direct CLI features._
 
-**Decommissioned Features** (Some of the features that I had implemented prior, but removed due to various constraints)
+**Decommissioned Features** (Some features that I had implemented but removed due to various constraints)
 
 * **Local User Guide**: [PRs: [#82](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/82)]
   * **What it was:** A PDF version of the UGthat the user can access directly from UniCa$h 
@@ -126,9 +126,8 @@ personal financial management, despite not being direct CLI features._
 * **Filter Transactions**: [PRs: [#130](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/130)]
   * **What it was:** Intended to complement the Fuzzy-Find transaction feature. While the Fuzzy-Find
   acted like a logical `OR` amongst keywords, Filter was intended to act as a logical `AND`, a direct inverse analogue.
-  * **Motivation for Implementation:** Combined with the Fuzzy-Find feature, the user would have extreme control
-  over their search results, being able to both narrow down and broaden the scope of transactions as much as possible.
-  Combined with the Rolling Balance Indicator, the user would be able to tabulate total expenses for andy conceivable
+  * **Motivation for Implementation:** Combined with the Fuzzy-Find feature, the user would have maximum control
+  over the scope of transactions to search. Combined with the Rolling Balance Indicator, the user would be able to tabulate total expenses for any conceivable
   combination of transaction properties. **Justification for Removal:** Same as Fuzzy-Find.
   Both features were simplified and integrated into the existing Find Command.
 [PR: [#138](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/138)]
