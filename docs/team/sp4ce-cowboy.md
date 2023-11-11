@@ -115,37 +115,26 @@ Below are some of the features that I had implemented prior, but were removed du
 * **Test Command**: [PRs: [#126](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/126)]
   * **What it was:** A temporary Test Command intended for internal testing of UniCa$h.
   **Motivation for Implementation:** To test UniCa$h's GUI and functionality by populating it with a
-  lot more transactions than the default UniCa$h.
+  lot more transactions than the default UniCa$h. 
   **Justification for Removal:** Merge onto a separate testing branch instead, which I also opened.
 
 * **Fuzzy-Find Transactions**: [PRs: [#110](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/110)]
-  * **What it was:** This was the initial implementation of the existing Find Command. As opposed to being limited to Name,
-  Location, and Category, it also searched all properties including DateTime, Type, and Amount. Furthermore,
-  as opposed to having to meet all keywords, the presence of any keyword(s) would be considered a match, intending
-  to act as a logical `OR` for all keywords.
-  **Motivation for Implementation:** A user would be able to search for any keyword across any property without having
-  to specify any prefixes or parameters, emulating a fuzzy-finding functionality. This would greatly improve transaction
-  retrieval speed.
-  **Justification for Removal:** The feature is too expansive in its breadth of search, and initial users might feel
-  overwhelmed or confused by its functionality. Furthermore, its expansive nature might be outside the scope of UniCa$h, 
-  on top of other functional constraints like insufficient testability.
+  * **What it was:** The initial implementation of the existing Find Command. It searched all properties including
+  DateTime, Type, and Amount. Matches were a logical `OR` of all keywords.
+  **Motivation for Implementation:** A user can search for any keyword across any property freely,
+  emulating a fuzzy-finding functionality. This would greatly improve transaction retrieval speed.
+  **Justification for Removal:** Feature is too expansive in its breadth of search and might be outside
+  the scope of UniCa$h, and other functional constraints like insufficient testability.
 
 * **Filter Transactions**: [PRs: [#130](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/130)]
-  * **What it was:** This feature was intended to complement the Fuzzy-Find transaction feature. While the Fuzzy-Find
+  * **What it was:** Intended to complement the Fuzzy-Find transaction feature. While the Fuzzy-Find
   acted like a logical `OR` amongst keywords, Filter was intended to act as a logical `AND`, a direct inverse analogue.
-  * **Motivation for Implementation:** Combined with the Fuzzy-Find feature, the user would have extreme precision
-  and control over their search results, being able to both narrow down and broaden the scope of transactions as much
-  as possible. Combined with the Rolling Balance Indicator, the user would have the means to tabulate total expenses for
-  every conceivable combination of transaction properties.
-  * **Justification for Removal:** Similar to the Fuzzy-Find feature, Filter is too expansive in its breadth of
-  implementation and initial users might feel overwhelmed or confused by its functionality. Similarly,
-  Filter's expansive nature might be outside the scope of UniCa$h,
-
-_Both features were simplified and integrated into the existing Find Command.
-[PR: [#138](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/138)]_
-
-
-
+  * **Motivation for Implementation:** Combined with the Fuzzy-Find feature, the user would have extreme control
+  over their search results, being able to both narrow down and broaden the scope of transactions as much as possible.
+  Combined with the Rolling Balance Indicator, the user would be able to tabulate total expenses for andy conceivable
+  combination of transaction properties. **Justification for Removal:** Same as Fuzzy-Find.
+  Both features were simplified and integrated into the existing Find Command.
+[PR: [#138](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/138)]
 
 **Documentation**
 * User Guide:
