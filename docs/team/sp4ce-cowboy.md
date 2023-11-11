@@ -91,7 +91,7 @@ explanations in the respective PRs.
   **Justification:** To provide our CLI-proficient target users a more intuitive,
   convenient and efficient means for them to interact with UniCa$h, similar to a real CLI.
 
-* **UI Features** 
+* **UI/UX Visual Features** 
   * **A StyleSheet class** [PRs: [#96](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/96)] was created such that all components involving any form of graphical
   representation have a centralized source of reference.
   * **Hash-based Category Coloring** [PRs: [#96](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/96)]
@@ -100,12 +100,12 @@ explanations in the respective PRs.
   **Justification:** To provide a seamless and consistent visual experience across UniCa$h for a better user-experience.
 
 
-_**Addendum**: The focus on color consistency and user experience across UniCa$h is motivated
+_**Highlights/Addendum**: The focus on color consistency and user experience across UniCa$h is motivated
 by certain scientific [studies](https://www.sciencedirect.com/science/article/abs/pii/S0167811623000599]) that show a positive correlation between color complexity
 and user engagement. [This](https://www.diva-portal.org/smash/record.jsf?pid=diva2%3A1788177&dswid=-2283) study found certain design elements contribute
 to increased user engagement especially by young adults. The UI components are intended to 
 increase target user (university students, are mostly young adults) engagement with UniCa$h,
-and consequently lead to improvement in personal financial management.
+and consequently lead to improvement in personal financial management._
 
 **Decommissioned Features** (Some features that I had implemented but removed due to various constraints)
 
