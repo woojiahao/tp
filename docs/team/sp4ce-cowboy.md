@@ -8,57 +8,48 @@ title: Rubesh Suresh's Project Portfolio Page
 UniCa$h is a desktop application for university students who want to be more financially conscious.
 The user interacts with it using a CLI, and it has a GUI created with JavaFX. UniCa$h is designed
 for users who are proficient with CLI. It is written in Java 11, spanning about [20 KLoC](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=T16-3&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=AY2324S1-CS2103-T16-3%2Ftp%5Bmaster%5D&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&isTabOnMergedGroup=true&tabOpen=true&tabType=authorship&tabAuthor=elhy1999&tabRepo=AY2324S1-CS2103-T16-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=true&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false).
-My contributions are given below. Code contributed by me: [RepoSense](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=T16-3&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&tabOpen=true&tabType=authorship&tabAuthor=sp4ce-cowboy&tabRepo=AY2324S1-CS2103-T16-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
+Code contributed by me: [RepoSense](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=T16-3&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&tabOpen=true&tabType=authorship&tabAuthor=sp4ce-cowboy&tabRepo=AY2324S1-CS2103-T16-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false). A summary of my contributions are given below, with more detailed
+explanations in the respective PRs.
 
 **Functional Features**
 
 * **Delete Transaction Command**: [PRs: [#62](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/62)]
   {_**Credits:** AB3's `Delete` command._}
-  * **What it does:** A CLI command to remove a specified transaction from UniCa$h.
-  * **Justification:** Core utility of a Finance Management App.
+  * A CLI command to remove a specified transaction from UniCa$h. **Justification:** Core utility of a Finance Management App.
 
 * **Clear Transactions Command**: [PRs:
 [#63](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/63)
 [#138](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/138/)]
   {_**Credits:** AB3's `Clear` command._}
-  * **What it does:** A CLI command to remove all transactions, and a parser class.
-  * **Justification:** To allow the user to start on a blank slate. Parser ensures that
+  * **What it does:** A CLI command to remove all transactions, and a parser class. **Justification:** To allow the user to start on a clean slate. Parser ensures that
   mass-deletion is intentional, adding a layer of safety.
-  
 
 * **Reset UniCash Command**: [PRs:
 [#90](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/90)
 [#138](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/138/)]
   * **What it does:** A CLI Command to restore UniCa$h to its original state with
-  the same default transactions that appear when the app is opened for the first time.
-  * **Justification:** An easy way for users and testers of the application alike to re-start
+  the same default transactions that appear when the app is opened for the first time. **Justification:** An easy way for users and testers of the application alike to re-start
   using UniCa$h from its default state.
 
 * **Help Command & UniCash Welcome Window** [PRs:
   [#96](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/96)]
   * **What it does:** A CLI command to open the Help Window with the 
   URL to UniCa$h's user guide, and also display a Message with a collated list of commands available,
-  which is also set as the start-up Welcome Window.
-  * **Justification:** To allow the user quick access to an overview of commands available.
-  * _**Note:** The Help Command has been enhanced by [Lip Wei](https://github.com/lipwei1808)
+  which is also set as the start-up Welcome Window. **Justification:** To allow the user quick access to an overview of commands available.
+_**Note:** The Help Command has been enhanced by [Lip Wei](https://github.com/lipwei1808)
         as mentioned [here](lipwei1808.md)._
  
 * **Get Transaction Command** [PRs: 
 [#101](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/101)]
-  * **What it does:** A CLI Command to see expanded details of a specific transaction.
-  * **Justification:** To allow a user to see details of a transaction whose properties' lengths
+  * **What it does:** A CLI Command to see expanded details of a specific transaction. **Justification:** To allow a user to see details of a transaction whose properties' lengths
   can extend beyond the UI's ability to display them.
 
-   
 * **Find Transactions Command Enhancement**: [PRs:
   [#101](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/101)
   [#138](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/138)]
   * **What it does:** A CLI command that allows the user to search for specific transactions based
-  on certain keywords.
-  * **Justification:** To allow the user to search for specific transactions especially if there are
-  many transactions stored.
-  * **Highlights:** Complements the Get Command and the Rolling Balance Indicator.
-  * **Possible Future Additions:** The Find command is limited to Name, Category and Location. This
+  on certain keywords. **Justification:** To allow the user to search for specific transactions especially if there are
+  many transactions stored. **Highlights:** Complements the Get Command and the Rolling Balance Indicator. **Possible Future Additions:** The Find command is limited to Name, Category and Location. This
   can be expanded to include the other properties in the future.
   * _Note: The initial Find Command was implemented by [Jamie](https://github.com/jamz903)
   as mentioned [here](jamz903.md)_
