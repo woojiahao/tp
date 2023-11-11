@@ -106,27 +106,27 @@ management, despite not being direct CLI features._
 Below are some of the features that I had implemented prior, but were removed due to various project constraints.
 
 * **Local User Guide**: [PRs: [#82](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/82)]
-  * **What it was:** A PDF version of the user guide (UG) that the user can access directly from UniCa$h
-  * **Motivation for Implementation:** Given the NFR of offline usage, it would be useful for the User to
+  * **What it was:** A PDF version of the user guide (UG) that the user can access directly from UniCa$h 
+  **Motivation for Implementation:** Given the NFR of offline usage, it would be useful for the User to
   have local access to the UG.
-  * **Justification for Removal:** It depended on the host machine to display the PDF, which was unreliable, and
+  **Justification for Removal:** It depended on the host machine to display the PDF, which was unreliable, and
   difficult to test. Furthermore, we were allowed to assume that all users have access to the UG.
 
 * **Test Command**: [PRs: [#126](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/126)]
   * **What it was:** A temporary Test Command intended for internal testing of UniCa$h.
-  * **Motivation for Implementation:** To test UniCa$h's GUI and functionality by populating it with a
+  **Motivation for Implementation:** To test UniCa$h's GUI and functionality by populating it with a
   lot more transactions than the default UniCa$h.
-  * **Justification for Removal:** Merge onto a separate testing branch instead, which I also opened.
+  **Justification for Removal:** Merge onto a separate testing branch instead, which I also opened.
 
 * **Fuzzy-Find Transactions**: [PRs: [#110](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/110)]
   * **What it was:** This was the initial implementation of the existing Find Command. As opposed to being limited to Name,
   Location, and Category, it also searched all properties including DateTime, Type, and Amount. Furthermore,
   as opposed to having to meet all keywords, the presence of any keyword(s) would be considered a match, intending
   to act as a logical `OR` for all keywords.
-  * **Motivation for Implementation:** A user would be able to search for any keyword across any property without having
+  **Motivation for Implementation:** A user would be able to search for any keyword across any property without having
   to specify any prefixes or parameters, emulating a fuzzy-finding functionality. This would greatly improve transaction
   retrieval speed.
-  * **Justification for Removal:** The feature is too expansive in its breadth of search, and initial users might feel
+  **Justification for Removal:** The feature is too expansive in its breadth of search, and initial users might feel
   overwhelmed or confused by its functionality. Furthermore, its expansive nature might be outside the scope of UniCa$h, 
   on top of other functional constraints like insufficient testability.
 
@@ -145,36 +145,30 @@ _Both features were simplified and integrated into the existing Find Command.
 [PR: [#138](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/138)]_
 
 
-**Other Contributions:**
 
-* **UniCash Messages** - A class to encapsulate and consolidate messages displayed in a central location.
-[PR: [#62](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/62)]
-* **Package Refactoring** - Refactored the codebase to refer to UniCash instead of AB3. [PR: [#77](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/62)]
-* **Overall Aesthetics** - Refactored the GUI to use the [Inter](https://fonts.google.com/specimen/Inter) font
-  (credits to [Jamie](jamz903.md) for finding the font) and a custom wallet icon.
-  [PR: [#78](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/78)]
 
 **Documentation**
 * User Guide:
-  * Added documentation for Delete, Clear, Reset, Find, Get, Help Commands)
+  * Added documentation for Delete, Clear, Reset, Find, Get, Help
   * UI Features and Overview of UI
 * Developer Guide:
-  * Migrated details of the Developer Guide from an external source (Google Docs) and consolidated them in GitHub.
-  * Set up structure skeleton for Developer Guide for easy and structured documentation by the team.
-  * Add documentation for own features (Delete, Clear, Reset, Find, Get, Help Commands)
+  * Migrated details of the DG from an external source (G Docs) and consolidated them in GitHub.
+  * Set up DG skeleton for structured and convenient documentation by the team.
+  * Add documentation for own features (Delete, Clear, Reset, Find, Get, Help)
   * Add documentation for UI and UI features
 
 **Project Management & Team Tasks**
 * Created and initialized the CS2103-T16-3 organization on GitHub
-* Created a testing branch to test new features in UniCa$h
-* Managed release v1.3a on GitHub - Can be found [here](https://github.com/AY2324S1-CS2103-T16-3/tp/releases/tag/v1.3).
+* Created a testing branch for in UniCa$h [PR: [#126](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/126)]
+* Refactored the codebase to refer to UniCash instead of AB3. [PR: [#77](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/62)]
+* Managed release [v1.3b](https://github.com/AY2324S1-CS2103-T16-3/tp/releases/tag/v1.3b) and [v1.3.1](https://github.com/AY2324S1-CS2103-T16-3/tp/releases/tag/v1.3.1) on GitHub
 * Made and released demo video for release v1.3b [here](https://github.com/AY2324S1-CS2103-T16-3/tp/releases/tag/v1.3b)
 
 **Community**
-* **Pull Requests Reviewed**: Refer to [here](https://github.com/AY2324S1-CS2103-T16-3/tp/pulls?q=is%3Apr+reviewed-by%3Asp4ce-cowboy)
+* **Pull Requests Reviewed**: Refer [here](https://github.com/AY2324S1-CS2103-T16-3/tp/pulls?q=is%3Apr+reviewed-by%3Asp4ce-cowboy)
 [Reviewed 41 PRs, with 91 PR comments in total thus far.]
-* **Pull Requests Opened**: Refer to [here](https://github.com/AY2324S1-CS2103-T16-3/tp/pulls?q=is%3Apr+author%3Asp4ce-cowboy+)
+* **Pull Requests Opened**: Refer [here](https://github.com/AY2324S1-CS2103-T16-3/tp/pulls?q=is%3Apr+author%3Asp4ce-cowboy+)
 [Opened 33 PRs. Almost all major PRs have full details and/or screenshots.]
-* **Issues Assigned & Completed**: Refer to [here](https://github.com/AY2324S1-CS2103-T16-3/tp/issues?q=is%3Aissue+author%3Asp4ce-cowboy+is%3Aclosed+)
+* **Issues Assigned & Completed**: Refer [here](https://github.com/AY2324S1-CS2103-T16-3/tp/issues?q=is%3Aissue+author%3Asp4ce-cowboy+is%3Aclosed+)
 
 
