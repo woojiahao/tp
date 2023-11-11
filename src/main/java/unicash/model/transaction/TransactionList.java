@@ -42,6 +42,7 @@ public class TransactionList implements Iterable<Transaction> {
         internalList.add(toAdd);
     }
 
+
     /**
      * Replaces the Transaction {@code target} in the list with {@code editedTransaction}.
      * {@code target} must exist in the list.
@@ -50,22 +51,20 @@ public class TransactionList implements Iterable<Transaction> {
         requireAllNonNull(target, editedTransaction);
 
         int targetHashCode = target.originalHashCode();
+        int targetIndex = -1;
 
-        int index = 0;
-
-        for (; index < internalList.size(); index++) {
-            if (internalList.get(index)
-                    .originalHashCode() == targetHashCode) {
-
-                break;
+        for (int i = 0; i < internalList.size(); i++) {
+            if (internalList.get(i).originalHashCode() == targetHashCode) {
+                targetIndex = i;
             }
         }
 
-        if (index >= internalList.size() && internalList.get(index).originalHashCode() != targetHashCode) {
+        if (targetIndex == -1) {
             throw new TransactionNotFoundException();
         }
 
-        internalList.set(index, editedTransaction);
+        internalList.set(targetIndex, editedTransaction);
+
     }
 
     /**
@@ -74,7 +73,19 @@ public class TransactionList implements Iterable<Transaction> {
      */
     public void remove(Transaction toRemove) {
         requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
+
+        int targetHashCode = toRemove.originalHashCode();
+        int targetIndex = -1;
+
+        for (int i = 0; i < internalList.size(); i++) {
+            if (internalList.get(i).originalHashCode() == targetHashCode) {
+                internalList.remove(i);
+                targetIndex = i;
+                break;
+            }
+        }
+
+        if (targetIndex == -1) {
             throw new TransactionNotFoundException();
         }
     }
