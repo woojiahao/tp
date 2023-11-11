@@ -25,7 +25,8 @@ public class NameTest {
             "peter the 2nd",  // alphanumeric
             "Capital Tan",  // capital letters
             "David Roger Jackson Ray Jr 2nd",  // longer names
-            "hello (world) @ NUS School_of-Computing #1234 & Longer, longer."  // Symbols
+            "hello (world) @ NUS School_of-Computing #1234 & Longer, longer.",  // Symbols
+            "a".repeat(500)  // exactly max length characters
     };
 
     @Test
