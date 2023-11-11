@@ -101,6 +101,8 @@ explanations in the respective PRs.
   This feature allows for a consistent color scheme across unique categories without having to hard-code colors, as 
   there is no limit for total category count in UniCa$h.
   **Justification:** To provide a seamless and consistent visual experience across UniCa$h for a better user-experience.
+  _**Highlights:** The motivation for color consistency comes from these studies that show positive correlation between
+  color complexity and target user engagement, which is also elaborated in the Developer Guide._
 
 
 **Decommissioned Features** (Some features that I had implemented but removed due to various constraints)
@@ -138,7 +140,7 @@ explanations in the respective PRs.
   * Migrated details of the DG from an external source (G Docs) and consolidated them in GitHub.
   * Set up DG skeleton for structured and convenient documentation by the team.
   * Added documentation for own features (Delete, Clear, Reset, Find, Get, Help)
-  * Added documentation for UI and UI features
+  * Added documentation for UI and UI features (Command Box, Rolling Balance Indicator)
 
 **Project Management & Team Tasks**
 * Created and initialized the CS2103-T16-3 organization on GitHub
