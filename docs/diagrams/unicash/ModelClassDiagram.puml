@@ -23,6 +23,11 @@ Class UniqueCategoryList
 Class TransactionType
 Class Category
 
+Class Budget
+Class BudgetInterval
+Class Interval
+Class "Amount" as BudgetAmount
+
 Class I #FFFFFF
 }
 
@@ -53,6 +58,11 @@ TransactionList -[hidden]right-> I
 Type "1" *-down- "1" TransactionType: Composition
 
 UniqueCategoryList *-down- "0...5" Category: Composition
+
+UniCash *--> "1" Budget
+Budget *--> BudgetAmount
+Budget *--> Interval
+Interval "1" *-down- "1" BudgetInterval: Composition
 
 ModelManager --> "~* filtered" Transaction
 @enduml
