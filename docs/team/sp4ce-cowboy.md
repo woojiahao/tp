@@ -135,12 +135,12 @@ explanations in the respective PRs.
 **Documentation**
 * User Guide:
   * Added documentation for own features (Delete, Clear, Reset, Find, Get, Help)
-  * UI Features and Overview of UI
+  * Added annotated descriptions and overview of UI and UI Features
 * Developer Guide:
   * Migrated details of the DG from an external source (G Docs) and consolidated them in GitHub.
   * Set up DG skeleton for structured and convenient documentation by the team.
   * Added documentation for own features (Delete, Clear, Reset, Find, Get, Help)
-  * Added documentation for UI and UI features (Command Box, Rolling Balance Indicator)
+  * Added documentation for UI and features (Command Box, Rolling Balance Indicator, Transactions Panel)
 
 **Project Management & Team Tasks**
 * Created and initialized the CS2103-T16-3 organization on GitHub
