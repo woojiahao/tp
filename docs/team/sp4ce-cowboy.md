@@ -109,12 +109,6 @@ explanations in the respective PRs.
   **Justification for Removal:** Unreliable to depend on the host machine to display the PDF and
   difficult to test. Furthermore, we were allowed to assume that all users have access to the UG.
 
-* **Test Command**: 
-  * **What it was:** A temporary Test Command intended for internal testing of UniCa$h.
-  **Motivation for Implementation:** To test UniCa$h's GUI and functionality by populating it with a
-  lot more transactions than the default UniCa$h. 
-  **Justification for Removal:** Merge onto a separate testing branch instead, which I also opened.
-
 * **Fuzzy-Find Transactions**: [PRs: [#110](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/110)]
   * **What it was:** The initial implementation of the existing Find Command. It searched all properties including
   DateTime, Type, and Amount. Matches were a logical `OR` of all keywords.
