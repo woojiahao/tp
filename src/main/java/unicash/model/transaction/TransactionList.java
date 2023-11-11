@@ -49,8 +49,19 @@ public class TransactionList implements Iterable<Transaction> {
     public void setTransaction(Transaction target, Transaction editedTransaction) {
         requireAllNonNull(target, editedTransaction);
 
-        int index = internalList.indexOf(target);
-        if (index == -1) {
+        int targetHashCode = target.originalHashCode();
+
+        int index = 0;
+
+        for (; index < internalList.size(); index++) {
+            if (internalList.get(index)
+                    .originalHashCode() == targetHashCode) {
+
+                break;
+            }
+        }
+
+        if (index >= internalList.size() && internalList.get(index).originalHashCode() != targetHashCode) {
             throw new TransactionNotFoundException();
         }
 
@@ -135,6 +146,7 @@ public class TransactionList implements Iterable<Transaction> {
     public int hashCode() {
         return internalList.hashCode();
     }
+
 
     @Override
     public String toString() {
