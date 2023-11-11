@@ -100,13 +100,6 @@ explanations in the respective PRs.
   **Justification:** To provide a seamless and consistent visual experience across UniCa$h for a better user-experience.
 
 
-_**Highlights/Addendum**: The focus on color consistency and user experience across UniCa$h is motivated
-by certain scientific [studies](https://www.sciencedirect.com/science/article/abs/pii/S0167811623000599]) that show a positive correlation between color complexity
-and user engagement. [This](https://www.diva-portal.org/smash/record.jsf?pid=diva2%3A1788177&dswid=-2283) study found certain design elements contribute
-to increased user engagement especially by young adults. The UI components are intended to 
-increase target user (university students, are mostly young adults) engagement with UniCa$h,
-and consequently lead to improvement in personal financial management._
-
 **Decommissioned Features** (Some features that I had implemented but removed due to various constraints)
 
 * **Local User Guide**: [PRs: [#82](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/82)]
