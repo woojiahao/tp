@@ -15,28 +15,28 @@ explanations in the respective PRs.
 
 * **Delete Transaction Command**: [PRs: [#62](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/62)]
   {_**Credits:** AB3's `Delete` command._}
-  * A CLI command to remove a specified transaction from UniCa$h.
+  * A command to remove a specified transaction from UniCa$h.
   **Justification:** Core utility of a Finance Management App.
 
 * **Clear Transactions Command**: [PRs:
 [#63](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/63)
 [#138](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/138/)]
   {_**Credits:** AB3's `Clear` command._}
-  * **What it does:** A CLI command to remove all transactions, and a parser class.
+  * **What it does:** A command to remove all transactions, and a parser class.
   **Justification:** To allow the user to start on a clean slate. Parser ensures that
   mass-deletion is intentional, adding a layer of safety.
 
 * **Reset UniCash Command**: [PRs:
 [#90](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/90)
 [#138](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/138/)]
-  * **What it does:** A CLI Command to restore UniCa$h to its original state with
+  * **What it does:** A Command to restore UniCa$h to its original state with
   the same default transactions that appear when the app is opened for the first time.
   **Justification:** An easy way for users and testers of the application alike to re-start
   using UniCa$h from its default state.
 
 * **Help Command & UniCash Welcome Window** [PRs:
   [#96](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/96)]
-  * **What it does:** A CLI command to open the Help Window with the 
+  * **What it does:** A command to open the Help Window with the 
   URL to UniCa$h's user guide, and also display a Message with a collated list of commands available,
   which is also set as the start-up Welcome Window.
   **Justification:** To allow the user quick access to an overview of commands available.
@@ -45,14 +45,14 @@ explanations in the respective PRs.
  
 * **Get Transaction Command** [PRs: 
 [#101](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/101)]
-  * **What it does:** A CLI Command to see expanded details of a specific transaction.
+  * **What it does:** A Command to see expanded details of a specific transaction.
   **Justification:** To allow a user to see details of a transaction whose properties' lengths
   can extend beyond the UI's ability to display them.
 
 * **Find Transactions Command Enhancement**: [PRs:
   [#101](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/101)
   [#138](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/138)]
-  * **What it does:** A CLI command to allow the user to search for specific transactions based
+  * **What it does:** A command to allow the user to search for specific transactions based
   on certain keywords.
   **Justification:** To allow the user find specific transactions especially if there are
   many transactions stored.
@@ -88,7 +88,7 @@ explanations in the respective PRs.
 [#119](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/119)]
   * The `CommandBox` can remember up to a maximum of 10 previous user inputs,
   which can be traversed with the up/down arrow keys. `ESC` will clear the command box.
-  **Justification:** To provide our CLI-proficient targe users a more intuitive,
+  **Justification:** To provide our CLI-proficient target users a more intuitive,
   convenient and efficient means for them to interact with UniCa$h, similar to a real CLI.
 
 * **UI Features** 
