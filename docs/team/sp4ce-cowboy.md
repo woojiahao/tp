@@ -92,7 +92,7 @@ explanations in the respective PRs.
   convenient and efficient means for them to interact with UniCa$h, similar to a real CLI.
 
 * **UI/UX Visual Features** 
-  * **A StyleSheet class** [PRs: [#96](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/96)] was created such that all components involving any form of graphical
+  * A **StyleSheet class** [PRs: [#96](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/96)] was created such that all components involving any form of graphical
   representation have a centralized source of reference.
   * **Hash-based Category Coloring** [PRs: [#96](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/96)]
   This feature allows for a consistent color pattern across unique categories without having to hard-code colors, as 
