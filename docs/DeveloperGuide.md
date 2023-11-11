@@ -446,7 +446,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/unicash/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddTransactionCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddTransactionCommand`) which the `UniCashParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `UniCashParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddTransactionCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddTransactionCommand`) which the `UniCashParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddTransactionCommandParser`, `DeleteTransactionCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model Component
