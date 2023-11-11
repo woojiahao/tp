@@ -25,6 +25,7 @@ UniCashParser .down.> XYZCommandParser: creates >
 
 XYZCommandParser ..> XYZCommand : creates >
 UniCashParser ..> Command : returns >
+UniCashParser ..> XYZCommand
 XYZCommandParser .up.|> Parser
 XYZCommandParser ..> ArgumentMultimap
 XYZCommandParser ..> ArgumentTokenizer
