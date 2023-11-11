@@ -2,9 +2,14 @@ package unicash.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static unicash.logic.UniCashMessages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static unicash.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static unicash.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static unicash.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static unicash.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static unicash.logic.parser.CliSyntax.PREFIX_NAME;
+import static unicash.logic.parser.CliSyntax.PREFIX_TYPE;
+
+import java.util.stream.Stream;
 
 import unicash.commons.util.ToStringBuilder;
 import unicash.logic.commands.FindCommand;
@@ -31,6 +36,21 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     public FindCommand parse(String args) throws ParseException {
         requireNonNull(args);
+
+        /* All prefixes are parsed first */
+        ArgumentMultimap argMultimapWithAllPrefixes = ArgumentTokenizer.tokenize(args, PREFIX_NAME,
+                PREFIX_DATETIME, PREFIX_AMOUNT, PREFIX_TYPE, PREFIX_CATEGORY, PREFIX_LOCATION);
+
+        /* If any of the invalid prefixes are present, an invalid command format message
+         * is displayed to the user, as opposed to the invalid prefixes themselves being
+         * parsed together with the valid prefixes as a standard field input. */
+        if (areAnyPrefixesPresent(
+                argMultimapWithAllPrefixes, PREFIX_DATETIME, PREFIX_AMOUNT, PREFIX_TYPE)) {
+
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
                 args, PREFIX_NAME, PREFIX_CATEGORY, PREFIX_LOCATION);
 
@@ -40,6 +60,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
+        /* Enforces singular prefix input by the user */
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_CATEGORY, PREFIX_LOCATION);
 
 
@@ -60,6 +81,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                     argMultimap.getValue(PREFIX_LOCATION).get());
             findPredicate.addLocationKeyword(transactionLocation.toString());
         }
+
         return new FindCommand(findPredicate);
 
     }
@@ -85,6 +107,17 @@ public class FindCommandParser implements Parser<FindCommand> {
         return new ToStringBuilder(this)
                 .add("findPredicate", findPredicate)
                 .toString();
+    }
+
+    /**
+     * Returns true if any of the prefixes contains any {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean areAnyPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes)
+                .anyMatch(prefix -> argumentMultimap
+                        .getValue(prefix)
+                        .isPresent());
     }
 
 }
