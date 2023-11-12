@@ -40,7 +40,7 @@ Please read through sections [Installation](#installation) and [Command Breakdow
 5. Type the command in the command box and press `Enter` to execute it. e.g. typing **`help`** and pressing `Enter` will
    open the help window.
 
-   To get started with UniCa$h, you can run the `add_transactions` command!  
+   To get started with UniCa$h, you can run the `add_transaction` command!  
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -69,7 +69,8 @@ Commands in UniCa$h have the following structure:
 **Notes:**
 
 1. `INDEX` uses positive integers which we define as integers that are strictly greater than `0`. 
-2. UniCa$h divides the error handling for `INDEX` into two cases, non-positive integers, i.e. `<= 0` values, are treated as invalid command formats while values that exceed the transaction list will be treated as being an invalid index as the supported values are `[1, transaction list size]`. 
+2. UniCa$h divides the error handling for `INDEX` into two cases, invalid numbers (non-positive integers, i.e. `<= 0` values,
+values larger than `Integer.MAX_VALUE` or non-integer values e.g. `10.2`) are treated as invalid command formats while values that exceed the transaction list will be treated as being an invalid index as the supported values are `[1, transaction list size]`. 
 
 <div class="callout callout-info" markdown="span">
 For more clarity about how commands are parsed and why `INDEX` is parsed this way, please refer to our [developer guide](DeveloperGuide.html#delete-transaction) on how some commands like `delete_transaction` handles `INDEX`.
@@ -589,7 +590,7 @@ Deletes a `Transaction` from UniCa$h.
 
 Command: `delete_transaction INDEX`
 
-Command Words Accepted: `delete_transaction`, `delete`, `del` (case-insensitive)
+Command Words Accepted: `delete_transaction`, `delete`, `del` (all case-insensitive)
 
 Command Argument: `INDEX` is the displayed transaction index
 of the transaction to be deleted, as shown in the currently displayed `Transactions List`.
@@ -603,7 +604,7 @@ of the transaction to be deleted, as shown in the currently displayed `Transacti
 There are some important `INDEX` constraints for which you can refer to the
 [command breakdown's argument types section](#argument-types). You can also refer to the
 UI Layout's `Transaction Card` section to learn about the transaction index values that
-can change based on the `Transactions List` configuration.
+can change based on the current `Transactions List` configuration.
 </div>
 
 
@@ -630,7 +631,9 @@ can change based on the `Transactions List` configuration.
 
 ###### Example 2
 
-> **Case**: Delete a transaction with the currently not visible but correctly specified `INDEX`.
+> **Case**: Delete a transaction with the currently not visible but correctly specified
+> `INDEX`. The transaction is present in the current `Transactions List` but the user has
+> scrolled further away. 
 >
 > **Input**: `delete_transaction 1`
 >
@@ -654,7 +657,7 @@ can change based on the `Transactions List` configuration.
 
 ###### Example 1
 
-> **Case**: Missing compulsory fields.
+> **Case**: Missing compulsory fields i.e. `INDEX`
 >
 > **Input**: `delete_transaction`
 >
@@ -662,18 +665,20 @@ can change based on the `Transactions List` configuration.
 > ```
 > Invalid command format! 
 >
-> delete_transaction: Deletes the transaction identified by the index number used in the displayed transaction list.
+> delete, delete_transaction, del: Deletes the transaction identified by the index number
+> used in the displayed transaction list.
 >
 > Argument: Index (must be a positive integer)
 >
 > Example: delete_transaction 1
 > ```
-> <img src="images/unicash/command-outputs/deleteTransaction/deleteFail1.png" width="1000" />
 
 ###### Example 2
 
-> **Case**: Invalid `<INDEX>` provided
-> (`<INDEX>` given as `10` given when only `5` transactions are presently displayed)
+> **Case**: Invalid `INDEX` provided
+> 
+> **Context**:`INDEX` given as `10` when only `5` transactions are present
+> in the current `Transaction List` configuration
 >
 > **Input**: `delete_transaction 10`
 >
@@ -681,44 +686,77 @@ can change based on the `Transactions List` configuration.
 > ```
 > The transaction index provided is invalid
 > ```
-> <img src="images/unicash/command-outputs/deleteTransaction/deleteFail2.png" width="1000" />
+
+###### Example 3
+
+> **Case**: Invalid `INDEX` provided
+> 
+> **Context**: `INDEX` given as a negative number
+>
+> **Inputs**: `delete_transaction -1`
+>
+> **Output**:
+> ```
+> Invalid command format! 
+>
+> delete, delete_transaction, del: Deletes the transaction identified by the index number
+> used in the displayed transaction list.
+>
+> Argument: Index (must be a positive integer)
+>
+> Example: delete_transaction 1
+> ```
+
+###### Example 4
+
+> **Case**: Invalid `INDEX` provided
+>
+> **Context**: `INDEX` given as a number larger than `Integer.MAX_VALUE`
+>
+> **Inputs**: `delete_transaction 10000000000000000`
+>
+> **Output**:
+> ```
+> Invalid command format! 
+>
+> delete, delete_transaction, del: Deletes the transaction identified by the index number
+> used in the displayed transaction list.
+>
+> Argument: Index (must be a positive integer)
+>
+> Example: delete_transaction 1
+> ```
+
+
 
 #### Get Transaction
 
 Retrieves a `Transaction` from UniCa$h.
 
-Command: `get <INDEX>`
+Command: `get INDEX`
 
-Command Words Accepted: `get`, `g` (case-insensitive)
+Command Words Accepted: `get`, `g` (all case-insensitive)
 
-Command Argument: `<INDEX>` is the displayed transaction index
-of the transaction to be retrieved, as shown in the `Transactions List`.
+Command Argument: `INDEX` is the displayed transaction index
+of the transaction to be deleted, as shown in the currently displayed `Transactions List`.
 
 | Arguments | Optional? | Purpose                                              |
 |-----------|-----------|------------------------------------------------------|
 | `<INDEX>` | No        | Transaction index of the transaction to be retrieved |
 
-Important notes:
 
-1. The `get` command word is case-insensitive, thus `GET` is
-   considered an equivalent command word.
-
-2. `<INDEX>` must be a positive integer, i.e. a number greater than 0.
-
-3. `<INDEX>` must be equal to or smaller than 2,147,483,647 which is the `Integer.MAX_VALUE` provided by Java 11.
-
-4. `<INDEX>` must be equal to or smaller than the largest displayed transaction index
-   of all transactions as shown in the `Transactions List`. Thus, even if there are `100` total transactions but only
-   `20` of those transactions are displayed in the current `Transactions List`, the maximum `INDEX` allowed
-   would be `20`
-
-5. Given `3.` and `4.`, the maximum allowed `<INDEX>` is the smaller value of the two.
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
+There are some important `INDEX` constraints for which you can refer to the
+[command breakdown's argument types section](#argument-types). You can also refer to the
+UI Layout's `Transaction Card` section to learn about the transaction index values that
+can change based on the current `Transactions List` configuration.
+</div>
 
 ##### Successful Execution
 
 ###### Example 1
 
-> **Case**: Retrieve a transaction with the correctly specified `<INDEX>`.
+> **Case**: Retrieve a transaction with the correctly specified `INDEX`.
 >
 > **Input**: `get 5`
 >
@@ -733,15 +771,13 @@ Important notes:
 > Location: Bugis;
 > Categories: #transport
 > ```
-> Input:
-> <img src="images/unicash/command-outputs/getTransaction/getInitial1.png" width="1000" />
-> Ouput:
-> <img src="images/unicash/command-outputs/getTransaction/getSuccessFinal1.png" width="1000" />
 
 ###### Example 2
 
-> **Case**: Retrieve a transaction with the currently not visible but correctly specified `<INDEX>`.
->
+> **Case**: Retrieve a transaction with the currently not visible but correctly specified
+> `INDEX`. The transaction is present in the current `Transactions List` but the user has
+> scrolled further away.
+> 
 > **Input**: `get 1`
 >
 > **Output**:
@@ -756,15 +792,15 @@ Important notes:
 > Categories: #shopping
 > ```
 > Input:
-> <img src="images/unicash/command-outputs/getTransaction/getInitial2.png" width="1000" />
+> <img src="images/unicash/command-outputs/getTransaction/GetInitial3.png" width="1000" />
 > Ouput:
-> <img src="images/unicash/command-outputs/getTransaction/getSuccessFinal2.png" width="1000" />
+> <img src="images/unicash/command-outputs/getTransaction/GetSuccess.png" width="1000" />
 
 ##### Failed Execution
 
 ###### Example 1
 
-> **Case**: Missing compulsory fields.
+> **Case**: Missing compulsory fields i.e. `INDEX`
 >
 > **Input**: `get`
 >
@@ -772,19 +808,19 @@ Important notes:
 > ```
 > Invalid command format! 
 >
-> get: Displays expanded details of a specific transaction.
+> get, g: Displays expanded details of a specific transaction.
 >
 > Argument: Index (must be a positive integer)
 >
 > Example: get 2
 > ```
-> <img src="images/unicash/command-outputs/getTransaction/getFail1.png" width="1000" />
 
 ###### Example 2
 
-> **Case**: Invalid `<INDEX>` provided
+> **Case**: Invalid `INDEX` provided
 >
-> **Context**: `10` given as `<INDEX>` when only `5` transactions are presently displayed.
+> **Context**:`INDEX` given as `10` when only `5` transactions are present
+> in the current `Transaction List` configuration
 >
 > **Input**: `get 10`
 >
@@ -792,7 +828,45 @@ Important notes:
 > ```
 > The transaction index provided is invalid
 > ```
-> <img src="images/unicash/command-outputs/getTransaction/getFail2.png" width="1000" />
+
+###### Example 3
+
+> **Case**: Invalid `INDEX` provided
+>
+> **Context**: `INDEX` given as a negative number
+>
+> **Inputs**: `get -1`
+>
+> **Output**:
+> ```
+> Invalid command format! 
+>
+> get, g: Displays expanded details of a specific transaction.
+>
+> Argument: Index (must be a positive integer)
+>
+> Example: get 2
+> ```
+
+###### Example 4
+
+> **Case**: Invalid `INDEX` provided
+>
+> **Context**: `INDEX` given as a number larger than `Integer.MAX_VALUE`
+>
+> **Inputs**: `get 10000000000000000`
+>
+> **Output**:
+> ```
+> Invalid command format! 
+>
+> get, g: Displays expanded details of a specific transaction.
+>
+> Argument: Index (must be a positive integer)
+>
+> Example: get 2
+> ```
+
 
 #### Find Transaction(s)
 
