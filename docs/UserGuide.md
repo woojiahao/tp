@@ -140,13 +140,12 @@ we have implemented in UniCa$h.
 
 ![img_2.png](images/unicash/UniCashUIAnnotated.png)
 
-<div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
+
 These main UI components are explained below. For the purposes of demonstrating certain UI features, certain commands
 and inputs that are yet to be explained are mentioned here. However, at a later section of this User Guide,
 all of these commands and inputs will be explained, feel free to refer to them at your discretion. **Where applicable,
 consider those explanations as the single source of authority for those commands, as the representation here is merely
 for UI demonstration purposes only.**
-</div>
 
 #### UniCa$h Main Window
 
@@ -588,25 +587,17 @@ Command: `delete_transaction INDEX`
 
 Command Words Accepted: `delete_transaction`, `delete`, `del` (case-insensitive)
 
-Command Argument: `<INDEX>` is the displayed transaction index
+Command Argument: `INDEX` is the displayed transaction index
 of the transaction to be deleted, as shown in the `Transactions List`.
 
 | Arguments | Optional? | Purpose                                            |
-|-----------|-----------|----------------------------------------------------|
-| `<INDEX>` | No        | Transaction index of the transaction to be deleted |
+|---------|-----------|----------------------------------------------------|
+| `INDEX` | No        | Transaction index of the transaction to be deleted |
 
-Important notes:
 
-2. `<INDEX>` must be a positive integer, i.e. a number greater than 0.
-
-3. `<INDEX>` must be equal to or smaller than 2,147,483,647 which is the `Integer.MAX_VALUE` provided by Java 11.
-
-4. `<INDEX>` must be equal to or smaller than the largest displayed transaction index
-   of all transactions as shown in the `Transactions List`. Thus, even if there are `100` total transactions but only
-   `20` of those transactions are displayed in the current `Transactions List`, the maximum `INDEX` allowed
-   would be `20`
-
-5. Given `3.` and `4.`, the maximum allowed `<INDEX>` is the smaller value of the two.
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
+There are some important `INDEX` constraints for which you can refer to the [command breakdown's argument types section](#argument-types)
+</div>
 
 ##### Successful Execution
 
