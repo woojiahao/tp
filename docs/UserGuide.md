@@ -126,27 +126,27 @@ User might also want to track financial events not involving currency exchange, 
 ### UI Layout
 
 UniCa$h is designed with users who prefer to use the keyboard in mind. Thus, almost all
-user input is designed for CLI-type usage, i.e. text-based keyboard input, and UI elements are intended 
-to either supplement this main functionality, or provide graphical support.
+user input is designed for CLI-type usage, i.e. text-based keyboard input, and User Interface
+elements are intended to either supplement this main functionality, or provide graphical support
+for features.
 
 When UniCa$h is first opened, it would look something like the image shown earlier 
 near the top of the user guide.
 
-![img_1.png](images/unicash/UniCashWelcome.png)
-
-By default, the Welcome Message will be displayed in the `Results Display`.
+By default, the UniCa$h welcome message will be displayed in the `Results Display`.
 This message can also be invoked with the `help` command which will be explained
 later on in this User Guide. Below are the main User Interface (UI) component features
 we have implemented in UniCa$h.
 
 ![img_2.png](images/unicash/UniCashUIAnnotated.png)
 
-Explained below are the main UI components. For the purposes of demonstrating certain UI features, certain commands
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
+These main UI components are explained below. For the purposes of demonstrating certain UI features, certain commands
 and inputs that are yet to be explained are mentioned here. However, at a later section of this User Guide,
 all of these commands and inputs will be explained, feel free to refer to them at your discretion. _Where applicable,
 consider those explanations as the single source of authority for those commands as the representation here is merely
-for UI demonstration purposes only._
-
+for UI demonstration purposes only.
+</div>
 
 #### UniCa$h Main Window Components
 
@@ -154,10 +154,12 @@ for UI demonstration purposes only._
 - The Menu bar contains the `File` and `Help` menus, of which `Help` can be opened with the
 `F1` keyboard shortcut, which is also default to the original `AB-3`.
 
-
-- _Note: On macOS, using UniCa$h in fullscreen will cause the Summary Window and Help Window to also
-open in fullscreen, however this is an expected behaviour caused by macOS's window management style, and does not
-cause any functional issues._ 
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
+On macOS, using UniCa$h in fullscreen will sometimes cause the Summary Window and
+Help Window to also open in fullscreen, however this is an expected behaviour caused by
+macOS's window management style, and cannot be overridden, but does not cause any functional
+issues. Simply exit fullscreen mode to continue using UniCa$h as per normal._ 
+</div>
 
 #### Command Box
 - The `Command Box` is the primary means by which the user interacts actively with the application.
@@ -168,18 +170,23 @@ is configured such that it can remember up to `10` latest user inputs.
   - When a user presses `ENTER` on any input, the input is stored regardless of its validity.
   - These inputs can be traversed through with the `UP` and `DOWN` arrow keys on the keyboard.
   - Only the `10` most recent inputs are stored by the `Command Box`
+- At any point in time, the user can press the `ESC` to empty the current text field in the `Command Box`
 
-  - _Note that due to a JavaFX built-in cursor control functionality (i.e. arrows keys can be used to navigate the menu bar),
-  the mouse cursor being too close to the menu can occasionally trigger this functionality instead, simply move your
-  mouse cursor away from the menu bar if this happens to alleviate the issue._
-- At any point in time, the user can press the `ESC` to empty the current text field in the `Command Box` 
+<div class="callout callout-important" markdown="span">
+The mouse cursor being too close to the menu can occasionally trigger the JavaFX built-in
+cursor control functionality that allows arrows keys to be used for navigating the menu bar. 
+If it happens, simply move your mouse cursor away from the menu bar and click on the `Command Box`
+to continue.
+</div>
+
 
 #### Transactions List
-- Each transaction input by the user is displayed in the `Transactions List`. 
-- The entire `Transactions List` will be displayed initially, however certain commands might limit this
-listing, which can be reversed with the `list` command to show the entire list again.
+- Each transaction stored in UniCa$h is displayed in the `Transactions List`. 
+- The entire `Transactions List` will be displayed by default upon start-up.
+- Certain commands like `find` might limit this listing.
+  - _This can be reversed with the `list` command to show the entire list again._
 - The `Transactions List` is ordered by the time at which the user inputs the transaction,
-not the actual date and time associated with that particular transactions.
+not the actual date and time associated with that particular transaction .
 - Transactions added will immediately appear at the top of the `Transactions List`, and this is to
 provide immediate response to the user as they will be able to see their most recently input 
 transaction right away.
