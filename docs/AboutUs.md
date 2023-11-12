@@ -54,7 +54,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/sp4ce-cowboy.png" width="200px">
 
 [[github](http://github.com/sp4ce-cowboy)]
-[[portfolio](team/sp4ce-cowboy.md))]
+[[portfolio](team/sp4ce-cowboy.md)]
 
 * Role: Developer
-* Responsibilities: User Interface, Documentation and Testing.
+* Responsibilities: User Interface, Documentation and Testing
