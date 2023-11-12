@@ -47,7 +47,8 @@ explanations in the respective PRs.
 [#101](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/101)]
   * **What it does:** A Command to see expanded details of a specific transaction.
   **Justification:** To allow a user to see details of a transaction whose properties' lengths
-  can extend beyond the UI's ability to display them.
+  can extend beyond the UI's ability to display them. **Highlights:** Complements the Find Command
+  whereby a user can search for some transactions and use `get` to see full details.
 
 * **Find Transactions Command Enhancement**: [PRs:
   [#101](https://github.com/AY2324S1-CS2103-T16-3/tp/pull/101)
@@ -56,7 +57,10 @@ explanations in the respective PRs.
   on certain keywords.
   **Justification:** To allow the user find specific transactions especially if there are
   many transactions stored.
-  **Highlights:** Complements the Get Command and the Rolling Balance Indicator.
+  **Highlights:** Complements the Get Command and the Rolling Balance Indicator. A user can tabulate
+  expenses for any combinations of transactions based on the given keywords. 
+  **Challenges:** A discrete predicate class had to be conceived for each property and an appropriate
+  means for matching keywords to transactions had to be devised.
   **Possible Future Additions:** The Find command is limited to Name, Category and Location. This
   can be expanded to include the other properties in the future.
   _Note: The initial Find Command was implemented by [Jamie](https://github.com/jamz903)
