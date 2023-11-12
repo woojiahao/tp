@@ -989,7 +989,7 @@ from display in the current `Transactions List`.
 
 ###### Example 3
 
-> **Case**: Command entered with UniCa$h prefixes unsupported Un
+> **Case**: Command entered with UniCa$h prefixes that are unsupported by `find` command 
 >
 > **Input**: `find type/expense`
 >
@@ -1029,6 +1029,7 @@ Command Words Accepted: `list`, `ls` (case-insensitive)
 > <img src="images/unicash/command-outputs/list/noTransactions.png" width="1000" />
 >
 > **Note:** There are no transactions to display, so the GUI will be empty. This is expected behaviour.
+
 ###### Example 2
 
 > **Case**: Calling the command with existing transactions.
@@ -1058,11 +1059,75 @@ Command Words Accepted: `list`, `ls` (case-insensitive)
 > ```
 
 #### Clear Transactions
+
 Clears all transactions in UniCa$h.
 
 Command: `clear_transactions`
 
-Command Words Accepted: `clear_transactions` (case-insensitive)
+Command Words Accepted: `clear_transactions` only (case-insensitive)
+
+<div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
+This command irreversibly deletes all transactions in UniCa$h. Thus, as an added layer
+of safety, the command has no short form alternatives and is intentionally lengthy. Additionally,
+it cannot be followed with any arguments, options, or non-whitespace text.
+</div>
+
+##### Successful Execution
+
+###### Example 1
+
+> **Case**: Command entered with correct format
+>
+> **Input**: `clear_transactions`
+>
+> **Output**:
+> ```
+> All transactions have been cleared!
+> ```
+>
+> <img src="images/unicash/command-outputs/clearTransactions/clear.png" width="1000" />
+
+###### Example 2
+
+> **Case**: Command entered with acceptable alternate format
+>
+> **Input**: `CLEAR_TRANSACTIONS`
+>
+> **Output**:
+> ```
+> All transactions have been cleared!
+> ```
+> 
+>  _(UI Output Same as above)_
+
+##### Failed Execution
+
+###### Example 1
+
+> **Case**: Command entered with random trailing text.
+>
+> **Input**: `clear_transactions   asdf`
+>
+> **Output**:
+> ```
+> Clear transactions command cannot have trailing arguments. Use the command clear_transactions without any trailing arguments.
+> ```
+
+###### Example 2
+
+> **Case**: Command entered with trailing text that can be considered a reasonable
+> user input.
+>
+> **Input**: `clear_transactions today` [OR] `clear_transactions current list`
+>
+> **Output**:
+> ```
+> Clear transactions command cannot have trailing arguments. Use the command clear_transactions without any trailing arguments.
+> ```
+> **Note:** In this example, it is made explicit that the `clear_transactions` command is not
+> meant for batch deletion of specific groups of transaction nor for mass deletion of transactions
+> present in a particular `Transaction List` configuration and that this command will
+> always delete all transactions in UniCa$h.
 
 ### Budget Management
 
