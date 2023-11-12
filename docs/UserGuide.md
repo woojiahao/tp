@@ -183,8 +183,8 @@ to continue.
 #### Transactions List
 - Each transaction stored in UniCa$h is displayed in the `Transactions List`. 
 - The entire `Transactions List` will be displayed by default upon start-up.
-- Certain commands like `find` might limit this listing.
-- This can be reversed with the `list` command to show the entire list again.
+- Certain commands like `find` might limit this listing which can be
+reversed with the `list` command to show the full list.
 - Transactions added will immediately appear at the top of the `Transactions List`, and this is to
 provide immediate response to the user as they will be able to see their most recently input 
 transaction right away.
@@ -225,9 +225,6 @@ of these transactions and display them in the `Results Display` component.
 </div>
 
 
-
-
-
 #### Results Display
 
 - The `Results Display` is the primary means by which UniCa$h "responds" back
@@ -242,17 +239,20 @@ to the user via text output.
 #### Rolling Balance Indicator
 
 - The `Rolling Balance Indicator` shows the net sum (i.e. `total income - total expense`) 
-for the **currently displayed `Transactions List`**.
+for the **currently displayed** `Transactions List`.
 - For example, if the input `find n/friends` was used to find transactions whose names 
 contain the keyword `friends`, the `Transactions List` would be updated to
 only show matching transactions and likewise the `Rolling Balance Indicator` 
-would reflect the net sum for these transactions.
-- If the currently displayed `Transactions List` is the entire list (i.e. after using 
-the `list` command), then the `Rolling Balance Indicator` would show the net sum of all 
-transactions in UniCa$h. 
-- _Note: Unlike the color of an amount of a transaction in `Transactions List`, the color of
+would reflect the net sum for these group of transactions **only**.
+- As UniCa$h starts up with the full `Transactions List` by default, the
+`Rolling Balance Indicator` would likewise show the net sum of all transactions in UniCa$h 
+at start-up. 
+
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
+Unlike the color of the amount of a transaction in the `Transactions List`, the color of
 the `Rolling Balance Indicator` will change based on whether the net sum is positive (green)
-or negative (red) or zero (black)._
+or negative (red) or zero (black).
+</div>
 
 [//]: # ()
 
