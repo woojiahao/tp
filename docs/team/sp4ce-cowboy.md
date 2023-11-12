@@ -101,7 +101,9 @@ explanations in the respective PRs.
   This feature allows for a consistent color scheme across unique categories without having to hard-code colors, as 
   there is no limit for total category count in UniCa$h.
   **Justification:** To provide a seamless and consistent visual experience across UniCa$h for a better user-experience.
-  _**Highlights:** The motivation for color consistency comes from these studies that show positive correlation between
+  _**Highlights:** The motivation for color consistency comes from these
+  ([1](https://www.sciencedirect.com/science/article/abs/pii/S0167811623000599),
+  [2](https://www.diva-portal.org/smash/record.jsf?pid=diva2%3A1788177&dswid=-2283)) studies that show positive correlation between
   color complexity and target user engagement, which is also elaborated in the Developer Guide._
 
 
