@@ -222,9 +222,6 @@ public enum CommandType {
                             ExampleGenerator.generate(
                                     getCommandWords(),
                                     PREFIX_NAME,
-                                    PREFIX_TYPE,
-                                    PREFIX_AMOUNT,
-                                    PREFIX_DATETIME,
                                     PREFIX_LOCATION,
                                     PREFIX_CATEGORY
                             )
