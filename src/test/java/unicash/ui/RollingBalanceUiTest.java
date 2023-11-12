@@ -1,5 +1,7 @@
 package unicash.ui;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static unicash.model.util.SampleDataUtil.getSampleUniCash;
 import static unicash.testutil.TestDataUtil.getSumOfTestExpenses;
 import static unicash.testutil.TestDataUtil.getTestTransactions;
@@ -46,39 +48,37 @@ public class RollingBalanceUiTest {
     @Test
     public void rollingBalance_unicashResetState_showsDefaultBalance(FxRobot robot) {
         var rollingBalanceNode = robot.lookup("#balanceIndicator").tryQuery();
-        Assertions.assertTrue(rollingBalanceNode.isPresent());
+        assertTrue(rollingBalanceNode.isPresent());
         var rollingBalanceNodeLabel = (Label) rollingBalanceNode.get();
         robot.clickOn("#commandBoxPlaceholder");
         robot.write(CommandType.RESET.getMainCommandWord());
         robot.type(KeyCode.ENTER);
 
-        Double resetUniCashIncome = getSampleUniCash().getTransactionList()
+        Double resetUniCashSumOfIncomes = getSampleUniCash().getTransactionList()
                 .stream()
                 .filter(x -> x.getTypeString().equalsIgnoreCase("income"))
                 .map(Transaction::getAmountAsDouble)
                 .reduce(0.0, Double::sum);
 
 
-        Double resetUniCashExpense = getSampleUniCash().getTransactionList()
+        Double resetUniCashSumOfExpenses = getSampleUniCash().getTransactionList()
                 .stream()
                 .filter(x -> x.getTypeString().equalsIgnoreCase("expense"))
                 .map(Transaction::getAmountAsDouble)
                 .reduce(0.0, Double::sum);
 
-        Double resetUniCashSum = resetUniCashIncome - resetUniCashExpense;
+        Double resetUniCashNetSum = resetUniCashSumOfIncomes - resetUniCashSumOfExpenses;
 
         String formattedRollingBalanceLabel;
-
-        if (Double.compare(resetUniCashSum, 0) < 0) {
+        if (Double.compare(resetUniCashNetSum, 0) < 0) {
             formattedRollingBalanceLabel = String.format("Rolling Balance: -$%.2f",
-                    Math.abs(resetUniCashSum));
+                    Math.abs(resetUniCashNetSum));
         } else {
             formattedRollingBalanceLabel = String.format("Rolling Balance: $%.2f",
-                    resetUniCashSum);
+                    resetUniCashNetSum);
         }
 
-        Assertions.assertEquals(rollingBalanceNodeLabel
-                .getText(), formattedRollingBalanceLabel);
+        assertEquals(rollingBalanceNodeLabel.getText(), formattedRollingBalanceLabel);
     }
 
 
@@ -118,13 +118,13 @@ public class RollingBalanceUiTest {
         robot.type(KeyCode.ENTER);
 
         var rollingBalanceNode = robot.lookup("#balanceIndicator").tryQuery();
-        Assertions.assertTrue(rollingBalanceNode.isPresent());
+        assertTrue(rollingBalanceNode.isPresent());
         var rollingBalanceNodeLabel = (Label) rollingBalanceNode.get();
 
         String formattedRollingBalanceLabel =
                 String.format("Rolling Balance: -$%.2f", lunchExpensesSum);
 
-        Assertions.assertEquals(rollingBalanceNodeLabel.getText(),
+        assertEquals(rollingBalanceNodeLabel.getText(),
                 formattedRollingBalanceLabel);
 
     }
