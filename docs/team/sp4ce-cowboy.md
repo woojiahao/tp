@@ -108,7 +108,7 @@ explanations in the respective PRs.
   _**Highlights:** The motivation for color consistency comes from these
   ([1](https://www.sciencedirect.com/science/article/abs/pii/S0167811623000599),
   [2](https://www.diva-portal.org/smash/record.jsf?pid=diva2%3A1788177&dswid=-2283)) studies that show positive correlation between
-  color complexity and target user engagement, which is also elaborated in the Developer Guide._
+  color complexity and target user engagement, which is also elaborated in the DG._
 
 
 **Decommissioned Features** (Some features that I had implemented prior but removed due to various constraints)
