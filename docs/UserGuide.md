@@ -36,6 +36,7 @@ Please read through sections [Installation](#installation) and [Command Breakdow
  
    <img src="images/Ui.png" width="650">
 
+
 5. Type the command in the command box and press `Enter` to execute it. e.g. typing **`help`** and pressing `Enter` will
    open the help window.
 
