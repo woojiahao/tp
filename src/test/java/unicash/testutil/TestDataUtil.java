@@ -3,9 +3,12 @@ package unicash.testutil;
 import static unicash.model.util.SampleDataUtil.getCategoryList;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
 import unicash.commons.enums.CommandType;
+import unicash.commons.enums.TransactionType;
 import unicash.model.ReadOnlyUniCash;
 import unicash.model.UniCash;
 import unicash.model.commons.Amount;
@@ -14,7 +17,6 @@ import unicash.model.transaction.Location;
 import unicash.model.transaction.Name;
 import unicash.model.transaction.Transaction;
 import unicash.model.transaction.Type;
-
 
 
 /**
@@ -327,14 +329,52 @@ public class TestDataUtil {
         ArrayList<String> userInputList = new ArrayList<>();
         for (Transaction transaction : getTestTransactions()) {
             String userInput = new UserInputBuilder(transaction)
-                    .addCommand(CommandType.ADD_TRANSACTION)
                     .withAllProperties()
+                    .addCommand(CommandType.ADD_TRANSACTION)
                     .toString();
 
             userInputList.add(userInput);
 
         }
         return userInputList;
+    }
+
+
+    /**
+     * Utility method to tabulate sum of expenses for all test transactions
+     * that match the input transaction predicate.
+     *
+     * @param transactionPredicate the input predicate to filter transactions by
+     * @return the sum of expenses as a positive double value
+     */
+    public static Double getSumOfTestExpenses(Predicate<Transaction> transactionPredicate) {
+        Double expensesSum = Arrays.stream(getTestTransactions())
+                .filter(transaction -> transaction.getType()
+                        .equals(TransactionType.EXPENSE))
+                .map(Transaction::getAmountAsDouble)
+                .reduce(0.0, Double::sum);
+
+        return expensesSum;
+
+    }
+
+    /**
+     * Utility method to tabulate sum of incomes for all test transactions
+     * that match the input transaction predicate.
+     *
+     * @param transactionPredicate the input predicate to filter transactions by
+     * @return the sum of incomes as a positive double value
+     */
+    public static Double getSumOfTestIncomes(Predicate<Transaction> transactionPredicate) {
+        Double expensesSum = Arrays.stream(getTestTransactions())
+                .filter(transactionPredicate)
+                .filter(transaction -> transaction.getType()
+                        .equals(TransactionType.INCOME))
+                .map(Transaction::getAmountAsDouble)
+                .reduce(0.0, Double::sum);
+
+        return expensesSum;
+
     }
 
 }
