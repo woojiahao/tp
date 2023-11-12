@@ -34,7 +34,7 @@ Please read through sections [Installation](#installation) and [Command Breakdow
 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
  
-   <img src="images/Ui.png" width="650">
+   ![UniCashWelcomeWindow](images/Ui.png)
 
 
 5. Type the command in the command box and press `Enter` to execute it. e.g. typing **`help`** and pressing `Enter` will
@@ -129,7 +129,8 @@ UniCa$h is designed with users who prefer to use the keyboard in mind. Thus, alm
 user input is designed for CLI-type usage, i.e. text-based keyboard input, and UI elements are intended 
 to either supplement this main functionality, or provide graphical support.
 
-When UniCa$h is first opened, it would look something like this:
+When UniCa$h is first opened, it would look something like the image shown earlier 
+near the top of the user guide.
 
 ![img_1.png](images/unicash/UniCashWelcome.png)
 
