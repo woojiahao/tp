@@ -5,6 +5,8 @@ import static unicash.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,6 +21,10 @@ public class TransactionList implements Iterable<Transaction> {
     public static final int MAX_TRANSACTIONS = 100000;
     public static final String MESSAGE_SIZE_CONSTRAINTS =
             "UniCa$h supports up to a maximum of 100,000 transactions.";
+
+    private static final Logger logger = Logger.getLogger("TransactionListLogger");
+    private static final String TRANSACTION_NOT_FOUND_LOG = "Transaction not found in TransactionList!";
+
     private final ObservableList<Transaction> internalList = FXCollections.observableArrayList();
     private final ObservableList<Transaction> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
@@ -56,10 +62,13 @@ public class TransactionList implements Iterable<Transaction> {
         for (int i = 0; i < internalList.size(); i++) {
             if (internalList.get(i).originalHashCode() == targetHashCode) {
                 targetIndex = i;
+                break;
             }
         }
 
+
         if (targetIndex == -1) {
+            logger.log(Level.INFO, TRANSACTION_NOT_FOUND_LOG);
             throw new TransactionNotFoundException();
         }
 
@@ -79,15 +88,17 @@ public class TransactionList implements Iterable<Transaction> {
 
         for (int i = 0; i < internalList.size(); i++) {
             if (internalList.get(i).originalHashCode() == targetHashCode) {
-                internalList.remove(i);
                 targetIndex = i;
                 break;
             }
         }
 
         if (targetIndex == -1) {
+            logger.log(Level.INFO, TRANSACTION_NOT_FOUND_LOG);
             throw new TransactionNotFoundException();
         }
+
+        internalList.remove(targetIndex);
     }
 
     /**
