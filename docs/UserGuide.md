@@ -1626,7 +1626,7 @@ To get a list of `COMMAND_WORD`, do `help` with no arguments
 > ```
 >
 > The following output is shown as well as the popup.
-> <img src="images/unicash/HelpPopup.png" width="1000" />
+> <img src="images/unicash/HelpPopUpNew.png" width="1000" />
 
 **Example 2**
 
