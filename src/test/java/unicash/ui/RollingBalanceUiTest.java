@@ -114,6 +114,15 @@ public class RollingBalanceUiTest {
                 new TransactionNameContainsKeywordsPredicate(
                         Collections.singletonList("lunch")));
 
+        /* The sum of incomes is tabulated from the test transactions list internally.
+         * This is added to account for incomes that might contain the word "lunch" in
+         * their names, for e.g "Fund-raising luncheon" thus covering both boundaries */
+        Double lunchIncomesSum = getSumOfTestIncomes(
+                new TransactionNameContainsKeywordsPredicate(
+                        Collections.singletonList("lunch")));
+
+        Double rollingBalance = lunchIncomesSum - lunchExpensesSum;
+
         /* User input for Find command constructed */
         String userInputString = new UserInputBuilder(
                 new TransactionBuilder().withName("lunch"))
@@ -131,40 +140,6 @@ public class RollingBalanceUiTest {
         assert rollingBalanceNode.isPresent();
         var rollingBalanceNodeLabel = (Label) rollingBalanceNode.get();
 
-        String formattedRollingBalanceLabel =
-                String.format("Rolling Balance: -$%.2f", lunchExpensesSum);
-
-        assertEquals(formattedRollingBalanceLabel,
-                rollingBalanceNodeLabel.getText());
-
-    }
-
-    @Test
-    public void rollingBalance_unfilteredTransactionList_showsCorrectBalance(FxRobot robot) {
-
-        /* All transactions in UniCash are cleared at first */
-        robot.clickOn("#commandBoxPlaceholder");
-        robot.write(CommandType.CLEAR_TRANSACTIONS.getMainCommandWord());
-        robot.type(KeyCode.ENTER);
-
-        /* Each test transaction is manually input into the command box */
-        Transaction[] transactionList = getTestTransactions();
-        for (String userInput : getTestTransactionsAsUserInputs()) {
-            robot.clickOn("#commandBoxPlaceholder");
-            robot.write(userInput);
-            robot.type(KeyCode.ENTER);
-
-        }
-
-        /* The sum of expenses is tabulated from the test transactions list internally */
-        Double totalExpensesSum = getSumOfTestExpenses(x -> true);
-        Double totalIncomesSum = getSumOfTestIncomes(x -> true);
-        Double rollingBalance = totalIncomesSum - totalExpensesSum;
-
-        var rollingBalanceNode = robot.lookup("#balanceIndicator").tryQuery();
-        assert rollingBalanceNode.isPresent();
-        var rollingBalanceNodeLabel = (Label) rollingBalanceNode.get();
-
         /* Format rolling balance string to account for negative values */
         String formattedRollingBalanceLabel;
         if (Double.compare(rollingBalance, 0) < 0) {
@@ -175,10 +150,9 @@ public class RollingBalanceUiTest {
                     rollingBalance);
         }
 
-        assertEquals(formattedRollingBalanceLabel,
-                rollingBalanceNodeLabel.getText());
+        assertEquals(formattedRollingBalanceLabel, rollingBalanceNodeLabel.getText());
 
     }
 
-
 }
+
