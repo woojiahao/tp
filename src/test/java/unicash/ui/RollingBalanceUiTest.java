@@ -8,6 +8,7 @@ import static unicash.testutil.TestDataUtil.getSumOfTestIncomes;
 import static unicash.testutil.TestDataUtil.getTestTransactions;
 import static unicash.testutil.TestDataUtil.getTestTransactionsAsUserInputs;
 
+import java.nio.file.Path;
 import java.util.Collections;
 import java.util.concurrent.TimeoutException;
 
@@ -15,6 +16,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.io.TempDir;
 import org.testfx.api.FxRobot;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationExtension;
@@ -33,10 +35,13 @@ import unicash.testutil.UserInputBuilder;
 @ExtendWith(ApplicationExtension.class)
 public class RollingBalanceUiTest {
 
+    @TempDir
+    Path tempDir;
+
     @BeforeEach
     public void setUp() throws TimeoutException {
         FxToolkit.registerPrimaryStage();
-        FxToolkit.setupApplication(() -> new MainApp());
+        FxToolkit.setupApplication(() -> new MainApp(tempDir.resolve("ui_data.json")));
         FxToolkit.showStage();
         WaitForAsyncUtils.waitForFxEvents(20);
     }
