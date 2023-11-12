@@ -1741,6 +1741,14 @@ Command Words Accepted: `exit`, `quit`, `bye` (case-insensitive)
 | **Clear Budget**            | `clear_budget`                                                                                        |
 | **Get Budget**              | `get_budget`                                                                                          |
 
+| **Reset UniCa$h to default** | `reset_unicash` (Add this to table)
+
+| **Show Help Window** | `help` (Add this to table)
+
+| **Show Welcome Message with Summary** | `help` (Add this to table)
+
+| **Show Command Specific Help** | `help [COMMAND_WORD]` (Add this to table)
+
 [//]: # (## Troubleshoot)
 
 ---
