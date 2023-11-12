@@ -69,7 +69,7 @@ Commands in UniCa$h have the following structure:
 **Notes:**
 
 1. `INDEX` uses positive integers which we define as integers that are strictly greater than `0`. 
-2. UniCa$h divides the error handling for `INDEX` into two cases, non-positive integers, i.e. `<= 0` values, are treated as invalid command formats while values that exceed the transaction list will be treated as being an invalid index as the supported values are `[1, transaction list size]`.
+2. UniCa$h divides the error handling for `INDEX` into two cases, non-positive integers, i.e. `<= 0` values, are treated as invalid command formats while values that exceed the transaction list will be treated as being an invalid index as the supported values are `[1, transaction list size]`. 
 
 <div class="callout callout-info" markdown="span">
 For more clarity about how commands are parsed and why `INDEX` is parsed this way, please refer to our [developer guide](DeveloperGuide.html#delete-transaction) on how some commands like `delete_transaction` handles `INDEX`.
@@ -123,7 +123,11 @@ User might also want to track financial events not involving currency exchange, 
    2. For `week` intervals, only transactions of the same [week of year](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/time/temporal/WeekFields.html#weekOfYear()) are found. 
    3. For `month` intervals, only transactions of the same month are found.
 
-### UI Layout
+[//]: # ()
+
+[//]: # (UI layout and description of what each section means)
+
+### User Interface Layout
 
 UniCa$h is designed with users who prefer to use the keyboard in mind. Thus, almost all
 user input is designed for CLI-type usage, i.e. text-based keyboard input, and User Interface
@@ -194,14 +198,17 @@ The most recent transactions appear at the top of the `Transactions List` as the
 actual date and time associated with that particular transaction.
 </div>
 
-#### Transaction
-- The `Transactions List` contains individual `Transactions` that look like this:
+#### Transaction Card
+- The `Transactions List` contains individual `Transaction Cards`, each corresponding to
+a single `Transaction` and they look like this:
 
 <img src="images/unicash/TransactionCardAnnotated.png" width="450">
 
-- **Transaction ID/Index/Number:** All terms used synonymously to refer to the number shown on the left partition of the blue box. Based
-on the configuration of `Transactions List`, this number might change, and that is the intended effect, the use for which 
-will be explained in the applicable commands, such as the `delete`, `edit` and `get` commands.
+- **Transaction Index (or ID/Number):** All terms used synonymously to refer to the number shown on the left partition of the blue box.
+  - Transactions are not inherently indexed, the Index values refer to the position of the
+  Transaction on the `Transactions List` 
+  - Thus, Index values are not static - depending on the configuration of currently displayed
+  `Transactions List`, this number might change.
 - **Transaction Name:** The name of the given transaction, shown on the right partition of the blue box.
 - **Transaction Date & Time:** The date & time assigned to the transaction, shown inside the pink box.
 - **Transaction Location:** The location assigned to the transaction, shown inside the red box.
@@ -210,6 +217,7 @@ This can be empty if the transaction has no categories assigned to it.
 - **Transaction Amount:** The expense or income assigned to the transaction, shown inside the black box.
   - _Given that `0.00` is a valid amount, its display colour and magnitude sign will depend 
   on the type of transaction only._
+
 
 <div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
 
@@ -252,10 +260,6 @@ Unlike the color of the amount of a transaction in the `Transactions List`, the 
 the `Rolling Balance Indicator` will change based on whether the net sum is positive (green)
 or negative (red) or zero (black).
 </div>
-
-[//]: # () 
-
-[//]: # (UI layout and description of what each section means)
 
 
 ---
@@ -588,7 +592,7 @@ Command: `delete_transaction INDEX`
 Command Words Accepted: `delete_transaction`, `delete`, `del` (case-insensitive)
 
 Command Argument: `INDEX` is the displayed transaction index
-of the transaction to be deleted, as shown in the `Transactions List`.
+of the transaction to be deleted, as shown in the currently displayed `Transactions List`.
 
 | Arguments | Optional? | Purpose                                            |
 |---------|-----------|----------------------------------------------------|
@@ -596,14 +600,19 @@ of the transaction to be deleted, as shown in the `Transactions List`.
 
 
 <div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
-There are some important `INDEX` constraints for which you can refer to the [command breakdown's argument types section](#argument-types)
+There are some important `INDEX` constraints for which you can refer to the
+[command breakdown's argument types section](#argument-types). You can also refer to the
+UI Layout's `Transaction Card` section to learn about the transaction index values that
+can change based on the `Transactions List` configuration.
 </div>
+
+
 
 ##### Successful Execution
 
 ###### Example 1
 
-> **Case**: Delete a transaction with the correctly specified `<INDEX>`.
+> **Case**: Delete a transaction with the correctly specified `INDEX`.
 >
 > **Input**: `delete_transaction 1`
 >
@@ -618,14 +627,10 @@ There are some important `INDEX` constraints for which you can refer to the [com
 > Location: Clarke Quay;
 > Categories: #social
 > ```
-> Input:
-> <img src="images/unicash/command-outputs/deleteTransaction/deleteTransactionInitialState.png" width="1000" />
-> Output:
-> <img src="images/unicash/command-outputs/deleteTransaction/deleteTransactionSuccess1FinalState.png" width="1000" />
 
 ###### Example 2
 
-> **Case**: Delete a transaction with the currently not visible but correctly specified `<INDEX>`.
+> **Case**: Delete a transaction with the currently not visible but correctly specified `INDEX`.
 >
 > **Input**: `delete_transaction 1`
 >
