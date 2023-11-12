@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static unicash.model.util.SampleDataUtil.getSampleUniCash;
 import static unicash.testutil.TestDataUtil.getSumOfTestExpenses;
+import static unicash.testutil.TestDataUtil.getSumOfTestIncomes;
 import static unicash.testutil.TestDataUtil.getTestTransactions;
 import static unicash.testutil.TestDataUtil.getTestTransactionsAsUserInputs;
 
@@ -23,6 +24,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import unicash.MainApp;
 import unicash.commons.enums.CommandType;
+import unicash.commons.enums.TransactionType;
 import unicash.model.transaction.Transaction;
 import unicash.model.transaction.predicates.TransactionNameContainsKeywordsPredicate;
 import unicash.testutil.TransactionBuilder;
@@ -55,14 +57,16 @@ public class RollingBalanceUiTest {
 
         Double resetUniCashSumOfIncomes = getSampleUniCash().getTransactionList()
                 .stream()
-                .filter(x -> x.getTypeString().equalsIgnoreCase("income"))
+                .filter(x -> x.getTypeString().equalsIgnoreCase(
+                        String.valueOf(TransactionType.INCOME)))
                 .map(Transaction::getAmountAsDouble)
                 .reduce(0.0, Double::sum);
 
 
         Double resetUniCashSumOfExpenses = getSampleUniCash().getTransactionList()
                 .stream()
-                .filter(x -> x.getTypeString().equalsIgnoreCase("expense"))
+                .filter(x -> x.getTypeString().equalsIgnoreCase(
+                        String.valueOf(TransactionType.EXPENSE)))
                 .map(Transaction::getAmountAsDouble)
                 .reduce(0.0, Double::sum);
 
@@ -77,7 +81,9 @@ public class RollingBalanceUiTest {
                     resetUniCashNetSum);
         }
 
+        /* Format rolling balance string to account for negative values */
         assertEquals(rollingBalanceNodeLabel.getText(), formattedRollingBalanceLabel);
+
     }
 
 
@@ -103,7 +109,7 @@ public class RollingBalanceUiTest {
                 new TransactionNameContainsKeywordsPredicate(
                         Collections.singletonList("lunch")));
 
-        /* User input is constructed */
+        /* User input for Find command constructed */
         String userInputString = new UserInputBuilder(
                 new TransactionBuilder().withName("lunch"))
                 .addName()
@@ -117,14 +123,55 @@ public class RollingBalanceUiTest {
         robot.type(KeyCode.ENTER);
 
         var rollingBalanceNode = robot.lookup("#balanceIndicator").tryQuery();
-        assertTrue(rollingBalanceNode.isPresent());
+        assert rollingBalanceNode.isPresent();
         var rollingBalanceNodeLabel = (Label) rollingBalanceNode.get();
 
         String formattedRollingBalanceLabel =
                 String.format("Rolling Balance: -$%.2f", lunchExpensesSum);
 
-        assertEquals(rollingBalanceNodeLabel.getText(),
-                formattedRollingBalanceLabel);
+        assertEquals(formattedRollingBalanceLabel,
+                rollingBalanceNodeLabel.getText());
+
+    }
+
+    @Test
+    public void rollingBalance_unfilteredTransactionList_showsCorrectBalance(FxRobot robot) {
+
+        /* All transactions in UniCash are cleared at first */
+        robot.clickOn("#commandBoxPlaceholder");
+        robot.write(CommandType.CLEAR_TRANSACTIONS.getMainCommandWord());
+        robot.type(KeyCode.ENTER);
+
+        /* Each test transaction is manually input into the command box */
+        Transaction[] transactionList = getTestTransactions();
+        for (String userInput : getTestTransactionsAsUserInputs()) {
+            robot.clickOn("#commandBoxPlaceholder");
+            robot.write(userInput);
+            robot.type(KeyCode.ENTER);
+
+        }
+
+        /* The sum of expenses is tabulated from the test transactions list internally */
+        Double totalExpensesSum = getSumOfTestExpenses(x -> true);
+        Double totalIncomesSum = getSumOfTestIncomes(x -> true);
+        Double rollingBalance = totalIncomesSum - totalExpensesSum;
+
+        var rollingBalanceNode = robot.lookup("#balanceIndicator").tryQuery();
+        assert rollingBalanceNode.isPresent();
+        var rollingBalanceNodeLabel = (Label) rollingBalanceNode.get();
+
+        /* Format rolling balance string to account for negative values */
+        String formattedRollingBalanceLabel;
+        if (Double.compare(rollingBalance, 0) < 0) {
+            formattedRollingBalanceLabel = String.format("Rolling Balance: -$%.2f",
+                    Math.abs(rollingBalance));
+        } else {
+            formattedRollingBalanceLabel = String.format("Rolling Balance: $%.2f",
+                    rollingBalance);
+        }
+
+        assertEquals(formattedRollingBalanceLabel,
+                rollingBalanceNodeLabel.getText());
 
     }
 

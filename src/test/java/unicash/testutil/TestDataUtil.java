@@ -9,8 +9,6 @@ import java.util.function.Predicate;
 
 import unicash.commons.enums.CommandType;
 import unicash.commons.enums.TransactionType;
-import unicash.model.ReadOnlyUniCash;
-import unicash.model.UniCash;
 import unicash.model.commons.Amount;
 import unicash.model.transaction.DateTime;
 import unicash.model.transaction.Location;
@@ -306,19 +304,10 @@ public class TestDataUtil {
                     new Location(""),
                     getCategoryList("transport")
             ),
+
+
         };
 
-    }
-
-    /**
-     * Returns a {@Code ReadOnlyUniCash} object populated with the test data
-     */
-    public static ReadOnlyUniCash getTestUniCash() {
-        UniCash sample = new UniCash();
-        for (var transaction : getTestTransactions()) {
-            sample.addTransaction(transaction);
-        }
-        return sample;
     }
 
     /**
@@ -349,8 +338,9 @@ public class TestDataUtil {
      */
     public static Double getSumOfTestExpenses(Predicate<Transaction> transactionPredicate) {
         Double expensesSum = Arrays.stream(getTestTransactions())
-                .filter(transaction -> transaction.getType()
-                        .equals(TransactionType.EXPENSE))
+                .filter(transaction -> transaction.getTypeString()
+                        .equalsIgnoreCase(String.valueOf(TransactionType.EXPENSE)))
+                .filter(transactionPredicate)
                 .map(Transaction::getAmountAsDouble)
                 .reduce(0.0, Double::sum);
 
@@ -367,9 +357,9 @@ public class TestDataUtil {
      */
     public static Double getSumOfTestIncomes(Predicate<Transaction> transactionPredicate) {
         Double expensesSum = Arrays.stream(getTestTransactions())
+                .filter(transaction -> transaction.getTypeString()
+                        .equalsIgnoreCase(String.valueOf(TransactionType.INCOME)))
                 .filter(transactionPredicate)
-                .filter(transaction -> transaction.getType()
-                        .equals(TransactionType.INCOME))
                 .map(Transaction::getAmountAsDouble)
                 .reduce(0.0, Double::sum);
 
