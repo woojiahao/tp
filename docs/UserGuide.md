@@ -224,9 +224,9 @@ This can be empty if the transaction has no categories assigned to it.
 Certain properties above (such as name, location, categories and amount)
 are allowed values that exceed the UI's capacity to display them fully.
 
-<br><img align="center" src="images/unicash/TransactionCardFull.png" width="450">
+<br><br><img align="center" src="images/unicash/TransactionCardFull.png" width="450">
 
-<br> This effect is accounted for as we do not wish to limit the user to arbitrary
+<br><br> This effect is accounted for as we do not wish to limit the user to arbitrary
 lengths. Thus, the `get` command is available to retrieve the full, expanded details
 of these transactions and display them in the `Results Display` component.
 </div>
@@ -602,7 +602,7 @@ of the transaction to be deleted, as shown in the currently displayed `Transacti
 <div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
 There are some important `INDEX` constraints for which you can refer to the
 [command breakdown's argument types section](#argument-types). You can also refer to the
-[UI Layout's `Transaction Card` section](#transaction-card) to learn about the transaction index values that
+[UI Layout's Transaction Card section](#transaction-card) to learn about the transaction index values that
 can change based on the current `Transactions List` configuration.
 </div>
 
