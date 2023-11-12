@@ -38,26 +38,20 @@ public class FindCommandParser implements Parser<FindCommand> {
         requireNonNull(args);
 
         /* All prefixes are parsed first */
-        ArgumentMultimap argMultimapWithAllPrefixes = ArgumentTokenizer.tokenize(args, PREFIX_NAME,
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME,
                 PREFIX_DATETIME, PREFIX_AMOUNT, PREFIX_TYPE, PREFIX_CATEGORY, PREFIX_LOCATION);
 
         /* If any of the invalid prefixes are present, an invalid command format message
          * is displayed to the user, as opposed to the invalid prefixes themselves being
          * parsed together with the valid prefixes as a standard field input. */
         if (areAnyPrefixesPresent(
-                argMultimapWithAllPrefixes, PREFIX_DATETIME, PREFIX_AMOUNT, PREFIX_TYPE)) {
+                argMultimap, PREFIX_DATETIME, PREFIX_AMOUNT, PREFIX_TYPE)) {
 
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
-                args, PREFIX_NAME, PREFIX_CATEGORY, PREFIX_LOCATION);
-
         String trimmedArgs = args.trim();
-
-        /* Throws a ParseException if the argument does not contain any non-whitespace characters
-         * or if there are any non-whitespace characters preceding the first valid prefix */
         if (trimmedArgs.isEmpty() || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));

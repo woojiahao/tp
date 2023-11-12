@@ -97,7 +97,7 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parseMethod_inputContainsDateTimePrefix_throwsException() {
+    public void parseMethod_inputContainsDateTimePrefix_throwsParseException() {
         String dateTimePrefixedArgument = "dt/10-10-2023 10:10";
         String findCommandArgumentWithDateTime =
                 CommandType.FIND.getMainCommandWord()
@@ -113,7 +113,7 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parseMethod_inputContainsTypePrefix_throwsException() {
+    public void parseMethod_inputContainsTypePrefix_throwsParseException() {
         String typePrefixedArgument = "type/expense";
         String findCommandArgumentWithType =
                 CommandType.FIND.getMainCommandWord()
@@ -129,7 +129,7 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parseMethod_inputContainsAmountPrefix_throwsException() {
+    public void parseMethod_inputContainsAmountPrefix_throwsParseException() {
         String amountPrefixedArgument = "amt/30.00";
         String findCommandArgumentWithAmount =
                 CommandType.FIND.getMainCommandWord()
@@ -146,7 +146,7 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parseMethod_inputContainsNamePrefix_doesNotThrowsException() {
+    public void parseMethod_inputContainsNamePrefix_doesNotThrowsParseException() {
         String namePrefixedArgument = "n/buying eggs";
         String findCommandArgumentWithName =
                 CommandType.FIND.getMainCommandWord()
@@ -163,7 +163,7 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parseMethod_inputContainsCategoryPrefix_doesNotThrowsException() {
+    public void parseMethod_inputContainsCategoryPrefix_doesNotThrowsParseException() {
         String categoryPrefixedArgument = "c/food";
         String findCommandArgumentWithCategory =
                 CommandType.FIND.getMainCommandWord()
@@ -180,7 +180,7 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parseMethod_inputContainsLocationPrefix_doesNotThrowsException() {
+    public void parseMethod_inputContainsLocationPrefix_doesNotThrowsParseException() {
         String locationPrefixedArgument = "l/mall";
         String findCommandArgumentWithLocation =
                 CommandType.FIND.getMainCommandWord()
