@@ -1129,6 +1129,61 @@ it cannot be followed with any arguments, options, or non-whitespace text.
 > present in a particular `Transaction List` configuration and that this command will
 > always delete all transactions in UniCa$h.
 
+#### Reset UniCash
+
+Clears all transactions in UniCa$h.
+
+Command: `reset_unicash`
+
+Command Words Accepted: `reset_unicash` only (case-insensitive)
+
+<div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
+Similar to `Clear Transactions`, this command overwrites all existing transactions in UniCa$h.
+Thus, as an added layer of safety, the command has no short form alternatives.
+It also cannot be followed with any arguments, options, or non-whitespace text.
+</div>
+
+##### Successful Execution
+
+###### Example 1
+
+> **Case**: Command entered with correct format
+>
+> **Input**: `reset_unicash`
+>
+> **Output**:
+> ```
+> UniCa$h has been successfully restored to its original state!
+> ```
+>
+> Note: The `Transactions List` in the UI output for this command will look 
+> identical to the very first image of UniCa$h shown at the top of the user
+> guide, as it is meant to restore UniCa$h to its default state.
+
+###### Example 2
+
+> **Case**: Command entered with acceptable alternate format
+>
+> **Input**: `RESET_UNICASH`
+>
+> **Output**:
+> ```
+> UniCa$h has been successfully restored to its original state!
+> ```
+
+##### Failed Execution
+
+###### Example 1
+
+> **Case**: Command entered with random trailing text.
+>
+> **Input**: `reset_unicash   asdf`
+>
+> **Output**:
+> ```
+> Reset command cannot have trailing arguments. Use the command reset_unicash without any trailing arguments.
+> ```
+
 ### Budget Management
 
 The budget serves as an observable metric used to allow users to understand when their expenses over a given interval. They can use this information to better understand if they should be controlling their spending or adjusting their budget.
