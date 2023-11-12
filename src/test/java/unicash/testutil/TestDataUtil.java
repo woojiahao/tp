@@ -2,6 +2,10 @@ package unicash.testutil;
 
 import static unicash.model.util.SampleDataUtil.getCategoryList;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import unicash.commons.enums.CommandType;
 import unicash.model.ReadOnlyUniCash;
 import unicash.model.UniCash;
 import unicash.model.commons.Amount;
@@ -10,6 +14,7 @@ import unicash.model.transaction.Location;
 import unicash.model.transaction.Name;
 import unicash.model.transaction.Transaction;
 import unicash.model.transaction.Type;
+
 
 
 /**
@@ -312,6 +317,24 @@ public class TestDataUtil {
             sample.addTransaction(transaction);
         }
         return sample;
+    }
+
+    /**
+     * Returns a List of strings that each represent the text user input required
+     * to add a Transaction to UniCash.
+     */
+    public static List<String> getTestTransactionsAsUserInputs() {
+        ArrayList<String> userInputList = new ArrayList<>();
+        for (Transaction transaction : getTestTransactions()) {
+            String userInput = new UserInputBuilder(transaction)
+                    .addCommand(CommandType.ADD_TRANSACTION)
+                    .withAllProperties()
+                    .toString();
+
+            userInputList.add(userInput);
+
+        }
+        return userInputList;
     }
 
 }

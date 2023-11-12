@@ -1,8 +1,5 @@
 package unicash.testutil;
 
-import unicash.model.category.Category;
-import unicash.model.transaction.Transaction;
-
 import static java.util.Objects.requireNonNull;
 import static unicash.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static unicash.logic.parser.CliSyntax.PREFIX_CATEGORY;
@@ -10,6 +7,11 @@ import static unicash.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static unicash.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static unicash.logic.parser.CliSyntax.PREFIX_NAME;
 import static unicash.logic.parser.CliSyntax.PREFIX_TYPE;
+
+import unicash.commons.enums.CommandType;
+import unicash.model.category.Category;
+import unicash.model.transaction.Transaction;
+
 
 /**
  * A utility class to help with reverse engineering possible user inputs from Transactions
@@ -29,8 +31,25 @@ public class UserInputBuilder {
     public UserInputBuilder(Transaction transaction) {
         requireNonNull(transaction);
         this.transaction = transaction;
-        userInput = WHITESPACE;
+        userInput = "";
 
+    }
+
+    /**
+     * Creates a {@code UserInputBuilder} object with a TransactionBuilder.
+     */
+    public UserInputBuilder(TransactionBuilder transactionBuilder) {
+        this(transactionBuilder.build());
+
+    }
+
+    /**
+     * Prefixes the user input with the main command word of a given {@code CommandType}
+     */
+    public UserInputBuilder addCommand(CommandType command) {
+        userInput = command.getMainCommandWord() + WHITESPACE + userInput;
+
+        return this;
     }
 
     /**
