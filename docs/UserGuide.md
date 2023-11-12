@@ -118,7 +118,7 @@ Note that each command might use the prefixes slightly differently so refer to e
 **Notes:**
 
 1. Amounts can be exactly `$0.00` as users may want to simply track that a transaction is present but not specify the amount.
-User might also want to track financial events not involving currency exchange, such as barter trading, free gifts, etc 
+User might also want to track financial events not involving currency exchange, such as barter trading, free gifts, etc. 
 2. Intervals work by filtering by the specified time period. 
    1. For `day` intervals, only transactions of the same day are found. 
    2. For `week` intervals, only transactions of the same [week of year](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/time/temporal/WeekFields.html#weekOfYear()) are found. 
@@ -128,7 +128,7 @@ User might also want to track financial events not involving currency exchange, 
 
 [//]: # (UI layout and description of what each section means)
 
-### User Interface Layout
+### User Interface (UI) Layout
 
 UniCa$h is designed with users who prefer to use the keyboard in mind. Thus, almost all
 user input is designed for CLI-type usage, i.e. text-based keyboard input, and User Interface
@@ -168,7 +168,6 @@ issues. Simply exit fullscreen mode to continue using UniCa$h as per normal.
 #### Command Box
 - The `Command Box` is the primary means by which the user interacts actively with the application.
 - The user types specific inputs into the `Command Box` and presses `ENTER` after typing to "communicate" with UniCa$h.
-- The responses from UniCa$h for each input will be as defined in the subsection for each command in the later part of this User Guide
 - Given that our application is targeted for users who prefer CLI-type text input interaction, the `Command Box`
 is configured such that it can remember up to `10` latest user inputs. 
   - When a user presses `ENTER` on any input, the input is stored regardless of its validity.
@@ -187,8 +186,8 @@ to continue.
 #### Transactions List
 - Each transaction stored in UniCa$h is displayed in the `Transactions List`. 
 - The entire `Transactions List` will be displayed by default upon start-up.
-- Certain commands like `find` might limit this listing which can be
-reversed with the `list` command to show the full list.
+- Certain commands like `find` might limit the `Transactions List` to a particular configuration 
+which can be reversed with the `list` command to show the full list.
 - Transactions added will immediately appear at the top of the `Transactions List`, and this is to
 provide immediate response to the user as they will be able to see their most recently input 
 transaction right away.
@@ -225,7 +224,7 @@ This can be empty if the transaction has no categories assigned to it.
 Certain properties above (such as name, location, categories and amount)
 are allowed values that exceed the UI's capacity to display them fully.
 
-<br><img src="images/unicash/TransactionCardFull.png" width="450">
+<br><img align="center" src="images/unicash/TransactionCardFull.png" width="450">
 
 <br> This effect is accounted for as we do not wish to limit the user to arbitrary
 lengths. Thus, the `get` command is available to retrieve the full, expanded details
@@ -603,7 +602,7 @@ of the transaction to be deleted, as shown in the currently displayed `Transacti
 <div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
 There are some important `INDEX` constraints for which you can refer to the
 [command breakdown's argument types section](#argument-types). You can also refer to the
-UI Layout's `Transaction Card` section to learn about the transaction index values that
+[UI Layout's `Transaction Card` section](#transaction-card) to learn about the transaction index values that
 can change based on the current `Transactions List` configuration.
 </div>
 
@@ -632,8 +631,8 @@ can change based on the current `Transactions List` configuration.
 ###### Example 2
 
 > **Case**: Delete a transaction with the currently not visible but correctly specified
-> `INDEX`. The transaction is present in the current `Transactions List` but the user has
-> scrolled further away. 
+> `INDEX`. The transaction is present in the current `Transactions List` configuration
+> but the user has scrolled further away. 
 >
 > **Input**: `delete_transaction 1`
 >
@@ -678,7 +677,7 @@ can change based on the current `Transactions List` configuration.
 > **Case**: Invalid `INDEX` provided
 > 
 > **Context**:`INDEX` given as `10` when only `5` transactions are present
-> in the current `Transaction List` configuration
+> in the current `Transaction List` configuration.
 >
 > **Input**: `delete_transaction 10`
 >
@@ -747,8 +746,8 @@ of the transaction to be deleted, as shown in the currently displayed `Transacti
 
 <div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
 There are some important `INDEX` constraints for which you can refer to the
-[command breakdown's argument types section](#argument-types). You can also refer to the
-UI Layout's `Transaction Card` section to learn about the transaction index values that
+[command breakdown's Argument Types section](#argument-types). You can also refer to the
+[UI Layout's Transaction Card section](#transaction-card) to learn about the transaction index values that
 can change based on the current `Transactions List` configuration.
 </div>
 
@@ -775,8 +774,8 @@ can change based on the current `Transactions List` configuration.
 ###### Example 2
 
 > **Case**: Retrieve a transaction with the currently not visible but correctly specified
-> `INDEX`. The transaction is present in the current `Transactions List` but the user has
-> scrolled further away.
+> `INDEX`. The transaction is present in the current `Transactions List` configuration 
+> but the user has scrolled further away.
 > 
 > **Input**: `get 1`
 >
@@ -874,10 +873,7 @@ Finds a `Transaction` in UniCa$h.
 
 Command: `find [n/NAME] [l/LOCATION] [c/CATEGORY]`
 
-Command Words Accepted: `find`, `search`, `f` (case-insensitive)
-
-Command Argument: `<INDEX>` is the displayed transaction index
-of the transaction to be retrieved, as shown in the `Transactions List`.
+Command Words Accepted: `find`, `search`, `f` (all case-insensitive)
 
 Command Options:
 
@@ -889,38 +885,75 @@ Command Options:
 | Any of the above | Min. one option | At least one option must be specified for the `find` command |
 
 Important notes:
-1. The `find` command word is case-insensitive, thus `FIND` is
-   considered an equivalent command word.
 
-2. *While each option is considered Optional, at least one option must be specified in total
-
+1. While all options are optional, at least one option must be specified in total.
+2. Only one instance of each option can be specified, i.e. `/n Friends n/Dinner` is invalid as the name
+      option is specified more than once.
 3. All keywords specified must match in order for a transaction to be displayed.
-4. Only one instance of each option can be specified, i.e. `/n Friends n/Dinner` is invalid as the name 
-option is specified more than once.
-5. For each keyword, a full substring match is required, thus `find n/Lunch with friends` with search for transactions
-whose name contains the String `Lunch with friends` and not `Lunch`, `with`, and `friends` separately. However, an 
-exact match is not required as a transaction with the name `Lunch with friends outside` contains the above substring
-and therefore it will be flagged as a match.
+4. For each keyword, a substring match is required, thus `find n/with friends` will search for transactions
+whose name contains the string "with friends". However, an exact word match is not required
+thus, a transaction with the name `Lunch with friends outside` will be flagged as a match.
+
+<div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
+Using the `find` command modifies the current `Transactions List` configuration, until
+another configuration modifying command (like `get_total_expenditure` or `list`) is used. Thus,
+editing transactions with the `edit` command will cause those transactions to be removed from
+the current `Transactions List` configuration if the properties being edited are the same
+properties used to filter the `Transactions List`. Thus, if the newly edited transaction do
+not match the conditions of the current `Transactions List` configuration, they will be removed
+from display in the current `Transactions List`.
+</div>
 
 ##### Successful Execution
 
 ###### Example 1
 
-> **Case**: Retrieve a transaction with the correctly specified options.
+> **Case**: Find a transaction with the correctly specified name option.
 >
-> **Input**: `find n/friends`
+> **Input**: `find n/with friends`
 >
 > **Output**:
 > ```
 > 
-> 1 Transactions listed!
+> 2 transactions listed!
 > 
 > ```
-> Input:
-> <img src="images/unicash/command-outputs/find/FindCommandSuccessInitial1.png" width="1000" />
+>
+> <img src="images/unicash/command-outputs/find/FindFriends.png" width="1000" />
+
+###### Example 2
+
+> **Case**: Find a transaction with the correctly specified category option.
+>
+> **Input**: `find c/food
+> `
+>
+> **Output**:
+> ```
 > 
-> Output:
-> <img src="images/unicash/command-outputs/find/FindSuccess1.png" width="1000" />
+> 3 transactions listed!
+> 
+> ```
+>
+> <img src="images/unicash/command-outputs/find/Find2.png" width="1000" />
+
+###### Example 3
+
+> **Case**: Find a transaction with multiple the correctly specified options.
+>
+> **Input**: `find n/lunch c/food
+> `
+>
+> **Output**:
+> ```
+> 
+> 2 transactions listed!
+> 
+> ```
+>
+> <img src="images/unicash/command-outputs/find/Find3.png" width="1000" />
+>
+> Note that only transactions that match all the given keywords are matched!
 
 ##### Failed Execution
 
@@ -932,20 +965,46 @@ and therefore it will be flagged as a match.
 >
 > **Output**:
 > ```
-> Invalid command format! 
+> Invalid command format!
 > 
-> find, search, f: Finds all transactions whose properties match all of thespecified keywords (case-insensitive) and displays them as a list with index numbers.
+> find, search, f: Finds all transactions whose properties match all of the specified keywords (case-insensitive) and displays them as a list with index numbers.
 > 
 > Only one keyword can be specified for each property and at least one keyword must be provided in total.
 > 
 > Parameters: [n/Name] [l/Location] [c/Category]
 > 
-> Example: find, search, f n/Buying groceries type/expense amt/300 dt/18-08-2023 19:30 l/NTUC c/Food
-> 
+> Example: find, search, f n/Buying groceries l/NTUC c/Food
 > ```
-> Output:
-> <img src="images/unicash/command-outputs/find/FindFailure2.png" width="1000" />
+
+###### Example 2
+
+> **Case**: Command entered with multiple instances of the same option 
+>
+> **Input**: `find n/with n/friends` 
+>
+> **Output**:
+> ```
+> Multiple values specified for the following single-valued field(s): n/
+> ```
+
+###### Example 3
+
+> **Case**: Command entered with UniCa$h prefixes unsupported Un
+>
+> **Input**: `find type/expense`
+>
+> **Output**:
+> ```
+> Invalid command format!
 > 
+> find, search, f: Finds all transactions whose properties match all of the specified keywords (case-insensitive) and displays them as a list with index numbers.
+> 
+> Only one keyword can be specified for each property and at least one keyword must be provided in total.
+> 
+> Parameters: [n/Name] [l/Location] [c/Category]
+> 
+> Example: find, search, f n/Buying groceries l/NTUC c/Food
+> ```
 
 #### List Transactions
 Shows the list of all transactions in UniCa$h.
