@@ -56,9 +56,9 @@ Commands in UniCa$h have the following structure:
 `command_word (ARGUMENT) (PREFIXES)`
 </p>
 
-| command_word                                                                                                    | ARGUMENT                                                                                                      | PREFIXES                                                                                                               |
-|-----------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|
-| Represents the command to run. May be referenced by alternative shorthands as described in each command section | Comes before all prefixes and often used to reference an index within the transactions list<br>Often optional | Often referred to as "Parameters"<br>Commonly used to specify various attributes/properties for a given `command_word` |
+| command_word                                                                                                                                                                      | ARGUMENT                                                                                                      | PREFIXES                                                                                                               |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|
+| Represents the command to run. May be referenced by alternative shorthands as described in each command section. All commands and their alternatives are always case-insensitive. | Comes before all prefixes and often used to reference an index within the transactions list<br>Often optional | Often referred to as "Parameters"<br>Commonly used to specify various attributes/properties for a given `command_word` |
 
 #### Argument Types
 
@@ -140,15 +140,15 @@ we have implemented in UniCa$h.
 
 ![img_2.png](images/unicash/UniCashUIAnnotated.png)
 
-<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
+<div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
 These main UI components are explained below. For the purposes of demonstrating certain UI features, certain commands
 and inputs that are yet to be explained are mentioned here. However, at a later section of this User Guide,
-all of these commands and inputs will be explained, feel free to refer to them at your discretion. _Where applicable,
-consider those explanations as the single source of authority for those commands as the representation here is merely
-for UI demonstration purposes only.
+all of these commands and inputs will be explained, feel free to refer to them at your discretion. **Where applicable,
+consider those explanations as the single source of authority for those commands, as the representation here is merely
+for UI demonstration purposes only.**
 </div>
 
-#### UniCa$h Main Window Components
+#### UniCa$h Main Window
 
 - The Main Window in UniCa$h is resizeable, but has a minimum size enforced.
 - The Menu bar contains the `File` and `Help` menus, of which `Help` can be opened with the
@@ -158,7 +158,7 @@ for UI demonstration purposes only.
 On macOS, using UniCa$h in fullscreen will sometimes cause the Summary Window and
 Help Window to also open in fullscreen, however this is an expected behaviour caused by
 macOS's window management style, and cannot be overridden, but does not cause any functional
-issues. Simply exit fullscreen mode to continue using UniCa$h as per normal._ 
+issues. Simply exit fullscreen mode to continue using UniCa$h as per normal. 
 </div>
 
 #### Command Box
@@ -172,7 +172,7 @@ is configured such that it can remember up to `10` latest user inputs.
   - Only the `10` most recent inputs are stored by the `Command Box`
 - At any point in time, the user can press the `ESC` to empty the current text field in the `Command Box`
 
-<div class="callout callout-important" markdown="span">
+<div class="callout callout-info" markdown="span">
 The mouse cursor being too close to the menu can occasionally trigger the JavaFX built-in
 cursor control functionality that allows arrows keys to be used for navigating the menu bar. 
 If it happens, simply move your mouse cursor away from the menu bar and click on the `Command Box`
@@ -202,7 +202,7 @@ actual date and time associated with that particular transaction.
 
 - **Transaction ID/Index/Number:** All terms used synonymously to refer to the number shown on the left partition of the blue box. Based
 on the configuration of `Transactions List`, this number might change, and that is the intended effect, the use for which 
-will be explained in the applicable commands, including `delete`, `edit` and `get` commands.
+will be explained in the applicable commands, such as the `delete`, `edit` and `get` commands.
 - **Transaction Name:** The name of the given transaction, shown on the right partition of the blue box.
 - **Transaction Date & Time:** The date & time assigned to the transaction, shown inside the pink box.
 - **Transaction Location:** The location assigned to the transaction, shown inside the red box.
@@ -215,9 +215,9 @@ This can be empty if the transaction has no categories assigned to it.
 <div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
 
 Certain properties above (such as name, location, categories and amount)
-are allowed values that exceed the UI's capacity to display them fully. 
+are allowed values that exceed the UI's capacity to display them fully.
 
-<img src="images/unicash/TransactionCardFull.png" width="450">
+<br><img src="images/unicash/TransactionCardFull.png" width="450">
 
 <br> This effect is accounted for as we do not wish to limit the user to arbitrary
 lengths. Thus, the `get` command is available to retrieve the full, expanded details
@@ -228,7 +228,7 @@ of these transactions and display them in the `Results Display` component.
 #### Results Display
 
 - The `Results Display` is the primary means by which UniCa$h "responds" back
-to the user via text output.
+to the user via text output. 
 - The `Results Display` can be scrolled if the text output displayed is too long.
 
 #### Data Source Indicator
@@ -254,7 +254,7 @@ the `Rolling Balance Indicator` will change based on whether the net sum is posi
 or negative (red) or zero (black).
 </div>
 
-[//]: # ()
+[//]: # () 
 
 [//]: # (UI layout and description of what each section means)
 
@@ -265,7 +265,7 @@ or negative (red) or zero (black).
 
 ### Features Overview
 
-UniCa$h comprises of four primary feature groups:
+UniCa$h comprises four primary feature groups:
 
 - Transaction Management
     - Add Transaction (`add_transaction`)
@@ -288,6 +288,8 @@ UniCa$h comprises of four primary feature groups:
     - Exit UniCa$h (`exit`)
 
 The instructions for the usage of each command within each feature group are elaborated in the sections below.
+For the command examples mentioned herein, you can assume that `Output` refers to the text
+shown in the `Results Display`, unless stated otherwise.
 
 ### Transaction Management
 
@@ -594,9 +596,6 @@ of the transaction to be deleted, as shown in the `Transactions List`.
 | `<INDEX>` | No        | Transaction index of the transaction to be deleted |
 
 Important notes:
-
-1. The `delete_transaction` command word is case-insensitive, thus `DELETE_TRANSACTION` is
-   considered an equivalent command word.
 
 2. `<INDEX>` must be a positive integer, i.e. a number greater than 0.
 
