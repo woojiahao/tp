@@ -939,7 +939,7 @@ from display in the current `Transactions List`.
 
 ###### Example 3
 
-> **Case**: Find a transaction with multiple the correctly specified options.
+> **Case**: Find a transaction with multiple correctly specified options.
 >
 > **Input**: `find n/lunch c/food
 > `
