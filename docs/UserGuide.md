@@ -40,7 +40,7 @@ Please read through sections [Installation](#installation) and [Command Breakdow
 5. Type the command in the command box and press `Enter` to execute it. e.g. typing **`help`** and pressing `Enter` will
    open the help window.
 
-   To get started with UniCa$h, you can run the `add_transactions` command!
+   To get started with UniCa$h, you can run the `add_transactions` command!  
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -117,6 +117,7 @@ Note that each command might use the prefixes slightly differently so refer to e
 **Notes:**
 
 1. Amounts can be exactly `$0.00` as users may want to simply track that a transaction is present but not specify the amount.
+User might also want to track financial events not involving currency exchange, such as barter trading, free gifts, etc 
 2. Intervals work by filtering by the specified time period. 
    1. For `day` intervals, only transactions of the same day are found. 
    2. For `week` intervals, only transactions of the same [week of year](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/time/temporal/WeekFields.html#weekOfYear()) are found. 
@@ -126,7 +127,7 @@ Note that each command might use the prefixes slightly differently so refer to e
 
 UniCa$h is designed with users who prefer to use the keyboard in mind. Thus, almost all
 user input is designed for CLI-type usage, i.e. text-based keyboard input, and UI elements are intended 
-to supplement this main functionality.
+to either supplement this main functionality, or provide graphical support.
 
 When UniCa$h is first opened, it would look something like this:
 
