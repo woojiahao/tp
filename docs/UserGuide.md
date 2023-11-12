@@ -184,42 +184,49 @@ to continue.
 - Each transaction stored in UniCa$h is displayed in the `Transactions List`. 
 - The entire `Transactions List` will be displayed by default upon start-up.
 - Certain commands like `find` might limit this listing.
-  - _This can be reversed with the `list` command to show the entire list again._
-- The `Transactions List` is ordered by the time at which the user inputs the transaction,
-not the actual date and time associated with that particular transaction .
+- This can be reversed with the `list` command to show the entire list again.
 - Transactions added will immediately appear at the top of the `Transactions List`, and this is to
 provide immediate response to the user as they will be able to see their most recently input 
 transaction right away.
-- The most recent transactions appear at the top of the `Transactions List`.
+
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
+The most recent transactions appear at the top of the `Transactions List` as the
+`Transactions List` is ordered by the time at which the user inputs the transaction, not the
+actual date and time associated with that particular transaction.
+</div>
 
 #### Transaction
 - The `Transactions List` contains individual `Transactions` that look like this:
 
-![img_1.png](images/unicash/TransactionCardAnnotated.png)
+<img src="images/unicash/TransactionCardAnnotated.png" width="450">
 
 - **Transaction ID/Index/Number:** All terms used synonymously to refer to the number shown on the left partition of the blue box. Based
 on the configuration of `Transactions List`, this number might change, and that is the intended effect, the use for which 
 will be explained in the applicable commands, including `delete`, `edit` and `get` commands.
 - **Transaction Name:** The name of the given transaction, shown on the right partition of the blue box.
-- **Transaction Date:** The date assigned to the transaction, shown inside the pink box.
+- **Transaction Date & Time:** The date & time assigned to the transaction, shown inside the pink box.
 - **Transaction Location:** The location assigned to the transaction, shown inside the red box.
 - **Transaction Categories:** The category/categories assigned to the transaction, shown inside the yellow box.
+This can be empty if the transaction has no categories assigned to it.
 - **Transaction Amount:** The expense or income assigned to the transaction, shown inside the black box.
-  - Expenses will be preceded with a `negative` sign and in red color, whereas incomes will not be preceded with any
-  sign and displayed in green color. 
-  - _This applies to the amount `0.00` as well, thus display color
-is based only on transaction type`._
+  - _Given that `0.00` is a valid amount, its display colour and magnitude sign will depend 
+  on the type of transaction only._
 
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
 
-Note: Certain properties above (such as name, location, categories and amount)
-are allowed values that exceed the UI's capacity to display them fully. For 
-example, a transaction name that is too long will be shortened by the application,
+Certain properties above (such as name, location, categories and amount)
+are allowed values that exceed the UI's capacity to display them fully. 
 
-![img_1.png](images/unicash/TransactionCardFull.png)
+<img src="images/unicash/TransactionCardFull.png" width="450">
 
-This effect is accounted for as we do not wish to limit the user to arbitrary
+<br> This effect is accounted for as we do not wish to limit the user to arbitrary
 lengths. Thus, the `get` command is available to retrieve the full, expanded details
 of these transactions and display them in the `Results Display` component.
+</div>
+
+
+
+
 
 #### Results Display
 
