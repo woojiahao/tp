@@ -287,7 +287,7 @@ Command: `add_transaction n/NAME type/TYPE amt/AMOUNT [dt/DATETIME] [l/LOCATION]
 For more information about the prefix constraints, refer to the [command breakdown's prefix types section](#prefix-types)
 </div>
 
-Take note in `add`, the following prefixes definition overrides the one in the [prefix types section](#prefix-types)
+Take note the following prefixes definition overrides the one in the [prefix types section](#prefix-types)
 
 | Prefix                                                                 | Constraints                                                                                                                                           | Remarks                                                                                                                                                      | Valid                                                                             | Invalid                                               |
 |------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|-------------------------------------------------------|
