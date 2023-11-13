@@ -17,58 +17,64 @@ title: Developer Guide
 
 ### Setting up
 
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
 If you are interested in testing out UniCa$h, you can refer to our [quick start](UserGuide.html#quick-start) in the user guide.
+</div>
 
-If you are interested in developing for UniCa$h, we recommend setting it up locally.
+If you are interested in developing for UniCa$h, you can find the setup steps below:
 
-First, ensure that the project is set up locally:
+Ensure that the project is set up locally:
 
 1. Create a fork of the GitHub repository
 2. Clone the fork of the repository
+ 
+    ```bash
+    git clone https://github.com/<your Github username>/tp.git
+    ```
 3. Change to the fork local directory
+ 
+    ```bash
+    cd tp/
+    ```
 4. Build the project
+
+    ```bash
+    ./gradlew build
+    ```
 5. Run the project
+
+    ```bash
+    ./gradlew run
+    ```
 
 Then, to contribute to the project, we recommend the following flow:
 
-1. Create a feature/fix/improvement local branch
-2. Make the changes necessary
-3. Create a Pull Request to the original repository
+1. Setup the original repository as the `upstream` remote
+
+    ```bash
+    git remote add upstream https://github.com/AY2324S1-CS2103-T16-3/tp.git
+    ```
+2. Create a feature/fix/improvement local branch
+
+    ```bash
+    git fetch upstream master
+    git merge upstream/master
+    git checkout -b <feat/fix/docs/etc.>/<branch name>
+    ```
+3. Make the necessary changes
+4. Create a Pull Request to the original repository
 
 ### Acknowledgements
 
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
-[//]: # (### 3.2. Setting up)
-
-[//]: # ()
-[//]: # ()
-[//]: # (### 3.3. Using this Developer Guide)
-
-[//]: # ()
-[//]: # ()
-[//]: # (### 3.4. Other useful guides)
-
-[//]: # ()
-[//]: # (Here is some other useful information.)
-
-[//]: # ()
-[//]: # (#### 3.4.1. User Guide)
-
-[//]: # ()
-[//]: # (#### 3.4.2. Documentation Guide)
-
-[//]: # ()
-[//]: # (#### 3.4.3. Testing & Logging Guide)
-
-[//]: # ()
-[//]: # (#### 3.4.4. Configuration & DevOps)
-
 ### Terminology
 
-| Term        | Meaning                                                                                           |
-|-------------|---------------------------------------------------------------------------------------------------|
-| Transaction | Represents both an expense or an income. Expenses cause a net loss while incomes cause a net gain |
+| Term        | Meaning                                                                                                             |
+|-------------|---------------------------------------------------------------------------------------------------------------------|
+| Transaction | Represents both an expense or an income. Expenses cause a net loss while incomes cause a net gain                   |
+| Expenditure | Total amount for transactions labelled as "expense"                                                                 |
+| Budget      | Observable metric on expenditure, tracking daily/weekly/monthly (only one) expense relative to preset budget amount |
 
 ---
 
@@ -83,13 +89,13 @@ Every user can...
 
 ### Development Milestones
 
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
 Features were developed over two sprints, each sprint lasting two weeks.
+</div>
 
 #### Milestone v1.2
 
-##### Track Finances
-
-[//]: # (TODO: Link to each DG/UG entry)
+**Track Finances**
 
 - Add transaction
 - Delete transaction
@@ -98,7 +104,7 @@ Features were developed over two sprints, each sprint lasting two weeks.
 - Find transaction(s)
 - Get total expenditure
  
-##### Categorize Finances
+**Categorize Finances**
 
 This feature serves as an extension to adding a transaction as categories provide finer details about a transaction.
 
@@ -108,7 +114,7 @@ Using the `edit_transaction` command, users can now:
 - Edit existing categories
 - Remove existing categories
 
-##### Others
+**Others**
 
 - Support file storage of transactions
 - Remove all dependencies to original AB3
@@ -123,6 +129,13 @@ Using the `edit_transaction` command, users can now:
 - Summary visualizations for expenses
 - UI improvements
 - Support file storage of budget
+
+#### Milestone v1.4
+
+The bulk of this milestone was improving the documentation, ensuring clarity for readers. Such changes include:
+
+- Adding detailed documentation about argument and prefix constraints
+- Provide documentation on logic, model, and storage components
 
 ## Requirements
 
@@ -139,10 +152,9 @@ Using the `edit_transaction` command, users can now:
 9. The application should not require an active Internet connection to function
 10. The application should be able to generate visualisations for 1000 expenses without any excessive sluggishness
 
-[//]: # (### Product Scope)
+### User Stories
 
-[//]: # ()
-[//]: # (### User Stories)
+The user stories for UniCa$h can be [found on GitHub.](https://github.com/orgs/AY2324S1-CS2103-T16-3/projects/1)
 
 ### Use Cases
 The following documents use cases for our application
@@ -271,24 +283,21 @@ the filtered transaction with a success message.
     - 3a1. UniCa$h displays a message informing the user that no results were found.
     - Use Case ends.
 
-**Use Case: UC07 - Tabulate Total Expenditure**
+**Use Case: UC07 - Get Total Expenditure**
 
 **MSS:**
-1. User enters the command to tabulate total expenditure.
+1. User enters the command to get the total expenditure.
 2. User submits the request.
-3. UniCa$h tabulates the expenditure based on the parameters passed in.
-4. UniCa$h displays the tabulated expenditure.
+3. UniCa$h parses the command, and it is in the right format.
+4. UniCa$h calculates the expenditure based on the parameters passed in.
+5. UniCa$h displays the calculated expenditure.
 
    Use Case ends.
 
 **Extensions**
-- 2a. User detects an issue with the command entered.
+- 3a. UniCa$h parses command, and detects that user entered the incorrect format (missing fields)
     - 2a1. UniCa$h displays an error message, requests for command to be re-entered.
-    - 2a2. User enters command again.
-
-  Steps 2a1-2a2 are repeated until the command entered is correct.
-
-  Use case resumes from Step 3.
+    - Use case resumes at step 1
 
 **Use Case: UC08 - Clear All Transactions**
 
@@ -353,24 +362,26 @@ the filtered transaction with a success message.
   - 2a1. UniCa$h displays an error message with the correct command format.
   - Use case resumes at step 1.
 
+
 **Use Case: UC12 - Set Budget**
 
 **MSS:**
-1. User enters the command to set the budget with the correct format (i.e. specifying the amount and interval).
+1. User enters the command to set the budget.
 2. User submits the request.
-3. UniCa$h sets the global budget.
-4. UniCa$h displays the new budget.
+3. UniCa$h parses the command, and it is in the right format.
+4. UniCa$h sets the global budget.
+5. UniCa$h displays the new budget.
 
    Use Case ends.
 
 **Extensions:**
 
-- 1a. User enters the incorrect format (missing fields)
-  - 1a1. UniCa$h displays an error message with the correct command format
+- 3a. UniCa$h parses command, and detects that user entered the incorrect format (missing fields)
+  - 3a1. UniCa$h displays an error message with the correct command format
   - Use case resumes at step 1.
-- 3a. UniCa$h contains existing budget.
-  - 3a1. UniCa$h replaces existing budget with new one.
-  - Use case resumes at step 4.
+- 4a. UniCa$h contains existing budget.
+  - 4a1. UniCa$h replaces existing budget with new one.
+  - Use case resumes at step 5.
 
 **Use Case: UC13 - Clear Budget**
 
@@ -387,6 +398,7 @@ the filtered transaction with a success message.
 - 3a. UniCa$h does not contain an existing budget.
     - 3a1. UniCa$h displays a prompt to create a budget first.
     - Use case ends.
+
 
 **Use Case: UC14 - Get Budget**
 
@@ -409,6 +421,10 @@ the filtered transaction with a success message.
 ## Design Overview
 
 ### Architecture
+
+<img src="images/ArchitectureDiagram.png">
+
+The architecture for UniCa$h leverages the existing architecture from AB3 and extends several components like supporting storage of transactions and the budget.
 
 ### UI Component
 
@@ -459,7 +475,51 @@ The `UI` component is also responsible for:
 
 ### Logic Component
 
+**API** : [`Logic.java`](https://github.com/AY2324S1-CS2103-T16-3/tp/blob/master/src/main/java/unicash/logic/Logic.java)
+
+Here's a (partial) class diagram of the `Logic` component:
+
+<img src="images/unicash/LogicClassDiagram.png" width="500">
+
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+
+![Interactions Inside the Logic Component for the `delete 1` Command](images/unicash/DeleteTransactionSequenceDiagram.png)
+
+<div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
+**Note:** The lifeline for `DeleteTransactionCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+How the `Logic` component works:
+
+1. When `Logic` is called upon to execute a command, it is passed to an `UniCashParser` object which in turn creates a parser that matches the command if necessary (e.g., `AddTransactionCommandParser`) and uses it to parse the command.
+   1. Note that not all commands would create an additional parser such as `GetBudgetCommand`, `ClearBudgetCommand`, etc.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddTransactionCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
+
+<img src="images/unicash/ParserClasses.png" width="600"/>
+
+How the parsing works:
+* When called upon to parse a user command, the `UniCashParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddTransactionCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddTransactionCommand`) which the `UniCashParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddTransactionCommandParser`, `DeleteTransactionCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* Note that there is a dependency drawn between `UniCashParser` and `XYZCommand` as not all commands require the use of a specialised parser class.
+
 ### Model Component
+
+**API** : [`Model.java`](https://github.com/AY2324S1-CS2103-T16-3/tp/blob/master/src/main/java/unicash/model/Model.java)
+
+<img src="images/unicash/ModelClassDiagram.png" width="500">
+
+The `Model` component,
+
+* stores UniCa$h data i.e., all `Transaction` objects (which are contained in a `TransactionList` object), the `Budget` object and `Category` objects (which are contained in a `UniqueCategoryList` object).
+* stores the currently 'selected' `Transaction` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Transaction>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+  * Refer [here](https://docs.oracle.com/javafx/2/binding/jfxpub-binding.htm) for a guide on Javafx bindings.
+* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+
 
 ### Storage Component
 
@@ -504,7 +564,7 @@ Continuous integration consists of the following:
 <br><br>
 Github Actions is used to execute a set of behavior on a repository and is often used for Continuous Integration and Continuous Deployment.
 <br><br>
-Github Actions are created as YAML configuration files found in the `.github/workflows` folder.
+Github Actions are created as [YAML configuration files](https://yaml.org/) found in the `.github/workflows` folder.
 <br><br>
 GitHub Actions can be generally broken down into the following components:
 <br>
@@ -645,7 +705,7 @@ UI tests are only run on Windows as both Linux and MacOS requires headless UI te
 
 #### Code coverage reporting
 
-Code coverage is generated using Github Actions and Gradle and uploaded to [Codecov.](https://app.codecov.io/gh/AY2324S1-CS2103-T16-3)
+Code coverage is generated using Github Actions and Gradle and uploaded to [Codecov.](https://app.codecov.io/gh/AY2324S1-CS2103-T16-3/tp)
 
 Code coverage includes both general unit tests and UI tests, and reporting is achieved through the `.github/workflows/gradle.yml` action.
 
@@ -657,14 +717,14 @@ To ensure that code coverage reporting includes both general unit tests and UI t
 
 1. A new Gradle task `uiTest` was created to only run UI tests that are unit test files that end with `UiTest`
 2. The default `test` task is configured to exclude such files
-3. The `jacocoTestReport` task is modified to only depend on (i.e. run before) the `uiTest` task is the system's OS is not MacOS, Ubuntu or *nux (i.e. Windows only)
+3. The `jacocoTestReport` task is modified to only depend on (i.e. run before) the `uiTest` task if the system's OS is not MacOS, Ubuntu or *nux (i.e. Windows only)
 4. The `coverage` task includes every `*.exec` file generated from both `uiTest` and `test` so that both coverage reports are available to Codecov
 
 The Github Action for reporting the code coverage only uploads the coverage reports to Codecov if the runner is Windows as only then will there be a complete code coverage report.
 
 These changes work around the limitation of Linux and MacOS runners on Github Actions not supporting a headless environment.
 
-By introducing UI testing into the code coverage reporting, we have been able to achieve a code coverage of > 85%!
+By introducing UI testing into the code coverage reporting, we have been able to achieve a code coverage of > 90%!
 
 ### General Classes and Components
 
@@ -701,10 +761,10 @@ private static final MESSAGE_USAGE = new CommandUsage.Builder()
 
 UniCa$h comprises four key components:
 
-1. Transaction Management
-2. Budget Management
-3. General Utility
-4. User Interface
+1. [Transaction Management](#transaction-management)
+2. [Budget Management](#budget-management)
+3. [General Utility](#general-utility)
+4. [User Interface](#user-interface)
 
 ### Transaction Management
 
@@ -737,6 +797,10 @@ The following are some noteworthy points regarding the attributes
 6. `UniqueCategoryList` enforces a max size of 5 `Category`
 7. There is a character limit for `Category` set at up to 15 characters/
 8. There is a limit of 100,000 transactions you can add to UniCa$h.
+
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
+For more details on the constraints of each property of `Transaction`, refer to the [prefix types section in the user guide.](UserGuide.html#prefix-types)
+</div>
 
 #### Add Transaction
 
@@ -774,33 +838,47 @@ a specified value of 5 in the `UniqueCategoryList` class. Else, a `ParserExcepti
 
 ##### Overview
 
-The `get_total_expenditure` command returns the total expenditure across a given month among all `expense` transactions in UniCa$h, with an optional filter for a given category.
+The `get_total_expenditure` command returns the total expenditure across a given month among all `expense` transactions in UniCa$h, with optional filters for a given category and year.
+
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
+The optional year value defaults to the current year if not provided.
+</div>
 
 The activity diagram of getting the total expenditure is as shown below
 
-<img src="images/unicash/GetTotalExpenditureActivityDiagram.png" width="1026" />
+<img src="images/unicash/get-total-expenditure/GetTotalExpenditureActivityDiagram.png" width="1026" />
 
 The following sequence diagram shows how the different components of UniCash interact with each other
 
-<img src="images/unicash/GetTotalExpenditureSequenceDiagram.png" width="1955" />
+<img src="images/unicash/get-total-expenditure/GetTotalExpenditureSequenceDiagram.png" width="1955" />
 
 The above sequence diagram omits details on the creation of the arguments of a `GetTotalExpenditureCommand` such as
 `Category` as it would make the diagram cluttered and difficult to read without adding additional value. It also omits
 the specific `predicate` behavior of provided to perform the filtering.
 
-ℹ️ **Note:** The lifeline for `GetTotalExpenditureCommandParser` should end at the destroy marker (X) but due to a
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
+The lifeline for `GetTotalExpenditureCommandParser` should end at the destroy marker (X) but due to a
 limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 ##### Details
 
 1. The user specifies the month to retrieve the total expenditure and the optional category
 2. The input will be parsed by `GetTotalExpenditureCommandParser`, and if it is invalid, `ParserException` is thrown,
-   prompting for the user to enter again.
-3. If the input is valid, a `GetTotalExpenditureCommand` object is created to be executed by the `LogicManager`.
-4. The `LogicManager` will then invoke the `execute` method of the command, filtering the existing transaction list to only include `expense` type transactions that fall in the given month and category (if any).
-5. The `GetTotalExpenditureCommand` also calculates the total expenditure from this filtered list of transactions.
+   prompting for the user to enter again
+3. If the input is valid, a `GetTotalExpenditureCommand` object is created to be executed by the `LogicManager`, since no year is provided, the current year is inferred
+4. The `LogicManager` will then invoke the `execute` method of the command, filtering the existing transaction list to only include `expense` type transactions that fall in the given month and category (if any)
+5. The `GetTotalExpenditureCommand` also calculates the total expenditure from this filtered list of transactions
 
-Note that the month to search is one-indexed, so it ranges from `[1, 12]`. The category is a single filter that is matched in a case-sensitive manner.
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
+**Key constraints:**
+<br><br>
+The month to search is one-indexed, so it ranges from `[1, 12]`
+<br>
+The year has to be `>= 1920`
+<br>
+The category is a single filter that is matched in a case-insensitive manner
+</div>
 
 #### Delete Transaction
 
@@ -870,16 +948,16 @@ out in the **Add Transaction** section above also remain.
 
 ### Budget Management
 
+<div class="callout callout-important" markdown="span">
+For this team project, we have opted to simplify the budgeting feature by limiting the user to a single budget at a time that can be configured for different intervals and amounts.
+</div>
+
 #### Budget Model
 
 <img src="images/unicash/BudgetClassDiagram.png" width="250" />
 
 <div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
 The budget is stored in `data/unicash.json`, much like the transactions. Refer to the [storage component](#storage-component) for more details.
-</div>
-
-<div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
-For this team project, we have opted to simplify the budgeting feature by limiting the user to a single budget at a time that can be configured for different intervals and amounts.
 </div>
 
 UniCa$h tracks a user's budget with the use of `Budget`.
@@ -892,6 +970,22 @@ The `Budget` class is composed of the following fields
 
 The following are some noteworthy points regarding the attributes
 1. `Amount` here follows the same constraints as the one mentioned in the `Transaction`'s `Amount` class.
+
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
+For more details on the constraints of each property of `Budget`, refer to the [prefix types section in the user guide.](UserGuide.html#prefix-types)
+</div>
+
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
+The [prefix types section in the user guide](UserGuide.html#prefix-types) contains a brief about how intervals are handled.
+<br><br>
+Expenses that fall within the interval are included and the total expense is computed relative to the budget.
+<br>
+1. Daily: expenses that occur within the same **day of year** (i.e. the expenses that occur on day `x` are included if today is day `x`, expenses on day `x +/- 1` are not includued)
+<br>
+2. Weekly: expenses that occur within the same **week of year**. This is dependent on the current year, for more information refer to the [documentation here.](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/time/temporal/WeekFields.html#weekOfYear())
+<br>
+3. Monthly: expenses that occur within the same **month** (i.e. the expenses that occur in September are included if today falls under September)
+</div>
 
 #### Set Budget
 
@@ -913,7 +1007,7 @@ The above sequence diagram omits details on the creation of the arguments of a `
 It also omits the file saving aspect of this, where the updated budget is saved to the `data/unicash.json` file.
 
 <div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
-The lifeline for `GetTotalExpenditureCommandParser` should end at the destroy marker (X) but due to a
+The lifeline for `SetBudgetCommandParser` should end at the destroy marker (X) but due to a
 limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
@@ -929,17 +1023,17 @@ limitation of PlantUML, the lifeline reaches the end of diagram.
 
 **Overview**
 
-The `clear_budget` command removes the globally set UniCa$h budget.
+The `clear_budget` command removes the globally set UniCa$h budget. If no budget is present, the user is prompted to set one using `set_budget` instead.
 
 <div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
-`clear_budget` will not parse any additional argument or parameters.
+`clear_budget` will not parse any additional argument or parameters. Even if additional argument or parameters are given, any existing budget will be cleared regardless, without any additional effects.
 </div>
 
 The following sequence diagram shows how the different components of UniCash interact with each other
 
-<img src="images/unicash/budget-management/ClearBudgetSequenceDiagram.png" width="700" />
+<img src="images/unicash/budget-management/ClearBudgetSequenceDiagram.png" width="1171" />
 
-It also omits the file saving aspect of this, where `data/unicash.json` is updated to now hold a `null` budget.
+This sequence diagram omits the file saving aspect of the command, where `data/unicash.json` is updated to now hold a `null` budget value.
 
 **Details**
 
@@ -952,7 +1046,7 @@ It also omits the file saving aspect of this, where `data/unicash.json` is updat
 
 **Overview**
 
-The `get_budget` command computes the total expenditure relative to the existing budget within the given interval.
+The `get_budget` command computes the total expenditure relative to the existing budget within the given interval. If no budget is present, the user is prompted to set one using `set_budget` instead.
 
 Intervals work by filtering by the specified time period:
 - For `day` intervals, only transactions of the same day are found
@@ -960,12 +1054,12 @@ Intervals work by filtering by the specified time period:
 - For `month` intervals, only transactions of the same month are found
 
 <div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
-`get_budget` will not parse any additional argument or parameters.
+`get_budget` will not parse any additional argument or parameters. Even if additional argument or parameters are given, no additional effects will be triggered.
 </div>
 
 The following sequence diagram shows how the different components of UniCash interact with each other
 
-<img src="images/unicash/budget-management/GetBudgetSequenceDiagram.png" width="700" />
+<img src="images/unicash/budget-management/GetBudgetSequenceDiagram.png" width="1163" />
 
 The above sequence diagram omits details such as internal method calls to `GetBudgetCommand#getIntervalFilter` and `GetBudgetCommand#getIntervalString` to reduce clutter.
 
@@ -1111,30 +1205,62 @@ This command will exit UniCa$h.
 
 ---
 
-[//]: # (## 8. Individual Contributions and Efforts)
+### Appendix: Planned Enhancements
 
-[//]: # ()
-[//]: # (Here's what each of us have contributed. &#40;Might not need this section&#41;)
+- The current `get_budget` command does not alter the transaction list when processing the expenses within the interval. This can lead to confusion as users may not be aware of the specific transactions that are being included in the calculation of the budget remainder, and as a result, mistaking the budget calculation as not working. 
+ 
+    We plan to apply a filter to the transaction list, like in `get_total_expenditure`, when `get_budget` is run to accurately display the list of transactions that we have included for the calculation to reduce this potential user confusion.
+- The current `get_budget`'s weekly interval calculation uses the week of year. However, given that this information is not immediately intuitive to users, users may not be aware of how weekly budgets are calculated, leading to confusion.
 
-[//]: # (---)
+  We plan to modify `get_budget`'s weekly interval calculation to use the previous `6` days + today to make the command more intuitive for users.
+- `find` to support all properties
+- Add confirmation to some data deletion commands (`delete`, `clear_transactions`, `reset_unicash`)
+- Expand summary window to incomes as well
+- Batch deletion/clear (by day, by month, etc)
 
-## Appendix
-
-### Proposed Changes
-
-To be added
-
-### Known JavaFX Bugs
-
-- Light scrollbars hard to see
-
-### Potential Features
+### Appendix: Potential Features
 
 Every user can...
 
 - Divide a group spending and tag friends involved in the spending
 - View a price list comparison of all available shops near NUS
 - Set recurring transactions
+- Support more than one global budget to allow users to set budgets for each category or different budgets for day/week/month
+- Support more types of transaction such as `transfer`
+
+### Appendix: Effort
+
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
+UniCa$h is based off of AB3's original architecture, leveraging the existing command handling framework and UI classes.
+</div>
+
+#### Migrating AB3 to UniCa$h
+
+While we leverage the existing AB3 architecture, UniCa$h introduces two custom models: `Transaction` and `Budget`, both of which includes its own custom set of properties like `Name`, `Amount`, and `Interval`. These custom properties include new constraints that had to be thoroughly tested.
+
+Although we were able to loosely reference the existing code from AB3 to build these custom models, the surrounding architecture such as `ModelManager`, `UniCash`, and `UniCashStorage` had to be altered to work with the new domain that UniCa$h introduces.
+
+We had to alter `ModelManager` and `UniCash` to contain the relevant `Transaction` and `Budget` information. This involved adding additional methods to handle transaction and budget management. `UniCashStorage` was created to support persisting the transaction and budget data to a file. For this, we had to create `JsonAdaptedX` versions of the models like `Transaction`, `Budget`, and `Category` to ensure that the user's data would be safely written to and reliably read from the storage file (taking inspiration from AB3's `JsonAdaaptedPerson`).
+
+Additionally, removing all dependencies to the old AB3 architecture such as the `Person` model or `JsonAdaptedPerson` was a big challenge as we had to ensure that doing so did not cause any regression to the new models and classes. However, it was also a good exercise in revealing unintended dependencies between UniCa$h and the old AB3 models and classes.
+
+#### Improving the UI
+
+[//]: # (TODO: Rubesh)
+
+#### Providing Summary Statistics
+
+[//]: # (TODO: Ernest)
+
+#### Increasing Test Coverage
+
+The original AB3 project had a severe lack of coverage of the UI components and this resulted in bugs that may be difficult to replicate and that could be easily missed when performing manual testing. By implementing [TestFX](https://github.com/TestFX/TestFX/blob/master/README.md) and modifying both Gradle and GitHub Actions, we were able to support UI testing. This raised our test coverage to over 90%! 
+
+TestFX has allowed us to create test suites for both individual UI components and integration tests that reduce the need to perform lengthy manual testing to ensure key UI behavior, providing a peace of mind that critical UI features were working as intended.
+
+### Appendix: Known Bugs
+
+- Light scrollbars hard to see
 
 ### Links
 

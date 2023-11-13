@@ -222,9 +222,6 @@ public enum CommandType {
                             ExampleGenerator.generate(
                                     getCommandWords(),
                                     PREFIX_NAME,
-                                    PREFIX_TYPE,
-                                    PREFIX_AMOUNT,
-                                    PREFIX_DATETIME,
                                     PREFIX_LOCATION,
                                     PREFIX_CATEGORY
                             )
@@ -235,7 +232,7 @@ public enum CommandType {
 
         @Override
         public String getMessageSuccess() {
-            return "Found %1$d transactions:\n\n%2$s";
+            return "%1$d transactions listed!";
         }
     },
     GET("get", "g") {
@@ -274,7 +271,7 @@ public enum CommandType {
 
         @Override
         public String getMessageSuccess() {
-            return "Your total expenditure in %1$s %2$d was %3$.2f";
+            return "Your total expenditure in %1$s %2$d was $%3$.2f";
         }
     },
     HELP("help", "h") {
@@ -401,7 +398,7 @@ public enum CommandType {
     }
 
     public String getMessageFailure() {
-        return "Command not recognised. Try using the command " + getMainCommandWord()
+        return "Command not recognised. Try using the command " + getCommandWords()
                 + " without any parameters instead.";
     }
 
