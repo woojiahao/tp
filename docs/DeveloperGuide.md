@@ -61,7 +61,7 @@ Then, to contribute to the project, we recommend the following flow:
     git merge upstream/master
     git checkout -b <feat/fix/docs/etc.>/<branch name>
     ```
-3. Make the changes necessary
+3. Make the necessary changes
 4. Create a Pull Request to the original repository
 
 ### Acknowledgements
@@ -1108,34 +1108,58 @@ This command will exit UniCa$h.
 
 ---
 
-## Appendix
-
-### Planned Enhancements
+### Appendix: Planned Enhancements
 
 - `get_budget` to apply a filter to transaction list, like `get_total_expenditure`, to remove any confusion about which transactions are counted in the budget
 - `get_budget`'s weekly interval calculation to use the previous `6` days + today for computation instead of week of year as the latter is not immediately intuitive
-- `set_budget` to support more than one global budget to allow users to set budgets for each category or different budgets for day/week/month
 - `find` to support all properties
 - Add confirmation to some data deletion commands (`delete`, `clear_transactions`, `reset_unicash`)
-- Expand support for multiple transaction types such as `transfer`
 - Expand summary window to incomes as well
 - Batch deletion/clear (by day, by month, etc)
 
-### Potential Features
+### Appendix: Potential Features
 
 Every user can...
 
 - Divide a group spending and tag friends involved in the spending
 - View a price list comparison of all available shops near NUS
 - Set recurring transactions
+- Support more than one global budget to allow users to set budgets for each category or different budgets for day/week/month
+- Support more types of transaction such as `transfer`
 
-### Known JavaFX Bugs
+### Appendix: Effort
+
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
+UniCa$h is based off of AB3's original architecture, leveraging the existing command handling framework and UI classes.
+</div>
+
+#### Migrating AB3 to UniCa$h
+
+While we leverage the existing AB3 architecture, UniCa$h introduces two custom models: `Transaction` and `Budget`, both of which includes its own custom set of properties like `Name`, `Amount`, and `Interval`. These custom properties include new constraints that had to be thoroughly tested.
+
+Although we were able to loosely reference the existing code from AB3 to build these custom models, the surrounding architecture such as `ModelManager`, `UniCash`, and `UniCashStorage` had to be altered to work with the new domain that UniCa$h introduces.
+
+We had to alter `ModelManager` and `UniCash` to contain the relevant `Transaction` and `Budget` information. This involved adding additional methods to handle transaction and budget management. `UniCashStorage` was created to support persisting the transaction and budget data to a file. For this, we had to create `JsonAdaptedX` versions of the models like `Transaction`, `Budget`, and `Category` to ensure that the user's data would be safely written to and reliably read from the storage file (taking inspiration from AB3's `JsonAdaaptedPerson`).
+
+Additionally, removing all dependencies to the old AB3 architecture such as the `Person` model or `JsonAdaptedPerson` was a big challenge as we had to ensure that doing so did not cause any regression to the new models and classes. However, it was also a good exercise in revealing unintended dependencies between UniCa$h and the old AB3 models and classes.
+
+#### Improving the UI
+
+[//]: # (TODO: Rubesh)
+
+#### Providing Summary Statistics
+
+[//]: # (TODO: Ernest)
+
+#### Increasing Test Coverage
+
+The original AB3 project had a severe lack of coverage of the UI components and this resulted in bugs that may be difficult to replicate and that could be easily missed when performing manual testing. By implementing [TestFX](https://github.com/TestFX/TestFX/blob/master/README.md) and modifying both Gradle and GitHub Actions, we were able to support UI testing. This raised our test coverage to over 90%! 
+
+TestFX has allowed us to create test suites for both individual UI components and integration tests that reduce the need to perform lengthy manual testing to ensure key UI behavior, providing a peace of mind that critical UI features were working as intended.
+
+### Appendix: Known Bugs
 
 - Light scrollbars hard to see
-
-### Individual Contributions and Efforts
-
-- [Jia Hao](team/woojiahao.html): get total expenditure, budget management logic (budget models were created by Lip Wei and Jamie), continuous integration, PR reviews
 
 ### Links
 
