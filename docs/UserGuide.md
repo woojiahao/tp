@@ -39,7 +39,7 @@ Please read through sections [Installation](#installation) and [Command Breakdow
 5. Type a command in the command box and press `Enter` to execute it. e.g. typing `help` and pressing `Enter` will
    execute the `help` command and open the help window.
 
-   To get started with UniCa$h, you can run the (`add_transactions` command)[#add-transaction]!
+   To get started with UniCa$h, you can run the [`add_transactions` command](#add-transaction)!
 
 6. Refer to the [Features](#features) below for details of each command.
 
