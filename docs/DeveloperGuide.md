@@ -27,15 +27,42 @@ Ensure that the project is set up locally:
 
 1. Create a fork of the GitHub repository
 2. Clone the fork of the repository
+ 
+    ```bash
+    git clone https://github.com/<your Github username>/tp.git
+    ```
 3. Change to the fork local directory
+ 
+    ```bash
+    cd tp/
+    ```
 4. Build the project
+
+    ```bash
+    ./gradlew build
+    ```
 5. Run the project
+
+    ```bash
+    ./gradlew run
+    ```
 
 Then, to contribute to the project, we recommend the following flow:
 
-1. Create a feature/fix/improvement local branch
-2. Make the changes necessary
-3. Create a Pull Request to the original repository
+1. Setup the original repository as the `upstream` remote
+
+    ```bash
+    git remote add upstream https://github.com/AY2324S1-CS2103-T16-3/tp.git
+    ```
+2. Create a feature/fix/improvement local branch
+
+    ```bash
+    git fetch upstream master
+    git merge upstream/master
+    git checkout -b <feat/fix/docs/etc.>/<branch name>
+    ```
+3. Make the changes necessary
+4. Create a Pull Request to the original repository
 
 ### Acknowledgements
 
@@ -238,14 +265,14 @@ the filtered transaction with a success message.
 **MSS:**
 1. User enters the command to get the total expenditure.
 2. User submits the request.
-3. UniCa$h parses the command and it is in the right format.
-4. UniCa$h tabulates the expenditure based on the parameters passed in.
-5. UniCa$h displays the tabulated expenditure.
+3. UniCa$h parses the command, and it is in the right format.
+4. UniCa$h calculates the expenditure based on the parameters passed in.
+5. UniCa$h displays the calculated expenditure.
 
    Use Case ends.
 
 **Extensions**
-- 3a. User enters the incorrect format (missing fields)
+- 3a. UniCa$h parses command, and detects that user entered the incorrect format (missing fields)
     - 2a1. UniCa$h displays an error message, requests for command to be re-entered.
     - Use case resumes at step 1
 
@@ -301,7 +328,7 @@ the filtered transaction with a success message.
 **MSS:**
 1. User enters the command to set the budget.
 2. User submits the request.
-3. UniCa$h parses the command and it is in the right format.
+3. UniCa$h parses the command, and it is in the right format.
 4. UniCa$h sets the global budget.
 5. UniCa$h displays the new budget.
 
@@ -309,7 +336,7 @@ the filtered transaction with a success message.
 
 **Extensions:**
 
-- 3a. User enters the incorrect format (missing fields)
+- 3a. UniCa$h parses command, and detects that user entered the incorrect format (missing fields)
   - 3a1. UniCa$h displays an error message with the correct command format
   - Use case resumes at step 1.
 - 4a. UniCa$h contains existing budget.
@@ -496,7 +523,7 @@ Continuous integration consists of the following:
 <br><br>
 Github Actions is used to execute a set of behavior on a repository and is often used for Continuous Integration and Continuous Deployment.
 <br><br>
-Github Actions are created as YAML configuration files found in the `.github/workflows` folder.
+Github Actions are created as [YAML configuration files](https://yaml.org/) found in the `.github/workflows` folder.
 <br><br>
 GitHub Actions can be generally broken down into the following components:
 <br>
@@ -637,7 +664,7 @@ UI tests are only run on Windows as both Linux and MacOS requires headless UI te
 
 #### Code coverage reporting
 
-Code coverage is generated using Github Actions and Gradle and uploaded to [Codecov.](https://app.codecov.io/gh/AY2324S1-CS2103-T16-3)
+Code coverage is generated using Github Actions and Gradle and uploaded to [Codecov.](https://app.codecov.io/gh/AY2324S1-CS2103-T16-3/tp)
 
 Code coverage includes both general unit tests and UI tests, and reporting is achieved through the `.github/workflows/gradle.yml` action.
 
@@ -649,14 +676,14 @@ To ensure that code coverage reporting includes both general unit tests and UI t
 
 1. A new Gradle task `uiTest` was created to only run UI tests that are unit test files that end with `UiTest`
 2. The default `test` task is configured to exclude such files
-3. The `jacocoTestReport` task is modified to only depend on (i.e. run before) the `uiTest` task is the system's OS is not MacOS, Ubuntu or *nux (i.e. Windows only)
+3. The `jacocoTestReport` task is modified to only depend on (i.e. run before) the `uiTest` task if the system's OS is not MacOS, Ubuntu or *nux (i.e. Windows only)
 4. The `coverage` task includes every `*.exec` file generated from both `uiTest` and `test` so that both coverage reports are available to Codecov
 
 The Github Action for reporting the code coverage only uploads the coverage reports to Codecov if the runner is Windows as only then will there be a complete code coverage report.
 
 These changes work around the limitation of Linux and MacOS runners on Github Actions not supporting a headless environment.
 
-By introducing UI testing into the code coverage reporting, we have been able to achieve a code coverage of > 85%!
+By introducing UI testing into the code coverage reporting, we have been able to achieve a code coverage of > 90%!
 
 ### General Classes and Components
 
@@ -809,7 +836,7 @@ The month to search is one-indexed, so it ranges from `[1, 12]`
 <br>
 The year has to be `>= 1920`
 <br>
-The category is a single filter that is matched in a case-sensitive manner
+The category is a single filter that is matched in a case-insensitive manner
 </div>
 
 #### Delete Transaction
@@ -903,8 +930,20 @@ The `Budget` class is composed of the following fields
 The following are some noteworthy points regarding the attributes
 1. `Amount` here follows the same constraints as the one mentioned in the `Transaction`'s `Amount` class.
 
-<div class="callout callout-info" markdown="span">
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
 For more details on the constraints of each property of `Budget`, refer to the [prefix types section in the user guide.](UserGuide.html#prefix-types)
+</div>
+
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
+The [prefix types section in the user guide](UserGuide.html#prefix-types) contains a brief about how intervals are handled.
+<br><br>
+Expenses that fall within the interval are included and the total expense is computed relative to the budget.
+<br>
+1. Daily: expenses that occur within the same **day of year** (i.e. the expenses that occur on day `x` are included if today is day `x`, expenses on day `x +/- 1` are not includued)
+<br>
+2. Weekly: expenses that occur within the same **week of year**. This is dependent on the current year, for more information refer to the [documentation here.](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/time/temporal/WeekFields.html#weekOfYear())
+<br>
+3. Monthly: expenses that occur within the same **month** (i.e. the expenses that occur in September are included if today falls under September)
 </div>
 
 #### Set Budget
@@ -927,7 +966,7 @@ The above sequence diagram omits details on the creation of the arguments of a `
 It also omits the file saving aspect of this, where the updated budget is saved to the `data/unicash.json` file.
 
 <div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
-The lifeline for `GetTotalExpenditureCommandParser` should end at the destroy marker (X) but due to a
+The lifeline for `SetBudgetCommandParser` should end at the destroy marker (X) but due to a
 limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
@@ -943,17 +982,17 @@ limitation of PlantUML, the lifeline reaches the end of diagram.
 
 **Overview**
 
-The `clear_budget` command removes the globally set UniCa$h budget.
+The `clear_budget` command removes the globally set UniCa$h budget. If no budget is present, the user is prompted to set one using `set_budget` instead.
 
 <div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
-`clear_budget` will not parse any additional argument or parameters.
+`clear_budget` will not parse any additional argument or parameters. Even if additional argument or parameters are given, any existing budget will be cleared regardless, without any additional effects.
 </div>
 
 The following sequence diagram shows how the different components of UniCash interact with each other
 
-<img src="images/unicash/budget-management/ClearBudgetSequenceDiagram.png" width="700" />
+<img src="images/unicash/budget-management/ClearBudgetSequenceDiagram.png" width="1171" />
 
-It also omits the file saving aspect of this, where `data/unicash.json` is updated to now hold a `null` budget.
+This sequence diagram omits the file saving aspect of the command, where `data/unicash.json` is updated to now hold a `null` budget value.
 
 **Details**
 
@@ -966,7 +1005,7 @@ It also omits the file saving aspect of this, where `data/unicash.json` is updat
 
 **Overview**
 
-The `get_budget` command computes the total expenditure relative to the existing budget within the given interval.
+The `get_budget` command computes the total expenditure relative to the existing budget within the given interval. If no budget is present, the user is prompted to set one using `set_budget` instead.
 
 Intervals work by filtering by the specified time period:
 - For `day` intervals, only transactions of the same day are found
@@ -974,12 +1013,12 @@ Intervals work by filtering by the specified time period:
 - For `month` intervals, only transactions of the same month are found
 
 <div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
-`get_budget` will not parse any additional argument or parameters.
+`get_budget` will not parse any additional argument or parameters. Even if additional argument or parameters are given, no additional effects will be triggered.
 </div>
 
 The following sequence diagram shows how the different components of UniCash interact with each other
 
-<img src="images/unicash/budget-management/GetBudgetSequenceDiagram.png" width="700" />
+<img src="images/unicash/budget-management/GetBudgetSequenceDiagram.png" width="1163" />
 
 The above sequence diagram omits details such as internal method calls to `GetBudgetCommand#getIntervalFilter` and `GetBudgetCommand#getIntervalString` to reduce clutter.
 
