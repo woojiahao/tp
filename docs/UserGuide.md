@@ -1487,19 +1487,23 @@ Command Words Accepted: `exit`, `quit`, `bye` (case-insensitive)
 
 ### Summary
 
-| Action                      | Format, Examples                                                                                      |
-|-----------------------------|-------------------------------------------------------------------------------------------------------|
-| **Add Transaction**         | `add_transaction n/Name type/Type amt/Amount [dt/Datetime] [l/Location] [c/Category]...`              |
-| **Delete Transaction**      | `delete_transaction INDEX`                                                                            |                                                                                                                                                                                                                       |
-| **Delete All Transactions** | `clear_transactions`                                                                                  |
-| **Edit Transaction**        | `edit_transaction INDEX [n/Name] [type/Type] [amt/Amount] [dt/Datetime] [l/Location] [c/Category]...` |
-| **List All Transactions**   | `list`                                                                                                |
-| **Find Transaction(s)**     | `find [n/Name] [c/Category] [l/Location]`                                                             |
-| **Get Total Expenditure**   | `get_total_expenditure month/Month [c/Category] [year/Year]`                                          |
-| **Summary Statistics**      | `summary`                                                                                             |
-| **Set Budget**              | `set_budget amt/Amount interval/Interval`                                                             |
-| **Clear Budget**            | `clear_budget`                                                                                        |
-| **Get Budget**              | `get_budget`                                                                                          |
+| Action                                | Command                                                                                               |
+|---------------------------------------|-------------------------------------------------------------------------------------------------------|
+| **Add Transaction**                   | `add_transaction n/Name type/Type amt/Amount [dt/Datetime] [l/Location] [c/Category]...`              |
+| **Delete Transaction**                | `delete_transaction INDEX`                                                                            |                                                                                                                                                                                                                       |
+| **Delete All Transactions**           | `clear_transactions`                                                                                  |
+| **Edit Transaction**                  | `edit_transaction INDEX [n/Name] [type/Type] [amt/Amount] [dt/Datetime] [l/Location] [c/Category]...` |
+| **List All Transactions**             | `list`                                                                                                |
+| **Find Transaction(s)**               | `find [n/Name] [c/Category] [l/Location]`                                                             |
+| **Get Total Expenditure**             | `get_total_expenditure month/Month [c/Category] [year/Year]`                                          |
+| **Summary Statistics**                | `summary`                                                                                             |
+| **Set Budget**                        | `set_budget amt/Amount interval/Interval`                                                             |
+| **Clear Budget**                      | `clear_budget`                                                                                        |
+| **Get Budget**                        | `get_budget`                                                                                          |
+| **Reset UniCa$h to default**          | `reset_unicash`                                                                                       |
+| **Show Help Window**                  | `help`                                                                                                |
+| **Show Welcome Message with Summary** | `help`                                                                                                |
+| **Show Command Specific Help**        | `help [COMMAND_WORD]`                                                                                 |
 
 [//]: # (## Troubleshoot)
 
