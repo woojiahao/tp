@@ -625,29 +625,12 @@ can change based on the current `Transactions List` configuration.
 > Categories: #social
 > ```
 
-**Example 2**
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
+The `delete` command can be triggered even if a transaction is out of the visible window
+as long as that particular transactions exists in the current `Transactions List`
+configuration.
+</div>
 
-> **Case**: Delete a transaction with the currently not visible but correctly specified
-> `INDEX`. The transaction is present in the current `Transactions List` configuration
-> but the user has scrolled further away. 
->
-> **Input**: `delete_transaction 1`
->
-> **Output**:
-> ```
-> Deleted Transaction:
-> 
-> Name: Lunch at McDonalds;
-> Type: expense;
-> Amount: $17.40;
-> Date: 15 Sep 2023 11:00;
-> Location: Clementi Mall;
-> Categories: #food
-> ```
-> Input:
-> <img src="images/unicash/command-outputs/deleteTransaction/deleteTransactionInitialState2.png" width="1000" />
-> Ouput:
-> <img src="images/unicash/command-outputs/deleteTransaction/deleteTransactionSuccess2FinalState.png" width="1000" />
 
 ##### Failed Execution
 
@@ -738,7 +721,7 @@ of the transaction to be deleted, as shown in the currently displayed `Transacti
 
 | Arguments | Optional? | Purpose                                              |
 |-----------|-----------|------------------------------------------------------|
-| `<INDEX>` | No        | Transaction index of the transaction to be retrieved |
+| `INDEX`   | No        | Transaction index of the transaction to be retrieved |
 
 
 <div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
@@ -768,29 +751,11 @@ can change based on the current `Transactions List` configuration.
 > Categories: #transport
 > ```
 
-**Example 2**
-
-> **Case**: Retrieve a transaction with the currently not visible but correctly specified
-> `INDEX`. The transaction is present in the current `Transactions List` configuration 
-> but the user has scrolled further away.
-> 
-> **Input**: `get 1`
->
-> **Output**:
-> ```
-> Transaction 1 retrieved:
->
-> Name: Buy clothes;
-> Type: expense;
-> Amount: $109.00;
-> Date: 17 Sep 2023 18:30;
-> Location: Uniqlo Bugis;
-> Categories: #shopping
-> ```
-> Input:
-> <img src="images/unicash/command-outputs/getTransaction/GetInitial3.png" width="1000" />
-> Ouput:
-> <img src="images/unicash/command-outputs/getTransaction/GetSuccess.png" width="1000" />
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
+The `get` command can be triggered even if a transaction is out of the visible window
+as long as that particular transactions exists in the current `Transactions List`
+configuration.
+</div>
 
 ##### Failed Execution
 
@@ -870,9 +835,14 @@ Finds a `Transaction` in UniCa$h.
 
 Command: `find [n/NAME] [l/LOCATION] [c/CATEGORY]`
 
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
+For more information about the prefix constraints, refer to the
+[command breakdown's prefix types section](#prefix-types)
+</div>
+
 Command Words Accepted: `find`, `search`, `f` (all case-insensitive)
 
-Command Options:
+Command Parameters:
 
 | Option Name      | Optional?       | Purpose                                                      |
 |------------------|-----------------|--------------------------------------------------------------|
@@ -880,6 +850,7 @@ Command Options:
 | l/               | Yes*            | Search keyword for the location of a transaction.            |
 | c/               | Yes*            | Search keyword for a category tagged to a transaction        |
 | Any of the above | Min. one option | At least one option must be specified for the `find` command |
+
 
 Important notes:
 
@@ -1074,7 +1045,7 @@ it cannot be followed with any arguments, options, or non-whitespace text.
 </div>
 
 <div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
-This command is still subject to the filter applied by `find` or `get_total_expenditure`
+This command is subject to the filter applied by `find` or `get_total_expenditure`
 commands, which you can read about under the `find` command section [here](#find-transaction)
 or under the `get_total_expenditure` command section [here](#get-total-expenditure).
 </div>
@@ -1658,7 +1629,7 @@ It also cannot be followed with any arguments, options, or non-whitespace text.
 
 
 <div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
-This command is still subject to the filter applied by `find` or `get_total_expenditure`
+This command is subject to the filter applied by `find` or `get_total_expenditure`
 commands, which you can read about under the `find` command section [here](#find-transaction)
 or under the `get_total_expenditure` command section [here](#get-total-expenditure).
 </div>
