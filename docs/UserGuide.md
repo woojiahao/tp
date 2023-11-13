@@ -606,7 +606,7 @@ Command: `get INDEX`
 Command Words Accepted: `get`, `g` (all case-insensitive)
 
 Command Argument: `INDEX` is the displayed transaction index
-of the transaction to be deleted, as shown in the currently displayed `Transactions List`.
+of the transaction to be retrieved, as shown in the currently displayed `Transactions List`.
 
 | Arguments | Optional? | Purpose                                              |
 |-----------|-----------|------------------------------------------------------|
@@ -733,7 +733,7 @@ Command Words Accepted: `find`, `search`, `f` (all case-insensitive)
 
 Command Parameters:
 
-| Option Name      | Optional?       | Purpose                                                      |
+| Parameter        | Optional?       | Purpose                                                      |
 |------------------|-----------------|--------------------------------------------------------------|
 | n/               | Yes*            | Search keyword for the name of a transaction.                |
 | l/               | Yes*            | Search keyword for the location of a transaction.            |
@@ -744,21 +744,21 @@ Command Parameters:
 Important notes:
 
 1. While all options are optional, at least one option must be specified in total.
-2. Only one instance of each option can be specified, i.e. `/n Friends n/Dinner` is invalid as the name
+2. Only one instance of each option can be specified, i.e. `n/Friends n/Dinner` is invalid as the name
       option is specified more than once.
 3. All keywords specified must match in order for a transaction to be displayed.
 4. For each keyword, a substring match is required, thus `find n/with friends` will search for transactions
-whose name contains the string "with friends". However, an exact word match is not required
-thus, a transaction with the name `Lunch with friends outside` will be flagged as a match.
+whose name contains the string "with friends". However, an exact full name match is not required
+thus, a transaction with the name `Lunch with friends outside` is still considered a match.
 
 <div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
 The find command, like get_total_expenditure, creates a filter on the `Transactions List`
 and this filter persists across commands.
 
-Therefore, it is expected that any changes to the `Transactions List` after find may result in
-transactions being hidden as they may no longer abide by the filter applied by find.
+<br>Therefore, it is expected that any changes to the `Transactions List` after the `find` command
+is used may result in transactions being hidden as they may no longer abide by the filter applied by `find`.
 
-Use the `list` command when this occurs to reset the filter and view all transactions
+<br>Use the `list` command when this occurs to reset the filter and view all transactions
 </div>
 
 ##### Successful Execution
