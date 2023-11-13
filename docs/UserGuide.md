@@ -25,7 +25,7 @@ Please read through sections [Installation](#installation) and [Command Breakdow
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `unicash.jar` from [GitHub](https://github.com/AY2324S1-CS2103-T16-3/tp/releases/tag/v1.3.1).
+2. Download the latest `unicash.jar` from [GitHub](https://github.com/AY2324S1-CS2103-T16-3/tp/releases/latest).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your UniCa$h.
 
@@ -36,10 +36,10 @@ Please read through sections [Installation](#installation) and [Command Breakdow
  
    <img src="images/Ui.png" width="650">
 
-5. Type the command in the command box and press `Enter` to execute it. e.g. typing **`help`** and pressing `Enter` will
-   open the help window.
+5. Type a command in the command box and press `Enter` to execute it. e.g. typing `help` and pressing `Enter` will
+   execute the `help` command and open the help window.
 
-   To get started with UniCa$h, you can run the `add_transactions` command!
+   To get started with UniCa$h, you can run the (`add_transactions` command)[#add-transaction]!
 
 6. Refer to the [Features](#features) below for details of each command.
 
