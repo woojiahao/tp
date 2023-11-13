@@ -223,7 +223,7 @@ the filtered transaction with a success message.
 **Use Case: UC04 - Editing a Transaction**
 
 **MSS:**
-1. User enters the command to edit an existing transaction's fields in the correct format.
+1. User enters the command to edit an existing transaction's fields.
 2. User submits the request.
 3. UniCa$h makes the edits specified in the command and displays all the fields of that transaction.
 
@@ -1125,12 +1125,14 @@ Similar to all other commands, the raw user input String "summary" is parsed by 
 newly-created `SummaryCommand` object. At this point, the `SummaryCommand` object first checks if there are any expenses
 available by calling `Model#hasExpense`. It then instantiates a `CommandResult` object to be returned to `MainWindow`.
 
-ℹ️ **Note:** The arguments provided to the `CommandResult` constructor depends on whether `Model#hasExpense` evaluates to
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
+The arguments provided to the `CommandResult` constructor depends on whether `Model#hasExpense` evaluates to
 `true`. In particular, the `feedbackToUser` and `showSummary` parameters of the `CommandResult` constructor differ. If
 there are no expenses available, the `feedbackToUser` string will contain a message to tell users that they have no
 expenses to summarize. This allows us to display different messages to `ResultDisplay` according to whether there are 
 expenses available or not. Also, the `showSummary` parameter will be set to `false`, preventing the
 `MainWindow#handleSummary` method from running, as explained in the prior sequence diagram.
+</div>
 
 ### General Utility
 
