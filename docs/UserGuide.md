@@ -124,9 +124,6 @@ User might also want to track financial events not involving currency exchange, 
    2. For `week` intervals, only transactions of the same [week of year](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/time/temporal/WeekFields.html#weekOfYear()) are found. 
    3. For `month` intervals, only transactions of the same month are found.
 
-[//]: # ()
-
-[//]: # (UI layout and description of what each section means)
 
 ### User Interface (UI) Layout
 
@@ -276,7 +273,7 @@ UniCa$h comprises four primary feature groups:
     - Edit Transaction (`edit_transaction`)
     - List Transactions (`list`)
     - Get Transaction (`get`)
-    - Find Transaction(s) (`find`)
+    - Find Transactions (`find`)
     - Clear All Transactions (`clear_transactions`)
 - Budget Management
     - Set Budget (`set_budget`)
@@ -601,7 +598,7 @@ of the transaction to be deleted, as shown in the currently displayed `Transacti
 
 <div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
 There are some important `INDEX` constraints for which you can refer to the
-[command breakdown's argument types section](#argument-types). You can also refer to the
+[command breakdown's Argument Types section](#argument-types). You can also refer to the
 [UI Layout's Transaction Card section](#transaction-card) to learn about the transaction index values that
 can change based on the current `Transactions List` configuration.
 </div>
@@ -610,7 +607,7 @@ can change based on the current `Transactions List` configuration.
 
 ##### Successful Execution
 
-###### Example 1
+**Example 1**
 
 > **Case**: Delete a transaction with the correctly specified `INDEX`.
 >
@@ -628,7 +625,7 @@ can change based on the current `Transactions List` configuration.
 > Categories: #social
 > ```
 
-###### Example 2
+**Example 2**
 
 > **Case**: Delete a transaction with the currently not visible but correctly specified
 > `INDEX`. The transaction is present in the current `Transactions List` configuration
@@ -654,7 +651,7 @@ can change based on the current `Transactions List` configuration.
 
 ##### Failed Execution
 
-###### Example 1
+**Example 1**
 
 > **Case**: Missing compulsory fields i.e. `INDEX`
 >
@@ -672,7 +669,7 @@ can change based on the current `Transactions List` configuration.
 > Example: delete_transaction 1
 > ```
 
-###### Example 2
+**Example 2**
 
 > **Case**: Invalid `INDEX` provided
 > 
@@ -686,7 +683,7 @@ can change based on the current `Transactions List` configuration.
 > The transaction index provided is invalid
 > ```
 
-###### Example 3
+**Example 3**
 
 > **Case**: Invalid `INDEX` provided
 > 
@@ -706,7 +703,7 @@ can change based on the current `Transactions List` configuration.
 > Example: delete_transaction 1
 > ```
 
-###### Example 4
+**Example 4**
 
 > **Case**: Invalid `INDEX` provided
 >
@@ -753,7 +750,7 @@ can change based on the current `Transactions List` configuration.
 
 ##### Successful Execution
 
-###### Example 1
+**Example 1**
 
 > **Case**: Retrieve a transaction with the correctly specified `INDEX`.
 >
@@ -771,7 +768,7 @@ can change based on the current `Transactions List` configuration.
 > Categories: #transport
 > ```
 
-###### Example 2
+**Example 2**
 
 > **Case**: Retrieve a transaction with the currently not visible but correctly specified
 > `INDEX`. The transaction is present in the current `Transactions List` configuration 
@@ -797,7 +794,7 @@ can change based on the current `Transactions List` configuration.
 
 ##### Failed Execution
 
-###### Example 1
+**Example 1**
 
 > **Case**: Missing compulsory fields i.e. `INDEX`
 >
@@ -814,7 +811,7 @@ can change based on the current `Transactions List` configuration.
 > Example: get 2
 > ```
 
-###### Example 2
+**Example 2**
 
 > **Case**: Invalid `INDEX` provided
 >
@@ -828,7 +825,7 @@ can change based on the current `Transactions List` configuration.
 > The transaction index provided is invalid
 > ```
 
-###### Example 3
+**Example 3**
 
 > **Case**: Invalid `INDEX` provided
 >
@@ -847,7 +844,7 @@ can change based on the current `Transactions List` configuration.
 > Example: get 2
 > ```
 
-###### Example 4
+**Example 4**
 
 > **Case**: Invalid `INDEX` provided
 >
@@ -867,7 +864,7 @@ can change based on the current `Transactions List` configuration.
 > ```
 
 
-#### Find Transaction(s)
+#### Find Transactions
 
 Finds a `Transaction` in UniCa$h.
 
@@ -895,18 +892,18 @@ whose name contains the string "with friends". However, an exact word match is n
 thus, a transaction with the name `Lunch with friends outside` will be flagged as a match.
 
 <div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
-Using the `find` command modifies the current `Transactions List` configuration, until
-another configuration modifying command (like `get_total_expenditure` or `list`) is used. Thus,
-editing transactions with the `edit` command will cause those transactions to be removed from
-the current `Transactions List` configuration if the properties being edited are the same
-properties used to filter the `Transactions List`. Thus, if the newly edited transaction do
-not match the conditions of the current `Transactions List` configuration, they will be removed
-from display in the current `Transactions List`.
+The find command, like get_total_expenditure, creates a filter on the `Transactions List`
+and this filter persists across commands.
+
+Therefore, it is expected that any changes to the `Transactions List` after find may result in
+transactions being hidden as they may no longer abide by the filter applied by find.
+
+Use the `list` command when this occurs to reset the filter and view all transactions
 </div>
 
 ##### Successful Execution
 
-###### Example 1
+**Example 1**
 
 > **Case**: Find a transaction with the correctly specified name option.
 >
@@ -921,7 +918,7 @@ from display in the current `Transactions List`.
 >
 > <img src="images/unicash/command-outputs/find/FindFriends.png" width="1000" />
 
-###### Example 2
+**Example 2**
 
 > **Case**: Find a transaction with the correctly specified category option.
 >
@@ -937,7 +934,7 @@ from display in the current `Transactions List`.
 >
 > <img src="images/unicash/command-outputs/find/Find2.png" width="1000" />
 
-###### Example 3
+**Example 3**
 
 > **Case**: Find a transaction with multiple correctly specified options.
 >
@@ -957,7 +954,7 @@ from display in the current `Transactions List`.
 
 ##### Failed Execution
 
-###### Example 1
+**Example 1**
 
 > **Case**: Command entered with no parameters
 >
@@ -978,7 +975,7 @@ from display in the current `Transactions List`.
 > Example: find, search, f n/Buying groceries l/NTUC c/Food
 > ```
 
-###### Example 2
+**Example 2**
 
 > **Case**: Command entered with multiple instances of the same option 
 >
@@ -989,7 +986,7 @@ from display in the current `Transactions List`.
 > Multiple values specified for the following single-valued field(s): n/
 > ```
 
-###### Example 3
+**Example 3**
 
 > **Case**: Command entered with UniCa$h prefixes that are unsupported by `find` command 
 >
@@ -1070,15 +1067,21 @@ Command: `clear_transactions`
 
 Command Words Accepted: `clear_transactions` only (case-insensitive)
 
-<div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
 This command irreversibly deletes all transactions in UniCa$h. Thus, as an added layer
 of safety, the command has no short form alternatives and is intentionally lengthy. Additionally,
 it cannot be followed with any arguments, options, or non-whitespace text.
 </div>
 
+<div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
+This command is still subject to the filter applied by `find` or `get_total_expenditure`
+commands, which you can read about under the `find` command section [here](#find-transaction)
+or under the `get_total_expenditure` command section [here](#get-total-expenditure).
+</div>
+
 ##### Successful Execution
 
-###### Example 1
+**Example 1**
 
 > **Case**: Command entered with correct format
 >
@@ -1091,49 +1094,26 @@ it cannot be followed with any arguments, options, or non-whitespace text.
 >
 > <img src="images/unicash/command-outputs/clearTransactions/clear.png" width="1000" />
 
-###### Example 2
-
-> **Case**: Command entered with acceptable alternate format
->
-> **Input**: `CLEAR_TRANSACTIONS`
->
-> **Output**:
-> ```
-> All transactions have been cleared!
-> ```
-> 
->  _(UI Output Same as above)_
 
 ##### Failed Execution
 
-###### Example 1
+**Example 1**
 
-> **Case**: Command entered with random trailing text.
+> **Case**: Command entered with any trailing text 
 >
-> **Input**: `clear_transactions   asdf`
+> **Input**: `clear_transactions   asdfg` [OR] `clear_transactions today`
 >
 > **Output**:
 > ```
 > Clear transactions command cannot have trailing arguments. Use the command clear_transactions
 > without any trailing arguments.
 > ```
-
-###### Example 2
-
-> **Case**: Command entered with trailing text that can be considered a reasonable
-> user input.
->
-> **Input**: `clear_transactions today` [OR] `clear_transactions current list`
->
-> **Output**:
-> ```
-> Clear transactions command cannot have trailing arguments. Use the command clear_transactions
-> without any trailing arguments.
-> ```
-> **Note:** In this example, it is made explicit that the `clear_transactions` command is not
-> meant for batch deletion of specific groups of transaction nor for mass deletion of
-> transactions present in a particular `Transaction List` configuration and that this
-> command will always delete all transactions in UniCa$h.
+<div class="callout callout-info" markdown="span">
+In the above example, it is made explicit that the `clear_transactions` command is not
+meant for batch deletion of specific groups of transaction nor for mass deletion of
+transactions present in a particular `Transaction List` configuration, and that this
+command will always delete all transactions in UniCa$h.
+</div>
 
 ### Budget Management
 
@@ -1670,15 +1650,22 @@ Command: `reset_unicash`
 
 Command Words Accepted: `reset_unicash` only (case-insensitive)
 
-<div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
 Similar to `Clear Transactions`, this command overwrites all existing transactions in UniCa$h.
 Thus, as an added layer of safety, the command has no short form alternatives.
 It also cannot be followed with any arguments, options, or non-whitespace text.
 </div>
 
+
+<div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
+This command is still subject to the filter applied by `find` or `get_total_expenditure`
+commands, which you can read about under the `find` command section [here](#find-transaction)
+or under the `get_total_expenditure` command section [here](#get-total-expenditure).
+</div>
+
 ##### Successful Execution
 
-###### Example 1
+**Example 1**
 
 > **Case**: Command entered with correct format
 >
@@ -1688,25 +1675,10 @@ It also cannot be followed with any arguments, options, or non-whitespace text.
 > ```
 > UniCa$h has been successfully restored to its original state!
 > ```
->
-> Note: The `Transactions List` in the UI output for this command will look
-> identical to the very first image of UniCa$h shown at the top of the user
-> guide, as it is meant to restore UniCa$h to its default state.
-
-###### Example 2
-
-> **Case**: Command entered with acceptable alternate format
->
-> **Input**: `RESET_UNICASH`
->
-> **Output**:
-> ```
-> UniCa$h has been successfully restored to its original state!
-> ```
 
 ##### Failed Execution
 
-###### Example 1
+**Example 1**
 
 > **Case**: Command entered with random trailing text.
 >
@@ -1718,8 +1690,10 @@ It also cannot be followed with any arguments, options, or non-whitespace text.
 > trailing arguments.
 > ```
 
+
 #### Exit UniCa$h
-Exit UniCa$h.
+
+Exit the UniCa$h application.
 
 Command: `exit`
 
@@ -1734,22 +1708,16 @@ Command Words Accepted: `exit`, `quit`, `bye` (case-insensitive)
 | **Delete All Transactions** | `clear_transactions`                                                                                  |
 | **Edit Transaction**        | `edit_transaction INDEX [n/Name] [type/Type] [amt/Amount] [dt/Datetime] [l/Location] [c/Category]...` |
 | **List All Transactions**   | `list`                                                                                                |
-| **Find Transaction(s)**     | `find [n/Name] [c/Category] [l/Location]`                                                             |
+| **Find Transactions**       | `find [n/Name] [c/Category] [l/Location]`                                                             |
 | **Get Total Expenditure**   | `get_total_expenditure month/Month [c/Category] [year/Year]`                                          |
 | **Summary Statistics**      | `summary`                                                                                             |
 | **Set Budget**              | `set_budget amt/Amount interval/Interval`                                                             |
 | **Clear Budget**            | `clear_budget`                                                                                        |
 | **Get Budget**              | `get_budget`                                                                                          |
 
-| **Reset UniCa$h to default** | `reset_unicash` (Add this to table)
 
-| **Show Help Window** | `help` (Add this to table)
 
-| **Show Welcome Message with Summary** | `help` (Add this to table)
 
-| **Show Command Specific Help** | `help [COMMAND_WORD]` (Add this to table)
-
-[//]: # (## Troubleshoot)
 
 ---
 
