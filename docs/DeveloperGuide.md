@@ -1110,8 +1110,12 @@ This command will exit UniCa$h.
 
 ### Appendix: Planned Enhancements
 
-- `get_budget` to apply a filter to transaction list, like `get_total_expenditure`, to remove any confusion about which transactions are counted in the budget
-- `get_budget`'s weekly interval calculation to use the previous `6` days + today for computation instead of week of year as the latter is not immediately intuitive
+- The current `get_budget` command does not alter the transaction list when processing the expenses within the interval. This can lead to confusion as users may not be aware of the specific transactions that are being included in the calculation of the budget remainder, and as a result, mistaking the budget calculation as not working. 
+ 
+    We plan to apply a filter to the transaction list, like in `get_total_expenditure`, when `get_budget` is run to accurately display the list of transactions that we have included for the calculation to reduce this potential user confusion.
+- The current `get_budget`'s weekly interval calculation uses the week of year. However, given that this information is not immediately intuitive to users, users may not be aware of how weekly budgets are calculated, leading to confusion.
+
+  We plan to modify `get_budget`'s weekly interval calculation to use the previous `6` days + today to make the command more intuitive for users.
 - `find` to support all properties
 - Add confirmation to some data deletion commands (`delete`, `clear_transactions`, `reset_unicash`)
 - Expand summary window to incomes as well
