@@ -91,7 +91,7 @@ Prefixes have several variations with different notations:
 
 **Notes:**
 
-1. Optional fields imply that the _omission_, not the absence of value when used, is supported. This means that `l/` is **_NOT_** an optional parameter, but rather a blank one.
+1. Optional fields imply that the _omission_ of the field, not the absence of value when used, is supported. This means that `l/` is **_NOT_** an optional parameter, but rather a blank one.
 
 #### Prefix Types
 
@@ -287,6 +287,12 @@ Command: `add_transaction n/NAME type/TYPE amt/AMOUNT [dt/DATETIME] [l/LOCATION]
 For more information about the prefix constraints, refer to the [command breakdown's prefix types section](#prefix-types)
 </div>
 
+Take note in `add`, the following prefixes definition overrides the one in the [prefix types section](#prefix-types)
+
+| Prefix                                                                 | Constraints                                                                                                                                           | Remarks                                                                                                                                                      | Valid                                                                             | Invalid                                               |
+|------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|-------------------------------------------------------|
+| `l/`<br><br>(Location of transaction)                                  | At least 1 character but no more than 500 characters.<br><br>Only supports alphanumeric characters, spaces, (, ), _, @, -, #, &, ., and , characters. | If no value is provided, i.e. `l/`, then it defaults to `-`.                                                                                                 | `l/`<br>`l/NTUC @ UTown`                                                                  | `l/Two ^`                                     |
+
 Command Words Accepted: `add_transaction`, `add`, `at` (case-insensitive)
 
 <div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
@@ -333,6 +339,8 @@ There is a limit of 100,000 transactions you can add to UniCa$h.
 > Location: -;
 > Categories:
 > ```
+> 
+> **Remarks**: The value of the `Date` output as shown above could be different from the one displayed in your application. Refer to [prefix types section](#prefix-types) for further elaboration on the omission of the `dt/` prefix.
 
 ##### Failed Execution
 
@@ -346,7 +354,7 @@ There is a limit of 100,000 transactions you can add to UniCa$h.
 > ```
 > Invalid command format! 
 >
-> add_transaction: Adds a transaction to UniCa$h.
+> add, add_transaction, at: Adds a transaction to UniCa$h.
 >
 > Parameters: n/NAME type/TYPE amt/AMOUNT dt/DATETIME l/LOCATION [c/CATEGORY]...
 >
@@ -378,6 +386,8 @@ There is a limit of 100,000 transactions you can add to UniCa$h.
 **Example 4**
 
 > **Case**: More than 100,000 transactions added.
+> 
+> **Precondition**: UniCa$h already has `100,000` transactions stored.
 >
 > **Input**: `add n/test amt/300 type/expense`
 >
@@ -1420,11 +1430,11 @@ To get a list of `COMMAND_WORD`, do `help` with no arguments
 >
 > **Output**:
 > ```
-> add_transaction: Adds a transaction to UniCa$h.
+> add, add_transaction, at: Adds a transaction to UniCa$h.
 >
 > Parameters: n/Name type/Type amt/Amount [dt/DateTime] [l/Location] [c/Category]...
 >
-> Example: add_transaction n/Buying groceries type/expense amt/300 dt/18-08-2023 19:30 l/NTUC c/Food
+> Example: add n/Buying groceries type/expense amt/300 dt/18-08-2023 19:30 l/NTUC c/Food
 > ```
 
 ##### Failed Execution
@@ -1439,11 +1449,11 @@ To get a list of `COMMAND_WORD`, do `help` with no arguments
 > ```
 > Unknown command
 >
-> help: Shows UniCa$h general usage instructions and specific command usage by specifying the command word.
+> help, h: Shows UniCa$h general usage instructions and specific command usage by specifying the command word.
 >
-> Argument: Command word specified must be a valid command word present in the help command
+> Argument: COMMAND_WORD (must be a valid command word present in the help command)
 >
-> Example: help add_transaction
+> Example: help add
 > ```
 
 #### Reset UniCa$h
