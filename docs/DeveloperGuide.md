@@ -943,8 +943,11 @@ The following sequence diagram shows how the different components of UniCa$h int
 7. The `EditTransactionCommand#execute` method then calls the `createEditedTransaction` method, which creates a new `Transaction` object with the updated values after editing. Note that this `Transaction` object is a different object from what is stored in UniCa$h.
 8. The `EditTransactionCommand#execute` method then updates UniCa$h with the new `Transaction` using the `Model#setTransaction` method.
 
-Note that although all fields can be edited, the `Name`, `Amount`, and `Type` fields cannot be left blank. The constraints laid
+
+<div class="callout callout-important" markdown="span">
+Although all fields can be edited, the `Name`, `Amount`, and `Type` fields cannot be left blank. The constraints laid
 out in the **Add Transaction** section above also remain.
+</div>
 
 ### Budget Management
 
@@ -1092,19 +1095,26 @@ the activities shown in the activity diagram above. The sequence diagram below d
 
 <img src="images/unicash/SummaryUiSequenceDiagram.png" width="700" />
 
+<div class="callout callout-info" markdown="span">
+The sequence diagram above abstracts away low-level details like getting the expense data from `LogicManager` and
+updating the `SummaryWindow` with the expense data. More information is provided under the "Details" section below.
+</div>
+
 **Details**
 
 1. The user runs the "summary" command
 2. The command is parsed by the `Logic` component, which is explained in another sequence diagram below, and returns a
    CommandResult object.
 3. `MainWindow` updates the `ResultDisplay` object with the `CommandResult#getFeedbackToUser` method.
-4. `MainWindow` retrieves the updated expense summary per category and per year-month from the `Logic` component. It
-   then calls `setPieChart` and `setLineChart` on the result to update the pie chart and line chart data (stored within
-   `SummaryWindow`).
-5. If the `commandResult` object's `showSummary` attribute is `true`, then it indicates that the summary window should
+4. In the "get expense data" step in the sequence diagram, `MainWindow` gets the updated expense summary per category
+   and per year-month from the `Logic` component using the `Logic#getExpenseSummaryPerCategory` and
+   `Logic#getExpenseSummaryPerYearMonth` methods.
+5. In the "update with expense data" step in the sequence diagram, `MainWindow` calls `Logic#setPieChart` and
+   `Logic#setLineChart` on the result to update the pie chart and line chart data (stored within `SummaryWindow`).
+6. If the `commandResult` object's `showSummary` attribute is `true`, then it indicates that the summary window should
    open. Subsequently, `MainWindow` performs a self-invocation by calling its own `handleSummary` method. Otherwise,
    the execution ends.
-6. Under the `handleSummary` method:
+7. Under the `handleSummary` method:
    1. `MainWindow` checks to see if `SummaryWindow` is already opened by calling `SummaryWindow#isShowing`. If this is
       false, then `SummaryWindow#focus` is called.
    2. Otherwise, `Logic#getExpenseSummaryPerCategory` is called to retrieve the expense summary per category formatted
@@ -1112,13 +1122,15 @@ the activities shown in the activity diagram above. The sequence diagram below d
    3. Within the `SummaryWindow#show` method, a check is first performed to determine if the expense summary is empty.
       If this is true, then the summary window does not open. Otherwise, the summary window is opened.
 
-ℹ️ **Note:** Steps 1 to 5 will be called every time a new command is entered. This allows the pie chart and  line chart
+<div class="callout callout-info" markdown="span" style="margin-bottom: 20px;">
+Steps 1 to 5 will be called every time a new command is entered. This allows the pie chart and line chart
 to be updated automatically every time the user makes commands that may modify the list of transactions.
+</div>
 
 Next, we delve deeper into the `Logic` component, specifically when `MainWindow` executed the
 `LogicManager.execute("summary")` line of code. The sequence diagram for this portion is given below. 
 
-<img src="images/unicash/SummaryExecuteSequenceDiagram.png" width="700" />
+<img src="images/unicash/SummaryExecuteSequenceDiagram.png" width="900" />
 
 Similar to all other commands, the raw user input String "summary" is parsed by `UniCashParser` to create a
 `SummaryCommand` object, which is returned to `LogicManager`. `LogicManager` then calls the `execute` method of the

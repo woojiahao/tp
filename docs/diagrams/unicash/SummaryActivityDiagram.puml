@@ -9,12 +9,13 @@ start
 if () then ([summary window is not open])
   if () then ([there are no expenses])
     :Tell user that they have no expenses to summarize;
-  else ()
+  else ([there is at least 1 expense])
     :Open summary window;
   endif
 else ([summary window is already open])
   if () then ([user deletes all expenses])
     :Tell user that there are no expenses available;
+  else ([user does not delete all expenses])
   endif
 endif
 

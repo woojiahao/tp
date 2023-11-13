@@ -26,29 +26,18 @@ activate ResultDisplay
 ResultDisplay --> MainWindow
 deactivate ResultDisplay
 
-MainWindow -> LogicManager : getExpenseSummaryPerCategory()
+MainWindow -> LogicManager : get expense data
 activate LogicManager
 
-LogicManager --> MainWindow : expenseSummaryPerCategory
+LogicManager --> MainWindow : expense data
 deactivate LogicManager
 
-MainWindow -> SummaryWindow : setPieChart(expenseSummaryPerCategory)
+MainWindow -> SummaryWindow : update with expense data
 activate SummaryWindow
 
 SummaryWindow --> MainWindow
 deactivate SummaryWindow
 
-MainWindow -> LogicManager : getExpenseSummaryPerYearMonth()
-activate LogicManager
-
-LogicManager --> MainWindow : expenseSummaryPerYearMonth
-deactivate LogicManager
-
-MainWindow -> SummaryWindow : setLineChart(expenseSummaryPerYearMonth)
-activate SummaryWindow
-
-SummaryWindow --> MainWindow
-deactivate SummaryWindow
 
 alt commandResult.isShowSummary()
 
