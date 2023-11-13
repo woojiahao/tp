@@ -1108,22 +1108,18 @@ This command will exit UniCa$h.
 
 ---
 
-[//]: # (## 8. Individual Contributions and Efforts)
-
-[//]: # ()
-[//]: # (Here's what each of us have contributed. &#40;Might not need this section&#41;)
-
-[//]: # (---)
-
 ## Appendix
 
-### Proposed Changes
+### Planned Enhancements
 
-To be added
-
-### Known JavaFX Bugs
-
-- Light scrollbars hard to see
+- `get_budget` to apply a filter to transaction list, like `get_total_expenditure`, to remove any confusion about which transactions are counted in the budget
+- `get_budget`'s weekly interval calculation to use the previous `6` days + today for computation instead of week of year as the latter is not immediately intuitive
+- `set_budget` to support more than one global budget to allow users to set budgets for each category or different budgets for day/week/month
+- `find` to support all properties
+- Add confirmation to some data deletion commands (`delete`, `clear_transactions`, `reset_unicash`)
+- Expand support for multiple transaction types such as `transfer`
+- Expand summary window to incomes as well
+- Batch deletion/clear (by day, by month, etc)
 
 ### Potential Features
 
@@ -1132,6 +1128,14 @@ Every user can...
 - Divide a group spending and tag friends involved in the spending
 - View a price list comparison of all available shops near NUS
 - Set recurring transactions
+
+### Known JavaFX Bugs
+
+- Light scrollbars hard to see
+
+### Individual Contributions and Efforts
+
+- [Jia Hao](team/woojiahao.html): get total expenditure, budget management logic (budget models were created by Lip Wei and Jamie), continuous integration, PR reviews
 
 ### Links
 
